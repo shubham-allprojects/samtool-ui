@@ -708,6 +708,12 @@ input[type="number"] {
   border-color: white;
 }
 
+/* Address Modal */
+.modal {
+  --bs-modal-width: 700px !important;
+  --bs-modal-margin: 12rem 1rem !important;
+}
+
 /* Media Queries */
 
 @media (min-width: 768px) {

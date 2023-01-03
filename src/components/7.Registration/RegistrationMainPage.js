@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const Registration = () => {
   // useState to store ID of state so that we can validate zipCodes for each state.
   const [IdOfState, SetIdOfState] = useState("");
+  const [addressFilled, setAddressFilled] = useState(false);
   const [cityUseState, setCityUseState] = useState({
     citiesByState: [],
     cityVisibilityClass: "d-none",
@@ -646,6 +647,8 @@ const Registration = () => {
                           onInputBlur={onInputBlur}
                           resetValues={resetValues}
                           cityUseState={cityUseState}
+                          addressFilled = {addressFilled}
+                          setAddressFilled = {setAddressFilled}
                         />
                       </div>
                     </form>
@@ -774,6 +777,8 @@ const Registration = () => {
                           onInputBlur={onInputBlur}
                           resetValues={resetValues}
                           cityUseState={cityUseState}
+                          addressFilled = {addressFilled}
+                          setAddressFilled = {setAddressFilled}
                         />
                       </div>
                     </form>

@@ -9,6 +9,8 @@ const CommonFormFields = ({
   onInputBlur,
   resetValues,
   cityUseState,
+  addressFilled,
+  setAddressFilled,
 }) => {
   // Getting only required validation details from RegisterMainPage.
   const {
@@ -37,7 +39,7 @@ const CommonFormFields = ({
       {/* Address Row 1 */}
       <div className="row addressRow1 mt-lg-3 mt-4">
         <div className="col-lg-2 mb-lg-0 mb-2">Address</div>
-        <div className="col-lg-2 mb-lg-0 mb-2">
+        {/* <div className="col-lg-2 mb-lg-0 mb-2">
           <input
             onBlur={onInputBlur}
             name="address"
@@ -56,20 +58,33 @@ const CommonFormFields = ({
             placeholder="Locality, Area"
             required
           />
+        </div> */}
+        <div className="col-lg-2 mb-lg-0 mb-2">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+              readOnly
+              checked={addressFilled}
+            />
+            <a
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setAddressFilled(false);
+              }}
+              class=""
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Launch demo modal
+            </a>
+          </div>
         </div>
       </div>
       {/* Address Row 2 */}
-      <div className="row addressRow2 mt-lg-3 mt-md-0">
-        {/* <div className="offset-lg-2 col-lg-2 mb-lg-0 mb-2">
-          <input
-            onBlur={onInputBlur}
-            name="city"
-            type="text"
-            className="form-control"
-            placeholder="City"
-            required
-          />
-        </div> */}
+      {/* <div className="row addressRow2 mt-lg-3 mt-md-0">
         <div className="offset-lg-2 col-lg-2 mb-lg-0 mb-2">
           <select
             onChange={onInputChange}
@@ -141,7 +156,7 @@ const CommonFormFields = ({
             {zipCodeValidationMessage}
           </span>
         </div>
-      </div>
+      </div> */}
       {/* Email */}
       <div className="row emailRow mt-lg-3 mt-4">
         <div className="col-lg-2 mb-lg-0 mb-2">
@@ -244,6 +259,41 @@ const CommonFormFields = ({
           >
             Cancel
           </button>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Modal title
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">...</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                onClick={() => {
+                  setAddressFilled(true);
+                }}
+              >
+                Save changes
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </>
