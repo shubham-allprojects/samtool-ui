@@ -39,26 +39,6 @@ const CommonFormFields = ({
       {/* Address Row 1 */}
       <div className="row addressRow1 mt-lg-3 mt-4">
         <div className="col-lg-2 mb-lg-0 mb-2">Address</div>
-        {/* <div className="col-lg-2 mb-lg-0 mb-2">
-          <input
-            onBlur={onInputBlur}
-            name="address"
-            type="text"
-            className="form-control"
-            placeholder="Block-House No Street"
-            required
-          />
-        </div>
-        <div className="col-lg-2 mb-lg-0 mb-2">
-          <input
-            onBlur={onInputBlur}
-            name="locality"
-            type="text"
-            className="form-control"
-            placeholder="Locality, Area"
-            required
-          />
-        </div> */}
         <div className="col-lg-2 mb-lg-0 mb-2">
           <div class="form-check">
             <input
@@ -69,94 +49,18 @@ const CommonFormFields = ({
               readOnly
               checked={addressFilled}
             />
-            <a
+            <label
               style={{ cursor: "pointer" }}
-              onClick={() => {
-                setAddressFilled(false);
-              }}
-              class=""
+              class="text-primary text-decoration-underline"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
             >
               Launch demo modal
-            </a>
+            </label>
           </div>
         </div>
       </div>
-      {/* Address Row 2 */}
-      {/* <div className="row addressRow2 mt-lg-3 mt-md-0">
-        <div className="offset-lg-2 col-lg-2 mb-lg-0 mb-2">
-          <select
-            onChange={onInputChange}
-            onBlur={onInputBlur}
-            name="state"
-            type="text"
-            className="form-select"
-            placeholder="State"
-            required
-          >
-            <option value="" style={{ color: "gray" }}>
-              State
-            </option>
-            {states
-              ? states.map((state, Index) => {
-                  return (
-                    <option
-                      id={`state-name-${state.state_id}`}
-                      key={Index}
-                      value={state.state_id}
-                    >
-                      {state.state_name}
-                    </option>
-                  );
-                })
-              : ""}
-          </select>
-        </div>
-        <div className={`col-lg-2 mb-lg-0 mb-2 ${cityVisibilityClass}`}>
-          <select
-            onChange={onInputChange}
-            onBlur={onInputBlur}
-            name="city"
-            type="text"
-            className="form-select"
-            placeholder="city"
-            required
-          >
-            <option id="selectedCity" value="" style={{ color: "gray" }}>
-              City
-            </option>
-            {citiesByState
-              ? citiesByState.map((city, Index) => {
-                  return (
-                    <option key={Index} value={city.city_name}>
-                      {city.city_name}
-                    </option>
-                  );
-                })
-              : ""}
-          </select>
-        </div>
 
-        <div className="col-lg-2">
-          <input
-            type="text"
-            onChange={onInputChange}
-            onBlur={onInputBlur}
-            placeholder="Zipcode"
-            name="zip"
-            className={`form-control border-${zipCodeValidationColor}`}
-            required
-          ></input>
-          <span
-            className={`pe-1 ${
-              zipCodeValidationMessage ? "text-danger" : "d-none"
-            }`}
-          >
-            {zipCodeValidationMessage}
-          </span>
-        </div>
-      </div> */}
       {/* Email */}
       <div className="row emailRow mt-lg-3 mt-4">
         <div className="col-lg-2 mb-lg-0 mb-2">
@@ -268,11 +172,11 @@ const CommonFormFields = ({
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">
-                Modal title
+                Address
               </h5>
               <button
                 type="button"
@@ -281,17 +185,175 @@ const CommonFormFields = ({
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">...</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-primary"
-                onClick={() => {
-                  setAddressFilled(true);
-                }}
-              >
-                Save changes
-              </button>
+            <div class="modal-body">
+              <form action="" className="row">
+                <div className="col-md-4">
+                  <div className="form-group mb-3">
+                    <input
+                      id="flat_number"
+                      type="number"
+                      className="form-control"
+                      placeholder="Flat Number"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="form-group mb-3">
+                    <input
+                      id="building_name"
+                      type="text"
+                      className="form-control"
+                      placeholder="Building Name"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="form-group mb-3">
+                    <input
+                      id="society_name"
+                      type="text"
+                      className="form-control"
+                      placeholder="Society Name"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-4">
+                  <div className="form-group mb-3">
+                    <input
+                      id="plot_number"
+                      type="number"
+                      className="form-control"
+                      placeholder="Plot Number"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-4">
+                  <input
+                    // onBlur={onInputBlur}
+                    name="locality"
+                    type="text"
+                    className="form-control"
+                    placeholder="Locality, Area"
+                    required
+                  />
+                </div>
+
+                <div className="col-md-4">
+                  <div className="form-group mb-3">
+                    <input
+                      id="landmark"
+                      type="text"
+                      className="form-control"
+                      placeholder="Landmark"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-4">
+                  <div className="form-group mb-3">
+                    <input
+                      id="village"
+                      type="text"
+                      className="form-control"
+                      placeholder="Village"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="form-group mb-3">
+                    {" "}
+                    <select
+                      onChange={onInputChange}
+                      onBlur={onInputBlur}
+                      name="state"
+                      type="text"
+                      className="form-select"
+                      placeholder="State"
+                      required
+                    >
+                      <option value="" style={{ color: "gray" }}>
+                        State
+                      </option>
+                      {states
+                        ? states.map((state, Index) => {
+                            return (
+                              <option
+                                id={`state-name-${state.state_id}`}
+                                key={Index}
+                                value={state.state_id}
+                              >
+                                {state.state_name}
+                              </option>
+                            );
+                          })
+                        : ""}
+                    </select>
+                  </div>
+                </div>
+                <div className={`col-md-4 ${cityVisibilityClass}`}>
+                  <div className="form-group mb-3">
+                    <select
+                      onChange={onInputChange}
+                      onBlur={onInputBlur}
+                      name="city"
+                      type="text"
+                      className="form-select"
+                      placeholder="city"
+                      required
+                    >
+                      <option
+                        id="selectedCity"
+                        value=""
+                        style={{ color: "gray" }}
+                      >
+                        City
+                      </option>
+                      {citiesByState
+                        ? citiesByState.map((city, Index) => {
+                            return (
+                              <option key={Index} value={city.city_name}>
+                                {city.city_name}
+                              </option>
+                            );
+                          })
+                        : ""}
+                    </select>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="form-group mb-3">
+                    <input
+                      type="text"
+                      onChange={onInputChange}
+                      onBlur={onInputBlur}
+                      placeholder="Zipcode"
+                      name="zip"
+                      className={`form-control border-${zipCodeValidationColor}`}
+                      required
+                    ></input>
+                    <span
+                      className={`pe-1 ${
+                        zipCodeValidationMessage ? "text-danger" : "d-none"
+                      }`}
+                    >
+                      {zipCodeValidationMessage}
+                    </span>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">
+                    Save
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
