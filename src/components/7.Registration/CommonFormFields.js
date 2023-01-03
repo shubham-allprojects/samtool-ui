@@ -34,7 +34,7 @@ const CommonFormFields = ({
 
   const onAddressFormSubmit = (e) => {
     e.preventDefault();
-    // setAddressFilled(true);
+    setAddressFilled(true);
   };
 
   const onAddressInputsChange = (e) => {
