@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: reactjs-frontend
+    image: reatcjs-dev
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./src:/sam-tool-react/src
+    ports:
+      - 5000:3000
