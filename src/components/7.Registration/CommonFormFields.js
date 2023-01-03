@@ -22,12 +22,42 @@ const CommonFormFields = ({
 
   const { citiesByState, cityVisibilityClass } = cityUseState;
 
+  const [btnIsDisabled, setBtnIsDisabled] = useState(true);
+
   // useState to store all states coming from api.
   const [states, setStates] = useState([]);
   // Function to get all states from api so that we can map states in select state field.
   const getAllSates = async () => {
     const allStates = await axios.get(`/sam/v1/property/by-state`);
     setStates(allStates.data);
+  };
+
+  const onAddressFormSubmit = (e) => {
+    e.preventDefault();
+    // setAddressFilled(true);
+  };
+
+  const onAddressInputsChange = (e) => {
+    const flatNo = document.getElementById("flat_number").value;
+    const buildingName = document.getElementById("building_name").value;
+    const societyName = document.getElementById("society_name").value;
+    const plotNumber = document.getElementById("plot_number").value;
+    const locality = document.getElementById("locality").value;
+    const landmark = document.getElementById("landmark").value;
+    const village = document.getElementById("village").value;
+    if (
+      flatNo &&
+      buildingName &&
+      societyName &&
+      plotNumber &&
+      locality &&
+      landmark &&
+      village
+    ) {
+      setBtnIsDisabled(false);
+    } else {
+      setBtnIsDisabled(true);
+    }
   };
 
   useEffect(() => {
@@ -40,9 +70,9 @@ const CommonFormFields = ({
       <div className="row addressRow1 mt-lg-3 mt-4">
         <div className="col-lg-2 mb-lg-0 mb-2">Address</div>
         <div className="col-lg-2 mb-lg-0 mb-2">
-          <div class="form-check">
+          <div className="form-check">
             <input
-              class="form-check-input"
+              className="form-check-input"
               type="checkbox"
               value=""
               id="flexCheckDefault"
@@ -51,7 +81,7 @@ const CommonFormFields = ({
             />
             <label
               style={{ cursor: "pointer" }}
-              class="text-primary text-decoration-underline"
+              className="text-primary text-decoration-underline"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
             >
@@ -166,35 +196,35 @@ const CommonFormFields = ({
         </div>
       </div>
       <div
-        class="modal fade"
+        className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 Address
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <form action="" className="row">
+            <div className="modal-body">
+              <div className="row">
                 <div className="col-md-4">
                   <div className="form-group mb-3">
                     <input
                       id="flat_number"
                       type="number"
-                      className="form-control"
+                      className="form-control "
+                      onChange={onAddressInputsChange}
                       placeholder="Flat Number"
-                      required
                     />
                   </div>
                 </div>
@@ -203,9 +233,9 @@ const CommonFormFields = ({
                     <input
                       id="building_name"
                       type="text"
-                      className="form-control"
+                      className="form-control "
+                      onChange={onAddressInputsChange}
                       placeholder="Building Name"
-                      required
                     />
                   </div>
                 </div>
@@ -214,9 +244,9 @@ const CommonFormFields = ({
                     <input
                       id="society_name"
                       type="text"
-                      className="form-control"
+                      className="form-control "
+                      onChange={onAddressInputsChange}
                       placeholder="Society Name"
-                      required
                     />
                   </div>
                 </div>
@@ -226,9 +256,9 @@ const CommonFormFields = ({
                     <input
                       id="plot_number"
                       type="number"
-                      className="form-control"
+                      className="form-control "
+                      onChange={onAddressInputsChange}
                       placeholder="Plot Number"
-                      required
                     />
                   </div>
                 </div>
@@ -236,11 +266,12 @@ const CommonFormFields = ({
                 <div className="col-md-4">
                   <input
                     // onBlur={onInputBlur}
+                    id="locality"
                     name="locality"
                     type="text"
-                    className="form-control"
+                    className="form-control "
+                    onChange={onAddressInputsChange}
                     placeholder="Locality, Area"
-                    required
                   />
                 </div>
 
@@ -249,9 +280,9 @@ const CommonFormFields = ({
                     <input
                       id="landmark"
                       type="text"
-                      className="form-control"
+                      className="form-control "
+                      onChange={onAddressInputsChange}
                       placeholder="Landmark"
-                      required
                     />
                   </div>
                 </div>
@@ -261,15 +292,14 @@ const CommonFormFields = ({
                     <input
                       id="village"
                       type="text"
-                      className="form-control"
+                      className="form-control "
+                      onChange={onAddressInputsChange}
                       placeholder="Village"
-                      required
                     />
                   </div>
                 </div>
-                <div className="col-md-4">
+                {/* <div className="col-md-4">
                   <div className="form-group mb-3">
-                    {" "}
                     <select
                       onChange={onInputChange}
                       onBlur={onInputBlur}
@@ -347,13 +377,17 @@ const CommonFormFields = ({
                       {zipCodeValidationMessage}
                     </span>
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">
+                </div> */}
+                <div className="modal-footer">
+                  <button
+                    onClick={onAddressFormSubmit}
+                    className="btn btn-primary"
+                    disabled={btnIsDisabled}
+                  >
                     Save
                   </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
