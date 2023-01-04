@@ -117,7 +117,7 @@ const CommonFormFields = ({
             style={{ resize: "none" }}
             value={addressValue}
             readOnly
-            className="form-control"
+            className={`form-control ${textAreaVisibility}`}
             cols="30"
             rows="4"
           ></textarea>
@@ -420,7 +420,9 @@ const CommonFormFields = ({
                 <div className="modal-footer">
                   <button
                     onClick={onAddressFormSubmit}
-                    className="btn btn-primary"
+                    className={`btn btn-primary ${
+                      locality && village && landmark ? "" : "disabled"
+                    }`}
                     data-bs-dismiss="modal"
                   >
                     Save
