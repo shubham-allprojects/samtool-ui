@@ -18,6 +18,24 @@ const CommonFormFields = ({
     zipCodeValidationColor,
   } = validationDetails;
 
+  const [addressDetails, setAddressDetails] = useState({});
+
+  const {
+    flat_number,
+    building_name,
+    society_name,
+    plot_number,
+    locality,
+    landmark,
+    village,
+  } = addressDetails;
+
+  const [addressValues, setAddressValues] = useState({
+    addressValue: "",
+    labelValue: "Add Details",
+  });
+
+  const { addressValue, labelValue } = addressValues;
   const { citiesByState, cityVisibilityClass } = cityUseState;
 
   // useState to store all states coming from api.
@@ -30,16 +48,49 @@ const CommonFormFields = ({
 
   const onAddressFormSubmit = (e) => {
     e.preventDefault();
+    let valuesArray = [
+      flat_number ? `Flat No: ${flat_number}` : "",
+      building_name ? `Building Name: ${building_name}` : "",
+      society_name ? `Society Name: ${society_name}` : "",
+      plot_number ? `Plot No: ${plot_number}` : "",
+      locality ? `Locality: ${locality}` : "",
+      landmark ? `Landmark: ${landmark}` : "",
+      village ? `Village: ${village}` : "",
+    ];
+
+    let mainArray = [];
+    for (let i of valuesArray) {
+      if (i !== "") {
+        mainArray.push(i);
+      }
+    }
+    setAddressValues({
+      addressValue: mainArray.join(", "),
+      labelValue: "Edit Details",
+    });
+  };
+
+  const setValues = (name, value) => {
+    setAddressDetails({ ...addressDetails, [name]: value });
   };
 
   const onAddressInputsChange = (e) => {
-    const flatNo = document.getElementById("flat_number").value;
-    const buildingName = document.getElementById("building_name").value;
-    const societyName = document.getElementById("society_name").value;
-    const plotNumber = document.getElementById("plot_number").value;
-    const locality = document.getElementById("locality").value;
-    const landmark = document.getElementById("landmark").value;
-    const village = document.getElementById("village").value;
+    const { name, value } = e.target;
+    if (name === "flat_number") {
+      setValues(name, value);
+    } else if (name === "building_name") {
+      setValues(name, value);
+    } else if (name === "society_name") {
+      setValues(name, value);
+    } else if (name === "plot_number") {
+      setValues(name, value);
+    } else if (name === "locality") {
+      setValues(name, value);
+    } else if (name === "landmark") {
+      setValues(name, value);
+    } else if (name === "village") {
+      setValues(name, value);
+    }
   };
 
   useEffect(() => {
@@ -51,15 +102,25 @@ const CommonFormFields = ({
       {/* Address Row 1 */}
       <div className="row addressRow1 mt-lg-3 mt-4">
         <div className="col-lg-2 mb-lg-0 mb-2">Address</div>
-        <div className="col-lg-2 mb-lg-0 mb-2">
+        <div className="col-lg-6 mb-lg-0 mb-2">
           <label
             style={{ cursor: "pointer" }}
-            className="text-primary text-decoration-underline"
+            className="text-primary text-decoration-underline form-label"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
-            Add Details
+            {labelValue}
           </label>
+          <textarea
+            style={{ resize: "none" }}
+            value={addressValue}
+            readOnly
+            className="form-control"
+            name=""
+            id=""
+            cols="30"
+            rows="4"
+          ></textarea>
         </div>
       </div>
 
@@ -193,6 +254,7 @@ const CommonFormFields = ({
                   <div className="form-group mb-3">
                     <input
                       id="flat_number"
+                      name="flat_number"
                       type="number"
                       className="form-control "
                       onChange={onAddressInputsChange}
@@ -204,6 +266,7 @@ const CommonFormFields = ({
                   <div className="form-group mb-3">
                     <input
                       id="building_name"
+                      name="building_name"
                       type="text"
                       className="form-control "
                       onChange={onAddressInputsChange}
@@ -215,6 +278,7 @@ const CommonFormFields = ({
                   <div className="form-group mb-3">
                     <input
                       id="society_name"
+                      name="society_name"
                       type="text"
                       className="form-control "
                       onChange={onAddressInputsChange}
@@ -227,6 +291,7 @@ const CommonFormFields = ({
                   <div className="form-group mb-3">
                     <input
                       id="plot_number"
+                      name="plot_number"
                       type="number"
                       className="form-control "
                       onChange={onAddressInputsChange}
@@ -251,6 +316,7 @@ const CommonFormFields = ({
                   <div className="form-group mb-3">
                     <input
                       id="landmark"
+                      name="landmark"
                       type="text"
                       className="form-control "
                       onChange={onAddressInputsChange}
@@ -263,6 +329,7 @@ const CommonFormFields = ({
                   <div className="form-group mb-3">
                     <input
                       id="village"
+                      name="village"
                       type="text"
                       className="form-control "
                       onChange={onAddressInputsChange}
@@ -354,6 +421,7 @@ const CommonFormFields = ({
                   <button
                     onClick={onAddressFormSubmit}
                     className="btn btn-primary"
+                    data-bs-dismiss="modal"
                   >
                     Save
                   </button>
