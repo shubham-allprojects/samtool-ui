@@ -266,6 +266,9 @@ const Registration = () => {
     fieldsToDelete.forEach((field) => {
       delete formData[field];
     });
+    if (formData.contact_details.landline_number === "") {
+      delete formData.contact_details.landline_number;
+    }
     console.log(formData);
 
     if (addressLabel === "Add Details") {

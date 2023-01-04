@@ -243,8 +243,6 @@ const CommonFormFields = ({
             [name]: parseInt(value),
           },
         });
-      } else {
-        delete formData.contact_details.landline_number;
       }
     } else if (name === "mobile_number") {
       setFormData({
