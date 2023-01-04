@@ -31,6 +31,9 @@ const CommonFormFields = ({
     locality,
     landmark,
     village,
+    state,
+    city,
+    zip,
   } = addressDetails;
 
   const [addressValues, setAddressValues] = useState({
@@ -76,6 +79,7 @@ const CommonFormFields = ({
 
   const onAddressFormSubmit = (e) => {
     e.preventDefault();
+    console.log("city: ");
     let valuesArray = [
       flat_number ? `Flat No: ${flat_number}` : "",
       building_name ? `Building Name: ${building_name}` : "",
@@ -120,6 +124,7 @@ const CommonFormFields = ({
     } else if (name === "village") {
       setValues(name, value);
     } else if (name === "zip") {
+      setValues(name, value);
       if (IdOfState !== "" && value !== "") {
         zipValidationByState(value, parseInt(IdOfState));
       }
@@ -142,6 +147,7 @@ const CommonFormFields = ({
         let getStateName = document.getElementById(`state-name-${value}`);
         if (getStateName) {
           stateName = getStateName.innerText;
+          setValues(name, stateName);
         }
         setFormData({
           ...formData,
@@ -161,6 +167,12 @@ const CommonFormFields = ({
           );
         }
       }
+    } else if (name === "city") {
+      setValues(name, value);
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
     }
   };
 
@@ -176,11 +188,6 @@ const CommonFormFields = ({
         ...formData,
         contact_details: { ...formData.contact_details, [name]: value },
       });
-    } else if (name === "city") {
-      setFormData({
-        ...formData,
-        contact_details: { ...formData.contact_details, [name]: value },
-      });
     } else if (name === "zip") {
       setFormData({
         ...formData,
@@ -190,6 +197,7 @@ const CommonFormFields = ({
         },
       });
     } else if (name === "state") {
+      setValues(city, "");
       SetIdOfState(value);
     } else if (name === "email") {
       setFormData({
@@ -602,7 +610,15 @@ const CommonFormFields = ({
                   <button
                     onClick={onAddressFormSubmit}
                     className={`btn btn-primary ${
-                      locality && village && landmark ? "" : "disabled"
+                      locality &&
+                      village &&
+                      landmark &&
+                      state &&
+                      city &&
+                      zip &&
+                      zipCodeValidationColor !== "danger"
+                        ? ""
+                        : "disabled"
                     }`}
                     data-bs-dismiss="modal"
                   >
