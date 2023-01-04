@@ -163,11 +163,9 @@ const CommonFormFields = ({
           citiesByState: allCities.data,
           cityVisibilityClass: "",
         });
-        if (String(formData.contact_details.zip) !== "") {
-          zipValidationByState(
-            String(formData.contact_details.zip),
-            parseInt(value)
-          );
+        if (String(zip) !== "") {
+          console.log(zip, value);
+          zipValidationByState(String(zip), parseInt(value));
         }
       }
     } else if (name === "city") {
@@ -192,13 +190,15 @@ const CommonFormFields = ({
         contact_details: { ...formData.contact_details, [name]: value },
       });
     } else if (name === "zip") {
-      setFormData({
-        ...formData,
-        contact_details: {
-          ...formData.contact_details,
-          [name]: parseInt(value),
-        },
-      });
+      if (zipCodeValidationColor !== "danger") {
+        setFormData({
+          ...formData,
+          contact_details: {
+            ...formData.contact_details,
+            [name]: parseInt(value),
+          },
+        });
+      }
     } else if (name === "state") {
       SetIdOfState(value);
     } else if (name === "email") {
