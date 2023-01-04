@@ -79,7 +79,7 @@ const CommonFormFields = ({
 
   const onAddressFormSubmit = (e) => {
     e.preventDefault();
-    console.log("city: ");
+    console.log("city: ", city);
     let valuesArray = [
       flat_number ? `Flat No: ${flat_number}` : "",
       building_name ? `Building Name: ${building_name}` : "",
@@ -141,6 +141,7 @@ const CommonFormFields = ({
       });
       style.borderColor = "";
     } else if (name === "state") {
+      addressDetails.city = "";
       if (value) {
         document.getElementById("selectedCity").selected = true;
         let stateName = "";
@@ -197,7 +198,6 @@ const CommonFormFields = ({
         },
       });
     } else if (name === "state") {
-      setValues(city, "");
       SetIdOfState(value);
     } else if (name === "email") {
       setFormData({
