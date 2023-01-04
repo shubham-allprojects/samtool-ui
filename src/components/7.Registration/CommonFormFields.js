@@ -9,8 +9,6 @@ const CommonFormFields = ({
   onInputBlur,
   resetValues,
   cityUseState,
-  addressFilled,
-  setAddressFilled,
 }) => {
   // Getting only required validation details from RegisterMainPage.
   const {
@@ -22,8 +20,6 @@ const CommonFormFields = ({
 
   const { citiesByState, cityVisibilityClass } = cityUseState;
 
-  const [btnIsDisabled, setBtnIsDisabled] = useState(true);
-
   // useState to store all states coming from api.
   const [states, setStates] = useState([]);
   // Function to get all states from api so that we can map states in select state field.
@@ -34,7 +30,6 @@ const CommonFormFields = ({
 
   const onAddressFormSubmit = (e) => {
     e.preventDefault();
-    setAddressFilled(true);
   };
 
   const onAddressInputsChange = (e) => {
@@ -45,19 +40,6 @@ const CommonFormFields = ({
     const locality = document.getElementById("locality").value;
     const landmark = document.getElementById("landmark").value;
     const village = document.getElementById("village").value;
-    if (
-      flatNo &&
-      buildingName &&
-      societyName &&
-      plotNumber &&
-      locality &&
-      landmark &&
-      village
-    ) {
-      setBtnIsDisabled(false);
-    } else {
-      setBtnIsDisabled(true);
-    }
   };
 
   useEffect(() => {
@@ -70,24 +52,14 @@ const CommonFormFields = ({
       <div className="row addressRow1 mt-lg-3 mt-4">
         <div className="col-lg-2 mb-lg-0 mb-2">Address</div>
         <div className="col-lg-2 mb-lg-0 mb-2">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              value=""
-              id="flexCheckDefault"
-              readOnly
-              checked={addressFilled}
-            />
-            <label
-              style={{ cursor: "pointer" }}
-              className="text-primary text-decoration-underline"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
-              Launch demo modal
-            </label>
-          </div>
+          <label
+            style={{ cursor: "pointer" }}
+            className="text-primary text-decoration-underline"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Add Details
+          </label>
         </div>
       </div>
 
@@ -382,7 +354,6 @@ const CommonFormFields = ({
                   <button
                     onClick={onAddressFormSubmit}
                     className="btn btn-primary"
-                    disabled={btnIsDisabled}
                   >
                     Save
                   </button>
