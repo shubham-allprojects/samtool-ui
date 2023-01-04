@@ -21,7 +21,7 @@ const CommonFormFields = ({
     zipCodeValidationColor,
   } = validationDetails;
 
-  const [addressDetails, setAddressDetails] = useState({});
+  const [addressDetails, setAddressDetails] = useState({ zip: "" });
 
   const {
     flat_number,
