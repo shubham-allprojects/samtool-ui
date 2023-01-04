@@ -79,15 +79,17 @@ const CommonFormFields = ({
 
   const onAddressFormSubmit = (e) => {
     e.preventDefault();
-    console.log("city: ", city);
     let valuesArray = [
       flat_number ? `Flat No: ${flat_number}` : "",
       building_name ? `Building Name: ${building_name}` : "",
       society_name ? `Society Name: ${society_name}` : "",
       plot_number ? `Plot No: ${plot_number}` : "",
-      locality ? `Locality: ${locality}` : "",
-      landmark ? `Landmark: ${landmark}` : "",
-      village ? `Village: ${village}` : "",
+      `Locality: ${locality}`,
+      `Landmark: ${landmark}`,
+      `Village: ${village}`,
+      `State: ${state}`,
+      `City: ${city}`,
+      `Zip Code: ${zip}`,
     ];
 
     let mainArray = [];
