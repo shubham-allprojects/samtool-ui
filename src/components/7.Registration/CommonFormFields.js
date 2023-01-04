@@ -33,9 +33,10 @@ const CommonFormFields = ({
   const [addressValues, setAddressValues] = useState({
     addressValue: "",
     labelValue: "Add Details",
+    textAreaVisibility: "d-none",
   });
 
-  const { addressValue, labelValue } = addressValues;
+  const { addressValue, labelValue, textAreaVisibility } = addressValues;
   const { citiesByState, cityVisibilityClass } = cityUseState;
 
   // useState to store all states coming from api.
@@ -67,6 +68,7 @@ const CommonFormFields = ({
     setAddressValues({
       addressValue: mainArray.join(", "),
       labelValue: "Edit Details",
+      textAreaVisibility: "",
     });
   };
 
@@ -116,8 +118,6 @@ const CommonFormFields = ({
             value={addressValue}
             readOnly
             className="form-control"
-            name=""
-            id=""
             cols="30"
             rows="4"
           ></textarea>
