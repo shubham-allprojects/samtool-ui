@@ -106,6 +106,7 @@ const CommonFormFields = ({
         <div className="col-lg-2 mb-lg-0 mb-2">Address</div>
         <div className="col-lg-6 mb-lg-0 mb-2">
           <label
+          id="address-modal-label"
             style={{ cursor: "pointer" }}
             className="text-primary text-decoration-underline form-label"
             data-bs-toggle="modal"

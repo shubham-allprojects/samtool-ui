@@ -422,6 +422,7 @@ const Registration = () => {
 
   // Function will run after Individual Form submit button is clicked.
   const onIndividualFormSubmit = async (e) => {
+    let addressLabel = document.getElementById("address-modal-label").innerText;
     e.preventDefault();
     const fieldsToDelete = [
       "organization_type",
@@ -435,20 +436,24 @@ const Registration = () => {
     });
     console.log(formData);
 
-    await axios
-      .post(`/sam/v1/customer-registration/individual-customer`, formData)
-      .then(async (res) => {
-        if (res.data.status === 0) {
-          toast.success(`Success: Please check your email for verification.`);
-          e.target.reset();
-          resetValues();
-          setTimeout(() => {
-            goTo("/register/verify");
-          }, 3000);
-        } else {
-          toast.error("Form is Invalid");
-        }
-      });
+    if (addressLabel === "Add Details") {
+      toast.error("Please Fill Address Details");
+    } else {
+      await axios
+        .post(`/sam/v1/customer-registration/individual-customer`, formData)
+        .then(async (res) => {
+          if (res.data.status === 0) {
+            toast.success(`Success: Please check your email for verification.`);
+            e.target.reset();
+            resetValues();
+            setTimeout(() => {
+              goTo("/register/verify");
+            }, 3000);
+          } else {
+            toast.error("Form is Invalid");
+          }
+        });
+    }
   };
 
   // Function will run after Organization Form submit button is clicked.
@@ -647,8 +652,8 @@ const Registration = () => {
                           onInputBlur={onInputBlur}
                           resetValues={resetValues}
                           cityUseState={cityUseState}
-                          addressFilled = {addressFilled}
-                          setAddressFilled = {setAddressFilled}
+                          addressFilled={addressFilled}
+                          setAddressFilled={setAddressFilled}
                         />
                       </div>
                     </form>
@@ -777,8 +782,8 @@ const Registration = () => {
                           onInputBlur={onInputBlur}
                           resetValues={resetValues}
                           cityUseState={cityUseState}
-                          addressFilled = {addressFilled}
-                          setAddressFilled = {setAddressFilled}
+                          addressFilled={addressFilled}
+                          setAddressFilled={setAddressFilled}
                         />
                       </div>
                     </form>
