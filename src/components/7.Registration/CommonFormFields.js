@@ -4,13 +4,16 @@ import { NavLink } from "react-router-dom";
 
 // Receiving validationDetails, onInputChange, onInputBlur as a props from organization/individual main form.
 const CommonFormFields = ({
-  validationDetails,
-  onInputChange,
-  onInputBlur,
   resetValues,
   cityUseState,
+  setCityUseState,
+  IdOfState,
+  formData,
+  setFormData,
+  SetIdOfState,
+  validationDetails,
+  setValidationDetails,
 }) => {
-  // Getting only required validation details from RegisterMainPage.
   const {
     emailValidationMessage,
     mobileValidationMessage,
@@ -47,6 +50,30 @@ const CommonFormFields = ({
     setStates(allStates.data);
   };
 
+  // Function to validate zipCodes.
+  const zipValidationByState = async (zipValue, stateId) => {
+    await axios
+      .post(`/sam/v1/customer-registration/zipcode-validation`, {
+        zipcode: zipValue,
+        state_id: stateId,
+      })
+      .then((res) => {
+        if (res.data.status === 0) {
+          setValidationDetails({
+            ...validationDetails,
+            zipCodeValidationMessage: "Invalid ZipCode.",
+            zipCodeValidationColor: "danger",
+          });
+        } else {
+          setValidationDetails({
+            ...validationDetails,
+            zipCodeValidationMessage: "",
+            zipCodeValidationColor: "",
+          });
+        }
+      });
+  };
+
   const onAddressFormSubmit = (e) => {
     e.preventDefault();
     let valuesArray = [
@@ -76,8 +103,8 @@ const CommonFormFields = ({
     setAddressDetails({ ...addressDetails, [name]: value });
   };
 
-  const onAddressInputsChange = (e) => {
-    const { name, value } = e.target;
+  const onInputChange = async (e) => {
+    const { name, value, style } = e.target;
     if (name === "flat_number") {
       setValues(name, value);
     } else if (name === "building_name") {
@@ -92,6 +119,158 @@ const CommonFormFields = ({
       setValues(name, value);
     } else if (name === "village") {
       setValues(name, value);
+    } else if (name === "zip") {
+      if (IdOfState !== "" && value !== "") {
+        zipValidationByState(value, parseInt(IdOfState));
+      }
+    } else if (name === "email") {
+      setValidationDetails({
+        ...validationDetails,
+        emailValidationMessage: "",
+      });
+      style.borderColor = "";
+    } else if (name === "mobile_number") {
+      setValidationDetails({
+        ...validationDetails,
+        mobileValidationMessage: "",
+      });
+      style.borderColor = "";
+    } else if (name === "state") {
+      if (value) {
+        document.getElementById("selectedCity").selected = true;
+        let stateName = "";
+        let getStateName = document.getElementById(`state-name-${value}`);
+        if (getStateName) {
+          stateName = getStateName.innerText;
+        }
+        setFormData({
+          ...formData,
+          contact_details: { ...formData.contact_details, [name]: stateName },
+        });
+        const allCities = await axios.post(`/sam/v1/property/by-city`, {
+          state_id: parseInt(value),
+        });
+        setCityUseState({
+          citiesByState: allCities.data,
+          cityVisibilityClass: "",
+        });
+        if (String(formData.contact_details.zip) !== "") {
+          zipValidationByState(
+            String(formData.contact_details.zip),
+            parseInt(value)
+          );
+        }
+      }
+    }
+  };
+
+  const onInputBlur = async (e) => {
+    const { name, value, style } = e.target;
+    if (name === "address") {
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
+    } else if (name === "locality") {
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
+    } else if (name === "city") {
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
+    } else if (name === "zip") {
+      setFormData({
+        ...formData,
+        contact_details: {
+          ...formData.contact_details,
+          [name]: parseInt(value),
+        },
+      });
+    } else if (name === "state") {
+      SetIdOfState(value);
+    } else if (name === "email") {
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
+      // If input field is email then post its value to api for validating.
+      await axios
+        .post(
+          `/sam/v1/customer-registration/email-validation`,
+          JSON.stringify({ email: value })
+        )
+        .then((res) => {
+          var emailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+          if (res.data.status === 1) {
+            setValidationDetails({
+              ...validationDetails,
+              emailValidationMessage: "Email id already exists.",
+            });
+            style.borderColor = "red";
+          } else if (!emailFormat.test(value)) {
+            setValidationDetails({
+              ...validationDetails,
+              emailValidationMessage: "Invalid email Id.",
+            });
+            style.borderColor = "red";
+          } else {
+            setValidationDetails({
+              ...validationDetails,
+              emailValidationMessage: "",
+            });
+            style.borderColor = "";
+          }
+        });
+    } else if (name === "landline_number") {
+      if (value !== "") {
+        setFormData({
+          ...formData,
+          contact_details: {
+            ...formData.contact_details,
+            [name]: parseInt(value),
+          },
+        });
+      } else {
+        delete formData.contact_details.landline_number;
+      }
+    } else if (name === "mobile_number") {
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
+      // If input field is mobile then post its value to api for validating.
+      await axios
+        .post(
+          `/sam/v1/customer-registration/mobilenumber-validation`,
+          JSON.stringify({ mobile_number: value })
+        )
+        .then((res) => {
+          if (res.data.status === 1) {
+            // Store validation message and validation color.
+            setValidationDetails({
+              ...validationDetails,
+              mobileValidationMessage: "Mobile number already exists.",
+            });
+            style.borderColor = "red";
+          } else if (res.data.status === 2) {
+            // Store validation message and validation color.
+            setValidationDetails({
+              ...validationDetails,
+              mobileValidationMessage: "Invalid Mobile Number Entered.",
+            });
+            style.borderColor = "red";
+          } else {
+            // Store validation message and validation color.
+            setValidationDetails({
+              ...validationDetails,
+              mobileValidationMessage: "",
+            });
+            style.borderColor = "";
+          }
+        });
     }
   };
 
@@ -106,7 +285,7 @@ const CommonFormFields = ({
         <div className="col-lg-2 mb-lg-0 mb-2">Address</div>
         <div className="col-lg-6 mb-lg-0 mb-2">
           <label
-          id="address-modal-label"
+            id="address-modal-label"
             style={{ cursor: "pointer" }}
             className="text-primary text-decoration-underline form-label"
             data-bs-toggle="modal"
@@ -258,7 +437,7 @@ const CommonFormFields = ({
                       name="flat_number"
                       type="number"
                       className="form-control "
-                      onChange={onAddressInputsChange}
+                      onChange={onInputChange}
                       placeholder="Flat Number"
                     />
                   </div>
@@ -270,7 +449,7 @@ const CommonFormFields = ({
                       name="building_name"
                       type="text"
                       className="form-control "
-                      onChange={onAddressInputsChange}
+                      onChange={onInputChange}
                       placeholder="Building Name"
                     />
                   </div>
@@ -282,7 +461,7 @@ const CommonFormFields = ({
                       name="society_name"
                       type="text"
                       className="form-control "
-                      onChange={onAddressInputsChange}
+                      onChange={onInputChange}
                       placeholder="Society Name"
                     />
                   </div>
@@ -295,7 +474,7 @@ const CommonFormFields = ({
                       name="plot_number"
                       type="number"
                       className="form-control "
-                      onChange={onAddressInputsChange}
+                      onChange={onInputChange}
                       placeholder="Plot Number"
                     />
                   </div>
@@ -303,12 +482,12 @@ const CommonFormFields = ({
 
                 <div className="col-md-4">
                   <input
-                    // onBlur={onInputBlur}
+                    onBlur={onInputBlur}
                     id="locality"
                     name="locality"
                     type="text"
                     className="form-control "
-                    onChange={onAddressInputsChange}
+                    onChange={onInputChange}
                     placeholder="Locality, Area"
                   />
                 </div>
@@ -320,7 +499,7 @@ const CommonFormFields = ({
                       name="landmark"
                       type="text"
                       className="form-control "
-                      onChange={onAddressInputsChange}
+                      onChange={onInputChange}
                       placeholder="Landmark"
                     />
                   </div>
@@ -333,21 +512,22 @@ const CommonFormFields = ({
                       name="village"
                       type="text"
                       className="form-control "
-                      onChange={onAddressInputsChange}
+                      onChange={onInputChange}
                       placeholder="Village"
                     />
                   </div>
                 </div>
-                {/* <div className="col-md-4">
+                <hr />
+                <div className="col-md-4">
                   <div className="form-group mb-3">
                     <select
                       onChange={onInputChange}
                       onBlur={onInputBlur}
+                      id="state"
                       name="state"
                       type="text"
                       className="form-select"
                       placeholder="State"
-                      required
                     >
                       <option value="" style={{ color: "gray" }}>
                         State
@@ -373,11 +553,11 @@ const CommonFormFields = ({
                     <select
                       onChange={onInputChange}
                       onBlur={onInputBlur}
+                      id="city"
                       name="city"
                       type="text"
                       className="form-select"
                       placeholder="city"
-                      required
                     >
                       <option
                         id="selectedCity"
@@ -403,11 +583,11 @@ const CommonFormFields = ({
                     <input
                       type="text"
                       onChange={onInputChange}
+                      id="zip"
                       onBlur={onInputBlur}
                       placeholder="Zipcode"
                       name="zip"
                       className={`form-control border-${zipCodeValidationColor}`}
-                      required
                     ></input>
                     <span
                       className={`pe-1 ${
@@ -417,7 +597,7 @@ const CommonFormFields = ({
                       {zipCodeValidationMessage}
                     </span>
                   </div>
-                </div> */}
+                </div>
                 <div className="modal-footer">
                   <button
                     onClick={onAddressFormSubmit}
