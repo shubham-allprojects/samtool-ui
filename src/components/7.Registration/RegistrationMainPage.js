@@ -6,20 +6,28 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Registration = () => {
+  const goTo = useNavigate();
+
   // useState to store ID of state so that we can validate zipCodes for each state.
   const [IdOfState, SetIdOfState] = useState("");
+
+  // useState to store address Details.
   const [addressDetails, setAddressDetails] = useState({ zip: "" });
+
+  // useState to store/remove and hide/show cities data.
   const [cityUseState, setCityUseState] = useState({
     citiesByState: [],
     cityVisibilityClass: "d-none",
   });
 
+  // useState to store/remove and hide/show address details.
   const [addressValues, setAddressValues] = useState({
     addressValue: "",
     labelValue: "Add Details",
     textAreaVisibility: "d-none",
   });
 
+  // Object destructuring.
   const {
     flat_number,
     building_name,
@@ -33,6 +41,67 @@ const Registration = () => {
     zip,
   } = addressDetails;
 
+  // useState to store each field's data from form.
+  const [formData, setFormData] = useState({
+    contact_details: {
+      user_type: "Individual User",
+      address: "",
+      locality: "",
+      city: "",
+      zip: "",
+      state: "",
+      email: "",
+      mobile_number: "",
+      landline_number: "",
+    },
+  });
+
+  // Store validation message and validation color based on input field.
+  const [validationDetails, setValidationDetails] = useState({});
+
+  // Object destructuring.
+  const {
+    aadhaarValidationMessage,
+    panValidationMessage,
+    gstValidationMessage,
+    tanValidationMessage,
+    cinValidationMessage,
+    zipCodeValidationColor,
+  } = validationDetails;
+
+  // Things to be changed when we change form i.e. either individual or organization.
+  const [toggleForms, setToggleForms] = useState({
+    individualSelected: true,
+    organizationSelected: false,
+    individualDisplay: "",
+    organizationDisplay: "d-none",
+  });
+
+  // Object destructuring.
+  const {
+    individualSelected,
+    organizationSelected,
+    individualDisplay,
+    organizationDisplay,
+  } = toggleForms;
+
+  // Function to reset values.
+  const resetValues = () => {
+    let allInputs = document.querySelectorAll(".form-control");
+    allInputs.forEach((i) => {
+      i.style.borderColor = "";
+    });
+    setAddressValues({
+      addressValue: "",
+      labelValue: "Add Details",
+      textAreaVisibility: "d-none",
+    });
+    setValidationDetails({});
+    SetIdOfState("");
+    setCityUseState({ citiesByState: [], cityVisibilityClass: "d-none" });
+  };
+
+  // Function will run on click of save button of address
   const onAddressFormSubmit = (e) => {
     e.preventDefault();
     let valuesArray = [
@@ -59,67 +128,6 @@ const Registration = () => {
       labelValue: "Edit Details",
       textAreaVisibility: "",
     });
-  };
-
-  const goTo = useNavigate();
-
-  // useState to store each field's data from form.
-  const [formData, setFormData] = useState({
-    contact_details: {
-      user_type: "Individual User",
-      address: "",
-      locality: "",
-      city: "",
-      zip: "",
-      state: "",
-      email: "",
-      mobile_number: "",
-      landline_number: "",
-    },
-  });
-
-  // Store validation message and validation color based on input field.
-  const [validationDetails, setValidationDetails] = useState({});
-
-  const { zipCodeValidationColor } = validationDetails;
-
-  // Things to be changed when we change form i.e. either individual or organization.
-  const [toggleForms, setToggleForms] = useState({
-    individualSelected: true,
-    organizationSelected: false,
-    individualDisplay: "",
-    organizationDisplay: "d-none",
-  });
-
-  // Object destructuring.
-  const {
-    aadhaarValidationMessage,
-    panValidationMessage,
-    gstValidationMessage,
-    tanValidationMessage,
-    cinValidationMessage,
-  } = validationDetails;
-
-  const {
-    individualSelected,
-    organizationSelected,
-    individualDisplay,
-    organizationDisplay,
-  } = toggleForms;
-
-  const resetValues = () => {
-    let allInputs = document.querySelectorAll(".form-control");
-    allInputs.forEach((i) => {
-      i.style.borderColor = "";
-    });
-    setAddressValues({
-      addressValue: "",
-      labelValue: "Add Details",
-      textAreaVisibility: "d-none",
-    });
-    setValidationDetails({});
-    SetIdOfState("");
-    setCityUseState({ citiesByState: [], cityVisibilityClass: "d-none" });
   };
 
   // Function to validate zipCodes.
@@ -193,10 +201,6 @@ const Registration = () => {
     } else if (attrOfForm === "individual") {
       showIndividualForm();
     }
-  };
-
-  const setValues = (name, value) => {
-    setAddressDetails({ ...addressDetails, [name]: value });
   };
 
   // Function to show backend validation on outside click of input filed.
@@ -360,6 +364,8 @@ const Registration = () => {
             [name]: parseInt(value),
           },
         });
+      } else {
+        delete formData.contact_details.landline_number;
       }
     } else if (name === "mobile_number") {
       setFormData({
@@ -397,6 +403,11 @@ const Registration = () => {
           }
         });
     }
+  };
+
+  // Function to store address Details in a useState => addressDetails
+  const setValues = (name, value) => {
+    setAddressDetails({ ...addressDetails, [name]: value });
   };
 
   // This will run onchange of input field.
@@ -511,9 +522,6 @@ const Registration = () => {
     fieldsToDelete.forEach((field) => {
       delete formData[field];
     });
-    if (formData.contact_details.landline_number === "") {
-      delete formData.contact_details.landline_number;
-    }
     console.log(formData);
 
     if (addressValues.labelValue === "Add Details") {
