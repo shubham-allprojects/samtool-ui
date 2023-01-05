@@ -13,6 +13,8 @@ const CommonFormFields = ({
   SetIdOfState,
   validationDetails,
   setValidationDetails,
+  addressValues,
+  setAddressValues,
 }) => {
   const {
     emailValidationMessage,
@@ -35,12 +37,6 @@ const CommonFormFields = ({
     city,
     zip,
   } = addressDetails;
-
-  const [addressValues, setAddressValues] = useState({
-    addressValue: "",
-    labelValue: "Add Details",
-    textAreaVisibility: "d-none",
-  });
 
   const { addressValue, labelValue, textAreaVisibility } = addressValues;
   const { citiesByState, cityVisibilityClass } = cityUseState;

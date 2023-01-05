@@ -13,6 +13,12 @@ const Registration = () => {
     cityVisibilityClass: "d-none",
   });
 
+  const [addressValues, setAddressValues] = useState({
+    addressValue: "",
+    labelValue: "Add Details",
+    textAreaVisibility: "d-none",
+  });
+
   const goTo = useNavigate();
 
   // useState to store each field's data from form.
@@ -61,6 +67,11 @@ const Registration = () => {
     let allInputs = document.querySelectorAll(".form-control");
     allInputs.forEach((i) => {
       i.style.borderColor = "";
+    });
+    setAddressValues({
+      addressValue: "",
+      labelValue: "Add Details",
+      textAreaVisibility: "d-none",
     });
     setValidationDetails({});
     SetIdOfState("");
@@ -254,7 +265,6 @@ const Registration = () => {
 
   // Function will run after Individual Form submit button is clicked.
   const onIndividualFormSubmit = async (e) => {
-    let addressLabel = document.getElementById("address-modal-label").innerText;
     e.preventDefault();
     const fieldsToDelete = [
       "organization_type",
@@ -271,7 +281,7 @@ const Registration = () => {
     }
     console.log(formData);
 
-    if (addressLabel === "Add Details") {
+    if (addressValues.labelValue === "Add Details") {
       toast.error("Please Fill Address Details");
     } else {
       await axios
@@ -305,20 +315,25 @@ const Registration = () => {
       delete formData[field];
     });
     console.log(formData);
-    await axios
-      .post(`/sam/v1/customer-registration/org-customer`, formData)
-      .then(async (res) => {
-        if (res.data.status === 0) {
-          toast.success(`Success: Please check your email for verification.`);
-          e.target.reset();
-          resetValues();
-          setTimeout(() => {
-            goTo("/register/verify");
-          }, 3000);
-        } else {
-          toast.error("Form is Invalid");
-        }
-      });
+    
+    if (addressValues.labelValue === "Add Details") {
+      toast.error("Please Fill Address Details");
+    } else {
+      await axios
+        .post(`/sam/v1/customer-registration/org-customer`, formData)
+        .then(async (res) => {
+          if (res.data.status === 0) {
+            toast.success(`Success: Please check your email for verification.`);
+            e.target.reset();
+            resetValues();
+            setTimeout(() => {
+              goTo("/register/verify");
+            }, 3000);
+          } else {
+            toast.error("Form is Invalid");
+          }
+        });
+    }
   };
 
   useEffect(() => {
@@ -491,6 +506,8 @@ const Registration = () => {
                           IdOfState={IdOfState}
                           formData={formData}
                           setFormData={setFormData}
+                          addressValues={addressValues}
+                          setAddressValues={setAddressValues}
                         />
                       </div>
                     </form>
@@ -622,6 +639,8 @@ const Registration = () => {
                           setCityUseState={setCityUseState}
                           formData={formData}
                           setFormData={setFormData}
+                          addressValues={addressValues}
+                          setAddressValues={setAddressValues}
                         />
                       </div>
                     </form>
