@@ -303,16 +303,6 @@ const Registration = () => {
         ...formData,
         contact_details: { ...formData.contact_details, [name]: value },
       });
-    } else if (name === "zip") {
-      if (zipCodeValidationColor !== "danger") {
-        setFormData({
-          ...formData,
-          contact_details: {
-            ...formData.contact_details,
-            [name]: parseInt(value),
-          },
-        });
-      }
     } else if (name === "state") {
       SetIdOfState(value);
     } else if (name === "email") {
@@ -449,7 +439,17 @@ const Registration = () => {
     } else if (name === "village") {
       setValues(name, value);
     } else if (name === "zip") {
-      setValues(name, value);
+      console.log("on Zip change", formData.contact_details);
+      if (zipCodeValidationColor !== "danger") {
+        setFormData({
+          ...formData,
+          contact_details: {
+            ...formData.contact_details,
+            [name]: parseInt(value),
+          },
+        });
+        setValues(name, value);
+      }
       if (IdOfState !== "" && value !== "") {
         zipValidationByState(value, parseInt(IdOfState));
       }
@@ -466,6 +466,7 @@ const Registration = () => {
       });
       style.borderColor = "";
     } else if (name === "state") {
+      console.log("On state change:", formData.contact_details);
       addressDetails.city = "";
       if (value) {
         document.getElementById("selectedCity").selected = true;
@@ -487,7 +488,6 @@ const Registration = () => {
           cityVisibilityClass: "",
         });
         if (String(zip) !== "") {
-          console.log(zip, value);
           zipValidationByState(String(zip), parseInt(value));
         }
       }
