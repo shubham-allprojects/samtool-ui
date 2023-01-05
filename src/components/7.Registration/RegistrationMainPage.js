@@ -4,9 +4,11 @@ import CommonFormFields from "./CommonFormFields";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useRef } from "react";
 
 const Registration = () => {
   const goTo = useNavigate();
+  const deselectStateInput = useRef();
 
   // useState to store ID of state so that we can validate zipCodes for each state.
   const [IdOfState, SetIdOfState] = useState("");
@@ -94,7 +96,21 @@ const Registration = () => {
     let allInputs = document.querySelectorAll(".form-control");
     allInputs.forEach((i) => {
       i.style.borderColor = "";
+      i.value = "";
     });
+    setAddressDetails({
+      flat_number: "",
+      building_name: "",
+      society_name: "",
+      plot_number: "",
+      locality: "",
+      village: "",
+      landmark: "",
+      state: "",
+      city: "",
+      zip: "",
+    });
+    deselectStateInput.current.selected = true;
     setAddressValues({
       addressValue: "",
       labelValue: "Add Details",
@@ -450,7 +466,6 @@ const Registration = () => {
     } else if (name === "village") {
       setValues(name, value);
     } else if (name === "zip") {
-      console.log("on Zip change", formData.contact_details);
       if (zipCodeValidationColor !== "danger") {
         setFormData({
           ...formData,
@@ -477,7 +492,6 @@ const Registration = () => {
       });
       style.borderColor = "";
     } else if (name === "state") {
-      console.log("On state change:", formData.contact_details);
       addressDetails.city = "";
       if (value) {
         document.getElementById("selectedCity").selected = true;
@@ -891,6 +905,8 @@ const Registration = () => {
             </div>
           </div>
         </div>
+
+        {/* Modal */}
         <div
           className="modal fade"
           id="exampleModal"
@@ -1012,7 +1028,11 @@ const Registration = () => {
                         className="form-select"
                         placeholder="State"
                       >
-                        <option value="" style={{ color: "gray" }}>
+                        <option
+                          ref={deselectStateInput}
+                          value=""
+                          style={{ color: "gray" }}
+                        >
                           State
                         </option>
                         {states
