@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const Registration = () => {
   // useState to store ID of state so that we can validate zipCodes for each state.
   const [IdOfState, SetIdOfState] = useState("");
+  const [addressDetails, setAddressDetails] = useState({ zip: "" });
   const [cityUseState, setCityUseState] = useState({
     citiesByState: [],
     cityVisibilityClass: "d-none",
@@ -18,6 +19,47 @@ const Registration = () => {
     labelValue: "Add Details",
     textAreaVisibility: "d-none",
   });
+
+  const {
+    flat_number,
+    building_name,
+    society_name,
+    plot_number,
+    locality,
+    landmark,
+    village,
+    state,
+    city,
+    zip,
+  } = addressDetails;
+
+  const onAddressFormSubmit = (e) => {
+    e.preventDefault();
+    let valuesArray = [
+      flat_number ? `Flat No: ${flat_number}` : "",
+      building_name ? `Building Name: ${building_name}` : "",
+      society_name ? `Society Name: ${society_name}` : "",
+      plot_number ? `Plot No: ${plot_number}` : "",
+      `Locality: ${locality}`,
+      `Landmark: ${landmark}`,
+      `Village: ${village}`,
+      `State: ${state}`,
+      `City: ${city}`,
+      `Zip Code: ${zip}`,
+    ];
+
+    let mainArray = [];
+    for (let i of valuesArray) {
+      if (i !== "") {
+        mainArray.push(i);
+      }
+    }
+    setAddressValues({
+      addressValue: mainArray.join(", "),
+      labelValue: "Edit Details",
+      textAreaVisibility: "",
+    });
+  };
 
   const goTo = useNavigate();
 
@@ -38,6 +80,8 @@ const Registration = () => {
 
   // Store validation message and validation color based on input field.
   const [validationDetails, setValidationDetails] = useState({});
+
+  const { zipCodeValidationColor } = validationDetails;
 
   // Things to be changed when we change form i.e. either individual or organization.
   const [toggleForms, setToggleForms] = useState({
@@ -76,6 +120,30 @@ const Registration = () => {
     setValidationDetails({});
     SetIdOfState("");
     setCityUseState({ citiesByState: [], cityVisibilityClass: "d-none" });
+  };
+
+  // Function to validate zipCodes.
+  const zipValidationByState = async (zipValue, stateId) => {
+    await axios
+      .post(`/sam/v1/customer-registration/zipcode-validation`, {
+        zipcode: zipValue,
+        state_id: stateId,
+      })
+      .then((res) => {
+        if (res.data.status === 0) {
+          setValidationDetails({
+            ...validationDetails,
+            zipCodeValidationMessage: "Invalid ZipCode.",
+            zipCodeValidationColor: "danger",
+          });
+        } else {
+          setValidationDetails({
+            ...validationDetails,
+            zipCodeValidationMessage: "",
+            zipCodeValidationColor: "",
+          });
+        }
+      });
   };
 
   const showOrganizationForm = () => {
@@ -127,8 +195,12 @@ const Registration = () => {
     }
   };
 
+  const setValues = (name, value) => {
+    setAddressDetails({ ...addressDetails, [name]: value });
+  };
+
   // Function to show backend validation on outside click of input filed.
-  const onInputBlur = (e) => {
+  const onInputBlur = async (e) => {
     const { name, value, style } = e.target;
     if (name === "first_name") {
       setFormData({ ...formData, [name]: value });
@@ -224,12 +296,112 @@ const Registration = () => {
         });
         style.borderColor = "red";
       }
+    } else if (name === "address") {
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
+    } else if (name === "locality") {
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
+    } else if (name === "zip") {
+      if (zipCodeValidationColor !== "danger") {
+        setFormData({
+          ...formData,
+          contact_details: {
+            ...formData.contact_details,
+            [name]: parseInt(value),
+          },
+        });
+      }
+    } else if (name === "state") {
+      SetIdOfState(value);
+    } else if (name === "email") {
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
+      // If input field is email then post its value to api for validating.
+      await axios
+        .post(
+          `/sam/v1/customer-registration/email-validation`,
+          JSON.stringify({ email: value })
+        )
+        .then((res) => {
+          var emailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+          if (res.data.status === 1) {
+            setValidationDetails({
+              ...validationDetails,
+              emailValidationMessage: "Email id already exists.",
+            });
+            style.borderColor = "red";
+          } else if (!emailFormat.test(value)) {
+            setValidationDetails({
+              ...validationDetails,
+              emailValidationMessage: "Invalid email Id.",
+            });
+            style.borderColor = "red";
+          } else {
+            setValidationDetails({
+              ...validationDetails,
+              emailValidationMessage: "",
+            });
+            style.borderColor = "";
+          }
+        });
+    } else if (name === "landline_number") {
+      if (value !== "") {
+        setFormData({
+          ...formData,
+          contact_details: {
+            ...formData.contact_details,
+            [name]: parseInt(value),
+          },
+        });
+      }
+    } else if (name === "mobile_number") {
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
+      // If input field is mobile then post its value to api for validating.
+      await axios
+        .post(
+          `/sam/v1/customer-registration/mobilenumber-validation`,
+          JSON.stringify({ mobile_number: value })
+        )
+        .then((res) => {
+          if (res.data.status === 1) {
+            // Store validation message and validation color.
+            setValidationDetails({
+              ...validationDetails,
+              mobileValidationMessage: "Mobile number already exists.",
+            });
+            style.borderColor = "red";
+          } else if (res.data.status === 2) {
+            // Store validation message and validation color.
+            setValidationDetails({
+              ...validationDetails,
+              mobileValidationMessage: "Invalid Mobile Number Entered.",
+            });
+            style.borderColor = "red";
+          } else {
+            // Store validation message and validation color.
+            setValidationDetails({
+              ...validationDetails,
+              mobileValidationMessage: "",
+            });
+            style.borderColor = "";
+          }
+        });
     }
   };
 
   // This will run onchange of input field.
-  const onInputChange = (e) => {
-    const { name, style } = e.target;
+  const onInputChange = async (e) => {
+    const { name, value, style } = e.target;
     if (name === "aadhar_number") {
       setValidationDetails({
         ...validationDetails,
@@ -260,6 +432,69 @@ const Registration = () => {
         cinValidationMessage: "",
       });
       style.borderColor = "";
+    } else if (name === "flat_number") {
+      setValues(name, value);
+    } else if (name === "building_name") {
+      setValues(name, value);
+    } else if (name === "society_name") {
+      setValues(name, value);
+    } else if (name === "plot_number") {
+      setValues(name, value);
+    } else if (name === "locality") {
+      setValues(name, value);
+    } else if (name === "landmark") {
+      setValues(name, value);
+    } else if (name === "village") {
+      setValues(name, value);
+    } else if (name === "zip") {
+      setValues(name, value);
+      if (IdOfState !== "" && value !== "") {
+        zipValidationByState(value, parseInt(IdOfState));
+      }
+    } else if (name === "email") {
+      setValidationDetails({
+        ...validationDetails,
+        emailValidationMessage: "",
+      });
+      style.borderColor = "";
+    } else if (name === "mobile_number") {
+      setValidationDetails({
+        ...validationDetails,
+        mobileValidationMessage: "",
+      });
+      style.borderColor = "";
+    } else if (name === "state") {
+      addressDetails.city = "";
+      if (value) {
+        document.getElementById("selectedCity").selected = true;
+        let stateName = "";
+        let getStateName = document.getElementById(`state-name-${value}`);
+        if (getStateName) {
+          stateName = getStateName.innerText;
+          setValues(name, stateName);
+        }
+        setFormData({
+          ...formData,
+          contact_details: { ...formData.contact_details, [name]: stateName },
+        });
+        const allCities = await axios.post(`/sam/v1/property/by-city`, {
+          state_id: parseInt(value),
+        });
+        setCityUseState({
+          citiesByState: allCities.data,
+          cityVisibilityClass: "",
+        });
+        if (String(zip) !== "") {
+          console.log(zip, value);
+          zipValidationByState(String(zip), parseInt(value));
+        }
+      }
+    } else if (name === "city") {
+      setValues(name, value);
+      setFormData({
+        ...formData,
+        contact_details: { ...formData.contact_details, [name]: value },
+      });
     }
   };
 
@@ -315,7 +550,7 @@ const Registration = () => {
       delete formData[field];
     });
     console.log(formData);
-    
+
     if (addressValues.labelValue === "Add Details") {
       toast.error("Please Fill Address Details");
     } else {
@@ -498,16 +733,13 @@ const Registration = () => {
                         </div>
                         <CommonFormFields
                           validationDetails={validationDetails}
-                          setValidationDetails={setValidationDetails}
-                          SetIdOfState={SetIdOfState}
                           resetValues={resetValues}
                           cityUseState={cityUseState}
-                          setCityUseState={setCityUseState}
-                          IdOfState={IdOfState}
-                          formData={formData}
-                          setFormData={setFormData}
                           addressValues={addressValues}
-                          setAddressValues={setAddressValues}
+                          onInputChange={onInputChange}
+                          onInputBlur={onInputBlur}
+                          onAddressFormSubmit={onAddressFormSubmit}
+                          addressDetails={addressDetails}
                         />
                       </div>
                     </form>
@@ -632,15 +864,13 @@ const Registration = () => {
                         </div>
                         <CommonFormFields
                           validationDetails={validationDetails}
-                          setValidationDetails={setValidationDetails}
-                          SetIdOfState={SetIdOfState}
                           resetValues={resetValues}
                           cityUseState={cityUseState}
-                          setCityUseState={setCityUseState}
-                          formData={formData}
-                          setFormData={setFormData}
                           addressValues={addressValues}
-                          setAddressValues={setAddressValues}
+                          onInputChange={onInputChange}
+                          onInputBlur={onInputBlur}
+                          onAddressFormSubmit={onAddressFormSubmit}
+                          addressDetails={addressDetails}
                         />
                       </div>
                     </form>
