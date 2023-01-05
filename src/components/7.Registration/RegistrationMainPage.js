@@ -45,14 +45,7 @@ const Registration = () => {
   const [formData, setFormData] = useState({
     contact_details: {
       user_type: "Individual User",
-      address: "",
-      locality: "",
-      city: "",
-      zip: "",
-      state: "",
-      email: "",
-      mobile_number: "",
-      landline_number: "",
+      address: "Not Available",
     },
   });
 
@@ -356,7 +349,7 @@ const Registration = () => {
           }
         });
     } else if (name === "landline_number") {
-      if (value !== "") {
+      if (value) {
         setFormData({
           ...formData,
           contact_details: {
@@ -364,8 +357,6 @@ const Registration = () => {
             [name]: parseInt(value),
           },
         });
-      } else {
-        delete formData.contact_details.landline_number;
       }
     } else if (name === "mobile_number") {
       setFormData({
