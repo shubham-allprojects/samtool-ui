@@ -90,15 +90,9 @@ const EditUserDetails = () => {
   // Function will get the data of user whose details are to be edited.
   const getUserToEdit = async () => {
     const [headers] = setHeaderAndUrl();
-    const userEmail = localStorage.getItem("user");
+    const userId = localStorage.getItem("userId");
     await axios
-      .post(
-        `/sam/v1/user-registration/auth/getuser`,
-        JSON.stringify({ email: userEmail }),
-        {
-          headers: headers,
-        }
-      )
+      .get(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
       .then(async (res) => {
         const [headers, url] = setHeaderAndUrl();
         const { individual_user, org_user, user_details } = res.data;
