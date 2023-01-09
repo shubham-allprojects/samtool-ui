@@ -14,6 +14,12 @@ const ManageUsers = () => {
     toast.success(`User ${userName} deleted successfuly`);
     setAllUsers(usersToShow);
   };
+
+  const deleteAllUsers = () => {
+    toast.success("Deleted all users");
+    setAllUsers([]);
+  };
+
   return (
     <Layout>
       <div className="container-fluid admin-users-wrapper section-padding">
@@ -88,6 +94,14 @@ const ManageUsers = () => {
                     })}
                   </tbody>
                 </table>
+              </div>
+              <div className="text-end">
+                <button
+                  onClick={deleteAllUsers}
+                  className="btn btn-outline-danger"
+                >
+                  Delete All
+                </button>
               </div>
             </div>
           )}
