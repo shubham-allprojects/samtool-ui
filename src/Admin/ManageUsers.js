@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
 import users from "./users.json";
 
 const ManageUsers = () => {
+  const [allUsers, setAllUsers] = useState(users);
+  const deleteUser = (userId) => {
+    let usersToShow = allUsers.filter((user) => {
+      return user._id !== userId;
+    });
+    setAllUsers(usersToShow);
+  };
   return (
     <Layout>
       <div className="container-fluid admin-users-wrapper section-padding">
@@ -25,7 +32,7 @@ const ManageUsers = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user, Index) => {
+                  {allUsers.map((user, Index) => {
                     return (
                       <tr key={Index}>
                         <td>{Index + 1}</td>
@@ -55,7 +62,12 @@ const ManageUsers = () => {
                                 <i className="bi bi-eye pe-1"></i> View
                               </NavLink>
 
-                              <span className="dropdown-item">
+                              <span
+                                className="dropdown-item"
+                                onClick={() => {
+                                  deleteUser(user._id);
+                                }}
+                              >
                                 <i className="bi bi-trash pe-1"></i> Delete
                               </span>
                             </ul>
