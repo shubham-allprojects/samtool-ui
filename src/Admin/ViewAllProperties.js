@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
 import propertyData from "./data.json";
 
 const ViewAllProperties = () => {
   const [properties, setProperties] = useState(propertyData);
+
+  const deleteProperty = (propertyId) => {
+    const propertiesToShow = properties.filter((property) => {
+      return property._id !== propertyId;
+    });
+    toast.success(`Property with ID: ${propertyId} deleted Successfuly`);
+    setProperties(propertiesToShow);
+  };
 
   return (
     <Layout>
@@ -77,6 +86,14 @@ const ViewAllProperties = () => {
                                   >
                                     Edit
                                   </NavLink>
+                                  <button
+                                    onClick={() => {
+                                      deleteProperty(property._id);
+                                    }}
+                                    className="ms-2 btn btn-outline-danger"
+                                  >
+                                    Delete
+                                  </button>
                                 </div>
                               </div>
                             </div>

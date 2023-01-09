@@ -25,7 +25,7 @@ import ViewCurrentUser from "./Admin/ViewCurrentUser";
 function App() {
   return (
     <>
-      <ToastContainer className="toast-container" autoClose="1000" />
+      <ToastContainer className="toast-container" autoClose="1800" />
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />
