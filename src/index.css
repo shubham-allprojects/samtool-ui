@@ -50,7 +50,7 @@ small {
 }
 
 /* React toast */
-.toast-container {
+.Toastify__toast-container {
   top: 50% !important;
   left: 50% !important;
   transform: translateX(-50%) translateY(-50%) !important;
@@ -828,7 +828,7 @@ input[type="number"] {
 }
 
 @media screen and (max-width: 992px) {
-  .toast-container {
+  .Toastify__toast-container {
     padding-top: 50% !important;
     padding-right: 30% !important;
     padding-left: 30% !important;
@@ -867,7 +867,7 @@ input[type="number"] {
     font-size: 0.5em !important;
   }
 
-  .toast-container {
+  .Toastify__toast-container {
     padding-top: 70% !important;
     padding-right: 11% !important;
     padding-left: 11% !important;
