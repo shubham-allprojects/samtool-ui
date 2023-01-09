@@ -20,6 +20,7 @@ import ViewAllProperties from "./Admin/ViewAllProperties";
 import ViewEditProperty from "./Admin/ViewEditProperty";
 import UploadProperties from "./Admin/UploadProperties";
 import ManageUsers from "./Admin/ManageUsers";
+import ViewCurrentUser from "./Admin/ViewCurrentUser";
 
 function App() {
   return (
@@ -81,19 +82,22 @@ function App() {
 
           {/* Admin */}
           <Route path="/admin" element={<AdminHomePage />} />
+          <Route path="/admin/property/*" element={<ViewAllProperties />} />
           <Route
-            path="/admin/view-properties"
-            element={<ViewAllProperties />}
-          />
-          <Route
-            path="/admin/edit-property/:id"
+            path="/admin/property/edit-property/:id"
             element={<ViewEditProperty />}
           />
           <Route
             path="/admin/upload-properties"
             element={<UploadProperties />}
           />
-          <Route path="/admin/users" element={<ManageUsers />} />
+          <Route path="/admin/users/*" element={<ManageUsers />} />
+
+          <Route
+            path="/admin/users/view-user/:id"
+            element={<ViewCurrentUser />}
+          />
+
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </ScrollToTop>

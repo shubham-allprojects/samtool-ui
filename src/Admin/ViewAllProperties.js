@@ -60,7 +60,7 @@ const ViewAllProperties = () => {
                                 <br />
                                 <div className="mt-3">
                                   <NavLink
-                                    to={`/admin/edit-property/${property._id}`}
+                                    to={`/admin/property/edit-property/${property._id}`}
                                     className="btn btn-outline-primary"
                                   >
                                     Edit

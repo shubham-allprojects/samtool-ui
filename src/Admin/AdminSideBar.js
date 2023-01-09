@@ -31,7 +31,7 @@ const AdminSideBar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/admin/view-properties">
+                <NavLink className="nav-link" to="/admin/property">
                   <span className="mx-2">
                     <i className="bi bi-buildings-fill text-secondary"></i>
                   </span>

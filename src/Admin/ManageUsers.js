@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
 import users from "./users.json";
@@ -47,13 +48,12 @@ const ManageUsers = () => {
                               className="dropdown-menu"
                               aria-labelledby="navbarDropdown"
                             >
-                              <span className="dropdown-item">
+                              <NavLink
+                                to={`/admin/users/view-user/${user._id}`}
+                                className="dropdown-item"
+                              >
                                 <i className="bi bi-eye pe-1"></i> View
-                              </span>
-
-                              <span className="dropdown-item">
-                                <i className="bi bi-pencil pe-1"></i> Edit
-                              </span>
+                              </NavLink>
 
                               <span className="dropdown-item">
                                 <i className="bi bi-trash pe-1"></i> Delete

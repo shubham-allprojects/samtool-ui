@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
-import propertyData from "./data.json";
+import users from "./users.json";
 
-const ViewEditProperty = () => {
+const ViewCurrentUser = () => {
   const { id } = useParams();
-  const [property, setProperty] = useState([]);
+  const [currentUser, setCurrentUser] = useState([]);
 
-  const [editViewDetails, setEditViewDetails] = useState({
+  const [viewUserDetails, setViewUserDetails] = useState({
     isReadOnly: true,
     isDisabled: false,
     editClassName: "editable-values",
@@ -16,7 +16,7 @@ const ViewEditProperty = () => {
   });
 
   const editDetails = () => {
-    setEditViewDetails({
+    setViewUserDetails({
       isReadOnly: false,
       isDisabled: true,
       editClassName: "",
@@ -25,7 +25,7 @@ const ViewEditProperty = () => {
   };
 
   const cancelEditing = () => {
-    setEditViewDetails({
+    setViewUserDetails({
       isReadOnly: true,
       isDisabled: false,
       editClassName: "editable-values",
@@ -33,23 +33,23 @@ const ViewEditProperty = () => {
     });
     let samp = document.querySelectorAll("input");
     for (let i of samp) {
-      document.getElementById(i.name).value = property[i.name];
+      document.getElementById(i.name).value = currentUser[i.name];
     }
   };
-  const { _id, count, category, city_name, market_value, range } = property;
+  const { _id, name, email, phone } = currentUser;
   const { isReadOnly, isDisabled, editClassName, cancelUpdateBtnClassName } =
-    editViewDetails;
+    viewUserDetails;
 
-  const setCurrentProperty = () => {
-    for (let i of propertyData) {
-      if (i._id === id) {
-        setProperty(i);
+  const setCurrentUserData = () => {
+    for (let i of users) {
+      if (i._id === parseInt(id)) {
+        setCurrentUser(i);
       }
     }
   };
 
   useEffect(() => {
-    setCurrentProperty();
+    setCurrentUserData();
   });
 
   return (
@@ -60,7 +60,7 @@ const ViewEditProperty = () => {
           <div className="col-xl-10 col-md-9 scrollable-right-div">
             <section className="admin-edit-property wrapper">
               <div className="container-fluid">
-                <h2 className="text-center mb-4">View & Edit</h2>
+                <h2 className="text-center mb-4">View/Edit</h2>
                 <div className="row justify-content-center">
                   <div className="col-xl-10 col-lg-11">
                     <form
@@ -94,16 +94,16 @@ const ViewEditProperty = () => {
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
-                              htmlFor="count"
+                              htmlFor="name"
                             >
-                              No of Properties:
+                              Name:
                             </label>
                             <input
-                              name="count"
-                              id="count"
+                              name="name"
+                              id="name"
                               className={`form-control ${editClassName}`}
-                              type="number"
-                              defaultValue={count}
+                              type="text"
+                              defaultValue={name}
                               readOnly={isReadOnly}
                             />
                           </div>
@@ -112,16 +112,16 @@ const ViewEditProperty = () => {
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
-                              htmlFor="category"
+                              htmlFor="email"
                             >
-                              Category:
+                              Email:
                             </label>
                             <input
-                              name="category"
-                              id="category"
+                              name="email"
+                              id="email"
                               className={`form-control ${editClassName}`}
-                              type="text"
-                              defaultValue={category}
+                              type="email"
+                              defaultValue={email}
                               readOnly={isReadOnly}
                             />
                           </div>
@@ -130,52 +130,16 @@ const ViewEditProperty = () => {
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
-                              htmlFor="city_name"
+                              htmlFor="phone"
                             >
-                              City:
+                              Contact:
                             </label>
                             <input
-                              name="city_name"
-                              id="city_name"
+                              name="phone"
+                              id="phone"
                               className={`form-control ${editClassName}`}
                               type="text"
-                              defaultValue={city_name}
-                              readOnly={isReadOnly}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-6">
-                          <div className="form-group mb-3">
-                            <label
-                              className="form-label fw-bold"
-                              htmlFor="market_value"
-                            >
-                              Market Value:
-                            </label>
-                            <input
-                              name="market_value"
-                              id="market_value"
-                              className={`form-control ${editClassName}`}
-                              type="text"
-                              defaultValue={market_value}
-                              readOnly={isReadOnly}
-                            />
-                          </div>
-                        </div>
-                        <div className="col-6">
-                          <div className="form-group mb-3">
-                            <label
-                              className="form-label fw-bold"
-                              htmlFor="range"
-                            >
-                              Range:
-                            </label>
-                            <input
-                              name="range"
-                              id="range"
-                              className={`form-control ${editClassName}`}
-                              type="text"
-                              defaultValue={range}
+                              defaultValue={phone}
                               readOnly={isReadOnly}
                             />
                           </div>
@@ -218,4 +182,4 @@ const ViewEditProperty = () => {
   );
 };
 
-export default ViewEditProperty;
+export default ViewCurrentUser;
