@@ -25,7 +25,7 @@ import ViewCurrentUser from "./Admin/ViewCurrentUser";
 function App() {
   return (
     <>
-      <ToastContainer pauseOnHover={true} autoClose="1000" />
+      <ToastContainer autoClose="2000" />
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />

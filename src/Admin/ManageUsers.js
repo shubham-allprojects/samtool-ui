@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
 import users from "./users.json";
 
 const ManageUsers = () => {
   const [allUsers, setAllUsers] = useState(users);
-  const deleteUser = (userId) => {
+  const deleteUser = (userId, userName) => {
     let usersToShow = allUsers.filter((user) => {
       return user._id !== userId;
     });
+    toast.success(`User ${userName} deleted successfuly`);
     setAllUsers(usersToShow);
   };
   return (
@@ -73,7 +75,7 @@ const ManageUsers = () => {
                                 <span
                                   className="dropdown-item"
                                   onClick={() => {
-                                    deleteUser(user._id);
+                                    deleteUser(user._id, user.name);
                                   }}
                                 >
                                   <i className="bi bi-trash pe-1"></i> Delete
