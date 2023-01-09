@@ -14,8 +14,13 @@ const ViewAllProperties = () => {
           <AdminSideBar />
 
           {properties.length <= 0 ? (
-            <div className="col-xl-10 col-md-9 text-center wrapper">
-              <h2 className="text-center">Sorry ! No Properties Found :(</h2>
+            <div
+              className="col-xl-10 col-md-9 d-flex align-items-center justify-content-center"
+              style={{ marginTop: "-6rem" }}
+            >
+              <h1 className="text-center fw-bold">
+                Sorry ! No Properties Found :(
+              </h1>
             </div>
           ) : (
             <div className="col-xl-10 col-md-9 scrollable-right-div">
