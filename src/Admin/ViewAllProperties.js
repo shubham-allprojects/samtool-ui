@@ -32,12 +32,13 @@ const ViewAllProperties = () => {
               </h1>
             </div>
           ) : (
-            <div className="col-xl-10 col-md-9 scrollable-right-div">
+            <div className="col-xl-10 col-md-9">
               <section className="admin-view-all-properties wrapper">
                 <h1 className="text-center mb-4 text-primary fw-bold">
                   Properties
                 </h1>
-                <div className="container-fluid">
+                <hr />
+                <div className="container-fluid scrollable-right-div">
                   <div className="row">
                     {properties.map((property, Index) => {
                       return (
