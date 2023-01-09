@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
 import propertyData from "./data.json";
 
 const ViewAllProperties = () => {
+  const [properties, setProperties] = useState(propertyData);
+
   return (
     <Layout>
       <div className="container-fluid section-padding">
         <div className="row min-100vh">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-9 scrollable-right-div">
-            <section className="admin-view-all-properties wrapper">
-              <h1 className="text-center mb-4 text-primary fw-bold">
-                Properties
-              </h1>
-              <div className="container-fluid">
-                <div className="row">
-                  {propertyData ? (
-                    propertyData.map((property, Index) => {
+
+          {properties.length <= 0 ? (
+            <div className="col-xl-10 col-md-9 text-center wrapper">
+              <h2 className="text-center">Sorry ! No Properties Found :(</h2>
+            </div>
+          ) : (
+            <div className="col-xl-10 col-md-9 scrollable-right-div">
+              <section className="admin-view-all-properties wrapper">
+                <h1 className="text-center mb-4 text-primary fw-bold">
+                  Properties
+                </h1>
+                <div className="container-fluid">
+                  <div className="row">
+                    {properties.map((property, Index) => {
                       return (
                         <div className="col-lg-3 col-md-4" key={Index}>
                           <div className="admin-property-card-wrapper">
@@ -71,19 +78,12 @@ const ViewAllProperties = () => {
                           </div>
                         </div>
                       );
-                    })
-                  ) : (
-                    <div className="py-5 text-center">
-                      <h2 className="text-capitalize">
-                        Sorry! No result found :(
-                      </h2>
-                      <span className="">Please try with another options</span>
-                    </div>
-                  )}
+                    })}
+                  </div>
                 </div>
-              </div>
-            </section>
-          </div>
+              </section>
+            </div>
+          )}
         </div>
       </div>
     </Layout>

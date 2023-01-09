@@ -19,7 +19,7 @@ const ManageUsers = () => {
           <AdminSideBar />
           {allUsers.length <= 0 ? (
             <div className="col-xl-10 col-md-9 text-center wrapper">
-              <h2 className="text-center">Sorry No Users Found</h2>
+              <h2 className="text-center">Sorry ! No Users Found :(</h2>
             </div>
           ) : (
             <div className="col-xl-10 col-md-9 scrollable-right-div wrapper">
