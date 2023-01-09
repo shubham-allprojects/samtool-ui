@@ -646,6 +646,10 @@ input[type="number"] {
   transition: 0.3s ease-in-out;
 }
 
+.custom-heading-color {
+  color: #333649;
+}
+
 /* Edit Property */
 .admin-property-edit-icon {
   right: 15px;

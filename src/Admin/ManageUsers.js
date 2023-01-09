@@ -18,6 +18,7 @@ const ManageUsers = () => {
   const deleteAllUsers = () => {
     toast.success("Deleted all users");
     setAllUsers([]);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -30,7 +31,9 @@ const ManageUsers = () => {
               className="col-xl-10 col-md-9 d-flex align-items-center justify-content-center"
               style={{ marginTop: "-6rem" }}
             >
-              <h1 className="text-center fw-bold">Sorry ! No Users Found :(</h1>
+              <h1 className="text-center fw-bold custom-heading-color">
+                Sorry ! No Users Found :(
+              </h1>
             </div>
           ) : (
             <div className="col-xl-10 col-md-9 scrollable-right-div wrapper">

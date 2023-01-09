@@ -16,6 +16,12 @@ const ViewAllProperties = () => {
     setProperties(propertiesToShow);
   };
 
+  const deleteAllProperties = () => {
+    toast.success("Deleted All Properties");
+    setProperties([]);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <Layout>
       <div className="container-fluid section-padding">
@@ -27,16 +33,14 @@ const ViewAllProperties = () => {
               className="col-xl-10 col-md-9 d-flex align-items-center justify-content-center"
               style={{ marginTop: "-6rem" }}
             >
-              <h1 className="text-center fw-bold">
+              <h1 className="text-center fw-bold custom-heading-color">
                 Sorry ! No Properties Found :(
               </h1>
             </div>
           ) : (
             <div className="col-xl-10 col-md-9">
               <section className="admin-view-all-properties wrapper">
-                <h1 className="text-center mb-4 text-primary fw-bold">
-                  Properties
-                </h1>
+                <h1 className="text-center text-primary fw-bold">Properties</h1>
                 <hr />
                 <div className="container-fluid scrollable-right-div">
                   <div className="row">
@@ -103,6 +107,15 @@ const ViewAllProperties = () => {
                       );
                     })}
                   </div>
+                </div>
+                <hr />
+                <div className="text-end">
+                  <button
+                    onClick={deleteAllProperties}
+                    className="btn btn-outline-danger"
+                  >
+                    Delete All
+                  </button>
                 </div>
               </section>
             </div>
