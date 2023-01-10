@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
+import BreadCrumb from "./BreadCrumb";
 import propertyData from "./data.json";
 
 const ViewEditProperty = () => {
@@ -57,7 +58,8 @@ const ViewEditProperty = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-9 scrollable-right-div">
+          <div className="col-xl-10 col-md-9">
+            <BreadCrumb />
             <section className="admin-edit-property wrapper">
               <div className="container-fluid">
                 <h2 className="text-center mb-4">View & Edit</h2>
