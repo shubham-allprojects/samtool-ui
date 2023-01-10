@@ -28,6 +28,10 @@ code {
 
 /* Common css */
 
+.nav-link:focus {
+  color: white !important;
+}
+
 small {
   font-size: 0.775em !important;
 }
