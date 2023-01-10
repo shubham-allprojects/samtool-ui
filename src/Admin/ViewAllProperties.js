@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
+import BreadCrumb from "./BreadCrumb";
 import propertyData from "./data.json";
 
 const ViewAllProperties = () => {
@@ -27,7 +28,6 @@ const ViewAllProperties = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh">
           <AdminSideBar />
-
           {properties.length <= 0 ? (
             <div
               className="col-xl-10 col-md-9 d-flex align-items-center justify-content-center"

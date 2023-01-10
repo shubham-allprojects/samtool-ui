@@ -19,7 +19,7 @@ import AdminHomePage from "./Admin/AdminHomePage";
 import ViewAllProperties from "./Admin/ViewAllProperties";
 import ViewEditProperty from "./Admin/ViewEditProperty";
 import UploadProperties from "./Admin/UploadProperties";
-import ManageUsers from "./Admin/ManageUsers";
+import ViewAllUsers from "./Admin/ViewAllUsers";
 import ViewCurrentUser from "./Admin/ViewCurrentUser";
 
 function App() {
@@ -91,7 +91,7 @@ function App() {
             path="/admin/upload-properties"
             element={<UploadProperties />}
           />
-          <Route path="/admin/users/*" element={<ManageUsers />} />
+          <Route path="/admin/users/*" element={<ViewAllUsers />} />
 
           <Route
             path="/admin/users/view-user/:id"
