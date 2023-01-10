@@ -26,21 +26,18 @@ const BreadCrumb = () => {
       <nav aria-label="breadcrumb" className="mt-3">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
-            <NavLink className="text-decoration-none" to="/admin">
+            <NavLink className="" to="/admin">
               Dashboard
             </NavLink>
           </li>
 
           {activeInnerText === "Users" ? (
             <>
-              <NavLink
-                to="/admin/users"
-                className="breadcrumb-item text-decoration-none"
-              >
+              <NavLink to="/admin/users" className="breadcrumb-item">
                 Users
               </NavLink>
               {dataToShow ? (
-                <li className="breadcrumb-item">{dataToShow}</li>
+                <li className="breadcrumb-item text-secondary">{dataToShow}</li>
               ) : (
                 ""
               )}
