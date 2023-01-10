@@ -28,18 +28,16 @@ const ViewAllProperties = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh">
           <AdminSideBar />
-          {properties.length <= 0 ? (
-            <div
-              className="col-xl-10 col-md-9 d-flex align-items-center justify-content-center"
-              style={{ marginTop: "-6rem" }}
-            >
-              <h1 className="text-center fw-bold custom-heading-color">
-                Sorry ! No Properties Found :(
-              </h1>
-            </div>
-          ) : (
-            <div className="col-xl-10 col-md-9">
-              <section className="admin-view-all-properties wrapper">
+          <div className="col-xl-10 col-md-9">
+            <BreadCrumb />
+            {properties.length <= 0 ? (
+              <div className="d-flex align-items-center justify-content-center mt-5">
+                <h1 className="fw-bold custom-heading-color">
+                  Sorry ! No Properties Found :(
+                </h1>
+              </div>
+            ) : (
+              <section className="admin-view-all-properties mb-5">
                 <h1 className="text-center text-primary fw-bold">Properties</h1>
                 <hr />
                 <div className="container-fluid scrollable-right-div">
@@ -118,8 +116,8 @@ const ViewAllProperties = () => {
                   </button>
                 </div>
               </section>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </Layout>

@@ -27,7 +27,8 @@ const ManageUsers = () => {
       <div className="container-fluid admin-users-wrapper section-padding">
         <div className="row min-100vh">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-9 wrapper">
+          <div className="col-xl-10 col-md-9">
+            <BreadCrumb />
             {allUsers.length <= 0 ? (
               <div className="d-flex align-items-center justify-content-center mt-5">
                 <h1 className="fw-bold custom-heading-color">
