@@ -34,7 +34,6 @@ const ManageUsers = () => {
     for (let i = 1; i <= pages; i++) {
       pagesArray.push(i);
     }
-    console.log(pagesArray);
   };
 
   // const deleteUser = (userId, userName) => {
@@ -83,8 +82,17 @@ const ManageUsers = () => {
   };
 
   const handlePageClick = (e) => {
-    let page = parseInt(e.target.textContent);
-    setCurrentPageNumber(page);
+    let page = e.target.textContent;
+    if (page === "Previous") {
+      setCurrentPageNumber(currentPageNumber - 1);
+      page = currentPageNumber - 1;
+    } else if (page === "Next") {
+      setCurrentPageNumber(currentPageNumber + 1);
+      page = currentPageNumber + 1;
+    } else {
+      setCurrentPageNumber(parseInt(page));
+      page = parseInt(page);
+    }
     if (userType === "org_user") {
       getOrgUsers(page, records_per_page);
     } else {
@@ -189,7 +197,6 @@ const ManageUsers = () => {
                                       // to={`/admin/users/view-user/${id}`}
                                       onClick={(e) => {
                                         e.preventDefault();
-                                        console.log("UserId: ", id);
                                       }}
                                       className="dropdown-item"
                                     >
@@ -216,6 +223,9 @@ const ManageUsers = () => {
                     <nav aria-label="Page navigation example">
                       <ul className="pagination" id="pagination">
                         <li
+                          onClick={(e) => {
+                            handlePageClick(e);
+                          }}
                           className={`page-item ${
                             currentPageNumber === 1 ? "disabled" : ""
                           }`}
@@ -236,6 +246,9 @@ const ManageUsers = () => {
                           );
                         })}
                         <li
+                          onClick={(e) => {
+                            handlePageClick(e);
+                          }}
                           className={`page-item ${
                             currentPageNumber ===
                             pagesArray[pagesArray.length - 1]
