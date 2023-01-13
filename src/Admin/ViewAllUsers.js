@@ -7,6 +7,7 @@ import AdminSideBar from "./AdminSideBar";
 import BreadCrumb from "./BreadCrumb";
 
 const records_per_page = 2;
+let pagesArray = [];
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [userType, setUserType] = useState("");
@@ -27,6 +28,15 @@ const ManageUsers = () => {
     return [headers, url];
   };
 
+  const setPageNumbers = (totalUsers) => {
+    pagesArray = [];
+    let pages = totalUsers / records_per_page;
+    for (let i = 1; i <= pages; i++) {
+      pagesArray.push(i);
+    }
+    console.log(pagesArray);
+  };
+
   // const deleteUser = (userId, userName) => {
   //   let usersToShow = allUsers.filter((user) => {
   //     return user._id !== userId;
@@ -36,6 +46,7 @@ const ManageUsers = () => {
   // };
 
   const getIndividualUsers = async (pageNumber, records_per_page) => {
+    setPageNumbers(individualUsersCount);
     setDisplayClass("");
     individualBtnRef.current.classList.add("active");
     orgBtnRef.current.classList.remove("active");
@@ -191,6 +202,29 @@ const ManageUsers = () => {
                         })}
                       </tbody>
                     </table>
+                    <nav aria-label="Page navigation example">
+                      <ul className="pagination" id="pagination">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
+                            Previous
+                          </a>
+                        </li>
+                        {pagesArray.map((pageNo, Index) => {
+                          return (
+                            <li className="page-item" key={Index}>
+                              <a className="page-link" href="#">
+                                {pageNo}
+                              </a>
+                            </li>
+                          );
+                        })}
+                        <li className="page-item">
+                          <a className="page-link" href="#">
+                            Next
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
                   </div>
                 </>
               )}
