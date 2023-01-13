@@ -7,11 +7,11 @@ import AdminSideBar from "./AdminSideBar";
 import BreadCrumb from "./BreadCrumb";
 
 const records_per_page = 2;
+let currentPageNumber = 1;
 let pagesArray = [];
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [userType, setUserType] = useState("");
-  const [currentPageNumber, setCurrentPageNumber] = useState(1);
   const [displayClass, setDisplayClass] = useState("d-none");
   const [counts, setCounts] = useState({
     individualUsersCount: 4,
@@ -45,7 +45,6 @@ const ManageUsers = () => {
   // };
 
   const getIndividualUsers = async (pageNumber, records_per_page) => {
-    setCurrentPageNumber(1)
     setPageNumbers(individualUsersCount);
     setDisplayClass("");
     individualBtnRef.current.classList.add("active");
@@ -66,7 +65,6 @@ const ManageUsers = () => {
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
-    setCurrentPageNumber(1)
     setPageNumbers(orgUsersCount);
     individualBtnRef.current.classList.remove("active");
     orgBtnRef.current.classList.add("active");
@@ -86,19 +84,16 @@ const ManageUsers = () => {
   const handlePageClick = (e) => {
     let page = e.target.textContent;
     if (page === "Previous") {
-      setCurrentPageNumber(currentPageNumber - 1);
-      page = currentPageNumber - 1;
+      currentPageNumber = currentPageNumber - 1;
     } else if (page === "Next") {
-      setCurrentPageNumber(currentPageNumber + 1);
-      page = currentPageNumber + 1;
+      currentPageNumber = currentPageNumber + 1;
     } else {
-      setCurrentPageNumber(parseInt(page));
-      page = parseInt(page);
+      currentPageNumber = parseInt(page);
     }
     if (userType === "org_user") {
-      getOrgUsers(page, records_per_page);
+      getOrgUsers(currentPageNumber, records_per_page);
     } else {
-      getIndividualUsers(page, records_per_page);
+      getIndividualUsers(currentPageNumber, records_per_page);
     }
   };
 
