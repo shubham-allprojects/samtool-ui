@@ -12,9 +12,13 @@ const ManageUsers = () => {
   const [userType, setUserType] = useState("");
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   const [displayClass, setDisplayClass] = useState("d-none");
-
+  const [counts, setCounts] = useState({
+    individualUsersCount: 4,
+    orgUsersCount: 3,
+  });
   const individualBtnRef = useRef();
   const orgBtnRef = useRef();
+  const { individualUsersCount, orgUsersCount } = counts;
 
   const setHeaderAndUrl = () => {
     const loginToken = localStorage.getItem("logintoken");
@@ -50,7 +54,7 @@ const ManageUsers = () => {
       });
   };
 
-  const getOrgUsers = async () => {
+  const getOrgUsers = async (pageNumber, records_per_page) => {
     individualBtnRef.current.classList.remove("active");
     orgBtnRef.current.classList.add("active");
     setDisplayClass("");
@@ -58,8 +62,8 @@ const ManageUsers = () => {
     setUserType("org_user");
     const orgBodyData = {
       type: "Organizational User",
-      page_number: 1,
-      number_of_records: 5,
+      page_number: pageNumber,
+      number_of_records: records_per_page,
     };
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
       setUsers(res.data);

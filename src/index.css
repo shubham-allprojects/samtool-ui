@@ -717,11 +717,18 @@ input[type="number"] {
 
 .users-btn {
   width: 200px;
+  transition: 0.3s ease-in-out;
+}
+
+.users-btn:hover {
+  background-color: #333649 !important;
+  transition: 0.3s ease-in-out;
 }
 
 .users-btn.active {
   background-color: #333649 !important;
   color: white;
+  transition: 0.3s ease-in-out;
 }
 
 /* Address Modal */
