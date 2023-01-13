@@ -66,6 +66,7 @@ const ManageUsers = () => {
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
+    setPageNumbers(orgUsersCount)
     individualBtnRef.current.classList.remove("active");
     orgBtnRef.current.classList.add("active");
     setDisplayClass("");
@@ -79,6 +80,15 @@ const ManageUsers = () => {
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
       setUsers(res.data);
     });
+  };
+
+  const handlePageClick = (e) => {
+    let page = parseInt(e.target.textContent);
+    if (userType === "org_user") {
+      getOrgUsers(page, records_per_page);
+    } else {
+      getIndividualUsers(page, records_per_page);
+    }
   };
 
   // const deleteAllUsers = () => {
@@ -205,23 +215,23 @@ const ManageUsers = () => {
                     <nav aria-label="Page navigation example">
                       <ul className="pagination" id="pagination">
                         <li className="page-item">
-                          <a className="page-link" href="#">
-                            Previous
-                          </a>
+                          <span className="page-link">Previous</span>
                         </li>
                         {pagesArray.map((pageNo, Index) => {
                           return (
-                            <li className={`page-item ${Index==0?"active":""}`} key={Index}>
-                              <a className="page-link" href="#">
-                                {pageNo}
-                              </a>
+                            <li
+                              onClick={(e) => {
+                                handlePageClick(e);
+                              }}
+                              className="page-item"
+                              key={Index}
+                            >
+                              <span className="page-link">{pageNo}</span>
                             </li>
                           );
                         })}
                         <li className="page-item">
-                          <a className="page-link" href="#">
-                            Next
-                          </a>
+                          <span className="page-link">Next</span>
                         </li>
                       </ul>
                     </nav>
