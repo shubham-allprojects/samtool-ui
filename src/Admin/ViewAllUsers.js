@@ -66,7 +66,7 @@ const ManageUsers = () => {
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
-    setPageNumbers(orgUsersCount)
+    setPageNumbers(orgUsersCount);
     individualBtnRef.current.classList.remove("active");
     orgBtnRef.current.classList.add("active");
     setDisplayClass("");
@@ -84,6 +84,7 @@ const ManageUsers = () => {
 
   const handlePageClick = (e) => {
     let page = parseInt(e.target.textContent);
+    setCurrentPageNumber(page);
     if (userType === "org_user") {
       getOrgUsers(page, records_per_page);
     } else {
@@ -214,7 +215,11 @@ const ManageUsers = () => {
                     </table>
                     <nav aria-label="Page navigation example">
                       <ul className="pagination" id="pagination">
-                        <li className="page-item">
+                        <li
+                          className={`page-item ${
+                            currentPageNumber === 1 ? "disabled" : ""
+                          }`}
+                        >
                           <span className="page-link">Previous</span>
                         </li>
                         {pagesArray.map((pageNo, Index) => {
@@ -230,7 +235,14 @@ const ManageUsers = () => {
                             </li>
                           );
                         })}
-                        <li className="page-item">
+                        <li
+                          className={`page-item ${
+                            currentPageNumber ===
+                            pagesArray[pagesArray.length - 1]
+                              ? "disabled"
+                              : ""
+                          }`}
+                        >
                           <span className="page-link">Next</span>
                         </li>
                       </ul>
