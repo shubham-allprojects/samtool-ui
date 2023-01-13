@@ -221,7 +221,9 @@ const ManageUsers = () => {
                       <ul className="pagination" id="pagination">
                         <li
                           onClick={(e) => {
-                            handlePageClick(e);
+                            if (currentPageNumber !== 1) {
+                              handlePageClick(e);
+                            }
                           }}
                           className={`page-item ${
                             currentPageNumber === 1 ? "disabled" : ""
@@ -244,7 +246,12 @@ const ManageUsers = () => {
                         })}
                         <li
                           onClick={(e) => {
-                            handlePageClick(e);
+                            if (
+                              currentPageNumber !==
+                              pagesArray[pagesArray.length - 1]
+                            ) {
+                              handlePageClick(e);
+                            }
                           }}
                           className={`page-item ${
                             currentPageNumber ===
