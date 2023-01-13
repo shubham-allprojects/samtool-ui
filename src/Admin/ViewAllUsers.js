@@ -30,7 +30,7 @@ const ManageUsers = () => {
 
   const setPageNumbers = (totalUsers) => {
     pagesArray = [];
-    let pages = totalUsers / records_per_page;
+    let pages = Math.ceil(totalUsers / records_per_page);
     for (let i = 1; i <= pages; i++) {
       pagesArray.push(i);
     }
