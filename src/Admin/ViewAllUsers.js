@@ -211,7 +211,7 @@ const ManageUsers = () => {
                         </li>
                         {pagesArray.map((pageNo, Index) => {
                           return (
-                            <li className="page-item" key={Index}>
+                            <li className={`page-item ${Index==0?"active":""}`} key={Index}>
                               <a className="page-link" href="#">
                                 {pageNo}
                               </a>
