@@ -45,6 +45,7 @@ const ManageUsers = () => {
   // };
 
   const getIndividualUsers = async (pageNumber, records_per_page) => {
+    setCurrentPageNumber(1)
     setPageNumbers(individualUsersCount);
     setDisplayClass("");
     individualBtnRef.current.classList.add("active");
@@ -65,6 +66,7 @@ const ManageUsers = () => {
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
+    setCurrentPageNumber(1)
     setPageNumbers(orgUsersCount);
     individualBtnRef.current.classList.remove("active");
     orgBtnRef.current.classList.add("active");
