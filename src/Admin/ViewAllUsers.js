@@ -16,7 +16,7 @@ const ManageUsers = () => {
     useState("d-none");
   const [orgDisplayClass, setOrgDisplayClass] = useState("d-none");
   const [counts, setCounts] = useState({
-    individualUsersCount: 37,
+    individualUsersCount: 45,
     orgUsersCount: 3,
   });
   const individualBtnRef = useRef();
