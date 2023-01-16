@@ -28,6 +28,7 @@ const BreadCrumb = ({ userType }) => {
 
   useEffect(() => {
     testFn();
+    // eslint-disable-next-line
   }, []);
 
   return (
