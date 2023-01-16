@@ -85,11 +85,24 @@ const ManageUsers = () => {
 
   const handlePageClick = (e) => {
     let allPageItems = document.querySelectorAll(".page-item");
+    let activePageItem = document.querySelector(".page-item.active");
     let page = e.target.textContent;
     if (page === "Previous") {
       currentPageNumber = currentPageNumber - 1;
+      activePageItem.classList.remove("active");
+      allPageItems.forEach((item) => {
+        if (parseInt(item.textContent) === currentPageNumber) {
+          item.classList.add("active");
+        }
+      });
     } else if (page === "Next") {
       currentPageNumber = currentPageNumber + 1;
+      activePageItem.classList.remove("active");
+      allPageItems.forEach((item) => {
+        if (parseInt(item.textContent) === currentPageNumber) {
+          item.classList.add("active");
+        }
+      });
     } else {
       currentPageNumber = parseInt(page);
       allPageItems.forEach((item) => {
