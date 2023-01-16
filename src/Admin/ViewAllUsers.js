@@ -67,6 +67,23 @@ const ManageUsers = () => {
   //   setAllUsers(usersToShow);
   // };
 
+  const getAllUsersData = async (userData) => {
+    const [headers, url] = setHeaderAndUrl();
+    if (userData.type === "Individual User") {
+      await axios.post(url, userData, { headers: headers }).then((res) => {
+        setUsers({ individualUsers: res.data.AllData, orgUsers: [] });
+      });
+    } else if (userData.type === "Organizational User") {
+      await axios.post(url, userData, { headers: headers }).then((res) => {
+        setUsers({
+          orgUsers: res.data.AllOrganizationData,
+          individualUsers: [],
+        });
+      });
+    }
+    setLoading(false);
+  };
+
   const getIndividualUsers = async (pageNumber, records_per_page) => {
     setPageNumbers(individualUsersCount);
     setFunctionalitiesState({
@@ -79,18 +96,12 @@ const ManageUsers = () => {
       orgDisplayClass: "d-none",
       userType: "Individual User",
     });
-    const [headers, url] = setHeaderAndUrl();
     const individualBodyData = {
       type: "Individual User",
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-    await axios
-      .post(url, individualBodyData, { headers: headers })
-      .then((res) => {
-        setUsers({ individualUsers: res.data.AllData, orgUsers: [] });
-      });
-    setLoading(false);
+    getAllUsersData(individualBodyData);
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
@@ -105,16 +116,12 @@ const ManageUsers = () => {
       orgDisplayClass: "",
       userType: "Organizational User",
     });
-    const [headers, url] = setHeaderAndUrl();
     const orgBodyData = {
       type: "Organizational User",
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-    await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
-      setUsers({ orgUsers: res.data.AllOrganizationData, individualUsers: [] });
-    });
-    setLoading(false);
+    getAllUsersData(orgBodyData);
   };
 
   const onBtnClick = (e) => {
