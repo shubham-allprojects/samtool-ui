@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
@@ -21,13 +20,13 @@ const ManageUsers = () => {
     orgBtnClass: "",
     individualBtnDisabled: false,
     orgBtnDisabled: false,
+    individualDisplayClass: "d-none",
+    orgDisplayClass: "d-none",
   });
 
   const [userType, setUserType] = useState("");
   const [loading, setLoading] = useState(false);
-  const [individualDisplayClass, setIndividualDisplayClass] =
-    useState("d-none");
-  const [orgDisplayClass, setOrgDisplayClass] = useState("d-none");
+
   const counts = {
     individualUsersCount: 45,
     orgUsersCount: 3,
@@ -40,6 +39,8 @@ const ManageUsers = () => {
     orgBtnClass,
     individualBtnDisabled,
     orgBtnDisabled,
+    individualDisplayClass,
+    orgDisplayClass,
   } = functionalitiesState;
 
   const setHeaderAndUrl = () => {
@@ -67,14 +68,14 @@ const ManageUsers = () => {
 
   const getIndividualUsers = async (pageNumber, records_per_page) => {
     setPageNumbers(individualUsersCount);
-    setIndividualDisplayClass("");
-    setOrgDisplayClass("d-none");
     setFunctionalitiesState({
       ...functionalitiesState,
       individualBtnClass: "active",
       orgBtnClass: "",
       individualBtnDisabled: true,
       orgBtnDisabled: false,
+      individualDisplayClass: "",
+      orgDisplayClass: "d-none",
     });
     setUserType("Individual User");
     const [headers, url] = setHeaderAndUrl();
@@ -93,14 +94,14 @@ const ManageUsers = () => {
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
     setPageNumbers(orgUsersCount);
-    setIndividualDisplayClass("d-none");
-    setOrgDisplayClass("");
     setFunctionalitiesState({
       ...functionalitiesState,
       individualBtnClass: "",
       orgBtnClass: "active",
       individualBtnDisabled: false,
       orgBtnDisabled: true,
+      individualDisplayClass: "d-none",
+      orgDisplayClass: "",
     });
     const [headers, url] = setHeaderAndUrl();
     setUserType("Organizational User");
