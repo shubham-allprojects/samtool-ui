@@ -6,15 +6,17 @@ import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
 import BreadCrumb from "./BreadCrumb";
 
-const records_per_page = 2;
+const records_per_page = 4;
 let currentPageNumber = 1;
 let pagesArray = [];
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [userType, setUserType] = useState("");
-  const [displayClass, setDisplayClass] = useState("d-none");
+  const [individualDisplayClass, setIndividualDisplayClass] =
+    useState("d-none");
+  const [orgDisplayClass, setOrgDisplayClass] = useState("d-none");
   const [counts, setCounts] = useState({
-    individualUsersCount: 4,
+    individualUsersCount: 37,
     orgUsersCount: 3,
   });
   const individualBtnRef = useRef();
@@ -46,7 +48,7 @@ const ManageUsers = () => {
 
   const getIndividualUsers = async (pageNumber, records_per_page) => {
     setPageNumbers(individualUsersCount);
-    setDisplayClass("");
+    setIndividualDisplayClass("");
     individualBtnRef.current.classList.add("active");
     orgBtnRef.current.classList.remove("active");
     setUserType("individual_user");
@@ -68,7 +70,7 @@ const ManageUsers = () => {
     setPageNumbers(orgUsersCount);
     individualBtnRef.current.classList.remove("active");
     orgBtnRef.current.classList.add("active");
-    setDisplayClass("");
+    setOrgDisplayClass("");
     const [headers, url] = setHeaderAndUrl();
     setUserType("org_user");
     const orgBodyData = {
@@ -88,13 +90,10 @@ const ManageUsers = () => {
     } else if (page === "Next") {
       currentPageNumber = currentPageNumber + 1;
     } else {
+      console.log(currentPageNumber);
       currentPageNumber = parseInt(page);
     }
-    if (userType === "org_user") {
-      getOrgUsers(currentPageNumber, records_per_page);
-    } else {
-      getIndividualUsers(currentPageNumber, records_per_page);
-    }
+    getIndividualUsers(currentPageNumber, records_per_page);
   };
 
   // const deleteAllUsers = () => {
@@ -123,16 +122,16 @@ const ManageUsers = () => {
                 </button>
                 <button
                   ref={orgBtnRef}
-                  onClick={() => {
-                    getOrgUsers(currentPageNumber, records_per_page);
-                  }}
+                  // onClick={() => {
+                  //   getOrgUsers(currentPageNumber, records_per_page);
+                  // }}
                   className="btn btn-outline-secondary users-btn"
                 >
                   Organizational User
                 </button>
               </div>
             </div>
-            <div className={`${displayClass} mt-4`}>
+            <div className={`${individualDisplayClass} mt-4`}>
               {users.length <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
                   <h1 className="fw-bold custom-heading-color">
@@ -146,35 +145,27 @@ const ManageUsers = () => {
                       <thead>
                         <tr>
                           <th>Sr. No.</th>
-                          <th>
-                            {userType === "org_user" ? "Company Name" : "Name"}
-                          </th>
+                          <th>User ID</th>
+                          <th>Name</th>
                           <th>Email</th>
                           <th>Role</th>
-                          <th>State</th>
+                          <th>Type</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         {users.map((user, Index) => {
-                          const {
-                            email_address,
-                            role_id,
-                            state_name,
-                            id,
-                            user_type,
-                          } = user.user_details;
+                          const { first_name } = user.individual_user;
+                          const { email_address, role_id, id, user_type } =
+                            user.user_details;
                           return (
                             <tr key={Index}>
                               <td>{Index + 1}</td>
-                              <td>
-                                {user_type === "Organizational User"
-                                  ? user.org_user.company_name
-                                  : user.individual_user.first_name}
-                              </td>
+                              <td>{id}</td>
+                              <td>{first_name}</td>
                               <td>{email_address}</td>
                               <td>{role_id}</td>
-                              <td>{state_name}</td>
+                              <td>{user_type}</td>
                               <td>
                                 <li className="nav-item dropdown list-unstyled">
                                   <span
