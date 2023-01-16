@@ -22,9 +22,9 @@ const ManageUsers = () => {
     orgBtnDisabled: false,
     individualDisplayClass: "d-none",
     orgDisplayClass: "d-none",
+    userType: "",
   });
 
-  const [userType, setUserType] = useState("");
   const [loading, setLoading] = useState(false);
 
   const counts = {
@@ -41,6 +41,7 @@ const ManageUsers = () => {
     orgBtnDisabled,
     individualDisplayClass,
     orgDisplayClass,
+    userType,
   } = functionalitiesState;
 
   const setHeaderAndUrl = () => {
@@ -76,8 +77,8 @@ const ManageUsers = () => {
       orgBtnDisabled: false,
       individualDisplayClass: "",
       orgDisplayClass: "d-none",
+      userType: "Individual User",
     });
-    setUserType("Individual User");
     const [headers, url] = setHeaderAndUrl();
     const individualBodyData = {
       type: "Individual User",
@@ -102,9 +103,9 @@ const ManageUsers = () => {
       orgBtnDisabled: true,
       individualDisplayClass: "d-none",
       orgDisplayClass: "",
+      userType: "Organizational User",
     });
     const [headers, url] = setHeaderAndUrl();
-    setUserType("Organizational User");
     const orgBodyData = {
       type: "Organizational User",
       page_number: pageNumber,
