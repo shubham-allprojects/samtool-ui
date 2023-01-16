@@ -200,8 +200,8 @@ const ManageUsers = () => {
                   <CommonSpinner />
                   {/* <CommonSpinner
                     spinnerColor="warning"
-                    height="5rem"
-                    width="5rem"
+                    height="3rem"
+                    width="3rem"
                   /> */}
                 </>
               ) : individualUsers.length <= 0 ? (
