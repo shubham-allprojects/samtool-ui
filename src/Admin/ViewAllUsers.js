@@ -20,10 +20,11 @@ const ManageUsers = () => {
   const [individualDisplayClass, setIndividualDisplayClass] =
     useState("d-none");
   const [orgDisplayClass, setOrgDisplayClass] = useState("d-none");
-  const [counts, setCounts] = useState({
+  const counts = {
     individualUsersCount: 45,
     orgUsersCount: 3,
-  });
+  };
+
   const individualBtnRef = useRef();
   const orgBtnRef = useRef();
   const { individualUsersCount, orgUsersCount } = counts;
