@@ -65,13 +65,12 @@ const ManageUsers = () => {
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-    // setLoading(true);
     await axios
       .post(url, individualBodyData, { headers: headers })
       .then((res) => {
         setUsers({ individualUsers: res.data, orgUsers: [] });
       });
-    // setLoading(false);
+    setLoading(false);
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
@@ -87,11 +86,10 @@ const ManageUsers = () => {
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-    // setLoading(true);
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
       setUsers({ orgUsers: res.data, individualUsers: [] });
     });
-    // setLoading(false);
+    setLoading(false);
   };
 
   const handlePageClick = (e) => {
@@ -145,6 +143,7 @@ const ManageUsers = () => {
                 <button
                   ref={individualBtnRef}
                   onClick={() => {
+                    setLoading(true);
                     currentPageNumber = 1;
                     getIndividualUsers(currentPageNumber, records_per_page);
                   }}
@@ -155,6 +154,7 @@ const ManageUsers = () => {
                 <button
                   ref={orgBtnRef}
                   onClick={() => {
+                    setLoading(true);
                     currentPageNumber = 1;
                     getOrgUsers(currentPageNumber, records_per_page);
                   }}
