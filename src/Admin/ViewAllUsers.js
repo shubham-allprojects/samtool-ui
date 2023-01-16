@@ -186,14 +186,13 @@ const ManageUsers = () => {
                           <th>Name</th>
                           <th>Email</th>
                           <th>Role</th>
-                          <th>Type</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         {individualUsers.map((user, Index) => {
                           const { first_name } = user.individual_user;
-                          const { email_address, role_id, id, user_type } =
+                          const { email_address, role_id, id } =
                             user.user_details;
                           return (
                             <tr key={Index}>
@@ -202,7 +201,6 @@ const ManageUsers = () => {
                               <td>{first_name}</td>
                               <td>{email_address}</td>
                               <td>{role_id}</td>
-                              <td>{user_type}</td>
                               <td>
                                 <li className="nav-item dropdown list-unstyled">
                                   <span
