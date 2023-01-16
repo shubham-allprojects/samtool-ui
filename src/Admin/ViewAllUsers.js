@@ -10,7 +10,10 @@ const records_per_page = 4;
 let currentPageNumber = 1;
 let pagesArray = [];
 const ManageUsers = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState({
+    individualUsers: [],
+    orgUsers: [],
+  });
   const [userType, setUserType] = useState("");
   const [individualDisplayClass, setIndividualDisplayClass] =
     useState("d-none");
@@ -22,6 +25,7 @@ const ManageUsers = () => {
   const individualBtnRef = useRef();
   const orgBtnRef = useRef();
   const { individualUsersCount, orgUsersCount } = counts;
+  const { individualUsers, orgUsers } = users;
 
   const setHeaderAndUrl = () => {
     const loginToken = localStorage.getItem("logintoken");
@@ -47,8 +51,10 @@ const ManageUsers = () => {
   // };
 
   const getIndividualUsers = async (pageNumber, records_per_page) => {
+    currentPageNumber = 1;
     setPageNumbers(individualUsersCount);
     setIndividualDisplayClass("");
+    setOrgDisplayClass("d-none");
     individualBtnRef.current.classList.add("active");
     orgBtnRef.current.classList.remove("active");
     setUserType("individual_user");
@@ -62,15 +68,17 @@ const ManageUsers = () => {
     await axios
       .post(url, individualBodyData, { headers: headers })
       .then((res) => {
-        setUsers(res.data);
+        setUsers({ individualUsers: res.data, orgUsers: [] });
       });
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
+    currentPageNumber = 1;
     setPageNumbers(orgUsersCount);
+    setIndividualDisplayClass("d-none");
+    setOrgDisplayClass("");
     individualBtnRef.current.classList.remove("active");
     orgBtnRef.current.classList.add("active");
-    setOrgDisplayClass("");
     const [headers, url] = setHeaderAndUrl();
     setUserType("org_user");
     const orgBodyData = {
@@ -79,7 +87,7 @@ const ManageUsers = () => {
       number_of_records: records_per_page,
     };
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
-      setUsers(res.data);
+      setUsers({ orgUsers: res.data, individualUsers: [] });
     });
   };
 
@@ -142,9 +150,9 @@ const ManageUsers = () => {
                 </button>
                 <button
                   ref={orgBtnRef}
-                  // onClick={() => {
-                  //   getOrgUsers(currentPageNumber, records_per_page);
-                  // }}
+                  onClick={() => {
+                    getOrgUsers(currentPageNumber, records_per_page);
+                  }}
                   className="btn btn-outline-secondary users-btn"
                 >
                   Organizational User
@@ -152,7 +160,7 @@ const ManageUsers = () => {
               </div>
             </div>
             <div className={`${individualDisplayClass} mt-4`}>
-              {users.length <= 0 ? (
+              {individualUsers.length <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
                   <h1 className="fw-bold custom-heading-color">
                     Sorry ! No Users Found :(
@@ -174,7 +182,7 @@ const ManageUsers = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {users.map((user, Index) => {
+                        {individualUsers.map((user, Index) => {
                           const { first_name } = user.individual_user;
                           const { email_address, role_id, id, user_type } =
                             user.user_details;
@@ -186,6 +194,134 @@ const ManageUsers = () => {
                               <td>{email_address}</td>
                               <td>{role_id}</td>
                               <td>{user_type}</td>
+                              <td>
+                                <li className="nav-item dropdown list-unstyled">
+                                  <span
+                                    className="nav-link dropdown-toggle"
+                                    id="navbarDropdown"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                  >
+                                    Select
+                                  </span>
+                                  <ul
+                                    className="dropdown-menu"
+                                    aria-labelledby="navbarDropdown"
+                                  >
+                                    <NavLink
+                                      // to={`/admin/users/view-user/${id}`}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                      }}
+                                      className="dropdown-item"
+                                    >
+                                      <i className="bi bi-eye pe-1"></i> View
+                                    </NavLink>
+
+                                    <span
+                                      className="dropdown-item"
+                                      // onClick={() => {
+                                      //   deleteUser(id, first_name);
+                                      // }}
+                                    >
+                                      <i className="bi bi-trash pe-1"></i>{" "}
+                                      Delete
+                                    </span>
+                                  </ul>
+                                </li>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                      <ul className="pagination" id="pagination">
+                        <li
+                          onClick={(e) => {
+                            if (currentPageNumber !== 1) {
+                              handlePageClick(e);
+                            }
+                          }}
+                          className={`page-item ${
+                            currentPageNumber === 1 ? "disabled" : ""
+                          }`}
+                        >
+                          <span className="page-link">Previous</span>
+                        </li>
+                        {pagesArray.map((pageNo, Index) => {
+                          return (
+                            <li
+                              onClick={(e) => {
+                                handlePageClick(e);
+                              }}
+                              className={`page-item ${
+                                Index === 0 ? "active" : ""
+                              }`}
+                              key={Index}
+                            >
+                              <span className="page-link">{pageNo}</span>
+                            </li>
+                          );
+                        })}
+                        <li
+                          onClick={(e) => {
+                            if (
+                              currentPageNumber !==
+                              pagesArray[pagesArray.length - 1]
+                            ) {
+                              handlePageClick(e);
+                            }
+                          }}
+                          className={`page-item ${
+                            currentPageNumber ===
+                            pagesArray[pagesArray.length - 1]
+                              ? "disabled"
+                              : ""
+                          }`}
+                        >
+                          <span className="page-link">Next</span>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </>
+              )}
+            </div>
+            <div className={`${orgDisplayClass} mt-4`}>
+              {orgUsers.length <= 0 ? (
+                <div className="d-flex align-items-center justify-content-center mt-5">
+                  <h1 className="fw-bold custom-heading-color">
+                    Sorry ! No Users Found :(
+                  </h1>
+                </div>
+              ) : (
+                <>
+                  <div className="table-wrapper">
+                    <table className="table table-bordered table-dark table-striped text-center">
+                      <thead>
+                        <tr>
+                          <th>Sr. No.</th>
+                          <th>User ID</th>
+                          <th>Company Name</th>
+                          <th>Email</th>
+                          <th>Role</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {orgUsers.map((user, Index) => {
+                          const { company_name } = user.org_user;
+                          const { email_address, role_id, id } =
+                            user.user_details;
+                          return (
+                            <tr key={Index}>
+                              <td>{Index + 1}</td>
+                              <td>{id}</td>
+                              <td>{company_name}</td>
+                              <td>{email_address}</td>
+                              <td>{role_id}</td>
                               <td>
                                 <li className="nav-item dropdown list-unstyled">
                                   <span
