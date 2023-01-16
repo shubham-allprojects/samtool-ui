@@ -28,6 +28,10 @@ code {
 
 /* Common css */
 
+.page-item:hover {
+  cursor: pointer;
+}
+
 .nav-link:focus {
   color: white !important;
 }
