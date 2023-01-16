@@ -92,6 +92,17 @@ const ManageUsers = () => {
     setLoading(false);
   };
 
+  const onBtnClick = (e) => {
+    const { name } = e.target;
+    setLoading(true);
+    currentPageNumber = 1;
+    if (name === "individualBtn") {
+      getIndividualUsers(currentPageNumber, records_per_page);
+    } else if (name === "orgBtn") {
+      getOrgUsers(currentPageNumber, records_per_page);
+    }
+  };
+
   const handlePageClick = (e) => {
     let allPageItems = document.querySelectorAll(".page-item");
     let activePageItem = document.querySelector(".page-item.active");
@@ -142,22 +153,16 @@ const ManageUsers = () => {
               <div className="col-12">
                 <button
                   ref={individualBtnRef}
-                  onClick={() => {
-                    setLoading(true);
-                    currentPageNumber = 1;
-                    getIndividualUsers(currentPageNumber, records_per_page);
-                  }}
+                  name="individualBtn"
+                  onClick={onBtnClick}
                   className="btn btn-outline-secondary me-2 users-btn"
                 >
                   Individual Users
                 </button>
                 <button
+                  name="orgBtn"
                   ref={orgBtnRef}
-                  onClick={() => {
-                    setLoading(true);
-                    currentPageNumber = 1;
-                    getOrgUsers(currentPageNumber, records_per_page);
-                  }}
+                  onClick={onBtnClick}
                   className="btn btn-outline-secondary users-btn"
                 >
                   Organizational User
