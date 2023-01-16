@@ -58,7 +58,7 @@ const ManageUsers = () => {
     setOrgDisplayClass("d-none");
     individualBtnRef.current.classList.add("active");
     orgBtnRef.current.classList.remove("active");
-    setUserType("individual_user");
+    setUserType("Individual User");
     const [headers, url] = setHeaderAndUrl();
     const individualBodyData = {
       type: "Individual User",
@@ -80,7 +80,7 @@ const ManageUsers = () => {
     individualBtnRef.current.classList.remove("active");
     orgBtnRef.current.classList.add("active");
     const [headers, url] = setHeaderAndUrl();
-    setUserType("org_user");
+    setUserType("Organizational User");
     const orgBodyData = {
       type: "Organizational User",
       page_number: pageNumber,
@@ -148,7 +148,7 @@ const ManageUsers = () => {
         <div className="row min-100vh">
           <AdminSideBar />
           <div className="col-xl-10 col-md-9 users-admin">
-            <BreadCrumb />
+            <BreadCrumb userType={userType} />
             <div className="row">
               <div className="col-12">
                 <button
