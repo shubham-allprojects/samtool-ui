@@ -51,7 +51,6 @@ const ManageUsers = () => {
   // };
 
   const getIndividualUsers = async (pageNumber, records_per_page) => {
-    currentPageNumber = 1;
     setPageNumbers(individualUsersCount);
     setIndividualDisplayClass("");
     setOrgDisplayClass("d-none");
@@ -73,7 +72,6 @@ const ManageUsers = () => {
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
-    currentPageNumber = 1;
     setPageNumbers(orgUsersCount);
     setIndividualDisplayClass("d-none");
     setOrgDisplayClass("");
@@ -142,6 +140,7 @@ const ManageUsers = () => {
                 <button
                   ref={individualBtnRef}
                   onClick={() => {
+                    currentPageNumber = 1;
                     getIndividualUsers(currentPageNumber, records_per_page);
                   }}
                   className="btn btn-outline-secondary me-2 users-btn"
@@ -151,6 +150,7 @@ const ManageUsers = () => {
                 <button
                   ref={orgBtnRef}
                   onClick={() => {
+                    currentPageNumber = 1;
                     getOrgUsers(currentPageNumber, records_per_page);
                   }}
                   className="btn btn-outline-secondary users-btn"
@@ -169,7 +169,7 @@ const ManageUsers = () => {
               ) : (
                 <>
                   <div className="table-wrapper">
-                    <table className="table table-bordered table-dark table-striped text-center">
+                    <table className="table table-bordered table-dark admin-users-table table-striped text-center">
                       <thead>
                         <tr>
                           <th>Sr. No.</th>
@@ -299,7 +299,7 @@ const ManageUsers = () => {
               ) : (
                 <>
                   <div className="table-wrapper">
-                    <table className="table table-bordered table-dark table-striped text-center">
+                    <table className="table table-bordered table-dark admin-users-table table-striped text-center">
                       <thead>
                         <tr>
                           <th>Sr. No.</th>

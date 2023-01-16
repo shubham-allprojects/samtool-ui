@@ -733,6 +733,10 @@ input[type="number"] {
   color: white !important;
 }
 
+.admin-users-table {
+  height: 200px;
+}
+
 /* Address Modal */
 .modal {
   --bs-modal-width: 700px !important;
