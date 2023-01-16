@@ -726,6 +726,10 @@ input[type="number"] {
   color: #333649 !important;
 }
 
+.users-btn:disabled {
+  opacity: 1 !important;
+}
+
 .users-btn:hover,
 .users-btn.active {
   background-color: #333649 !important;

@@ -57,6 +57,8 @@ const ManageUsers = () => {
     setPageNumbers(individualUsersCount);
     setIndividualDisplayClass("");
     setOrgDisplayClass("d-none");
+    individualBtnRef.current.disabled = true;
+    orgBtnRef.current.disabled = false;
     individualBtnRef.current.classList.add("active");
     orgBtnRef.current.classList.remove("active");
     setUserType("Individual User");
@@ -78,6 +80,8 @@ const ManageUsers = () => {
     setPageNumbers(orgUsersCount);
     setIndividualDisplayClass("d-none");
     setOrgDisplayClass("");
+    individualBtnRef.current.disabled = false;
+    orgBtnRef.current.disabled = true;
     individualBtnRef.current.classList.remove("active");
     orgBtnRef.current.classList.add("active");
     const [headers, url] = setHeaderAndUrl();
@@ -174,6 +178,11 @@ const ManageUsers = () => {
               {loading ? (
                 <>
                   <CommonSpinner />
+                  {/* <CommonSpinner
+                    spinnerColor="warning"
+                    height="5rem"
+                    width="5rem"
+                  /> */}
                 </>
               ) : individualUsers.length <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
