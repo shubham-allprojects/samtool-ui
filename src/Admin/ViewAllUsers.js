@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
 import BreadCrumb from "./BreadCrumb";
+import CommonLoader from "../CommonLoader";
 
 const records_per_page = 4;
 let currentPageNumber = 1;
@@ -15,6 +16,7 @@ const ManageUsers = () => {
     orgUsers: [],
   });
   const [userType, setUserType] = useState("");
+  const [loading, setLoading] = useState(false);
   const [individualDisplayClass, setIndividualDisplayClass] =
     useState("d-none");
   const [orgDisplayClass, setOrgDisplayClass] = useState("d-none");
@@ -63,11 +65,12 @@ const ManageUsers = () => {
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-
+    setLoading(true);
     await axios
       .post(url, individualBodyData, { headers: headers })
       .then((res) => {
         setUsers({ individualUsers: res.data, orgUsers: [] });
+        setLoading(false);
       });
   };
 
@@ -84,8 +87,10 @@ const ManageUsers = () => {
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
+    setLoading(true);
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
       setUsers({ orgUsers: res.data, individualUsers: [] });
+      setLoading(false);
     });
   };
 
@@ -160,7 +165,11 @@ const ManageUsers = () => {
               </div>
             </div>
             <div className={`${individualDisplayClass} mt-4`}>
-              {individualUsers.length <= 0 ? (
+              {loading ? (
+                <>
+                  <CommonLoader />
+                </>
+              ) : individualUsers.length <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
                   <h1 className="fw-bold custom-heading-color">
                     Sorry ! No Users Found :(
