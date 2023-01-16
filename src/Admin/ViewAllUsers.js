@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
 import BreadCrumb from "./BreadCrumb";
-import CommonLoader from "../CommonLoader";
+import CommonSpinner from "../CommonSpinner";
 
 const records_per_page = 4;
 let currentPageNumber = 1;
@@ -65,13 +65,13 @@ const ManageUsers = () => {
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-    setLoading(true);
+    // setLoading(true);
     await axios
       .post(url, individualBodyData, { headers: headers })
       .then((res) => {
         setUsers({ individualUsers: res.data, orgUsers: [] });
-        setLoading(false);
       });
+    // setLoading(false);
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
@@ -87,11 +87,11 @@ const ManageUsers = () => {
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-    setLoading(true);
+    // setLoading(true);
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
       setUsers({ orgUsers: res.data, individualUsers: [] });
-      setLoading(false);
     });
+    // setLoading(false);
   };
 
   const handlePageClick = (e) => {
@@ -167,7 +167,7 @@ const ManageUsers = () => {
             <div className={`${individualDisplayClass} mt-4`}>
               {loading ? (
                 <>
-                  <CommonLoader />
+                  <CommonSpinner />
                 </>
               ) : individualUsers.length <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
@@ -299,7 +299,11 @@ const ManageUsers = () => {
               )}
             </div>
             <div className={`${orgDisplayClass} mt-4`}>
-              {orgUsers.length <= 0 ? (
+              {loading ? (
+                <>
+                  <CommonSpinner />
+                </>
+              ) : orgUsers.length <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
                   <h1 className="fw-bold custom-heading-color">
                     Sorry ! No Users Found :(
