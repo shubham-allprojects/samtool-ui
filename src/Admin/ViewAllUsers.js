@@ -235,7 +235,9 @@ const ManageUsers = () => {
                               onClick={(e) => {
                                 handlePageClick(e);
                               }}
-                              className="page-item"
+                              className={`page-item ${
+                                Index === 0 ? "active" : ""
+                              }`}
                               key={Index}
                             >
                               <span className="page-link">{pageNo}</span>
