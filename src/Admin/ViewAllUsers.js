@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
@@ -27,10 +27,10 @@ const ManageUsers = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const counts = {
+  const [counts, setCounts] = useState({
     individualUsersCount: 45,
     orgUsersCount: 3,
-  };
+  });
 
   const { individualUsersCount, orgUsersCount } = counts;
   const { individualUsers, orgUsers } = users;
@@ -66,6 +66,29 @@ const ManageUsers = () => {
   //   toast.success(`User ${userName} deleted successfuly`);
   //   setAllUsers(usersToShow);
   // };
+
+  const getTotalUsersCount = async () => {
+    const [headers, url] = setHeaderAndUrl();
+    const orgBodyData = {
+      type: "Organizational User",
+      page_number: 1,
+      number_of_records: records_per_page,
+    };
+    const individualBodyData = {
+      type: "Individual User",
+      page_number: 1,
+      number_of_records: records_per_page,
+    };
+
+    await axios
+      .post(url, individualBodyData, { headers: headers })
+      .then((res) => {
+        setCounts({ ...counts, individualUsersCount: res.data.count });
+      });
+    await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
+      setCounts({ ...counts, individualUsersCount: res.data.count });
+    });
+  };
 
   const getAllUsersData = async (userData) => {
     const [headers, url] = setHeaderAndUrl();
@@ -173,6 +196,11 @@ const ManageUsers = () => {
   //   setAllUsers([]);
   //   window.scrollTo(0, 0);
   // };
+
+  useEffect(() => {
+    getTotalUsersCount();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Layout>
