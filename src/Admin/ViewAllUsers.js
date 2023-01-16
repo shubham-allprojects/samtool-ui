@@ -133,7 +133,7 @@ const ManageUsers = () => {
       <div className="container-fluid admin-users-wrapper section-padding">
         <div className="row min-100vh">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-9">
+          <div className="col-xl-10 col-md-9 users-admin">
             <BreadCrumb />
             <div className="row">
               <div className="col-12">

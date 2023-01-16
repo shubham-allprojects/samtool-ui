@@ -737,6 +737,22 @@ input[type="number"] {
   height: 200px;
 }
 
+.users-admin .active > .page-link,
+.users-admin .page-link.active {
+  z-index: 3;
+  background-color: black;
+  border-color: black;
+}
+
+.users-admin .page-link,
+.users-admin .page-link:hover {
+  color: black;
+}
+
+.users-admin .active > .page-link:hover {
+  color: white;
+}
+
 /* Address Modal */
 .modal {
   --bs-modal-width: 700px !important;
