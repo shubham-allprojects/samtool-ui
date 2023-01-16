@@ -15,6 +15,14 @@ const ManageUsers = () => {
     individualUsers: [],
     orgUsers: [],
   });
+
+  const [functionalitiesState, setFunctionalitiesState] = useState({
+    individualBtnClass: "",
+    orgBtnClass: "",
+    individualBtnDisabled: false,
+    orgBtnDisabled: false,
+  });
+
   const [userType, setUserType] = useState("");
   const [loading, setLoading] = useState(false);
   const [individualDisplayClass, setIndividualDisplayClass] =
@@ -25,10 +33,14 @@ const ManageUsers = () => {
     orgUsersCount: 3,
   };
 
-  const individualBtnRef = useRef();
-  const orgBtnRef = useRef();
   const { individualUsersCount, orgUsersCount } = counts;
   const { individualUsers, orgUsers } = users;
+  const {
+    individualBtnClass,
+    orgBtnClass,
+    individualBtnDisabled,
+    orgBtnDisabled,
+  } = functionalitiesState;
 
   const setHeaderAndUrl = () => {
     const loginToken = localStorage.getItem("logintoken");
@@ -57,10 +69,13 @@ const ManageUsers = () => {
     setPageNumbers(individualUsersCount);
     setIndividualDisplayClass("");
     setOrgDisplayClass("d-none");
-    individualBtnRef.current.disabled = true;
-    orgBtnRef.current.disabled = false;
-    individualBtnRef.current.classList.add("active");
-    orgBtnRef.current.classList.remove("active");
+    setFunctionalitiesState({
+      ...functionalitiesState,
+      individualBtnClass: "active",
+      orgBtnClass: "",
+      individualBtnDisabled: true,
+      orgBtnDisabled: false,
+    });
     setUserType("Individual User");
     const [headers, url] = setHeaderAndUrl();
     const individualBodyData = {
@@ -80,10 +95,13 @@ const ManageUsers = () => {
     setPageNumbers(orgUsersCount);
     setIndividualDisplayClass("d-none");
     setOrgDisplayClass("");
-    individualBtnRef.current.disabled = false;
-    orgBtnRef.current.disabled = true;
-    individualBtnRef.current.classList.remove("active");
-    orgBtnRef.current.classList.add("active");
+    setFunctionalitiesState({
+      ...functionalitiesState,
+      individualBtnClass: "",
+      orgBtnClass: "active",
+      individualBtnDisabled: false,
+      orgBtnDisabled: true,
+    });
     const [headers, url] = setHeaderAndUrl();
     setUserType("Organizational User");
     const orgBodyData = {
@@ -157,18 +175,18 @@ const ManageUsers = () => {
             <div className="row">
               <div className="col-12">
                 <button
-                  ref={individualBtnRef}
                   name="individualBtn"
                   onClick={onBtnClick}
-                  className="btn btn-outline-secondary me-2 users-btn"
+                  className={`btn btn-outline-secondary me-2 users-btn ${individualBtnClass}`}
+                  disabled={individualBtnDisabled}
                 >
                   Individual Users
                 </button>
                 <button
                   name="orgBtn"
-                  ref={orgBtnRef}
                   onClick={onBtnClick}
-                  className="btn btn-outline-secondary users-btn"
+                  className={`btn btn-outline-secondary users-btn ${orgBtnClass}`}
+                  disabled={orgBtnDisabled}
                 >
                   Organizational User
                 </button>
