@@ -27,12 +27,9 @@ const ManageUsers = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [counts, setCounts] = useState({
-    individualUsersCount: 45,
-    orgUsersCount: 3,
-  });
+  const [individualUsersCount, setIndividualUsersCount] = useState(0);
+  const [orgUsersCount, setOrgUsersCount] = useState(0);
 
-  const { individualUsersCount, orgUsersCount } = counts;
   const { individualUsers, orgUsers } = users;
   const {
     individualBtnClass,
@@ -83,10 +80,10 @@ const ManageUsers = () => {
     await axios
       .post(url, individualBodyData, { headers: headers })
       .then((res) => {
-        setCounts({ ...counts, individualUsersCount: res.data.count });
+        setIndividualUsersCount(res.data.count);
       });
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
-      setCounts({ ...counts, individualUsersCount: res.data.count });
+      setOrgUsersCount(res.data.count);
     });
   };
 
