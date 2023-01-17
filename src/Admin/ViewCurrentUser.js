@@ -10,6 +10,7 @@ const ViewCurrentUser = () => {
   const [otherDetailsOfUser, setOtherDetailsOfUser] = useState({});
   const [categoryWiseUserDetails, setCategoryWiseUserDetails] = useState({});
   const [userType, setUserType] = useState("");
+  const [roles, setRoles] = useState([]);
 
   const [viewUserDetails, setViewUserDetails] = useState({
     isReadOnly: true,
@@ -50,11 +51,24 @@ const ViewCurrentUser = () => {
     setUserType(typeOfUser);
     setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
     setOtherDetailsOfUser(currentUser.data.user_details);
-    console.log(currentUser.data[typeOfUser]);
+  };
+
+  const getAllAvailableRoles = async () => {
+    const token = localStorage.getItem("logintoken");
+    const headers = { Authorization: token };
+    const allRoles = await axios.get(
+      `/sam/v1/user-registration/auth/all-roles`,
+      {
+        headers: headers,
+      }
+    );
+    setRoles(allRoles.data);
+    console.log(allRoles.data);
   };
 
   useEffect(() => {
     setCurrentUserData();
+    getAllAvailableRoles();
     // eslint-disable-next-line
   }, []);
 
@@ -83,12 +97,15 @@ const ViewCurrentUser = () => {
                       <div className="row">
                         <div className="col-6">
                           <div className="form-group mb-3">
-                            <label className="form-label fw-bold" htmlFor="_id">
+                            <label
+                              className="form-label fw-bold"
+                              htmlFor="user_id"
+                            >
                               USER ID:
                             </label>
                             <input
-                              name="_id"
-                              id="_id"
+                              name="user_id"
+                              id="user_id"
                               className={`form-control ${editClassName}`}
                               type="text"
                               defaultValue={user_id}
@@ -100,19 +117,28 @@ const ViewCurrentUser = () => {
                         <div className="col-6">
                           <div className="form-group mb-3">
                             <label
+                              htmlFor="role"
                               className="form-label fw-bold"
-                              htmlFor="name"
-                            >
-                              Role:
-                            </label>
-                            <input
-                              name="name"
-                              id="name"
-                              className={`form-control ${editClassName}`}
-                              type="text"
-                              defaultValue={role_id}
+                            >Role</label>
+                            <select
+                              id="role"
+                              className={`form-select ${editClassName}`}
                               readOnly={isReadOnly}
-                            />
+                            >
+                              {roles.map((data) => {
+                                return (
+                                  <option
+                                    selected={
+                                      data.id === role_id ? true : false
+                                    }
+                                    key={data.id}
+                                    value={data.id}
+                                  >
+                                    {`${data.id} - ${data.role}`}
+                                  </option>
+                                );
+                              })}
+                            </select>
                           </div>
                         </div>
                         {/* Show Data As Per User Type*/}
