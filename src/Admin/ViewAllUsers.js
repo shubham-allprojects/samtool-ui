@@ -217,11 +217,6 @@ const ManageUsers = () => {
               {loading ? (
                 <>
                   <CommonSpinner />
-                  {/* <CommonSpinner
-                    spinnerColor="warning"
-                    height="3rem"
-                    width="3rem"
-                  /> */}
                 </>
               ) : individualUsers.length <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
@@ -272,9 +267,6 @@ const ManageUsers = () => {
                                   >
                                     <NavLink
                                       to={`/admin/users/view-user/${user_id}`}
-                                      // onClick={(e) => {
-                                      //   e.preventDefault();
-                                      // }}
                                       className="dropdown-item"
                                     >
                                       <i className="bi bi-eye pe-1"></i> View
@@ -403,10 +395,7 @@ const ManageUsers = () => {
                                     aria-labelledby="navbarDropdown"
                                   >
                                     <NavLink
-                                      // to={`/admin/users/view-user/${id}`}
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                      }}
+                                      to={`/admin/users/view-user/${user_id}`}
                                       className="dropdown-item"
                                     >
                                       <i className="bi bi-eye pe-1"></i> View
