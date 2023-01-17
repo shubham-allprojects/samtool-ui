@@ -102,6 +102,7 @@ const ManageUsers = () => {
 
   const getIndividualUsers = (pageNumber, records_per_page) => {
     setPageNumbers(individualUsersCount);
+    console.log(individualUsersCount);
     setFunctionalitiesState({
       ...functionalitiesState,
       individualBtnClass: "active",
@@ -142,10 +143,13 @@ const ManageUsers = () => {
   };
 
   const handlePageClick = (e) => {
-    let allPageItems = document.querySelectorAll(".page-item");
-    let activePageItem = document.querySelector(".page-item.active");
+    let allPageItems = document.querySelectorAll(".individual-pagination");
+    let activePageItem = document.querySelector(
+      ".individual-pagination.page-item.active"
+    );
     let page = e.target.textContent;
     if (page === "Previous") {
+      console.log("prev of indi");
       currentPageNumber = currentPageNumber - 1;
       activePageItem.classList.remove("active");
       allPageItems.forEach((item) => {
@@ -172,6 +176,42 @@ const ManageUsers = () => {
       });
     }
     getIndividualUsers(currentPageNumber, records_per_page);
+  };
+
+  const handlePageClick2 = (e) => {
+    let allPageItems = document.querySelectorAll(".org-pagination");
+    let activePageItem = document.querySelector(
+      ".org-pagination.page-item.active"
+    );
+    let page = e.target.textContent;
+    if (page === "Previous") {
+      console.log("prev of org");
+      currentPageNumber = currentPageNumber - 1;
+      activePageItem.classList.remove("active");
+      allPageItems.forEach((item) => {
+        if (parseInt(item.textContent) === currentPageNumber) {
+          item.classList.add("active");
+        }
+      });
+    } else if (page === "Next") {
+      currentPageNumber = currentPageNumber + 1;
+      activePageItem.classList.remove("active");
+      allPageItems.forEach((item) => {
+        if (parseInt(item.textContent) === currentPageNumber) {
+          item.classList.add("active");
+        }
+      });
+    } else {
+      currentPageNumber = parseInt(page);
+      allPageItems.forEach((item) => {
+        if (item.textContent === page) {
+          item.classList.add("active");
+        } else {
+          item.classList.remove("active");
+        }
+      });
+    }
+    getOrgUsers(currentPageNumber, records_per_page);
   };
 
   // const deleteAllUsers = () => {
@@ -299,7 +339,7 @@ const ManageUsers = () => {
                               handlePageClick(e);
                             }
                           }}
-                          className={`page-item ${
+                          className={`individual-pagination page-item ${
                             currentPageNumber === 1 ? "disabled" : ""
                           }`}
                         >
@@ -311,7 +351,7 @@ const ManageUsers = () => {
                               onClick={(e) => {
                                 handlePageClick(e);
                               }}
-                              className={`page-item ${
+                              className={`individual-pagination page-item ${
                                 Index === 0 ? "active" : ""
                               }`}
                               key={Index}
@@ -329,7 +369,7 @@ const ManageUsers = () => {
                               handlePageClick(e);
                             }
                           }}
-                          className={`page-item ${
+                          className={`individual-pagination page-item ${
                             currentPageNumber ===
                             pagesArray[pagesArray.length - 1]
                               ? "disabled"
@@ -425,10 +465,10 @@ const ManageUsers = () => {
                         <li
                           onClick={(e) => {
                             if (currentPageNumber !== 1) {
-                              handlePageClick(e);
+                              handlePageClick2(e);
                             }
                           }}
-                          className={`page-item ${
+                          className={`org-pagination page-item ${
                             currentPageNumber === 1 ? "disabled" : ""
                           }`}
                         >
@@ -438,9 +478,9 @@ const ManageUsers = () => {
                           return (
                             <li
                               onClick={(e) => {
-                                handlePageClick(e);
+                                handlePageClick2(e);
                               }}
-                              className={`page-item ${
+                              className={`org-pagination page-item ${
                                 Index === 0 ? "active" : ""
                               }`}
                               key={Index}
@@ -455,10 +495,10 @@ const ManageUsers = () => {
                               currentPageNumber !==
                               pagesArray[pagesArray.length - 1]
                             ) {
-                              handlePageClick(e);
+                              handlePageClick2(e);
                             }
                           }}
-                          className={`page-item ${
+                          className={`org-pagination page-item ${
                             currentPageNumber ===
                             pagesArray[pagesArray.length - 1]
                               ? "disabled"
