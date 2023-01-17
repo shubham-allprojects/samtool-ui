@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 function Header() {
   // To save status of login i.e. true or false.
   const [loginStatus, setLoginStatus] = useState(false);
+  const [roleId, setRoleId] = useState(false);
   // To navigate to particular route.
   const goTo = useNavigate();
   // Logout function.
@@ -24,6 +25,8 @@ function Header() {
   // Save status of login.
   const setStatusOfLogin = () => {
     const statusOfLogin = localStorage.getItem("isLoggedIn");
+    const roleId = localStorage.getItem("roleId");
+    setRoleId(parseInt(roleId));
     if (statusOfLogin) {
       setLoginStatus(true);
     }
@@ -98,11 +101,15 @@ function Header() {
                       Welcome, {localStorage.getItem("user")}
                     </span>
                   </li>
-                  <li className="nav-item ps-lg-2">
-                    <NavLink to="/admin" className="nav-link">
-                      Administration
-                    </NavLink>
-                  </li>
+                  {roleId === 1 ? (
+                    <li className="nav-item ps-lg-2">
+                      <NavLink to="/admin" className="nav-link">
+                        Administration
+                      </NavLink>
+                    </li>
+                  ) : (
+                    ""
+                  )}
                   <li className="nav-item ps-lg-2">
                     <span
                       style={{ cursor: "pointer" }}
