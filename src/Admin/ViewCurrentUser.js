@@ -7,7 +7,8 @@ import BreadCrumb from "./BreadCrumb";
 
 const ViewCurrentUser = () => {
   const { id } = useParams();
-  const [otherDetailsOfUser, setOtherDetailsOfUser] = useState([]);
+  const [otherDetailsOfUser, setOtherDetailsOfUser] = useState({});
+  const [categoryWiseUserDetails, setCategoryWiseUserDetails] = useState({});
   const [userType, setUserType] = useState("");
 
   const [viewUserDetails, setViewUserDetails] = useState({
@@ -33,10 +34,6 @@ const ViewCurrentUser = () => {
       editClassName: "editable-values",
       cancelUpdateBtnClassName: "d-none",
     });
-    // let samp = document.querySelectorAll("input");
-    // for (let i of samp) {
-    //   document.getElementById(i.name).value = currentUser[i.name];
-    // }
   };
   const { user_id, role_id, email_address, mobile_number } = otherDetailsOfUser;
   const { isReadOnly, isDisabled, editClassName, cancelUpdateBtnClassName } =
@@ -49,8 +46,11 @@ const ViewCurrentUser = () => {
       `/sam/v1/user-registration/auth/${id}`,
       { headers: headers }
     );
-    setUserType(Object.keys(currentUser.data)[1]);
+    const typeOfUser = Object.keys(currentUser.data)[1];
+    setUserType(typeOfUser);
+    setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
     setOtherDetailsOfUser(currentUser.data.user_details);
+    console.log(currentUser.data[typeOfUser]);
   };
 
   useEffect(() => {
@@ -114,6 +114,119 @@ const ViewCurrentUser = () => {
                             />
                           </div>
                         </div>
+                        {/* Show Data As Per User Type*/}
+                        {userType === "individual_user" ? (
+                          <>
+                            <div className="col-6">
+                              <div className="form-group mb-3">
+                                <label
+                                  className="form-label fw-bold"
+                                  htmlFor="first_name"
+                                >
+                                  First Name:
+                                </label>
+                                <input
+                                  name="first_name"
+                                  id="first_name"
+                                  className={`form-control ${editClassName}`}
+                                  type="text"
+                                  defaultValue={
+                                    categoryWiseUserDetails.first_name
+                                  }
+                                  readOnly={isReadOnly}
+                                  disabled={isDisabled}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group mb-3">
+                                <label
+                                  className="form-label fw-bold"
+                                  htmlFor="middle_name"
+                                >
+                                  Middle Name:
+                                </label>
+                                <input
+                                  name="middle_name"
+                                  id="middle_name"
+                                  className={`form-control ${editClassName}`}
+                                  type="text"
+                                  defaultValue={
+                                    categoryWiseUserDetails.middle_name
+                                  }
+                                  readOnly={isReadOnly}
+                                  disabled={isDisabled}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group mb-3">
+                                <label
+                                  className="form-label fw-bold"
+                                  htmlFor="last_name"
+                                >
+                                  Last Name:
+                                </label>
+                                <input
+                                  name="last_name"
+                                  id="last_name"
+                                  className={`form-control ${editClassName}`}
+                                  type="text"
+                                  defaultValue={
+                                    categoryWiseUserDetails.last_name
+                                  }
+                                  readOnly={isReadOnly}
+                                  disabled={isDisabled}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group mb-3">
+                                <label
+                                  className="form-label fw-bold"
+                                  htmlFor="aadhar_number"
+                                >
+                                  Aadhaar Number:
+                                </label>
+                                <input
+                                  name="aadhar_number"
+                                  id="aadhar_number"
+                                  className={`form-control ${editClassName}`}
+                                  type="text"
+                                  defaultValue={
+                                    categoryWiseUserDetails.aadhar_number
+                                  }
+                                  readOnly={isReadOnly}
+                                  disabled={isDisabled}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group mb-3">
+                                <label
+                                  className="form-label fw-bold"
+                                  htmlFor="pan_number"
+                                >
+                                  PAN Number:
+                                </label>
+                                <input
+                                  name="pan_number"
+                                  id="pan_number"
+                                  className={`form-control ${editClassName}`}
+                                  type="text"
+                                  defaultValue={
+                                    categoryWiseUserDetails.pan_number
+                                  }
+                                  readOnly={isReadOnly}
+                                  disabled={isDisabled}
+                                />
+                              </div>
+                            </div>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+
                         <div className="col-6">
                           <div className="form-group mb-3">
                             <label
@@ -129,6 +242,7 @@ const ViewCurrentUser = () => {
                               type="email"
                               defaultValue={email_address}
                               readOnly={isReadOnly}
+                              disabled={isDisabled}
                             />
                           </div>
                         </div>
@@ -147,6 +261,7 @@ const ViewCurrentUser = () => {
                               type="text"
                               defaultValue={mobile_number}
                               readOnly={isReadOnly}
+                              disabled={isDisabled}
                             />
                           </div>
                         </div>
