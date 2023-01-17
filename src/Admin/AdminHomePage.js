@@ -42,7 +42,7 @@ const AdminHomePage = () => {
     });
 
     console.log(orgCount, indiCount);
-    counter("usersCount", 0, orgCount + indiCount, 3000);
+    counter("usersCount", 0, orgCount + indiCount, 2500);
   };
 
   function counter(id, start, end, duration) {
