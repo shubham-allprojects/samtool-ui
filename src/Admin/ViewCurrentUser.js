@@ -55,6 +55,7 @@ const ViewCurrentUser = () => {
 
   useEffect(() => {
     setCurrentUserData();
+    // eslint-disable-next-line
   }, []);
 
   return (
