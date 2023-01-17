@@ -64,47 +64,40 @@ const ManageUsers = () => {
   //   setAllUsers(usersToShow);
   // };
 
-  const getTotalUsersCount = async () => {
+  const setIndividualUsersDetails = async (pageNumber, records_per_page) => {
     const [headers, url] = setHeaderAndUrl();
-    const orgBodyData = {
-      type: "Organizational User",
-      page_number: 1,
-      number_of_records: records_per_page,
-    };
     const individualBodyData = {
       type: "Individual User",
-      page_number: 1,
+      page_number: pageNumber,
       number_of_records: records_per_page,
     };
-
     await axios
       .post(url, individualBodyData, { headers: headers })
       .then((res) => {
         setIndividualUsersCount(res.data.count);
-      });
-    await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
-      setOrgUsersCount(res.data.count);
-    });
-  };
-
-  const getAllUsersData = async (userData) => {
-    const [headers, url] = setHeaderAndUrl();
-    if (userData.type === "Individual User") {
-      await axios.post(url, userData, { headers: headers }).then((res) => {
         setUsers({ individualUsers: res.data.AllData, orgUsers: [] });
       });
-    } else if (userData.type === "Organizational User") {
-      await axios.post(url, userData, { headers: headers }).then((res) => {
-        setUsers({
-          orgUsers: res.data.AllOrganizationData,
-          individualUsers: [],
-        });
-      });
-    }
     setLoading(false);
   };
 
-  const getIndividualUsers = async (pageNumber, records_per_page) => {
+  const setOrgUsersDetails = async (pageNumber, records_per_page) => {
+    const [headers, url] = setHeaderAndUrl();
+    const orgBodyData = {
+      type: "Organizational User",
+      page_number: pageNumber,
+      number_of_records: records_per_page,
+    };
+    await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
+      setOrgUsersCount(res.data.count);
+      setUsers({
+        orgUsers: res.data.AllOrganizationData,
+        individualUsers: [],
+      });
+    });
+    setLoading(false);
+  };
+
+  const getIndividualUsers = (pageNumber, records_per_page) => {
     setPageNumbers(individualUsersCount);
     setFunctionalitiesState({
       ...functionalitiesState,
@@ -116,12 +109,7 @@ const ManageUsers = () => {
       orgDisplayClass: "d-none",
       userType: "Individual User",
     });
-    const individualBodyData = {
-      type: "Individual User",
-      page_number: pageNumber,
-      number_of_records: records_per_page,
-    };
-    getAllUsersData(individualBodyData);
+    setIndividualUsersDetails(pageNumber, records_per_page);
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
@@ -136,12 +124,7 @@ const ManageUsers = () => {
       orgDisplayClass: "",
       userType: "Organizational User",
     });
-    const orgBodyData = {
-      type: "Organizational User",
-      page_number: pageNumber,
-      number_of_records: records_per_page,
-    };
-    getAllUsersData(orgBodyData);
+    setOrgUsersDetails(pageNumber, records_per_page);
   };
 
   const onBtnClick = (e) => {
@@ -195,7 +178,8 @@ const ManageUsers = () => {
   // };
 
   useEffect(() => {
-    getTotalUsersCount();
+    setIndividualUsersDetails(1, 1);
+    setOrgUsersDetails(1, 1);
     // eslint-disable-next-line
   }, []);
 
