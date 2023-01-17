@@ -64,7 +64,7 @@ const ViewCurrentUser = () => {
         <div className="row min-100vh">
           <AdminSideBar />
           <div className="col-xl-10 col-md-9">
-            <BreadCrumb />
+            <BreadCrumb emailOfCurrentUser={email_address} />
             <section className="admin-edit-property wrapper">
               <div className="container-fluid">
                 <h2 className="text-center mb-4">View/Edit</h2>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import properties from "./data.json";
 
-const BreadCrumb = ({ userType }) => {
+const BreadCrumb = ({ userType, emailOfCurrentUser }) => {
   const [activeInnerText, setActiveInnerText] = useState("");
   const [dataToShow, setDataToShow] = useState({
     userName: "",
@@ -46,11 +46,8 @@ const BreadCrumb = ({ userType }) => {
               <NavLink to="/admin/users" className="breadcrumb-item">
                 Users
               </NavLink>
-              {userType ? (
-                <li className="breadcrumb-item text-secondary">{userType}</li>
-              ) : (
-                ""
-              )}
+              <li className="breadcrumb-item text-secondary">{userType}</li>
+              <li className="breadcrumb-item text-secondary">{emailOfCurrentUser}</li>
             </>
           ) : activeInnerText === "Properties" ? (
             <>
