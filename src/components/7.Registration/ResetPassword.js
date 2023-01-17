@@ -125,7 +125,7 @@ const ResetPassword = () => {
         })
       );
       setResetBtnClassName("disabled");
-      toast.success("Password Changed Successfully !");
+      toast.success("Password Saved Successfully !");
       setTimeout(() => {
         goTo("/login");
       }, 3000);
