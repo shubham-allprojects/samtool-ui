@@ -26,7 +26,6 @@ const ManageUsers = () => {
   });
 
   const [loading, setLoading] = useState(false);
-
   const [individualUsersCount, setIndividualUsersCount] = useState(0);
   const [orgUsersCount, setOrgUsersCount] = useState(0);
 

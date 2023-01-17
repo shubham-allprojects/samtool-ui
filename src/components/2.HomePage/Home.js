@@ -28,34 +28,21 @@ function Home() {
   // Object destructuring.
   const { states, assetCategory, cities, localities, banks } = searchFields;
 
-  // Function will check if user is loggedIn or not & based on the login status it will set headers and url.
-  const setHeaderAndUrl = () => {
-    const statusOfLogin = localStorage.getItem("isLoggedIn");
-    const loginToken = localStorage.getItem("logintoken");
-    let headers =
-      statusOfLogin !== "true"
-        ? { "Content-Type": "Application/json" }
-        : { Authorization: loginToken };
-    let url = `/sam/v1/property${statusOfLogin !== "true" ? "" : `/auth`}`;
-    return [headers, url];
-  };
+  const url = `/sam/v1/property`;
 
   // It will fetch all states, banks, assets from api and will map those values to respective select fields.
   const getSearchDetails = async () => {
-    const [headers, url] = setHeaderAndUrl();
     let apis = {
       stateAPI: `${url}/by-state`,
       bankAPI: `${url}/by-bank`,
       categoryAPI: `${url}/by-category`,
     };
     // Get all states from api.
-    const allStates = await axios.get(apis.stateAPI, { headers: headers });
+    const allStates = await axios.get(apis.stateAPI);
     // Get all banks from api.
-    const allBanks = await axios.get(apis.bankAPI, { headers: headers });
+    const allBanks = await axios.get(apis.bankAPI);
     // Get all asset Categories from api.
-    const assetCategories = await axios.get(apis.categoryAPI, {
-      headers: headers,
-    });
+    const assetCategories = await axios.get(apis.categoryAPI);
 
     // store states, banks and asset categories into searchFields useState.
     setSearchFields({
@@ -68,7 +55,6 @@ function Home() {
 
   // This function will run on change of input fields.
   const onFieldsChange = async (e) => {
-    const [headers, url] = setHeaderAndUrl();
     let apis = {
       cityAPI: `${url}/by-city`,
       addressAPI: `${url}/by-address`,
@@ -83,13 +69,9 @@ function Home() {
       } else {
         delete dataToPost.state_id;
       }
-      const cityByState = await axios.post(
-        apis.cityAPI,
-        {
-          state_id: parseInt(value),
-        },
-        { headers: headers }
-      );
+      const cityByState = await axios.post(apis.cityAPI, {
+        state_id: parseInt(value),
+      });
       // Store cities data into searchField useState.
       setSearchFields({ ...searchFields, cities: cityByState.data });
       // Unhide city select box when we select state.
@@ -107,13 +89,9 @@ function Home() {
         delete dataToPost.city_id;
       }
       // If input is cities then post selected city id to api for getting locality info. based on selected city.
-      const localityByCity = await axios.post(
-        apis.addressAPI,
-        {
-          city_id: parseInt(value),
-        },
-        { headers: headers }
-      );
+      const localityByCity = await axios.post(apis.addressAPI, {
+        city_id: parseInt(value),
+      });
       // Store locality data into searchField useState.
       setSearchFields({ ...searchFields, localities: localityByCity.data });
       // Unhide select box when we select city.
@@ -150,19 +128,15 @@ function Home() {
   // This will run after Search button click.
   const getPropertyData = async (e) => {
     e.preventDefault();
-    const [headers, url] = setHeaderAndUrl();
-    console.log(headers, url);
     let apis = {
       searchAPI: `${url}/count-category`,
     };
     // Post data and get Searched result from response.
-    await axios
-      .post(apis.searchAPI, dataToPost, { headers: headers })
-      .then((res) => {
-        // Store Searched results into propertyData useState.
-        // localStorage.setItem("propertyDataFromLocal", JSON.stringify(res.data));
-        setPropertyData(res.data);
-      });
+    await axios.post(apis.searchAPI, dataToPost).then((res) => {
+      // Store Searched results into propertyData useState.
+      // localStorage.setItem("propertyDataFromLocal", JSON.stringify(res.data));
+      setPropertyData(res.data);
+    });
     // Unhide div and display search results in card format.
     document.querySelectorAll(".display-on-search").forEach((item) => {
       item.classList.remove("d-none");
