@@ -13,31 +13,28 @@ const ViewCurrentUser = () => {
   const [roles, setRoles] = useState([]);
 
   const [viewUserDetails, setViewUserDetails] = useState({
-    isReadOnly: true,
-    isDisabled: false,
-    editClassName: "editable-values",
+    editRoleSelectClass: "d-none",
+    defaultRoleClass: "",
     cancelUpdateBtnClassName: "d-none",
   });
 
   const editDetails = () => {
     setViewUserDetails({
-      isReadOnly: false,
-      isDisabled: true,
-      editClassName: "",
+      editRoleSelectClass: "",
+      defaultRoleClass: "d-none",
       cancelUpdateBtnClassName: "",
     });
   };
 
   const cancelEditing = () => {
     setViewUserDetails({
-      isReadOnly: true,
-      isDisabled: false,
-      editClassName: "editable-values",
+      editRoleSelectClass: "d-none",
+      defaultRoleClass: "",
       cancelUpdateBtnClassName: "d-none",
     });
   };
   const { user_id, role_id, email_address, mobile_number } = otherDetailsOfUser;
-  const { isReadOnly, isDisabled, editClassName, cancelUpdateBtnClassName } =
+  const { editRoleSelectClass, defaultRoleClass, cancelUpdateBtnClassName } =
     viewUserDetails;
 
   const setCurrentUserData = async () => {
@@ -88,12 +85,12 @@ const ViewCurrentUser = () => {
                       action=""
                       className="card shadow p-xl-5 p-lg-4 p-3 position-relative"
                     >
-                      <div className="text-end position-absolute admin-property-edit-icon">
+                      {/* <div className="text-end position-absolute admin-property-edit-icon">
                         <i
                           onClick={editDetails}
                           className="bi bi-pencil-square"
                         ></i>
-                      </div>
+                      </div> */}
                       <div className="row">
                         <div className="col-6">
                           <div className="form-group mb-3">
@@ -103,15 +100,8 @@ const ViewCurrentUser = () => {
                             >
                               USER ID:
                             </label>
-                            <input
-                              name="user_id"
-                              id="user_id"
-                              className={`form-control ${editClassName}`}
-                              type="text"
-                              defaultValue={user_id}
-                              disabled={isDisabled}
-                              readOnly={isReadOnly}
-                            />
+                            <br />
+                            {user_id}
                           </div>
                         </div>
                         <div className="col-6">
@@ -119,11 +109,26 @@ const ViewCurrentUser = () => {
                             <label
                               htmlFor="role"
                               className="form-label fw-bold"
-                            >Role</label>
+                            >
+                              Role
+                              <span className="ms-4">
+                                <i
+                                  onClick={editDetails}
+                                  className="bi bi-pencil-square"
+                                ></i>
+                              </span>
+                            </label>
+                            <span className={`${defaultRoleClass}`}>
+                              <br /> {role_id} -
+                              {role_id === 1
+                                ? " Admin"
+                                : role_id === 2
+                                ? " Editor"
+                                : " Viewer"}
+                            </span>
                             <select
                               id="role"
-                              className={`form-select ${editClassName}`}
-                              readOnly={isReadOnly}
+                              className={`form-select ${editRoleSelectClass}`}
                             >
                               {roles.map((data) => {
                                 return (
@@ -152,17 +157,8 @@ const ViewCurrentUser = () => {
                                 >
                                   First Name:
                                 </label>
-                                <input
-                                  name="first_name"
-                                  id="first_name"
-                                  className={`form-control ${editClassName}`}
-                                  type="text"
-                                  defaultValue={
-                                    categoryWiseUserDetails.first_name
-                                  }
-                                  readOnly={isReadOnly}
-                                  disabled={isDisabled}
-                                />
+                                <br />
+                                {categoryWiseUserDetails.first_name}
                               </div>
                             </div>
                             <div className="col-6">
@@ -173,17 +169,8 @@ const ViewCurrentUser = () => {
                                 >
                                   Middle Name:
                                 </label>
-                                <input
-                                  name="middle_name"
-                                  id="middle_name"
-                                  className={`form-control ${editClassName}`}
-                                  type="text"
-                                  defaultValue={
-                                    categoryWiseUserDetails.middle_name
-                                  }
-                                  readOnly={isReadOnly}
-                                  disabled={isDisabled}
-                                />
+                                <br />
+                                {categoryWiseUserDetails.middle_name}
                               </div>
                             </div>
                             <div className="col-6">
@@ -194,17 +181,8 @@ const ViewCurrentUser = () => {
                                 >
                                   Last Name:
                                 </label>
-                                <input
-                                  name="last_name"
-                                  id="last_name"
-                                  className={`form-control ${editClassName}`}
-                                  type="text"
-                                  defaultValue={
-                                    categoryWiseUserDetails.last_name
-                                  }
-                                  readOnly={isReadOnly}
-                                  disabled={isDisabled}
-                                />
+                                <br />
+                                {categoryWiseUserDetails.last_name}
                               </div>
                             </div>
                             <div className="col-6">
@@ -215,17 +193,8 @@ const ViewCurrentUser = () => {
                                 >
                                   Aadhaar Number:
                                 </label>
-                                <input
-                                  name="aadhar_number"
-                                  id="aadhar_number"
-                                  className={`form-control ${editClassName}`}
-                                  type="text"
-                                  defaultValue={
-                                    categoryWiseUserDetails.aadhar_number
-                                  }
-                                  readOnly={isReadOnly}
-                                  disabled={isDisabled}
-                                />
+                                <br />
+                                {categoryWiseUserDetails.aadhar_number}
                               </div>
                             </div>
                             <div className="col-6">
@@ -236,17 +205,8 @@ const ViewCurrentUser = () => {
                                 >
                                   PAN Number:
                                 </label>
-                                <input
-                                  name="pan_number"
-                                  id="pan_number"
-                                  className={`form-control ${editClassName}`}
-                                  type="text"
-                                  defaultValue={
-                                    categoryWiseUserDetails.pan_number
-                                  }
-                                  readOnly={isReadOnly}
-                                  disabled={isDisabled}
-                                />
+                                <br />
+                                {categoryWiseUserDetails.pan_number}
                               </div>
                             </div>
                           </>
@@ -262,15 +222,8 @@ const ViewCurrentUser = () => {
                             >
                               Email:
                             </label>
-                            <input
-                              name="email"
-                              id="email"
-                              className={`form-control ${editClassName}`}
-                              type="email"
-                              defaultValue={email_address}
-                              readOnly={isReadOnly}
-                              disabled={isDisabled}
-                            />
+                            <br />
+                            {email_address}
                           </div>
                         </div>
                         <div className="col-6">
@@ -281,15 +234,8 @@ const ViewCurrentUser = () => {
                             >
                               Contact:
                             </label>
-                            <input
-                              name="phone"
-                              id="phone"
-                              className={`form-control ${editClassName}`}
-                              type="text"
-                              defaultValue={mobile_number}
-                              readOnly={isReadOnly}
-                              disabled={isDisabled}
-                            />
+                            <br />
+                            {mobile_number}
                           </div>
                         </div>
                       </div>
