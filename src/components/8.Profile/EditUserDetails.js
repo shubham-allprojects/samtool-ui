@@ -80,11 +80,9 @@ const EditUserDetails = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   // Function will provide login token of user from localStorage and also some urls are stored in this function.
   const setHeaderAndUrl = () => {
-    let loginToken = "";
     let headers = "";
     if (data) {
-      loginToken = data.logintoken;
-      headers = { Authorization: loginToken };
+      headers = { Authorization: data.logintoken };
     }
     let url = `/sam/v1/property`;
     let customer_reg_url = `/sam/v1/customer-registration`;

@@ -40,9 +40,13 @@ const ManageUsers = () => {
     userType,
   } = functionalitiesState;
 
+  const data = JSON.parse(localStorage.getItem("data"));
+
   const setHeaderAndUrl = () => {
-    const loginToken = localStorage.getItem("logintoken");
-    let headers = { Authorization: loginToken };
+    let headers = "";
+    if (data) {
+      headers = { Authorization: data.logintoken };
+    }
     let url = `/sam/v1/user-registration/auth/get-users`;
     return [headers, url];
   };
