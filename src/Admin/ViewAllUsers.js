@@ -267,10 +267,10 @@ const ManageUsers = () => {
                                     aria-labelledby="navbarDropdown"
                                   >
                                     <NavLink
-                                      // to={`/admin/users/view-user/${id}`}
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                      }}
+                                      to={`/admin/users/view-user/${user_id}`}
+                                      // onClick={(e) => {
+                                      //   e.preventDefault();
+                                      // }}
                                       className="dropdown-item"
                                     >
                                       <i className="bi bi-eye pe-1"></i> View

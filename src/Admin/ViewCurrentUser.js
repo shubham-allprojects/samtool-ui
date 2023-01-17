@@ -1,13 +1,14 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
 import BreadCrumb from "./BreadCrumb";
-import users from "./users.json";
 
 const ViewCurrentUser = () => {
   const { id } = useParams();
-  const [currentUser, setCurrentUser] = useState([]);
+  const [otherDetailsOfUser, setOtherDetailsOfUser] = useState([]);
+  const [userType, setUserType] = useState("");
 
   const [viewUserDetails, setViewUserDetails] = useState({
     isReadOnly: true,
@@ -32,26 +33,29 @@ const ViewCurrentUser = () => {
       editClassName: "editable-values",
       cancelUpdateBtnClassName: "d-none",
     });
-    let samp = document.querySelectorAll("input");
-    for (let i of samp) {
-      document.getElementById(i.name).value = currentUser[i.name];
-    }
+    // let samp = document.querySelectorAll("input");
+    // for (let i of samp) {
+    //   document.getElementById(i.name).value = currentUser[i.name];
+    // }
   };
-  const { _id, name, email, phone } = currentUser;
+  const { user_id, role_id, email_address, mobile_number } = otherDetailsOfUser;
   const { isReadOnly, isDisabled, editClassName, cancelUpdateBtnClassName } =
     viewUserDetails;
 
-  const setCurrentUserData = () => {
-    for (let i of users) {
-      if (i._id === parseInt(id)) {
-        setCurrentUser(i);
-      }
-    }
+  const setCurrentUserData = async () => {
+    const token = localStorage.getItem("logintoken");
+    const headers = { Authorization: token };
+    const currentUser = await axios.get(
+      `/sam/v1/user-registration/auth/${id}`,
+      { headers: headers }
+    );
+    setUserType(Object.keys(currentUser.data)[1]);
+    setOtherDetailsOfUser(currentUser.data.user_details);
   };
 
   useEffect(() => {
     setCurrentUserData();
-  });
+  }, []);
 
   return (
     <Layout>
@@ -79,14 +83,14 @@ const ViewCurrentUser = () => {
                         <div className="col-6">
                           <div className="form-group mb-3">
                             <label className="form-label fw-bold" htmlFor="_id">
-                              ID:
+                              USER ID:
                             </label>
                             <input
                               name="_id"
                               id="_id"
                               className={`form-control ${editClassName}`}
                               type="text"
-                              defaultValue={_id}
+                              defaultValue={user_id}
                               disabled={isDisabled}
                               readOnly={isReadOnly}
                             />
@@ -98,14 +102,14 @@ const ViewCurrentUser = () => {
                               className="form-label fw-bold"
                               htmlFor="name"
                             >
-                              Name:
+                              Role:
                             </label>
                             <input
                               name="name"
                               id="name"
                               className={`form-control ${editClassName}`}
                               type="text"
-                              defaultValue={name}
+                              defaultValue={role_id}
                               readOnly={isReadOnly}
                             />
                           </div>
@@ -123,7 +127,7 @@ const ViewCurrentUser = () => {
                               id="email"
                               className={`form-control ${editClassName}`}
                               type="email"
-                              defaultValue={email}
+                              defaultValue={email_address}
                               readOnly={isReadOnly}
                             />
                           </div>
@@ -141,7 +145,7 @@ const ViewCurrentUser = () => {
                               id="phone"
                               className={`form-control ${editClassName}`}
                               type="text"
-                              defaultValue={phone}
+                              defaultValue={mobile_number}
                               readOnly={isReadOnly}
                             />
                           </div>
