@@ -43,7 +43,7 @@ const AdminHomePage = () => {
     });
 
     console.log(orgCount, indiCount);
-    counter("usersCount", 0, orgCount + indiCount, 2400);
+    counter("usersCount", 0, orgCount + indiCount, 2000);
   };
 
   useEffect(() => {

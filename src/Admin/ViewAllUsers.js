@@ -291,7 +291,13 @@ const ManageUsers = () => {
                               <td>{user_id}</td>
                               <td>{first_name}</td>
                               <td>{email_address}</td>
-                              <td>{role_id}</td>
+                              <td>
+                                {role_id === 1
+                                  ? "Admin"
+                                  : role_id === 2
+                                  ? "Editor"
+                                  : "Viewer"}
+                              </td>
                               <td>
                                 <li className="nav-item dropdown list-unstyled">
                                   <span
@@ -420,7 +426,13 @@ const ManageUsers = () => {
                               <td>{user_id}</td>
                               <td>{company_name}</td>
                               <td>{email_address}</td>
-                              <td>{role_id}</td>
+                              <td>
+                                {role_id === 1
+                                  ? "Admin"
+                                  : role_id === 2
+                                  ? "Editor"
+                                  : "Viewer"}
+                              </td>
                               <td>
                                 <li className="nav-item dropdown list-unstyled">
                                   <span
