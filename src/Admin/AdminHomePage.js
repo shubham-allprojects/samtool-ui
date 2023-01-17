@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import AdminSideBar from "./AdminSideBar";
 import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
 
-const AdminHomePage = () => {
-  const [individualUsersCount, setIndividualUsersCount] = useState(0);
-  const [orgUsersCount, setOrgUsersCount] = useState(0);
-  const data = JSON.parse(localStorage.getItem("data"));
+let orgCount = 0;
+let indiCount = 0;
 
+const AdminHomePage = () => {
+  const data = JSON.parse(localStorage.getItem("data"));
   const setHeaderAndUrl = () => {
     let headers = "";
     if (data) {
@@ -18,35 +18,50 @@ const AdminHomePage = () => {
     return [headers, url];
   };
 
-  const setIndividualUsersDetails = async (pageNumber, records_per_page) => {
+  const setCountOfUsers = async () => {
     const [headers, url] = setHeaderAndUrl();
     const individualBodyData = {
       type: "Individual User",
-      page_number: pageNumber,
-      number_of_records: records_per_page,
+      page_number: 1,
+      number_of_records: 1,
     };
+    const orgBodyData = {
+      type: "Organizational User",
+      page_number: 1,
+      number_of_records: 1,
+    };
+
     await axios
       .post(url, individualBodyData, { headers: headers })
       .then((res) => {
-        setIndividualUsersCount(res.data.count);
+        indiCount = res.data.count;
       });
+
+    await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
+      orgCount = res.data.count;
+    });
+
+    console.log(orgCount, indiCount);
+    counter("usersCount", 0, orgCount + indiCount, 3000);
   };
 
-  const setOrgUsersDetails = async (pageNumber, records_per_page) => {
-    const [headers, url] = setHeaderAndUrl();
-    const orgBodyData = {
-      type: "Organizational User",
-      page_number: pageNumber,
-      number_of_records: records_per_page,
-    };
-    await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
-      setOrgUsersCount(res.data.count);
-    });
-  };
+  function counter(id, start, end, duration) {
+    let obj = document.getElementById(id),
+      current = start,
+      range = end - start,
+      increment = end > start ? 1 : -1,
+      step = Math.abs(Math.floor(duration / range)),
+      timer = setInterval(() => {
+        current += increment;
+        obj.textContent = current;
+        if (current === end) {
+          clearInterval(timer);
+        }
+      }, step);
+  }
 
   useEffect(() => {
-    setIndividualUsersDetails(1, 1);
-    setOrgUsersDetails(1, 1);
+    setCountOfUsers();
     // eslint-disable-next-line
   }, []);
 
@@ -83,8 +98,8 @@ const AdminHomePage = () => {
                       <i className="bi bi-person-fill text-white fs-1 blue-on-hover"></i>
                     </span>
                     <div>
-                      <span className="admin-dashboard-count">
-                        {individualUsersCount + orgUsersCount}
+                      <span className="admin-dashboard-count" id="usersCount">
+                        0
                       </span>
                       <h5 className="text-white text-end blue-on-hover fw-bold">
                         Users
