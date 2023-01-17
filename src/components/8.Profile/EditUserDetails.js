@@ -82,7 +82,7 @@ const EditUserDetails = () => {
   const setHeaderAndUrl = () => {
     const loginToken = localStorage.getItem("logintoken");
     let headers = { Authorization: loginToken };
-    let url = `/sam/v1/property/auth`;
+    let url = `/sam/v1/property`;
     let customer_reg_url = `/sam/v1/customer-registration`;
     return [headers, url, customer_reg_url];
   };
@@ -94,7 +94,7 @@ const EditUserDetails = () => {
     await axios
       .get(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
       .then(async (res) => {
-        const [headers, url] = setHeaderAndUrl();
+        const [, url] = setHeaderAndUrl();
         const { individual_user, org_user, user_details } = res.data;
         if (individual_user) {
           const {
@@ -152,15 +152,11 @@ const EditUserDetails = () => {
           user_type: user_type,
         });
         // Get Cities using state_id from api.
-        const cityByState = await axios.post(
-          `${url}/by-city`,
-          { state_id: state_id },
-          { headers: headers }
-        );
-        // Get States from api.
-        const allStates = await axios.get(`${url}/by-state`, {
-          headers: headers,
+        const cityByState = await axios.post(`${url}/by-city`, {
+          state_id: state_id,
         });
+        // Get States from api.
+        const allStates = await axios.get(`${url}/by-state`);
         setAllUseStates({
           ...allUseStates,
           citiesFromApi: cityByState.data,
@@ -196,14 +192,12 @@ const EditUserDetails = () => {
 
   const onInputChange = async (e) => {
     const { name, value } = e.target;
-    const [headers, url, customer_reg_url] = setHeaderAndUrl();
+    const [, url, customer_reg_url] = setHeaderAndUrl();
     // If input is state then post selected state id to api for getting cities based on selected state.
     if (name === "state_name") {
-      const cityByState = await axios.post(
-        `${url}/by-city`,
-        { state_id: parseInt(value) },
-        { headers: headers }
-      );
+      const cityByState = await axios.post(`${url}/by-city`, {
+        state_id: parseInt(value),
+      });
       setAllUseStates({
         ...allUseStates,
         citiesFromApi: cityByState.data,
@@ -265,7 +259,7 @@ const EditUserDetails = () => {
 
   // Function will run when user click on cancel button.
   const cancelEditing = async () => {
-    const [headers, url] = setHeaderAndUrl();
+    const [, url] = setHeaderAndUrl();
     setValidation({
       zipCodeValidationColor: "",
       zipCodeValidationMessage: "",
@@ -274,11 +268,9 @@ const EditUserDetails = () => {
     const { city, state_id, state_name } = originalValuesToShow;
 
     // Get Cities using state_id from api.
-    const cityByState = await axios.post(
-      `${url}/by-city`,
-      { state_id: state_id },
-      { headers: headers }
-    );
+    const cityByState = await axios.post(`${url}/by-city`, {
+      state_id: state_id,
+    });
 
     setCommonUserDetails({
       ...commonUserDetails,
