@@ -37,30 +37,33 @@ const ViewCurrentUser = () => {
   const { editRoleSelectClass, defaultRoleClass, cancelUpdateBtnClassName } =
     viewUserDetails;
 
+  const data = JSON.parse(localStorage.getItem("data"));
+
   const setCurrentUserData = async () => {
-    const token = localStorage.getItem("logintoken");
-    const headers = { Authorization: token };
-    const currentUser = await axios.get(
-      `/sam/v1/user-registration/auth/${id}`,
-      { headers: headers }
-    );
-    const typeOfUser = Object.keys(currentUser.data)[1];
-    setUserType(typeOfUser);
-    setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
-    setOtherDetailsOfUser(currentUser.data.user_details);
+    if (data) {
+      const headers = { Authorization: data.logintoken };
+      const currentUser = await axios.get(
+        `/sam/v1/user-registration/auth/${id}`,
+        { headers: headers }
+      );
+      const typeOfUser = Object.keys(currentUser.data)[1];
+      setUserType(typeOfUser);
+      setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
+      setOtherDetailsOfUser(currentUser.data.user_details);
+    }
   };
 
   const getAllAvailableRoles = async () => {
-    const token = localStorage.getItem("logintoken");
-    const headers = { Authorization: token };
-    const allRoles = await axios.get(
-      `/sam/v1/user-registration/auth/all-roles`,
-      {
-        headers: headers,
-      }
-    );
-    setRoles(allRoles.data);
-    console.log(allRoles.data);
+    if (data) {
+      const headers = { Authorization: data.logintoken };
+      const allRoles = await axios.get(
+        `/sam/v1/user-registration/auth/all-roles`,
+        {
+          headers: headers,
+        }
+      );
+      setRoles(allRoles.data);
+    }
   };
 
   useEffect(() => {
