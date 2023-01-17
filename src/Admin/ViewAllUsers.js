@@ -241,8 +241,7 @@ const ManageUsers = () => {
                   className={`btn btn-outline-secondary me-2 users-btn ${individualBtnClass}`}
                   disabled={individualBtnDisabled}
                 >
-                  Individual Users -{" "}
-                  <span id="individualCount">{individualUsersCount}</span>
+                  Individual Users
                 </button>
                 <button
                   name="orgBtn"
@@ -250,8 +249,7 @@ const ManageUsers = () => {
                   className={`btn btn-outline-secondary users-btn ${orgBtnClass}`}
                   disabled={orgBtnDisabled}
                 >
-                  Organizational User -{" "}
-                  <span id="orgCount">{orgUsersCount}</span>
+                  Organizational User
                 </button>
               </div>
             </div>

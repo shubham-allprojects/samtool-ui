@@ -47,7 +47,6 @@ const BreadCrumb = ({ userType, emailOfCurrentUser }) => {
                 Users
               </NavLink>
               <li className="breadcrumb-item text-secondary">{userType}</li>
-              <li className="breadcrumb-item text-secondary">{emailOfCurrentUser}</li>
             </>
           ) : activeInnerText === "Properties" ? (
             <>
@@ -61,7 +60,11 @@ const BreadCrumb = ({ userType, emailOfCurrentUser }) => {
               )}
             </>
           ) : (
-            <NavLink className="d-none" to="/"></NavLink>
+            <>
+              <li className="breadcrumb-item text-secondary">
+                {emailOfCurrentUser}
+              </li>
+            </>
           )}
         </ol>
       </nav>
