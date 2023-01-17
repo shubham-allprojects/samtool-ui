@@ -118,7 +118,7 @@ const ResetPassword = () => {
       });
     } else {
       await axios.post(
-        `/sam/v1/customer-registration/reset-password`,
+        `/sam/v1/customer-registration/set-password`,
         JSON.stringify({
           password: newPassword,
           token: localStorage.getItem("token"),
@@ -165,7 +165,7 @@ const ResetPassword = () => {
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8 order-2 order-lg-1 mt-5 mt-lg-0">
               <form onSubmit={onResetPasswordFormSubmit} className="card p-5">
-                <h3 className="text-center fw-bold">Reset Password</h3>
+                <h3 className="text-center fw-bold">Set Password</h3>
                 <hr />
                 {alertVisible ? (
                   <div
