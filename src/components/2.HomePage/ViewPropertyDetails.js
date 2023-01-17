@@ -5,8 +5,8 @@ import Layout from "../1.CommonLayout/Layout";
 const ViewPropertyDetails = () => {
   const goTo = useNavigate();
   const checkStatusOfLogin = () => {
-    const statusOfLogin = localStorage.getItem("isLoggedIn");
-    if (statusOfLogin !== "true") {
+    const data = JSON.parse(localStorage.getItem("data"));
+    if (!data) {
       goTo("/login");
     }
   };

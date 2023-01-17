@@ -4,9 +4,13 @@ import { Link } from "react-scroll";
 import { toast } from "react-toastify";
 
 function Header() {
-  // To save status of login i.e. true or false.
-  const [loginStatus, setLoginStatus] = useState(false);
-  const [roleId, setRoleId] = useState(false);
+  const [allUseStates, setAllUseStates] = useState({
+    loginStatus: false,
+    roleId: null,
+    userEmail: "",
+  });
+
+  const { loginStatus, roleId, userEmail } = allUseStates;
   // To navigate to particular route.
   const goTo = useNavigate();
   // Logout function.
@@ -15,7 +19,7 @@ function Header() {
     toast.success("Logged Out Successfully");
     // Clear localStorage.
     localStorage.clear();
-    setLoginStatus(false);
+    setAllUseStates({ ...allUseStates, loginStatus: false });
     setTimeout(() => {
       window.location.reload();
     }, 2000);
@@ -24,17 +28,19 @@ function Header() {
 
   // Save status of login.
   const setStatusOfLogin = () => {
-    const statusOfLogin = localStorage.getItem("isLoggedIn");
-    const roleId = localStorage.getItem("roleId");
-    setRoleId(parseInt(roleId));
-    if (statusOfLogin) {
-      setLoginStatus(true);
+    const data = JSON.parse(localStorage.getItem("data"));
+    if (data) {
+      setAllUseStates({
+        loginStatus: true,
+        roleId: data.roleId,
+        userEmail: data.user,
+      });
     }
   };
 
   useEffect(() => {
     setStatusOfLogin();
-  });
+  }, []);
 
   return (
     <header className="header-wrapper">
@@ -97,9 +103,7 @@ function Header() {
                     </NavLink>
                   </li>
                   <li className="nav-item ps-lg-2">
-                    <span className="nav-link">
-                      Welcome, {localStorage.getItem("user")}
-                    </span>
+                    <span className="nav-link">Welcome, {userEmail}</span>
                   </li>
                   {roleId === 1 ? (
                     <li className="nav-item ps-lg-2">

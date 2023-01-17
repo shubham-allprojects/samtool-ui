@@ -77,11 +77,16 @@ const LoginMainPage = () => {
             loginBtnTxt: "Loading...",
             loginBtnClassName: "disabled",
           });
-          localStorage.setItem("isLoggedIn", true);
-          localStorage.setItem("user", email);
-          localStorage.setItem("logintoken", token);
-          localStorage.setItem("userId", user_id);
-          localStorage.setItem("roleId", role_id);
+          localStorage.setItem(
+            "data",
+            JSON.stringify({
+              isLoggedIn: true,
+              user: email,
+              logintoken: token,
+              userId: user_id,
+              roleId: role_id,
+            })
+          );
           setTimeout(() => {
             setLoaderDetails({
               ...loaderDetails,

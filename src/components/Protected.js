@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 const Protected = ({ children }) => {
   const goTo = useNavigate();
   const checkStatusOfLogin = () => {
-    const statusOfLogin = localStorage.getItem("isLoggedIn");
-    if (statusOfLogin === null) {
+    const data = JSON.parse(localStorage.getItem("data"));
+    if (!data) {
       goTo("/");
     }
   };

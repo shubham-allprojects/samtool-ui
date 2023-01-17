@@ -77,11 +77,15 @@ const EditUserDetails = () => {
 
   // To navigate to particular route.
   // const goTo = useNavigate();
-
+  const data = JSON.parse(localStorage.getItem("data"));
   // Function will provide login token of user from localStorage and also some urls are stored in this function.
   const setHeaderAndUrl = () => {
-    const loginToken = localStorage.getItem("logintoken");
-    let headers = { Authorization: loginToken };
+    let loginToken = "";
+    let headers = "";
+    if (data) {
+      loginToken = data.logintoken;
+      headers = { Authorization: loginToken };
+    }
     let url = `/sam/v1/property`;
     let customer_reg_url = `/sam/v1/customer-registration`;
     return [headers, url, customer_reg_url];
@@ -90,80 +94,82 @@ const EditUserDetails = () => {
   // Function will get the data of user whose details are to be edited.
   const getUserToEdit = async () => {
     const [headers] = setHeaderAndUrl();
-    const userId = localStorage.getItem("userId");
-    await axios
-      .get(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
-      .then(async (res) => {
-        const [, url] = setHeaderAndUrl();
-        const { individual_user, org_user, user_details } = res.data;
-        if (individual_user) {
+    if (data) {
+      const userId = data.userId;
+      await axios
+        .get(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
+        .then(async (res) => {
+          const [, url] = setHeaderAndUrl();
+          const { individual_user, org_user, user_details } = res.data;
+          if (individual_user) {
+            const {
+              first_name,
+              middle_name,
+              last_name,
+              pan_number,
+              aadhar_number,
+            } = individual_user;
+            setIndividualUserDetails({
+              first_name: first_name,
+              middle_name: middle_name,
+              last_name: last_name,
+              pan_number: pan_number,
+              aadhar_number: aadhar_number,
+            });
+          } else if (org_user) {
+            const {
+              cin_number,
+              company_name,
+              gst_number,
+              organization_type,
+              tan_number,
+            } = org_user;
+            setOrgUserDetails({
+              cin_number: cin_number,
+              company_name: company_name,
+              gst_number: gst_number,
+              organization_type: organization_type,
+              tan_number: tan_number,
+            });
+          }
           const {
-            first_name,
-            middle_name,
-            last_name,
-            pan_number,
-            aadhar_number,
-          } = individual_user;
-          setIndividualUserDetails({
-            first_name: first_name,
-            middle_name: middle_name,
-            last_name: last_name,
-            pan_number: pan_number,
-            aadhar_number: aadhar_number,
+            user_type,
+            mobile_number,
+            locality,
+            city,
+            state_name,
+            state_id,
+            zip,
+            email_address,
+            address,
+          } = user_details;
+          setUserType(user_type);
+          setIdOfState(parseInt(state_id));
+          setCommonUserDetails({
+            state_id: parseInt(state_id),
+            address: address,
+            mobile_number: mobile_number,
+            locality: locality,
+            city: city,
+            state_name: state_name,
+            zip: zip,
+            email: email_address,
+            user_type: user_type,
           });
-        } else if (org_user) {
-          const {
-            cin_number,
-            company_name,
-            gst_number,
-            organization_type,
-            tan_number,
-          } = org_user;
-          setOrgUserDetails({
-            cin_number: cin_number,
-            company_name: company_name,
-            gst_number: gst_number,
-            organization_type: organization_type,
-            tan_number: tan_number,
+          // Get Cities using state_id from api.
+          const cityByState = await axios.post(`${url}/by-city`, {
+            state_id: state_id,
           });
-        }
-        const {
-          user_type,
-          mobile_number,
-          locality,
-          city,
-          state_name,
-          state_id,
-          zip,
-          email_address,
-          address,
-        } = user_details;
-        setUserType(user_type);
-        setIdOfState(parseInt(state_id));
-        setCommonUserDetails({
-          state_id: parseInt(state_id),
-          address: address,
-          mobile_number: mobile_number,
-          locality: locality,
-          city: city,
-          state_name: state_name,
-          zip: zip,
-          email: email_address,
-          user_type: user_type,
+          // Get States from api.
+          const allStates = await axios.get(`${url}/by-state`);
+          setAllUseStates({
+            ...allUseStates,
+            citiesFromApi: cityByState.data,
+            statesFromApi: allStates.data,
+          });
+          SetOriginalValuesToShow(user_details);
         });
-        // Get Cities using state_id from api.
-        const cityByState = await axios.post(`${url}/by-city`, {
-          state_id: state_id,
-        });
-        // Get States from api.
-        const allStates = await axios.get(`${url}/by-state`);
-        setAllUseStates({
-          ...allUseStates,
-          citiesFromApi: cityByState.data,
-          statesFromApi: allStates.data,
-        });
-        SetOriginalValuesToShow(user_details);
-      });
+    }
   };
 
   // Function to validate zipCodes.
