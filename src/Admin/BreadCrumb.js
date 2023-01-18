@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-let savedUserType = "";
 const BreadCrumb = ({ userType, emailOfCurrentUser }) => {
   const [isUserPageActive, setIsUserPageActive] = useState(false);
   const testFn = () => {
@@ -29,8 +28,13 @@ const BreadCrumb = ({ userType, emailOfCurrentUser }) => {
                 Users
               </NavLink>
               {userType ? (
+                <li className="breadcrumb-item text-secondary">{userType}</li>
+              ) : (
+                <></>
+              )}
+              {emailOfCurrentUser ? (
                 <li className="breadcrumb-item text-secondary">
-                  {(savedUserType = userType)}
+                  {emailOfCurrentUser}
                 </li>
               ) : (
                 <></>
