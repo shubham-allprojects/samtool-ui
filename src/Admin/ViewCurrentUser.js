@@ -33,7 +33,8 @@ const ViewCurrentUser = () => {
       cancelUpdateBtnClassName: "d-none",
     });
   };
-  const { user_id, role_id, email_address, mobile_number } = otherDetailsOfUser;
+  const { user_id, role_id, email_address, mobile_number, user_type } =
+    otherDetailsOfUser;
   const { editRoleSelectClass, defaultRoleClass, cancelUpdateBtnClassName } =
     viewUserDetails;
 
@@ -78,7 +79,10 @@ const ViewCurrentUser = () => {
         <div className="row min-100vh">
           <AdminSideBar />
           <div className="col-xl-10 col-md-9">
-            <BreadCrumb emailOfCurrentUser={email_address} />
+            <BreadCrumb
+              typeOfUser={user_type}
+              emailOfCurrentUser={email_address}
+            />
             <section className="admin-edit-property wrapper">
               <div className="container-fluid">
                 <h2 className="text-center mb-4">View/Edit</h2>
@@ -149,6 +153,18 @@ const ViewCurrentUser = () => {
                             </select>
                           </div>
                         </div>
+                        <div className="col-6">
+                          <div className="form-group mb-3">
+                            <label
+                              className="form-label fw-bold"
+                              htmlFor="user_type"
+                            >
+                              USER TYPE:
+                            </label>
+                            <br />
+                            {user_type}
+                          </div>
+                        </div>
                         {/* Show Data As Per User Type*/}
                         {userType === "individual_user" ? (
                           <>
@@ -214,7 +230,68 @@ const ViewCurrentUser = () => {
                             </div>
                           </>
                         ) : (
-                          <></>
+                          <>
+                            <div className="col-6">
+                              <div className="form-group mb-3">
+                                <label
+                                  className="form-label fw-bold"
+                                  htmlFor="company_name"
+                                >
+                                  Company Name:
+                                </label>
+                                <br />
+                                {categoryWiseUserDetails.company_name}
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group mb-3">
+                                <label
+                                  className="form-label fw-bold"
+                                  htmlFor="organization_type"
+                                >
+                                  Organization Type:
+                                </label>
+                                <br />
+                                {categoryWiseUserDetails.organization_type}
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group mb-3">
+                                <label
+                                  className="form-label fw-bold"
+                                  htmlFor="gst_number"
+                                >
+                                  GST Number:
+                                </label>
+                                <br />
+                                {categoryWiseUserDetails.gst_number}
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group mb-3">
+                                <label
+                                  className="form-label fw-bold"
+                                  htmlFor="tan_number"
+                                >
+                                  TAN Number:
+                                </label>
+                                <br />
+                                {categoryWiseUserDetails.tan_number}
+                              </div>
+                            </div>
+                            <div className="col-6">
+                              <div className="form-group mb-3">
+                                <label
+                                  className="form-label fw-bold"
+                                  htmlFor="cin_number"
+                                >
+                                  CIN Number:
+                                </label>
+                                <br />
+                                {categoryWiseUserDetails.cin_number}
+                              </div>
+                            </div>
+                          </>
                         )}
 
                         <div className="col-6">

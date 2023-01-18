@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const BreadCrumb = ({ userType, emailOfCurrentUser }) => {
+const BreadCrumb = ({ userType, emailOfCurrentUser, typeOfUser }) => {
   const [isUserPageActive, setIsUserPageActive] = useState(false);
   const testFn = () => {
     setIsUserPageActive(window.location.href.includes("/admin/users"));
@@ -33,9 +33,14 @@ const BreadCrumb = ({ userType, emailOfCurrentUser }) => {
                 <></>
               )}
               {emailOfCurrentUser ? (
-                <li className="breadcrumb-item text-secondary">
-                  {emailOfCurrentUser}
-                </li>
+                <>
+                  <li className="breadcrumb-item text-secondary">
+                    {typeOfUser}
+                  </li>
+                  <li className="breadcrumb-item text-secondary">
+                    {emailOfCurrentUser}
+                  </li>
+                </>
               ) : (
                 <></>
               )}
