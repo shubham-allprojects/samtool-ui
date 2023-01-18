@@ -88,7 +88,7 @@ const AdminHomePage = () => {
                     </span>
                     <div>
                       <span className="admin-dashboard-count" id="usersCount">
-                        0
+                        1
                       </span>
                       <h5 className="text-white text-end blue-on-hover fw-bold">
                         Users
