@@ -42,8 +42,9 @@ const AdminHomePage = () => {
       orgCount = res.data.count;
     });
 
-    console.log(orgCount, indiCount);
-    counter("usersCount", 0, orgCount + indiCount, 2000);
+    const totalCount = orgCount + indiCount;
+    const duration = totalCount * 10;
+    counter("usersCount", 0, totalCount, duration);
   };
 
   useEffect(() => {
