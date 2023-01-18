@@ -61,7 +61,12 @@ const LoginMainPage = () => {
   // Login Function.
   const onLogin = async (e) => {
     e.preventDefault();
-
+    setLoaderDetails({
+      ...loaderDetails,
+      loading: true,
+      loginBtnTxt: "Loading...",
+      loginBtnClassName: "disabled",
+    });
     await axios
       .post(
         `/sam/v1/customer-registration/login`,
@@ -71,12 +76,6 @@ const LoginMainPage = () => {
         console.log(res.data);
         const { email, token, role_id, user_id } = res.data.token;
         if (email !== "" && token !== "") {
-          setLoaderDetails({
-            ...loaderDetails,
-            loading: true,
-            loginBtnTxt: "Loading...",
-            loginBtnClassName: "disabled",
-          });
           localStorage.setItem(
             "data",
             JSON.stringify({
@@ -88,18 +87,18 @@ const LoginMainPage = () => {
             })
           );
           setTimeout(() => {
-            setLoaderDetails({
-              ...loaderDetails,
-              loading: false,
-              loginBtnTxt: "Login",
-              loginBtnClassName: "disabled",
-            });
             toast.success("Logged in Successfully !");
           }, 1000);
           setTimeout(() => {
             goTo("/profile/edit-details");
           }, 2500);
         } else {
+          setLoaderDetails({
+            ...loaderDetails,
+            loading: false,
+            loginBtnTxt: "Login",
+            loginBtnClassName: "",
+          });
           setAlertDetails({
             alertVisible: true,
             alertMsg: "Invalid Username or Password Entered.",
