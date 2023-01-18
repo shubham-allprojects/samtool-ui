@@ -28,6 +28,10 @@ code {
 
 /* Common css */
 
+.breadcrumb {
+  --bs-breadcrumb-divider: ">";
+}
+
 .page-item:hover {
   cursor: pointer;
 }
