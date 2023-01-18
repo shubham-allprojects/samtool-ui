@@ -18,7 +18,7 @@ const BreadCrumb = ({ userType, emailOfCurrentUser, typeOfUser }) => {
       <nav aria-label="breadcrumb" className="mt-3">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
-            <NavLink className="" to="/admin">
+            <NavLink className="text-decoration-none" to="/admin">
               Dashboard
             </NavLink>
           </li>
@@ -28,18 +28,14 @@ const BreadCrumb = ({ userType, emailOfCurrentUser, typeOfUser }) => {
                 Users
               </NavLink>
               {userType ? (
-                <li className="breadcrumb-item text-secondary">{userType}</li>
+                <li className="breadcrumb-item">{userType}</li>
               ) : (
                 <></>
               )}
               {emailOfCurrentUser ? (
                 <>
-                  <li className="breadcrumb-item text-secondary">
-                    {typeOfUser}
-                  </li>
-                  <li className="breadcrumb-item text-secondary">
-                    {emailOfCurrentUser}
-                  </li>
+                  <li className="breadcrumb-item">{typeOfUser}</li>
+                  <li className="breadcrumb-item">{emailOfCurrentUser}</li>
                 </>
               ) : (
                 <></>

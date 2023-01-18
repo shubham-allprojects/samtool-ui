@@ -32,6 +32,12 @@ code {
   --bs-breadcrumb-divider: ">";
 }
 
+.breadcrumb-item,
+.breadcrumb-item > *, .breadcrumb-item.active {
+  text-decoration: none;
+  color: rgba(0, 0, 255, 0.781) !important;
+}
+
 .page-item:hover {
   cursor: pointer;
 }
