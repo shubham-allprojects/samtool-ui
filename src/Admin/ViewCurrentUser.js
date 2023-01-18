@@ -9,7 +9,6 @@ const ViewCurrentUser = () => {
   const { id } = useParams();
   const [otherDetailsOfUser, setOtherDetailsOfUser] = useState({});
   const [categoryWiseUserDetails, setCategoryWiseUserDetails] = useState({});
-  const [userType, setUserType] = useState("");
   const [roles, setRoles] = useState([]);
 
   const [viewUserDetails, setViewUserDetails] = useState({
@@ -48,7 +47,6 @@ const ViewCurrentUser = () => {
         { headers: headers }
       );
       const typeOfUser = Object.keys(currentUser.data)[1];
-      setUserType(typeOfUser);
       setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
       setOtherDetailsOfUser(currentUser.data.user_details);
     }
@@ -166,7 +164,7 @@ const ViewCurrentUser = () => {
                           </div>
                         </div>
                         {/* Show Data As Per User Type*/}
-                        {userType === "individual_user" ? (
+                        {user_type === "Individual User" ? (
                           <>
                             <div className="col-6">
                               <div className="form-group mb-3">
