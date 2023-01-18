@@ -7,7 +7,7 @@ import { counter } from "./CommonFunctions";
 
 let orgCount = 0;
 let indiCount = 0;
-
+let startCounter;
 const AdminHomePage = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   const setHeaderAndUrl = () => {
@@ -43,8 +43,10 @@ const AdminHomePage = () => {
     });
 
     const totalCount = orgCount + indiCount;
-    const duration = totalCount * 10;
-    counter("usersCount", 0, totalCount, duration);
+    totalCount > 100
+      ? (startCounter = Math.floor((totalCount * 80) / 100))
+      : (startCounter = 0);
+    counter("usersCount", startCounter, totalCount, 1000);
   };
 
   useEffect(() => {
