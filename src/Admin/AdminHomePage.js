@@ -42,11 +42,13 @@ const AdminHomePage = () => {
       orgCount = res.data.count;
     });
 
-    const totalCount = orgCount + indiCount;
-    totalCount > 100
-      ? (startCounter = Math.floor((totalCount * 80) / 100))
-      : (startCounter = 0);
-    counter("usersCount", startCounter, totalCount, 1000);
+    const totalCount = indiCount + orgCount;
+    if (!totalCount <= 0) {
+      totalCount > 100
+        ? (startCounter = Math.floor((totalCount * 80) / 100))
+        : (startCounter = 0);
+      counter("usersCount", startCounter, totalCount, 1000);
+    }
   };
 
   useEffect(() => {
@@ -88,7 +90,7 @@ const AdminHomePage = () => {
                     </span>
                     <div>
                       <span className="admin-dashboard-count" id="usersCount">
-                        1
+                        0
                       </span>
                       <h5 className="text-white text-end blue-on-hover fw-bold">
                         Users
