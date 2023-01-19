@@ -296,7 +296,7 @@ const ManageUsers = () => {
                                     <div
                                       className="dropdown-item"
                                       onClick={() => {
-                                        deleteUser(user_id, first_name);
+                                        deleteUser(user_id, email_address);
                                       }}
                                     >
                                       <i className="bi bi-trash pe-2"></i>
@@ -428,9 +428,9 @@ const ManageUsers = () => {
 
                                     <span
                                       className="dropdown-item"
-                                      // onClick={() => {
-                                      //   deleteUser(id, first_name);
-                                      // }}
+                                      onClick={() => {
+                                        deleteUser(user_id, email_address);
+                                      }}
                                     >
                                       <i className="bi bi-trash pe-1"></i>{" "}
                                       Delete
