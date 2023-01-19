@@ -239,7 +239,6 @@ const ManageUsers = () => {
                     <table className="table table-bordered table-dark admin-users-table table-striped text-center">
                       <thead>
                         <tr>
-                          <th>Sr. No.</th>
                           <th>User ID</th>
                           <th>Name</th>
                           <th>Email</th>
@@ -254,7 +253,6 @@ const ManageUsers = () => {
                             user.user_details;
                           return (
                             <tr key={Index}>
-                              <td>{Index + 1}</td>
                               <td>{user_id}</td>
                               <td>{first_name}</td>
                               <td>{email_address}</td>
@@ -374,7 +372,6 @@ const ManageUsers = () => {
                     <table className="table table-bordered table-dark admin-users-table table-striped text-center">
                       <thead>
                         <tr>
-                          <th>Sr. No.</th>
                           <th>User ID</th>
                           <th>Company Name</th>
                           <th>Email</th>
@@ -389,7 +386,6 @@ const ManageUsers = () => {
                             user.user_details;
                           return (
                             <tr key={Index}>
-                              <td>{Index + 1}</td>
                               <td>{user_id}</td>
                               <td>{company_name}</td>
                               <td>{email_address}</td>
