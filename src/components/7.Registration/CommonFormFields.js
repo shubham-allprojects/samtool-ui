@@ -20,7 +20,7 @@ const CommonFormFields = ({
           <label
             id="address-modal-label"
             style={{ cursor: "pointer" }}
-            className="text-primary text-decoration-underline form-label"
+            className="address-label"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
@@ -98,7 +98,7 @@ const CommonFormFields = ({
         </div>
       </div>
       {/* SAM T & C */}
-      <div className="row SamTermsConditionsRow mt-3">
+      <div className="row register-links mt-3">
         <div className="offset-lg-2 col-lg-4">
           <NavLink to="/">SAM Terms and Conditions</NavLink>
         </div>
