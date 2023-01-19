@@ -168,10 +168,11 @@ const LoginMainPage = () => {
                       className={`icon-eye-login bi bi-${eyeIcon}`}
                     ></i>
                   </div>
-                  <h6 className="text-center fw-bold">OR</h6>
                 </div>
-                <h6 className="fw-bold mt-3 mt-md-0">Login with OTP</h6>
-                <div className="row">
+                {/* Login with OTP section */}
+                {/* <div className="row">
+                  <h6 className="text-center fw-bold">OR</h6>
+                  <h6 className="fw-bold mt-3 mt-md-0">Login with OTP</h6>
                   <div className="col-md-7 col-xl-8 mb-3">
                     <input
                       type="Number"
@@ -181,9 +182,11 @@ const LoginMainPage = () => {
                     />
                   </div>
                   <div className="col-md-5 col-xl-4 text-md-end text-center">
-                    <button className="btn btn-primary">Send OTP</button>
+                    <button type="button" className="btn btn-primary">
+                      Send OTP
+                    </button>
                   </div>
-                </div>
+                </div> */}
                 <hr />
                 <div className="text-center my-3">
                   <button
