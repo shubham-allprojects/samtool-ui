@@ -631,7 +631,7 @@ const Registration = () => {
                           name="individual"
                           onClick={changeForm}
                         >
-                          IndividuallabelValue
+                          Individual
                         </label>
                       </div>
                       <div className="form-check form-check-inline">
