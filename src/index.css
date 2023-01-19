@@ -773,7 +773,7 @@ input[type="number"] {
 }
 
 .upload-file-inner-wrapper {
-  color: white;
+  color: lightgray;
   border: 2px dashed gray;
 }
 
