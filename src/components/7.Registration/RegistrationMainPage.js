@@ -896,7 +896,7 @@ const Registration = () => {
                   </div>
                 </div>
                 <small className="token-verify-link">
-                  Already have Token?
+                  Already registered?
                   <NavLink to="/register/verify" className="fw-bold ps-1">
                     click here to verify
                   </NavLink>
