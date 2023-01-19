@@ -17,7 +17,8 @@ const CommonFormFields = ({
       <div className="row addressRow1 mt-lg-3 mt-4">
         <div className="col-lg-2 mb-lg-0 mb-2">Address</div>
         <div className="col-lg-6 mb-lg-0 mb-2">
-          <label
+          <a
+            href="/anyValue"
             id="address-modal-label"
             style={{ cursor: "pointer" }}
             className="address-label"
@@ -25,7 +26,7 @@ const CommonFormFields = ({
             data-bs-target="#exampleModal"
           >
             {labelValue}
-          </label>
+          </a>
           <textarea
             style={{ resize: "none" }}
             value={addressValue}

@@ -488,6 +488,11 @@ input[type="number"] {
   font-weight: 600;
 }
 
+.register-links a:hover,
+.address-label:hover {
+  border-color: #0a58ca;
+}
+
 .IndividualForm .btn-secondary,
 .OrganizationForm .btn-secondary {
   background-color: rgba(211, 211, 211, 0.647) !important;
