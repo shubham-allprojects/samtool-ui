@@ -785,11 +785,12 @@ input[type="number"] {
   position: relative;
   overflow: hidden;
   display: inline-block;
+  display: flex;
+  justify-content: center;
 }
 
 .upload-iocn {
   position: absolute;
-  left: 47%;
   top: 0;
 }
 

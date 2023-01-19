@@ -91,12 +91,8 @@ const UploadProperties = () => {
                           type="file"
                           id="formFile"
                         />
-                        {fileName ? (
-                          <div className="text-center mt-2">{fileName}</div>
-                        ) : (
-                          ""
-                        )}
                       </div>
+                      {fileName ? <div className="text-center fs-5">{fileName}</div> : ""}
                     </div>
                     <div className="mt-2">
                       <small className="text-white">
