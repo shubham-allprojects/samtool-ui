@@ -777,6 +777,10 @@ input[type="number"] {
   border: 2px dashed gray;
 }
 
+.upload-file-inner-wrapper.active {
+  border-color: white;
+}
+
 .upload-btn-wrapper {
   position: relative;
   overflow: hidden;

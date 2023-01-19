@@ -11,6 +11,8 @@ const UploadProperties = () => {
     tableDisplayClass: "d-none",
   });
 
+  const [dropzoneActive, setDropzoneActive] = useState(false);
+
   const fileRef = useRef();
   const { data, tableHeadings, tableDisplayClass } = allUseStates;
 
@@ -38,6 +40,10 @@ const UploadProperties = () => {
     }
   };
 
+  const handleDrop = (e) => {
+    console.log("ok");
+  };
+
   return (
     <Layout>
       <div className="container-fluid section-padding">
@@ -48,7 +54,20 @@ const UploadProperties = () => {
               <div className="row justify-content-center">
                 <div className="col-xl-7 col-md-8 shadow p-md-4 p-3 mb-5 upload-file-main-wrapper">
                   <div className="">
-                    <div className="py-3 upload-file-inner-wrapper">
+                    <div
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        setDropzoneActive(true);
+                      }}
+                      onDragLeave={(e) => {
+                        e.preventDefault();
+                        setDropzoneActive(false);
+                      }}
+                      onDrop={(e) => handleDrop(e)}
+                      className={`py-3 upload-file-inner-wrapper ${
+                        dropzoneActive ? "active" : ""
+                      }`}
+                    >
                       <div className="text-center text-capitalize fs-2 fw-bold">
                         Upload or drag files
                       </div>
