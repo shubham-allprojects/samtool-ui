@@ -52,8 +52,15 @@ const UploadProperties = () => {
     e.preventDefault();
     if (e.dataTransfer.files.length) {
       const inputFile = e.dataTransfer.files[0];
-      setFileName(e.dataTransfer.files[0].name);
-      readFileFunction(inputFile);
+      const fileExtension = inputFile.type.split("/")[1];
+      if (!allowedExtensions.includes(fileExtension)) {
+        alert("Please upload a csv file");
+        setDropzoneActive(false);
+        return;
+      } else {
+        setFileName(e.dataTransfer.files[0].name);
+        readFileFunction(inputFile);
+      }
     }
   };
 
