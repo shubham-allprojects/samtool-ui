@@ -62,15 +62,17 @@ const ManageUsers = () => {
 
   const deleteUser = async (userId, userName) => {
     const [headers] = setHeaderAndUrl();
-    // let usersToShow = allUsers.filter((user) => {
-    //   return user._id !== userId;
-    // });
+    console.log(userType, currentPageNumber);
     await axios
       .delete(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
       .then((res) => {
-        console.log(res);
         if (res.data.status === 0) {
           toast.success(`User ${userName} deleted successfuly`);
+          if (userType === "Individual User") {
+            getIndividualUsers(currentPageNumber, records_per_page);
+          } else {
+            getOrgUsers(currentPageNumber, records_per_page);
+          }
         }
       });
   };
@@ -152,7 +154,6 @@ const ManageUsers = () => {
   const handlePageClick = (e) => {
     let className1 = "";
     let className2 = "";
-    console.log(userType);
     if (userType === "Individual User") {
       className1 = ".individual-pagination";
       className2 = ".individual-pagination.page-item.active";
