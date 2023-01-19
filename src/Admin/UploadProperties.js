@@ -43,6 +43,7 @@ const UploadProperties = () => {
   };
 
   const handleDrop = (e) => {
+    e.preventDefault();
     if (e.dataTransfer.files.length) {
       setFileName(e.dataTransfer.files[0].name);
     }
@@ -50,7 +51,18 @@ const UploadProperties = () => {
 
   return (
     <Layout>
-      <div className="container-fluid section-padding">
+      <div
+        className="container-fluid section-padding"
+        onDrop={(e) => {
+          e.preventDefault();
+        }}
+        onDragOver={(e) => {
+          e.preventDefault();
+        }}
+        onDragLeave={(e) => {
+          e.preventDefault();
+        }}
+      >
         <div className="row min-100vh">
           <AdminSideBar />
           <div className="col-xl-10 col-md-9 scrollable-right-div wrapper">
@@ -60,12 +72,12 @@ const UploadProperties = () => {
                   <div className="">
                     <div
                       onDragOver={(e) => {
-                        e.preventDefault();
                         setDropzoneActive(true);
+                        e.preventDefault();
                       }}
                       onDragLeave={(e) => {
-                        e.preventDefault();
                         setDropzoneActive(false);
+                        e.preventDefault();
                       }}
                       onDrop={(e) => handleDrop(e)}
                       className={`py-3 upload-file-inner-wrapper ${
@@ -92,7 +104,11 @@ const UploadProperties = () => {
                           id="formFile"
                         />
                       </div>
-                      {fileName ? <div className="text-center fs-5">{fileName}</div> : ""}
+                      {fileName ? (
+                        <div className="text-center fs-5">{fileName}</div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="mt-2">
                       <small className="text-white">
