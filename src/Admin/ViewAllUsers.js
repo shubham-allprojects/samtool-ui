@@ -5,6 +5,7 @@ import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
 import BreadCrumb from "./BreadCrumb";
 import CommonSpinner from "../CommonSpinner";
+import { toast } from "react-toastify";
 
 const records_per_page = 4;
 let currentPageNumber = 1;
@@ -59,13 +60,20 @@ const ManageUsers = () => {
     }
   };
 
-  // const deleteUser = (userId, userName) => {
-  //   let usersToShow = allUsers.filter((user) => {
-  //     return user._id !== userId;
-  //   });
-  //   toast.success(`User ${userName} deleted successfuly`);
-  //   setAllUsers(usersToShow);
-  // };
+  const deleteUser = async (userId, userName) => {
+    const [headers] = setHeaderAndUrl();
+    // let usersToShow = allUsers.filter((user) => {
+    //   return user._id !== userId;
+    // });
+    await axios
+      .delete(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === 0) {
+          toast.success(`User ${userName} deleted successfuly`);
+        }
+      });
+  };
 
   const setIndividualUsersDetails = async (pageNumber, records_per_page) => {
     const [headers, url] = setHeaderAndUrl();
@@ -285,15 +293,15 @@ const ManageUsers = () => {
                                       <i className="bi bi-eye pe-1"></i> View
                                     </NavLink>
 
-                                    <span
+                                    <div
                                       className="dropdown-item"
-                                      // onClick={() => {
-                                      //   deleteUser(id, first_name);
-                                      // }}
+                                      onClick={() => {
+                                        deleteUser(user_id, first_name);
+                                      }}
                                     >
-                                      <i className="bi bi-trash pe-1"></i>{" "}
+                                      <i className="bi bi-trash pe-2"></i>
                                       Delete
-                                    </span>
+                                    </div>
                                   </ul>
                                 </li>
                               </td>

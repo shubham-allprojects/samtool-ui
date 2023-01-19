@@ -141,6 +141,9 @@ const ViewCurrentUser = () => {
                                     selected={
                                       data.id === role_id ? true : false
                                     }
+                                    disabled={
+                                      data.id === role_id ? true : false
+                                    }
                                     key={data.id}
                                     value={data.id}
                                   >
