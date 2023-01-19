@@ -49,9 +49,9 @@ const UploadProperties = () => {
                 <div className="col-xl-7 col-md-8 shadow p-md-4 p-3 mb-5 upload-file-main-wrapper">
                   <div className="">
                     <div className="py-3 upload-file-inner-wrapper">
-                      <h2 className="text-center text-capitalize">
+                      <div className="text-center text-capitalize fs-2 fw-bold">
                         Upload or drag files
-                      </h2>
+                      </div>
                       {/* <input
                       ref={fileRef}
                       onChange={fileUpload}
@@ -71,7 +71,7 @@ const UploadProperties = () => {
                       </div>
                     </div>
                     <div className="mt-2">
-                      <small className="text-muted">
+                      <small className="text-white">
                         Refer to the csv file example below.
                       </small>
                       <br />
