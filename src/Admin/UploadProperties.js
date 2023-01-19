@@ -24,7 +24,7 @@ const UploadProperties = () => {
       tableDisplayClass: "d-none",
     });
     fileRef.current.value = "";
-    setFileName();
+    setFileName("");
     window.scrollTo(0, 0);
   };
 
@@ -52,6 +52,8 @@ const UploadProperties = () => {
       const fileExtension = inputFile.type.split("/")[1];
       if (!allowedExtensions.includes(fileExtension)) {
         alert("Please upload a csv file");
+        fileRef.current.value = "";
+        setFileName("");
         return;
       } else {
         readFileFunction(inputFile);
