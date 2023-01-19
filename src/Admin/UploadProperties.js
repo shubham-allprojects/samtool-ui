@@ -17,6 +17,22 @@ const UploadProperties = () => {
   const fileRef = useRef();
   const { data, tableHeadings, tableDisplayClass } = allUseStates;
 
+  const readFileFunction = (inputFile) => {
+    const reader = new FileReader();
+    reader.onload = async ({ target }) => {
+      const csv = Papa.parse(target.result, { header: true });
+      const parsedData = csv.data;
+      setAllUseStates({
+        ...allUseStates,
+        tableHeadings: Object.keys(parsedData[0]),
+        data: parsedData,
+        tableDisplayClass: "",
+      });
+    };
+    reader.readAsText(inputFile);
+    setDropzoneActive(false);
+  };
+
   const fileUpload = (e) => {
     if (e.target.files.length) {
       const inputFile = e.target.files[0];
@@ -26,26 +42,16 @@ const UploadProperties = () => {
       //   setError("Please input a csv file");
       //   return;
       // }
-      const reader = new FileReader();
-      reader.onload = async ({ target }) => {
-        const csv = Papa.parse(target.result, { header: true });
-        const parsedData = csv.data;
-        console.log(parsedData);
-        setAllUseStates({
-          ...allUseStates,
-          tableHeadings: Object.keys(parsedData[0]),
-          data: parsedData,
-          tableDisplayClass: "",
-        });
-      };
-      reader.readAsText(inputFile);
+      readFileFunction(inputFile);
     }
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
     if (e.dataTransfer.files.length) {
+      const inputFile = e.dataTransfer.files[0];
       setFileName(e.dataTransfer.files[0].name);
+      readFileFunction(inputFile);
     }
   };
 
