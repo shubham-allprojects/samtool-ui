@@ -106,8 +106,8 @@ const UploadProperties = () => {
                         dropzoneActive ? "active" : ""
                       }`}
                     >
-                      <div className="text-center text-capitalize fs-2 fw-bold">
-                        Upload or drag files
+                      <div className="text-center fs-3 fw-bold">
+                        Choose a file or drag it here
                       </div>
 
                       <div className="upload-btn-wrapper py-xl-3 py-md-2 py-1 w-100">
