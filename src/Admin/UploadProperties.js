@@ -18,7 +18,18 @@ const UploadProperties = () => {
   const fileRef = useRef();
   const { data, tableHeadings, tableDisplayClass } = allUseStates;
 
+  const onCancelClick = (e) => {
+    setAllUseStates({
+      ...allUseStates,
+      tableDisplayClass: "d-none",
+    });
+    fileRef.current.value = "";
+    setFileName();
+    window.scrollTo(0, 0);
+  };
+
   const readFileFunction = (inputFile) => {
+    setFileName(inputFile.name);
     const reader = new FileReader();
     reader.onload = async ({ target }) => {
       const csv = Papa.parse(target.result, { header: true });
@@ -32,6 +43,7 @@ const UploadProperties = () => {
     };
     reader.readAsText(inputFile);
     setDropzoneActive(false);
+    document.getElementById("showCsvDataInTable").scrollIntoView(true);
   };
 
   const fileUpload = (e) => {
@@ -42,7 +54,6 @@ const UploadProperties = () => {
         alert("Please upload a csv file");
         return;
       } else {
-        setFileName(inputFile.name);
         readFileFunction(inputFile);
       }
     }
@@ -58,7 +69,6 @@ const UploadProperties = () => {
         setDropzoneActive(false);
         return;
       } else {
-        setFileName(e.dataTransfer.files[0].name);
         readFileFunction(inputFile);
       }
     }
@@ -77,7 +87,7 @@ const UploadProperties = () => {
       >
         <div className="row min-100vh">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-9 scrollable-right-div wrapper">
+          <div className="col-xl-10 col-md-9 wrapper">
             <div className="container-fluid">
               <div className="row justify-content-center">
                 <div className="col-xl-7 col-md-8 shadow p-md-4 p-3 mb-5 upload-file-main-wrapper">
@@ -99,19 +109,13 @@ const UploadProperties = () => {
                       <div className="text-center text-capitalize fs-2 fw-bold">
                         Upload or drag files
                       </div>
-                      {/* <input
-                      ref={fileRef}
-                      onChange={fileUpload}
-                      className="form-control"
-                      type="file"
-                      id="formFile"
-                    /> */}
+
                       <div className="upload-btn-wrapper py-xl-3 py-md-2 py-1 w-100">
                         <i className="bi bi-upload fs-1 upload-iocn"></i>
                         <input
                           ref={fileRef}
                           onChange={fileUpload}
-                          className="form-control upload-csv-file"
+                          className="upload-csv-file"
                           type="file"
                           id="formFile"
                         />
@@ -135,8 +139,9 @@ const UploadProperties = () => {
                     </div>
                   </div>
                 </div>
-                <div className={`col-xl-12 mb-5 ${tableDisplayClass}`}>
-                  <div className="csv-data-table">
+
+                <div id="showCsvDataInTable" className={`col-xl-12 mb-5`}>
+                  <div className={`${tableDisplayClass}`}>
                     <table className="table table-striped table-bordered table-dark">
                       <thead>
                         <tr>
@@ -157,21 +162,17 @@ const UploadProperties = () => {
                         })}
                       </tbody>
                     </table>
-                  </div>
-                  <div className="text-end mt-3">
-                    <button className="btn btn-success me-2">Save</button>
-                    <button
-                      onClick={(e) => {
-                        setAllUseStates({
-                          ...allUseStates,
-                          tableDisplayClass: "d-none",
-                        });
-                        fileRef.current.value = "";
-                      }}
-                      className="btn btn-secondary"
-                    >
-                      Cancel
-                    </button>
+                    <div className="text-end mt-3">
+                      <button className="btn btn-success me-2">Save</button>
+                      <button
+                        onClick={(e) => {
+                          onCancelClick(e);
+                        }}
+                        className="btn btn-secondary"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
