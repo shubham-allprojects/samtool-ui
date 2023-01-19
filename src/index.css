@@ -33,7 +33,8 @@ code {
 }
 
 .breadcrumb-item,
-.breadcrumb-item > *, .breadcrumb-item.active {
+.breadcrumb-item > *,
+.breadcrumb-item.active {
   text-decoration: none;
   color: rgba(0, 0, 255, 0.781) !important;
 }
@@ -765,6 +766,31 @@ input[type="number"] {
 
 .users-admin .active > .page-link:hover {
   color: white;
+}
+
+.upload-file-main-wrapper {
+  background: #333649;
+}
+
+.upload-file-inner-wrapper {
+  color: white;
+  border: 2px dashed gray;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-iocn {
+  position: absolute;
+  left: 45%;
+  top: 1%;
+}
+
+.upload-csv-file {
+  opacity: 0;
 }
 
 /* Address Modal */
