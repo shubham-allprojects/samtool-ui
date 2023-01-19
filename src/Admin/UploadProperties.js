@@ -4,6 +4,7 @@ import Papa from "papaparse";
 import { useRef } from "react";
 import Layout from "../components/1.CommonLayout/Layout";
 
+const allowedExtensions = ["csv"];
 const UploadProperties = () => {
   const [allUseStates, setAllUseStates] = useState({
     data: [],
@@ -36,13 +37,14 @@ const UploadProperties = () => {
   const fileUpload = (e) => {
     if (e.target.files.length) {
       const inputFile = e.target.files[0];
-      setFileName(inputFile.name);
-      // const fileExtension = inputFile.type.split("/")[1];
-      // if (!allowedExtensions.includes(fileExtension)) {
-      //   setError("Please input a csv file");
-      //   return;
-      // }
-      readFileFunction(inputFile);
+      const fileExtension = inputFile.type.split("/")[1];
+      if (!allowedExtensions.includes(fileExtension)) {
+        alert("Please upload a csv file");
+        return;
+      } else {
+        setFileName(inputFile.name);
+        readFileFunction(inputFile);
+      }
     }
   };
 
