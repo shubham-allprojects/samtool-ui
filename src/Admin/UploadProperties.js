@@ -12,6 +12,7 @@ const UploadProperties = () => {
   });
 
   const [dropzoneActive, setDropzoneActive] = useState(false);
+  const [fileName, setFileName] = useState("");
 
   const fileRef = useRef();
   const { data, tableHeadings, tableDisplayClass } = allUseStates;
@@ -19,6 +20,7 @@ const UploadProperties = () => {
   const fileUpload = (e) => {
     if (e.target.files.length) {
       const inputFile = e.target.files[0];
+      setFileName(inputFile.name);
       // const fileExtension = inputFile.type.split("/")[1];
       // if (!allowedExtensions.includes(fileExtension)) {
       //   setError("Please input a csv file");
@@ -41,7 +43,9 @@ const UploadProperties = () => {
   };
 
   const handleDrop = (e) => {
-    console.log("ok");
+    if (e.dataTransfer.files.length) {
+      setFileName(e.dataTransfer.files[0].name);
+    }
   };
 
   return (
@@ -79,7 +83,7 @@ const UploadProperties = () => {
                       id="formFile"
                     /> */}
                       <div className="upload-btn-wrapper py-xl-3 py-md-2 py-1 w-100">
-                        <i class="bi bi-upload fs-1 upload-iocn"></i>
+                        <i className="bi bi-upload fs-1 upload-iocn"></i>
                         <input
                           ref={fileRef}
                           onChange={fileUpload}
@@ -87,6 +91,11 @@ const UploadProperties = () => {
                           type="file"
                           id="formFile"
                         />
+                        {fileName ? (
+                          <div className="text-center mt-2">{fileName}</div>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                     <div className="mt-2">
