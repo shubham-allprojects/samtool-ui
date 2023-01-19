@@ -59,9 +59,6 @@ const UploadProperties = () => {
         onDragOver={(e) => {
           e.preventDefault();
         }}
-        onDragLeave={(e) => {
-          e.preventDefault();
-        }}
       >
         <div className="row min-100vh">
           <AdminSideBar />
