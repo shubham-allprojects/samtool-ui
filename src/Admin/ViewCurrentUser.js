@@ -78,7 +78,10 @@ const ViewCurrentUser = () => {
     } else {
       array = array.filter((item) => item !== parseInt(value));
     }
-    console.log(array);
+  };
+
+  const saveRoles = () => {
+    alert(array);
   };
 
   useEffect(() => {
@@ -144,7 +147,10 @@ const ViewCurrentUser = () => {
                               >
                                 <i className="bi bi-x-square-fill text-danger fs-5"></i>
                               </span>
-                              <span className={`ms-3 ${editRoleSelectClass}`}>
+                              <span
+                                onClick={saveRoles}
+                                className={`ms-3 ${editRoleSelectClass}`}
+                              >
                                 <i className="bi bi-check-square-fill text-success fs-5"></i>
                               </span>
                             </label>
