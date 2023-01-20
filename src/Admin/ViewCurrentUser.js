@@ -82,7 +82,7 @@ const ViewCurrentUser = () => {
   };
 
   const saveRoles = () => {
-    alert("Saved Roles: " + array);
+    alert("Saved Roles: " + array.sort());
     commonFnForSaveAndCancelClick();
   };
 
