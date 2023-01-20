@@ -25,7 +25,7 @@ const ViewCurrentUser = () => {
     });
   };
 
-  const cancelEditing = () => {
+  const commonFnForSaveAndCancelClick = () => {
     setViewUserDetails({
       editRoleSelectClass: "d-none",
       defaultRoleClass: "",
@@ -38,6 +38,11 @@ const ViewCurrentUser = () => {
       }
     });
   };
+
+  const cancelEditing = () => {
+    commonFnForSaveAndCancelClick();
+  };
+
   const { user_id, role_id, email_address, mobile_number, user_type } =
     otherDetailsOfUser;
   const { editRoleSelectClass, defaultRoleClass, cancelUpdateBtnClassName } =
@@ -81,7 +86,8 @@ const ViewCurrentUser = () => {
   };
 
   const saveRoles = () => {
-    alert(array);
+    alert("Saved Roles: " + array);
+    commonFnForSaveAndCancelClick();
   };
 
   useEffect(() => {
