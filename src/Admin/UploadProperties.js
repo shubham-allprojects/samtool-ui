@@ -142,8 +142,13 @@ const UploadProperties = () => {
                   </div>
                 </div>
 
-                <div id="showCsvDataInTable" className={`col-xl-12 mb-5`}>
-                  <div className={`${tableDisplayClass}`}>
+                <div
+                  id="showCsvDataInTable"
+                  className="col-xl-12 position-relative mb-5"
+                >
+                  <div
+                    className={`${tableDisplayClass} csv-data-table-wrapper`}
+                  >
                     <table className="table table-striped table-bordered table-dark">
                       <thead>
                         <tr>
@@ -164,7 +169,7 @@ const UploadProperties = () => {
                         })}
                       </tbody>
                     </table>
-                    <div className="text-end mt-3">
+                    <div className="text-end mt-3 bg-dark position-absolute save-cancel-btn-div">
                       <button className="btn btn-success me-2">Save</button>
                       <button
                         onClick={(e) => {
