@@ -31,6 +31,12 @@ const ViewCurrentUser = () => {
       defaultRoleClass: "",
       cancelUpdateBtnClassName: "d-none",
     });
+    const roleCheckboxes = document.querySelectorAll(".roles-checkbox");
+    roleCheckboxes.forEach((checkbox) => {
+      if (!(parseInt(checkbox.id) === role_id)) {
+        checkbox.checked = false;
+      }
+    });
   };
   const { user_id, role_id, email_address, mobile_number, user_type } =
     otherDetailsOfUser;
@@ -157,17 +163,17 @@ const ViewCurrentUser = () => {
                                 return (
                                   <div
                                     key={Index}
-                                    class="form-check form-check-inline"
+                                    className="form-check form-check-inline"
                                   >
                                     <input
-                                      class="form-check-input"
+                                      className="form-check-input roles-checkbox"
                                       type="checkbox"
                                       id={data.id}
                                       value={data.id}
                                     />
                                     <label
-                                      class="form-check-label"
-                                      for="inlineCheckbox1"
+                                      className="form-check-label"
+                                      htmlFor="inlineCheckbox1"
                                     >
                                       {`${data.id} - ${data.role}`}
                                     </label>
