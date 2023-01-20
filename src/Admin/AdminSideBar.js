@@ -25,7 +25,7 @@ const AdminSideBar = () => {
               <li className="nav-item">
                 <NavLink className="nav-link admin-home-link" to="/admin">
                   <span className="mx-2">
-                    <i className="bi bi-house-fill text-secondary"></i>
+                    <i className="bi bi-house-fill text-light"></i>
                   </span>
                   Dashboard
                 </NavLink>
@@ -33,7 +33,7 @@ const AdminSideBar = () => {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/admin/property">
                   <span className="mx-2">
-                    <i className="bi bi-buildings-fill text-secondary"></i>
+                    <i className="bi bi-buildings-fill text-light"></i>
                   </span>
                   Properties
                 </NavLink>
@@ -41,7 +41,7 @@ const AdminSideBar = () => {
               <li className="nav-item">
                 <NavLink to="/admin/users" className="nav-link">
                   <span className="mx-2">
-                    <i className="bi bi-person-fill text-secondary"></i>
+                    <i className="bi bi-person-fill text-light"></i>
                   </span>
                   Users
                 </NavLink>
@@ -50,7 +50,7 @@ const AdminSideBar = () => {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/admin/upload-properties">
                   <span className="mx-2">
-                    <i className="bi bi-upload text-secondary"></i>
+                    <i className="bi bi-upload text-light"></i>
                   </span>
                   Upload Properties
                 </NavLink>

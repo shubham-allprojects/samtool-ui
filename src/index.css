@@ -779,8 +779,8 @@ input[type="number"] {
 }
 
 .upload-file-inner-wrapper {
-  color: lightgray;
-  border: 2px dashed gray;
+  color: white;
+  border: 2px dashed lightgray;
 }
 
 .upload-file-inner-wrapper.active {
