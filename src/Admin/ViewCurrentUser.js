@@ -131,7 +131,7 @@ const ViewCurrentUser = () => {
                                 ? " Editor"
                                 : " Viewer"}
                             </span>
-                            <select
+                            {/* <select
                               id="role"
                               className={`form-select ${editRoleSelectClass}`}
                             >
@@ -151,7 +151,44 @@ const ViewCurrentUser = () => {
                                   </option>
                                 );
                               })}
-                            </select>
+                            </select> */}
+                            <div
+                              className={`form-group ${editRoleSelectClass}`}
+                            >
+                              {roles.map((data, Index) => {
+                                if (data.id === role_id) {
+                                  const defaultRole = document.getElementById(
+                                    data.role
+                                  );
+                                  if (defaultRole) {
+                                    defaultRole.checked = true;
+                                    defaultRole.disabled = true;
+                                  }
+                                }
+                                return (
+                                  <div
+                                    key={Index}
+                                    class="form-check form-check-inline"
+                                  >
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      id={data.role}
+                                      value={data.id}
+                                      // disabled={
+                                      //   data.id === role_id ? true : false
+                                      // }
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="inlineCheckbox1"
+                                    >
+                                      {`${data.id} - ${data.role}`}
+                                    </label>
+                                  </div>
+                                );
+                              })}
+                            </div>
                           </div>
                         </div>
                         <div className="col-6">
