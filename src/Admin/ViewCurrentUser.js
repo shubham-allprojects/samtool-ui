@@ -70,6 +70,16 @@ const ViewCurrentUser = () => {
       setRoles(allRoles.data);
     }
   };
+  let array = [role_id];
+  const onRoleSelect = (e) => {
+    const { checked, value } = e.target;
+    if (checked) {
+      array.push(parseInt(value));
+    } else {
+      array = array.filter((item) => item !== parseInt(value));
+    }
+    console.log(array);
+  };
 
   useEffect(() => {
     setCurrentUserData();
@@ -168,6 +178,9 @@ const ViewCurrentUser = () => {
                                     <input
                                       className="form-check-input roles-checkbox"
                                       type="checkbox"
+                                      onChange={(e) => {
+                                        onRoleSelect(e);
+                                      }}
                                       id={data.id}
                                       value={data.id}
                                     />
