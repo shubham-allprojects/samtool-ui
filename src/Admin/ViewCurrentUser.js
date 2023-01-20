@@ -116,11 +116,20 @@ const ViewCurrentUser = () => {
                               className="form-label fw-bold"
                             >
                               Role
-                              <span className="ms-4">
+                              <span className={`ms-4 ${defaultRoleClass}`}>
                                 <i
                                   onClick={editDetails}
                                   className="bi bi-pencil-square"
                                 ></i>
+                              </span>
+                              <span
+                                onClick={cancelEditing}
+                                className={`ms-4 ${editRoleSelectClass}`}
+                              >
+                                <i className="bi bi-x-square-fill text-danger fs-5"></i>
+                              </span>
+                              <span className={`ms-3 ${editRoleSelectClass}`}>
+                                <i className="bi bi-check-square-fill text-success fs-5"></i>
                               </span>
                             </label>
                             <span className={`${defaultRoleClass}`}>
@@ -131,34 +140,14 @@ const ViewCurrentUser = () => {
                                 ? " Editor"
                                 : " Viewer"}
                             </span>
-                            {/* <select
-                              id="role"
-                              className={`form-select ${editRoleSelectClass}`}
-                            >
-                              {roles.map((data) => {
-                                return (
-                                  <option
-                                    selected={
-                                      data.id === role_id ? true : false
-                                    }
-                                    disabled={
-                                      data.id === role_id ? true : false
-                                    }
-                                    key={data.id}
-                                    value={data.id}
-                                  >
-                                    {`${data.id} - ${data.role}`}
-                                  </option>
-                                );
-                              })}
-                            </select> */}
+
                             <div
                               className={`form-group ${editRoleSelectClass}`}
                             >
                               {roles.map((data, Index) => {
                                 if (data.id === role_id) {
                                   const defaultRole = document.getElementById(
-                                    data.role
+                                    data.id
                                   );
                                   if (defaultRole) {
                                     defaultRole.checked = true;
@@ -173,11 +162,8 @@ const ViewCurrentUser = () => {
                                     <input
                                       class="form-check-input"
                                       type="checkbox"
-                                      id={data.role}
+                                      id={data.id}
                                       value={data.id}
-                                      // disabled={
-                                      //   data.id === role_id ? true : false
-                                      // }
                                     />
                                     <label
                                       class="form-check-label"
@@ -357,7 +343,7 @@ const ViewCurrentUser = () => {
                           </div>
                         </div>
                       </div>
-                      <div
+                      {/* <div
                         className={`row mt-4 ${cancelUpdateBtnClassName}`}
                         id="update-cancel"
                       >
@@ -381,7 +367,7 @@ const ViewCurrentUser = () => {
                             </button>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </form>
                   </div>
                 </div>
