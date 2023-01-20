@@ -12,24 +12,21 @@ const ViewCurrentUser = () => {
   const [roles, setRoles] = useState([]);
 
   const [viewUserDetails, setViewUserDetails] = useState({
-    editRoleSelectClass: "d-none",
-    defaultRoleClass: "",
-    cancelUpdateBtnClassName: "d-none",
+    classOnEditClick: "d-none",
+    classOnPageLoad: "",
   });
 
   const editDetails = () => {
     setViewUserDetails({
-      editRoleSelectClass: "",
-      defaultRoleClass: "d-none",
-      cancelUpdateBtnClassName: "",
+      classOnEditClick: "",
+      classOnPageLoad: "d-none",
     });
   };
 
   const commonFnForSaveAndCancelClick = () => {
     setViewUserDetails({
-      editRoleSelectClass: "d-none",
-      defaultRoleClass: "",
-      cancelUpdateBtnClassName: "d-none",
+      classOnEditClick: "d-none",
+      classOnPageLoad: "",
     });
     const roleCheckboxes = document.querySelectorAll(".roles-checkbox");
     roleCheckboxes.forEach((checkbox) => {
@@ -45,8 +42,7 @@ const ViewCurrentUser = () => {
 
   const { user_id, role_id, email_address, mobile_number, user_type } =
     otherDetailsOfUser;
-  const { editRoleSelectClass, defaultRoleClass, cancelUpdateBtnClassName } =
-    viewUserDetails;
+  const { classOnEditClick, classOnPageLoad } = viewUserDetails;
 
   const data = JSON.parse(localStorage.getItem("data"));
 
@@ -141,7 +137,7 @@ const ViewCurrentUser = () => {
                               className="form-label fw-bold"
                             >
                               Role
-                              <span className={`ms-4 ${defaultRoleClass}`}>
+                              <span className={`ms-4 ${classOnPageLoad}`}>
                                 <i
                                   onClick={editDetails}
                                   className="bi bi-pencil-square"
@@ -149,18 +145,18 @@ const ViewCurrentUser = () => {
                               </span>
                               <span
                                 onClick={cancelEditing}
-                                className={`ms-4 ${editRoleSelectClass}`}
+                                className={`ms-4 ${classOnEditClick}`}
                               >
                                 <i className="bi bi-x-square-fill text-danger fs-5"></i>
                               </span>
                               <span
                                 onClick={saveRoles}
-                                className={`ms-3 ${editRoleSelectClass}`}
+                                className={`ms-3 ${classOnEditClick}`}
                               >
                                 <i className="bi bi-check-square-fill text-success fs-5"></i>
                               </span>
                             </label>
-                            <span className={`${defaultRoleClass}`}>
+                            <span className={`${classOnPageLoad}`}>
                               <br /> {role_id} -
                               {role_id === 1
                                 ? " Admin"
@@ -169,9 +165,7 @@ const ViewCurrentUser = () => {
                                 : " Viewer"}
                             </span>
 
-                            <div
-                              className={`form-group ${editRoleSelectClass}`}
-                            >
+                            <div className={`form-group ${classOnEditClick}`}>
                               {roles.map((data, Index) => {
                                 if (data.id === role_id) {
                                   const defaultRole = document.getElementById(
@@ -374,31 +368,6 @@ const ViewCurrentUser = () => {
                           </div>
                         </div>
                       </div>
-                      {/* <div
-                        className={`row mt-4 ${cancelUpdateBtnClassName}`}
-                        id="update-cancel"
-                      >
-                        <div className="col-12">
-                          <div className="text-end">
-                            <button
-                              onClick={cancelEditing}
-                              type="button"
-                              className="btn btn-secondary me-2"
-                            >
-                              Cancel
-                            </button>
-                            <button
-                              onClick={(e) => {
-                                e.preventDefault();
-                              }}
-                              type="submit"
-                              className="btn btn-primary"
-                            >
-                              Update
-                            </button>
-                          </div>
-                        </div>
-                      </div> */}
                     </form>
                   </div>
                 </div>
