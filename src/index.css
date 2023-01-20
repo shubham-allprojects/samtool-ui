@@ -24,6 +24,9 @@ code {
     rgb(255, 174, 0) 100%
   );
   --navbar-bg: linear-gradient(0deg, rgb(2, 77, 251) 0%, rgb(0, 157, 255) 100%);
+  --primary-color: rgb(13, 110, 253);
+  --secondary-color: orange;
+  --primary-color-hover: #0a58ca;
 }
 
 /* Common css */
@@ -36,7 +39,7 @@ code {
 .breadcrumb-item > *,
 .breadcrumb-item.active {
   text-decoration: none;
-  color: rgba(0, 0, 255, 0.781) !important;
+  color: var(--primary-color-hover) !important;
 }
 
 .page-item:hover {
@@ -178,7 +181,7 @@ input[type="number"] {
 
 .nav-link.active,
 .nav-link:hover {
-  color: orange !important;
+  color: var(--secondary-color) !important;
 }
 
 .navbar .navbar-toggler {
@@ -194,7 +197,8 @@ input[type="number"] {
   font-size: 1.5rem;
 }
 
-.navbar .nav-item .nav-link {
+.navbar .nav-link,
+.offcanvas-body .nav-link {
   color: white;
   font-size: 0.9rem;
   font-weight: 500;
@@ -275,7 +279,7 @@ input[type="number"] {
 .admin-property-card-wrapper .top-line {
   width: 100%;
   height: 10px;
-  background: orange;
+  background: var(--secondary-color);
   border: 0 none;
   margin: 1rem 0;
 }
@@ -442,7 +446,7 @@ input[type="number"] {
   width: 50px;
   color: white;
   cursor: pointer;
-  background-color: orange;
+  background-color: var(--secondary-color);
   margin: 0 10px;
 }
 
@@ -482,15 +486,15 @@ input[type="number"] {
 
 .register-links a,
 .address-label {
-  color: rgb(13, 110, 253);
+  color: var(--primary-color);
   text-decoration: none;
-  border-bottom: 2px solid rgb(13, 110, 253);
+  border-bottom: 2px solid var(--primary-color);
   font-weight: 600;
 }
 
 .register-links a:hover,
 .address-label:hover {
-  border-color: #0a58ca;
+  border-color: var(--primary-color-hover);
 }
 
 .IndividualForm .btn-secondary,
@@ -657,17 +661,13 @@ input[type="number"] {
 
 /* Admin */
 
-.admin-sidebar .nav-link {
-  color: white;
-}
-
 .scrollable-right-div {
   max-height: 100vh;
   overflow-y: scroll;
 }
 
 .admin-sidebar {
-  background: #333649;
+  background: var(--bg-gradient-blue);
   transition: 0.3s ease-in-out;
 }
 
@@ -693,7 +693,7 @@ input[type="number"] {
 }
 
 .admin-top-cards:hover .admin-dashboard-count {
-  color: orange;
+  color: var(--secondary-color);
 }
 
 .admin-home-wrapper .fs-1 {
@@ -707,18 +707,18 @@ input[type="number"] {
   align-items: center;
   text-decoration: none;
   transition: 0.3s ease-in-out;
-  background-color: orange !important;
+  background-color: var(--secondary-color) !important;
 }
 
 .admin-top-cards:hover {
   transition: 0.3s ease-in-out;
   background-color: white !important;
-  border-color: orange;
+  border-color: var(--secondary-color);
   transform: scale(1.06);
 }
 
 .admin-top-cards:hover .blue-on-hover {
-  color: orange !important;
+  color: var(--secondary-color) !important;
 }
 
 .admin-users-wrapper .dropdown-item {
@@ -739,8 +739,8 @@ input[type="number"] {
 .users-btn {
   width: 200px;
   transition: 0.3s ease-in-out;
-  border-color: #333649 !important;
-  color: #333649 !important;
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
 }
 
 .users-btn:disabled {
@@ -749,7 +749,7 @@ input[type="number"] {
 
 .users-btn:hover,
 .users-btn.active {
-  background-color: #333649 !important;
+  background-color: var(--primary-color-hover) !important;
   transition: 0.3s ease-in-out;
   color: white !important;
 }
@@ -761,13 +761,13 @@ input[type="number"] {
 .users-admin .active > .page-link,
 .users-admin .page-link.active {
   z-index: 3;
-  background-color: black;
-  border-color: black;
+  background-color: var(--primary-color-hover);
+  border-color: var(--primary-color-hover);
 }
 
 .users-admin .page-link,
 .users-admin .page-link:hover {
-  color: black;
+  color: var(--primary-color-hover);
 }
 
 .users-admin .active > .page-link:hover {
@@ -775,7 +775,7 @@ input[type="number"] {
 }
 
 .upload-file-main-wrapper {
-  background: #333649;
+  background: var(--bg-gradient-blue);
 }
 
 .upload-file-inner-wrapper {

@@ -245,7 +245,7 @@ const ManageUsers = () => {
               ) : (
                 <>
                   <div className="table-wrapper">
-                    <table className="table table-bordered table-dark admin-users-table table-striped text-center">
+                    <table className="table table-bordered table-primary admin-users-table table-striped text-center">
                       <thead>
                         <tr>
                           <th>User ID</th>
@@ -378,7 +378,7 @@ const ManageUsers = () => {
               ) : (
                 <>
                   <div className="table-wrapper">
-                    <table className="table table-bordered table-dark admin-users-table table-striped text-center">
+                    <table className="table table-bordered table-primary admin-users-table table-striped text-center">
                       <thead>
                         <tr>
                           <th>User ID</th>
