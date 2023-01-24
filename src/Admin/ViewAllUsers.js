@@ -234,7 +234,7 @@ const ManageUsers = () => {
             <div className={`${individualDisplayClass} mt-4`}>
               {loading ? (
                 <>
-                  <CommonSpinner />
+                  <CommonSpinner spinnerColor="primary" />
                 </>
               ) : individualUsers.length <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
@@ -367,7 +367,7 @@ const ManageUsers = () => {
             <div className={`${orgDisplayClass} mt-4`}>
               {loading ? (
                 <>
-                  <CommonSpinner />
+                  <CommonSpinner spinnerColor="primary" />
                 </>
               ) : orgUsers.length <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">

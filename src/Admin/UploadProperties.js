@@ -149,7 +149,7 @@ const UploadProperties = () => {
                   <div
                     className={`${tableDisplayClass} csv-data-table-wrapper`}
                   >
-                    <table className="table table-striped table-bordered table-dark">
+                    <table className="table table-striped table-bordered table-dark h-100">
                       <thead>
                         <tr>
                           {tableHeadings.map((heading, Index) => {
