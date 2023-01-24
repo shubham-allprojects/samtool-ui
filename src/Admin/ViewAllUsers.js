@@ -212,11 +212,11 @@ const ManageUsers = () => {
           <div className="col-xl-10 col-md-9 users-admin">
             <BreadCrumb userType={userType} />
             <div className="row">
-              <div className="col-12">
+              <div className="col-12 text-center text-md-start">
                 <button
                   name="individualBtn"
                   onClick={onBtnClick}
-                  className={`btn btn-outline-secondary me-2 users-btn ${individualBtnClass}`}
+                  className={`btn btn-outline-secondary me-md-2 users-btn ${individualBtnClass}`}
                   disabled={individualBtnDisabled}
                 >
                   Individual Users
@@ -224,7 +224,7 @@ const ManageUsers = () => {
                 <button
                   name="orgBtn"
                   onClick={onBtnClick}
-                  className={`btn btn-outline-secondary users-btn ${orgBtnClass}`}
+                  className={`btn btn-outline-secondary users-btn ${orgBtnClass} mt-2 mt-md-0`}
                   disabled={orgBtnDisabled}
                 >
                   Organizational User
@@ -311,56 +311,56 @@ const ManageUsers = () => {
                         })}
                       </tbody>
                     </table>
-                    <nav aria-label="Page navigation example">
-                      <ul className="pagination" id="pagination">
-                        <li
-                          onClick={(e) => {
-                            if (currentPageNumber !== 1) {
-                              handlePageClick(e);
-                            }
-                          }}
-                          className={`individual-pagination page-item ${
-                            currentPageNumber === 1 ? "disabled" : ""
-                          }`}
-                        >
-                          <span className="page-link">Previous</span>
-                        </li>
-                        {pagesArray.map((pageNo, Index) => {
-                          return (
-                            <li
-                              onClick={(e) => {
-                                handlePageClick(e);
-                              }}
-                              className={`individual-pagination page-item ${
-                                Index === 0 ? "active" : ""
-                              }`}
-                              key={Index}
-                            >
-                              <span className="page-link">{pageNo}</span>
-                            </li>
-                          );
-                        })}
-                        <li
-                          onClick={(e) => {
-                            if (
-                              currentPageNumber !==
-                              pagesArray[pagesArray.length - 1]
-                            ) {
-                              handlePageClick(e);
-                            }
-                          }}
-                          className={`individual-pagination page-item ${
-                            currentPageNumber ===
-                            pagesArray[pagesArray.length - 1]
-                              ? "disabled"
-                              : ""
-                          }`}
-                        >
-                          <span className="page-link">Next</span>
-                        </li>
-                      </ul>
-                    </nav>
                   </div>
+                  <nav aria-label="Page navigation example">
+                    <ul className="pagination" id="pagination">
+                      <li
+                        onClick={(e) => {
+                          if (currentPageNumber !== 1) {
+                            handlePageClick(e);
+                          }
+                        }}
+                        className={`individual-pagination page-item ${
+                          currentPageNumber === 1 ? "disabled" : ""
+                        }`}
+                      >
+                        <span className="page-link">Previous</span>
+                      </li>
+                      {pagesArray.map((pageNo, Index) => {
+                        return (
+                          <li
+                            onClick={(e) => {
+                              handlePageClick(e);
+                            }}
+                            className={`individual-pagination page-item ${
+                              Index === 0 ? "active" : ""
+                            }`}
+                            key={Index}
+                          >
+                            <span className="page-link">{pageNo}</span>
+                          </li>
+                        );
+                      })}
+                      <li
+                        onClick={(e) => {
+                          if (
+                            currentPageNumber !==
+                            pagesArray[pagesArray.length - 1]
+                          ) {
+                            handlePageClick(e);
+                          }
+                        }}
+                        className={`individual-pagination page-item ${
+                          currentPageNumber ===
+                          pagesArray[pagesArray.length - 1]
+                            ? "disabled"
+                            : ""
+                        }`}
+                      >
+                        <span className="page-link">Next</span>
+                      </li>
+                    </ul>
+                  </nav>
                 </>
               )}
             </div>
@@ -444,56 +444,56 @@ const ManageUsers = () => {
                         })}
                       </tbody>
                     </table>
-                    <nav aria-label="Page navigation example">
-                      <ul className="pagination" id="pagination">
-                        <li
-                          onClick={(e) => {
-                            if (currentPageNumber !== 1) {
-                              handlePageClick(e);
-                            }
-                          }}
-                          className={`org-pagination page-item ${
-                            currentPageNumber === 1 ? "disabled" : ""
-                          }`}
-                        >
-                          <span className="page-link">Previous</span>
-                        </li>
-                        {pagesArray.map((pageNo, Index) => {
-                          return (
-                            <li
-                              onClick={(e) => {
-                                handlePageClick(e);
-                              }}
-                              className={`org-pagination page-item ${
-                                Index === 0 ? "active" : ""
-                              }`}
-                              key={Index}
-                            >
-                              <span className="page-link">{pageNo}</span>
-                            </li>
-                          );
-                        })}
-                        <li
-                          onClick={(e) => {
-                            if (
-                              currentPageNumber !==
-                              pagesArray[pagesArray.length - 1]
-                            ) {
-                              handlePageClick(e);
-                            }
-                          }}
-                          className={`org-pagination page-item ${
-                            currentPageNumber ===
-                            pagesArray[pagesArray.length - 1]
-                              ? "disabled"
-                              : ""
-                          }`}
-                        >
-                          <span className="page-link">Next</span>
-                        </li>
-                      </ul>
-                    </nav>
                   </div>
+                  <nav aria-label="Page navigation example">
+                    <ul className="pagination" id="pagination">
+                      <li
+                        onClick={(e) => {
+                          if (currentPageNumber !== 1) {
+                            handlePageClick(e);
+                          }
+                        }}
+                        className={`org-pagination page-item ${
+                          currentPageNumber === 1 ? "disabled" : ""
+                        }`}
+                      >
+                        <span className="page-link">Previous</span>
+                      </li>
+                      {pagesArray.map((pageNo, Index) => {
+                        return (
+                          <li
+                            onClick={(e) => {
+                              handlePageClick(e);
+                            }}
+                            className={`org-pagination page-item ${
+                              Index === 0 ? "active" : ""
+                            }`}
+                            key={Index}
+                          >
+                            <span className="page-link">{pageNo}</span>
+                          </li>
+                        );
+                      })}
+                      <li
+                        onClick={(e) => {
+                          if (
+                            currentPageNumber !==
+                            pagesArray[pagesArray.length - 1]
+                          ) {
+                            handlePageClick(e);
+                          }
+                        }}
+                        className={`org-pagination page-item ${
+                          currentPageNumber ===
+                          pagesArray[pagesArray.length - 1]
+                            ? "disabled"
+                            : ""
+                        }`}
+                      >
+                        <span className="page-link">Next</span>
+                      </li>
+                    </ul>
+                  </nav>
                 </>
               )}
             </div>
