@@ -826,6 +826,13 @@ input[type="number"] {
   --bs-modal-width: 700px !important;
 }
 
+.sidebar-toggle-btn-sm {
+  position: absolute;
+  width: fit-content !important;
+  top: 0.5rem;
+  right: 0;
+}
+
 /* Media Queries */
 
 @media (min-width: 768px) {

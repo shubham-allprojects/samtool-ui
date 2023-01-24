@@ -207,9 +207,9 @@ const ManageUsers = () => {
   return (
     <Layout>
       <div className="container-fluid admin-users-wrapper section-padding">
-        <div className="row min-100vh">
+        <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-9 users-admin">
+          <div className="col-xl-10 col-md-9 users-admin mt-4 mt-md-0">
             <BreadCrumb userType={userType} />
             <div className="row">
               <div className="col-12 text-center text-md-start">

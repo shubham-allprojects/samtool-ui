@@ -1,8 +1,20 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 const AdminSideBar = () => {
+  const [toggleClasses, setToggleClasses] = useState({
+    sideBarOnSmallScreen: "d-none",
+    icon: "bi-list",
+  });
+
+  const { sideBarOnSmallScreen, icon } = toggleClasses;
+  const toggleSideBarVisibility = () => {
+    if (sideBarOnSmallScreen === "") {
+      setToggleClasses({ sideBarOnSmallScreen: "d-none", icon: "bi-list" });
+    } else {
+      setToggleClasses({ sideBarOnSmallScreen: "", icon: "bi-x-lg" });
+    }
+  };
   useEffect(() => {
     if (window.location.pathname !== "/admin") {
       document.querySelector(".admin-home-link").classList.remove("active");
@@ -11,7 +23,15 @@ const AdminSideBar = () => {
 
   return (
     <>
-      <div className="col-xl-2 col-md-3 admin-sidebar d-md-block d-none">
+      <button
+        onClick={toggleSideBarVisibility}
+        className="btn btn-primary sidebar-toggle-btn-sm d-block d-md-none"
+      >
+        <i className={`bi ${icon}`}></i>
+      </button>
+      <div
+        className={`col-xl-2 col-md-3 admin-sidebar d-md-block ${sideBarOnSmallScreen}`}
+      >
         <div className="py-3">
           <span className="offcanvas-header text-white">
             <h4 className="offcanvas-title ps-4" id="offcanvasExampleLabel">
@@ -19,7 +39,7 @@ const AdminSideBar = () => {
             </h4>
           </span>
 
-          <div className="offcanvas-body mt-4">
+          <div className="offcanvas-body mt-md-4">
             <ul className="navbar-nav">
               <hr className="text-white" />
               <li className="nav-item">

@@ -56,9 +56,9 @@ const ViewEditProperty = () => {
   return (
     <Layout>
       <div className="container-fluid section-padding">
-        <div className="row min-100vh">
+        <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-9">
+          <div className="col-xl-10 col-md-9 mt-4 mt-md-0">
             <BreadCrumb />
             <section className="admin-edit-property wrapper">
               <div className="container-fluid">
@@ -75,7 +75,7 @@ const ViewEditProperty = () => {
                           className="bi bi-pencil-square"
                         ></i>
                       </div>
-                      <div className="row">
+                      <div className="row mt-4 mt-md-0">
                         <div className="col-6">
                           <div className="form-group mb-3">
                             <label className="form-label fw-bold" htmlFor="_id">

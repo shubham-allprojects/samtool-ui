@@ -95,9 +95,9 @@ const ViewCurrentUser = () => {
   return (
     <Layout>
       <div className="container-fluid section-padding">
-        <div className="row min-100vh">
+        <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-9">
+          <div className="col-xl-10 col-md-9 mt-4 mt-md-0">
             <BreadCrumb
               typeOfUser={user_type}
               emailOfCurrentUser={email_address}
@@ -118,7 +118,7 @@ const ViewCurrentUser = () => {
                         ></i>
                       </div> */}
                       <div className="row">
-                        <div className="col-6">
+                        <div className="col-md-6 col-12 text-center text-md-start">
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
@@ -130,7 +130,7 @@ const ViewCurrentUser = () => {
                             {user_id}
                           </div>
                         </div>
-                        <div className="col-6">
+                        <div className="col-md-6 col-12 text-center text-md-start">
                           <div className="form-group mb-3">
                             <label
                               htmlFor="role"
@@ -202,7 +202,7 @@ const ViewCurrentUser = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="col-6">
+                        <div className="col-md-6 col-12 text-center text-md-start">
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
@@ -217,7 +217,7 @@ const ViewCurrentUser = () => {
                         {/* Show Data As Per User Type*/}
                         {user_type === "Individual User" ? (
                           <>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12 text-center text-md-start">
                               <div className="form-group mb-3">
                                 <label
                                   className="form-label fw-bold"
@@ -229,7 +229,7 @@ const ViewCurrentUser = () => {
                                 {categoryWiseUserDetails.first_name}
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12 text-center text-md-start">
                               <div className="form-group mb-3">
                                 <label
                                   className="form-label fw-bold"
@@ -241,7 +241,7 @@ const ViewCurrentUser = () => {
                                 {categoryWiseUserDetails.middle_name}
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12 text-center text-md-start">
                               <div className="form-group mb-3">
                                 <label
                                   className="form-label fw-bold"
@@ -253,7 +253,7 @@ const ViewCurrentUser = () => {
                                 {categoryWiseUserDetails.last_name}
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12 text-center text-md-start">
                               <div className="form-group mb-3">
                                 <label
                                   className="form-label fw-bold"
@@ -265,7 +265,7 @@ const ViewCurrentUser = () => {
                                 {categoryWiseUserDetails.aadhar_number}
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12 text-center text-md-start">
                               <div className="form-group mb-3">
                                 <label
                                   className="form-label fw-bold"
@@ -280,7 +280,7 @@ const ViewCurrentUser = () => {
                           </>
                         ) : (
                           <>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12 text-center text-md-start">
                               <div className="form-group mb-3">
                                 <label
                                   className="form-label fw-bold"
@@ -292,7 +292,7 @@ const ViewCurrentUser = () => {
                                 {categoryWiseUserDetails.company_name}
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12 text-center text-md-start">
                               <div className="form-group mb-3">
                                 <label
                                   className="form-label fw-bold"
@@ -304,7 +304,7 @@ const ViewCurrentUser = () => {
                                 {categoryWiseUserDetails.organization_type}
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12 text-center text-md-start">
                               <div className="form-group mb-3">
                                 <label
                                   className="form-label fw-bold"
@@ -316,7 +316,7 @@ const ViewCurrentUser = () => {
                                 {categoryWiseUserDetails.gst_number}
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12 text-center text-md-start">
                               <div className="form-group mb-3">
                                 <label
                                   className="form-label fw-bold"
@@ -328,7 +328,7 @@ const ViewCurrentUser = () => {
                                 {categoryWiseUserDetails.tan_number}
                               </div>
                             </div>
-                            <div className="col-6">
+                            <div className="col-md-6 col-12 text-center text-md-start">
                               <div className="form-group mb-3">
                                 <label
                                   className="form-label fw-bold"
@@ -343,7 +343,7 @@ const ViewCurrentUser = () => {
                           </>
                         )}
 
-                        <div className="col-6">
+                        <div className="col-md-6 col-12 text-center text-md-start">
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
@@ -355,7 +355,7 @@ const ViewCurrentUser = () => {
                             {email_address}
                           </div>
                         </div>
-                        <div className="col-6">
+                        <div className="col-md-6 col-12 text-center text-md-start">
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
