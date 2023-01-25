@@ -76,7 +76,7 @@ const ManageUsers = () => {
       });
   };
 
-  const setIndividualUsersDetails = async (pageNumber, records_per_page) => {
+  const saveIndividualUsersCount = async (pageNumber, records_per_page) => {
     const [headers, url] = setHeaderAndUrl();
     const individualBodyData = {
       type: "Individual User",
@@ -87,12 +87,10 @@ const ManageUsers = () => {
       .post(url, individualBodyData, { headers: headers })
       .then((res) => {
         setIndividualUsersCount(res.data.count);
-        setUsers({ individualUsers: res.data.AllData, orgUsers: [] });
       });
-    setLoading(false);
   };
 
-  const setOrgUsersDetails = async (pageNumber, records_per_page) => {
+  const saveOrgUsersCount = async (pageNumber, records_per_page) => {
     const [headers, url] = setHeaderAndUrl();
     const orgBodyData = {
       type: "Organizational User",
@@ -101,15 +99,10 @@ const ManageUsers = () => {
     };
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
       setOrgUsersCount(res.data.count);
-      setUsers({
-        orgUsers: res.data.AllOrganizationData,
-        individualUsers: [],
-      });
     });
-    setLoading(false);
   };
 
-  const getIndividualUsers = (pageNumber, records_per_page) => {
+  const getIndividualUsers = async (pageNumber, records_per_page) => {
     setPageNumbers(individualUsersCount);
     setFunctionalitiesState({
       ...functionalitiesState,
@@ -121,7 +114,18 @@ const ManageUsers = () => {
       orgDisplayClass: "d-none",
       userType: "Individual User",
     });
-    setIndividualUsersDetails(pageNumber, records_per_page);
+    const [headers, url] = setHeaderAndUrl();
+    const individualBodyData = {
+      type: "Individual User",
+      page_number: pageNumber,
+      number_of_records: records_per_page,
+    };
+    await axios
+      .post(url, individualBodyData, { headers: headers })
+      .then((res) => {
+        setUsers({ individualUsers: res.data.AllData, orgUsers: [] });
+      });
+    setLoading(false);
   };
 
   const getOrgUsers = async (pageNumber, records_per_page) => {
@@ -136,7 +140,19 @@ const ManageUsers = () => {
       orgDisplayClass: "",
       userType: "Organizational User",
     });
-    setOrgUsersDetails(pageNumber, records_per_page);
+    const [headers, url] = setHeaderAndUrl();
+    const orgBodyData = {
+      type: "Organizational User",
+      page_number: pageNumber,
+      number_of_records: records_per_page,
+    };
+    await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
+      setUsers({
+        orgUsers: res.data.AllOrganizationData,
+        individualUsers: [],
+      });
+    });
+    setLoading(false);
   };
 
   const onBtnClick = (e) => {
@@ -198,8 +214,8 @@ const ManageUsers = () => {
   };
 
   useEffect(() => {
-    setIndividualUsersDetails(1, 1);
-    setOrgUsersDetails(1, 1);
+    saveIndividualUsersCount(1, 1);
+    saveOrgUsersCount(1, 1);
     // eslint-disable-next-line
   }, []);
 
