@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 
@@ -76,7 +76,7 @@ const EditUserDetails = () => {
   const { zipCodeValidationColor, zipCodeValidationMessage } = validation;
 
   // To navigate to particular route.
-  // const goTo = useNavigate();
+  const goTo = useNavigate();
   const data = JSON.parse(localStorage.getItem("data"));
   // Function will provide login token of user from localStorage and also some urls are stored in this function.
   const setHeaderAndUrl = () => {
@@ -334,9 +334,9 @@ const EditUserDetails = () => {
               selectStateClassName: "d-none",
               cityVisiblity: "d-none",
             });
-            // setTimeout(() => {
-            //   goTo("/profile");
-            // }, 3000);
+            setTimeout(() => {
+              goTo("/profile");
+            }, 3000);
           } else {
             toast.error("Some Error Occured");
           }

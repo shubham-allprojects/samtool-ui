@@ -216,7 +216,7 @@ const Profile = () => {
 
                   <div className="progress mt-4">
                     <div
-                      className="progress-bar bg-primary"
+                      className="progress-bar bg-primary progress-bar-striped progress-bar-animated"
                       title="25%"
                       role="progressbar"
                       style={{ width: "75%" }}
