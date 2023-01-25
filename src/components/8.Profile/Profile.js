@@ -162,7 +162,7 @@ const Profile = () => {
                     </div>
                     {user_type === "Individual User" ? (
                       <>
-                        <div className="offset-md-1 col-md-3 mt-4 mt-md-0">
+                        <div className="col-md-4 mt-4 mt-md-0">
                           <div>
                             <p className="text-muted fw-bold">MOBILE</p>
                             <p>{mobile_number}</p>
@@ -172,7 +172,7 @@ const Profile = () => {
                             <p>{pan_number}</p>
                           </div>
                         </div>
-                        <div className="col-md-3">
+                        <div className="col-md-4">
                           <div className="mt-4 mt-md-0">
                             <p className="text-muted fw-bold">AADHAAR</p>
                             <p>{aadhar_number}</p>
@@ -185,7 +185,7 @@ const Profile = () => {
                       </>
                     ) : (
                       <>
-                        <div className="offset-md-1 col-md-3 mt-4 mt-md-0">
+                        <div className="col-md-4 mt-4 mt-md-0">
                           <div>
                             <p className="text-muted fw-bold">CIN</p>
                             <p>{cin_number}</p>
@@ -195,7 +195,7 @@ const Profile = () => {
                             <p>{tan_number}</p>
                           </div>
                         </div>
-                        <div className="col-md-3">
+                        <div className="col-md-4">
                           <div className="mt-4 mt-md-0">
                             <p className="text-muted fw-bold">GST</p>
                             <p>{gst_number}</p>
