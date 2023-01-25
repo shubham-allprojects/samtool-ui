@@ -140,7 +140,7 @@ const Profile = () => {
                       <span className="fw-bold fs-3 text-warning">
                         {userType === "Individual User"
                           ? `${first_name} ${last_name}`
-                          : company_name}
+                          : `${company_name} - (${organization_type})`}
                       </span>
                       <br />
                       <span className="text-muted">{userType}</span>
@@ -149,32 +149,34 @@ const Profile = () => {
                   {/* Other details */}
                   <div className="row mt-4">
                     <div className="col-md-4">
-                      <p className="text-muted">About</p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Nam corporis eos architecto, ducimus, consectetur
-                      </p>
+                      <p className="text-muted fw-bold">Address</p>
+                      <span className="text-muted">Locality:</span> {locality}
+                      <br />
+                      <span className="text-muted">City:</span> {city}
+                      <br />
+                      <span className="text-muted">State:</span> {state_name}
+                      <br />
+                      <span className="text-muted">Zip:</span> {zip}
                     </div>
                     {userType === "Individual User" ? (
                       <>
-                        {" "}
                         <div className="offset-md-1 col-md-3 mt-4 mt-md-0">
                           <div>
-                            <p className="text-muted">Mobile</p>
+                            <p className="text-muted fw-bold">Mobile</p>
                             <p>{mobile_number}</p>
                           </div>
                           <div className="mt-4 mt-md-5">
-                            <p className="text-muted">PAN</p>
+                            <p className="text-muted fw-bold">PAN</p>
                             <p>{pan_number}</p>
                           </div>
                         </div>
                         <div className="col-md-3">
                           <div className="mt-4 mt-md-0">
-                            <p className="text-muted">Aadhaar</p>
+                            <p className="text-muted fw-bold">AADHAAR</p>
                             <p>{aadhar_number}</p>
                           </div>
                           <div className="mt-4 mt-md-5">
-                            <p className="text-muted">Email</p>
+                            <p className="text-muted fw-bold">EMAIL</p>
                             <p>{email}</p>
                           </div>
                         </div>
@@ -183,21 +185,21 @@ const Profile = () => {
                       <>
                         <div className="offset-md-1 col-md-3 mt-4 mt-md-0">
                           <div>
-                            <p className="text-muted">CIN</p>
+                            <p className="text-muted fw-bold">CIN</p>
                             <p>{cin_number}</p>
                           </div>
                           <div className="mt-4 mt-md-5">
-                            <p className="text-muted">TAN</p>
+                            <p className="text-muted fw-bold">TAN</p>
                             <p>{tan_number}</p>
                           </div>
                         </div>
                         <div className="col-md-3">
                           <div className="mt-4 mt-md-0">
-                            <p className="text-muted">GST</p>
+                            <p className="text-muted fw-bold">GST</p>
                             <p>{gst_number}</p>
                           </div>
                           <div className="mt-4 mt-md-5">
-                            <p className="text-muted">Email</p>
+                            <p className="text-muted fw-bold">EMAIL</p>
                             <p>{email}</p>
                           </div>
                         </div>
@@ -359,7 +361,7 @@ const Profile = () => {
                       </div>
                       <div className="col-12 my-3">
                         <span className="text-muted">
-                          Lorem ipsum dolor sit:{" "}
+                          Lorem ipsum dolor sit:
                         </span>
                         <span>5</span>
                       </div>
