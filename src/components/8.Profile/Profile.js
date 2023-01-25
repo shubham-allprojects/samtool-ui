@@ -164,30 +164,22 @@ const Profile = () => {
                       <>
                         <div className="offset-md-1 col-md-3 mt-4 mt-md-0">
                           <div>
-                            <p className="text-muted fw-bold">Mobile</p>
-                            <button className="btn btn-outline-primary w-100 ">
-                              {mobile_number}
-                            </button>
+                            <p className="text-muted fw-bold">MOBILE</p>
+                            <p>{mobile_number}</p>
                           </div>
                           <div className="mt-4 mt-md-5">
                             <p className="text-muted fw-bold">PAN</p>
-                            <button className="btn btn-outline-primary w-100 ">
-                              {pan_number}
-                            </button>
+                            <p>{pan_number}</p>
                           </div>
                         </div>
                         <div className="col-md-3">
                           <div className="mt-4 mt-md-0">
                             <p className="text-muted fw-bold">AADHAAR</p>
-                            <button className="btn btn-outline-primary w-100 ">
-                              {aadhar_number}
-                            </button>
+                            <p>{aadhar_number}</p>
                           </div>
                           <div className="mt-4 mt-md-5">
                             <p className="text-muted fw-bold">EMAIL</p>
-                            <button className="btn btn-outline-primary w-100 ">
-                              {email}
-                            </button>
+                            <p>{email}</p>
                           </div>
                         </div>
                       </>
