@@ -4,20 +4,13 @@ import axios from "axios";
 
 const Profile = () => {
   const data = JSON.parse(localStorage.getItem("data"));
-  const [userType, setUserType] = useState("");
+  const [userRole, setUserRole] = useState("");
   // To store updated user details.
   const [commonUserDetails, setCommonUserDetails] = useState({});
 
   // Object destructuring.
-  const {
-    mobile_number,
-    locality,
-
-    city,
-    state_name,
-    zip,
-    email,
-  } = commonUserDetails;
+  const { mobile_number, locality, user_type, city, state_name, zip, email } =
+    commonUserDetails;
 
   const [orgUserDetails, setOrgUserDetails] = useState({});
 
@@ -50,8 +43,9 @@ const Profile = () => {
 
   // Function will get the data of user whose details are to be edited.
   const getUserProfileDetails = async () => {
-    const [headers, url] = setHeaderAndUrl();
+    const [headers, url, role] = setHeaderAndUrl();
     if (data) {
+      setUserRole(role);
       const userId = data.userId;
       await axios
         .get(`${url}/${userId}`, { headers: headers })
@@ -99,7 +93,7 @@ const Profile = () => {
             email_address,
             address,
           } = user_details;
-          setUserType(user_type);
+
           setCommonUserDetails({
             state_id: parseInt(state_id),
             address: address,
@@ -140,12 +134,18 @@ const Profile = () => {
                   <div className="row">
                     <div className="col-xl-12 text-center text-md-start">
                       <span className="fw-bold fs-3 text-warning">
-                        {userType === "Individual User"
+                        {user_type === "Individual User"
                           ? `${first_name} ${last_name}`
                           : `${company_name} - (${organization_type})`}
                       </span>
                       <br />
-                      <span className="text-muted">{userType}</span>
+                      <span className="text-muted">{`${user_type} ( ${
+                        userRole === 1
+                          ? "Admin"
+                          : userRole === 2
+                          ? "Editor"
+                          : "Viewer"
+                      } )`}</span>
                     </div>
                   </div>
                   {/* Other details */}
@@ -160,7 +160,7 @@ const Profile = () => {
                       <br />
                       <span className="text-muted">Zip:</span> {zip}
                     </div>
-                    {userType === "Individual User" ? (
+                    {user_type === "Individual User" ? (
                       <>
                         <div className="offset-md-1 col-md-3 mt-4 mt-md-0">
                           <div>
@@ -227,244 +227,6 @@ const Profile = () => {
                       data-bs-placement="top"
                     >
                       75%
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row mt-5 justify-content-between">
-                <div className="col-xl-4 col-md-6 border border-2 shadow profile-details-div">
-                  <div className="p-3">
-                    <div className="row justify-content-center">
-                      <div className="col-1">
-                        <i className="bi bi-mortarboard-fill"></i>
-                      </div>
-                      <div className="col-11">
-                        <small className="text-muted">Some details</small>
-                        <br />
-                        <small className="text-muted">Heading1: </small>
-                        <small>Description1</small>
-                        <br />
-                        <small className="text-muted">Heading2: </small>
-                        <small>Description2</small>
-                        <br />
-                        <small className="text-muted">Heading3: </small>
-                        <small>Description3</small>
-                        <br />
-                        <small className="text-muted">Heading4: </small>
-                        <small>Description4</small>
-                        <br />
-                      </div>
-                      <div className="col-12">
-                        <hr />
-                      </div>
-                    </div>
-                    <div className="row justify-content-center">
-                      <div className="col-1">
-                        <i className="bi bi-person-fill"></i>
-                      </div>
-                      <div className="col-11">
-                        <small className="text-muted">
-                          Personal Information
-                        </small>
-                        <br />
-                        <small className="text-muted">Birth Date: </small>
-                        <small>March 17, 1989</small>
-                        <br />
-                        <small className="text-muted">Gender: </small>
-                        <small>Male</small>
-                        <br />
-                        <small className="text-muted">Nationality: </small>
-                        <small>Indian</small>
-                        <br />
-                        <small className="text-muted">Marital Status: </small>
-                        <small>Married</small>
-                        <br />
-                        <small className="text-muted">DL Number: </small>
-                        <small>HS0952363723</small>
-                        <br />
-                        <small className="text-muted">User Id: </small>
-                        <small>ABCD28998</small>w
-                        <br />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4 col-md-6 mt-4 mt-md-0 border border-2 shadow profile-details-div">
-                  <div className="p-3">
-                    <div className="row justify-content-center">
-                      <div className="col-1">
-                        <i className="bi bi-person-workspace"></i>
-                      </div>
-                      <div className="col-11">
-                        <small className="">Other details</small>
-                      </div>
-                      <div className="col-1">
-                        <i className="bi bi-circle-fill"></i>
-                      </div>
-                      <div className="col-11">
-                        <small className="text-muted">Some details</small>
-                        <br />
-                        <small className="text-muted">detail 1 example</small>
-                        <br />
-                        <small className="text-muted">
-                          detail 2 example Lorem ipsum dolor sit.
-                        </small>
-                      </div>
-                      <div className="col-12">
-                        <hr />
-                      </div>
-                      <div className="col-1">
-                        <i className="bi bi-circle-fill"></i>
-                      </div>
-                      <div className="col-11">
-                        <small className="text-muted">Some details</small>
-                        <br />
-                        <small className="text-muted">detail 1 example</small>
-                        <br />
-                        <small className="text-muted">
-                          detail 2 example Lorem ipsum dolor sit.
-                        </small>
-                      </div>
-                      <div className="col-12">
-                        <hr />
-                      </div>
-                      <div className="col-1">
-                        <i className="bi bi-circle-fill"></i>
-                      </div>
-                      <div className="col-11">
-                        <small className="text-muted">Some details</small>
-                        <br />
-                        <small className="text-muted">detail 1 example</small>
-                        <br />
-                        <small className="text-muted">
-                          detail 2 example Lorem ipsum dolor sit.
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4 col-md-6  mt-4 mt-xl-0 border border-2 shadow profile-details-div ">
-                  <div className="p-3">
-                    <span className="fw-bolder">Some Heading</span>
-                    <br />
-                    <div className="row justify-content-center">
-                      <div className="col-5 mt-3">
-                        <div className="progress circled-div">
-                          <div
-                            className="progress-bar bg-warning"
-                            role="progressbar"
-                            style={{ width: "89%" }}
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          >
-                            +89%
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-12 my-3">
-                        <span className="text-muted">
-                          Lorem ipsum dolor sit:
-                        </span>
-                        <span>5</span>
-                      </div>
-                      <div className="col-6">
-                        <span className="badge w-100 rounded-pill bg-warning text-dark">
-                          text1
-                        </span>
-                      </div>
-                      <div className="col-6">
-                        <span className="badge w-100 rounded-pill bg-outline-warning text-dark">
-                          text2
-                        </span>
-                      </div>
-                      <div className="col-6 mt-2">
-                        <span className="badge w-100 rounded-pill bg-warning text-dark">
-                          text3
-                        </span>
-                      </div>
-                      <div className="col-6 mt-2">
-                        <span className="badge w-100 rounded-pill bg-outline-warning text-dark">
-                          text4
-                        </span>
-                      </div>
-                      <div className="col-6 mt-2">
-                        <span className="badge w-100 rounded-pill bg-warning text-dark">
-                          text5
-                        </span>
-                      </div>
-                      <div className="col-6 mt-2">
-                        <span className="badge w-100 rounded-pill bg-outline-warning text-dark">
-                          text6
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4 col-md-6 mt-4 border border-2 shadow profile-details-div ">
-                  <div className="p-3">
-                    <span className="fw-bolder">Other Heading</span>
-                    <br />
-                    <div className="row justify-content-center">
-                      <div className="col-5 mt-3">
-                        <div className="progress circled-div">
-                          <div
-                            className="progress-bar bg-warning"
-                            role="progressbar"
-                            style={{ width: "79%" }}
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          >
-                            +79%
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-12 my-3">
-                        <span className="text-muted">Specials:</span>
-                      </div>
-                      <div className="col-6">
-                        <button
-                          type="button"
-                          className="btn fourth-div-btn btn-warning btn-sm position-relative"
-                        >
-                          Text 1
-                          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-                            79+
-                          </span>
-                        </button>
-                      </div>
-                      <div className="col-6">
-                        <button
-                          type="button"
-                          className="btn fourth-div-btn btn-outline-warning btn-sm position-relative"
-                        >
-                          Text 2
-                          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-                            79+
-                          </span>
-                        </button>
-                      </div>
-                      <div className="col-6 mt-3">
-                        <button
-                          type="button"
-                          className="btn fourth-div-btn btn-warning btn-sm position-relative"
-                        >
-                          Text 3
-                          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-                            79+
-                          </span>
-                        </button>
-                      </div>
-                      <div className="col-6 mt-3">
-                        <button
-                          type="button"
-                          className="btn fourth-div-btn btn-outline-warning btn-sm position-relative"
-                        >
-                          Text 4
-                          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-                            79+
-                          </span>
-                        </button>
-                      </div>
                     </div>
                   </div>
                 </div>
