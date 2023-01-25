@@ -70,7 +70,11 @@ const ManageUsers = () => {
           if (userType === "Individual User") {
             getIndividualUsers(currentPageNumber, records_per_page);
           } else {
-            getOrgUsers(currentPageNumber, records_per_page);
+            setOrgUsersCount(orgUsersCount - 1);
+            if (orgUsers.length === 1) {
+              currentPageNumber = currentPageNumber - 1;
+            }
+            getOrgUsers(currentPageNumber, records_per_page, orgUsersCount - 1);
           }
         }
       });
@@ -128,8 +132,8 @@ const ManageUsers = () => {
     setLoading(false);
   };
 
-  const getOrgUsers = async (pageNumber, records_per_page) => {
-    setPageNumbers(orgUsersCount);
+  const getOrgUsers = async (pageNumber, records_per_page, count) => {
+    setPageNumbers(count);
     setFunctionalitiesState({
       ...functionalitiesState,
       individualBtnClass: "",
@@ -162,7 +166,7 @@ const ManageUsers = () => {
     if (name === "individualBtn") {
       getIndividualUsers(currentPageNumber, records_per_page);
     } else if (name === "orgBtn") {
-      getOrgUsers(currentPageNumber, records_per_page);
+      getOrgUsers(currentPageNumber, records_per_page, orgUsersCount);
     }
   };
 
@@ -209,7 +213,7 @@ const ManageUsers = () => {
     if (userType === "Individual User") {
       getIndividualUsers(currentPageNumber, records_per_page);
     } else {
-      getOrgUsers(currentPageNumber, records_per_page);
+      getOrgUsers(currentPageNumber, records_per_page, orgUsersCount);
     }
   };
 
