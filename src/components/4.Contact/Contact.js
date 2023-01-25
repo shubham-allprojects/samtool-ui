@@ -78,15 +78,15 @@ const Contact = () => {
                     <div className="col-md-5 d-flex align-items-center mt-5 mt-md-0">
                       <div className="contact-details">
                         <p>
-                          <i class="pe-3 bi bi-envelope-fill text-primary"></i>
+                          <i className="pe-3 bi bi-envelope-fill text-primary"></i>
                           example@mail.com
                         </p>
                         <p>
-                          <i class="pe-3 bi bi-telephone-fill text-primary"></i>
+                          <i className="pe-3 bi bi-telephone-fill text-primary"></i>
                           464066935, 4567869394
                         </p>
                         <p>
-                          <i class="pe-3 bi bi-geo-alt-fill text-primary"></i>
+                          <i className="pe-3 bi bi-geo-alt-fill text-primary"></i>
                           Example Address, Location
                         </p>
                       </div>
