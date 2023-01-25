@@ -122,6 +122,7 @@ const ManageUsers = () => {
       orgDisplayClass: "d-none",
       userType: "Individual User",
     });
+    localStorage.setItem("userType", "Individual User");
     setIndividualUsersDetails(pageNumber, records_per_page);
   };
 
@@ -137,6 +138,7 @@ const ManageUsers = () => {
       orgDisplayClass: "",
       userType: "Organizational User",
     });
+    localStorage.setItem("userType", "Organizational User");
     setOrgUsersDetails(pageNumber, records_per_page);
   };
 
@@ -196,6 +198,7 @@ const ManageUsers = () => {
     } else {
       getOrgUsers(currentPageNumber, records_per_page);
     }
+    console.log(currentPageNumber);
   };
 
   useEffect(() => {
