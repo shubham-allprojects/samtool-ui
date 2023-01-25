@@ -10,10 +10,9 @@ const Profile = () => {
 
   // Object destructuring.
   const {
-    user_type,
     mobile_number,
     locality,
-    address,
+
     city,
     state_name,
     zip,
@@ -34,17 +33,19 @@ const Profile = () => {
   const [individualUserDetails, setIndividualUserDetails] = useState({});
 
   // Object destructuring.
-  const { first_name, middle_name, last_name, pan_number, aadhar_number } =
+  const { first_name, last_name, pan_number, aadhar_number } =
     individualUserDetails;
 
   // Function will provide login token of user from localStorage and also some urls are stored in this function.
   const setHeaderAndUrl = () => {
     let headers = "";
+    let role = "";
     if (data) {
       headers = { Authorization: data.logintoken };
+      role = data.roleId;
     }
     let url = `/sam/v1/user-registration/auth`;
-    return [headers, url];
+    return [headers, url, role];
   };
 
   // Function will get the data of user whose details are to be edited.
@@ -116,6 +117,7 @@ const Profile = () => {
 
   useEffect(() => {
     getUserProfileDetails();
+    // eslint-disable-next-line
   }, []);
 
   return (
