@@ -594,29 +594,6 @@ input[type="number"] {
   width: 100%;
 }
 
-/* Profile */
-
-.profile-wrapper .profile-details-div {
-  height: 360px;
-}
-
-.profile-wrapper .circled-div {
-  border-radius: 50% !important;
-  height: 134px !important;
-  width: 100% !important;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.profile-wrapper .fourth-div-btn {
-  width: 88%;
-}
-
-.bg-outline-warning {
-  border: 2px solid yellow;
-  background-color: rgba(255, 255, 0, 0.251);
-}
-
 /* Edit Details */
 
 .edit-details-wrapper label {

@@ -133,7 +133,7 @@ const Profile = () => {
                   {/* Name & designation */}
                   <div className="row">
                     <div className="col-xl-12 text-center text-md-start">
-                      <span className="fw-bold fs-3 text-warning">
+                      <span className="fw-bold fs-3 text-primary">
                         {user_type === "Individual User"
                           ? `${first_name} ${last_name}`
                           : `${company_name} - (${organization_type})`}
@@ -216,7 +216,7 @@ const Profile = () => {
 
                   <div className="progress mt-4">
                     <div
-                      className="progress-bar bg-warning"
+                      className="progress-bar bg-primary"
                       title="25%"
                       role="progressbar"
                       style={{ width: "75%" }}
