@@ -119,17 +119,17 @@ const Profile = () => {
       <section className="profile-wrapper section-padding min-100vh">
         <div className="container-fluid wrapper">
           <div className="row justify-content-center">
-            <div className="col-11">
+            <div className="col-12 px-4">
               <div className="row border p-4 shadow">
                 {/* Profile image */}
-                <div className="col-md-3 text-center text-md-start">
+                <div className="col-md-2 text-center text-md-start">
                   <img
                     src="profile.png"
                     alt="Profile Pic"
                     className="img-fluid"
                   />
                 </div>
-                <div className="col-xl-9 col-md-9">
+                <div className="col-md-10">
                   {/* Name & designation */}
                   <div className="row">
                     <div className="col-xl-12 text-center text-md-start">
