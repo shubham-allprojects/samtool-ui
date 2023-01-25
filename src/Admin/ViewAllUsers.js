@@ -62,7 +62,6 @@ const ManageUsers = () => {
 
   const deleteUser = async (userId, userName) => {
     const [headers] = setHeaderAndUrl();
-    console.log(userType, currentPageNumber);
     await axios
       .delete(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
       .then((res) => {
@@ -122,7 +121,6 @@ const ManageUsers = () => {
       orgDisplayClass: "d-none",
       userType: "Individual User",
     });
-    localStorage.setItem("userType", "Individual User");
     setIndividualUsersDetails(pageNumber, records_per_page);
   };
 
@@ -138,7 +136,6 @@ const ManageUsers = () => {
       orgDisplayClass: "",
       userType: "Organizational User",
     });
-    localStorage.setItem("userType", "Organizational User");
     setOrgUsersDetails(pageNumber, records_per_page);
   };
 
@@ -198,7 +195,6 @@ const ManageUsers = () => {
     } else {
       getOrgUsers(currentPageNumber, records_per_page);
     }
-    console.log(currentPageNumber);
   };
 
   useEffect(() => {
