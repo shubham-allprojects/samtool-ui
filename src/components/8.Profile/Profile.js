@@ -143,11 +143,7 @@ const Profile = () => {
                           : company_name}
                       </span>
                       <br />
-                      <span className="text-muted">
-                        {userType === "Individual User"
-                          ? `${user_type}`
-                          : `${userType} (${organization_type})`}
-                      </span>
+                      <span className="text-muted">{userType}</span>
                     </div>
                   </div>
                   {/* Other details */}
@@ -159,26 +155,54 @@ const Profile = () => {
                         elit. Nam corporis eos architecto, ducimus, consectetur
                       </p>
                     </div>
-                    <div className="offset-md-1 col-md-3 mt-4 mt-md-0">
-                      <div>
-                        <p className="text-muted">Mobile</p>
-                        <p>{mobile_number}</p>
-                      </div>
-                      <div className="mt-4 mt-md-5">
-                        <p className="text-muted">Email</p>
-                        <p>{email}</p>
-                      </div>
-                    </div>
-                    <div className="col-md-3">
-                      <div className="mt-4 mt-md-0">
-                        <p className="text-muted">City & State</p>
-                        <p>{`${city}, ${state_name}`}</p>
-                      </div>
-                      <div className="mt-4 mt-md-5">
-                        <p className="text-muted">Some Heading</p>
-                        <p>Lorem ipsum dolor sit.</p>
-                      </div>
-                    </div>
+                    {userType === "Individual User" ? (
+                      <>
+                        {" "}
+                        <div className="offset-md-1 col-md-3 mt-4 mt-md-0">
+                          <div>
+                            <p className="text-muted">Mobile</p>
+                            <p>{mobile_number}</p>
+                          </div>
+                          <div className="mt-4 mt-md-5">
+                            <p className="text-muted">PAN</p>
+                            <p>{pan_number}</p>
+                          </div>
+                        </div>
+                        <div className="col-md-3">
+                          <div className="mt-4 mt-md-0">
+                            <p className="text-muted">Aadhaar</p>
+                            <p>{aadhar_number}</p>
+                          </div>
+                          <div className="mt-4 mt-md-5">
+                            <p className="text-muted">Email</p>
+                            <p>{email}</p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="offset-md-1 col-md-3 mt-4 mt-md-0">
+                          <div>
+                            <p className="text-muted">CIN</p>
+                            <p>{cin_number}</p>
+                          </div>
+                          <div className="mt-4 mt-md-5">
+                            <p className="text-muted">TAN</p>
+                            <p>{tan_number}</p>
+                          </div>
+                        </div>
+                        <div className="col-md-3">
+                          <div className="mt-4 mt-md-0">
+                            <p className="text-muted">GST</p>
+                            <p>{gst_number}</p>
+                          </div>
+                          <div className="mt-4 mt-md-5">
+                            <p className="text-muted">Email</p>
+                            <p>{email}</p>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="col-md-6 mt-4 mt-md-0">
