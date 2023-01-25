@@ -251,7 +251,7 @@ const ManageUsers = () => {
                 <>
                   <CommonSpinner spinnerColor="primary" />
                 </>
-              ) : individualUsers.length <= 0 ? (
+              ) : individualUsersCount <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
                   <h1 className="fw-bold custom-heading-color">
                     Sorry ! No Users Found :(
@@ -384,7 +384,7 @@ const ManageUsers = () => {
                 <>
                   <CommonSpinner spinnerColor="primary" />
                 </>
-              ) : orgUsers.length <= 0 ? (
+              ) : orgUsersCount <= 0 ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
                   <h1 className="fw-bold custom-heading-color">
                     Sorry ! No Users Found :(
