@@ -69,56 +69,59 @@ const ManageUsers = () => {
           toast.success(`User ${userName} deleted successfuly`);
           if (userType === "Individual User") {
             setIndividualUsersCount(individualUsersCount - 1);
-            if (individualUsers.length <= 1) {
-              currentPageNumber = currentPageNumber - 1;
-              getIndividualUsers(
-                currentPageNumber,
-                records_per_page,
-                individualUsersCount - 1
-              );
-              const individualPageItems = document.querySelectorAll(
-                ".individual-pagination.page-item"
-              );
-              individualPageItems.forEach((item) => {
-                console.log(item.textContent, currentPageNumber);
-                if (parseInt(item.textContent) === currentPageNumber) {
-                  item.classList.add("active");
-                } else {
-                  item.classList.remove("active");
-                }
-              });
-            } else {
-              getIndividualUsers(
-                currentPageNumber,
-                records_per_page,
-                individualUsersCount - 1
-              );
+            if (individualUsersCount - 1 > 0) {
+              if (individualUsers.length <= 1) {
+                currentPageNumber = currentPageNumber - 1;
+                getIndividualUsers(
+                  currentPageNumber,
+                  records_per_page,
+                  individualUsersCount - 1
+                );
+                const individualPageItems = document.querySelectorAll(
+                  ".individual-pagination.page-item"
+                );
+                individualPageItems.forEach((item) => {
+                  if (parseInt(item.textContent) === currentPageNumber) {
+                    item.classList.add("active");
+                  } else {
+                    item.classList.remove("active");
+                  }
+                });
+              } else {
+                getIndividualUsers(
+                  currentPageNumber,
+                  records_per_page,
+                  individualUsersCount - 1
+                );
+              }
             }
           } else {
             setOrgUsersCount(orgUsersCount - 1);
-            if (orgUsers.length <= 1) {
-              currentPageNumber = currentPageNumber - 1;
-              getOrgUsers(
-                currentPageNumber,
-                records_per_page,
-                orgUsersCount - 1
-              );
-              const orgPageItems = document.querySelectorAll(
-                ".org-pagination.page-item"
-              );
-              orgPageItems.forEach((item) => {
-                if (parseInt(item.textContent) === currentPageNumber) {
-                  item.classList.add("active");
-                } else {
-                  item.classList.remove("active");
-                }
-              });
-            } else {
-              getOrgUsers(
-                currentPageNumber,
-                records_per_page,
-                orgUsersCount - 1
-              );
+            if (orgUsersCount - 1 > 0) {
+              if (orgUsers.length <= 1) {
+                currentPageNumber = currentPageNumber - 1;
+                getOrgUsers(
+                  currentPageNumber,
+                  records_per_page,
+                  orgUsersCount - 1
+                );
+                const orgPageItems = document.querySelectorAll(
+                  ".org-pagination.page-item"
+                );
+                orgPageItems.forEach((item) => {
+                  if (parseInt(item.textContent) === currentPageNumber) {
+                    item.classList.add("active");
+                  } else {
+                    item.classList.remove("active");
+                  }
+                });
+              } else {
+                getOrgUsers(
+                  currentPageNumber,
+                  records_per_page,
+                  orgUsersCount - 1
+                );
+              }
             }
           }
         }
