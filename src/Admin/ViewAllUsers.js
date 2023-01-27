@@ -89,6 +89,13 @@ const ManageUsers = () => {
           toast.success(`User ${userName} deleted successfuly`);
           if (userType === "Individual User") {
             setIndividualUsersCount(individualUsersCount - 1);
+            localStorage.setItem(
+              "pagination",
+              JSON.stringify({
+                ...localPaginationData,
+                individualCount: individualUsersCount - 1,
+              })
+            );
             if (individualUsersCount - 1 > 0) {
               if (individualUsers.length <= 1) {
                 currentPageNumber = currentPageNumber - 1;
@@ -108,6 +115,13 @@ const ManageUsers = () => {
             }
           } else {
             setOrgUsersCount(orgUsersCount - 1);
+            localStorage.setItem(
+              "pagination",
+              JSON.stringify({
+                ...localPaginationData,
+                orgCount: orgUsersCount - 1,
+              })
+            );
             if (orgUsersCount - 1 > 0) {
               if (orgUsers.length <= 1) {
                 currentPageNumber = currentPageNumber - 1;
