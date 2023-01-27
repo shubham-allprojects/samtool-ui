@@ -64,22 +64,14 @@ const ManageUsers = () => {
     }
   };
 
-  const toggleOrgPaginationActiveClass = () => {
-    const orgPageItems = document.querySelectorAll(".org-pagination.page-item");
-    orgPageItems.forEach((item) => {
-      if (parseInt(item.textContent) === currentPageNumber) {
-        item.classList.add("active");
-      } else {
-        item.classList.remove("active");
-      }
-    });
-  };
-
-  const toggleIndividualPaginationActiveClass = () => {
-    const individualPageItems = document.querySelectorAll(
-      ".individual-pagination.page-item"
-    );
-    individualPageItems.forEach((item) => {
+  const togglePaginationActiveClass = (userType) => {
+    let pageItems = "";
+    if (userType === "Individual User") {
+      pageItems = document.querySelectorAll(".individual-pagination.page-item");
+    } else {
+      pageItems = document.querySelectorAll(".org-pagination.page-item");
+    }
+    pageItems.forEach((item) => {
       if (parseInt(item.textContent) === currentPageNumber) {
         item.classList.add("active");
       } else {
@@ -105,7 +97,7 @@ const ManageUsers = () => {
                   records_per_page,
                   individualUsersCount - 1
                 );
-                toggleIndividualPaginationActiveClass();
+                togglePaginationActiveClass(userType);
               } else {
                 getIndividualUsers(
                   currentPageNumber,
@@ -124,7 +116,7 @@ const ManageUsers = () => {
                   records_per_page,
                   orgUsersCount - 1
                 );
-                toggleOrgPaginationActiveClass();
+                togglePaginationActiveClass(userType);
               } else {
                 getOrgUsers(
                   currentPageNumber,
@@ -315,12 +307,13 @@ const ManageUsers = () => {
     if (localPaginationData !== null) {
       const { pageNo, individualCount, orgCount, userType } =
         localPaginationData;
+      currentPageNumber = pageNo;
       if (userType === "Individual User") {
         getIndividualUsers(pageNo, records_per_page, individualCount);
-        toggleIndividualPaginationActiveClass();
+        togglePaginationActiveClass(userType);
       } else {
         getOrgUsers(pageNo, records_per_page, orgCount);
-        toggleOrgPaginationActiveClass();
+        togglePaginationActiveClass(userType);
       }
     } else {
       saveUsersCount(1, 1);
