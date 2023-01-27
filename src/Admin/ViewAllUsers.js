@@ -11,6 +11,8 @@ const records_per_page = 4;
 let currentPageNumber = 1;
 let pagesArray = [];
 const ManageUsers = () => {
+  const data = JSON.parse(localStorage.getItem("data"));
+  const localPaginationData = JSON.parse(localStorage.getItem("pagination"));
   const [users, setUsers] = useState({
     individualUsers: [],
     orgUsers: [],
@@ -27,8 +29,12 @@ const ManageUsers = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [individualUsersCount, setIndividualUsersCount] = useState(0);
-  const [orgUsersCount, setOrgUsersCount] = useState(0);
+  const [individualUsersCount, setIndividualUsersCount] = useState(
+    localPaginationData ? localPaginationData.individualCount : 0
+  );
+  const [orgUsersCount, setOrgUsersCount] = useState(
+    localPaginationData ? localPaginationData.orgCount : 0
+  );
 
   const { individualUsers, orgUsers } = users;
   const {
@@ -40,8 +46,6 @@ const ManageUsers = () => {
     orgDisplayClass,
     userType,
   } = functionalitiesState;
-
-  const data = JSON.parse(localStorage.getItem("data"));
 
   const setHeaderAndUrl = () => {
     let headers = "";
@@ -58,6 +62,30 @@ const ManageUsers = () => {
     for (let i = 1; i <= pages; i++) {
       pagesArray.push(i);
     }
+  };
+
+  const toggleOrgPaginationActiveClass = () => {
+    const orgPageItems = document.querySelectorAll(".org-pagination.page-item");
+    orgPageItems.forEach((item) => {
+      if (parseInt(item.textContent) === currentPageNumber) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    });
+  };
+
+  const toggleIndividualPaginationActiveClass = () => {
+    const individualPageItems = document.querySelectorAll(
+      ".individual-pagination.page-item"
+    );
+    individualPageItems.forEach((item) => {
+      if (parseInt(item.textContent) === currentPageNumber) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    });
   };
 
   const deleteUser = async (userId, userName) => {
@@ -77,14 +105,7 @@ const ManageUsers = () => {
                   records_per_page,
                   individualUsersCount - 1
                 );
-                const individualPageItems = document.querySelectorAll(
-                  ".individual-pagination.page-item"
-                );
-                individualPageItems.forEach((item) => {
-                  if (parseInt(item.textContent) === currentPageNumber) {
-                    item.classList.add("active");
-                  }
-                });
+                toggleIndividualPaginationActiveClass();
               } else {
                 getIndividualUsers(
                   currentPageNumber,
@@ -103,14 +124,7 @@ const ManageUsers = () => {
                   records_per_page,
                   orgUsersCount - 1
                 );
-                const orgPageItems = document.querySelectorAll(
-                  ".org-pagination.page-item"
-                );
-                orgPageItems.forEach((item) => {
-                  if (parseInt(item.textContent) === currentPageNumber) {
-                    item.classList.add("active");
-                  }
-                });
+                toggleOrgPaginationActiveClass();
               } else {
                 getOrgUsers(
                   currentPageNumber,
@@ -124,33 +138,53 @@ const ManageUsers = () => {
       });
   };
 
-  const saveIndividualUsersCount = async (pageNumber, records_per_page) => {
+  const saveUsersCount = async (pageNumber, records_per_page) => {
     const [headers, url] = setHeaderAndUrl();
+    let individualCount = 0;
+    let orgCount = 0;
     const individualBodyData = {
       type: "Individual User",
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-    await axios
-      .post(url, individualBodyData, { headers: headers })
-      .then((res) => {
-        setIndividualUsersCount(res.data.count);
-      });
-  };
 
-  const saveOrgUsersCount = async (pageNumber, records_per_page) => {
-    const [headers, url] = setHeaderAndUrl();
     const orgBodyData = {
       type: "Organizational User",
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
+
+    await axios
+      .post(url, individualBodyData, { headers: headers })
+      .then((res) => {
+        setIndividualUsersCount(res.data.count);
+        individualCount = res.data.count;
+      });
+
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
       setOrgUsersCount(res.data.count);
+      orgCount = res.data.count;
     });
+
+    localStorage.setItem(
+      "pagination",
+      JSON.stringify({
+        ...localPaginationData,
+        orgCount: orgCount,
+        individualCount: individualCount,
+      })
+    );
   };
 
   const getIndividualUsers = async (pageNumber, records_per_page, count) => {
+    localStorage.setItem(
+      "pagination",
+      JSON.stringify({
+        ...localPaginationData,
+        pageNo: pageNumber,
+        userType: "Individual User",
+      })
+    );
     setPageNumbers(count);
     setFunctionalitiesState({
       ...functionalitiesState,
@@ -177,6 +211,14 @@ const ManageUsers = () => {
   };
 
   const getOrgUsers = async (pageNumber, records_per_page, count) => {
+    localStorage.setItem(
+      "pagination",
+      JSON.stringify({
+        ...localPaginationData,
+        pageNo: pageNumber,
+        userType: "Organizational User",
+      })
+    );
     setPageNumbers(count);
     setFunctionalitiesState({
       ...functionalitiesState,
@@ -270,8 +312,19 @@ const ManageUsers = () => {
   };
 
   useEffect(() => {
-    saveIndividualUsersCount(1, 1);
-    saveOrgUsersCount(1, 1);
+    if (localPaginationData !== null) {
+      const { pageNo, individualCount, orgCount, userType } =
+        localPaginationData;
+      if (userType === "Individual User") {
+        getIndividualUsers(pageNo, records_per_page, individualCount);
+        toggleIndividualPaginationActiveClass();
+      } else {
+        getOrgUsers(pageNo, records_per_page, orgCount);
+        toggleOrgPaginationActiveClass();
+      }
+    } else {
+      saveUsersCount(1, 1);
+    }
     // eslint-disable-next-line
   }, []);
 
