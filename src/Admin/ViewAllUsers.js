@@ -72,12 +72,6 @@ const ManageUsers = () => {
       pageItems = document.querySelectorAll(".org-pagination.page-item");
     }
     pageItems.forEach((item) => {
-      console.log(
-        "Inside Toggle: ",
-        currentPageNumber,
-        "item.TextContent: ",
-        item.textContent
-      );
       if (parseInt(item.textContent) === currentPageNumber) {
         item.classList.add("active");
       } else {
