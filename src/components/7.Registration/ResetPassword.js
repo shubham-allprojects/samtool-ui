@@ -117,6 +117,8 @@ const ResetPassword = () => {
         passwordType2: "text",
       });
     } else {
+      setResetBtnClassName("disabled");
+      e.target.reset();
       await axios.post(
         `/sam/v1/customer-registration/set-password`,
         JSON.stringify({
@@ -124,7 +126,6 @@ const ResetPassword = () => {
           token: localStorage.getItem("token"),
         })
       );
-      setResetBtnClassName("disabled");
       toast.success("Password Saved Successfully !");
       setTimeout(() => {
         goTo("/login");
@@ -239,9 +240,10 @@ const ResetPassword = () => {
                   </div>
                   <div className="col-lg-12">
                     <button
+                      type="submit"
                       className={`btn common-btn w-100 ${resetBtnClassName}`}
                     >
-                      Reset Password
+                      Set Password
                     </button>
                   </div>
                 </div>
