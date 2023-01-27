@@ -324,6 +324,7 @@ const ManageUsers = () => {
       const { userType } = localPaginationData;
       togglePaginationActiveClass(userType);
     }
+    // eslint-disable-next-line
   }, [togglePaginationActiveClass]);
 
   return (
