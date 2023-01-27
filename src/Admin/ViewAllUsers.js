@@ -308,7 +308,6 @@ const ManageUsers = () => {
       const { pageNo, individualCount, orgCount, userType } =
         localPaginationData;
       currentPageNumber = pageNo;
-      togglePaginationActiveClass(userType);
       if (userType === "Individual User") {
         getIndividualUsers(pageNo, records_per_page, individualCount);
       } else {
@@ -319,6 +318,13 @@ const ManageUsers = () => {
     }
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (localPaginationData !== null) {
+      const { userType } = localPaginationData;
+      togglePaginationActiveClass(userType);
+    }
+  }, [togglePaginationActiveClass]);
 
   return (
     <Layout>
