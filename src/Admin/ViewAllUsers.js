@@ -68,7 +68,32 @@ const ManageUsers = () => {
         if (res.data.status === 0) {
           toast.success(`User ${userName} deleted successfuly`);
           if (userType === "Individual User") {
-            getIndividualUsers(currentPageNumber, records_per_page);
+            setIndividualUsersCount(individualUsersCount - 1);
+            if (individualUsers.length <= 1) {
+              currentPageNumber = currentPageNumber - 1;
+              getIndividualUsers(
+                currentPageNumber,
+                records_per_page,
+                individualUsersCount - 1
+              );
+              const individualPageItems = document.querySelectorAll(
+                ".individual-pagination.page-item"
+              );
+              individualPageItems.forEach((item) => {
+                console.log(item.textContent, currentPageNumber);
+                if (parseInt(item.textContent) === currentPageNumber) {
+                  item.classList.add("active");
+                } else {
+                  item.classList.remove("active");
+                }
+              });
+            } else {
+              getIndividualUsers(
+                currentPageNumber,
+                records_per_page,
+                individualUsersCount - 1
+              );
+            }
           } else {
             setOrgUsersCount(orgUsersCount - 1);
             if (orgUsers.length <= 1) {
@@ -84,6 +109,8 @@ const ManageUsers = () => {
               orgPageItems.forEach((item) => {
                 if (parseInt(item.textContent) === currentPageNumber) {
                   item.classList.add("active");
+                } else {
+                  item.classList.remove("active");
                 }
               });
             } else {
@@ -124,8 +151,8 @@ const ManageUsers = () => {
     });
   };
 
-  const getIndividualUsers = async (pageNumber, records_per_page) => {
-    setPageNumbers(individualUsersCount);
+  const getIndividualUsers = async (pageNumber, records_per_page, count) => {
+    setPageNumbers(count);
     setFunctionalitiesState({
       ...functionalitiesState,
       individualBtnClass: "active",
@@ -182,7 +209,11 @@ const ManageUsers = () => {
     setLoading(true);
     currentPageNumber = 1;
     if (name === "individualBtn") {
-      getIndividualUsers(currentPageNumber, records_per_page);
+      getIndividualUsers(
+        currentPageNumber,
+        records_per_page,
+        individualUsersCount
+      );
     } else if (name === "orgBtn") {
       getOrgUsers(currentPageNumber, records_per_page, orgUsersCount);
     }
@@ -229,7 +260,11 @@ const ManageUsers = () => {
       });
     }
     if (userType === "Individual User") {
-      getIndividualUsers(currentPageNumber, records_per_page);
+      getIndividualUsers(
+        currentPageNumber,
+        records_per_page,
+        individualUsersCount
+      );
     } else {
       getOrgUsers(currentPageNumber, records_per_page, orgUsersCount);
     }
