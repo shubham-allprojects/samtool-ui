@@ -83,8 +83,6 @@ const ManageUsers = () => {
                 individualPageItems.forEach((item) => {
                   if (parseInt(item.textContent) === currentPageNumber) {
                     item.classList.add("active");
-                  } else {
-                    item.classList.remove("active");
                   }
                 });
               } else {
@@ -111,8 +109,6 @@ const ManageUsers = () => {
                 orgPageItems.forEach((item) => {
                   if (parseInt(item.textContent) === currentPageNumber) {
                     item.classList.add("active");
-                  } else {
-                    item.classList.remove("active");
                   }
                 });
               } else {
