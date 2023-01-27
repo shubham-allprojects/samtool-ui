@@ -71,10 +71,28 @@ const ManageUsers = () => {
             getIndividualUsers(currentPageNumber, records_per_page);
           } else {
             setOrgUsersCount(orgUsersCount - 1);
-            if (orgUsers.length === 1) {
+            if (orgUsers.length <= 1) {
               currentPageNumber = currentPageNumber - 1;
+              getOrgUsers(
+                currentPageNumber,
+                records_per_page,
+                orgUsersCount - 1
+              );
+              const orgPageItems = document.querySelectorAll(
+                ".org-pagination.page-item"
+              );
+              orgPageItems.forEach((item) => {
+                if (parseInt(item.textContent) === currentPageNumber) {
+                  item.classList.add("active");
+                }
+              });
+            } else {
+              getOrgUsers(
+                currentPageNumber,
+                records_per_page,
+                orgUsersCount - 1
+              );
             }
-            getOrgUsers(currentPageNumber, records_per_page, orgUsersCount - 1);
           }
         }
       });
