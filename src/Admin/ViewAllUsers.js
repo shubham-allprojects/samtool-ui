@@ -307,7 +307,7 @@ const ManageUsers = () => {
   useEffect(() => {
     saveUsersCount(1, 1);
     // eslint-disable-next-line
-  }, [saveUsersCount, individualUsersCount, orgUsersCount]);
+  }, [saveUsersCount]);
 
   useEffect(() => {
     if (localUserType) {
