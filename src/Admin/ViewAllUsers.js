@@ -88,14 +88,6 @@ const ManageUsers = () => {
         if (res.data.status === 0) {
           toast.success(`User ${userName} deleted successfuly`);
           if (userType === "Individual User") {
-            localStorage.setItem(
-              "pagination",
-              JSON.stringify({
-                ...localPaginationData,
-                individualCount: individualUsersCount - 1,
-              })
-            );
-            console.log(JSON.parse(localStorage.getItem("pagination")));
             setIndividualUsersCount(individualUsersCount - 1);
             if (individualUsersCount - 1 > 0) {
               if (individualUsers.length <= 1) {
@@ -185,6 +177,7 @@ const ManageUsers = () => {
         userType: "Individual User",
       })
     );
+    console.log(JSON.parse(localStorage.getItem("pagination")));
     setPageNumbers(count);
     setFunctionalitiesState({
       ...functionalitiesState,
