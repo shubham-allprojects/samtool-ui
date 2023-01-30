@@ -62,7 +62,6 @@ const ManageUsers = () => {
   };
 
   const setPageNumbers = (totalUsers) => {
-    console.log(totalUsers);
     pagesArray = [];
     let pages = Math.ceil(totalUsers / records_per_page);
     for (let i = 1; i <= pages; i++) {
@@ -287,19 +286,11 @@ const ManageUsers = () => {
   };
 
   useEffect(() => {
-    if (localUserType) {
-      console.log(
-        localPageNo,
-        localIndividualCount,
-        localOrgCount,
-        localUserType
-      );
-      currentPageNumber = localPageNo;
-      if (localUserType === "Individual User") {
-        getIndividualUsers(localPageNo, records_per_page, localIndividualCount);
-      } else {
-        getOrgUsers(localPageNo, records_per_page, localOrgCount);
-      }
+    currentPageNumber = localPageNo;
+    if (localUserType === "Individual User") {
+      getIndividualUsers(localPageNo, records_per_page, localIndividualCount);
+    } else {
+      getOrgUsers(localPageNo, records_per_page, localOrgCount);
     }
 
     // eslint-disable-next-line
