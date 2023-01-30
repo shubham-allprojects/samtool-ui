@@ -303,15 +303,11 @@ const ManageUsers = () => {
 
   useEffect(() => {
     saveUsersCount(1, 1);
-    // eslint-disable-next-line
-  }, [saveUsersCount, setPageNumbers]);
-
-  useEffect(() => {
     if (userType) {
       togglePaginationActiveClass(userType);
     }
     // eslint-disable-next-line
-  }, [togglePaginationActiveClass]);
+  }, [togglePaginationActiveClass, saveUsersCount, setPageNumbers]);
 
   return (
     <Layout>
