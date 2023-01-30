@@ -137,8 +137,6 @@ const ManageUsers = () => {
 
   const saveUsersCount = async (pageNumber, records_per_page) => {
     const [headers, url] = setHeaderAndUrl();
-    let individualCount = 0;
-    let orgCount = 0;
     const individualBodyData = {
       type: "Individual User",
       page_number: pageNumber,
@@ -160,7 +158,6 @@ const ManageUsers = () => {
 
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
       setOrgUsersCount(res.data.count);
-      orgCount = res.data.count;
       localStorage.setItem("localOrgCount", res.data.count);
     });
   };
