@@ -312,7 +312,6 @@ const ManageUsers = () => {
   };
 
   useEffect(() => {
-    saveUsersCount(1, 1);
     if (localPaginationData !== null) {
       const { pageNo, individualCount, orgCount, userType } =
         localPaginationData;
@@ -325,6 +324,11 @@ const ManageUsers = () => {
     }
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    saveUsersCount(1, 1);
+    // eslint-disable-next-line
+  }, [saveUsersCount]);
 
   useEffect(() => {
     if (localPaginationData !== null) {
