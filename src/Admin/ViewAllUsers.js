@@ -310,8 +310,8 @@ const ManageUsers = () => {
   }, [saveUsersCount]);
 
   useEffect(() => {
-    if (localUserType) {
-      togglePaginationActiveClass(localUserType);
+    if (userType) {
+      togglePaginationActiveClass(userType);
     }
     // eslint-disable-next-line
   }, [togglePaginationActiveClass]);
