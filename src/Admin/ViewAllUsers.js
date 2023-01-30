@@ -12,7 +12,12 @@ let currentPageNumber = 1;
 let pagesArray = [];
 const ManageUsers = () => {
   const data = JSON.parse(localStorage.getItem("data"));
-  const localPaginationData = JSON.parse(localStorage.getItem("pagination"));
+  const localPageNo = parseInt(localStorage.getItem("localPageNo"));
+  const localUserType = localStorage.getItem("localUserType");
+  const localIndividualCount = parseInt(
+    localStorage.getItem("localIndividualCount")
+  );
+  const localOrgCount = parseInt(localStorage.getItem("localOrgCount"));
   const [users, setUsers] = useState({
     individualUsers: [],
     orgUsers: [],
@@ -30,10 +35,10 @@ const ManageUsers = () => {
 
   const [loading, setLoading] = useState(false);
   const [individualUsersCount, setIndividualUsersCount] = useState(
-    localPaginationData ? localPaginationData.individualCount : 0
+    localIndividualCount ? localIndividualCount : 0
   );
   const [orgUsersCount, setOrgUsersCount] = useState(
-    localPaginationData ? localPaginationData.orgCount : 0
+    localOrgCount ? localOrgCount : 0
   );
 
   const { individualUsers, orgUsers } = users;
@@ -150,34 +155,19 @@ const ManageUsers = () => {
       .post(url, individualBodyData, { headers: headers })
       .then((res) => {
         setIndividualUsersCount(res.data.count);
-        individualCount = res.data.count;
+        localStorage.setItem("localIndividualCount", res.data.count);
       });
 
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
       setOrgUsersCount(res.data.count);
       orgCount = res.data.count;
+      localStorage.setItem("localOrgCount", res.data.count);
     });
-
-    localStorage.setItem(
-      "pagination",
-      JSON.stringify({
-        ...localPaginationData,
-        orgCount: orgCount,
-        individualCount: individualCount,
-      })
-    );
   };
 
   const getIndividualUsers = async (pageNumber, records_per_page, count) => {
-    localStorage.setItem(
-      "pagination",
-      JSON.stringify({
-        ...localPaginationData,
-        pageNo: pageNumber,
-        userType: "Individual User",
-      })
-    );
-    console.log(JSON.parse(localStorage.getItem("pagination")));
+    localStorage.setItem("localPageNo", pageNumber);
+    localStorage.setItem("localUserType", "Individual User");
     setPageNumbers(count);
     setFunctionalitiesState({
       ...functionalitiesState,
@@ -204,14 +194,8 @@ const ManageUsers = () => {
   };
 
   const getOrgUsers = async (pageNumber, records_per_page, count) => {
-    localStorage.setItem(
-      "pagination",
-      JSON.stringify({
-        ...localPaginationData,
-        pageNo: pageNumber,
-        userType: "Organizational User",
-      })
-    );
+    localStorage.setItem("localPageNo", pageNumber);
+    localStorage.setItem("localUserType", "Organizational User");
     setPageNumbers(count);
     setFunctionalitiesState({
       ...functionalitiesState,
@@ -305,16 +289,31 @@ const ManageUsers = () => {
   };
 
   useEffect(() => {
-    if (localPaginationData !== null) {
-      const { pageNo, individualCount, orgCount, userType } =
-        localPaginationData;
-      currentPageNumber = pageNo;
-      if (userType === "Individual User") {
-        getIndividualUsers(pageNo, records_per_page, individualCount);
+    // if (localPaginationData !== null) {
+    //   const { pageNo, individualCount, orgCount, userType } =
+    //     localPaginationData;
+    //   currentPageNumber = pageNo;
+    //   if (userType === "Individual User") {
+    //     getIndividualUsers(pageNo, records_per_page, individualCount);
+    //   } else {
+    //     getOrgUsers(pageNo, records_per_page, orgCount);
+    //   }
+    // }
+    if (localPageNo) {
+      console.log(
+        localPageNo,
+        localIndividualCount,
+        localOrgCount,
+        localUserType
+      );
+      currentPageNumber = localPageNo;
+      if (localUserType === "Individual User") {
+        getIndividualUsers(localPageNo, records_per_page, localIndividualCount);
       } else {
-        getOrgUsers(pageNo, records_per_page, orgCount);
+        getOrgUsers(localPageNo, records_per_page, localOrgCount);
       }
     }
+
     // eslint-disable-next-line
   }, []);
 
@@ -324,9 +323,8 @@ const ManageUsers = () => {
   }, [saveUsersCount]);
 
   useEffect(() => {
-    if (localPaginationData !== null) {
-      const { userType } = localPaginationData;
-      togglePaginationActiveClass(userType);
+    if (localUserType) {
+      togglePaginationActiveClass(localUserType);
     }
     // eslint-disable-next-line
   }, [togglePaginationActiveClass]);
