@@ -138,29 +138,15 @@ const ManageUsers = () => {
 
   const saveUsersCount = async (pageNumber, records_per_page) => {
     const [headers, url] = setHeaderAndUrl();
-    const individualBodyData = {
-      type: "Individual User",
-      page_number: pageNumber,
-      number_of_records: records_per_page,
-    };
-
-    const orgBodyData = {
-      type: "Organizational User",
-      page_number: pageNumber,
-      number_of_records: records_per_page,
-    };
 
     await axios
-      .post(url, individualBodyData, { headers: headers })
+      .get(`/sam/v1/user-registration/auth/type-count`, { headers: headers })
       .then((res) => {
-        setIndividualUsersCount(res.data.count);
-        localStorage.setItem("localIndividualCount", res.data.count);
+        setIndividualUsersCount(parseInt(res.data.individual_count));
+        setOrgUsersCount(parseInt(res.data.org_count));
+        localStorage.setItem("localIndividualCount", res.data.individual_count);
+        localStorage.setItem("localOrgCount", res.data.org_count);
       });
-
-    await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
-      setOrgUsersCount(res.data.count);
-      localStorage.setItem("localOrgCount", res.data.count);
-    });
   };
 
   const getIndividualUsers = async (pageNumber, records_per_page, count) => {
@@ -186,7 +172,7 @@ const ManageUsers = () => {
     await axios
       .post(url, individualBodyData, { headers: headers })
       .then((res) => {
-        setUsers({ individualUsers: res.data.AllData, orgUsers: [] });
+        setUsers({ individualUsers: res.data, orgUsers: [] });
       });
     setLoading(false);
   };
@@ -213,7 +199,7 @@ const ManageUsers = () => {
     };
     await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
       setUsers({
-        orgUsers: res.data.AllOrganizationData,
+        orgUsers: res.data,
         individualUsers: [],
       });
     });
