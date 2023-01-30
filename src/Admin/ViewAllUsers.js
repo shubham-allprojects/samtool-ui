@@ -320,16 +320,13 @@ const ManageUsers = () => {
     } else {
       getOrgUsers(pageNo, records_per_page, orgCount);
     }
-
     saveUsersCount(1, 1);
-
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     const { userType } = localPaginationData;
     togglePaginationActiveClass(userType);
-
     // eslint-disable-next-line
   }, [togglePaginationActiveClass]);
 
