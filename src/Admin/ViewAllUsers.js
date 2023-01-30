@@ -30,7 +30,7 @@ const ManageUsers = () => {
     orgBtnDisabled: false,
     individualDisplayClass: "d-none",
     orgDisplayClass: "d-none",
-    userType: "",
+    userType: localUserType ? localUserType : "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -287,10 +287,10 @@ const ManageUsers = () => {
 
   useEffect(() => {
     currentPageNumber = localPageNo;
-    if (localUserType === "Individual User") {
-      getIndividualUsers(localPageNo, records_per_page, localIndividualCount);
-    } else if (localUserType === "Organizational User") {
-      getOrgUsers(localPageNo, records_per_page, localOrgCount);
+    if (userType === "Individual User") {
+      getIndividualUsers(localPageNo, records_per_page, individualUsersCount);
+    } else if (userType === "Organizational User") {
+      getOrgUsers(localPageNo, records_per_page, orgUsersCount);
     }
     // eslint-disable-next-line
   }, [orgUsersCount, individualUsersCount]);
