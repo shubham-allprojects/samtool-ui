@@ -97,38 +97,26 @@ const ManageUsers = () => {
             if (individualUsersCount - 1 > 0) {
               if (individualUsers.length <= 1) {
                 currentPageNumber = currentPageNumber - 1;
-                getIndividualUsers(
-                  currentPageNumber,
-                  records_per_page,
-                  individualUsersCount - 1
-                );
                 togglePaginationActiveClass(userType);
-              } else {
-                getIndividualUsers(
-                  currentPageNumber,
-                  records_per_page,
-                  individualUsersCount - 1
-                );
               }
+              getIndividualUsers(
+                currentPageNumber,
+                records_per_page,
+                individualUsersCount - 1
+              );
             }
           } else {
             setOrgUsersCount(orgUsersCount - 1);
             if (orgUsersCount - 1 > 0) {
               if (orgUsers.length <= 1) {
                 currentPageNumber = currentPageNumber - 1;
-                getOrgUsers(
-                  currentPageNumber,
-                  records_per_page,
-                  orgUsersCount - 1
-                );
                 togglePaginationActiveClass(userType);
-              } else {
-                getOrgUsers(
-                  currentPageNumber,
-                  records_per_page,
-                  orgUsersCount - 1
-                );
               }
+              getOrgUsers(
+                currentPageNumber,
+                records_per_page,
+                orgUsersCount - 1
+              );
             }
           }
         }
@@ -300,30 +288,27 @@ const ManageUsers = () => {
         getOrgUsers(localPageNo, records_per_page, localOrgCount);
       }
     }
-
     // eslint-disable-next-line
   }, []);
-
-  useEffect(() => {
-    if (userType === "Individual User") {
-      setPageNumbers(individualUsersCount);
-    } else {
-      setPageNumbers(orgUsersCount);
-    }
-    // eslint-disable-next-line
-  }, [setPageNumbers]);
-
-  useEffect(() => {
-    saveUsersCount(1, 1);
-    // eslint-disable-next-line
-  }, [saveUsersCount, individualUsersCount, orgUsersCount]);
 
   useEffect(() => {
     if (localUserType) {
       togglePaginationActiveClass(localUserType);
     }
+    if (userType === "Individual User") {
+      setPageNumbers(individualUsersCount);
+    } else {
+      setPageNumbers(orgUsersCount);
+    }
+    saveUsersCount(1, 1);
     // eslint-disable-next-line
-  }, [togglePaginationActiveClass]);
+  }, [
+    togglePaginationActiveClass,
+    saveUsersCount,
+    individualUsersCount,
+    orgUsersCount,
+    setPageNumbers,
+  ]);
 
   return (
     <Layout>
