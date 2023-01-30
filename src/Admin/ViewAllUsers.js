@@ -10,19 +10,19 @@ import { toast } from "react-toastify";
 const records_per_page = 4;
 let currentPageNumber = 1;
 let pagesArray = [];
-const data = JSON.parse(localStorage.getItem("data"));
-const localPageNo = parseInt(localStorage.getItem("localPageNo"));
-const localUserType = localStorage.getItem("localUserType");
-const localIndividualCount = parseInt(
-  localStorage.getItem("localIndividualCount")
-);
-const localOrgCount = parseInt(localStorage.getItem("localOrgCount"));
+
 const ManageUsers = () => {
   const [users, setUsers] = useState({
     individualUsers: [],
     orgUsers: [],
   });
-
+  const data = JSON.parse(localStorage.getItem("data"));
+  const localPageNo = parseInt(localStorage.getItem("localPageNo"));
+  const localUserType = localStorage.getItem("localUserType");
+  const localIndividualCount = parseInt(
+    localStorage.getItem("localIndividualCount")
+  );
+  const localOrgCount = parseInt(localStorage.getItem("localOrgCount"));
   const [functionalitiesState, setFunctionalitiesState] = useState({
     individualBtnClass: "",
     orgBtnClass: "",
