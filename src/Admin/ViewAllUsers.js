@@ -288,30 +288,23 @@ const ManageUsers = () => {
 
   useEffect(() => {
     if (userType === "Individual User") {
+      setPageNumbers(individualUsersCount);
       getIndividualUsers(
         currentPageNumber,
         records_per_page,
         individualUsersCount
       );
     } else if (userType === "Organizational User") {
+      setPageNumbers(orgUsersCount);
       getOrgUsers(currentPageNumber, records_per_page, orgUsersCount);
     }
     // eslint-disable-next-line
   }, [orgUsersCount, individualUsersCount]);
 
   useEffect(() => {
-    if (userType === "Individual User") {
-      setPageNumbers(individualUsersCount);
-    } else if (userType === "Organizational User") {
-      setPageNumbers(orgUsersCount);
-    }
-    // eslint-disable-next-line
-  }, [setPageNumbers]);
-
-  useEffect(() => {
     saveUsersCount(1, 1);
     // eslint-disable-next-line
-  }, [saveUsersCount]);
+  }, [saveUsersCount, setPageNumbers]);
 
   useEffect(() => {
     if (userType) {
