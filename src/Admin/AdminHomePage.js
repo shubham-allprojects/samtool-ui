@@ -15,31 +15,15 @@ const AdminHomePage = () => {
     if (data) {
       headers = { Authorization: data.logintoken };
     }
-    let url = `/sam/v1/user-registration/auth/get-users`;
+    let url = `/sam/v1/user-registration/auth`;
     return [headers, url];
   };
 
   const setCountOfUsers = async () => {
     const [headers, url] = setHeaderAndUrl();
-    const individualBodyData = {
-      type: "Individual User",
-      page_number: 1,
-      number_of_records: 1,
-    };
-    const orgBodyData = {
-      type: "Organizational User",
-      page_number: 1,
-      number_of_records: 1,
-    };
-
-    await axios
-      .post(url, individualBodyData, { headers: headers })
-      .then((res) => {
-        indiCount = res.data.count;
-      });
-
-    await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
-      orgCount = res.data.count;
+    await axios.get(`${url}/type-count`, { headers: headers }).then((res) => {
+      indiCount = parseInt(res.data.individual_count);
+      orgCount = parseInt(res.data.org_count);
     });
 
     const totalCount = indiCount + orgCount;
