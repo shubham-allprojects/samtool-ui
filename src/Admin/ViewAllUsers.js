@@ -286,17 +286,7 @@ const ManageUsers = () => {
   };
 
   useEffect(() => {
-    // if (localPaginationData !== null) {
-    //   const { pageNo, individualCount, orgCount, userType } =
-    //     localPaginationData;
-    //   currentPageNumber = pageNo;
-    //   if (userType === "Individual User") {
-    //     getIndividualUsers(pageNo, records_per_page, individualCount);
-    //   } else {
-    //     getOrgUsers(pageNo, records_per_page, orgCount);
-    //   }
-    // }
-    if (localPageNo) {
+    if (localUserType) {
       console.log(
         localPageNo,
         localIndividualCount,
@@ -315,9 +305,18 @@ const ManageUsers = () => {
   }, []);
 
   useEffect(() => {
+    if (userType === "Individual User") {
+      setPageNumbers(individualUsersCount);
+    } else {
+      setPageNumbers(orgUsersCount);
+    }
+    // eslint-disable-next-line
+  }, [setPageNumbers]);
+
+  useEffect(() => {
     saveUsersCount(1, 1);
     // eslint-disable-next-line
-  }, [saveUsersCount]);
+  }, [saveUsersCount, individualUsersCount, orgUsersCount]);
 
   useEffect(() => {
     if (localUserType) {
