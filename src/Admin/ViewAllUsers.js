@@ -58,7 +58,7 @@ const ManageUsers = () => {
     if (data) {
       headers = { Authorization: data.logintoken };
     }
-    let url = `/sam/v1/user-registration/auth/get-users`;
+    let url = `/sam/v1/user-registration/auth`;
     return [headers, url];
   };
 
@@ -136,17 +136,14 @@ const ManageUsers = () => {
       });
   };
 
-  const saveUsersCount = async (pageNumber, records_per_page) => {
+  const saveUsersCount = async () => {
     const [headers, url] = setHeaderAndUrl();
-
-    await axios
-      .get(`/sam/v1/user-registration/auth/type-count`, { headers: headers })
-      .then((res) => {
-        setIndividualUsersCount(parseInt(res.data.individual_count));
-        setOrgUsersCount(parseInt(res.data.org_count));
-        localStorage.setItem("localIndividualCount", res.data.individual_count);
-        localStorage.setItem("localOrgCount", res.data.org_count);
-      });
+    await axios.get(`${url}/type-count`, { headers: headers }).then((res) => {
+      setIndividualUsersCount(parseInt(res.data.individual_count));
+      setOrgUsersCount(parseInt(res.data.org_count));
+      localStorage.setItem("localIndividualCount", res.data.individual_count);
+      localStorage.setItem("localOrgCount", res.data.org_count);
+    });
   };
 
   const getIndividualUsers = async (pageNumber, records_per_page, count) => {
@@ -170,7 +167,7 @@ const ManageUsers = () => {
       number_of_records: records_per_page,
     };
     await axios
-      .post(url, individualBodyData, { headers: headers })
+      .post(`${url}/get-users`, individualBodyData, { headers: headers })
       .then((res) => {
         setUsers({ individualUsers: res.data, orgUsers: [] });
       });
@@ -197,12 +194,14 @@ const ManageUsers = () => {
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-    await axios.post(url, orgBodyData, { headers: headers }).then((res) => {
-      setUsers({
-        orgUsers: res.data,
-        individualUsers: [],
+    await axios
+      .post(`${url}/get-users`, orgBodyData, { headers: headers })
+      .then((res) => {
+        setUsers({
+          orgUsers: res.data,
+          individualUsers: [],
+        });
       });
-    });
     setLoading(false);
   };
 
@@ -288,7 +287,7 @@ const ManageUsers = () => {
   }, [orgUsersCount, individualUsersCount]);
 
   useEffect(() => {
-    saveUsersCount(1, 1);
+    saveUsersCount();
     if (userType) {
       togglePaginationActiveClass(userType);
     }
