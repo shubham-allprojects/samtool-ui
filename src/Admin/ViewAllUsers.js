@@ -18,6 +18,7 @@ const ManageUsers = () => {
   });
   const data = JSON.parse(localStorage.getItem("data"));
   const localPageNo = parseInt(localStorage.getItem("localPageNo"));
+  localPageNo ? (currentPageNumber = localPageNo) : (currentPageNumber = 1);
   const localUserType = localStorage.getItem("localUserType");
   const localIndividualCount = parseInt(
     localStorage.getItem("localIndividualCount")
@@ -286,11 +287,14 @@ const ManageUsers = () => {
   };
 
   useEffect(() => {
-    currentPageNumber = localPageNo;
     if (userType === "Individual User") {
-      getIndividualUsers(localPageNo, records_per_page, individualUsersCount);
+      getIndividualUsers(
+        currentPageNumber,
+        records_per_page,
+        individualUsersCount
+      );
     } else if (userType === "Organizational User") {
-      getOrgUsers(localPageNo, records_per_page, orgUsersCount);
+      getOrgUsers(currentPageNumber, records_per_page, orgUsersCount);
     }
     // eslint-disable-next-line
   }, [orgUsersCount, individualUsersCount]);
