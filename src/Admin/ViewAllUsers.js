@@ -289,17 +289,16 @@ const ManageUsers = () => {
     currentPageNumber = localPageNo;
     if (localUserType === "Individual User") {
       getIndividualUsers(localPageNo, records_per_page, localIndividualCount);
-    } else {
+    } else if (localUserType === "Organizational User") {
       getOrgUsers(localPageNo, records_per_page, localOrgCount);
     }
-
     // eslint-disable-next-line
-  }, []);
+  }, [orgUsersCount, individualUsersCount]);
 
   useEffect(() => {
     if (userType === "Individual User") {
       setPageNumbers(individualUsersCount);
-    } else {
+    } else if (userType === "Organizational User") {
       setPageNumbers(orgUsersCount);
     }
     // eslint-disable-next-line
