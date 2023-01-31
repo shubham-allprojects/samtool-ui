@@ -142,31 +142,41 @@ const LoginMainPage = () => {
                 <h6 className="fw-bold">Login with Email</h6>
                 <div className="row">
                   <div className="col-lg-12 mb-3">
-                    <input
-                      onChange={onUserNameAndPasswordChange}
-                      type="email"
-                      name="email"
-                      className="form-control"
-                      id="exampleInputEmail1"
-                      placeholder="Email"
-                      required
-                    />
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon1">
+                        <i class="bi bi-envelope-at-fill"></i>
+                      </span>
+                      <input
+                        onChange={onUserNameAndPasswordChange}
+                        type="email"
+                        name="email"
+                        className="form-control"
+                        id="exampleInputEmail1"
+                        placeholder="Email"
+                        required
+                      />
+                    </div>
                   </div>
-                  <div className="col-lg-12 mb-3 position-relative">
-                    <input
-                      onChange={onUserNameAndPasswordChange}
-                      name="password"
-                      type={passwordType}
-                      className="form-control"
-                      id="exampleInputPassword1"
-                      placeholder="Password"
-                      required
-                    />
-                    <i
-                      placeholder={eyeIcon}
-                      onClick={changeEyeIcon1}
-                      className={`icon-eye-login bi bi-${eyeIcon}`}
-                    ></i>
+                  <div className="col-lg-12 mb-3">
+                    <div class="input-group position-relative">
+                      <span class="input-group-text" id="basic-addon1">
+                        <i class="bi bi-lock-fill"></i>
+                      </span>
+                      <input
+                        onChange={onUserNameAndPasswordChange}
+                        name="password"
+                        type={passwordType}
+                        className="form-control"
+                        id="exampleInputPassword1"
+                        placeholder="Password"
+                        required
+                      />
+                      <i
+                        placeholder={eyeIcon}
+                        onClick={changeEyeIcon1}
+                        className={`icon-eye-login bi bi-${eyeIcon}`}
+                      ></i>
+                    </div>
                   </div>
                 </div>
                 {/* Login with OTP section */}
