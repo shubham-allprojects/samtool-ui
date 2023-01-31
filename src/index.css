@@ -557,7 +557,7 @@ input[type="number"] {
 
 /* Reset Password */
 
-.reset-password-wrapper .form-control {
+.set-password-wrapper .form-control {
   border-top: none;
   border-left: none;
   border-right: none;
@@ -565,7 +565,7 @@ input[type="number"] {
   padding: 0.2rem 0.1rem !important;
 }
 
-.reset-password-wrapper .form-control:focus {
+.set-password-wrapper .form-control:focus {
   border-color: lightgray;
 }
 
@@ -582,7 +582,7 @@ input[type="number"] {
   font-size: 10px;
 }
 
-.reset-pass-img {
+.set-pass-img {
   height: 100%;
   width: 100%;
 }
@@ -862,7 +862,7 @@ input[type="number"] {
     left: 70px;
   }
 
-  .reset-pass-img {
+  .set-pass-img {
     height: 435px;
   }
 
@@ -890,7 +890,7 @@ input[type="number"] {
     width: 32% !important;
   }
 
-  .reset-pass-img {
+  .set-pass-img {
     height: 441px;
   }
 

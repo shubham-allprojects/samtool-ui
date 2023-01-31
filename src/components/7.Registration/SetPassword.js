@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
-import resetPassImg from "../../images/resetpass.svg";
+import setPassImg from "../../images/setpass.svg";
 
 const SetPassword = () => {
   //  Important variables for storing password data as well as validation data.
@@ -18,7 +18,7 @@ const SetPassword = () => {
     passwordType2: "password",
   });
 
-  const [resetBtnClassName, setResetBtnClassName] = useState("");
+  const [setPassBtnClassName, setSetPassBtnClassName] = useState("");
 
   const [alertDetails, setAlertDetails] = useState({
     alertVisible: false,
@@ -78,7 +78,7 @@ const SetPassword = () => {
     }
   };
 
-  // On reset Button click this function will run.
+  // On setPassWord Button click this function will run.
   const onSetPasswordFormSubmit = async (e) => {
     e.preventDefault();
     if (
@@ -117,7 +117,7 @@ const SetPassword = () => {
         passwordType2: "text",
       });
     } else {
-      setResetBtnClassName("disabled");
+      setSetPassBtnClassName("disabled");
       e.target.reset();
       await axios.post(
         `/sam/v1/customer-registration/set-password`,
@@ -161,7 +161,7 @@ const SetPassword = () => {
 
   return (
     <Layout>
-      <section className="reset-password-wrapper section-padding min-100vh">
+      <section className="set-password-wrapper section-padding min-100vh">
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8 order-2 order-lg-1 mt-5 mt-lg-0">
@@ -241,7 +241,7 @@ const SetPassword = () => {
                   <div className="col-lg-12">
                     <button
                       type="submit"
-                      className={`btn common-btn w-100 ${resetBtnClassName}`}
+                      className={`btn common-btn w-100 ${setPassBtnClassName}`}
                     >
                       Set Password
                     </button>
@@ -250,7 +250,7 @@ const SetPassword = () => {
               </form>
             </div>
             <div className="col-xl-5 col-lg-6 col-md-8 order-1 order-lg-2 mb-md-5 mb-lg-0">
-              <img src={resetPassImg} alt="" className="reset-pass-img" />
+              <img src={setPassImg} alt="" className="set-pass-img" />
             </div>
           </div>
         </div>
