@@ -119,20 +119,24 @@ const SetPassword = () => {
         passwordType2: "text",
       });
     } else {
-      console.log(localStorage.getItem("token"));
-      setSetPassBtnClassName("disabled");
-      e.target.reset();
-      await axios.post(
-        `/sam/v1/customer-registration/set-password`,
-        JSON.stringify({
-          password: newPassword,
-          token: localStorage.getItem("token"),
-        })
-      );
-      toast.success("Password Saved Successfully !");
-      setTimeout(() => {
-        goTo("/login");
-      }, 3000);
+      let verifiedToken = localStorage.getItem("token");
+      if (verifiedToken) {
+        setSetPassBtnClassName("disabled");
+        e.target.reset();
+        await axios.post(
+          `/sam/v1/customer-registration/set-password`,
+          JSON.stringify({
+            password: newPassword,
+            token: localStorage.getItem("token"),
+          })
+        );
+        toast.success("Password Saved Successfully !");
+        setTimeout(() => {
+          goTo("/login");
+        }, 3000);
+      } else {
+        toast.error("Verify Token First");
+      }
     }
   };
 
