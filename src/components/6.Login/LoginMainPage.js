@@ -113,10 +113,10 @@ const LoginMainPage = () => {
       <section className="login-wrapper min-100vh section-padding">
         <div className="container-fluid mt-5">
           <div className="row justify-content-evenly">
-            <div className="col-lg-5 col-xl-5 mb-5">
+            <div className="col-lg-5 col-xl-5 order-lg-1 order-2 mt-lg-0 mt-5 mb-5">
               <img src={login} alt="" className="login-img" />
             </div>
-            <div className="col-lg-5 col-xl-4 col-md-7">
+            <div className="col-lg-5 col-xl-4 col-md-7 order-lg-2 order-1">
               <form
                 onSubmit={onLogin}
                 action=""
