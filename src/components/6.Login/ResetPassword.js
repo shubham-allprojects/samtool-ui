@@ -152,7 +152,7 @@ const ResetPassword = () => {
       <section className="reset-password-wrapper section-padding min-100vh">
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
-            <div className="col-xl-5 col-lg-6 col-md-8">
+            <div className="col-xl-5 col-lg-6 col-md-8 order-1 order-lg-2">
               <form onSubmit={onresetPasswordFormSubmit} className="card p-5">
                 <h3 className="text-center fw-bold">Reset Password</h3>
                 <hr />
@@ -253,7 +253,7 @@ const ResetPassword = () => {
                 </div>
               </form>
             </div>
-            <div className="col-xl-5 col-lg-6 col-md-8 my-5 my-lg-0">
+            <div className="col-xl-5 col-lg-6 col-md-8 my-5 my-lg-0 order-2 order-lg-1">
               <img src={resetPassImg} alt="" className="set-pass-img" />
             </div>
           </div>
