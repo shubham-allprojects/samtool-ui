@@ -119,6 +119,7 @@ const SetPassword = () => {
         passwordType2: "text",
       });
     } else {
+      console.log(localStorage.getItem("token"));
       setSetPassBtnClassName("disabled");
       e.target.reset();
       await axios.post(
@@ -166,7 +167,7 @@ const SetPassword = () => {
       <section className="set-password-wrapper section-padding min-100vh">
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
-            <div className="col-xl-5 col-lg-6 col-md-8 order-2 order-lg-1 mt-5 mt-lg-0">
+            <div className="col-xl-5 col-lg-6 col-md-8">
               <form onSubmit={onSetPasswordFormSubmit} className="card p-5">
                 <h3 className="text-center fw-bold">Set Password</h3>
                 <hr />
@@ -251,7 +252,7 @@ const SetPassword = () => {
                 </div>
               </form>
             </div>
-            <div className="col-xl-5 col-lg-6 col-md-8 order-1 order-lg-2 mb-md-5 mb-lg-0">
+            <div className="col-xl-5 col-lg-6 col-md-8 my-5 my-lg-0">
               <img src={setPassImg} alt="" className="set-pass-img" />
             </div>
           </div>
