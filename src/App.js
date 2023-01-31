@@ -62,7 +62,7 @@ function App() {
             path="/login/reset-password"
             element={
               // <Protected>
-                <ResetPassword />
+              <ResetPassword />
               // </Protected>
             }
           />
@@ -70,7 +70,7 @@ function App() {
             path="/register/set-password"
             element={
               // <ProtectAfterLogin>
-                <SetPassword />
+              <SetPassword />
               // </ProtectAfterLogin>
             }
           />
