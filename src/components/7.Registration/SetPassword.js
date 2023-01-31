@@ -187,7 +187,7 @@ const SetPassword = () => {
                   <div className="col-lg-12 mb-4">
                     <div className="form-group position-relative">
                       <label className="text-muted" htmlFor="set-password">
-                        New Password<span className="text-danger ps-1">*</span>
+                        Password<span className="text-danger ps-1">*</span>
                       </label>
                       <input
                         id="set-password"
