@@ -21,9 +21,9 @@ function Header() {
     localStorage.clear();
     setAllUseStates({ ...allUseStates, loginStatus: false });
     setTimeout(() => {
-      window.location.reload();
+      // window.location.reload();
+      goTo("/");
     }, 2000);
-    goTo("/");
   };
 
   // Save status of login.

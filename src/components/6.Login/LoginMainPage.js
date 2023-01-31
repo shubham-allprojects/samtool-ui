@@ -142,9 +142,9 @@ const LoginMainPage = () => {
                 <h6 className="fw-bold">Login with Email</h6>
                 <div className="row">
                   <div className="col-lg-12 mb-3">
-                    <div class="input-group">
-                      <span class="input-group-text" id="basic-addon1">
-                        <i class="bi bi-envelope-at-fill"></i>
+                    <div className="input-group">
+                      <span className="input-group-text" id="basic-addon1">
+                        <i className="bi bi-envelope-at-fill"></i>
                       </span>
                       <input
                         onChange={onUserNameAndPasswordChange}
@@ -158,9 +158,9 @@ const LoginMainPage = () => {
                     </div>
                   </div>
                   <div className="col-lg-12 mb-3">
-                    <div class="input-group position-relative">
-                      <span class="input-group-text" id="basic-addon1">
-                        <i class="bi bi-lock-fill"></i>
+                    <div className="input-group position-relative">
+                      <span className="input-group-text" id="basic-addon1">
+                        <i className="bi bi-lock-fill"></i>
                       </span>
                       <input
                         onChange={onUserNameAndPasswordChange}

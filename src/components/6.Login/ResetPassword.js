@@ -181,9 +181,9 @@ const ResetPassword = () => {
                         New Password<span className="text-danger ps-1">*</span>
                       </label>
 
-                      <div class="input-group position-relative">
-                        <span class="input-group-text" id="basic-addon1">
-                          <i class="bi bi-lock-fill"></i>
+                      <div className="input-group position-relative">
+                        <span className="input-group-text" id="basic-addon1">
+                          <i className="bi bi-lock-fill"></i>
                         </span>
                         <input
                           id="set-password"
@@ -222,9 +222,9 @@ const ResetPassword = () => {
                       <span className="text-danger ps-1">*</span>
                     </label>
                     <div className="form-group">
-                      <div class="input-group position-relative">
-                        <span class="input-group-text" id="basic-addon1">
-                          <i class="bi bi-lock-fill"></i>
+                      <div className="input-group position-relative">
+                        <span className="input-group-text" id="basic-addon1">
+                          <i className="bi bi-lock-fill"></i>
                         </span>
                         <input
                           id="confirm-password"
