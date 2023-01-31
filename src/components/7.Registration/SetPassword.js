@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import resetPassImg from "../../images/resetpass.svg";
 
-const ResetPassword = () => {
+const SetPassword = () => {
   //  Important variables for storing password data as well as validation data.
   const [details, setDetails] = useState({
     newPassword: "",
@@ -42,7 +42,7 @@ const ResetPassword = () => {
   // Function to check if the password satisfies the given password condition.
   const onPasswordsBlur = (e) => {
     const { name, value } = e.target;
-    if (name === "resetPassword") {
+    if (name === "setPassword") {
       const regexForPassword =
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
       if (value.match(regexForPassword)) {
@@ -64,7 +64,7 @@ const ResetPassword = () => {
   // Onchange function for both password fields.
   const onPasswordsChange = (e) => {
     const { name, value } = e.target;
-    if (name === "resetPassword") {
+    if (name === "setPassword") {
       setDetails({
         ...details,
         newPassword: value,
@@ -79,7 +79,7 @@ const ResetPassword = () => {
   };
 
   // On reset Button click this function will run.
-  const onResetPasswordFormSubmit = async (e) => {
+  const onSetPasswordFormSubmit = async (e) => {
     e.preventDefault();
     if (
       newPassword !== confirmPassword &&
@@ -165,7 +165,7 @@ const ResetPassword = () => {
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8 order-2 order-lg-1 mt-5 mt-lg-0">
-              <form onSubmit={onResetPasswordFormSubmit} className="card p-5">
+              <form onSubmit={onSetPasswordFormSubmit} className="card p-5">
                 <h3 className="text-center fw-bold">Set Password</h3>
                 <hr />
                 {alertVisible ? (
@@ -186,12 +186,12 @@ const ResetPassword = () => {
                 <div className="row mt-3">
                   <div className="col-lg-12 mb-4">
                     <div className="form-group position-relative">
-                      <label className="text-muted" htmlFor="reset-password">
+                      <label className="text-muted" htmlFor="set-password">
                         New Password<span className="text-danger ps-1">*</span>
                       </label>
                       <input
-                        id="reset-password"
-                        name="resetPassword"
+                        id="set-password"
+                        name="setPassword"
                         type={passwordType1}
                         className="form-control"
                         onBlur={onPasswordsBlur}
@@ -259,4 +259,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default SetPassword;

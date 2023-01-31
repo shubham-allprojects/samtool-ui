@@ -3,7 +3,7 @@ import "./App.css";
 import Home from "./components/2.HomePage/Home";
 import ViewPropertyDetails from "./components/2.HomePage/ViewPropertyDetails";
 import LoginMainPage from "./components/6.Login/LoginMainPage";
-import ResetPassword from "./components/7.Registration/ResetPassword";
+import SetPassword from "./components/7.Registration/SetPassword";
 import Registration from "./components/7.Registration/RegistrationMainPage";
 import ScrollToTop from "./components/ScrollToTop";
 import VerifyToken from "./components/7.Registration/VerifyToken";
@@ -59,7 +59,7 @@ function App() {
             path="/register/reset-password"
             element={
               <ProtectAfterLogin>
-                <ResetPassword />
+                <SetPassword />
               </ProtectAfterLogin>
             }
           />
@@ -75,7 +75,7 @@ function App() {
             path="/profile/edit-details"
             element={
               <Protected>
-              <EditUserDetails />
+                <EditUserDetails />
               </Protected>
             }
           />
