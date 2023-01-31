@@ -337,6 +337,16 @@ input[type="number"] {
 
 /* Home about Us */
 
+.about-home-link {
+  color: black;
+  transition: 0.2s ease-in-out;
+}
+
+.about-home-link:hover {
+  color: var(--primary-color-hover);
+  transition: 0.2s ease-in-out;
+}
+
 .home-about-wrapper .common-col {
   height: 320px;
   width: 50% !important;

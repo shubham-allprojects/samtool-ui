@@ -66,13 +66,9 @@ function Header() {
                 </NavLink>
               </li>
               <li className="nav-item ps-lg-2">
-                <Link
-                  style={{ cursor: "pointer" }}
-                  className="nav-link"
-                  to="about"
-                >
+                <NavLink className="nav-link" to="/about">
                   About
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item ps-lg-2">
                 <NavLink className="nav-link" to="/contact">

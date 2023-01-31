@@ -22,6 +22,7 @@ import UploadProperties from "./Admin/UploadProperties";
 import ViewAllUsers from "./Admin/ViewAllUsers";
 import ViewCurrentUser from "./Admin/ViewCurrentUser";
 import ResetPassword from "./components/6.Login/ResetPassword";
+import AboutUs from "./components/3.About/AboutUs";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/property" element={<ViewPropertyDetails />} />
           <Route
@@ -67,9 +69,9 @@ function App() {
           <Route
             path="/register/set-password"
             element={
-              <ProtectAfterLogin>
+              // <ProtectAfterLogin>
                 <SetPassword />
-              </ProtectAfterLogin>
+              // </ProtectAfterLogin>
             }
           />
           <Route

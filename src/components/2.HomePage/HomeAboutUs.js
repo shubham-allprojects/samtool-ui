@@ -1,16 +1,22 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import WhoWeAre from "../../images/2.png";
 import WhyChooseUs from "../../images/3.png";
 
 const HomeAboutUs = () => {
   return (
     <>
-      <section id="about" className="home-about-wrapper">
+      <section className="home-about-wrapper">
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-6 about-details-col bg-white common-col order-md-1 order-1">
               <div className="px-md-4 px-lg-5 px-2 text-center">
-                <h1 className="text-center">WHO WE ARE</h1>
+                <h1 className="text-center">
+                  WHO WE ARE
+                  <NavLink to="/about" className="ms-4 about-home-link">
+                    <i class="bi bi-arrow-right-circle"></i>
+                  </NavLink>
+                </h1>
                 <p>
                   Finding the right property requires a lot of time and effort.
                   Won`t it be convenient if all the properties that fit your
