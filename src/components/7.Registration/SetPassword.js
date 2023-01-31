@@ -45,18 +45,20 @@ const SetPassword = () => {
     if (name === "setPassword") {
       const regexForPassword =
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
-      if (value.match(regexForPassword)) {
-        setDetails({
-          ...details,
-          newPassword: value,
-          invalidMessage1: "",
-        });
-      } else {
-        setDetails({
-          ...details,
-          newPassword: value,
-          invalidMessage1: "Invalid Password",
-        });
+      if (value) {
+        if (value.match(regexForPassword)) {
+          setDetails({
+            ...details,
+            newPassword: value,
+            invalidMessage1: "",
+          });
+        } else {
+          setDetails({
+            ...details,
+            newPassword: value,
+            invalidMessage1: "Invalid Password",
+          });
+        }
       }
     }
   };
