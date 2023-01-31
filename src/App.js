@@ -21,6 +21,7 @@ import ViewEditProperty from "./Admin/ViewEditProperty";
 import UploadProperties from "./Admin/UploadProperties";
 import ViewAllUsers from "./Admin/ViewAllUsers";
 import ViewCurrentUser from "./Admin/ViewCurrentUser";
+import ResetPassword from "./components/6.Login/ResetPassword";
 
 function App() {
   return (
@@ -48,7 +49,7 @@ function App() {
             }
           />
           <Route
-            path="/login"
+            path="/login/*"
             element={
               <ProtectAfterLogin>
                 <LoginMainPage />
@@ -56,7 +57,15 @@ function App() {
             }
           />
           <Route
-            path="/register/reset-password"
+            path="/login/reset-password"
+            element={
+              // <Protected>
+                <ResetPassword />
+              // </Protected>
+            }
+          />
+          <Route
+            path="/register/set-password"
             element={
               <ProtectAfterLogin>
                 <SetPassword />

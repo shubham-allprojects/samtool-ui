@@ -555,7 +555,7 @@ input[type="number"] {
   width: 18% !important;
 }
 
-/* Reset Password */
+/* Set Password */
 
 .set-password-wrapper .form-control {
   border-top: none;
@@ -569,7 +569,7 @@ input[type="number"] {
   border-color: lightgray;
 }
 
-.icon-eye {
+.icon-eye-setpass {
   position: absolute;
   right: 1rem;
   bottom: 0.5rem;
@@ -580,6 +580,31 @@ input[type="number"] {
 
 .password-condition {
   font-size: 10px;
+}
+
+.set-pass-img {
+  height: 100%;
+  width: 100%;
+}
+
+/* Reset Password */
+
+.reset-password-wrapper .input-group > .form-control:focus {
+  z-index: 0;
+}
+
+.icon-eye-resetpass {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.21rem;
+  font-size: 21px;
+  color: rgba(128, 128, 128, 0.855);
+  cursor: pointer;
+}
+
+.icon-lock-resetpass {
+  position: absolute;
+  bottom: 0;
 }
 
 .set-pass-img {

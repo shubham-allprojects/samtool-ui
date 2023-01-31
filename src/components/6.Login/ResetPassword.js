@@ -1,12 +1,11 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
-import setPassImg from "../../images/setpass.svg";
+import resetPassImg from "../../images/resetPass.svg";
 
-const SetPassword = () => {
+const ResetPassword = () => {
   //  Important variables for storing password data as well as validation data.
   const [details, setDetails] = useState({
     newPassword: "",
@@ -18,7 +17,7 @@ const SetPassword = () => {
     passwordType2: "password",
   });
 
-  const [setPassBtnClassName, setSetPassBtnClassName] = useState("");
+  const [resetBtnClassName, setResetBtnClassName] = useState("");
 
   const [alertDetails, setAlertDetails] = useState({
     alertVisible: false,
@@ -42,7 +41,7 @@ const SetPassword = () => {
   // Function to check if the password satisfies the given password condition.
   const onPasswordsBlur = (e) => {
     const { name, value } = e.target;
-    if (name === "setPassword") {
+    if (name === "resetPassword") {
       const regexForPassword =
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
       if (value) {
@@ -66,7 +65,7 @@ const SetPassword = () => {
   // Onchange function for both password fields.
   const onPasswordsChange = (e) => {
     const { name, value } = e.target;
-    if (name === "setPassword") {
+    if (name === "resetPassword") {
       setDetails({
         ...details,
         newPassword: value,
@@ -81,7 +80,7 @@ const SetPassword = () => {
   };
 
   // On setPassWord Button click this function will run.
-  const onSetPasswordFormSubmit = async (e) => {
+  const onresetPasswordFormSubmit = async (e) => {
     e.preventDefault();
     if (
       newPassword !== confirmPassword &&
@@ -119,24 +118,6 @@ const SetPassword = () => {
         passwordType2: "text",
       });
     } else {
-      let verifiedToken = localStorage.getItem("token");
-      if (verifiedToken) {
-        setSetPassBtnClassName("disabled");
-        e.target.reset();
-        await axios.post(
-          `/sam/v1/customer-registration/set-password`,
-          JSON.stringify({
-            password: newPassword,
-            token: localStorage.getItem("token"),
-          })
-        );
-        toast.success("Password Saved Successfully !");
-        setTimeout(() => {
-          goTo("/login");
-        }, 3000);
-      } else {
-        toast.error("Verify Token First");
-      }
     }
   };
 
@@ -168,12 +149,12 @@ const SetPassword = () => {
 
   return (
     <Layout>
-      <section className="set-password-wrapper section-padding min-100vh">
+      <section className="reset-password-wrapper section-padding min-100vh">
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8">
-              <form onSubmit={onSetPasswordFormSubmit} className="card p-5">
-                <h3 className="text-center fw-bold">Set Password</h3>
+              <form onSubmit={onresetPasswordFormSubmit} className="card p-5">
+                <h3 className="text-center fw-bold">Reset Password</h3>
                 <hr />
                 {alertVisible ? (
                   <div
@@ -192,25 +173,33 @@ const SetPassword = () => {
                 )}
                 <div className="row mt-3">
                   <div className="col-lg-12 mb-4">
-                    <div className="form-group position-relative">
-                      <label className="text-muted" htmlFor="set-password">
-                        Password<span className="text-danger ps-1">*</span>
+                    <div className="form-group">
+                      <label
+                        className="text-muted form-label"
+                        htmlFor="set-password"
+                      >
+                        New Password<span className="text-danger ps-1">*</span>
                       </label>
-                      <input
-                        id="set-password"
-                        name="setPassword"
-                        type={passwordType1}
-                        className="form-control"
-                        onBlur={onPasswordsBlur}
-                        onChange={onPasswordsChange}
-                        required
-                      />
 
-                      <i
-                        placeholder={eyeIcon}
-                        onClick={changeEyeIcon1}
-                        className={`icon-eye-setpass bi bi-${eyeIcon}`}
-                      ></i>
+                      <div class="input-group position-relative">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="bi bi-lock-fill"></i>
+                        </span>
+                        <input
+                          id="set-password"
+                          name="resetPassword"
+                          type={passwordType1}
+                          className="form-control"
+                          onBlur={onPasswordsBlur}
+                          onChange={onPasswordsChange}
+                          required
+                        />
+                        <i
+                          placeholder={eyeIcon}
+                          onClick={changeEyeIcon1}
+                          className={`icon-eye-resetpass bi bi-${eyeIcon}`}
+                        ></i>
+                      </div>
                     </div>
                     {invalidMessage1 ? (
                       <span className="pe-1 text-danger">
@@ -225,39 +214,47 @@ const SetPassword = () => {
                     </span>
                   </div>
                   <div className="col-lg-12 mb-4">
-                    <label className="text-muted" htmlFor="confirm-password">
+                    <label
+                      className="text-muted form-label"
+                      htmlFor="confirm-password"
+                    >
                       Confirm Password
                       <span className="text-danger ps-1">*</span>
                     </label>
-                    <div className="form-group position-relative">
-                      <input
-                        id="confirm-password"
-                        name="confirmPassword"
-                        type={passwordType2}
-                        className="form-control"
-                        onChange={onPasswordsChange}
-                        required
-                      />
-                      <i
-                        placeholder={eyeIcon}
-                        onClick={changeEyeIcon2}
-                        className={`icon-eye-setpass bi bi-${eyeIcon2}`}
-                      ></i>
+                    <div className="form-group">
+                      <div class="input-group position-relative">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="bi bi-lock-fill"></i>
+                        </span>
+                        <input
+                          id="confirm-password"
+                          name="confirmPassword"
+                          type={passwordType2}
+                          className="form-control"
+                          onChange={onPasswordsChange}
+                          required
+                        />
+                        <i
+                          placeholder={eyeIcon}
+                          onClick={changeEyeIcon2}
+                          className={`icon-eye-resetpass bi bi-${eyeIcon2}`}
+                        ></i>
+                      </div>
                     </div>
                   </div>
                   <div className="col-lg-12">
                     <button
                       type="submit"
-                      className={`btn common-btn w-100 ${setPassBtnClassName}`}
+                      className={`btn common-btn w-100 ${resetBtnClassName}`}
                     >
-                      Set Password
+                      Reset Password
                     </button>
                   </div>
                 </div>
               </form>
             </div>
             <div className="col-xl-5 col-lg-6 col-md-8 my-5 my-lg-0">
-              <img src={setPassImg} alt="" className="set-pass-img" />
+              <img src={resetPassImg} alt="" className="set-pass-img" />
             </div>
           </div>
         </div>
@@ -266,4 +263,4 @@ const SetPassword = () => {
   );
 };
 
-export default SetPassword;
+export default ResetPassword;
