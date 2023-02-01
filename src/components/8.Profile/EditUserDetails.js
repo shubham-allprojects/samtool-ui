@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { rootTitile } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
@@ -47,6 +47,7 @@ const EditUserDetails = () => {
   const [allUseStates, setAllUseStates] = useState({
     isReadOnly: true,
     editClassName: "editable-values",
+    editBtnClassName: "",
     cancelUpdateBtnClassName: "d-none",
     lableVisibility: "",
     selectStateClassName: "d-none",
@@ -59,6 +60,7 @@ const EditUserDetails = () => {
   const {
     isReadOnly,
     editClassName,
+    editBtnClassName,
     cancelUpdateBtnClassName,
     lableVisibility,
     selectStateClassName,
@@ -241,6 +243,7 @@ const EditUserDetails = () => {
       ...allUseStates,
       isReadOnly: false,
       editClassName: "",
+      editBtnClassName: "d-none",
       cancelUpdateBtnClassName: "",
       lableVisibility: "d-none",
       selectStateClassName: "",
@@ -289,6 +292,7 @@ const EditUserDetails = () => {
       citiesFromApi: cityByState.data,
       isReadOnly: true,
       editClassName: "editable-values",
+      editBtnClassName: "",
       cancelUpdateBtnClassName: "d-none",
       lableVisibility: "",
       selectStateClassName: "d-none",
@@ -330,6 +334,7 @@ const EditUserDetails = () => {
               ...allUseStates,
               isReadOnly: true,
               editClassName: "editable-values",
+              editBtnClassName: "",
               cancelUpdateBtnClassName: "d-none",
               lableVisibility: "",
               selectStateClassName: "d-none",
@@ -369,8 +374,14 @@ const EditUserDetails = () => {
                     <div className="col-4 text-end">
                       <i
                         onClick={editDetails}
-                        className="bi bi-pencil-square"
+                        className={`bi bi-pencil-square ${editBtnClassName}`}
                       ></i>
+                      <NavLink
+                        to="/profile"
+                        className="ms-4 text-decoration-none"
+                      >
+                        View Profile <i className="bi bi-arrow-right"></i>
+                      </NavLink>
                     </div>
                     <div className="col-xl-4 col-lg-4 col-md-6  col-12">
                       <div className="form-group mb-3">
