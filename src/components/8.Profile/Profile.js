@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
 import { rootTitile } from "../../CommonFunctions";
+import { NavLink } from "react-router-dom";
 
 const Profile = () => {
   const data = JSON.parse(localStorage.getItem("data"));
@@ -122,7 +123,7 @@ const Profile = () => {
         <div className="container-fluid wrapper">
           <div className="row justify-content-center">
             <div className="col-12 px-4">
-              <div className="row border p-4 shadow">
+              <div className="row border px-4 py-5 shadow">
                 {/* Profile image */}
                 <div className="col-md-2 text-center text-md-start">
                   <img
@@ -187,6 +188,21 @@ const Profile = () => {
                         {email} <br />
                       </div>
                     )}
+                    <div className="col-md-4">
+                      <p className="text-muted fw-bold">Quick Links</p>
+                      <ul>
+                        <li>
+                          <NavLink to="/reset-password">
+                            Reset Password
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/profile/edit-details">
+                            Edit Details
+                          </NavLink>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
