@@ -163,73 +163,30 @@ const Profile = () => {
                       <span className="text-muted">Zip:</span> {zip}
                     </div>
                     {user_type === "Individual User" ? (
-                      <>
-                        <div className="col-md-4 mt-4 mt-md-0">
-                          <div>
-                            <p className="text-muted fw-bold">MOBILE</p>
-                            <p>{mobile_number}</p>
-                          </div>
-                          <div className="mt-4 mt-md-5">
-                            <p className="text-muted fw-bold">PAN</p>
-                            <p>{pan_number}</p>
-                          </div>
-                        </div>
-                        <div className="col-md-4">
-                          <div className="mt-4 mt-md-0">
-                            <p className="text-muted fw-bold">AADHAAR</p>
-                            <p>{aadhar_number}</p>
-                          </div>
-                          <div className="mt-4 mt-md-5">
-                            <p className="text-muted fw-bold">EMAIL</p>
-                            <p>{email}</p>
-                          </div>
-                        </div>
-                      </>
+                      <div className="col-md-4 mt-4 mt-md-0">
+                        <p className="text-muted fw-bold">Personal Details</p>
+                        <span className="text-muted">Mobile Number: </span>
+                        {mobile_number} <br />
+                        <span className="text-muted">Pan Number: </span>
+                        {pan_number} <br />
+                        <span className="text-muted">Aadhaar Number: </span>
+                        {aadhar_number} <br />
+                        <span className="text-muted">Email address: </span>
+                        {email} <br />
+                      </div>
                     ) : (
-                      <>
-                        <div className="col-md-4 mt-4 mt-md-0">
-                          <div>
-                            <p className="text-muted fw-bold">CIN</p>
-                            <p>{cin_number}</p>
-                          </div>
-                          <div className="mt-4 mt-md-5">
-                            <p className="text-muted fw-bold">TAN</p>
-                            <p>{tan_number}</p>
-                          </div>
-                        </div>
-                        <div className="col-md-4">
-                          <div className="mt-4 mt-md-0">
-                            <p className="text-muted fw-bold">GST</p>
-                            <p>{gst_number}</p>
-                          </div>
-                          <div className="mt-4 mt-md-5">
-                            <p className="text-muted fw-bold">EMAIL</p>
-                            <p>{email}</p>
-                          </div>
-                        </div>
-                      </>
+                      <div className="col-md-4 mt-4 mt-md-0">
+                        <p className="text-muted fw-bold">Other Details</p>
+                        <span className="text-muted">Cin Number: </span>
+                        {cin_number} <br />
+                        <span className="text-muted">Tan Number: </span>
+                        {tan_number} <br />
+                        <span className="text-muted">Gst Number: </span>
+                        {gst_number} <br />
+                        <span className="text-muted">Email Address: </span>
+                        {email} <br />
+                      </div>
                     )}
-                  </div>
-                </div>
-                <div className="col-md-6 mt-4 mt-md-0">
-                  <p className="text-muted">
-                    some text Lorem ipsum dolor sit amet.
-                  </p>
-
-                  <div className="progress mt-4">
-                    <div
-                      className="progress-bar bg-primary progress-bar-striped progress-bar-animated"
-                      title="25%"
-                      role="progressbar"
-                      style={{ width: "75%" }}
-                      aria-valuenow="25"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="top"
-                    >
-                      75%
-                    </div>
                   </div>
                 </div>
               </div>
