@@ -119,6 +119,14 @@ const ResetPassword = () => {
         passwordType2: "text",
       });
     } else {
+      // alert("Logged Out Successfully");
+      toast.success("Password changed successfully");
+      // Clear localStorage.
+      localStorage.clear();
+      setTimeout(() => {
+        // window.location.reload();
+        goTo("/login");
+      }, 2000);
     }
   };
 
