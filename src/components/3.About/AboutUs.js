@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { rootTitile } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
 
 const AboutUs = () => {
+  useEffect(() => {
+    rootTitile.textContent = "SAM TOOL - ABOUT";
+  }, []);
+
   return (
     <Layout>
       <section className="section-padding about-wrapper min-100vh">

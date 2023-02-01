@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import login from "../../images/loginsvg.svg";
+import { rootTitile } from "../../CommonFunctions";
 
 const LoginMainPage = () => {
   // It is used to navigate to particular route.
@@ -107,6 +108,10 @@ const LoginMainPage = () => {
         }
       });
   };
+
+  useEffect(() => {
+    rootTitile.textContent = "SAM TOOL - LOGIN";
+  }, []);
 
   return (
     <Layout>

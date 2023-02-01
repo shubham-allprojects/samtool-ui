@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { rootTitile } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
 
 const Contact = () => {
+  useEffect(() => {
+    rootTitile.textContent = "SAM TOOL - CONTACT";
+  }, []);
   return (
     <Layout>
       <section className="contact-wrapper">

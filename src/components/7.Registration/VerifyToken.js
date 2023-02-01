@@ -1,10 +1,10 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import verifyTokenImg from "../../images/verifytoken.svg";
+import { rootTitile } from "../../CommonFunctions";
 
 const VerifyToken = () => {
   // useState to save token entered by user.
@@ -72,6 +72,10 @@ const VerifyToken = () => {
         }
       });
   };
+
+  useEffect(() => {
+    rootTitile.textContent = "SAM TOOL - VERIFY TOKEN";
+  }, []);
 
   return (
     <Layout>

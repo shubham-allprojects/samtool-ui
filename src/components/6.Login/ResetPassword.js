@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import resetPassImg from "../../images/resetPass.svg";
+import { rootTitile } from "../../CommonFunctions";
 
 const ResetPassword = () => {
   //  Important variables for storing password data as well as validation data.
@@ -146,6 +147,10 @@ const ResetPassword = () => {
       });
     }
   };
+
+  useEffect(() => {
+    rootTitile.textContent = "SAM TOOL - RESET PASSWORD";
+  }, []);
 
   return (
     <Layout>

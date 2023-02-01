@@ -14,3 +14,5 @@ export function counter(id, start, end, duration) {
     }, step);
   }
 }
+
+export const rootTitile = document.getElementById("root-title");

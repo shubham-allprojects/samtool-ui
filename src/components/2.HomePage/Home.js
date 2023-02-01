@@ -5,6 +5,7 @@ import Properties from "./Properties";
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-scroll";
+import { rootTitile } from "../../CommonFunctions";
 
 function Home() {
   // useState to store data of each field e.g all states, all banks etc.
@@ -171,6 +172,7 @@ function Home() {
 
   // This will run every time we refresh page or if some state change occurs.
   useEffect(() => {
+    rootTitile.textContent = "SAM TOOL - HOME" 
     getSearchDetails();
     // getDataFromLocal();
     changeNavBarColor();

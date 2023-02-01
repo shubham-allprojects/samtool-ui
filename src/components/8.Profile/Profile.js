@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
+import { rootTitile } from "../../CommonFunctions";
 
 const Profile = () => {
   const data = JSON.parse(localStorage.getItem("data"));
@@ -110,6 +111,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    rootTitile.textContent = "SAM TOOL - PROFILE";
     getUserProfileDetails();
     // eslint-disable-next-line
   }, []);

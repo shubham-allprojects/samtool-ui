@@ -5,6 +5,7 @@ import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useRef } from "react";
+import { rootTitile } from "../../CommonFunctions";
 
 const Registration = () => {
   const goTo = useNavigate();
@@ -596,6 +597,7 @@ const Registration = () => {
   };
 
   useEffect(() => {
+    rootTitile.textContent = "SAM TOOL - REGISTER";
     resetValues();
     getAllSates();
   }, []);
