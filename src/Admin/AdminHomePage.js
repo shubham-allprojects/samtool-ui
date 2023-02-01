@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import AdminSideBar from "./AdminSideBar";
 import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
-import { counter } from "./CommonFunctions";
+import { counter } from "../../src/CommonFunctions";
 
 let orgCount = 0;
 let indiCount = 0;
