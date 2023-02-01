@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminSideBar from "./AdminSideBar";
 import Papa from "papaparse";
 import { useRef } from "react";
 import Layout from "../components/1.CommonLayout/Layout";
+import { rootTitile } from "../CommonFunctions";
 
 const allowedExtensions = ["csv"];
 const UploadProperties = () => {
@@ -75,6 +76,10 @@ const UploadProperties = () => {
       }
     }
   };
+
+  useEffect(() => {
+    rootTitile.textContent = "ADMIN - UPLOAD PROPERTIES";
+  }, []);
 
   return (
     <Layout>
