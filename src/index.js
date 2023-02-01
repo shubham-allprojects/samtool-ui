@@ -18,7 +18,7 @@ axios.interceptors.request.use((req) => {
 
 axios.interceptors.response.use((res) => {
   let endTime = new Date().getTime() / 1000;
-  console.log(res.request.responseURL);
+  console.log(res.request.responseURL, res.config.method);
   console.log("Response Time: ", (endTime - startTime).toFixed(4), "sec");
   return res;
 });
