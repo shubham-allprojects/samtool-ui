@@ -166,16 +166,16 @@ const ManageUsers = () => {
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-    let startTime = new Date().getTime() / 1000;
+    // let startTime = new Date().getTime() / 1000;
     await axios
       .post(`${url}/get-users`, individualBodyData, { headers: headers })
       .then((res) => {
-        let endTime = new Date().getTime() / 1000;
-        console.log(
-          `(Method: POST) GET individual Users - Response Time: ${(
-            endTime - startTime
-          ).toFixed(4)} sec`
-        );
+        // let endTime = new Date().getTime() / 1000;
+        // console.log(
+        //   `(Method: POST) GET individual Users - Response Time: ${(
+        //     endTime - startTime
+        //   ).toFixed(4)} sec`
+        // );
         setUsers({ individualUsers: res.data, orgUsers: [] });
       });
     setLoading(false);
@@ -201,16 +201,16 @@ const ManageUsers = () => {
       page_number: pageNumber,
       number_of_records: records_per_page,
     };
-    let startTime = new Date().getTime() / 1000;
+    // let startTime = new Date().getTime() / 1000;
     await axios
       .post(`${url}/get-users`, orgBodyData, { headers: headers })
       .then((res) => {
-        let endTime = new Date().getTime() / 1000;
-        console.log(
-          `(Method: POST) GET Organizational Users - Response Time: ${(
-            endTime - startTime
-          ).toFixed(4)} sec`
-        );
+        // let endTime = new Date().getTime() / 1000;
+        // console.log(
+        //   `(Method: POST) GET Organizational Users - Response Time: ${(
+        //     endTime - startTime
+        //   ).toFixed(4)} sec`
+        // );
         setUsers({
           orgUsers: res.data,
           individualUsers: [],
