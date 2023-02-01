@@ -192,9 +192,7 @@ const Profile = () => {
                       <p className="text-muted fw-bold">Quick Links</p>
                       <ul>
                         <li>
-                          <NavLink to="/reset-password">
-                            Reset Password
-                          </NavLink>
+                          <NavLink to="/reset-password">Reset Password</NavLink>
                         </li>
                         <li>
                           <NavLink to="/profile/edit-details">
