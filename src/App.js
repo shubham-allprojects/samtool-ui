@@ -93,13 +93,16 @@ function App() {
 
           {/* Admin */}
           <Route path="/admin" element={<AdminHomePage />} />
-          <Route path="/admin/property/*" element={<ViewAllProperties />} />
+          <Route
+            path="/admin/property/properties"
+            element={<ViewAllProperties />}
+          />
           <Route
             path="/admin/property/edit-property/:id"
             element={<ViewEditProperty />}
           />
           <Route
-            path="/admin/upload-properties"
+            path="/admin/property/upload-properties"
             element={<UploadProperties />}
           />
           <Route path="/admin/users/*" element={<ViewAllUsers />} />

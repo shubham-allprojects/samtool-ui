@@ -55,20 +55,20 @@ const AdminSideBar = () => {
                 <span
                   className="nav-link"
                   data-bs-toggle="collapse"
-                  data-bs-target="#collapseExample"
+                  data-bs-target="#propertyCollapse"
                 >
                   <span className="mx-2">
-                    <i class="bi bi-building-fill"></i>
+                    <i class="bi bi-building-fill text-light"></i>
                   </span>
                   Property
                   <i className="bi bi-chevron-down ms-1"></i>
                 </span>
 
-                <div className="collapse" id="collapseExample">
+                <div className="collapse" id="propertyCollapse">
                   <div className="card card-body bg-primary">
                     <ul className="list-unstyled">
                       <li className="nav-item">
-                        <NavLink className="nav-link" to="/admin/property">
+                        <NavLink className="nav-link" to="/admin/property/properties">
                           <i className="bi bi-buildings-fill text-light me-2"></i>
                           Properties
                         </NavLink>
@@ -86,7 +86,7 @@ const AdminSideBar = () => {
                       <li className="nav-item">
                         <NavLink
                           className="nav-link"
-                          to="/admin/upload-properties"
+                          to="/admin/property/upload-properties"
                         >
                           <i class="bi bi-upload me-2 text-light"></i>Upload
                           Properties
@@ -105,14 +105,6 @@ const AdminSideBar = () => {
                 </NavLink>
               </li>
               <hr className="text-white" />
-              {/* <li className="nav-item">
-                <NavLink className="nav-link" to="/admin/upload-properties">
-                  <span className="mx-2">
-                    <i className="bi bi-upload text-light"></i>
-                  </span>
-                  Upload Properties
-                </NavLink>
-              </li> */}
             </ul>
           </div>
         </div>
