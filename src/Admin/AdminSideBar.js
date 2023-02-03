@@ -16,11 +16,11 @@ const AdminSideBar = () => {
     }
   };
   useEffect(() => {
-    if (window.location.pathname !== "/admin") {
+    const path = window.location.pathname;
+    if (path !== "/admin") {
       document.querySelector(".admin-home-link").classList.remove("active");
     }
-
-    if (window.location.pathname.includes("/admin/property")) {
+    if (path.includes("/admin/property")) {
       document.getElementById("propertyCollapse").classList.add("show");
     }
   });
