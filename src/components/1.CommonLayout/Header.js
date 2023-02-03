@@ -60,24 +60,6 @@ function Header() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <NavLink to="/" className="nav-link">
-                  Search
-                </NavLink>
-              </li>
-              <li className="nav-item ps-lg-2">
-                <NavLink className="nav-link" to="/about">
-                  About
-                </NavLink>
-              </li>
-              <li className="nav-item ps-lg-2">
-                <NavLink className="nav-link" to="/contact">
-                  Contact
-                </NavLink>
-              </li>
-              <li className="nav-item ps-lg-2">
-                <span className="nav-link">Account</span>
-              </li>
               {!loginStatus ? (
                 <>
                   <li className="nav-item ps-lg-2">
@@ -87,40 +69,78 @@ function Header() {
                   </li>
                   <li className="nav-item ps-lg-2">
                     <NavLink to="/register" className="nav-link">
-                      Registration
+                      Register
                     </NavLink>
                   </li>
                 </>
               ) : (
                 <>
                   <li className="nav-item ps-lg-2">
-                    <NavLink to="/profile" className="nav-link">
-                      Profile
-                    </NavLink>
+                    <span className="nav-link">
+                      <i class="bi bi-person-fill"></i> {userEmail}
+                    </span>
                   </li>
-                  <li className="nav-item ps-lg-2">
-                    <span className="nav-link">Welcome, {userEmail}</span>
-                  </li>
-                  {roleId === 1 ? (
-                    <li className="nav-item ps-lg-2">
-                      <NavLink to="/admin" className="nav-link">
-                        Administration
-                      </NavLink>
-                    </li>
-                  ) : (
-                    ""
-                  )}
                   <li className="nav-item ps-lg-2">
                     <span
                       style={{ cursor: "pointer" }}
                       className="nav-link"
                       onClick={logOut}
                     >
-                      Logout
+                      <i class="bi bi-box-arrow-right"></i> Logout
                     </span>
                   </li>
                 </>
               )}
+
+              <li class="nav-item dropdown">
+                <span
+                  class="nav-link dropdown-toggle"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Menu
+                </span>
+                <ul class="dropdown-menu main-nav-dropdown-menu">
+                  <li>
+                    <NavLink to="/" className="nav-link text-dark">
+                      Search
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="nav-link text-dark" to="/about">
+                      About
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="nav-link text-dark" to="/contact">
+                      Contact
+                    </NavLink>
+                  </li>
+                  <hr class="dropdown-divider" />
+                  {loginStatus !== null ? (
+                    <>
+                      <li>
+                        <NavLink to="/profile" className="nav-link text-dark">
+                          Profile
+                        </NavLink>
+                      </li>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {roleId && roleId === 1 ? (
+                    <li>
+                      <NavLink to="/admin" className="nav-link text-dark">
+                        Administration
+                      </NavLink>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+                </ul>
+              </li>
             </ul>
           </div>
         </div>

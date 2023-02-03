@@ -165,6 +165,7 @@ input[type="number"] {
 }
 
 /* Navbar */
+
 .navbar {
   background: var(--navbar-bg);
   transition: 0.3s ease-in-out;
@@ -203,6 +204,10 @@ input[type="number"] {
   font-size: 0.9rem;
   font-weight: 500;
   transition: 0.3s ease-in-out;
+}
+
+.main-nav-dropdown-menu[data-bs-popper] {
+  left: -80px !important;
 }
 
 /* Home */
