@@ -58,18 +58,29 @@ const AdminSideBar = () => {
                   data-bs-target="#collapseExample"
                 >
                   <span className="mx-2">
-                    <i className="bi bi-buildings-fill text-light"></i>
+                    <i class="bi bi-building-fill"></i>
                   </span>
-                  Properties
+                  Property
                   <i className="bi bi-chevron-down ms-1"></i>
                 </span>
 
                 <div className="collapse" id="collapseExample">
                   <div className="card card-body bg-primary">
-                    <ul>
+                    <ul className="list-unstyled">
                       <li className="nav-item">
                         <NavLink className="nav-link" to="/admin/property">
+                          <i className="bi bi-buildings-fill text-light me-2"></i>
                           Properties
+                        </NavLink>
+                      </li>
+
+                      <li className="nav-item">
+                        <NavLink
+                          className="nav-link"
+                          to="/admin/property/add-property"
+                        >
+                          <i className="bi bi-building-add text-light me-2"></i>
+                          Add
                         </NavLink>
                       </li>
                       <li className="nav-item">
@@ -77,7 +88,8 @@ const AdminSideBar = () => {
                           className="nav-link"
                           to="/admin/upload-properties"
                         >
-                          Upload Properties
+                          <i class="bi bi-upload me-2 text-light"></i>Upload
+                          Properties
                         </NavLink>
                       </li>
                     </ul>
