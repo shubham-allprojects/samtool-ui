@@ -19,6 +19,10 @@ const AdminSideBar = () => {
     if (window.location.pathname !== "/admin") {
       document.querySelector(".admin-home-link").classList.remove("active");
     }
+
+    if (window.location.pathname.includes("/admin/property")) {
+      document.getElementById("propertyCollapse").classList.add("show");
+    }
   });
 
   return (
@@ -58,7 +62,7 @@ const AdminSideBar = () => {
                   data-bs-target="#propertyCollapse"
                 >
                   <span className="mx-2">
-                    <i class="bi bi-building-fill text-light"></i>
+                    <i className="bi bi-building-fill text-light"></i>
                   </span>
                   Property
                   <i className="bi bi-chevron-down ms-1"></i>
@@ -91,7 +95,7 @@ const AdminSideBar = () => {
                           className="nav-link"
                           to="/admin/property/upload-properties"
                         >
-                          <i class="bi bi-upload me-2 text-light"></i>Upload
+                          <i className="bi bi-upload me-2 text-light"></i>Upload
                           Properties
                         </NavLink>
                       </li>
