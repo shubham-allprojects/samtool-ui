@@ -68,7 +68,10 @@ const AdminSideBar = () => {
                   <div className="card card-body bg-primary">
                     <ul className="list-unstyled">
                       <li className="nav-item">
-                        <NavLink className="nav-link" to="/admin/property/properties">
+                        <NavLink
+                          className="nav-link"
+                          to="/admin/property/properties"
+                        >
                           <i className="bi bi-buildings-fill text-light me-2"></i>
                           Properties
                         </NavLink>
