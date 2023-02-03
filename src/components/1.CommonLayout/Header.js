@@ -105,31 +105,20 @@ function Header() {
                 <ul class="dropdown-menu main-nav-dropdown-menu bg-primary">
                   <li>
                     <NavLink to="/" className="nav-link">
-                      Search
+                      <i class="bi bi-search text-white me-1"></i> Search
                     </NavLink>
                   </li>
                   <li>
                     <NavLink className="nav-link" to="/about">
-                      About
+                      <i class="bi bi-info-circle text-white me-1"></i> About
                     </NavLink>
                   </li>
                   <li>
                     <NavLink className="nav-link" to="/contact">
-                      Contact
+                      <i class="bi bi-telephone text-white me-1"></i> Contact
                     </NavLink>
                   </li>
-                  <hr class="dropdown-divider" />
-                  {loginStatus !== null ? (
-                    <>
-                      <li>
-                        <NavLink to="/profile" className="nav-link">
-                          Profile
-                        </NavLink>
-                      </li>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+                  <hr class="dropdown-divider bg-white" />
                   {roleId && roleId === 1 ? (
                     <li>
                       <NavLink to="/admin" className="nav-link">
@@ -138,6 +127,27 @@ function Header() {
                     </li>
                   ) : (
                     ""
+                  )}
+                  {loginStatus !== null ? (
+                    <>
+                      <li>
+                        <NavLink to="/profile" className="nav-link">
+                          <i class="bi bi-person-square text-white me-1"></i>
+                          Profile
+                        </NavLink>
+                      </li>
+                      <li>
+                        <span
+                          style={{ cursor: "pointer" }}
+                          className="nav-link"
+                          onClick={logOut}
+                        >
+                          <i class="bi bi-box-arrow-right"></i> Logout
+                        </span>
+                      </li>
+                    </>
+                  ) : (
+                    <></>
                   )}
                 </ul>
               </li>
