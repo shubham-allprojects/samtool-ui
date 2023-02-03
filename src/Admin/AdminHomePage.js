@@ -51,7 +51,7 @@ const AdminHomePage = () => {
               <div className="row">
                 <div className="col-xl-3 col-lg-4 col-md-6">
                   <NavLink
-                    to="/admin/property"
+                    to="/admin/property/properties"
                     className="card py-3 admin-top-cards"
                   >
                     <span className="me-xl-5 me-4">
