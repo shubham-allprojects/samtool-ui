@@ -23,6 +23,7 @@ import ViewAllUsers from "./Admin/ViewAllUsers";
 import ViewCurrentUser from "./Admin/ViewCurrentUser";
 import ResetPassword from "./components/6.Login/ResetPassword";
 import AboutUs from "./components/3.About/AboutUs";
+import AddProperty from "./Admin/AddProperty";
 
 function App() {
   return (
@@ -94,11 +95,15 @@ function App() {
           {/* Admin */}
           <Route path="/admin" element={<AdminHomePage />} />
           <Route
-            path="/admin/property/properties"
+            path="/admin/property/properties/*"
             element={<ViewAllProperties />}
           />
           <Route
-            path="/admin/property/edit-property/:id"
+            path="/admin/property/add-property"
+            element={<AddProperty />}
+          />
+          <Route
+            path="/admin/property/properties/edit-property/:id"
             element={<ViewEditProperty />}
           />
           <Route
