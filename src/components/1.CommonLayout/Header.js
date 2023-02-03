@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Link } from "react-scroll";
 import { toast } from "react-toastify";
 
 function Header() {

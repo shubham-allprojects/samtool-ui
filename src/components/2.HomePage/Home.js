@@ -4,7 +4,6 @@ import Layout from "../1.CommonLayout/Layout";
 import Properties from "./Properties";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-scroll";
 import { rootTitile } from "../../CommonFunctions";
 
 function Home() {
@@ -172,7 +171,7 @@ function Home() {
 
   // This will run every time we refresh page or if some state change occurs.
   useEffect(() => {
-    rootTitile.textContent = "SAM TOOL - HOME" 
+    rootTitile.textContent = "SAM TOOL - HOME";
     getSearchDetails();
     // getDataFromLocal();
     changeNavBarColor();
@@ -327,15 +326,14 @@ function Home() {
             {/* Search button*/}
             <div className="row justify-content-center py-4">
               <div className="text-center">
-                <Link
-                  to="properties"
+                <button
                   className={`btn btn-lg common-btn ${
                     Object.keys(dataToPost).length > 2 ? "" : "disabled"
                   }`}
                   onClick={getPropertyData}
                 >
                   Search
-                </Link>
+                </button>
               </div>
             </div>
           </div>
