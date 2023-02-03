@@ -118,17 +118,18 @@ function Header() {
                       <i class="bi bi-telephone text-white me-1"></i> Contact
                     </NavLink>
                   </li>
-                  <hr class="dropdown-divider bg-white" />
+                  {/* <hr class="dropdown-divider bg-white" /> */}
                   {roleId && roleId === 1 ? (
                     <li>
                       <NavLink to="/admin" className="nav-link">
+                        <i class="bi bi-person-fill-check text-white me-2"></i>
                         Administration
                       </NavLink>
                     </li>
                   ) : (
                     ""
                   )}
-                  {loginStatus !== null ? (
+                  {loginStatus ? (
                     <>
                       <li>
                         <NavLink to="/profile" className="nav-link">
