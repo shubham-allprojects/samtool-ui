@@ -132,7 +132,7 @@ function Header() {
                     <>
                       <li>
                         <NavLink to="/profile" className="nav-link">
-                          <i class="bi bi-person-square text-white me-1"></i>
+                          <i class="bi bi-person-square text-white me-2"></i>
                           Profile
                         </NavLink>
                       </li>
@@ -142,7 +142,8 @@ function Header() {
                           className="nav-link"
                           onClick={logOut}
                         >
-                          <i class="bi bi-box-arrow-right"></i> Logout
+                          <i class="bi bi-box-arrow-right text-white me-1"></i>{" "}
+                          Logout
                         </span>
                       </li>
                     </>
