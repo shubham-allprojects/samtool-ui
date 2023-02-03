@@ -102,19 +102,19 @@ function Header() {
                 >
                   Menu
                 </span>
-                <ul class="dropdown-menu main-nav-dropdown-menu">
+                <ul class="dropdown-menu main-nav-dropdown-menu bg-primary">
                   <li>
-                    <NavLink to="/" className="nav-link text-dark">
+                    <NavLink to="/" className="nav-link">
                       Search
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className="nav-link text-dark" to="/about">
+                    <NavLink className="nav-link" to="/about">
                       About
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className="nav-link text-dark" to="/contact">
+                    <NavLink className="nav-link" to="/contact">
                       Contact
                     </NavLink>
                   </li>
@@ -122,7 +122,7 @@ function Header() {
                   {loginStatus !== null ? (
                     <>
                       <li>
-                        <NavLink to="/profile" className="nav-link text-dark">
+                        <NavLink to="/profile" className="nav-link">
                           Profile
                         </NavLink>
                       </li>
@@ -132,7 +132,7 @@ function Header() {
                   )}
                   {roleId && roleId === 1 ? (
                     <li>
-                      <NavLink to="/admin" className="nav-link text-dark">
+                      <NavLink to="/admin" className="nav-link">
                         Administration
                       </NavLink>
                     </li>

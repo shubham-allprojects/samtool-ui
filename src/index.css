@@ -207,7 +207,7 @@ input[type="number"] {
 }
 
 .main-nav-dropdown-menu[data-bs-popper] {
-  left: -80px !important;
+  left: -90px !important;
 }
 
 /* Home */
