@@ -97,7 +97,7 @@ function Header() {
                       className="nav-link"
                       onClick={logOut}
                     >
-                      <i className="bi bi-box-arrow-right fs-2"></i> Logout
+                      <i className="bi bi-box-arrow-right"></i> Logout
                     </span>
                   </li>
                 </>
