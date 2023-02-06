@@ -76,7 +76,7 @@ small {
   top: 50% !important;
   left: 50% !important;
   transform: translateX(-50%) translateY(-50%) !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
   padding-top: 21% !important;
   padding-right: 38% !important;
   padding-left: 38% !important;
@@ -87,7 +87,7 @@ small {
 /* React confirm */
 
 .react-confirm-alert-overlay {
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
 .react-confirm-alert-body {
@@ -98,13 +98,13 @@ small {
 .react-confirm-alert-button-group > button {
   background: white !important;
   color: var(--primary-color) !important;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .react-confirm-alert-button-group > button:hover {
   background: orange !important;
   color: white !important;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .skyblue-bg {
