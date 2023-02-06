@@ -210,6 +210,11 @@ input[type="number"] {
   left: -120px !important;
   padding: 10px;
   width: 150px;
+  transition: 0.3s ease-in-out;
+}
+
+.main-nav-dropdown-menu {
+  border: 2px solid var(--primary-color-hover) !important;
 }
 
 /* Home */
