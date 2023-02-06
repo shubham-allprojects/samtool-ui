@@ -118,7 +118,7 @@ const ResetPassword = () => {
         passwordType2: "text",
       });
     } else {
-      // alert("Logged Out Successfully");
+      setResetBtnClassName("disabled");
       toast.success("Password changed successfully");
       // Clear localStorage.
       localStorage.clear();
