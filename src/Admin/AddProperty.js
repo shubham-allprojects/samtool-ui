@@ -52,6 +52,23 @@ const AddProperty = () => {
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
+                              htmlFor="property_image"
+                            >
+                              Image:
+                            </label>
+                            <input
+                              name="property_image"
+                              id="property_image"
+                              className="form-control"
+                              type="file"
+                              // required
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-4">
+                          <div className="form-group mb-3">
+                            <label
+                              className="form-label fw-bold"
                               htmlFor="category"
                             >
                               Category:
@@ -99,6 +116,8 @@ const AddProperty = () => {
                             />
                           </div>
                         </div>
+                      </div>
+                      <div className="row">
                         <div className="col-md-10 col-xl-8">
                           <div className="form-group mb-3">
                             <div className="row">
@@ -141,7 +160,9 @@ const AddProperty = () => {
                             </div>
                           </div>
                         </div>
-                        <hr className="mt-2" />
+                      </div>
+                      <hr />
+                      <div className="row">
                         <div className="col-12 text-end">
                           <button type="submit" className="btn btn-primary">
                             Add
