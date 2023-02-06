@@ -9,18 +9,6 @@ function Header() {
     userEmail: "",
   });
 
-  const onDropdownHover = (e) => {
-    const dropDownNav = e.target.nextElementSibling;
-    dropDownNav.classList.add("show");
-    dropDownNav.setAttribute("data-bs-popper", "static");
-  };
-
-  const onDropdownMouseLeave = (e) => {
-    const dropDownNav = e.target;
-    dropDownNav.classList.remove("show");
-    dropDownNav.removeAttribute("data-bs-popper");
-  };
-
   const { loginStatus, roleId, userEmail } = allUseStates;
   // To navigate to particular route.
   const goTo = useNavigate();
@@ -105,7 +93,6 @@ function Header() {
 
               <li className="nav-item dropdown ps-lg-2">
                 <span
-                  onMouseEnter={onDropdownHover}
                   className="nav-link"
                   id="navbarDropdown"
                   role="button"
@@ -115,7 +102,6 @@ function Header() {
                   <i className="bi bi-caret-down-square-fill"></i>
                 </span>
                 <ul
-                  onMouseLeave={onDropdownMouseLeave}
                   className="dropdown-menu main-nav-dropdown-menu bg-primary"
                   data-bs-popper="static"
                 >

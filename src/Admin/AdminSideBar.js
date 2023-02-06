@@ -76,7 +76,7 @@ const AdminSideBar = () => {
                           className="nav-link"
                           to="/admin/property/properties"
                         >
-                          <i className="bi bi-buildings-fill text-light me-2"></i>
+                          <i className="bi bi-buildings text-light me-2"></i>
                           Properties
                         </NavLink>
                       </li>
@@ -86,7 +86,7 @@ const AdminSideBar = () => {
                           className="nav-link"
                           to="/admin/property/add-property"
                         >
-                          <i className="bi bi-building-add text-light me-2"></i>
+                          <i className="bi bi-plus-circle text-light me-2"></i>
                           Add
                         </NavLink>
                       </li>
