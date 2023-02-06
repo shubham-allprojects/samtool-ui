@@ -367,11 +367,11 @@ const EditUserDetails = () => {
               <form onSubmit={updateDetails} className="card h-100">
                 <div className="card-body">
                   <div className="row">
-                    <div className="col-8">
+                    <div className="col-md-8 col-6">
                       <h6 className="mb-2 text-primary">Personal Details</h6>
                     </div>
 
-                    <div className="col-4 text-end">
+                    <div className="col-md-4 col-6 text-end">
                       <i
                         onClick={editDetails}
                         className={`bi bi-pencil-square ${editBtnClassName}`}
@@ -383,7 +383,7 @@ const EditUserDetails = () => {
                         View Profile <i className="bi bi-arrow-right"></i>
                       </NavLink>
                     </div>
-                    <div className="col-xl-4 col-lg-4 col-md-6  col-12">
+                    <div className="col-xl-4 col-lg-4 col-md-6 col-12">
                       <div className="form-group mb-3">
                         <label htmlFor="userType" className="form-label">
                           User Type:

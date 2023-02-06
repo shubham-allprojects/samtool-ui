@@ -188,7 +188,7 @@ const Profile = () => {
                         {email} <br />
                       </div>
                     )}
-                    <div className="col-md-4">
+                    <div className="col-md-4 mt-4 mt-md-0">
                       <p className="text-muted fw-bold">Quick Links</p>
                       <ul>
                         <li>
