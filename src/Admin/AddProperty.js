@@ -48,7 +48,7 @@ const AddProperty = () => {
                       <h2 className="fw-bold">Add Property</h2>
                       <hr />
                       <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-xl-4 col-md-6">
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
@@ -65,7 +65,7 @@ const AddProperty = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-xl-4 col-md-6">
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
@@ -82,7 +82,7 @@ const AddProperty = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-xl-4 col-md-6">
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
@@ -99,7 +99,7 @@ const AddProperty = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-xl-4 col-md-6">
                           <div className="form-group mb-3">
                             <label
                               className="form-label fw-bold"
@@ -118,7 +118,7 @@ const AddProperty = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-md-10 col-xl-8">
+                        <div className="col-xl-8">
                           <div className="form-group mb-3">
                             <div className="row">
                               <div className="col-12">
