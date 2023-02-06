@@ -7,6 +7,7 @@ import BreadCrumb from "./BreadCrumb";
 import CommonSpinner from "../CommonSpinner";
 import { toast } from "react-toastify";
 import { rootTitile } from "../CommonFunctions";
+import { confirmAlert } from "react-confirm-alert";
 
 const records_per_page = 4;
 let currentPageNumber = 1;
@@ -135,6 +136,25 @@ const ManageUsers = () => {
           }
         }
       });
+  };
+
+  const confirmDelete = (userId, userName) => {
+    confirmAlert({
+      title: "Confirm",
+      message: "Are you sure you want to delete user?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            deleteUser(userId, userName);
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
   };
 
   const saveUsersCount = async () => {
@@ -406,7 +426,7 @@ const ManageUsers = () => {
                                     <div
                                       className="dropdown-item"
                                       onClick={() => {
-                                        deleteUser(user_id, email_address);
+                                        confirmDelete(user_id, email_address);
                                       }}
                                     >
                                       <i className="bi bi-trash pe-2"></i>
