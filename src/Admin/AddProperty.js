@@ -61,6 +61,7 @@ const AddProperty = () => {
                               id="category"
                               className="form-control"
                               type="text"
+                              // required
                             />
                           </div>
                         </div>
@@ -77,6 +78,7 @@ const AddProperty = () => {
                               id="city_name"
                               className="form-control"
                               type="text"
+                              // required
                             />
                           </div>
                         </div>
@@ -93,6 +95,7 @@ const AddProperty = () => {
                               id="market_value"
                               className="form-control"
                               type="number"
+                              // required
                             />
                           </div>
                         </div>
@@ -111,6 +114,7 @@ const AddProperty = () => {
                                   name="min_value"
                                   className="form-control"
                                   type="number"
+                                  required
                                 />
                               </div>
 
@@ -123,6 +127,7 @@ const AddProperty = () => {
                                     maxValueErr ? "border-danger" : ""
                                   }`}
                                   type="number"
+                                  required
                                 />
                                 <span
                                   className={`text-danger ${
