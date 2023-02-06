@@ -9,6 +9,18 @@ function Header() {
     userEmail: "",
   });
 
+  const onDropdownHover = (e) => {
+    const dropDownNav = e.target.nextElementSibling;
+    dropDownNav.classList.add("show");
+    dropDownNav.setAttribute("data-bs-popper", "static");
+  };
+
+  const onDropdownMouseLeave = (e) => {
+    const dropDownNav = e.target;
+    dropDownNav.classList.remove("show");
+    dropDownNav.removeAttribute("data-bs-popper");
+  };
+
   const { loginStatus, roleId, userEmail } = allUseStates;
   // To navigate to particular route.
   const goTo = useNavigate();
@@ -76,7 +88,7 @@ function Header() {
                 <>
                   <li className="nav-item ps-lg-2">
                     <span className="nav-link">
-                      <i class="bi bi-person-fill"></i> {userEmail}
+                      <i className="bi bi-person-fill"></i> {userEmail}
                     </span>
                   </li>
                   <li className="nav-item ps-lg-2">
@@ -85,43 +97,50 @@ function Header() {
                       className="nav-link"
                       onClick={logOut}
                     >
-                      <i class="bi bi-box-arrow-right"></i> Logout
+                      <i className="bi bi-box-arrow-right fs-2"></i> Logout
                     </span>
                   </li>
                 </>
               )}
 
-              <li class="nav-item dropdown">
+              <li className="nav-item dropdown ps-lg-2">
                 <span
-                  class="nav-link dropdown-toggle"
+                  onMouseEnter={onDropdownHover}
+                  className="nav-link"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Menu
+                  <i className="bi bi-caret-down-square-fill"></i>
                 </span>
-                <ul class="dropdown-menu main-nav-dropdown-menu bg-primary">
+                <ul
+                  onMouseLeave={onDropdownMouseLeave}
+                  className="dropdown-menu main-nav-dropdown-menu bg-primary"
+                  data-bs-popper="static"
+                >
                   <li>
                     <NavLink to="/" className="nav-link">
-                      <i class="bi bi-search text-white me-1"></i> Search
+                      <i className="bi bi-search text-white me-1"></i> Search
                     </NavLink>
                   </li>
                   <li>
                     <NavLink className="nav-link" to="/about">
-                      <i class="bi bi-info-circle text-white me-1"></i> About
+                      <i className="bi bi-info-circle text-white me-1"></i>{" "}
+                      About
                     </NavLink>
                   </li>
                   <li>
                     <NavLink className="nav-link" to="/contact">
-                      <i class="bi bi-telephone text-white me-1"></i> Contact
+                      <i className="bi bi-telephone text-white me-1"></i>{" "}
+                      Contact
                     </NavLink>
                   </li>
-                  {/* <hr class="dropdown-divider bg-white" /> */}
+                  {/* <hr className="dropdown-divider bg-white" /> */}
                   {roleId && roleId === 1 ? (
                     <li>
                       <NavLink to="/admin" className="nav-link">
-                        <i class="bi bi-person-fill-check text-white me-2"></i>
+                        <i className="bi bi-person-fill-check text-white me-2"></i>
                         Administration
                       </NavLink>
                     </li>
@@ -132,7 +151,7 @@ function Header() {
                     <>
                       <li>
                         <NavLink to="/profile" className="nav-link">
-                          <i class="bi bi-person-square text-white me-2"></i>
+                          <i className="bi bi-person-square text-white me-2"></i>
                           Profile
                         </NavLink>
                       </li>
@@ -142,7 +161,7 @@ function Header() {
                           className="nav-link"
                           onClick={logOut}
                         >
-                          <i class="bi bi-box-arrow-right text-white me-1"></i>{" "}
+                          <i className="bi bi-box-arrow-right text-white me-1"></i>{" "}
                           Logout
                         </span>
                       </li>
