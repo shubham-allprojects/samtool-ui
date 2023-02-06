@@ -128,6 +128,7 @@ function Home() {
   // This will run after Search button click.
   const getPropertyData = async (e) => {
     e.preventDefault();
+    document.getElementById("properties").scrollIntoView(true);
     let apis = {
       searchAPI: `${url}/count-category`,
     };
