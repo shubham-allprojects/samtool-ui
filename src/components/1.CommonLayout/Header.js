@@ -43,7 +43,7 @@ function Header() {
 
   return (
     <header className="header-wrapper">
-      <nav className="navbar navbar-expand-lg fixed-top">
+      <nav className="navbar navbar-expand-md fixed-top">
         <div className="container-fluid">
           <span className="navbar-brand px-lg-4">Assets Class</span>
           <button

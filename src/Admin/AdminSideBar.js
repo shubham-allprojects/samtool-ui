@@ -34,7 +34,7 @@ const AdminSideBar = () => {
         <i className={`bi ${icon}`}></i>
       </button>
       <div
-        className={`col-xl-2 col-md-3 admin-sidebar d-md-block ${sideBarOnSmallScreen}`}
+        className={`col-xl-2 col-md-4 admin-sidebar d-md-block ${sideBarOnSmallScreen}`}
       >
         <div className="py-3">
           <span className="offcanvas-header text-white">

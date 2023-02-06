@@ -94,10 +94,10 @@ const UploadProperties = () => {
       >
         <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-9 wrapper mt-4 mt-md-0">
+          <div className="col-xl-10 col-md-8 wrapper mt-4 mt-md-0">
             <div className="container-fluid">
               <div className="row justify-content-center">
-                <div className="col-xl-7 col-md-8 shadow p-md-4 p-3 mb-5 upload-file-main-wrapper">
+                <div className="col-xl-7 col-md-11 shadow p-md-4 p-3 mb-5 upload-file-main-wrapper">
                   <div className="">
                     <div
                       onDragOver={(e) => {

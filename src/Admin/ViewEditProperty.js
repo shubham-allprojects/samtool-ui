@@ -58,7 +58,7 @@ const ViewEditProperty = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-9 mt-4 mt-md-0">
+          <div className="col-xl-10 col-md-8 mt-4 mt-md-0">
             <BreadCrumb />
             <section className="admin-edit-property wrapper">
               <div className="container-fluid">
