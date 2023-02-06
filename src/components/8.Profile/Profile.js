@@ -190,16 +190,14 @@ const Profile = () => {
                     )}
                     <div className="col-md-4 mt-4 mt-md-0">
                       <p className="text-muted fw-bold">Quick Links</p>
-                      <ul>
-                        <li>
-                          <NavLink to="/reset-password">Reset Password</NavLink>
-                        </li>
-                        <li>
-                          <NavLink to="/profile/edit-details">
-                            Edit Details
-                          </NavLink>
-                        </li>
-                      </ul>
+                      <li>
+                        <NavLink to="/reset-password">Reset Password</NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/profile/edit-details">
+                          Edit Details
+                        </NavLink>
+                      </li>
                     </div>
                   </div>
                 </div>
