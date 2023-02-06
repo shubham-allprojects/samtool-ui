@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/1.CommonLayout/Layout";
 import AdminSideBar from "./AdminSideBar";
-import BreadCrumb from "./BreadCrumb";
+// import BreadCrumb from "./BreadCrumb";
 
 const AddProperty = () => {
+  const [formData, setFormData] = useState({
+    min_value: null,
+    max_value: null,
+  });
+
+  const [err, setErr] = useState({
+    maxValueErr: false,
+  });
+
+  const { min_value, max_value } = formData;
+  const { maxValueErr } = err;
+
+  const onInputBlur = (e) => {
+    const { name, value } = e.target;
+    if (name === "min_value") {
+      setFormData({ ...formData, [name]: parseInt(value) });
+    } else if (name === "max_value") {
+      if (parseInt(value) > min_value) {
+        setFormData({ ...formData, [name]: parseInt(value) });
+        setErr({ ...err, maxValueErr: false });
+      } else {
+        setErr({ ...err, maxValueErr: true });
+      }
+    }
+  };
   return (
     <Layout>
       <div className="container-fluid section-padding">
@@ -77,19 +102,39 @@ const AddProperty = () => {
                               </div>
                               <div className="col-md-5">
                                 Min:
-                                <input className="form-control" type="number" />
+                                <input
+                                  onBlur={onInputBlur}
+                                  name="min_value"
+                                  className="form-control"
+                                  type="number"
+                                />
                               </div>
 
                               <div className="col-md-5">
                                 Max:
-                                <input className="form-control" type="number" />
+                                <input
+                                  onBlur={onInputBlur}
+                                  name="max_value"
+                                  className="form-control"
+                                  type="number"
+                                />
+                                <span
+                                  className={`text-danger ${
+                                    maxValueErr ? "" : "d-none"
+                                  }`}
+                                >
+                                  Maximum value must be greater than minimum
+                                  value
+                                </span>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <hr />
+                        <hr className="mt-2" />
                         <div className="col-12 text-end">
-                            <button type="button" className="btn btn-primary">Add</button>
+                          <button type="button" className="btn btn-primary">
+                            Add
+                          </button>
                         </div>
                       </div>
                     </form>
