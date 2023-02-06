@@ -16,17 +16,21 @@ const AddProperty = () => {
   const { min_value, max_value } = formData;
   const { maxValueErr } = err;
 
-  const onInputBlur = (e) => {
+  const onInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "min_value") {
       setFormData({ ...formData, [name]: parseInt(value) });
     } else if (name === "max_value") {
-      if (parseInt(value) > min_value) {
-        setFormData({ ...formData, [name]: parseInt(value) });
-        setErr({ ...err, maxValueErr: false });
-      } else {
-        setErr({ ...err, maxValueErr: true });
-      }
+      setFormData({ ...formData, [name]: parseInt(value) });
+    }
+  };
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    if (max_value > min_value) {
+      setErr({ ...err, maxValueErr: false });
+    } else {
+      setErr({ ...err, maxValueErr: true });
     }
   };
   return (
@@ -40,7 +44,7 @@ const AddProperty = () => {
               <div className="container-fluid">
                 <div className="row justify-content-center">
                   <div className="col-md-10">
-                    <form action="" className="card shadow p-4">
+                    <form onSubmit={onFormSubmit} className="card shadow p-4">
                       <h2 className="fw-bold">Add Property</h2>
                       <hr />
                       <div className="row">
@@ -92,7 +96,7 @@ const AddProperty = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-md-8">
+                        <div className="col-md-10 col-xl-8">
                           <div className="form-group mb-3">
                             <div className="row">
                               <div className="col-12">
@@ -100,22 +104,24 @@ const AddProperty = () => {
                                   Range:
                                 </label>
                               </div>
-                              <div className="col-md-5">
+                              <div className="col-md-6">
                                 Min:
                                 <input
-                                  onBlur={onInputBlur}
+                                  onChange={onInputChange}
                                   name="min_value"
                                   className="form-control"
                                   type="number"
                                 />
                               </div>
 
-                              <div className="col-md-5">
+                              <div className="col-md-6">
                                 Max:
                                 <input
-                                  onBlur={onInputBlur}
+                                  onChange={onInputChange}
                                   name="max_value"
-                                  className="form-control"
+                                  className={`form-control ${
+                                    maxValueErr ? "border-danger" : ""
+                                  }`}
                                   type="number"
                                 />
                                 <span
@@ -132,7 +138,7 @@ const AddProperty = () => {
                         </div>
                         <hr className="mt-2" />
                         <div className="col-12 text-end">
-                          <button type="button" className="btn btn-primary">
+                          <button type="submit" className="btn btn-primary">
                             Add
                           </button>
                         </div>
