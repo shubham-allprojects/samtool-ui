@@ -559,7 +559,7 @@ const ManageUsers = () => {
                                     <span
                                       className="dropdown-item"
                                       onClick={() => {
-                                        deleteUser(user_id, email_address);
+                                        confirmDelete(user_id, email_address);
                                       }}
                                     >
                                       <i className="bi bi-trash pe-1"></i>{" "}
