@@ -8,6 +8,8 @@ const AdminSideBar = () => {
   });
 
   const { sideBarOnSmallScreen, icon } = toggleClasses;
+
+  // Close and open sidebar on small screen.
   const toggleSideBarVisibility = () => {
     if (sideBarOnSmallScreen === "") {
       setToggleClasses({ sideBarOnSmallScreen: "d-none", icon: "bi-list" });
@@ -15,11 +17,14 @@ const AdminSideBar = () => {
       setToggleClasses({ sideBarOnSmallScreen: "", icon: "bi-x-lg" });
     }
   };
+
   useEffect(() => {
     const path = window.location.pathname;
+    // Remove active class of link 'Dashboard' if we switch to other link.
     if (path !== "/admin") {
       document.querySelector(".admin-home-link").classList.remove("active");
     }
+    // collapse of property section on sidebar will remain open until we are on 'admin/property' path.
     if (path.includes("/admin/property")) {
       document.getElementById("propertyCollapse").classList.add("show");
     }

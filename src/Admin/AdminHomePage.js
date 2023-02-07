@@ -5,9 +5,10 @@ import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
 import { counter, rootTitle } from "../../src/CommonFunctions";
 
-let orgCount = 0;
-let indiCount = 0;
+let orgCount = 0; // Default count of organizational users.
+let indiCount = 0; // Default count of individual users.
 let startCounter;
+
 const AdminHomePage = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   const setHeaderAndUrl = () => {
@@ -20,12 +21,14 @@ const AdminHomePage = () => {
   };
 
   const setCountOfUsers = async () => {
+    // Get and store the count of both types of Users i.e. Individual Users and Organizational Users.
     const [headers, url] = setHeaderAndUrl();
     await axios.get(`${url}/type-count`, { headers: headers }).then((res) => {
       indiCount = parseInt(res.data.individual_count);
       orgCount = parseInt(res.data.org_count);
     });
 
+    // To show counter animation on admin Home page.
     const totalCount = indiCount + orgCount;
     if (!totalCount <= 0) {
       totalCount > 100

@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const BreadCrumb = ({ userType, emailOfCurrentUser, typeOfUser }) => {
   const [isUserPageActive, setIsUserPageActive] = useState(false);
+  // If we are on Users section in admin then isUserPageActive will be true.
   const testFn = () => {
     setIsUserPageActive(window.location.href.includes("/admin/users"));
   };
