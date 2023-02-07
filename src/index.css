@@ -865,7 +865,6 @@ input[type="number"] {
 .csv-data-table-wrapper {
   height: 500px;
   overflow-y: scroll;
-  padding-bottom: 3.4rem;
 }
 
 .csv-data-table-wrapper .save-cancel-btn-div {
