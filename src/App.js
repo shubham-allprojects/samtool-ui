@@ -16,14 +16,14 @@ import ScrollButton from "./components/ScrollButton";
 import Contact from "./components/4.Contact/Contact";
 import PageNotFound from "./components/PageNotFound";
 import AdminHomePage from "./Admin/AdminHomePage";
-import ViewAllProperties from "./Admin/ViewAllProperties";
-import ViewEditProperty from "./Admin/ViewEditProperty";
-import UploadProperties from "./Admin/UploadProperties";
-import ViewAllUsers from "./Admin/ViewAllUsers";
-import ViewCurrentUser from "./Admin/ViewCurrentUser";
+import ViewAllProperties from "./Admin/Property/ViewAllProperties";
+import ViewEditProperty from "./Admin/Property/ViewEditProperty";
+import UploadProperties from "./Admin/Property/UploadProperties";
+import ViewAllUsers from "./Admin/User/ViewAllUsers";
+import ViewCurrentUser from "./Admin/User/ViewCurrentUser";
 import ResetPassword from "./components/6.Login/ResetPassword";
 import AboutUs from "./components/3.About/AboutUs";
-import AddProperty from "./Admin/AddProperty";
+import AddProperty from "./Admin/Property/AddProperty";
 
 function App() {
   return (

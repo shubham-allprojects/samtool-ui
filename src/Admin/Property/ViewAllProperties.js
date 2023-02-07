@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
-import { rootTitile } from "../CommonFunctions";
-import Layout from "../components/1.CommonLayout/Layout";
-import AdminSideBar from "./AdminSideBar";
-import BreadCrumb from "./BreadCrumb";
+import { rootTitile } from "../../CommonFunctions";
+import Layout from "../../components/1.CommonLayout/Layout";
+import AdminSideBar from "../AdminSideBar";
+import BreadCrumb from "../BreadCrumb";
 import propertyData from "./data.json";
 
 const ViewAllProperties = () => {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Layout from "../components/1.CommonLayout/Layout";
-import AdminSideBar from "./AdminSideBar";
-import BreadCrumb from "./BreadCrumb";
+import Layout from "../../components/1.CommonLayout/Layout";
+import AdminSideBar from "../AdminSideBar";
+import BreadCrumb from "../BreadCrumb";
 import propertyData from "./data.json";
 
 const ViewEditProperty = () => {

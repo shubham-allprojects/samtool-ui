@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import AdminSideBar from "./AdminSideBar";
+import AdminSideBar from "../AdminSideBar";
 import Papa from "papaparse";
 import { useRef } from "react";
-import Layout from "../components/1.CommonLayout/Layout";
-import { rootTitile } from "../CommonFunctions";
+import Layout from "../../components/1.CommonLayout/Layout";
+import { rootTitile } from "../../CommonFunctions";
 
 const allowedExtensions = ["csv"];
 const UploadProperties = () => {

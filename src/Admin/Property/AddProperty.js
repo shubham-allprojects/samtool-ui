@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Layout from "../components/1.CommonLayout/Layout";
-import AdminSideBar from "./AdminSideBar";
+import Layout from "../../components/1.CommonLayout/Layout";
+import AdminSideBar from "../AdminSideBar";
 // import BreadCrumb from "./BreadCrumb";
 
 const AddProperty = () => {

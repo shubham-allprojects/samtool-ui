@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import Layout from "../components/1.CommonLayout/Layout";
-import AdminSideBar from "./AdminSideBar";
-import BreadCrumb from "./BreadCrumb";
-import CommonSpinner from "../CommonSpinner";
+import Layout from "../../components/1.CommonLayout/Layout";
+import AdminSideBar from "../AdminSideBar";
+import BreadCrumb from "../BreadCrumb";
+import CommonSpinner from "../../CommonSpinner";
 import { toast } from "react-toastify";
-import { rootTitile } from "../CommonFunctions";
+import { rootTitile } from "../../CommonFunctions";
 import { confirmAlert } from "react-confirm-alert";
 
 const records_per_page = 4;
