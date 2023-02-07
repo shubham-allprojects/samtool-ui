@@ -6,7 +6,15 @@ import Layout from "../../components/1.CommonLayout/Layout";
 import { rootTitle } from "../../CommonFunctions";
 
 const allowedExtensions = ["csv"];
+const chunkSize = 3048;
 const UploadProperties = () => {
+  const [files, setFiles] = useState([]);
+  const [currentFileIndex, setCurrentFileIndex] = useState(null);
+  const [lastUploadedFileIndex, setLastUploadedFileIndex] = useState(null);
+  const [currentChunkIndex, setCurrentChunkIndex] = useState(null);
+  const [chunkData, setChunkData] = useState("");
+  const [TotalChunks, setTotalChunks] = useState(0);
+
   const [allUseStates, setAllUseStates] = useState({
     data: [],
     tableHeadings: [],
@@ -48,6 +56,8 @@ const UploadProperties = () => {
   };
 
   const fileUpload = (e) => {
+    setFiles([...files, ...e.target.files]);
+    setTotalChunks(Math.ceil(e.target.files[0].size / chunkSize));
     if (e.target.files.length) {
       const inputFile = e.target.files[0];
       const fileExtension = inputFile.type.split("/")[1];
@@ -64,6 +74,7 @@ const UploadProperties = () => {
 
   const handleDrop = (e) => {
     e.preventDefault();
+    setFiles([...files, ...e.dataTransfer.files]);
     if (e.dataTransfer.files.length) {
       const inputFile = e.dataTransfer.files[0];
       const fileExtension = inputFile.type.split("/")[1];
@@ -76,6 +87,77 @@ const UploadProperties = () => {
       }
     }
   };
+
+  const readAndUploadCurrentChunk = () => {
+    const reader = new FileReader();
+    const file = files[currentFileIndex];
+    if (!file) {
+      return;
+    }
+    const from = currentChunkIndex * chunkSize;
+    const to = from + chunkSize;
+    const blob = file.slice(from, to);
+    reader.onload = (e) => uploadChunk(e);
+    reader.readAsDataURL(blob);
+  };
+
+  const uploadChunk = (readerEvent) => {
+    let fileSize = 0;
+    const file = files[currentFileIndex];
+    const size = Math.round(file.size / 1024) + 1;
+    fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
+    const data = readerEvent.target.result.split(",")[1];
+    const detailsToShow = `Name: ${
+      file.name
+    } ----- Size: ${fileSize} ----- TotalChunks: ${Math.ceil(
+      file.size / chunkSize
+    )} ----- Data For Chunk: ${currentChunkIndex + 1} is ====> ${data}`;
+    setChunkData(chunkData + "      " + detailsToShow);
+    console.log(detailsToShow);
+    // const headers = { "Content-Type": "application/octet-stream" };
+    const chunks = Math.ceil(file.size / chunkSize) - 1;
+    const isLastChunk = currentChunkIndex === chunks;
+    console.warn("IS LAST CHUNK: ", isLastChunk);
+    if (isLastChunk) {
+      setLastUploadedFileIndex(currentFileIndex);
+      setCurrentChunkIndex(null);
+    } else {
+      setCurrentChunkIndex(currentChunkIndex + 1);
+    }
+  };
+
+  useEffect(() => {
+    if (lastUploadedFileIndex === null) {
+      return;
+    }
+    const isLastFile = lastUploadedFileIndex === files.length - 1;
+    const nextFileIndex = isLastFile ? null : currentFileIndex + 1;
+    setCurrentFileIndex(nextFileIndex);
+  }, [lastUploadedFileIndex]);
+
+  useEffect(() => {
+    if (files.length > 0) {
+      if (currentFileIndex === null) {
+        setCurrentFileIndex(
+          lastUploadedFileIndex === null ? 0 : lastUploadedFileIndex + 1
+        );
+      }
+    }
+  }, [files.length]);
+
+  useEffect(() => {
+    if (currentFileIndex !== null) {
+      setCurrentChunkIndex(0);
+    }
+  }, [currentFileIndex]);
+
+  useEffect(() => {
+    if (currentChunkIndex !== null) {
+      readAndUploadCurrentChunk();
+    }
+  }, [currentChunkIndex]);
+
+  const postChunksToDataBase = () => {};
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - UPLOAD PROPERTIES";
@@ -175,7 +257,12 @@ const UploadProperties = () => {
                       </tbody>
                     </table>
                     <div className="text-end mt-3 bg-dark position-absolute save-cancel-btn-div">
-                      <button className="btn btn-success me-2">Save</button>
+                      <button
+                        className="btn btn-success me-2"
+                        onClick={postChunksToDataBase}
+                      >
+                        Save
+                      </button>
                       <button
                         onClick={(e) => {
                           onCancelClick(e);

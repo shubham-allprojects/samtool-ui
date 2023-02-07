@@ -9,20 +9,20 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { BrowserRouter } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
-let startTime = "";
-axios.interceptors.request.use((req) => {
-  startTime = new Date().getTime() / 1000;
-  return req;
-});
+// let startTime = "";
+// axios.interceptors.request.use((req) => {
+//   startTime = new Date().getTime() / 1000;
+//   return req;
+// });
 
-axios.interceptors.response.use((res) => {
-  let endTime = new Date().getTime() / 1000;
-  console.log(res.request.responseURL, res.config.method);
-  console.log("Response Time: ", (endTime - startTime).toFixed(4), "sec");
-  return res;
-});
+// axios.interceptors.response.use((res) => {
+//   let endTime = new Date().getTime() / 1000;
+//   console.log(res.request.responseURL, res.config.method);
+//   console.log("Response Time: ", (endTime - startTime).toFixed(4), "sec");
+//   return res;
+// });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
