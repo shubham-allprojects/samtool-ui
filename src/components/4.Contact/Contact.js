@@ -6,6 +6,7 @@ const Contact = () => {
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - CONTACT";
   }, []);
+
   return (
     <Layout>
       <section className="contact-wrapper">

@@ -4,6 +4,7 @@ import Layout from "../1.CommonLayout/Layout";
 
 const ViewPropertyDetails = () => {
   const goTo = useNavigate();
+  // If user is not logged in and tries to view property details then user will redirect to the login page
   const checkStatusOfLogin = () => {
     const data = JSON.parse(localStorage.getItem("data"));
     if (!data) {

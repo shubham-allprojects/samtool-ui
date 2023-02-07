@@ -10,12 +10,14 @@ const LoginMainPage = () => {
   // It is used to navigate to particular route.
   const goTo = useNavigate();
 
+  // It is used to store spinner and login-button details.
   const [loaderDetails, setLoaderDetails] = useState({
     loading: false,
     loginBtnTxt: "Login",
     loginBtnClassName: "",
   });
 
+  // Password type and eye icon details.
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
@@ -23,6 +25,7 @@ const LoginMainPage = () => {
     passwordType: "password",
   });
 
+  // Bootstrap alert details.
   const [alertDetails, setAlertDetails] = useState({
     alertVisible: false,
     alertMsg: "",
