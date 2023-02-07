@@ -9,6 +9,7 @@ const allowedExtensions = ["csv"];
 const chunkSize = 3048;
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
+  const [saveFile, setSavedFile] = useState([]);
   const [currentFileIndex, setCurrentFileIndex] = useState(null);
   const [lastUploadedFileIndex, setLastUploadedFileIndex] = useState(null);
   const [currentChunkIndex, setCurrentChunkIndex] = useState(null);
@@ -55,7 +56,7 @@ const UploadProperties = () => {
   };
 
   const fileUpload = (e) => {
-    setFiles([...files, ...e.target.files]);
+    setSavedFile([...files, ...e.target.files]);
     if (e.target.files.length) {
       const inputFile = e.target.files[0];
       const fileExtension = inputFile.type.split("/")[1];
@@ -72,7 +73,7 @@ const UploadProperties = () => {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    setFiles([...files, ...e.dataTransfer.files]);
+    setSavedFile([...files, ...e.dataTransfer.files]);
     if (e.dataTransfer.files.length) {
       const inputFile = e.dataTransfer.files[0];
       const fileExtension = inputFile.type.split("/")[1];
@@ -155,7 +156,9 @@ const UploadProperties = () => {
     }
   }, [currentChunkIndex]);
 
-  const postChunksToDataBase = () => {};
+  const postChunksToDataBase = () => {
+    setFiles(saveFile);
+  };
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - UPLOAD PROPERTIES";
