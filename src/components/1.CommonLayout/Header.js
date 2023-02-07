@@ -20,8 +20,8 @@ function Header() {
     localStorage.clear();
     setAllUseStates({ ...allUseStates, loginStatus: false });
     setTimeout(() => {
-      window.location.reload();
       goTo("/");
+      window.location.reload();
     }, 2000);
   };
 
