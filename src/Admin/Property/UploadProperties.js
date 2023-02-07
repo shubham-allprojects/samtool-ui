@@ -13,7 +13,6 @@ const UploadProperties = () => {
   const [lastUploadedFileIndex, setLastUploadedFileIndex] = useState(null);
   const [currentChunkIndex, setCurrentChunkIndex] = useState(null);
   const [chunkData, setChunkData] = useState("");
-  const [TotalChunks, setTotalChunks] = useState(0);
 
   const [allUseStates, setAllUseStates] = useState({
     data: [],
@@ -57,7 +56,6 @@ const UploadProperties = () => {
 
   const fileUpload = (e) => {
     setFiles([...files, ...e.target.files]);
-    setTotalChunks(Math.ceil(e.target.files[0].size / chunkSize));
     if (e.target.files.length) {
       const inputFile = e.target.files[0];
       const fileExtension = inputFile.type.split("/")[1];
