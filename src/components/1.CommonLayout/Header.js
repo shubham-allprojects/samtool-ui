@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Header() {
+  // This useState will store data from localStorage such as login-status, role and email of user.
   const [allUseStates, setAllUseStates] = useState({
     loginStatus: false,
     roleId: null,
@@ -10,8 +11,10 @@ function Header() {
   });
 
   const { loginStatus, roleId, userEmail } = allUseStates;
+
   // To navigate to particular route.
   const goTo = useNavigate();
+
   // Logout function.
   const logOut = () => {
     // alert("Logged Out Successfully");
@@ -27,6 +30,7 @@ function Header() {
 
   // Save status of login.
   const setStatusOfLogin = () => {
+    // data is the loggedIn user's data from localStorage.
     const data = JSON.parse(localStorage.getItem("data"));
     if (data) {
       setAllUseStates({
@@ -59,6 +63,7 @@ function Header() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
+              {/* If user is not loggedIn then show these navbar links */}
               {!loginStatus ? (
                 <>
                   <li className="nav-item ps-lg-2">
@@ -73,24 +78,28 @@ function Header() {
                   </li>
                 </>
               ) : (
-                <>
-                  <li className="nav-item ps-lg-2">
-                    <span className="nav-link">
-                      <i className="bi bi-person-fill"></i> {userEmail}
-                    </span>
-                  </li>
-                  <li className="nav-item ps-lg-2">
-                    <span
-                      style={{ cursor: "pointer" }}
-                      className="nav-link"
-                      onClick={logOut}
-                    >
-                      <i className="bi bi-box-arrow-right"></i> Logout
-                    </span>
-                  </li>
-                </>
+                {
+                  /* If user is loggedIn then show these navbar links */
+                }(
+                  <>
+                    <li className="nav-item ps-lg-2">
+                      <span className="nav-link">
+                        <i className="bi bi-person-fill"></i> {userEmail}
+                      </span>
+                    </li>
+                    <li className="nav-item ps-lg-2">
+                      <span
+                        style={{ cursor: "pointer" }}
+                        className="nav-link"
+                        onClick={logOut}
+                      >
+                        <i className="bi bi-box-arrow-right"></i> Logout
+                      </span>
+                    </li>
+                  </>
+                )
               )}
-
+              {/* If user is not loggedIn then show these navbar links in dropdown */}
               <li className="nav-item dropdown ps-lg-2">
                 <span
                   className="nav-link"
@@ -122,7 +131,6 @@ function Header() {
                       Contact
                     </NavLink>
                   </li>
-                  {/* <hr className="dropdown-divider bg-white" /> */}
                   {roleId && roleId === 1 ? (
                     <li>
                       <NavLink to="/admin" className="nav-link">
@@ -133,6 +141,7 @@ function Header() {
                   ) : (
                     ""
                   )}
+                  {/* If user is loggedIn then show these navbar links in dropdown */}
                   {loginStatus ? (
                     <>
                       <li>
