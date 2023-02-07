@@ -37,6 +37,19 @@ const UploadProperties = () => {
     window.scrollTo(0, 0);
   };
 
+  const dataFromLocal = JSON.parse(localStorage.getItem("data"));
+  const setHeaderAndUrl = () => {
+    let headers = "";
+    if (dataFromLocal) {
+      headers = {
+        Authorization: dataFromLocal.logintoken,
+        "Content-Type": "application/octet-stream",
+      };
+    }
+    let url = `/sam/v1/property/auth/upload-chunk`;
+    return [headers, url];
+  };
+
   const readFileFunction = (inputFile) => {
     setFileName(inputFile.name);
     const reader = new FileReader();
@@ -100,20 +113,22 @@ const UploadProperties = () => {
     reader.readAsDataURL(blob);
   };
 
-  const uploadChunk = (readerEvent) => {
+  const uploadChunk = async (readerEvent) => {
     let fileSize = 0;
     const file = files[currentFileIndex];
     const size = Math.round(file.size / 1024) + 1;
     fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
     const data = readerEvent.target.result.split(",")[1];
-    const detailsToShow = `Name: ${
-      file.name
-    } ----- Size: ${fileSize} ----- TotalChunks: ${Math.ceil(
-      file.size / chunkSize
-    )} ----- Data For Chunk: ${currentChunkIndex + 1} is ====> ${data}`;
-    setChunkData(chunkData + "      " + detailsToShow);
-    console.log(detailsToShow);
-    // const headers = { "Content-Type": "application/octet-stream" };
+    const [headers, url] = setHeaderAndUrl();
+    const dataToPost = JSON.stringify({
+      upload_id: file.name,
+      chunk_number: currentChunkIndex + 1,
+      total_chunks: Math.ceil(file.size / chunkSize),
+      total_file_size: fileSize,
+      file_name: file.name,
+      data: data,
+    });
+    console.log(dataToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
     console.warn("IS LAST CHUNK: ", isLastChunk);
