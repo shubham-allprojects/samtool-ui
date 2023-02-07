@@ -4,7 +4,7 @@ import Layout from "../1.CommonLayout/Layout";
 import Properties from "./Properties";
 import axios from "axios";
 import { useState } from "react";
-import { rootTitile } from "../../CommonFunctions";
+import { rootTitle } from "../../CommonFunctions";
 
 function Home() {
   // useState to store data of each field e.g all states, all banks etc.
@@ -61,7 +61,7 @@ function Home() {
     };
     const { name, value } = e.target;
     const fiveSectionCol = document.querySelectorAll(".five-section-col");
-    // If input is state then post selected state id to api for getting cities based on selected state.
+
     if (name === "states") {
       // Store state id ( if available ) into dataToPost useState (It is required for search functionality).
       if (value) {
@@ -69,6 +69,7 @@ function Home() {
       } else {
         delete dataToPost.state_id;
       }
+      // If input is state then post selected state id to api for getting cities based on selected state.
       const cityByState = await axios.post(apis.cityAPI, {
         state_id: parseInt(value),
       });
@@ -172,7 +173,7 @@ function Home() {
 
   // This will run every time we refresh page or if some state change occurs.
   useEffect(() => {
-    rootTitile.textContent = "SAM TOOL - HOME";
+    rootTitle.textContent = "SAM TOOL - HOME";
     getSearchDetails();
     // getDataFromLocal();
     changeNavBarColor();

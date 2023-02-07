@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import AdminSideBar from "./AdminSideBar";
 import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
-import { counter, rootTitile } from "../../src/CommonFunctions";
+import { counter, rootTitle } from "../../src/CommonFunctions";
 
 let orgCount = 0;
 let indiCount = 0;
@@ -36,7 +36,7 @@ const AdminHomePage = () => {
   };
 
   useEffect(() => {
-    rootTitile.textContent = "ADMIN - HOME";
+    rootTitle.textContent = "ADMIN - HOME";
     setCountOfUsers();
     // eslint-disable-next-line
   }, []);

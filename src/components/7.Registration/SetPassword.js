@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import setPassImg from "../../images/setpass.svg";
-import { rootTitile } from "../../CommonFunctions";
+import { rootTitle } from "../../CommonFunctions";
 
 const SetPassword = () => {
   //  Important variables for storing password data as well as validation data.
@@ -167,7 +167,7 @@ const SetPassword = () => {
   };
 
   useEffect(() => {
-    rootTitile.textContent = "SAM TOOL - SET PASSWORD";
+    rootTitle.textContent = "SAM TOOL - SET PASSWORD";
   }, []);
 
   return (

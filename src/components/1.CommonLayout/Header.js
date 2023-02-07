@@ -78,26 +78,23 @@ function Header() {
                   </li>
                 </>
               ) : (
-                {
-                  /* If user is loggedIn then show these navbar links */
-                }(
-                  <>
-                    <li className="nav-item ps-lg-2">
-                      <span className="nav-link">
-                        <i className="bi bi-person-fill"></i> {userEmail}
-                      </span>
-                    </li>
-                    <li className="nav-item ps-lg-2">
-                      <span
-                        style={{ cursor: "pointer" }}
-                        className="nav-link"
-                        onClick={logOut}
-                      >
-                        <i className="bi bi-box-arrow-right"></i> Logout
-                      </span>
-                    </li>
-                  </>
-                )
+                /* If user is loggedIn then show these navbar links */
+                <>
+                  <li className="nav-item ps-lg-2">
+                    <span className="nav-link">
+                      <i className="bi bi-person-fill"></i> {userEmail}
+                    </span>
+                  </li>
+                  <li className="nav-item ps-lg-2">
+                    <span
+                      style={{ cursor: "pointer" }}
+                      className="nav-link"
+                      onClick={logOut}
+                    >
+                      <i className="bi bi-box-arrow-right"></i> Logout
+                    </span>
+                  </li>
+                </>
               )}
               {/* If user is not loggedIn then show these navbar links in dropdown */}
               <li className="nav-item dropdown ps-lg-2">

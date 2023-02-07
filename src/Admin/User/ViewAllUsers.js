@@ -6,7 +6,7 @@ import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
 import CommonSpinner from "../../CommonSpinner";
 import { toast } from "react-toastify";
-import { rootTitile } from "../../CommonFunctions";
+import { rootTitle } from "../../CommonFunctions";
 import { confirmAlert } from "react-confirm-alert";
 
 const records_per_page = 4;
@@ -330,7 +330,7 @@ const ManageUsers = () => {
   }, [togglePaginationActiveClass, saveUsersCount, setPageNumbers]);
 
   useEffect(() => {
-    rootTitile.textContent = "ADMIN - USERS";
+    rootTitle.textContent = "ADMIN - USERS";
   }, []);
 
   return (

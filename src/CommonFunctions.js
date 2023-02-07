@@ -15,4 +15,4 @@ export function counter(id, start, end, duration) {
   }
 }
 
-export const rootTitile = document.getElementById("root-title");
+export const rootTitle = document.getElementById("root-title");

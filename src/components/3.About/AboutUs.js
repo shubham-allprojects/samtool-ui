@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { rootTitile } from "../../CommonFunctions";
+import { rootTitle } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
 
 const AboutUs = () => {
   useEffect(() => {
-    rootTitile.textContent = "SAM TOOL - ABOUT";
+    rootTitle.textContent = "SAM TOOL - ABOUT";
   }, []);
 
   return (

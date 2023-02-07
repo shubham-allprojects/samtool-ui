@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
-import { rootTitile } from "../../CommonFunctions";
+import { rootTitle } from "../../CommonFunctions";
 import { NavLink } from "react-router-dom";
 
 const Profile = () => {
@@ -112,7 +112,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    rootTitile.textContent = "SAM TOOL - PROFILE";
+    rootTitle.textContent = "SAM TOOL - PROFILE";
     getUserProfileDetails();
     // eslint-disable-next-line
   }, []);

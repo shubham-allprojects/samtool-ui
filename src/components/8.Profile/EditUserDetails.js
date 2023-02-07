@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { rootTitile } from "../../CommonFunctions";
+import { rootTitle } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
 
 const EditUserDetails = () => {
@@ -353,7 +353,7 @@ const EditUserDetails = () => {
   };
 
   useEffect(() => {
-    rootTitile.textContent = "SAM TOOL - EDIT DETAILS";
+    rootTitle.textContent = "SAM TOOL - EDIT DETAILS";
     getUserToEdit();
     // eslint-disable-next-line
   }, []);

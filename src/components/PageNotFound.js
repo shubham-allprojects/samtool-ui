@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { rootTitile } from "../CommonFunctions";
+import { rootTitle } from "../CommonFunctions";
 
 const PageNotFound = () => {
   useEffect(() => {
-    rootTitile.textContent = "PAGE NOT FOUND";
+    rootTitle.textContent = "PAGE NOT FOUND";
   }, []);
 
   return (

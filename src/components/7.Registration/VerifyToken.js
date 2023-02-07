@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import verifyTokenImg from "../../images/verifytoken.svg";
-import { rootTitile } from "../../CommonFunctions";
+import { rootTitle } from "../../CommonFunctions";
 
 const VerifyToken = () => {
   // useState to save token entered by user.
@@ -74,7 +74,7 @@ const VerifyToken = () => {
   };
 
   useEffect(() => {
-    rootTitile.textContent = "SAM TOOL - VERIFY TOKEN";
+    rootTitle.textContent = "SAM TOOL - VERIFY TOKEN";
   }, []);
 
   return (
