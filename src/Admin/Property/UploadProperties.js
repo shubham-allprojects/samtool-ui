@@ -8,7 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
-const allowedExtensions = ["csv", "json"];
+const allowedExtensions = ["csv"];
 const chunkSize = 1000 * 1024;
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
