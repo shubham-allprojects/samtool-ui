@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
-const chunkSize = 3048;
+const chunkSize = 1000 * 1024;
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
   const [saveFile, setSavedFile] = useState([]);
@@ -261,7 +261,7 @@ const UploadProperties = () => {
                   <div
                     className={`${tableDisplayClass} csv-data-table-wrapper`}
                   >
-                    <table className="table table-striped table-bordered table-dark h-100">
+                    <table className="table table-striped table-bordered table-primary h-100">
                       <thead>
                         <tr>
                           {tableHeadings.map((heading, Index) => {
@@ -281,7 +281,7 @@ const UploadProperties = () => {
                         })}
                       </tbody>
                     </table>
-                    <div className="text-end mt-3 bg-dark position-absolute save-cancel-btn-div">
+                    <div className="text-end mt-3 bg-primary position-absolute save-cancel-btn-div">
                       <button
                         className="btn btn-success me-2"
                         onClick={postChunksToDataBase}
