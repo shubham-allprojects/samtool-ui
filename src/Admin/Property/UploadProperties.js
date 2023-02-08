@@ -6,6 +6,7 @@ import Layout from "../../components/1.CommonLayout/Layout";
 import { rootTitle } from "../../CommonFunctions";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
 const chunkSize = 3048;
@@ -15,7 +16,7 @@ const UploadProperties = () => {
   const [currentFileIndex, setCurrentFileIndex] = useState(null);
   const [lastUploadedFileIndex, setLastUploadedFileIndex] = useState(null);
   const [currentChunkIndex, setCurrentChunkIndex] = useState(null);
-  const [chunkData, setChunkData] = useState("");
+  const [uniqueUploadId, setUniqueUploadId] = useState(uuid());
 
   const [allUseStates, setAllUseStates] = useState({
     data: [],
@@ -122,24 +123,25 @@ const UploadProperties = () => {
     fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
     const data = readerEvent.target.result.split(",")[1];
     const [headers, url] = setHeaderAndUrl();
-    const dataToPost = JSON.stringify({
-      upload_id: "11",
+    const dataToPost = {
+      upload_id: uniqueUploadId,
       chunk_number: `${currentChunkIndex + 1}`,
       total_chunks: `${Math.ceil(file.size / chunkSize)}`,
       total_file_size: fileSize,
       file_name: file.name,
       data: data,
-    });
-    // console.log(dataToPost);
-    await axios.post(url, dataToPost, { headers: headers }).then((res) => {
-      console.log(res.data);
-    });
+    };
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
-    console.warn("IS LAST CHUNK: ", isLastChunk);
+    await axios.post(url, dataToPost, { headers: headers }).then(() => {
+      if (isLastChunk) {
+        setUniqueUploadId(uuid());
+        toast.success("Data saved successfully");
+        onCancelClick();
+      }
+    });
+    // console.warn("IS LAST CHUNK: ", isLastChunk);
     if (isLastChunk) {
-      toast.success("Data saved successfully");
-      onCancelClick();
       setLastUploadedFileIndex(currentFileIndex);
       setCurrentChunkIndex(null);
     } else {
