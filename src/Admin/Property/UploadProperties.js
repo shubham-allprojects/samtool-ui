@@ -4,6 +4,8 @@ import Papa from "papaparse";
 import { useRef } from "react";
 import Layout from "../../components/1.CommonLayout/Layout";
 import { rootTitle } from "../../CommonFunctions";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const allowedExtensions = ["csv"];
 const chunkSize = 3048;
@@ -27,7 +29,7 @@ const UploadProperties = () => {
   const fileRef = useRef();
   const { data, tableHeadings, tableDisplayClass } = allUseStates;
 
-  const onCancelClick = (e) => {
+  const onCancelClick = () => {
     setAllUseStates({
       ...allUseStates,
       tableDisplayClass: "d-none",
@@ -121,18 +123,23 @@ const UploadProperties = () => {
     const data = readerEvent.target.result.split(",")[1];
     const [headers, url] = setHeaderAndUrl();
     const dataToPost = JSON.stringify({
-      upload_id: file.name,
-      chunk_number: currentChunkIndex + 1,
-      total_chunks: Math.ceil(file.size / chunkSize),
+      upload_id: "11",
+      chunk_number: `${currentChunkIndex + 1}`,
+      total_chunks: `${Math.ceil(file.size / chunkSize)}`,
       total_file_size: fileSize,
       file_name: file.name,
       data: data,
     });
-    console.log(dataToPost);
+    // console.log(dataToPost);
+    await axios.post(url, dataToPost, { headers: headers }).then((res) => {
+      console.log(res.data);
+    });
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
     console.warn("IS LAST CHUNK: ", isLastChunk);
     if (isLastChunk) {
+      toast.success("Data saved successfully");
+      onCancelClick();
       setLastUploadedFileIndex(currentFileIndex);
       setCurrentChunkIndex(null);
     } else {
@@ -280,9 +287,7 @@ const UploadProperties = () => {
                         Save
                       </button>
                       <button
-                        onClick={(e) => {
-                          onCancelClick(e);
-                        }}
+                        onClick={onCancelClick}
                         className="btn btn-secondary"
                       >
                         Cancel
