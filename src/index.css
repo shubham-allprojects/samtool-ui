@@ -86,7 +86,7 @@ small {
 
 /* React confirm */
 
-.react-confirm-alert-overlay {
+/* .react-confirm-alert-overlay {
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
@@ -105,7 +105,7 @@ small {
   background: orange !important;
   color: white !important;
   transition: 0.2s ease-in-out;
-}
+} */
 
 .skyblue-bg {
   background: rgba(135, 207, 235, 0.25);
@@ -888,6 +888,16 @@ input[type="number"] {
 }
 
 /* Media Queries */
+
+@media (min-width: 576px) {
+  .confirm-delete-modal {
+    --bs-modal-width: 400px !important;
+  }
+  .confirm-delete-modal .modal-content {
+    background: var(--bg-gradient-blue);
+    color: white;
+  }
+}
 
 @media (min-width: 768px) {
   .contact-form-wrapper {

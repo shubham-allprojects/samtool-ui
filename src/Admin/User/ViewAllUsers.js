@@ -138,23 +138,31 @@ const ManageUsers = () => {
       });
   };
 
-  const confirmDelete = (userId, userName) => {
-    confirmAlert({
-      title: "Confirm",
-      message: "Are you sure you want to delete user?",
-      buttons: [
-        {
-          label: "Yes",
-          onClick: () => {
-            deleteUser(userId, userName);
-          },
-        },
-        {
-          label: "No",
-          onClick: () => {},
-        },
-      ],
-    });
+  // const confirmDelete = (userId, userName) => {
+  //   confirmAlert({
+  //     title: "Confirm",
+  //     message: "Are you sure you want to delete user?",
+  //     buttons: [
+  //       {
+  //         label: "Yes",
+  //         onClick: () => {
+  //           deleteUser(userId, userName);
+  //         },
+  //       },
+  //       {
+  //         label: "No",
+  //         onClick: () => {},
+  //       },
+  //     ],
+  //   });
+  // };
+
+  const [selectedUserId, setSelectedUserId] = useState("");
+  const [selectedUserEmail, setSelectedUserEmail] = useState("");
+
+  const confirmDelete = (userId, userEmail) => {
+    setSelectedUserId(userId);
+    setSelectedUserEmail(userEmail);
   };
 
   const saveUsersCount = async () => {
@@ -424,10 +432,15 @@ const ManageUsers = () => {
                                     </NavLink>
 
                                     <div
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#confirmDeletedModal"
                                       className="dropdown-item"
                                       onClick={() => {
                                         confirmDelete(user_id, email_address);
                                       }}
+                                      // onClick={() => {
+                                      //   confirmDelete(user_id, email_address);
+                                      // }}
                                     >
                                       <i className="bi bi-trash pe-2"></i>
                                       Delete
@@ -558,9 +571,9 @@ const ManageUsers = () => {
 
                                     <span
                                       className="dropdown-item"
-                                      onClick={() => {
-                                        confirmDelete(user_id, email_address);
-                                      }}
+                                      // onClick={() => {
+                                      //   confirmDelete(user_id, email_address);
+                                      // }}
                                     >
                                       <i className="bi bi-trash pe-1"></i>{" "}
                                       Delete
@@ -625,6 +638,45 @@ const ManageUsers = () => {
                   </nav>
                 </>
               )}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Modal */}
+
+      <div
+        className="modal fade"
+        id="confirmDeletedModal"
+        tabIndex="-1"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered modal-sm confirm-delete-modal">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Are you sure ?
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <label htmlFor="confirm-delete-input" className="form-label">
+                Please type <span className="fw-bold">{selectedUserEmail}</span>{" "}
+                to confirm.
+              </label>
+              <input
+                type="text"
+                name="confirm-delete-email"
+                id="confirm-delete-input"
+                className="form-control"
+              />
+              <button className="btn btn-danger w-100 mt-3 fw-bold">
+                Delete User
+              </button>
             </div>
           </div>
         </div>
