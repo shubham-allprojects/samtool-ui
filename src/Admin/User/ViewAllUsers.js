@@ -36,6 +36,11 @@ const ManageUsers = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState("");
+  const [selectedUserEmail, setSelectedUserEmail] = useState("");
+  const [confirmDeleteUserBtnDisabled, setConfirmDeleteUserBtnDisabled] =
+    useState(true);
+  const confirmDeleteInputRef = useRef();
   const [individualUsersCount, setIndividualUsersCount] = useState(
     localIndividualCount ? localIndividualCount : 0
   );
@@ -138,12 +143,6 @@ const ManageUsers = () => {
         }
       });
   };
-
-  const [selectedUserId, setSelectedUserId] = useState("");
-  const [selectedUserEmail, setSelectedUserEmail] = useState("");
-  const [confirmDeleteUserBtnDisabled, setConfirmDeleteUserBtnDisabled] =
-    useState(true);
-  const confirmDeleteInputRef = useRef();
 
   const saveUsersCount = async () => {
     const [headers, url] = setHeaderAndUrl();
