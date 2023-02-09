@@ -138,32 +138,9 @@ const ManageUsers = () => {
       });
   };
 
-  // const confirmDelete = (userId, userName) => {
-  //   confirmAlert({
-  //     title: "Confirm",
-  //     message: "Are you sure you want to delete user?",
-  //     buttons: [
-  //       {
-  //         label: "Yes",
-  //         onClick: () => {
-  //           deleteUser(userId, userName);
-  //         },
-  //       },
-  //       {
-  //         label: "No",
-  //         onClick: () => {},
-  //       },
-  //     ],
-  //   });
-  // };
-
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectedUserEmail, setSelectedUserEmail] = useState("");
-
-  const confirmDelete = (userId, userEmail) => {
-    setSelectedUserId(userId);
-    setSelectedUserEmail(userEmail);
-  };
+  const [confirmDeleteUserBtn, setConfirmDeleteUserBtn] = useState(true);
 
   const saveUsersCount = async () => {
     const [headers, url] = setHeaderAndUrl();
@@ -436,11 +413,9 @@ const ManageUsers = () => {
                                       data-bs-target="#confirmDeletedModal"
                                       className="dropdown-item"
                                       onClick={() => {
-                                        confirmDelete(user_id, email_address);
+                                        setSelectedUserId(user_id);
+                                        setSelectedUserEmail(email_address);
                                       }}
-                                      // onClick={() => {
-                                      //   confirmDelete(user_id, email_address);
-                                      // }}
                                     >
                                       <i className="bi bi-trash pe-2"></i>
                                       Delete
@@ -569,12 +544,7 @@ const ManageUsers = () => {
                                       <i className="bi bi-eye pe-1"></i> View
                                     </NavLink>
 
-                                    <span
-                                      className="dropdown-item"
-                                      // onClick={() => {
-                                      //   confirmDelete(user_id, email_address);
-                                      // }}
-                                    >
+                                    <span className="dropdown-item">
                                       <i className="bi bi-trash pe-1"></i>{" "}
                                       Delete
                                     </span>
@@ -669,12 +639,22 @@ const ManageUsers = () => {
                 to confirm.
               </label>
               <input
+                onChange={(e) => {
+                  if (e.target.value === selectedUserEmail) {
+                    setConfirmDeleteUserBtn(false);
+                  } else {
+                    setConfirmDeleteUserBtn(true);
+                  }
+                }}
                 type="text"
                 name="confirm-delete-email"
                 id="confirm-delete-input"
                 className="form-control"
               />
-              <button className="btn btn-danger w-100 mt-3 fw-bold">
+              <button
+                disabled={confirmDeleteUserBtn}
+                className="btn btn-danger w-100 mt-3 fw-bold"
+              >
                 Delete User
               </button>
             </div>
