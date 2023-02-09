@@ -910,7 +910,7 @@ const Registration = () => {
 
         {/* Modal */}
         <div
-          className="modal fade"
+          className="modal fade registration-address-modal"
           id="exampleModal"
           tabIndex="-1"
           aria-labelledby="exampleModalLabel"

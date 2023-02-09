@@ -84,29 +84,6 @@ small {
   width: 100% !important;
 }
 
-/* React confirm */
-
-/* .react-confirm-alert-overlay {
-  background-color: rgba(0, 0, 0, 0.7) !important;
-}
-
-.react-confirm-alert-body {
-  background: var(--bg-gradient-blue) !important;
-  color: white !important;
-}
-
-.react-confirm-alert-button-group > button {
-  background: white !important;
-  color: var(--primary-color) !important;
-  transition: 0.2s ease-in-out;
-}
-
-.react-confirm-alert-button-group > button:hover {
-  background: orange !important;
-  color: white !important;
-  transition: 0.2s ease-in-out;
-} */
-
 .skyblue-bg {
   background: rgba(135, 207, 235, 0.25);
 }
@@ -527,6 +504,10 @@ input[type="number"] {
   text-decoration: underline;
 }
 
+.registration-address-modal {
+  --bs-modal-width: 700px !important;
+}
+
 /* Individual Registration */
 
 .register-links a,
@@ -813,6 +794,14 @@ input[type="number"] {
   height: 200px;
 }
 
+.confirm-delete-modal {
+  --bs-modal-width: 400px !important;
+}
+.confirm-delete-modal .modal-content {
+  background: var(--bg-gradient-blue);
+  color: white;
+}
+
 .users-admin .active > .page-link,
 .users-admin .page-link.active {
   z-index: 3;
@@ -875,11 +864,6 @@ input[type="number"] {
   border-top: 1px solid white;
 }
 
-/* Address Modal */
-.modal {
-  --bs-modal-width: 700px !important;
-}
-
 .sidebar-toggle-btn-sm {
   position: absolute;
   width: fit-content !important;
@@ -888,16 +872,6 @@ input[type="number"] {
 }
 
 /* Media Queries */
-
-@media (min-width: 576px) {
-  .confirm-delete-modal {
-    --bs-modal-width: 400px !important;
-  }
-  .confirm-delete-modal .modal-content {
-    background: var(--bg-gradient-blue);
-    color: white;
-  }
-}
 
 @media (min-width: 768px) {
   .contact-form-wrapper {

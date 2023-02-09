@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
@@ -140,7 +140,9 @@ const ManageUsers = () => {
 
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectedUserEmail, setSelectedUserEmail] = useState("");
-  const [confirmDeleteUserBtn, setConfirmDeleteUserBtn] = useState(true);
+  const [confirmDeleteUserBtnDisabled, setConfirmDeleteUserBtnDisabled] =
+    useState(true);
+  const confirmDeleteInputRef = useRef();
 
   const saveUsersCount = async () => {
     const [headers, url] = setHeaderAndUrl();
@@ -627,6 +629,10 @@ const ManageUsers = () => {
                 Are you sure ?
               </h5>
               <button
+                onClick={() => {
+                  confirmDeleteInputRef.current.value = "";
+                  setConfirmDeleteUserBtnDisabled(true);
+                }}
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
@@ -641,18 +647,19 @@ const ManageUsers = () => {
               <input
                 onChange={(e) => {
                   if (e.target.value === selectedUserEmail) {
-                    setConfirmDeleteUserBtn(false);
+                    setConfirmDeleteUserBtnDisabled(false);
                   } else {
-                    setConfirmDeleteUserBtn(true);
+                    setConfirmDeleteUserBtnDisabled(true);
                   }
                 }}
+                ref={confirmDeleteInputRef}
                 type="text"
                 name="confirm-delete-email"
                 id="confirm-delete-input"
                 className="form-control"
               />
               <button
-                disabled={confirmDeleteUserBtn}
+                disabled={confirmDeleteUserBtnDisabled}
                 className="btn btn-danger w-100 mt-3 fw-bold"
               >
                 Delete User
