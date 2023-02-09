@@ -94,6 +94,8 @@ const ManageUsers = () => {
       .then((res) => {
         if (res.data.status === 0) {
           toast.success(`User ${userName} deleted successfuly`);
+          confirmDeleteInputRef.current.value = "";
+          setConfirmDeleteUserBtnDisabled(true);
           if (userType === "Individual User") {
             setIndividualUsersCount(individualUsersCount - 1);
             if (individualUsersCount - 1 > 0) {
@@ -545,10 +547,18 @@ const ManageUsers = () => {
                                       <i className="bi bi-eye pe-1"></i> View
                                     </NavLink>
 
-                                    <span className="dropdown-item">
+                                    <div
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#confirmDeletedModal"
+                                      className="dropdown-item"
+                                      onClick={() => {
+                                        setSelectedUserId(user_id);
+                                        setSelectedUserEmail(email_address);
+                                      }}
+                                    >
                                       <i className="bi bi-trash pe-1"></i>{" "}
                                       Delete
-                                    </span>
+                                    </div>
                                   </ul>
                                 </li>
                               </td>
@@ -661,6 +671,7 @@ const ManageUsers = () => {
                 onClick={() => {
                   deleteUser(selectedUserId, selectedUserEmail);
                 }}
+                data-bs-dismiss="modal"
                 disabled={confirmDeleteUserBtnDisabled}
                 className="btn btn-danger w-100 mt-3 fw-bold"
               >
