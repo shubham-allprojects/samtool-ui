@@ -105,7 +105,7 @@ const LoginMainPage = () => {
           });
           setAlertDetails({
             alertVisible: true,
-            alertMsg: "Invalid Username or Password Entered.",
+            alertMsg: "Invalid Credentials.",
             alertClr: "danger",
           });
         }

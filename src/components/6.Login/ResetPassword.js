@@ -4,8 +4,22 @@ import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import resetPassImg from "../../images/resetPass.svg";
 import { rootTitle } from "../../CommonFunctions";
+import axios from "axios";
 
 const ResetPassword = () => {
+  const data = JSON.parse(localStorage.getItem("data"));
+  const setHeaderAndUrl = () => {
+    let headers = "";
+    let userId = "";
+    if (data) {
+      headers = { Authorization: data.logintoken };
+      userId = data.userId;
+    }
+    let url = `/sam/v1/customer-registration/auth`;
+
+    return [headers, url, userId];
+  };
+
   //  Important variables for storing password data as well as validation data.
   const [details, setDetails] = useState({
     newPassword: "",
@@ -119,13 +133,34 @@ const ResetPassword = () => {
       });
     } else {
       setResetBtnClassName("disabled");
-      toast.success("Password changed successfully");
-      // Clear localStorage.
-      localStorage.clear();
-      setTimeout(() => {
-        // window.location.reload();
-        goTo("/login");
-      }, 2000);
+      const [headers, url, userId] = setHeaderAndUrl();
+      await axios
+        .post(
+          `${url}/reset-password`,
+          {
+            user_id: userId.toString(),
+            password: newPassword,
+          },
+          { headers: headers }
+        )
+        .then((res) => {
+          if (res.data.status === 0) {
+            toast.success("Password changed successfully");
+            // Clear localStorage.
+            localStorage.clear();
+            setTimeout(() => {
+              // window.location.reload();
+              goTo("/login");
+            }, 2000);
+          } else {
+            setResetBtnClassName("");
+            setAlertDetails({
+              alertMsg: "New password can not be the same as your current password",
+              alertVisible: true,
+              alertClr: "danger",
+            });
+          }
+        });
     }
   };
 
