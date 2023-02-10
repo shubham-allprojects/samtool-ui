@@ -469,16 +469,18 @@ input[type="number"] {
   color: white;
   cursor: pointer;
   background-color: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
   margin: 0 10px;
+  transition: 0.3s ease-in-out;
 }
 
-.footer-icon i {
-  transition: 0.2s ease-in-out;
+.footer-icon:hover {
+  transition: 0.3s ease-in-out;
+  background-color: white;
 }
 
 .footer-icon:hover i {
-  transform: scale(1.08);
-  transition: 0.2s ease-in-out;
+  color: var(--secondary-color);
 }
 
 /* <----- Registration ----> */
