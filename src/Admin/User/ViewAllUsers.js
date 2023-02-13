@@ -417,6 +417,9 @@ const ManageUsers = () => {
                                       onClick={() => {
                                         setSelectedUserId(user_id);
                                         setSelectedUserEmail(email_address);
+                                        confirmDeleteInputRef.current.value =
+                                          "";
+                                        setConfirmDeleteUserBtnDisabled(true);
                                       }}
                                     >
                                       <i className="bi bi-trash pe-2"></i>
@@ -553,6 +556,9 @@ const ManageUsers = () => {
                                       onClick={() => {
                                         setSelectedUserId(user_id);
                                         setSelectedUserEmail(email_address);
+                                        confirmDeleteInputRef.current.value =
+                                          "";
+                                        setConfirmDeleteUserBtnDisabled(true);
                                       }}
                                     >
                                       <i className="bi bi-trash pe-1"></i>{" "}
@@ -637,10 +643,6 @@ const ManageUsers = () => {
                 Are you sure ?
               </h5>
               <button
-                onClick={() => {
-                  confirmDeleteInputRef.current.value = "";
-                  setConfirmDeleteUserBtnDisabled(true);
-                }}
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
