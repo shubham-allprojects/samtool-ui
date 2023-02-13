@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./components/2.HomePage/Home";
 import ViewPropertyDetails from "./components/2.HomePage/ViewPropertyDetails";
-import LoginMainPage from "./components/6.Login/LoginMainPage";
+import LoginMainPage from "./components/5.Login/LoginMainPage";
 import SetPassword from "./components/6.Registration/SetPassword";
 import Registration from "./components/6.Registration/RegistrationMainPage";
 import ScrollToTop from "./components/ScrollToTop";
