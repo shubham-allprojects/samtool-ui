@@ -24,6 +24,7 @@ import ViewCurrentUser from "./Admin/User/ViewCurrentUser";
 import ResetPassword from "./components/5.Login/ResetPassword";
 import AboutUs from "./components/3.About/AboutUs";
 import AddProperty from "./Admin/Property/AddProperty";
+import ForgotPassword from "./components/5.Login/ForgotPassword";
 
 function App() {
   return (
@@ -91,6 +92,7 @@ function App() {
               </Protected>
             }
           />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           {/* Admin */}
           <Route path="/admin" element={<AdminHomePage />} />

@@ -226,7 +226,7 @@ const LoginMainPage = () => {
                     <small className="fw-bold">
                       <NavLink
                         className="ps-1 text-decoration-none"
-                        to="/register"
+                        to="/forgot-password"
                       >
                         Forgot password?
                       </NavLink>
