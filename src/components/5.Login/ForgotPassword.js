@@ -15,6 +15,7 @@ const ForgotPassword = () => {
       .then((res) => {
         if (res.data.status === 1) {
           alert("Email sent successfully");
+          e.target.reset();
         } else {
           alert("User does not exists");
         }
