@@ -220,12 +220,27 @@ const LoginMainPage = () => {
                     {loginBtnTxt}
                   </button>
                 </div>
-                <small className="register-link position-absolute fixed-bottom text-end px-3 py-2 fw-bold">
-                  Not Registered ?
-                  <NavLink className="ps-1" to="/register">
-                    Click here.
-                  </NavLink>
-                </small>
+
+                <div className="row">
+                  <div className="col-6">
+                    <small className="fw-bold">
+                      <NavLink
+                        className="ps-1 text-decoration-none"
+                        to="/register"
+                      >
+                        Forgot password?
+                      </NavLink>
+                    </small>
+                  </div>
+                  <div className="col-6">
+                    <small className="register-link text-end fw-bold">
+                      Not Registered ?
+                      <NavLink className="ps-1" to="/register">
+                        Click here.
+                      </NavLink>
+                    </small>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
