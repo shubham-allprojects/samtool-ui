@@ -221,8 +221,8 @@ const LoginMainPage = () => {
                   </button>
                 </div>
 
-                <div className="row">
-                  <div className="col-6">
+                <div className="d-flex justify-content-between">
+                  <div className="">
                     <small className="fw-bold">
                       <NavLink
                         className="ps-1 text-decoration-none"
@@ -232,7 +232,7 @@ const LoginMainPage = () => {
                       </NavLink>
                     </small>
                   </div>
-                  <div className="col-6">
+                  <div className="">
                     <small className="register-link text-end fw-bold">
                       Not Registered ?
                       <NavLink className="ps-1" to="/register">
