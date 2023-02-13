@@ -9,21 +9,19 @@ import axios from "axios";
 const ResetPassword = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   const setHeaderAndUrl = () => {
-    let headers = "";
     let userId = "";
     if (data) {
-      headers = { Authorization: data.logintoken };
       userId = data.userId;
     }
-    let url = `/sam/v1/customer-registration/auth`;
+    let url = `/sam/v1/customer-registration/`;
 
-    return [headers, url, userId];
+    return [url, userId];
   };
 
   //  Important variables for storing password data as well as validation data.
   const [details, setDetails] = useState({
+    currentPassword: "",
     newPassword: "",
-    confirmPassword: "",
     invalidMessage1: "",
     eyeIcon: "eye-slash",
     eyeIcon2: "eye-slash",
@@ -43,8 +41,8 @@ const ResetPassword = () => {
   const goTo = useNavigate();
 
   const {
+    currentPassword,
     newPassword,
-    confirmPassword,
     invalidMessage1,
     eyeIcon,
     eyeIcon2,
@@ -55,7 +53,7 @@ const ResetPassword = () => {
   // Function to check if the password satisfies the given password condition.
   const onPasswordsBlur = (e) => {
     const { name, value } = e.target;
-    if (name === "resetPassword") {
+    if (name === "new-password") {
       const regexForPassword =
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
       if (value) {
@@ -79,70 +77,59 @@ const ResetPassword = () => {
   // Onchange function for both password fields.
   const onPasswordsChange = (e) => {
     const { name, value } = e.target;
-    if (name === "resetPassword") {
+    if (name === "new-password") {
       setDetails({
         ...details,
         newPassword: value,
         invalidMessage1: "",
       });
-    } else if (name === "confirmPassword") {
+    } else if (name === "current-password") {
       setDetails({
         ...details,
-        confirmPassword: value,
+        currentPassword: value,
       });
     }
+  };
+
+  const displayPasswordInputs = () => {
+    setDetails({
+      ...details,
+      eyeIcon: "eye",
+      passwordType1: "text",
+      eyeIcon2: "eye",
+      passwordType2: "text",
+    });
   };
 
   // On setPassWord Button click this function will run.
   const onresetPasswordFormSubmit = async (e) => {
     e.preventDefault();
-    if (
-      newPassword !== confirmPassword &&
-      invalidMessage1 !== "Invalid Password"
-    ) {
+    if (currentPassword === newPassword) {
+      displayPasswordInputs();
       setAlertDetails({
+        alertMsg: "New password can not be the same as your current password",
         alertVisible: true,
-        alertMsg: "Password and confirm password does not match.",
         alertClr: "danger",
       });
-      setDetails({
-        ...details,
-        eyeIcon: "eye",
-        passwordType1: "text",
-        eyeIcon2: "eye",
-        passwordType2: "text",
-      });
-    } else if (newPassword !== confirmPassword) {
-      setDetails({
-        ...details,
-        eyeIcon: "eye",
-        passwordType1: "text",
-        eyeIcon2: "eye",
-        passwordType2: "text",
-      });
     } else if (
-      newPassword === confirmPassword &&
+      currentPassword !== newPassword &&
       invalidMessage1 === "Invalid Password"
     ) {
-      setDetails({
-        ...details,
-        eyeIcon: "eye",
-        passwordType1: "text",
-        eyeIcon2: "eye",
-        passwordType2: "text",
+      displayPasswordInputs();
+      setAlertDetails({
+        alertMsg: "Invalid New Password",
+        alertVisible: true,
+        alertClr: "danger",
       });
     } else {
       setResetBtnClassName("disabled");
-      const [headers, url, userId] = setHeaderAndUrl();
+      const [url, userId] = setHeaderAndUrl();
       await axios
-        .post(
-          `${url}/reset-password`,
-          {
-            user_id: userId.toString(),
-            password: newPassword,
-          },
-          { headers: headers }
-        )
+        .post(`${url}/reset-password`, {
+          user_id: userId.toString(),
+          old_password: currentPassword,
+          new_password: newPassword,
+        })
         .then((res) => {
           if (res.data.status === 0) {
             toast.success("Password changed successfully");
@@ -155,10 +142,11 @@ const ResetPassword = () => {
           } else {
             setResetBtnClassName("");
             setAlertDetails({
-              alertMsg: "New password can not be the same as your current password",
+              alertMsg: "Invalid current password",
               alertVisible: true,
               alertClr: "danger",
             });
+            displayPasswordInputs();
           }
         });
     }
@@ -223,9 +211,10 @@ const ResetPassword = () => {
                     <div className="form-group">
                       <label
                         className="text-muted form-label"
-                        htmlFor="set-password"
+                        htmlFor="current-password"
                       >
-                        New Password<span className="text-danger ps-1">*</span>
+                        Current Password
+                        <span className="text-danger ps-1">*</span>
                       </label>
 
                       <div className="input-group position-relative">
@@ -233,11 +222,10 @@ const ResetPassword = () => {
                           <i className="bi bi-lock-fill"></i>
                         </span>
                         <input
-                          id="set-password"
-                          name="resetPassword"
+                          id="current-password"
+                          name="current-password"
                           type={passwordType1}
                           className="form-control"
-                          onBlur={onPasswordsBlur}
                           onChange={onPasswordsChange}
                           required
                         />
@@ -245,6 +233,36 @@ const ResetPassword = () => {
                           placeholder={eyeIcon}
                           onClick={changeEyeIcon1}
                           className={`icon-eye-resetpass bi bi-${eyeIcon}`}
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-12 mb-4">
+                    <label
+                      className="text-muted form-label"
+                      htmlFor="new-password"
+                    >
+                      New Password
+                      <span className="text-danger ps-1">*</span>
+                    </label>
+                    <div className="form-group">
+                      <div className="input-group position-relative">
+                        <span className="input-group-text" id="basic-addon1">
+                          <i className="bi bi-lock-fill"></i>
+                        </span>
+                        <input
+                          id="new-password"
+                          name="new-password"
+                          type={passwordType2}
+                          className="form-control"
+                          onBlur={onPasswordsBlur}
+                          onChange={onPasswordsChange}
+                          required
+                        />
+                        <i
+                          placeholder={eyeIcon}
+                          onClick={changeEyeIcon2}
+                          className={`icon-eye-resetpass bi bi-${eyeIcon2}`}
                         ></i>
                       </div>
                     </div>
@@ -260,35 +278,6 @@ const ResetPassword = () => {
                       lowercase letter, 1 number, 1 special character and should
                       be 8-15 characters long.
                     </span>
-                  </div>
-                  <div className="col-lg-12 mb-4">
-                    <label
-                      className="text-muted form-label"
-                      htmlFor="confirm-password"
-                    >
-                      Confirm Password
-                      <span className="text-danger ps-1">*</span>
-                    </label>
-                    <div className="form-group">
-                      <div className="input-group position-relative">
-                        <span className="input-group-text" id="basic-addon1">
-                          <i className="bi bi-lock-fill"></i>
-                        </span>
-                        <input
-                          id="confirm-password"
-                          name="confirmPassword"
-                          type={passwordType2}
-                          className="form-control"
-                          onChange={onPasswordsChange}
-                          required
-                        />
-                        <i
-                          placeholder={eyeIcon}
-                          onClick={changeEyeIcon2}
-                          className={`icon-eye-resetpass bi bi-${eyeIcon2}`}
-                        ></i>
-                      </div>
-                    </div>
                   </div>
                   <div className="col-lg-12">
                     <button
