@@ -621,13 +621,13 @@ input[type="number"] {
   z-index: 0 !important;
 }
 
-.reset-password-wrapper .input-group-text,
+.change-password-wrapper .input-group-text,
 .login-wrapper .input-group-text {
   background-color: var(--primary-color);
   color: white;
 }
 
-.icon-eye-resetpass {
+.icon-eye-changePassword {
   position: absolute;
   right: 1rem;
   bottom: 0.21rem;

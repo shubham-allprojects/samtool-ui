@@ -191,7 +191,7 @@ const Profile = () => {
                     <div className="col-md-4 mt-4 mt-md-0">
                       <p className="text-muted fw-bold">Quick Links</p>
                       <li>
-                        <NavLink to="/reset-password">Reset Password</NavLink>
+                        <NavLink to="/reset-password">Change Password</NavLink>
                       </li>
                       <li>
                         <NavLink to="/profile/edit-details">

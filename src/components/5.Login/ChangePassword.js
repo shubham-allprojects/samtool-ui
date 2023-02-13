@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
-import resetPassImg from "../../images/resetPass.svg";
+import changePassImg from "../../images/changePassword.svg";
 import { rootTitle } from "../../CommonFunctions";
 import axios from "axios";
 
-const ResetPassword = () => {
+const ChangePassword = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   const setHeaderAndUrl = () => {
     let userId = "";
@@ -29,7 +29,8 @@ const ResetPassword = () => {
     passwordType2: "password",
   });
 
-  const [resetBtnClassName, setResetBtnClassName] = useState("");
+  const [changePasswordBtnClassName, setChangePasswordBtnClassName] =
+    useState("");
 
   const [alertDetails, setAlertDetails] = useState({
     alertVisible: false,
@@ -102,7 +103,7 @@ const ResetPassword = () => {
   };
 
   // On setPassWord Button click this function will run.
-  const onresetPasswordFormSubmit = async (e) => {
+  const onChangePasswordFormSubmit = async (e) => {
     e.preventDefault();
     if (currentPassword === newPassword) {
       displayPasswordInputs();
@@ -122,7 +123,7 @@ const ResetPassword = () => {
         alertClr: "danger",
       });
     } else {
-      setResetBtnClassName("disabled");
+      setChangePasswordBtnClassName("disabled");
       const [url, userId] = setHeaderAndUrl();
       await axios
         .post(`${url}/reset-password`, {
@@ -140,7 +141,7 @@ const ResetPassword = () => {
               goTo("/login");
             }, 2000);
           } else {
-            setResetBtnClassName("");
+            setChangePasswordBtnClassName("");
             setAlertDetails({
               alertMsg: "Invalid current password",
               alertVisible: true,
@@ -179,17 +180,17 @@ const ResetPassword = () => {
   };
 
   useEffect(() => {
-    rootTitle.textContent = "SAM TOOL - RESET PASSWORD";
+    rootTitle.textContent = "SAM TOOL - CHANGE PASSWORD";
   }, []);
 
   return (
     <Layout>
-      <section className="reset-password-wrapper section-padding min-100vh">
+      <section className="change-password-wrapper section-padding min-100vh">
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8 order-1 order-lg-2">
-              <form onSubmit={onresetPasswordFormSubmit} className="card p-5">
-                <h3 className="text-center fw-bold">Reset Password</h3>
+              <form onSubmit={onChangePasswordFormSubmit} className="card p-5">
+                <h3 className="text-center fw-bold">Change Password</h3>
                 <hr />
                 {alertVisible ? (
                   <div
@@ -232,7 +233,7 @@ const ResetPassword = () => {
                         <i
                           placeholder={eyeIcon}
                           onClick={changeEyeIcon1}
-                          className={`icon-eye-resetpass bi bi-${eyeIcon}`}
+                          className={`icon-eye-changePassword bi bi-${eyeIcon}`}
                         ></i>
                       </div>
                     </div>
@@ -262,7 +263,7 @@ const ResetPassword = () => {
                         <i
                           placeholder={eyeIcon}
                           onClick={changeEyeIcon2}
-                          className={`icon-eye-resetpass bi bi-${eyeIcon2}`}
+                          className={`icon-eye-changePassword bi bi-${eyeIcon2}`}
                         ></i>
                       </div>
                     </div>
@@ -284,16 +285,16 @@ const ResetPassword = () => {
                   <div className="col-lg-12">
                     <button
                       type="submit"
-                      className={`btn common-btn w-100 ${resetBtnClassName}`}
+                      className={`btn common-btn w-100 ${changePasswordBtnClassName}`}
                     >
-                      Reset Password
+                      Change Password
                     </button>
                   </div>
                 </div>
               </form>
             </div>
             <div className="col-xl-5 col-lg-6 col-md-8 my-5 my-lg-0 order-2 order-lg-1">
-              <img src={resetPassImg} alt="" className="set-pass-img" />
+              <img src={changePassImg} alt="" className="set-pass-img" />
             </div>
           </div>
         </div>
@@ -302,4 +303,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ChangePassword;
