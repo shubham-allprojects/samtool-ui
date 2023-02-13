@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../1.CommonLayout/Layout";
 import resetPassImg from "../../images/resetPass.svg";
+import axios from "axios";
 
 const ForgotPassword = () => {
+  const [emailValue, setEmailValue] = useState("");
+  const resetPassword = async (e) => {
+    e.preventDefault();
+    await axios
+      .post(
+        `/sam/v1/customer-registration/email-validation`,
+        JSON.stringify({ email: emailValue })
+      )
+      .then((res) => {
+        if (res.data.status === 1) {
+          alert("Email sent successfully");
+        } else {
+          alert("User does not exists");
+        }
+      });
+  };
   return (
     <Layout>
       <section className="forgot-password section-padding min-100vh">
@@ -12,7 +29,10 @@ const ForgotPassword = () => {
               <img src={resetPassImg} alt="" className="set-pass-img" />
             </div>
             <div className="col-xl-5">
-              <form className="card shadow justify-content-center p-5">
+              <form
+                onSubmit={resetPassword}
+                className="card shadow justify-content-center p-5"
+              >
                 <h2 className="text-center fw-bold">Reset your password</h2>
                 <hr />
                 <div className="form-group mb-3">
@@ -26,6 +46,10 @@ const ForgotPassword = () => {
                     id="email"
                     className="form-control"
                     placeholder="Enter your email address"
+                    required
+                    onChange={(e) => {
+                      setEmailValue(e.target.value);
+                    }}
                   />
                 </div>
                 <button className="btn btn-primary">
