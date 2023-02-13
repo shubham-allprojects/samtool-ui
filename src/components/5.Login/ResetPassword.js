@@ -266,13 +266,15 @@ const ResetPassword = () => {
                         ></i>
                       </div>
                     </div>
-                    {invalidMessage1 ? (
-                      <span className="pe-1 text-danger">
-                        {invalidMessage1}
-                      </span>
-                    ) : (
-                      <span className="d-none"></span>
-                    )}
+
+                    <span
+                      className={`pe-1 text-danger ${
+                        invalidMessage1 ? "" : "d-none"
+                      }`}
+                    >
+                      {invalidMessage1}
+                    </span>
+
                     <span className="text-muted password-condition">
                       Password should contain at least 1 uppercase letter, 1
                       lowercase letter, 1 number, 1 special character and should
