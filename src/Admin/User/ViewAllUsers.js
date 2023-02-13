@@ -92,6 +92,13 @@ const ManageUsers = () => {
     });
   };
 
+  const onDeleteBtnClick = (userId, userName) => {
+    setSelectedUserId(userId);
+    setSelectedUserEmail(userName);
+    confirmDeleteInputRef.current.value = "";
+    setConfirmDeleteUserBtnDisabled(true);
+  };
+
   const deleteUser = async (userId, userName) => {
     const [headers] = setHeaderAndUrl();
     await axios
@@ -415,11 +422,10 @@ const ManageUsers = () => {
                                       data-bs-target="#confirmDeletedModal"
                                       className="dropdown-item"
                                       onClick={() => {
-                                        setSelectedUserId(user_id);
-                                        setSelectedUserEmail(email_address);
-                                        confirmDeleteInputRef.current.value =
-                                          "";
-                                        setConfirmDeleteUserBtnDisabled(true);
+                                        onDeleteBtnClick(
+                                          user_id,
+                                          email_address
+                                        );
                                       }}
                                     >
                                       <i className="bi bi-trash pe-2"></i>
@@ -554,11 +560,10 @@ const ManageUsers = () => {
                                       data-bs-target="#confirmDeletedModal"
                                       className="dropdown-item"
                                       onClick={() => {
-                                        setSelectedUserId(user_id);
-                                        setSelectedUserEmail(email_address);
-                                        confirmDeleteInputRef.current.value =
-                                          "";
-                                        setConfirmDeleteUserBtnDisabled(true);
+                                        onDeleteBtnClick(
+                                          user_id,
+                                          email_address
+                                        );
                                       }}
                                     >
                                       <i className="bi bi-trash pe-1"></i>{" "}
