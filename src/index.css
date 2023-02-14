@@ -727,21 +727,24 @@ input[type="number"] {
 .admin-top-card {
   background: var(--secondary-color) !important;
   transition: 0.3s ease-in-out;
+  height: 125px !important;
+  display: flex;
+  justify-content: center;
 }
 
 .admin-top-card:hover {
   transition: 0.3s ease-in-out;
   background: white !important;
   border-color: var(--secondary-color);
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .hover-color-secondary {
   transition: 0.3s ease-in-out;
 }
 
-.hover-color-secondary.icon{
-font-size: 3.5rem !important;
+.hover-color-secondary.icon {
+  font-size: 2.5rem !important;
 }
 
 .admin-top-card:hover .hover-color-secondary {

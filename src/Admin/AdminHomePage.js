@@ -55,18 +55,18 @@ const AdminHomePage = () => {
                 <div className="col-xl-3 col-lg-4 col-md-6">
                   <NavLink
                     to="/admin/property/properties"
-                    className="card text-decoration-none py-3 admin-top-card"
+                    className="card text-decoration-none admin-top-card"
                   >
                     <div className="row justify-content-center">
-                      <div className="col-xl-3">
+                      <div className="col-xl-3 col-lg-4 col-md-3 col-3">
                         <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1"></i>
                       </div>
-                      <div className="col-xl-5 text-end">
+                      <div className="col-xl-5 col-lg-6 col-md-6 col-4 text-end">
                         <span className="fw-bold text-white hover-color-secondary fs-1">
                           180
                         </span>
                         <br />
-                        <span className="fw-bold fs-5 text-white hover-color-secondary">
+                        <span className="fw-bold text-white hover-color-secondary">
                           Properties
                         </span>
                       </div>
@@ -76,13 +76,13 @@ const AdminHomePage = () => {
                 <div className="col-xl-3 col-lg-4 col-md-6 mt-4 mt-md-0">
                   <NavLink
                     to="/admin/users"
-                    className="card py-3 admin-top-card text-decoration-none"
+                    className="card admin-top-card text-decoration-none"
                   >
                     <div className="row justify-content-center">
-                      <div className="col-xl-3">
+                      <div className="col-xl-3 col-lg-4 col-md-3 col-3">
                         <i className="bi bi-person-fill text-white hover-color-secondary icon fs-1"></i>
                       </div>
-                      <div className="col-xl-5 text-end">
+                      <div className="col-xl-5 col-lg-6 col-md-6 col-4 text-end">
                         <span
                           className="fw-bold text-white hover-color-secondary fs-1"
                           id="usersCount"
@@ -90,7 +90,7 @@ const AdminHomePage = () => {
                           0
                         </span>
                         <br />
-                        <span className="fw-bold fs-5 text-white hover-color-secondary">
+                        <span className="fw-bold text-white hover-color-secondary">
                           Users
                         </span>
                       </div>
