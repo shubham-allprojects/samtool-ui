@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "../1.CommonLayout/Layout";
 import resetPassImg from "../../images/resetPass.svg";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [emailValue, setEmailValue] = useState("");
@@ -11,7 +12,13 @@ const ForgotPassword = () => {
     alertClr: "",
   });
 
+  const [displayOfSections, setDisplayOfSections] = useState({
+    mainSectionDisplay: "",
+    afterSubmitSectionDisplay: "d-none",
+  });
+
   const { alertMsg, alertClr, alertVisible } = alertDetails;
+  const { mainSectionDisplay, afterSubmitSectionDisplay } = displayOfSections;
 
   const resetPassword = async (e) => {
     e.preventDefault();
@@ -22,8 +29,11 @@ const ForgotPassword = () => {
       )
       .then((res) => {
         if (res.data.status === 1) {
-          alert("Email sent successfully");
           e.target.reset();
+          setDisplayOfSections({
+            mainSectionDisplay: "d-none",
+            afterSubmitSectionDisplay: "",
+          });
         } else {
           setAlertDetails({
             alertVisible: true,
@@ -38,7 +48,9 @@ const ForgotPassword = () => {
     <Layout>
       <section className="forgot-password section-padding min-100vh">
         <div className="container wrapper">
-          <div className="row justify-content-lg-between justify-content-center">
+          <div
+            className={`row justify-content-lg-between justify-content-center ${mainSectionDisplay}`}
+          >
             <div className="col-xl-5 col-lg-5 col-md-8 order-2 order-lg-1 mt-lg-0 mt-5">
               <img src={resetPassImg} alt="" className="set-pass-img" />
             </div>
@@ -85,6 +97,21 @@ const ForgotPassword = () => {
                   Send password reset email
                 </button>
               </form>
+            </div>
+          </div>
+          <div
+            className={`row justify-content-center ${afterSubmitSectionDisplay}`}
+          >
+            <div className="col-xl-4 col-lg-5 col-md-6">
+              <div className="card shadow p-4 bg-primary text-white">
+                <span className="mb-3">
+                  Check your email for a link to reset your password. If it
+                  doesn't appear within a few minutes, check your spam folder.
+                </span>
+                <NavLink to="/login" className="btn btn-outline-light fw-bold">
+                  Return to sign in
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>
