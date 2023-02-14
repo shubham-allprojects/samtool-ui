@@ -97,7 +97,10 @@ const AdminHomePage = () => {
                       </div>
                       <div className="col-xl-6 col-md-7 col-5 text-end">
                         <span className="fw-bold text-white hover-color-secondary fs-5">
-                          <span id="usersCount" className="fs-3">0</span> <br /> Users
+                          <span id="usersCount" className="fs-3">
+                            0
+                          </span>
+                          <br /> Users
                         </span>
                       </div>
                     </div>
