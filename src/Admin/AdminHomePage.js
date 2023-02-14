@@ -49,7 +49,7 @@ const AdminHomePage = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-8 scrollable-right-div mt-4 mt-md-0">
+          <div className="col-xl-10 col-md-8 mt-4 mt-md-0">
             <div className="container-fluid wrapper admin-home-wrapper">
               <div className="row">
                 <div className="col-xl-3 col-lg-4 col-md-6">
@@ -68,6 +68,23 @@ const AdminHomePage = () => {
                         <br />
                         <span className="fw-bold text-white hover-color-secondary">
                           Properties
+                        </span>
+                      </div>
+                    </div>
+                  </NavLink>
+                </div>
+                <div className="col-xl-3 col-lg-4 col-md-6 mt-4 mt-md-0">
+                  <NavLink
+                    to="/admin/property/upload-properties"
+                    className="card admin-top-card text-decoration-none"
+                  >
+                    <div className="row justify-content-center">
+                      <div className="col-xl-3 col-lg-4 col-md-3 col-3">
+                        <i className="bi bi-upload text-white hover-color-secondary icon fs-1"></i>
+                      </div>
+                      <div className="col-xl-5 col-lg-6 col-md-6 col-4 text-end">
+                        <span className="fw-bold text-white hover-color-secondary fs-5">
+                          Upload <br /> Properties
                         </span>
                       </div>
                     </div>
