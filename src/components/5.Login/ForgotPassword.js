@@ -77,7 +77,7 @@ const ForgotPassword = () => {
                 </div>
 
                 <div className="form-group mb-3">
-                  <label htmlFor="email" className="form-label fw-bold">
+                  <label htmlFor="email" className="form-label common-btn-font">
                     Enter your user account's verified email address and we will
                     send you a password reset link.
                   </label>
@@ -93,7 +93,7 @@ const ForgotPassword = () => {
                     }}
                   />
                 </div>
-                <button className="btn btn-primary">
+                <button className="btn btn-primary common-btn-font">
                   Send password reset email
                 </button>
               </form>
@@ -110,8 +110,7 @@ const ForgotPassword = () => {
                 </span>
                 <NavLink
                   to="/login"
-                  className="btn btn-outline-light"
-                  style={{ fontWeight: "600" }}
+                  className="btn btn-outline-light common-btn-font"
                 >
                   Return to sign in
                 </NavLink>

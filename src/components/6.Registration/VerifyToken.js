@@ -118,7 +118,7 @@ const VerifyToken = () => {
                   <div className="col-12">
                     <div className="form-group">
                       <button
-                        className={`btn common-btn w-100 ${verifyButtonClass}`}
+                        className={`btn btn-primary common-btn-font w-100 ${verifyButtonClass}`}
                       >
                         <span
                           className={`${

@@ -35,6 +35,10 @@ code {
   --bs-breadcrumb-divider: ">";
 }
 
+.common-btn-font {
+  font-weight: 500 !important;
+}
+
 .breadcrumb-item,
 .breadcrumb-item > *,
 .breadcrumb-item.active {

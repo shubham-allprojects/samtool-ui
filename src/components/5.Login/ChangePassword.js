@@ -285,7 +285,7 @@ const ChangePassword = () => {
                   <div className="col-lg-12">
                     <button
                       type="submit"
-                      className={`btn common-btn w-100 ${changePasswordBtnClassName}`}
+                      className={`btn btn-primary common-btn-font w-100 ${changePasswordBtnClassName}`}
                     >
                       Change Password
                     </button>

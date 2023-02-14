@@ -208,7 +208,7 @@ const LoginMainPage = () => {
                 <hr />
                 <div className="text-center my-3">
                   <button
-                    className={`btn btn-primary ${loginBtnClassName} w-100`}
+                    className={`btn btn-primary ${loginBtnClassName} w-100 common-btn-font`}
                   >
                     <span
                       className={`${

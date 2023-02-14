@@ -253,7 +253,7 @@ const SetPassword = () => {
                   <div className="col-lg-12">
                     <button
                       type="submit"
-                      className={`btn common-btn w-100 ${setPassBtnClassName}`}
+                      className={`btn btn-primary common-btn-font w-100 ${setPassBtnClassName}`}
                     >
                       Set Password
                     </button>

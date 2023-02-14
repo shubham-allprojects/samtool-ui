@@ -329,7 +329,7 @@ function Home() {
             <div className="row justify-content-center py-4">
               <div className="text-center">
                 <button
-                  className={`btn btn-lg common-btn ${
+                  className={`btn btn-lg btn-primary common-btn-font ${
                     Object.keys(dataToPost).length > 2 ? "" : "disabled"
                   }`}
                   onClick={getPropertyData}

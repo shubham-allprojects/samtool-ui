@@ -49,7 +49,7 @@ const Properties = ({ propertyData }) => {
                         <div className="mt-3">
                           <button
                             onClick={viewProperty}
-                            className="btn common-btn"
+                            className="btn btn-primary common-btn-font"
                           >
                             View
                           </button>

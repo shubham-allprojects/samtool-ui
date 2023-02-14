@@ -96,7 +96,7 @@ const ViewPropertyDetails = () => {
                 </div>
 
                 <div className="col-12">
-                  <button className="btn common-btn mt-2">Contact</button>
+                  <button className="btn btn-primary common-btn-font mt-2">Contact</button>
                 </div>
               </div>
             </div>
