@@ -88,6 +88,7 @@ const Contact = () => {
                           type="text"
                           className="form-control"
                           placeholder="Your Name"
+                          required
                         />
                       </div>
                       <div className="form-group mb-3">
@@ -97,6 +98,7 @@ const Contact = () => {
                           name="email_address"
                           className="form-control"
                           placeholder="Email Address"
+                          required
                         />
                       </div>
                       <div className="form-group mb-4">
@@ -108,6 +110,7 @@ const Contact = () => {
                           rows="5"
                           className="form-control"
                           placeholder="Message"
+                          required
                         ></textarea>
                       </div>
                       <button

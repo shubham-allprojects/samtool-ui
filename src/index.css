@@ -423,8 +423,7 @@ input[type="number"] {
 .contact-form .form-control,
 .contact-form .form-control:focus {
   border-radius: 0;
-  border-color: rgba(220, 220, 220, 0.4);
-  background: rgba(220, 220, 220, 0.4);
+  border-color: var(--primary-color);
   font-size: 12px;
   padding: 13px 0 13px 13px;
 }
