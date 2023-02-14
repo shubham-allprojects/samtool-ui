@@ -725,7 +725,7 @@ input[type="number"] {
 }
 
 .admin-dashboard-count {
-  font-size: 3.8rem;
+  font-size: 2.8rem;
   font-weight: bold;
   color: white;
 }
@@ -735,7 +735,7 @@ input[type="number"] {
 }
 
 .admin-home-wrapper .fs-1 {
-  font-size: 4.5rem !important;
+  font-size: 3.5rem !important;
 }
 
 .admin-top-cards {
@@ -981,10 +981,10 @@ input[type="number"] {
     overflow: scroll !important;
   }
   .admin-home-wrapper .fs-1 {
-    font-size: 3.8rem !important;
+    font-size: 2.8rem !important;
   }
   .admin-dashboard-count {
-    font-size: 3.4rem;
+    font-size: 2.4rem;
   }
 }
 
