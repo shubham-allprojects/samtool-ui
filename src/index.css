@@ -406,7 +406,7 @@ input[type="number"] {
 }
 
 .contact-icon:hover {
-  transform: scale(1.2);
+  transform: scale(1.16);
   transition: 0.2s ease-in-out;
 }
 
@@ -441,13 +441,13 @@ input[type="number"] {
   align-items: center;
 }
 
-.footer-icons-div {
+.footer-icons-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.footer-icon {
+.footer-icon-div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -462,12 +462,12 @@ input[type="number"] {
   transition: 0.3s ease-in-out;
 }
 
-.footer-icon:hover {
+.footer-icon-div:hover {
   transition: 0.3s ease-in-out;
   background-color: white;
 }
 
-.footer-icon:hover i {
+.footer-icon-div:hover .footer-icon {
   color: var(--secondary-color);
 }
 
