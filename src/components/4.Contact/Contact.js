@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
 
@@ -25,8 +26,13 @@ const Contact = () => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    e.target.reset();
-    console.log(formData);
+    setLoading(true);
+    setTimeout(() => {
+      e.target.reset();
+      toast.success("Message sent successfully");
+      console.log(formData);
+      setLoading(false);
+    }, 1500);
   };
 
   useEffect(() => {
