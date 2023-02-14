@@ -724,38 +724,28 @@ input[type="number"] {
   overflow-y: scroll;
 }
 
-.admin-dashboard-count {
-  font-size: 2.8rem;
-  font-weight: bold;
-  color: white;
-}
-
-.admin-top-cards:hover .admin-dashboard-count {
-  color: var(--secondary-color);
-}
-
-.admin-home-wrapper .fs-1 {
-  font-size: 3.5rem !important;
-}
-
-.admin-top-cards {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
+.admin-top-card {
+  background: var(--secondary-color) !important;
   transition: 0.3s ease-in-out;
-  background-color: var(--secondary-color) !important;
 }
 
-.admin-top-cards:hover {
+.admin-top-card:hover {
   transition: 0.3s ease-in-out;
-  background-color: white !important;
+  background: white !important;
   border-color: var(--secondary-color);
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
-.admin-top-cards:hover .blue-on-hover {
+.hover-color-secondary {
+  transition: 0.3s ease-in-out;
+}
+
+.hover-color-secondary.icon{
+font-size: 3.5rem !important;
+}
+
+.admin-top-card:hover .hover-color-secondary {
+  transition: 0.3s ease-in-out;
   color: var(--secondary-color) !important;
 }
 
@@ -979,12 +969,6 @@ input[type="number"] {
 @media screen and (max-width: 1280px) {
   .csv-data-table {
     overflow: scroll !important;
-  }
-  .admin-home-wrapper .fs-1 {
-    font-size: 2.8rem !important;
-  }
-  .admin-dashboard-count {
-    font-size: 2.4rem;
   }
 }
 

@@ -55,34 +55,45 @@ const AdminHomePage = () => {
                 <div className="col-xl-3 col-lg-4 col-md-6">
                   <NavLink
                     to="/admin/property/properties"
-                    className="card py-3 admin-top-cards"
+                    className="card text-decoration-none py-3 admin-top-card"
                   >
-                    <span className="me-xl-5 me-4">
-                      <i className="bi bi-buildings-fill text-white fs-1 blue-on-hover"></i>
-                    </span>
-                    <div>
-                      <span className="admin-dashboard-count">180</span>
-                      <h5 className="text-white text-end blue-on-hover fw-bold">
-                        Properties
-                      </h5>
+                    <div className="row justify-content-center">
+                      <div className="col-xl-3">
+                        <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1"></i>
+                      </div>
+                      <div className="col-xl-5 text-end">
+                        <span className="fw-bold text-white hover-color-secondary fs-1">
+                          180
+                        </span>
+                        <br />
+                        <span className="fw-bold fs-5 text-white hover-color-secondary">
+                          Properties
+                        </span>
+                      </div>
                     </div>
                   </NavLink>
                 </div>
                 <div className="col-xl-3 col-lg-4 col-md-6 mt-4 mt-md-0">
                   <NavLink
                     to="/admin/users"
-                    className="card py-3 admin-top-cards"
+                    className="card py-3 admin-top-card text-decoration-none"
                   >
-                    <span className="me-xl-5 me-4">
-                      <i className="bi bi-person-fill text-white fs-1 blue-on-hover"></i>
-                    </span>
-                    <div>
-                      <span className="admin-dashboard-count" id="usersCount">
-                        0
-                      </span>
-                      <h5 className="text-white text-end blue-on-hover fw-bold">
-                        Users
-                      </h5>
+                    <div className="row justify-content-center">
+                      <div className="col-xl-3">
+                        <i className="bi bi-person-fill text-white hover-color-secondary icon fs-1"></i>
+                      </div>
+                      <div className="col-xl-5 text-end">
+                        <span
+                          className="fw-bold text-white hover-color-secondary fs-1"
+                          id="usersCount"
+                        >
+                          0
+                        </span>
+                        <br />
+                        <span className="fw-bold fs-5 text-white hover-color-secondary">
+                          Users
+                        </span>
+                      </div>
                     </div>
                   </NavLink>
                 </div>
