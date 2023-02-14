@@ -1,8 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    full_name: "",
+    email_address: "",
+    message: "",
+  });
+
+  const { full_name, email_address, message } = formData;
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "full_name") {
+      setFormData({ ...formData, [name]: value });
+    } else if (name === "email_address") {
+      setFormData({ ...formData, [name]: value });
+    } else if (name === "message") {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    e.target.reset();
+    console.log(formData);
+  };
+
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - CONTACT";
   }, []);
@@ -34,7 +58,10 @@ const Contact = () => {
         <div className="container contact-form-wrapper position-relative py-4 py-md-0">
           <div className="row">
             <div className="col-xl-12">
-              <form className="card bg-white shadow contact-form py-5 px-3">
+              <form
+                onSubmit={onFormSubmit}
+                className="card bg-white shadow contact-form py-5 px-3"
+              >
                 <div className="container-fluid">
                   <div className="row">
                     <div className="col-md-5">
@@ -48,6 +75,8 @@ const Contact = () => {
                       </div>
                       <div className="form-group mb-3">
                         <input
+                          onChange={onInputChange}
+                          name="full_name"
                           type="text"
                           className="form-control"
                           placeholder="Your Name"
@@ -55,13 +84,16 @@ const Contact = () => {
                       </div>
                       <div className="form-group mb-3">
                         <input
+                          onChange={onInputChange}
                           type="email"
+                          name="email_address"
                           className="form-control"
                           placeholder="Email Address"
                         />
                       </div>
                       <div className="form-group mb-4">
                         <textarea
+                          onChange={onInputChange}
                           style={{ resize: "none" }}
                           name="message"
                           id=""
@@ -71,6 +103,7 @@ const Contact = () => {
                         ></textarea>
                       </div>
                       <button
+                        type="submit"
                         className="btn btn-primary w-100"
                         style={{ borderRadius: "0" }}
                       >
