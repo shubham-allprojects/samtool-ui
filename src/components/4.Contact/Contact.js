@@ -9,6 +9,8 @@ const Contact = () => {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const { full_name, email_address, message } = formData;
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -107,7 +109,19 @@ const Contact = () => {
                         className="btn btn-primary w-100"
                         style={{ borderRadius: "0" }}
                       >
-                        Send Now <i className="bi bi-arrow-right ps-2"></i>
+                        {loading ? (
+                          <>
+                            <div
+                              className="spinner-grow spinner-grow-sm text-light me-2"
+                              role="status"
+                            ></div>
+                            Sending....
+                          </>
+                        ) : (
+                          <>
+                            Send Now <i className="bi bi-arrow-right ps-2"></i>
+                          </>
+                        )}
                       </button>
                     </div>
                     <div className="col-md-2 d-md-flex d-none justify-content-center">
