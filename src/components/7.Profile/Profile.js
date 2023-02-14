@@ -194,9 +194,7 @@ const Profile = () => {
                         <NavLink to="/reset-password">Change Password</NavLink>
                       </li>
                       <li>
-                        <NavLink to="/profile/edit-details">
-                          Edit Details
-                        </NavLink>
+                        <NavLink to="/edit-details">Edit Details</NavLink>
                       </li>
                     </div>
                   </div>

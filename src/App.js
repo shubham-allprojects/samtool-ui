@@ -85,7 +85,7 @@ function App() {
             }
           />
           <Route
-            path="/profile/edit-details"
+            path="/edit-details"
             element={
               <Protected>
                 <EditUserDetails />

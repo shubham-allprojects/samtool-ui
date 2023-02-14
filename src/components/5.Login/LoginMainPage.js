@@ -94,7 +94,7 @@ const LoginMainPage = () => {
             toast.success("Logged in Successfully !");
           }, 1000);
           setTimeout(() => {
-            goTo("/profile/edit-details");
+            goTo("/edit-details");
           }, 2500);
         } else {
           setLoaderDetails({
