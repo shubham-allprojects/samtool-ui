@@ -120,25 +120,10 @@ input:-webkit-autofill:active {
 }
 
 /* Firefox */
+
 input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
-}
-
-.common-btn {
-  filter: drop-shadow(18px 18px 3px rgba(0, 0, 0, 0.4));
-  color: #fff !important;
-  font-size: 18px !important;
-  background: var(--bg-gradient-blue);
-  transition: 0.3s ease-in-out !important;
-  border: 2px solid #c797eb !important;
-  border-radius: 9px !important;
-  font-weight: 600 !important;
-}
-.common-btn:hover {
-  transform: scale(0.98);
-  filter: drop-shadow(0px 0px 8px);
-  transition: 0.3s ease-in-out;
 }
 
 .footer-bg {
