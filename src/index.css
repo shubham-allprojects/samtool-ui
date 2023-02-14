@@ -394,20 +394,11 @@ input[type="number"] {
   font-size: 18px !important;
 }
 
-.contact-social-icons {
+.contact-social-icons-wrapper {
   position: absolute;
   display: flex;
-}
-
-.contact-icon {
-  color: white;
-  font-size: 2.1rem;
-  transition: 0.2s ease-in-out;
-}
-
-.contact-icon:hover {
-  transform: scale(1.16);
-  transition: 0.2s ease-in-out;
+  justify-content: center;
+  align-items: center;
 }
 
 .contact-form .bi-person-vcard {
@@ -447,7 +438,8 @@ input[type="number"] {
   justify-content: center;
 }
 
-.footer-icon-div {
+.footer-icon-div,
+.contact-icon-div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -462,12 +454,14 @@ input[type="number"] {
   transition: 0.3s ease-in-out;
 }
 
-.footer-icon-div:hover {
+.footer-icon-div:hover,
+.contact-icon-div:hover {
   transition: 0.3s ease-in-out;
   background-color: white;
 }
 
-.footer-icon-div:hover .footer-icon {
+.footer-icon-div:hover .footer-icon,
+.contact-icon-div:hover .contact-icon {
   color: var(--secondary-color);
 }
 
@@ -861,9 +855,9 @@ input[type="number"] {
     min-height: 0vh;
   }
 
-  .contact-social-icons {
+  .contact-social-icons-wrapper {
     bottom: 98px;
-    left: 70px;
+    left: 58px;
   }
 
   .contact-form {
@@ -899,11 +893,6 @@ input[type="number"] {
     flex: 0 0 auto !important;
   }
 
-  .contact-social-icons {
-    bottom: 48px;
-    left: 70px;
-  }
-
   .set-pass-img {
     height: 435px;
   }
@@ -920,6 +909,11 @@ input[type="number"] {
     right: 2rem;
     left: 14rem;
     top: -8rem;
+  }
+
+  .contact-social-icons-wrapper {
+    bottom: 24px;
+    left: 60px;
   }
 
   .page-not-found-wrapper {
@@ -1054,9 +1048,9 @@ input[type="number"] {
     font-size: 2.4rem;
   }
 
-  .contact-social-icons {
-    bottom: 1rem;
-    left: 0.8rem;
+  .contact-social-icons-wrapper {
+    bottom: 0.8rem;
+    left: 0.2rem;
   }
 
   .page-not-found-wrapper {

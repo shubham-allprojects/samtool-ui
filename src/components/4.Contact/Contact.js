@@ -54,12 +54,12 @@ const Contact = () => {
               <small className="contact-subtitle">Home / Contact Us</small>
             </div>
           </div>
-          <div className="contact-social-icons">
-            <div className="contact-icon">
-              <i className="bi bi-facebook"></i>
+          <div className="contact-social-icons-wrapper">
+            <div className="contact-icon-div">
+              <i className="bi bi-facebook contact-icon"></i>
             </div>
-            <div className="contact-icon ps-4">
-              <i className="bi bi-linkedin"></i>
+            <div className="contact-icon-div">
+              <i className="bi bi-linkedin contact-icon"></i>
             </div>
           </div>
         </div>
