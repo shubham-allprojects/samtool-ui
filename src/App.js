@@ -71,9 +71,9 @@ function App() {
           <Route
             path="/register/set-password"
             element={
-              // <ProtectAfterLogin>
-              <SetPassword />
-              // </ProtectAfterLogin>
+              <ProtectAfterLogin>
+                <SetPassword />
+              </ProtectAfterLogin>
             }
           />
           <Route

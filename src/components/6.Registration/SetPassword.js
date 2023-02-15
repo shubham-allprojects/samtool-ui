@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import setPassImg from "../../images/setpass.svg";
@@ -24,8 +24,9 @@ const SetPassword = () => {
     alertVisible: false,
     alertMsg: "",
     alertClr: "",
+    alertLinkText: "",
   });
-  const { alertMsg, alertClr, alertVisible } = alertDetails;
+  const { alertMsg, alertClr, alertVisible, alertLinkText } = alertDetails;
   // Used to navigate to particular page.
   const goTo = useNavigate();
 
@@ -135,7 +136,12 @@ const SetPassword = () => {
           goTo("/login");
         }, 3000);
       } else {
-        toast.error("Verify Token First");
+        setAlertDetails({
+          alertVisible: true,
+          alertMsg: "Please verify your token.",
+          alertClr: "danger",
+          alertLinkText: "Click here",
+        });
       }
     }
   };
@@ -184,7 +190,19 @@ const SetPassword = () => {
                     className={`login-alert alert alert-${alertClr} alert-dismissible show`}
                     role="alert"
                   >
-                    <small className="fw-bold">{alertMsg}</small>
+                    <small className="fw-bold">
+                      {alertMsg}
+                      {alertLinkText ? (
+                        <NavLink
+                          to="/register/verify"
+                          className="ps-1 text-decoration-none"
+                        >
+                          {alertLinkText}
+                        </NavLink>
+                      ) : (
+                        <></>
+                      )}
+                    </small>
 
                     <i
                       onClick={() => setAlertDetails({ alertVisible: false })}
