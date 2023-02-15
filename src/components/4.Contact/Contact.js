@@ -59,16 +59,21 @@ const Contact = () => {
       toast.success("Message sent successfully");
       console.log(formData);
       setLoading(false);
+      setCaptchaVerified(false);
     }, 1500);
   };
 
-  useEffect(() => {
+  const loadCaptchaOnRefresh = () => {
     loadCaptchaEnginge(6);
     const captchaWrapper =
       document.getElementById("captcha-wrapper").firstChild;
     captchaWrapper.classList.add("flexAndCenter");
     document.getElementById("reload_href").classList.add("d-none");
+  };
+
+  useEffect(() => {
     rootTitle.textContent = "SAM TOOL - CONTACT";
+    loadCaptchaOnRefresh();
   }, []);
 
   return (
@@ -150,7 +155,7 @@ const Contact = () => {
                         <>
                           <div className="form-group mt-3">
                             <button className="btn btn-outline-success disabled w-100">
-                              Verified{" "}
+                              Verified
                               <i className="bi bi-patch-check-fill"></i>
                             </button>
                           </div>
@@ -198,8 +203,18 @@ const Contact = () => {
                       )}
                       <button
                         type="submit"
-                        className="btn btn-primary w-100 mt-3"
+                        className={`btn btn-primary w-100 mt-3 ${
+                          loading ? "disabled" : ""
+                        }`}
                         style={{ borderRadius: "0" }}
+                        disabled={
+                          full_name &&
+                          email_address &&
+                          message &&
+                          captchaVerified
+                            ? false
+                            : true
+                        }
                       >
                         {loading ? (
                           <>
