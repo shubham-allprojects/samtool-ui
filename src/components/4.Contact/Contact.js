@@ -175,7 +175,7 @@ const Contact = () => {
                             <input
                               type="text"
                               className={`form-control ${
-                                captchaErr ? "border-danger" : ""
+                                captchaErr ? "border-danger" : "border-primary"
                               }`}
                               ref={captchaRef}
                             />
@@ -187,7 +187,9 @@ const Contact = () => {
                             Verify
                           </div>
                           <div
-                            className={`col-xl-9 ${captchaErr ? "" : "d-none"}`}
+                            className={`col-xl-9 ps-0 ${
+                              captchaErr ? "" : "d-none"
+                            }`}
                           >
                             <span className="text-danger">Invalid Captcha</span>
                           </div>

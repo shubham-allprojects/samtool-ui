@@ -31,12 +31,9 @@ code {
 
 /* Common css */
 
+/* Breadcrumb in admin section */
 .breadcrumb {
   --bs-breadcrumb-divider: ">";
-}
-
-.common-btn-font {
-  font-weight: 500 !important;
 }
 
 .breadcrumb-item,
@@ -44,6 +41,10 @@ code {
 .breadcrumb-item.active {
   text-decoration: none;
   color: var(--primary-color-hover) !important;
+}
+
+.common-btn-font {
+  font-weight: 500 !important;
 }
 
 .page-item:hover {
@@ -96,14 +97,16 @@ p {
   text-align: justify;
 }
 
-.bi-circle-fill::before {
+/* .bi-circle-fill::before {
   content: "\f287";
   font-size: 8px;
   padding-left: 4px;
   color: gray;
-}
+} */
 
 /* Chrome, Safari, Edge, Opera */
+
+/* Hide input-type-number buttons */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -111,27 +114,19 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* input box background color for chrome auto fill */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
   box-shadow: 0 0 0 30px white inset !important;
-}
-
-/* Firefox */
-
-input[type="number"] {
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
-
-.footer-bg {
-  background: linear-gradient(
-    0deg,
-    rgba(2, 48, 251, 0.779) 0%,
-    rgb(0, 157, 255) 100%
-  ) !important;
 }
 
 .form-control:focus,
@@ -207,6 +202,19 @@ input[type="number"] {
 }
 
 /* Home */
+
+.w-30 {
+  width: 30% !important;
+}
+
+.w-22 {
+  width: 22.5% !important;
+}
+
+.w-18 {
+  width: 18% !important;
+}
+
 .home-wrapper {
   width: 100%;
   height: auto;
@@ -432,6 +440,14 @@ input[type="number"] {
 
 /* Footer */
 
+.footer-bg {
+  background: linear-gradient(
+    0deg,
+    rgba(2, 48, 251, 0.779) 0%,
+    rgb(0, 157, 255) 100%
+  ) !important;
+}
+
 .footer-wrapper {
   width: 100%;
 }
@@ -564,18 +580,6 @@ input[type="number"] {
   cursor: pointer;
 }
 
-.w-30 {
-  width: 30% !important;
-}
-
-.w-22 {
-  width: 22.5% !important;
-}
-
-.w-18 {
-  width: 18% !important;
-}
-
 /* Set Password */
 
 .set-password-wrapper .form-control {
@@ -645,8 +649,6 @@ input[type="number"] {
   height: 100%;
   width: 100%;
 }
-
-/* Profile */
 
 /* Edit Details */
 
