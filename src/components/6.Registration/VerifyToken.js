@@ -23,6 +23,7 @@ const VerifyToken = () => {
 
   // Function to compare and verify user entered token with original token.
   const verifyUserToken = async (e) => {
+    setLoading(true);
     e.preventDefault();
     await axios
       .post(
@@ -30,7 +31,6 @@ const VerifyToken = () => {
         JSON.stringify({ token: enteredToken })
       )
       .then((res) => {
-        setLoading(true);
         if (res.data.status === 0) {
           setLoading(false);
           e.target.reset();
