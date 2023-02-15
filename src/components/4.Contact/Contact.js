@@ -178,6 +178,7 @@ const Contact = () => {
                                 captchaErr ? "border-danger" : "border-primary"
                               }`}
                               ref={captchaRef}
+                              placeholder="Enter captcha"
                             />
                           </div>
                           <div
