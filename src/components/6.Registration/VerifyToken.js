@@ -10,13 +10,7 @@ const VerifyToken = () => {
   // useState to save token entered by user.
   const [enteredToken, setEnteredToken] = useState("");
 
-  const [loaderDetails, setLoaderDetails] = useState({
-    loading: false,
-    verifyBtnText: "Verify Token",
-    verifyButtonClass: "",
-  });
-
-  const { loading, verifyBtnText, verifyButtonClass } = loaderDetails;
+  const [loading, setLoading] = useState(false);
 
   // To navigate to particular route.
   const goTo = useNavigate();
@@ -36,34 +30,24 @@ const VerifyToken = () => {
         JSON.stringify({ token: enteredToken })
       )
       .then((res) => {
+        setLoading(true);
         if (res.data.status === 0) {
+          setLoading(false);
           e.target.reset();
-          setLoaderDetails({
-            ...loaderDetails,
-            loading: true,
-            verifyBtnText: "Verifying...",
-            verifyButtonClass: "disabled",
-          });
-          setTimeout(() => {
-            setLoaderDetails({
-              ...loaderDetails,
-              loading: false,
-              verifyBtnText: "Verify Token",
-              verifyButtonClass: "disabled",
-            });
-            toast.success("Verification Successful !");
-            localStorage.setItem("token", enteredToken);
-          }, 1000);
+          toast.success("Verification Successful !");
+          localStorage.setItem("token", enteredToken);
           setTimeout(() => {
             goTo("/register/set-password");
           }, 2000);
         } else if (res.data.status === 1) {
+          setLoading(false);
           setAlertDetails({
             alertVisible: true,
             alertMsg: "Token is Expired.",
             alertClr: "danger",
           });
         } else if (res.data.status === 2) {
+          setLoading(false);
           setAlertDetails({
             alertVisible: true,
             alertMsg: "Token is Invalid.",
@@ -118,16 +102,22 @@ const VerifyToken = () => {
                   <div className="col-12">
                     <div className="form-group">
                       <button
-                        className={`btn btn-primary common-btn-font w-100 ${verifyButtonClass}`}
+                        className={`btn btn-primary common-btn-font w-100 ${
+                          loading ? "disabled" : ""
+                        }`}
                       >
-                        <span
-                          className={`${
-                            loading ? "" : "d-none"
-                          } spinner-grow spinner-grow-sm me-2`}
-                          role="status"
-                          aria-hidden="true"
-                        ></span>
-                        {verifyBtnText}
+                        {loading ? (
+                          <>
+                            <span
+                              className="spinner-grow spinner-grow-sm me-2"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Verifying...
+                          </>
+                        ) : (
+                          "Verify token"
+                        )}
                       </button>
                     </div>
                   </div>
