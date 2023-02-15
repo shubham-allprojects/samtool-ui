@@ -138,7 +138,7 @@ const Contact = () => {
                           required
                         />
                       </div>
-                      <div className="form-group mb-4">
+                      <div className="form-group mb-3">
                         <textarea
                           onChange={onInputChange}
                           style={{ resize: "none" }}
