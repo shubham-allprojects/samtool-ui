@@ -874,7 +874,7 @@ input[type="number"] {
   .contact-form {
     position: absolute !important;
     right: 0rem;
-    left: 2.59rem;
+    left: 0rem;
     top: -4rem;
   }
 
@@ -912,13 +912,9 @@ input[type="number"] {
     height: 421px;
   }
 
-  .contact-form-wrapper {
-    min-height: 70vh;
-  }
-
   .contact-form {
-    right: 2rem;
-    left: 14rem;
+    right: 1rem;
+    left: 12rem;
     top: -8rem;
   }
 
@@ -1046,10 +1042,6 @@ input[type="number"] {
   .contact-bg-img {
     min-height: 279px;
   }
-
-  /* .contact-form-wrapper {
-    min-height: 100vh;
-  } */
 
   .contact-first-row {
     padding-left: 0px;

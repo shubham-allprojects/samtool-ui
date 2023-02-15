@@ -157,10 +157,13 @@ const Contact = () => {
                         }`}
                       >
                         <div className="row">
-                          <div className="col-xl-9 ps-0" id="captcha-wrapper">
+                          <div
+                            className="col-xl-9 col-md-8 col-7 ps-0"
+                            id="captcha-wrapper"
+                          >
                             <LoadCanvasTemplate />
                           </div>
-                          <div className="col-xl-3 btn btn-primary">
+                          <div className="col-xl-3 col-md-4 col-5 btn btn-primary">
                             <i
                               onClick={() => {
                                 loadCaptchaEnginge(6);
@@ -168,7 +171,7 @@ const Contact = () => {
                               className="bi bi-arrow-clockwise"
                             ></i>
                           </div>
-                          <div className="col-xl-9 ps-0 mt-3">
+                          <div className="col-xl-9 col-md-8 col-7 ps-0 mt-3">
                             <input
                               type="text"
                               className={`form-control ${
@@ -179,7 +182,7 @@ const Contact = () => {
                           </div>
                           <div
                             onClick={onCaptchaSubmit}
-                            className="col-xl-3 btn btn-primary mt-3"
+                            className="col-xl-3 col-md-4 col-5 btn btn-primary mt-3"
                           >
                             Verify
                           </div>
