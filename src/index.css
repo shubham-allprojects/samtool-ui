@@ -142,7 +142,7 @@ input[type="number"] {
 }
 
 .min-100vh {
-  min-height: 100vh;
+  min-height: 100vh !important;
 }
 
 .section-padding {
@@ -411,12 +411,23 @@ input[type="number"] {
   padding-left: 2.2rem;
 }
 
-.contact-form .form-control,
-.contact-form .form-control:focus {
+.contact-form .contact-us-form-control,
+.contact-form .contact-us-form-control:focus {
   border-radius: 0;
   border-color: var(--primary-color);
   font-size: 12px;
   padding: 13px 0 13px 13px;
+}
+
+/* CAPTCHA */
+
+.flexAndCenter {
+  display: flex;
+  justify-content: center;
+  border: 2px dotted var(--primary-color);
+  padding: 1.7px 0px;
+  align-items: center;
+  height: 37px;
 }
 
 /* Footer */
@@ -935,8 +946,8 @@ input[type="number"] {
   }
 
   .contact-form {
-    right: 7rem;
-    left: 21rem;
+    right: 5rem;
+    left: 15rem;
     top: -10rem;
   }
 
@@ -1036,9 +1047,9 @@ input[type="number"] {
     min-height: 279px;
   }
 
-  .contact-form-wrapper {
+  /* .contact-form-wrapper {
     min-height: 100vh;
-  }
+  } */
 
   .contact-first-row {
     padding-left: 0px;

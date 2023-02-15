@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
+
+import {
+  LoadCanvasTemplate,
+  loadCaptchaEnginge,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +15,27 @@ const Contact = () => {
     email_address: "",
     message: "",
   });
+
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [captchaErr, setCaptchaErr] = useState(false);
+  const captchaRef = useRef();
+
+  const onCaptchaSubmit = (e) => {
+    e.preventDefault();
+    let user_captcha = captchaRef.current.value;
+    if (user_captcha) {
+      if (validateCaptcha(user_captcha) === true) {
+        setCaptchaVerified(true);
+        setCaptchaErr(false);
+        loadCaptchaEnginge(6);
+        captchaRef.current.value = "";
+      } else {
+        setCaptchaVerified(false);
+        setCaptchaErr(true);
+        captchaRef.current.value = "";
+      }
+    }
+  };
 
   const [loading, setLoading] = useState(false);
 
@@ -36,6 +63,11 @@ const Contact = () => {
   };
 
   useEffect(() => {
+    loadCaptchaEnginge(6);
+    const captchaWrapper =
+      document.getElementById("captcha-wrapper").firstChild;
+    captchaWrapper.classList.add("flexAndCenter");
+    document.getElementById("reload_href").classList.add("d-none");
     rootTitle.textContent = "SAM TOOL - CONTACT";
   }, []);
 
@@ -63,7 +95,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        <div className="container contact-form-wrapper position-relative py-4 py-md-0">
+        <div className="container contact-form-wrapper position-relative py-4 py-md-0 min-100vh">
           <div className="row">
             <div className="col-xl-12">
               <form
@@ -86,7 +118,7 @@ const Contact = () => {
                           onChange={onInputChange}
                           name="full_name"
                           type="text"
-                          className="form-control"
+                          className="form-control contact-us-form-control"
                           placeholder="Your Name"
                           required
                         />
@@ -96,7 +128,7 @@ const Contact = () => {
                           onChange={onInputChange}
                           type="email"
                           name="email_address"
-                          className="form-control"
+                          className="form-control contact-us-form-control"
                           placeholder="Email Address"
                           required
                         />
@@ -108,14 +140,65 @@ const Contact = () => {
                           name="message"
                           id=""
                           rows="5"
-                          className="form-control"
+                          className="form-control contact-us-form-control"
                           placeholder="Message"
                           required
                         ></textarea>
                       </div>
+
+                      {captchaVerified ? (
+                        <>
+                          <div className="form-group mt-3">
+                            <button className="btn btn-outline-success disabled w-100">
+                              Verified{" "}
+                              <i className="bi bi-patch-check-fill"></i>
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="row w-100">
+                            <div className="col-xl-9" id="captcha-wrapper">
+                              <LoadCanvasTemplate />
+                            </div>
+                            <div className="col-xl-3 btn btn-primary">
+                              <i
+                                onClick={() => {
+                                  loadCaptchaEnginge(6);
+                                }}
+                                className="bi bi-arrow-clockwise"
+                              ></i>
+                            </div>
+                            <div className="col-xl-9 mt-3">
+                              <input
+                                type="text"
+                                className={`form-control ${
+                                  captchaErr ? "border-danger" : ""
+                                }`}
+                                ref={captchaRef}
+                              />
+                            </div>
+                            <div
+                              onClick={onCaptchaSubmit}
+                              className="col-xl-3 btn btn-primary mt-3"
+                            >
+                              Verify
+                            </div>
+                            <div
+                              className={`col-xl-9 ${
+                                captchaErr ? "" : "d-none"
+                              }`}
+                            >
+                              <span className="text-danger">
+                                Invalid Captcha
+                              </span>
+                            </div>
+                          </div>
+                        </>
+                      )}
                       <button
                         type="submit"
-                        className="btn btn-primary w-100"
+                        className="btn btn-primary w-100 mt-3"
                         style={{ borderRadius: "0" }}
                       >
                         {loading ? (
