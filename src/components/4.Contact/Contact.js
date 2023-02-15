@@ -152,40 +152,42 @@ const Contact = () => {
                       </div>
 
                       <div
-                        className={`row w-100 ${
+                        className={`container ${
                           captchaVerified ? "d-none" : ""
                         }`}
                       >
-                        <div className="col-xl-9" id="captcha-wrapper">
-                          <LoadCanvasTemplate />
-                        </div>
-                        <div className="col-xl-3 btn btn-primary">
-                          <i
-                            onClick={() => {
-                              loadCaptchaEnginge(6);
-                            }}
-                            className="bi bi-arrow-clockwise"
-                          ></i>
-                        </div>
-                        <div className="col-xl-9 mt-3">
-                          <input
-                            type="text"
-                            className={`form-control ${
-                              captchaErr ? "border-danger" : ""
-                            }`}
-                            ref={captchaRef}
-                          />
-                        </div>
-                        <div
-                          onClick={onCaptchaSubmit}
-                          className="col-xl-3 btn btn-primary mt-3"
-                        >
-                          Verify
-                        </div>
-                        <div
-                          className={`col-xl-9 ${captchaErr ? "" : "d-none"}`}
-                        >
-                          <span className="text-danger">Invalid Captcha</span>
+                        <div className="row">
+                          <div className="col-xl-9 ps-0" id="captcha-wrapper">
+                            <LoadCanvasTemplate />
+                          </div>
+                          <div className="col-xl-3 btn btn-primary">
+                            <i
+                              onClick={() => {
+                                loadCaptchaEnginge(6);
+                              }}
+                              className="bi bi-arrow-clockwise"
+                            ></i>
+                          </div>
+                          <div className="col-xl-9 ps-0 mt-3">
+                            <input
+                              type="text"
+                              className={`form-control ${
+                                captchaErr ? "border-danger" : ""
+                              }`}
+                              ref={captchaRef}
+                            />
+                          </div>
+                          <div
+                            onClick={onCaptchaSubmit}
+                            className="col-xl-3 btn btn-primary mt-3"
+                          >
+                            Verify
+                          </div>
+                          <div
+                            className={`col-xl-9 ${captchaErr ? "" : "d-none"}`}
+                          >
+                            <span className="text-danger">Invalid Captcha</span>
+                          </div>
                         </div>
                       </div>
 
@@ -196,7 +198,7 @@ const Contact = () => {
                       >
                         <button className="btn btn-outline-success disabled w-100">
                           Verified
-                          <i className="bi bi-patch-check-fill"></i>
+                          <i className="bi bi-patch-check-fill ms-1"></i>
                         </button>
                       </div>
 
