@@ -84,44 +84,44 @@ const SetPassword = () => {
   // On setPassWord Button click this function will run.
   const onSetPasswordFormSubmit = async (e) => {
     e.preventDefault();
-    if (
-      newPassword !== confirmPassword &&
-      invalidMessage1 !== "Invalid Password"
-    ) {
-      setAlertDetails({
-        alertVisible: true,
-        alertMsg: "Password and confirm password does not match.",
-        alertClr: "danger",
-      });
-      setDetails({
-        ...details,
-        eyeIcon: "eye",
-        passwordType1: "text",
-        eyeIcon2: "eye",
-        passwordType2: "text",
-      });
-    } else if (newPassword !== confirmPassword) {
-      setDetails({
-        ...details,
-        eyeIcon: "eye",
-        passwordType1: "text",
-        eyeIcon2: "eye",
-        passwordType2: "text",
-      });
-    } else if (
-      newPassword === confirmPassword &&
-      invalidMessage1 === "Invalid Password"
-    ) {
-      setDetails({
-        ...details,
-        eyeIcon: "eye",
-        passwordType1: "text",
-        eyeIcon2: "eye",
-        passwordType2: "text",
-      });
-    } else {
-      let verifiedToken = localStorage.getItem("token");
-      if (verifiedToken) {
+    let verifiedToken = localStorage.getItem("token");
+    if (verifiedToken) {
+      if (
+        newPassword !== confirmPassword &&
+        invalidMessage1 !== "Invalid Password"
+      ) {
+        setAlertDetails({
+          alertVisible: true,
+          alertMsg: "Password and confirm password does not match.",
+          alertClr: "danger",
+        });
+        setDetails({
+          ...details,
+          eyeIcon: "eye",
+          passwordType1: "text",
+          eyeIcon2: "eye",
+          passwordType2: "text",
+        });
+      } else if (newPassword !== confirmPassword) {
+        setDetails({
+          ...details,
+          eyeIcon: "eye",
+          passwordType1: "text",
+          eyeIcon2: "eye",
+          passwordType2: "text",
+        });
+      } else if (
+        newPassword === confirmPassword &&
+        invalidMessage1 === "Invalid Password"
+      ) {
+        setDetails({
+          ...details,
+          eyeIcon: "eye",
+          passwordType1: "text",
+          eyeIcon2: "eye",
+          passwordType2: "text",
+        });
+      } else {
         setSetPassBtnClassName("disabled");
         e.target.reset();
         await axios.post(
@@ -132,17 +132,18 @@ const SetPassword = () => {
           })
         );
         toast.success("Password Saved Successfully !");
+        localStorage.removeItem("token");
         setTimeout(() => {
           goTo("/login");
         }, 3000);
-      } else {
-        setAlertDetails({
-          alertVisible: true,
-          alertMsg: "Please verify your token.",
-          alertClr: "danger",
-          alertLinkText: "Click here",
-        });
       }
+    } else {
+      setAlertDetails({
+        alertVisible: true,
+        alertMsg: "Please verify your token.",
+        alertClr: "danger",
+        alertLinkText: "Click here",
+      });
     }
   };
 

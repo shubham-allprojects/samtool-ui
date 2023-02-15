@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import verifyTokenImg from "../../images/verifytoken.svg";
@@ -55,8 +55,8 @@ const VerifyToken = () => {
             localStorage.setItem("token", enteredToken);
           }, 1000);
           setTimeout(() => {
-            goTo("/register/reset-password");
-          }, 3000);
+            goTo("/register/set-password");
+          }, 2000);
         } else if (res.data.status === 1) {
           setAlertDetails({
             alertVisible: true,
@@ -101,7 +101,7 @@ const VerifyToken = () => {
                     ></i>
                   </div>
                 ) : (
-                  <div className="d-none"></div>
+                  <></>
                 )}
                 <div className="row mt-3">
                   <div className="col-12">
@@ -129,6 +129,21 @@ const VerifyToken = () => {
                         ></span>
                         {verifyBtnText}
                       </button>
+                    </div>
+                  </div>
+                  <div className="col-12 mt-3">
+                    <div className="position-relative form-group">
+                      <div
+                        className="position-absolute"
+                        style={{ top: "0", right: "0" }}
+                      >
+                        <small className="fw-bold">
+                          Not registered?
+                          <NavLink to="/register" className="ps-1">
+                            Click here
+                          </NavLink>
+                        </small>
+                      </div>
                     </div>
                   </div>
                 </div>
