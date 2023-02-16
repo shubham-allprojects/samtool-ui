@@ -409,22 +409,22 @@ input:-webkit-autofill:active {
   align-items: center;
 }
 
-.contact-form .bi-person-vcard {
+/* .contact-form .bi-person-vcard {
   font-size: 1.5rem;
   position: absolute;
   top: 2.89rem;
-}
-
+} */
+/* 
 .getintouch-text {
   padding-left: 2.2rem;
-}
+} */
 
 .contact-form .contact-us-form-control,
 .contact-form .contact-us-form-control:focus {
   border-radius: 0;
   border-color: var(--primary-color);
   font-size: 12px;
-  padding: 13px 0 13px 13px;
+  padding: 13px;
 }
 
 /* CAPTCHA */

@@ -112,11 +112,9 @@ const Contact = () => {
                     <div className="col-md-6">
                       <div className="form-title mb-4">
                         <span>
-                          <i className="bi bi-person-vcard"></i>
+                          <i className="bi bi-person-vcard fs-4 me-2"></i>
                         </span>
-                        <span className="fw-bold fs-5 getintouch-text">
-                          Get In Touch
-                        </span>
+                        <span className="fw-bold fs-5"> Get In Touch</span>
                       </div>
                       <div className="form-group mb-3">
                         <input
