@@ -920,9 +920,13 @@ input:-webkit-autofill:active {
     top: -8rem;
   }
 
+  .contact-first-row {
+    padding-left: 18px;
+  }
+
   .contact-social-icons-wrapper {
     bottom: 24px;
-    left: 60px;
+    left: 18px;
   }
 
   .page-not-found-wrapper {
