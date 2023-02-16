@@ -9,7 +9,8 @@ import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
-const chunkSize = 1000 * 1024;
+// const chunkSize = 1000 * 1024;
+const chunkSize = 2048;
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
   const [saveFile, setSavedFile] = useState([]);
@@ -134,15 +135,16 @@ const UploadProperties = () => {
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
     await axios.post(url, dataToPost, { headers: headers }).then((res) => {
-      console.log(res);
       if (isLastChunk) {
-        // if (res.data === "File uploaded successfully") {
-        //   setUniqueUploadId(uuid());
-        //   toast.success("Data saved successfully");
-        //   onCancelClick();
-        // } else {
-        //   toast.error("Some error occurred");
-        // }
+        console.log(dataToPost.total_chunks);
+        if (res.data.msg === 0) {
+          setUniqueUploadId(uuid());
+          toast.success("Data saved successfully");
+          onCancelClick();
+        } else {
+          toast.error("Duplicate data");
+          onCancelClick();
+        }
       }
     });
     // console.warn("IS LAST CHUNK: ", isLastChunk);

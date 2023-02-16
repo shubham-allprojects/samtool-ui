@@ -77,7 +77,6 @@ const LoginMainPage = () => {
         JSON.stringify({ username: email, password: password })
       )
       .then((res) => {
-        console.log(res.data);
         const { email, token, role_id, user_id } = res.data.token;
         if (email !== "" && token !== "") {
           localStorage.setItem(
