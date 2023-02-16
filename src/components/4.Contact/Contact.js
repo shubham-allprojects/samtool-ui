@@ -109,7 +109,7 @@ const Contact = () => {
               >
                 <div className="container-fluid">
                   <div className="row">
-                    <div className="col-md-5">
+                    <div className="col-md-6">
                       <div className="form-title mb-4">
                         <span>
                           <i className="bi bi-person-vcard"></i>
@@ -238,7 +238,7 @@ const Contact = () => {
                         )}
                       </button>
                     </div>
-                    <div className="col-md-2 d-md-flex d-none justify-content-center">
+                    <div className="col-md-1 d-md-flex d-none justify-content-center">
                       <div className="vr bg-secondary"></div>
                     </div>
                     <div className="col-md-5 d-flex align-items-center mt-5 mt-md-0">

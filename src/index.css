@@ -944,7 +944,7 @@ input:-webkit-autofill:active {
   }
 
   .contact-form {
-    right: 5rem;
+    right: 0rem;
     left: 15rem;
     top: -10rem;
   }
