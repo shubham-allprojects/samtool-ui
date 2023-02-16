@@ -25,6 +25,7 @@ import ChangePassword from "./components/5.Login/ChangePassword";
 import AboutUs from "./components/3.About/AboutUs";
 import AddProperty from "./Admin/Property/AddProperty";
 import ForgotPassword from "./components/5.Login/ForgotPassword";
+import AdminProtected from "./components/AdminProtected";
 
 function App() {
   return (
@@ -53,7 +54,7 @@ function App() {
             }
           />
           <Route
-            path="/login/*"
+            path="/login"
             element={
               <ProtectAfterLogin>
                 <LoginMainPage />
@@ -70,7 +71,7 @@ function App() {
           />
           <Route path="/register/set-password" element={<SetPassword />} />
           <Route
-            path="/profile/*"
+            path="/profile"
             element={
               <Protected>
                 <Profile />
@@ -88,28 +89,62 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
 
           {/* Admin */}
-          <Route path="/admin" element={<AdminHomePage />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminProtected>
+                <AdminHomePage />
+              </AdminProtected>
+            }
+          />
           <Route
             path="/admin/property/properties/*"
-            element={<ViewAllProperties />}
+            element={
+              <AdminProtected>
+                <ViewAllProperties />
+              </AdminProtected>
+            }
           />
           <Route
             path="/admin/property/add-property"
-            element={<AddProperty />}
+            element={
+              <AdminProtected>
+                <AddProperty />
+              </AdminProtected>
+            }
           />
           <Route
             path="/admin/property/properties/edit-property/:id"
-            element={<ViewEditProperty />}
+            element={
+              <AdminProtected>
+                <ViewEditProperty />
+              </AdminProtected>
+            }
           />
           <Route
             path="/admin/property/upload-properties"
-            element={<UploadProperties />}
+            element={
+              <AdminProtected>
+                <UploadProperties />
+              </AdminProtected>
+            }
           />
-          <Route path="/admin/users/*" element={<ViewAllUsers />} />
+          <Route
+            path="/admin/users/*"
+            element={
+              <AdminProtected>
+                <ViewAllUsers />
+              </AdminProtected>
+            }
+          />
 
           <Route
             path="/admin/users/view-user/:id"
-            element={<ViewCurrentUser />}
+            element={
+              <AdminProtected>
+                <ViewCurrentUser />
+              </AdminProtected>
+            }
           />
 
           <Route path="*" element={<PageNotFound />} />
