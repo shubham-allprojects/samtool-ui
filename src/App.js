@@ -63,19 +63,12 @@ function App() {
           <Route
             path="/reset-password"
             element={
-              // <Protected>
-              <ChangePassword />
-              // </Protected>
+              <Protected>
+                <ChangePassword />
+              </Protected>
             }
           />
-          <Route
-            path="/register/set-password"
-            element={
-              <ProtectAfterLogin>
-                <SetPassword />
-              </ProtectAfterLogin>
-            }
-          />
+          <Route path="/register/set-password" element={<SetPassword />} />
           <Route
             path="/profile/*"
             element={

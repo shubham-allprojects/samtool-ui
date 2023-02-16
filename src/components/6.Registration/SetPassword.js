@@ -84,66 +84,56 @@ const SetPassword = () => {
   // On setPassWord Button click this function will run.
   const onSetPasswordFormSubmit = async (e) => {
     e.preventDefault();
-    let verifiedToken = localStorage.getItem("token");
-    if (verifiedToken) {
-      if (
-        newPassword !== confirmPassword &&
-        invalidMessage1 !== "Invalid Password"
-      ) {
-        setAlertDetails({
-          alertVisible: true,
-          alertMsg: "Password and confirm password does not match.",
-          alertClr: "danger",
-        });
-        setDetails({
-          ...details,
-          eyeIcon: "eye",
-          passwordType1: "text",
-          eyeIcon2: "eye",
-          passwordType2: "text",
-        });
-      } else if (newPassword !== confirmPassword) {
-        setDetails({
-          ...details,
-          eyeIcon: "eye",
-          passwordType1: "text",
-          eyeIcon2: "eye",
-          passwordType2: "text",
-        });
-      } else if (
-        newPassword === confirmPassword &&
-        invalidMessage1 === "Invalid Password"
-      ) {
-        setDetails({
-          ...details,
-          eyeIcon: "eye",
-          passwordType1: "text",
-          eyeIcon2: "eye",
-          passwordType2: "text",
-        });
-      } else {
-        setSetPassBtnClassName("disabled");
-        e.target.reset();
-        await axios.post(
-          `/sam/v1/customer-registration/set-password`,
-          JSON.stringify({
-            password: newPassword,
-            token: localStorage.getItem("token"),
-          })
-        );
-        toast.success("Password Saved Successfully !");
-        localStorage.removeItem("token");
-        setTimeout(() => {
-          goTo("/login");
-        }, 3000);
-      }
-    } else {
+    if (
+      newPassword !== confirmPassword &&
+      invalidMessage1 !== "Invalid Password"
+    ) {
       setAlertDetails({
         alertVisible: true,
-        alertMsg: "Please verify your token.",
+        alertMsg: "Password and confirm password does not match.",
         alertClr: "danger",
-        alertLinkText: "Click here",
       });
+      setDetails({
+        ...details,
+        eyeIcon: "eye",
+        passwordType1: "text",
+        eyeIcon2: "eye",
+        passwordType2: "text",
+      });
+    } else if (newPassword !== confirmPassword) {
+      setDetails({
+        ...details,
+        eyeIcon: "eye",
+        passwordType1: "text",
+        eyeIcon2: "eye",
+        passwordType2: "text",
+      });
+    } else if (
+      newPassword === confirmPassword &&
+      invalidMessage1 === "Invalid Password"
+    ) {
+      setDetails({
+        ...details,
+        eyeIcon: "eye",
+        passwordType1: "text",
+        eyeIcon2: "eye",
+        passwordType2: "text",
+      });
+    } else {
+      setSetPassBtnClassName("disabled");
+      e.target.reset();
+      await axios.post(
+        `/sam/v1/customer-registration/set-password`,
+        JSON.stringify({
+          password: newPassword,
+          token: localStorage.getItem("token"),
+        })
+      );
+      toast.success("Password Saved Successfully !");
+      localStorage.removeItem("token");
+      setTimeout(() => {
+        goTo("/login");
+      }, 2000);
     }
   };
 
@@ -175,6 +165,10 @@ const SetPassword = () => {
 
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - SET PASSWORD";
+    let verifiedToken = localStorage.getItem("token");
+    if (!verifiedToken) {
+      goTo("/");
+    }
   }, []);
 
   return (
@@ -191,19 +185,7 @@ const SetPassword = () => {
                     className={`login-alert alert alert-${alertClr} alert-dismissible show`}
                     role="alert"
                   >
-                    <small className="fw-bold">
-                      {alertMsg}
-                      {alertLinkText ? (
-                        <NavLink
-                          to="/register/verify"
-                          className="ps-1 text-decoration-none"
-                        >
-                          {alertLinkText}
-                        </NavLink>
-                      ) : (
-                        <></>
-                      )}
-                    </small>
+                    <small className="fw-bold">{alertMsg}</small>
 
                     <i
                       onClick={() => setAlertDetails({ alertVisible: false })}
