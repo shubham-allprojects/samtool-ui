@@ -9,7 +9,8 @@ import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
-const chunkSize = 1000 * 1024;
+// const chunkSize = 1000 * 1024;
+const chunkSize = 6000;
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
   const [saveFile, setSavedFile] = useState([]);
@@ -31,12 +32,12 @@ const UploadProperties = () => {
   const { data, tableHeadings, tableDisplayClass } = allUseStates;
 
   const onCancelClick = () => {
-    // setAllUseStates({
-    //   ...allUseStates,
-    //   tableDisplayClass: "d-none",
-    // });
-    // fileRef.current.value = "";
-    // setFileName("");
+    setAllUseStates({
+      ...allUseStates,
+      tableDisplayClass: "d-none",
+    });
+    fileRef.current.value = "";
+    setFileName("");
     window.scrollTo(0, 0);
     setTimeout(() => {
       window.location.reload();
@@ -142,6 +143,7 @@ const UploadProperties = () => {
     setProgress(
       Math.round((dataToPost.chunk_number / dataToPost.total_chunks) * 100)
     );
+    // setProgressModalOpen(true);
     await axios.post(url, dataToPost, { headers: headers }).then((res) => {
       setProgressModalOpen(true);
       if (isLastChunk) {
