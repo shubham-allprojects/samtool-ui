@@ -134,14 +134,15 @@ const UploadProperties = () => {
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
     await axios.post(url, dataToPost, { headers: headers }).then((res) => {
+      console.log(res);
       if (isLastChunk) {
-        if (res.data === "File uploaded successfully") {
-          setUniqueUploadId(uuid());
-          toast.success("Data saved successfully");
-          onCancelClick();
-        } else {
-          toast.error("Some error occurred");
-        }
+        // if (res.data === "File uploaded successfully") {
+        //   setUniqueUploadId(uuid());
+        //   toast.success("Data saved successfully");
+        //   onCancelClick();
+        // } else {
+        //   toast.error("Some error occurred");
+        // }
       }
     });
     // console.warn("IS LAST CHUNK: ", isLastChunk);
