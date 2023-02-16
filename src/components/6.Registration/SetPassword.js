@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import setPassImg from "../../images/setpass.svg";
@@ -24,9 +24,8 @@ const SetPassword = () => {
     alertVisible: false,
     alertMsg: "",
     alertClr: "",
-    alertLinkText: "",
   });
-  const { alertMsg, alertClr, alertVisible, alertLinkText } = alertDetails;
+  const { alertMsg, alertClr, alertVisible } = alertDetails;
   // Used to navigate to particular page.
   const goTo = useNavigate();
 
@@ -169,7 +168,7 @@ const SetPassword = () => {
     if (!verifiedToken) {
       goTo("/");
     }
-  }, []);
+  });
 
   return (
     <Layout>
