@@ -9,8 +9,7 @@ import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
-// const chunkSize = 1000 * 1024;
-const chunkSize = 2048;
+const chunkSize = 1000 * 1024;
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
   const [saveFile, setSavedFile] = useState([]);
@@ -32,13 +31,16 @@ const UploadProperties = () => {
   const { data, tableHeadings, tableDisplayClass } = allUseStates;
 
   const onCancelClick = () => {
-    setAllUseStates({
-      ...allUseStates,
-      tableDisplayClass: "d-none",
-    });
-    fileRef.current.value = "";
-    setFileName("");
+    // setAllUseStates({
+    //   ...allUseStates,
+    //   tableDisplayClass: "d-none",
+    // });
+    // fileRef.current.value = "";
+    // setFileName("");
     window.scrollTo(0, 0);
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   };
 
   const dataFromLocal = JSON.parse(localStorage.getItem("data"));
@@ -117,6 +119,9 @@ const UploadProperties = () => {
     reader.readAsDataURL(blob);
   };
 
+  const [progress, setProgress] = useState(0);
+  const [progressModalOpen, setProgressModalOpen] = useState(false);
+
   const uploadChunk = async (readerEvent) => {
     let fileSize = 0;
     const file = files[currentFileIndex];
@@ -134,20 +139,21 @@ const UploadProperties = () => {
     };
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
+    setProgress(
+      Math.round((dataToPost.chunk_number / dataToPost.total_chunks) * 100)
+    );
     await axios.post(url, dataToPost, { headers: headers }).then((res) => {
+      setProgressModalOpen(true);
       if (isLastChunk) {
-        console.log(dataToPost.total_chunks);
         if (res.data.msg === 0) {
-          setUniqueUploadId(uuid());
-          toast.success("Data saved successfully");
-          onCancelClick();
+          // setUniqueUploadId(uuid());
         } else {
+          setProgressModalOpen(false);
           toast.error("Duplicate data");
           onCancelClick();
         }
       }
     });
-    // console.warn("IS LAST CHUNK: ", isLastChunk);
     if (isLastChunk) {
       setLastUploadedFileIndex(currentFileIndex);
       setCurrentChunkIndex(null);
@@ -306,6 +312,48 @@ const UploadProperties = () => {
                       </button>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`modal fade ${progressModalOpen ? "show" : ""}`}
+        id="exampleModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        // aria-hidden="true"
+        aria-modal="true"
+        style={{ display: `${progressModalOpen ? "block" : "none"}` }}
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content bg-dark">
+            <div className="modal-header">
+              <h5 className="modal-title text-white" id="exampleModalLabel">
+                {progress === 100
+                  ? "Data uploaded successfully"
+                  : "Uploading...."}
+              </h5>
+              <button
+                type="button"
+                className="btn-close bg-white"
+                onClick={() => {
+                  onCancelClick();
+                }}
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="progress my-2">
+                <div
+                  className="progress-bar progress-bar-animated progress-bar-striped bg-info"
+                  role="progressbar"
+                  style={{ width: `${progress}%` }}
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  {progress}%
                 </div>
               </div>
             </div>
