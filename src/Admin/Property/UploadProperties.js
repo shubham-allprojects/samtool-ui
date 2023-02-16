@@ -339,6 +339,7 @@ const UploadProperties = () => {
                 type="button"
                 className="btn-close bg-white"
                 onClick={() => {
+                  setProgressModalOpen(false);
                   onCancelClick();
                 }}
               ></button>
