@@ -10,6 +10,7 @@ const ViewCurrentUser = () => {
   const [otherDetailsOfUser, setOtherDetailsOfUser] = useState({});
   const [categoryWiseUserDetails, setCategoryWiseUserDetails] = useState({});
   const [roles, setRoles] = useState([]);
+  const [headers, setHeaders] = useState({});
 
   const [viewUserDetails, setViewUserDetails] = useState({
     classOnEditClick: "d-none",
@@ -45,11 +46,11 @@ const ViewCurrentUser = () => {
   const { classOnEditClick, classOnPageLoad } = viewUserDetails;
 
   const data = JSON.parse(localStorage.getItem("data"));
-  let headers = "";
 
   const setCurrentUserData = async () => {
     if (data) {
-      headers = { Authorization: data.logintoken };
+      let headers = { Authorization: data.logintoken };
+      setHeaders({ Authorization: data.logintoken });
       const currentUser = await axios.get(
         `/sam/v1/user-registration/auth/${id}`,
         { headers: headers }
@@ -62,7 +63,8 @@ const ViewCurrentUser = () => {
 
   const getAllAvailableRoles = async () => {
     if (data) {
-      headers = { Authorization: data.logintoken };
+      let headers = { Authorization: data.logintoken };
+      setHeaders({ Authorization: data.logintoken });
       const allRoles = await axios.get(
         `/sam/v1/user-registration/auth/all-roles`,
         {
@@ -72,6 +74,7 @@ const ViewCurrentUser = () => {
       setRoles(allRoles.data);
     }
   };
+
   let array = [];
   const onRoleSelect = (e) => {
     const { checked, value } = e.target;
