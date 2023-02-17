@@ -40,7 +40,9 @@ const AdminHomePage = () => {
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - HOME";
-    setCountOfUsers();
+    if (data) {
+      setCountOfUsers();
+    }
     // eslint-disable-next-line
   }, []);
 
