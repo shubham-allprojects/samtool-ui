@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
@@ -82,10 +83,25 @@ const ViewCurrentUser = () => {
     }
   };
 
-  const saveRoles = () => {
-    console.log(array);
-    console.warn("header====>", headers);
-    commonFnForSaveAndCancelClick();
+  let rolesToPost = [];
+  const saveRoles = async () => {
+    for (let i of array) {
+      rolesToPost.push({ role_id: i });
+    }
+    await axios
+      .post(
+        `/sam/v1/user-registration/auth/add-role`,
+        { user_id: user_id, roles: rolesToPost },
+        {
+          headers: headers,
+        }
+      )
+      .then((res) => {
+        if (res.data.status === 0) {
+          toast.success("Roles added successfully");
+          commonFnForSaveAndCancelClick();
+        }
+      });
   };
 
   useEffect(() => {
