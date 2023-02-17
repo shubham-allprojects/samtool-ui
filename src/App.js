@@ -25,6 +25,7 @@ import AboutUs from "./components/3.About/AboutUs";
 import AddProperty from "./Admin/Property/AddProperty";
 import ForgotPassword from "./components/5.Login/ForgotPassword";
 import AdminProtected from "./components/AdminProtected";
+import AccessDeniedPage from "./components/AccessDeniedPage";
 
 function App() {
   return (
@@ -124,7 +125,7 @@ function App() {
             path="/admin/property/upload-properties"
             element={
               // <AdminProtected>
-                <UploadProperties />
+              <UploadProperties />
               // </AdminProtected>
             }
           />
@@ -147,6 +148,7 @@ function App() {
           />
 
           <Route path="*" element={<PageNotFound />} />
+          <Route path="/access-denied" element={<AccessDeniedPage />} />
         </Routes>
       </ScrollToTop>
       <ScrollButton />
