@@ -51,6 +51,8 @@ const ViewCurrentUser = () => {
     if (data) {
       let headers = { Authorization: data.logintoken };
       setHeaders({ Authorization: data.logintoken });
+
+      // Get user by Id.
       const currentUser = await axios.get(
         `/sam/v1/user-registration/auth/${id}`,
         { headers: headers }
@@ -58,13 +60,8 @@ const ViewCurrentUser = () => {
       const typeOfUser = Object.keys(currentUser.data)[1];
       setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
       setOtherDetailsOfUser(currentUser.data.user_details);
-    }
-  };
 
-  const getAllAvailableRoles = async () => {
-    if (data) {
-      let headers = { Authorization: data.logintoken };
-      setHeaders({ Authorization: data.logintoken });
+      // Get all roles.
       const allRoles = await axios.get(
         `/sam/v1/user-registration/auth/all-roles`,
         {
@@ -93,7 +90,6 @@ const ViewCurrentUser = () => {
 
   useEffect(() => {
     setCurrentUserData();
-    getAllAvailableRoles();
     // eslint-disable-next-line
   }, []);
 
