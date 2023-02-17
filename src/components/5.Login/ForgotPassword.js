@@ -30,6 +30,7 @@ const ForgotPassword = () => {
       .then((res) => {
         if (res.data.status === 1) {
           e.target.reset();
+          localStorage.setItem("forgotPassUserName", emailValue);
           setDisplayOfSections({
             mainSectionDisplay: "d-none",
             afterSubmitSectionDisplay: "",

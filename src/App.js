@@ -26,6 +26,7 @@ import AddProperty from "./Admin/Property/AddProperty";
 import ForgotPassword from "./components/5.Login/ForgotPassword";
 import AdminProtected from "./components/AdminProtected";
 import AccessDeniedPage from "./components/AccessDeniedPage";
+import ForgotAndResetPassword from "./components/8.ForgotAndResetPassword/ForgotAndResetPassword";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
             }
           />
           <Route path="/register/set-password" element={<SetPassword />} />
+          <Route path="/forgot-password/reset-password" element={<ForgotAndResetPassword />} />
           <Route
             path="/profile"
             element={
@@ -86,7 +88,7 @@ function App() {
               </Protected>
             }
           />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgot-password/*" element={<ForgotPassword />} />
 
           {/* Admin */}
           <Route
