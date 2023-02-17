@@ -45,10 +45,11 @@ const ViewCurrentUser = () => {
   const { classOnEditClick, classOnPageLoad } = viewUserDetails;
 
   const data = JSON.parse(localStorage.getItem("data"));
+  let headers = "";
 
   const setCurrentUserData = async () => {
     if (data) {
-      const headers = { Authorization: data.logintoken };
+      headers = { Authorization: data.logintoken };
       const currentUser = await axios.get(
         `/sam/v1/user-registration/auth/${id}`,
         { headers: headers }
@@ -61,7 +62,7 @@ const ViewCurrentUser = () => {
 
   const getAllAvailableRoles = async () => {
     if (data) {
-      const headers = { Authorization: data.logintoken };
+      headers = { Authorization: data.logintoken };
       const allRoles = await axios.get(
         `/sam/v1/user-registration/auth/all-roles`,
         {
@@ -71,7 +72,7 @@ const ViewCurrentUser = () => {
       setRoles(allRoles.data);
     }
   };
-  let array = [role_id];
+  let array = [];
   const onRoleSelect = (e) => {
     const { checked, value } = e.target;
     if (checked) {
@@ -82,7 +83,8 @@ const ViewCurrentUser = () => {
   };
 
   const saveRoles = () => {
-    alert("Saved Roles: " + array.sort());
+    console.log(array);
+    console.warn("header====>", headers);
     commonFnForSaveAndCancelClick();
   };
 
