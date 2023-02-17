@@ -76,11 +76,21 @@ const ViewCurrentUser = () => {
 
   let array = [];
   const onRoleSelect = (e) => {
-    const { checked, value } = e.target;
-    if (checked) {
-      array.push(parseInt(value));
+    const { checked, value, id } = e.target;
+    if (parseInt(id) === role_id) {
+      if (!checked) {
+        if (window.confirm("Are you sure ?") === true) {
+          toast.success("Role deleted");
+        } else {
+          e.target.checked = true;
+        }
+      }
     } else {
-      array = array.filter((item) => item !== parseInt(value));
+      if (checked) {
+        array.push(parseInt(value));
+      } else {
+        array = array.filter((item) => item !== parseInt(value));
+      }
     }
   };
 
@@ -191,7 +201,7 @@ const ViewCurrentUser = () => {
                                   );
                                   if (defaultRole) {
                                     defaultRole.checked = true;
-                                    defaultRole.disabled = true;
+                                    // defaultRole.disabled = true;
                                   }
                                 }
                                 return (
