@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // Only loggedIn user will have access to the components wrapped in this component.
 const AdminProtected = ({ children }) => {
