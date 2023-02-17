@@ -58,6 +58,7 @@ const ViewCurrentUser = () => {
         `/sam/v1/user-registration/auth/${id}`,
         { headers: headers }
       );
+      console.log(currentUser.data);
       const typeOfUser = Object.keys(currentUser.data)[1];
       setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
       setOtherDetailsOfUser(currentUser.data.user_details);
