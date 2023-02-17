@@ -1,11 +1,20 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { rootTitle } from "../CommonFunctions";
 
 const AccessDeniedPage = () => {
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const checkIsUserLoggedIn = () => {
+    const data = JSON.parse(localStorage.getItem("data"));
+    if (data) {
+      setUserLoggedIn(true);
+    } else {
+      setUserLoggedIn(false);
+    }
+  };
   useEffect(() => {
     rootTitle.textContent = "ACCESS DENIED";
+    checkIsUserLoggedIn();
   }, []);
 
   return (
@@ -23,7 +32,12 @@ const AccessDeniedPage = () => {
               <NavLink to="/" className="btn btn-sm btn-outline-secondary me-2">
                 <i className="bi bi-arrow-left pe-1"></i> Back to home
               </NavLink>
-              <NavLink to="/login" className="btn btn-sm btn-outline-secondary">
+              <NavLink
+                to="/login"
+                className={`btn btn-sm btn-outline-secondary ${
+                  userLoggedIn ? "d-none" : ""
+                }`}
+              >
                 Back to Login <i className="bi bi-arrow-right ps-1"></i>
               </NavLink>
             </div>
