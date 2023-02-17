@@ -893,7 +893,8 @@ input:-webkit-autofill:active {
     top: -4rem;
   }
 
-  .page-not-found-wrapper {
+  .page-not-found-wrapper,
+  .access-denied-wrapper {
     padding: 355px 0 0 0;
   }
 
@@ -903,7 +904,8 @@ input:-webkit-autofill:active {
 }
 
 @media screen and (min-width: 820px) {
-  .page-not-found-wrapper {
+  .page-not-found-wrapper,
+  .access-denied-wrapper {
     padding: 435px 0 0 0;
   }
 }
@@ -942,7 +944,8 @@ input:-webkit-autofill:active {
     left: 18px;
   }
 
-  .page-not-found-wrapper {
+  .page-not-found-wrapper,
+  .access-denied-wrapper {
     padding: 140px 0 0 0;
   }
 }
@@ -966,7 +969,8 @@ input:-webkit-autofill:active {
     top: -10rem;
   }
 
-  .page-not-found-wrapper {
+  .page-not-found-wrapper,
+  .access-denied-wrapper {
     padding: 235px 0 0 0;
   }
 }
@@ -1076,12 +1080,17 @@ input:-webkit-autofill:active {
     left: 0.2rem;
   }
 
-  .page-not-found-wrapper {
+  .page-not-found-wrapper,
+  .access-denied-wrapper {
     background-size: contain;
   }
 
   .page-not-found-wrapper {
     padding: 80px 0 0 0;
+  }
+
+  .access-denied-wrapper {
+    padding: 40px 0 0 0;
   }
 
   .btn-home {
