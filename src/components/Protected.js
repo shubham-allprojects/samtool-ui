@@ -7,7 +7,7 @@ const Protected = ({ children }) => {
   const checkStatusOfLogin = () => {
     const data = JSON.parse(localStorage.getItem("data"));
     if (!data) {
-      goTo("/");
+      goTo("/access-denied");
     }
   };
   useEffect(() => {
