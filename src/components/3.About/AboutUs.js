@@ -45,30 +45,43 @@ const AboutUs = () => {
                 <img src={whyUs} alt="why-us" className="img-fluid" />
               </div>
             </div>
-            <div className="col-md-6 d-flex align-items-center justify-content-md-end">
+            <div className="col-md-6">
               <div className="row">
-                <div className="col-12">
-                  <h1 className="fw-bold custom-text-secondary">
-                    WHY CHOOSE US ?
-                  </h1>
-                  <p className="common-btn-font">
-                    <span>
-                      We have a strong track record of succesful project
-                    </span>
-                    <br />
-                    <span>
-                      We have a dedicated team with the expertise and skills
-                    </span>
-                    <br />
-                    <span>We negotiate the best deals for our clients</span>
-                    <br />
-                    <span>
-                      We have a solid network of resources in the industry
-                    </span>
-                  </p>
+                <h1 className="custom-text-secondary fw-bold">
+                  WHY CHOOSE US ?
+                </h1>
+              </div>
+              <div className="row">
+                <div className="col-1">
+                  <i className="bi bi-caret-right-fill"></i>
                 </div>
-
-                <br />
+                <div className="col-xl-11 p-0">
+                  We have a strong track record of succesful project
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-1">
+                  <i className="bi bi-caret-right-fill"></i>
+                </div>
+                <div className="col-xl-11 p-0">
+                  We have a dedicated team with the expertise and skills
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-1">
+                  <i className="bi bi-caret-right-fill"></i>
+                </div>
+                <div className="col-xl-11 p-0">
+                  We negotiate the best deals for our clients
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-1">
+                  <i className="bi bi-caret-right-fill"></i>
+                </div>
+                <div className="col-xl-11 p-0">
+                  We have a solid network of resources in the industry
+                </div>
               </div>
             </div>
           </div>
