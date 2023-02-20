@@ -75,7 +75,7 @@ const ViewCurrentUser = () => {
 
   let array = [];
   const onRoleSelect = (e) => {
-    const { checked, value, id } = e.target;
+    const { value, id } = e.target;
     let allChecks = document.querySelectorAll(".roles-checkbox");
     let array1 = [];
     allChecks.forEach((check) => {
@@ -87,7 +87,7 @@ const ViewCurrentUser = () => {
       alert("User must have at least one role");
       e.target.checked = true;
     } else if (parseInt(id) === role_id) {
-      if (!checked) {
+      if (!e.target.checked) {
         if (
           window.confirm("Are you sure you want to remove existing role?") ===
           true
@@ -98,7 +98,7 @@ const ViewCurrentUser = () => {
         }
       }
     } else {
-      if (checked) {
+      if (e.target.checked) {
         array.push(parseInt(value));
       } else {
         array = array.filter((item) => item !== parseInt(value));
