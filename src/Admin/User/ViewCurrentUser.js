@@ -58,7 +58,6 @@ const ViewCurrentUser = () => {
         `/sam/v1/user-registration/auth/${id}`,
         { headers: headers }
       );
-      console.log(currentUser.data);
       const typeOfUser = Object.keys(currentUser.data)[1];
       setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
       setOtherDetailsOfUser(currentUser.data.user_details);
@@ -77,10 +76,23 @@ const ViewCurrentUser = () => {
   let array = [];
   const onRoleSelect = (e) => {
     const { checked, value, id } = e.target;
-    if (parseInt(id) === role_id) {
+    let allChecks = document.querySelectorAll(".roles-checkbox");
+    let array1 = [];
+    allChecks.forEach((check) => {
+      array1.push(check.checked);
+    });
+
+    let condition = [...new Set(array1)];
+    if (condition.length === 1 && condition[0] === false) {
+      alert("User must have at least one role");
+      e.target.checked = true;
+    } else if (parseInt(id) === role_id) {
       if (!checked) {
-        if (window.confirm("Are you sure ?") === true) {
-          toast.success("Role deleted");
+        if (
+          window.confirm("Are you sure you want to remove existing role?") ===
+          true
+        ) {
+          toast.success("Role removed successfully");
         } else {
           e.target.checked = true;
         }
@@ -212,7 +224,7 @@ const ViewCurrentUser = () => {
                                     <input
                                       className="form-check-input roles-checkbox"
                                       type="checkbox"
-                                      onChange={(e) => {
+                                      onClick={(e) => {
                                         onRoleSelect(e);
                                       }}
                                       id={data.id}
