@@ -634,7 +634,6 @@ const ManageUsers = () => {
         </div>
       </div>
       {/* Modal */}
-
       <div
         className="modal fade"
         id="confirmDeletedModal"

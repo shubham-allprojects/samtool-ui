@@ -325,7 +325,6 @@ const UploadProperties = () => {
         id="exampleModal"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
-        // aria-hidden="true"
         aria-modal="true"
         style={{ display: `${progressModalOpen ? "block" : "none"}` }}
       >
