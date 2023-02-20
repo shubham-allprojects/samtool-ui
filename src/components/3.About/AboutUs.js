@@ -40,48 +40,24 @@ const AboutUs = () => {
           </div>
           {/* Why choose us */}
           <div className="row px-xl-5 px-lg-4 px-md-3 px-2 wrapper">
-            <div className="col-md-6 mt-5 mt-md-0">
+            <div className="col-md-6 mt-5 mt-md-0 order-md-1 order-2">
               <div>
                 <img src={whyUs} alt="why-us" className="img-fluid" />
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="row">
-                <h1 className="custom-text-secondary fw-bold">
+            <div className="col-md-6 d-flex align-items-center justify-content-md-end order-md-2 order-1">
+              <div>
+                <h1 className="custom-text-secondary fw-bold text-md-end">
                   WHY CHOOSE US ?
                 </h1>
-              </div>
-              <div className="row">
-                <div className="col-1">
-                  <i className="bi bi-caret-right-fill"></i>
-                </div>
-                <div className="col-xl-11 p-0">
-                  We have a strong track record of succesful project
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-1">
-                  <i className="bi bi-caret-right-fill"></i>
-                </div>
-                <div className="col-xl-11 p-0">
-                  We have a dedicated team with the expertise and skills
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-1">
-                  <i className="bi bi-caret-right-fill"></i>
-                </div>
-                <div className="col-xl-11 p-0">
-                  We negotiate the best deals for our clients
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-1">
-                  <i className="bi bi-caret-right-fill"></i>
-                </div>
-                <div className="col-xl-11 p-0">
-                  We have a solid network of resources in the industry
-                </div>
+                <ul className="text-justify common-btn-font">
+                  <li>We have a strong track record of succesful project</li>
+                  <li>
+                    We have a dedicated team with the expertise and skills
+                  </li>
+                  <li>We negotiate the best deals for our clients</li>
+                  <li>We have a solid network of resources in the industry</li>
+                </ul>
               </div>
             </div>
           </div>
