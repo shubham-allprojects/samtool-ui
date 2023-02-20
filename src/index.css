@@ -29,6 +29,14 @@ code {
   --primary-color-hover: #0a58ca;
 }
 
+.custom-text-primary {
+  color: var(--primary-color);
+}
+
+.custom-text-secondary {
+  color: var(--secondary-color);
+}
+
 /* Common css */
 
 /* Breadcrumb in admin section */
