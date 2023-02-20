@@ -9,8 +9,8 @@ import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
-// const chunkSize = 1000 * 1024;
-const chunkSize = 6000;
+const chunkSize = 1000 * 1024;
+// const chunkSize = 6000;
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
   const [saveFile, setSavedFile] = useState([]);
@@ -138,6 +138,7 @@ const UploadProperties = () => {
       file_name: file.name,
       data: data,
     };
+    console.log(dataToPost.total_chunks);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
     setProgress(
