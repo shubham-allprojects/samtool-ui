@@ -47,10 +47,10 @@ const AboutUs = () => {
             </div>
             <div className="col-md-6 d-flex align-items-center justify-content-md-end order-md-2 order-1">
               <div>
-                <h1 className="custom-text-secondary fw-bold text-md-end">
-                  WHY CHOOSE US ?
-                </h1>
                 <ul className="text-justify common-btn-font">
+                  <h1 className="custom-text-secondary fw-bold">
+                    WHY CHOOSE US ?
+                  </h1>
                   <li>We have a strong track record of succesful project</li>
                   <li>
                     We have a dedicated team with the expertise and skills
