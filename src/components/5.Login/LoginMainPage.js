@@ -86,7 +86,7 @@ const LoginMainPage = () => {
               user: email,
               logintoken: token,
               userId: user_id,
-              roleId: role_id,
+              roleId: role_id[0].role_id,
             })
           );
           setTimeout(() => {
