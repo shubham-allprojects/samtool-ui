@@ -48,6 +48,8 @@ const ViewCurrentUser = () => {
 
   const data = JSON.parse(localStorage.getItem("data"));
 
+  const [currentUserRoles, setCurrentUserRoles] = useState([])
+
   const setCurrentUserData = async () => {
     if (data) {
       let headers = { Authorization: data.logintoken };
@@ -61,6 +63,7 @@ const ViewCurrentUser = () => {
       const typeOfUser = Object.keys(currentUser.data)[1];
       setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
       setOtherDetailsOfUser(currentUser.data.user_details);
+      setCurrentUserRoles(currentUser.data.role)
 
       // Get all roles.
       const allRoles = await axios.get(
