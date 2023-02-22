@@ -33,6 +33,7 @@ const ViewCurrentUser = () => {
       classOnEditClick: "d-none",
       classOnPageLoad: "",
     });
+    setCurrentUserData();
   };
 
   const cancelEditing = () => {
@@ -91,7 +92,7 @@ const ViewCurrentUser = () => {
 
   let array = [];
 
-  const onRoleSelect = (e) => {
+  const onRoleSelect = async (e) => {
     const { value, id } = e.target;
     let allChecks = document.querySelectorAll(".roles-checkbox");
     let array1 = [];
@@ -104,13 +105,33 @@ const ViewCurrentUser = () => {
       alert("User must have at least one role");
       e.target.checked = true;
     } else if (defaultRoleIds.includes(parseInt(id))) {
+      let data = {
+        user_id: user_id,
+        roles: [
+          {
+            role_id: parseInt(id),
+          },
+        ],
+      };
       if (!e.target.checked) {
         if (
           window.confirm("Are you sure you want to remove existing role?") ===
           true
         ) {
-          toast.success("Role removed successfully");
-          commonFnForSaveAndCancelClick();
+          console.log(data);
+          await axios
+            .delete(`/sam/v1/user-registration/auth/remove-role`, data, {
+              headers: headers,
+            })
+            .then((res) => {
+              if (res.data.status === 0) {
+                toast.success("Role removed successfully");
+                commonFnForSaveAndCancelClick();
+              } else {
+                toast.error("Error: Please try after some time");
+                commonFnForSaveAndCancelClick();
+              }
+            });
         } else {
           e.target.checked = true;
         }
@@ -141,7 +162,6 @@ const ViewCurrentUser = () => {
         if (res.data.status === 0) {
           toast.success("Roles added successfully");
           commonFnForSaveAndCancelClick();
-          setCurrentUserData();
         }
       });
   };
