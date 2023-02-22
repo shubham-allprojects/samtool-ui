@@ -93,6 +93,7 @@ const ViewCurrentUser = () => {
   };
 
   const deleteRole = async (data) => {
+    console.log(data, headers);
     await axios
       .delete(`/sam/v1/user-registration/auth/remove-role`, data, {
         headers: headers,
@@ -136,7 +137,6 @@ const ViewCurrentUser = () => {
           window.confirm("Are you sure you want to remove existing role?") ===
           true
         ) {
-          console.log(data);
           deleteRole(data);
         } else {
           e.target.checked = true;
@@ -147,7 +147,7 @@ const ViewCurrentUser = () => {
         setSaveRoleBtnClass("");
         array.push(parseInt(value));
       } else {
-        setSaveRoleBtnClass("d-none")
+        setSaveRoleBtnClass("d-none");
         array = array.filter((item) => item !== parseInt(value));
       }
     }
