@@ -48,7 +48,9 @@ const ViewCurrentUser = () => {
 
   const data = JSON.parse(localStorage.getItem("data"));
 
-  const [currentUserRoles, setCurrentUserRoles] = useState([])
+  const [role1, setRole1] = useState(null);
+  const [role2, setRole2] = useState(null);
+  const [role3, setRole3] = useState(null);
 
   const setCurrentUserData = async () => {
     if (data) {
@@ -60,10 +62,10 @@ const ViewCurrentUser = () => {
         `/sam/v1/user-registration/auth/${id}`,
         { headers: headers }
       );
-      const typeOfUser = Object.keys(currentUser.data)[1];
+      const typeOfUser = Object.keys(currentUser.data)[2];
       setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
       setOtherDetailsOfUser(currentUser.data.user_details);
-      setCurrentUserRoles(currentUser.data.role)
+      let currentRolesArray = currentUser.data.role;
 
       // Get all roles.
       const allRoles = await axios.get(
@@ -200,12 +202,14 @@ const ViewCurrentUser = () => {
                               </span>
                             </label>
                             <span className={`${classOnPageLoad}`}>
-                              <br /> {role_id} -
+                              <br />
+
+                              {/* {role_id} -
                               {role_id === 1
                                 ? " Admin"
                                 : role_id === 2
                                 ? " Editor"
-                                : " Viewer"}
+                                : " Viewer"}  */}
                             </span>
 
                             <div className={`form-group ${classOnEditClick}`}>
