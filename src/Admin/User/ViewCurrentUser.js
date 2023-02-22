@@ -173,12 +173,6 @@ const ViewCurrentUser = () => {
                       action=""
                       className="card shadow p-xl-5 p-lg-4 p-3 position-relative"
                     >
-                      {/* <div className="text-end position-absolute admin-property-edit-icon">
-                        <i
-                          onClick={editDetails}
-                          className="bi bi-pencil-square"
-                        ></i>
-                      </div> */}
                       <div className="row">
                         <div className="col-md-6 col-12 text-center text-md-start">
                           <div className="form-group mb-3">
@@ -221,25 +215,22 @@ const ViewCurrentUser = () => {
                             <span className={`${classOnPageLoad}`}>
                               <br />
                               {defaultRoleText ? defaultRoleText : "not"}
-                              {/* {role_id} -
-                              {role_id === 1
-                                ? " Admin"
-                                : role_id === 2
-                                ? " Editor"
-                                : " Viewer"}  */}
                             </span>
 
                             <div className={`form-group ${classOnEditClick}`}>
                               {roles.map((data, Index) => {
-                                if (data.id === role_id) {
-                                  const defaultRole = document.getElementById(
-                                    data.id
-                                  );
-                                  if (defaultRole) {
-                                    defaultRole.checked = true;
-                                    // defaultRole.disabled = true;
+                                defaultRoleIds.forEach((id) => {
+                                  if (id === data.id) {
+                                    const defaultRole = document.getElementById(
+                                      data.id
+                                    );
+                                    if (defaultRole) {
+                                      defaultRole.checked = true;
+                                      // defaultRole.disabled = true;
+                                    }
                                   }
-                                }
+                                });
+
                                 return (
                                   <div
                                     key={Index}
