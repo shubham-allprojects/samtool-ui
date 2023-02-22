@@ -33,19 +33,13 @@ const ViewCurrentUser = () => {
       classOnEditClick: "d-none",
       classOnPageLoad: "",
     });
-    const roleCheckboxes = document.querySelectorAll(".roles-checkbox");
-    roleCheckboxes.forEach((checkbox) => {
-      if (!(parseInt(checkbox.id) === role_id)) {
-        checkbox.checked = false;
-      }
-    });
   };
 
   const cancelEditing = () => {
     commonFnForSaveAndCancelClick();
   };
 
-  const { user_id, role_id, email_address, mobile_number, user_type } =
+  const { user_id, email_address, mobile_number, user_type } =
     otherDetailsOfUser;
   const { classOnEditClick, classOnPageLoad } = viewUserDetails;
 
@@ -96,6 +90,7 @@ const ViewCurrentUser = () => {
   };
 
   let array = [];
+
   const onRoleSelect = (e) => {
     const { value, id } = e.target;
     let allChecks = document.querySelectorAll(".roles-checkbox");
@@ -108,13 +103,14 @@ const ViewCurrentUser = () => {
     if (condition.length === 1 && condition[0] === false) {
       alert("User must have at least one role");
       e.target.checked = true;
-    } else if (parseInt(id) === role_id) {
+    } else if (defaultRoleIds.includes(parseInt(id))) {
       if (!e.target.checked) {
         if (
           window.confirm("Are you sure you want to remove existing role?") ===
           true
         ) {
           toast.success("Role removed successfully");
+          commonFnForSaveAndCancelClick();
         } else {
           e.target.checked = true;
         }
@@ -215,7 +211,7 @@ const ViewCurrentUser = () => {
                             </label>
                             <span className={`${classOnPageLoad}`}>
                               <br />
-                              {defaultRoleText ? defaultRoleText : "not"}
+                              {defaultRoleText ? defaultRoleText : ""}
                             </span>
 
                             <div className={`form-group ${classOnEditClick}`}>
