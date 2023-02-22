@@ -90,9 +90,25 @@ const ViewCurrentUser = () => {
     }
   };
 
+  const deleteRole = async (data) => {
+    await axios
+      .delete(`/sam/v1/user-registration/auth/remove-role`, data, {
+        headers: headers,
+      })
+      .then((res) => {
+        if (res.data.status === 0) {
+          toast.success("Role removed successfully");
+          commonFnForSaveAndCancelClick();
+        } else {
+          toast.error("Error: Please try after some time");
+          commonFnForSaveAndCancelClick();
+        }
+      });
+  };
+
   let array = [];
 
-  const onRoleSelect = async (e) => {
+  const onRoleSelect = (e) => {
     const { value, id } = e.target;
     let allChecks = document.querySelectorAll(".roles-checkbox");
     let array1 = [];
@@ -119,19 +135,7 @@ const ViewCurrentUser = () => {
           true
         ) {
           console.log(data);
-          await axios
-            .delete(`/sam/v1/user-registration/auth/remove-role`, data, {
-              headers: headers,
-            })
-            .then((res) => {
-              if (res.data.status === 0) {
-                toast.success("Role removed successfully");
-                commonFnForSaveAndCancelClick();
-              } else {
-                toast.error("Error: Please try after some time");
-                commonFnForSaveAndCancelClick();
-              }
-            });
+          deleteRole(data);
         } else {
           e.target.checked = true;
         }
