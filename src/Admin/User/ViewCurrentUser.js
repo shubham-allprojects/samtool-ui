@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
+let defaultRoleText = "";
 
 const ViewCurrentUser = () => {
   const { id } = useParams();
@@ -48,10 +49,6 @@ const ViewCurrentUser = () => {
 
   const data = JSON.parse(localStorage.getItem("data"));
 
-  const [role1, setRole1] = useState(null);
-  const [role2, setRole2] = useState(null);
-  const [role3, setRole3] = useState(null);
-
   const setCurrentUserData = async () => {
     if (data) {
       let headers = { Authorization: data.logintoken };
@@ -66,6 +63,23 @@ const ViewCurrentUser = () => {
       setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
       setOtherDetailsOfUser(currentUser.data.user_details);
       let currentRolesArray = currentUser.data.role;
+      let roleIdArray = [];
+      let arrayWithRoleAndId = [];
+      currentRolesArray.forEach((obj) => {
+        roleIdArray.push(obj.role_id);
+      });
+
+      for (let i of roleIdArray) {
+        if (i === 1) {
+          arrayWithRoleAndId.push("1-Admin");
+        } else if (i === 2) {
+          arrayWithRoleAndId.push("2-Editor");
+        } else if (i === 3) {
+          arrayWithRoleAndId.push("3-Viewer");
+        }
+      }
+
+      defaultRoleText = arrayWithRoleAndId.join(", ");
 
       // Get all roles.
       const allRoles = await axios.get(
@@ -203,7 +217,7 @@ const ViewCurrentUser = () => {
                             </label>
                             <span className={`${classOnPageLoad}`}>
                               <br />
-
+                              {defaultRoleText ? defaultRoleText : "not"}
                               {/* {role_id} -
                               {role_id === 1
                                 ? " Admin"
