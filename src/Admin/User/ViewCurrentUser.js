@@ -34,7 +34,6 @@ const ViewCurrentUser = () => {
       classOnPageLoad: "",
     });
     setCurrentUserData();
-    setSaveRoleBtnClass("d-none");
     const allChecks = document.querySelectorAll(".roles-checkbox");
     allChecks.forEach((check) => {
       defaultRoleIds.forEach((defaultId) => {
@@ -56,8 +55,6 @@ const ViewCurrentUser = () => {
   const { classOnEditClick, classOnPageLoad } = viewUserDetails;
 
   const data = JSON.parse(localStorage.getItem("data"));
-
-  const [saveRoleBtnClass, setSaveRoleBtnClass] = useState("d-none");
 
   const setCurrentUserData = async () => {
     if (data) {
@@ -155,10 +152,8 @@ const ViewCurrentUser = () => {
       }
     } else {
       if (e.target.checked) {
-        setSaveRoleBtnClass("");
         array.push(parseInt(value));
       } else {
-        setSaveRoleBtnClass("d-none");
         array = array.filter((item) => item !== parseInt(value));
       }
     }
@@ -243,7 +238,7 @@ const ViewCurrentUser = () => {
                               </span>
                               <span
                                 onClick={saveRoles}
-                                className={`ms-3 ${saveRoleBtnClass}`}
+                                className={`ms-3 ${classOnEditClick}`}
                               >
                                 <i className="bi bi-check-square-fill text-success fs-5"></i>
                               </span>
