@@ -145,6 +145,7 @@ const ViewCurrentUser = () => {
         if (res.data.status === 0) {
           toast.success("Roles added successfully");
           commonFnForSaveAndCancelClick();
+          setCurrentUserData();
         }
       });
   };
