@@ -34,6 +34,17 @@ const ViewCurrentUser = () => {
       classOnPageLoad: "",
     });
     setCurrentUserData();
+    setSaveRoleBtnClass("d-none");
+    const allChecks = document.querySelectorAll(".roles-checkbox");
+    allChecks.forEach((check) => {
+      defaultRoleIds.forEach((defaultId) => {
+        if (parseInt(check.id) === defaultId) {
+          check.checked = true;
+        } else {
+          check.checked = false;
+        }
+      });
+    });
   };
 
   const cancelEditing = () => {
