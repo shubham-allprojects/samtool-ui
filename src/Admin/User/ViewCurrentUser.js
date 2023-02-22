@@ -5,7 +5,9 @@ import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
+
 let defaultRoleText = "";
+let defaultRoleIds = [];
 
 const ViewCurrentUser = () => {
   const { id } = useParams();
@@ -80,6 +82,7 @@ const ViewCurrentUser = () => {
       }
 
       defaultRoleText = arrayWithRoleAndId.join(", ");
+      defaultRoleIds = roleIdArray;
 
       // Get all roles.
       const allRoles = await axios.get(
