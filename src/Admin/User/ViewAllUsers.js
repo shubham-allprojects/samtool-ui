@@ -374,20 +374,29 @@ const ManageUsers = () => {
                       <tbody>
                         {individualUsers.map((user, Index) => {
                           const { first_name } = user.individual_user;
-                          const { email_address, role_id, user_id } =
-                            user.user_details;
+                          const { email_address, user_id } = user.user_details;
+                          let currentRolesArray = user.role;
+                          let roleIdArray = [];
+                          let arrayOfRoles = [];
+                          currentRolesArray.forEach((obj) => {
+                            roleIdArray.push(obj.role_id);
+                          });
+
+                          for (let i of roleIdArray) {
+                            if (i === 1) {
+                              arrayOfRoles.push("Admin");
+                            } else if (i === 2) {
+                              arrayOfRoles.push("Editor");
+                            } else if (i === 3) {
+                              arrayOfRoles.push("Viewer");
+                            }
+                          }
                           return (
                             <tr key={Index}>
                               <td>{user_id}</td>
                               <td>{first_name}</td>
                               <td>{email_address}</td>
-                              <td>
-                                {role_id === 1
-                                  ? "Admin"
-                                  : role_id === 2
-                                  ? "Editor"
-                                  : "Viewer"}
-                              </td>
+                              <td>{arrayOfRoles.join(", ")}</td>
                               <td>
                                 <li className="nav-item dropdown list-unstyled">
                                   <span
@@ -514,18 +523,28 @@ const ManageUsers = () => {
                           const { company_name } = user.org_user;
                           const { email_address, role_id, user_id } =
                             user.user_details;
+                          let currentRolesArray = user.role;
+                          let roleIdArray = [];
+                          let arrayOfRoles = [];
+                          currentRolesArray.forEach((obj) => {
+                            roleIdArray.push(obj.role_id);
+                          });
+
+                          for (let i of roleIdArray) {
+                            if (i === 1) {
+                              arrayOfRoles.push("Admin");
+                            } else if (i === 2) {
+                              arrayOfRoles.push("Editor");
+                            } else if (i === 3) {
+                              arrayOfRoles.push("Viewer");
+                            }
+                          }
                           return (
                             <tr key={Index}>
                               <td>{user_id}</td>
                               <td>{company_name}</td>
                               <td>{email_address}</td>
-                              <td>
-                                {role_id === 1
-                                  ? "Admin"
-                                  : role_id === 2
-                                  ? "Editor"
-                                  : "Viewer"}
-                              </td>
+                              <td>{arrayOfRoles.join(", ")}</td>
                               <td>
                                 <li className="nav-item dropdown list-unstyled">
                                   <span

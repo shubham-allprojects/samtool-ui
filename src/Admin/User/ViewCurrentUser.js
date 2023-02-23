@@ -71,22 +71,22 @@ const ViewCurrentUser = () => {
       setOtherDetailsOfUser(currentUser.data.user_details);
       let currentRolesArray = currentUser.data.role;
       let roleIdArray = [];
-      let arrayWithRoleAndId = [];
+      let arrayOfRoles = [];
       currentRolesArray.forEach((obj) => {
         roleIdArray.push(obj.role_id);
       });
 
       for (let i of roleIdArray) {
         if (i === 1) {
-          arrayWithRoleAndId.push("1-Admin");
+          arrayOfRoles.push("Admin");
         } else if (i === 2) {
-          arrayWithRoleAndId.push("2-Editor");
+          arrayOfRoles.push("Editor");
         } else if (i === 3) {
-          arrayWithRoleAndId.push("3-Viewer");
+          arrayOfRoles.push("Viewer");
         }
       }
 
-      defaultRoleText = arrayWithRoleAndId.join(", ");
+      defaultRoleText = arrayOfRoles.join(", ");
       defaultRoleIds = roleIdArray;
 
       // Get all roles.
@@ -280,7 +280,7 @@ const ViewCurrentUser = () => {
                                       className="form-check-label"
                                       htmlFor="inlineCheckbox1"
                                     >
-                                      {`${data.id} - ${data.role}`}
+                                      {data.role}
                                     </label>
                                   </div>
                                 );
