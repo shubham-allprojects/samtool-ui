@@ -56,7 +56,7 @@ const Registration = () => {
   const [formData, setFormData] = useState({
     contact_details: {
       user_type: "Individual User",
-      address: "Not Available",
+      role_id: 2,
     },
   });
 
@@ -521,7 +521,51 @@ const Registration = () => {
       setValues(name, value);
       setFormData({
         ...formData,
-        contact_details: { ...formData.contact_details, [name]: value },
+        contact_details: {
+          ...formData.contact_details,
+          [name]: value,
+          address: value,
+        },
+      });
+    } else if (name === "flat_number") {
+      setFormData({
+        ...formData,
+        contact_details: {
+          ...formData.contact_details,
+          [name]: parseInt(value),
+        },
+      });
+    } else if (name === "building_name") {
+      setFormData({
+        ...formData,
+        contact_details: {
+          ...formData.contact_details,
+          [name]: value,
+        },
+      });
+    } else if (name === "society_name") {
+      setFormData({
+        ...formData,
+        contact_details: {
+          ...formData.contact_details,
+          [name]: value,
+        },
+      });
+    } else if (name === "landmark") {
+      setFormData({
+        ...formData,
+        contact_details: {
+          ...formData.contact_details,
+          [name]: value,
+        },
+      });
+    } else if (name === "plot_number") {
+      setFormData({
+        ...formData,
+        contact_details: {
+          ...formData.contact_details,
+          [name]: parseInt(value),
+        },
       });
     }
   };
