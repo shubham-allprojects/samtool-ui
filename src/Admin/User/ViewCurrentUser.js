@@ -8,6 +8,7 @@ import BreadCrumb from "../BreadCrumb";
 
 let defaultRoleText = "";
 let defaultRoleIds = [];
+let rolesToRemove = [];
 
 const ViewCurrentUser = () => {
   const { id } = useParams();
@@ -30,6 +31,7 @@ const ViewCurrentUser = () => {
   };
 
   const commonFnForSaveAndCancelClick = () => {
+    rolesToRemove = [];
     setViewUserDetails({
       classOnEditClick: "d-none",
       classOnPageLoad: "",
@@ -134,23 +136,19 @@ const ViewCurrentUser = () => {
       alert("User must have at least one role");
       e.target.checked = true;
     } else if (defaultRoleIds.includes(parseInt(id))) {
-      let data = {
-        user_id: user_id,
-        roles: [
-          {
-            role_id: parseInt(id),
-          },
-        ],
-      };
       if (!e.target.checked) {
         if (
           window.confirm("Are you sure you want to remove existing role?") ===
           true
         ) {
-          deleteRole(data);
+          rolesToRemove.push({
+            role_id: parseInt(id),
+          });
         } else {
           e.target.checked = true;
         }
+      } else {
+        rolesToRemove.pop({ role_id: parseInt(id) });
       }
     } else {
       if (e.target.checked) {
@@ -166,20 +164,29 @@ const ViewCurrentUser = () => {
     for (let i of array) {
       rolesToPost.push({ role_id: i });
     }
-    await axios
-      .post(
-        `/sam/v1/user-registration/auth/add-role`,
-        { user_id: user_id, roles: rolesToPost },
-        {
-          headers: headers,
-        }
-      )
-      .then((res) => {
-        if (res.data.status === 0) {
-          toast.success("Roles added successfully");
-          commonFnForSaveAndCancelClick();
-        }
-      });
+    let data = {
+      user_id: user_id,
+      roles: rolesToRemove,
+    };
+
+    if (rolesToRemove.length > 0) {
+      deleteRole(data);
+    }
+
+    // await axios
+    //   .post(
+    //     `/sam/v1/user-registration/auth/add-role`,
+    //     { user_id: user_id, roles: rolesToPost },
+    //     {
+    //       headers: headers,
+    //     }
+    //   )
+    //   .then((res) => {
+    //     if (res.data.status === 0) {
+    //       toast.success("Roles added successfully");
+    //       commonFnForSaveAndCancelClick();
+    //     }
+    //   });
   };
 
   useEffect(() => {
