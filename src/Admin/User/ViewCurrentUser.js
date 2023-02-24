@@ -171,7 +171,6 @@ const ViewCurrentUser = () => {
 
     if (rolesToRemove.length > 0) {
       deleteRole(data);
-      console.warn({ user_id: user_id, roles: rolesToPost });
     }
 
     // await axios
