@@ -28,15 +28,6 @@ const ViewCurrentUser = () => {
       classOnEditClick: "",
       classOnPageLoad: "d-none",
     });
-  };
-
-  const commonFnForSaveAndCancelClick = () => {
-    rolesToRemove = [];
-    setViewUserDetails({
-      classOnEditClick: "d-none",
-      classOnPageLoad: "",
-    });
-    setCurrentUserData();
     const allChecks = document.querySelectorAll(".roles-checkbox");
     allChecks.forEach((check) => {
       defaultRoleIds.forEach((defaultId) => {
@@ -47,6 +38,15 @@ const ViewCurrentUser = () => {
         }
       });
     });
+  };
+
+  const commonFnForSaveAndCancelClick = () => {
+    rolesToRemove = [];
+    setViewUserDetails({
+      classOnEditClick: "d-none",
+      classOnPageLoad: "",
+    });
+    setCurrentUserData();
   };
 
   const cancelEditing = () => {
@@ -107,18 +107,10 @@ const ViewCurrentUser = () => {
   const deleteRole = (data) => {
     console.log(data, headers);
     let url = "/sam/v1/user-registration/auth/remove-role";
-    axios.delete(url, data, {
+    axios.delete(url, {
       headers: headers,
+      data: data,
     });
-    // .then((res) => {
-    //   if (res.data.status === 0) {
-    //     toast.success("Role removed successfully");
-    //     commonFnForSaveAndCancelClick();
-    //   } else {
-    //     toast.error("Error: Please try after some time");
-    //     commonFnForSaveAndCancelClick();
-    //   }
-    // });
   };
 
   let array = [];
@@ -173,20 +165,20 @@ const ViewCurrentUser = () => {
       deleteRole(data);
     }
 
-    // await axios
-    //   .post(
-    //     `/sam/v1/user-registration/auth/add-role`,
-    //     { user_id: user_id, roles: rolesToPost },
-    //     {
-    //       headers: headers,
-    //     }
-    //   )
-    //   .then((res) => {
-    //     if (res.data.status === 0) {
-    //       toast.success("Roles added successfully");
-    //       commonFnForSaveAndCancelClick();
-    //     }
-    //   });
+    await axios
+      .post(
+        `/sam/v1/user-registration/auth/add-role`,
+        { user_id: user_id, roles: rolesToPost },
+        {
+          headers: headers,
+        }
+      )
+      .then((res) => {
+        if (res.data.status === 0) {
+          toast.success("Roles updated successfully");
+          commonFnForSaveAndCancelClick();
+        }
+      });
   };
 
   useEffect(() => {
