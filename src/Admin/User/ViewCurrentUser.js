@@ -15,6 +15,7 @@ const ViewCurrentUser = () => {
   const [categoryWiseUserDetails, setCategoryWiseUserDetails] = useState({});
   const [roles, setRoles] = useState([]);
   const [headers, setHeaders] = useState({});
+  const [loggedInUserId, setLoggedInUserId] = useState(null);
 
   const [viewUserDetails, setViewUserDetails] = useState({
     classOnEditClick: "d-none",
@@ -60,6 +61,7 @@ const ViewCurrentUser = () => {
     if (data) {
       let headers = { Authorization: data.logintoken };
       setHeaders({ Authorization: data.logintoken });
+      setLoggedInUserId(data.userId);
 
       // Get user by Id.
       const currentUser = await axios.get(
@@ -275,6 +277,12 @@ const ViewCurrentUser = () => {
                                       }}
                                       id={data.id}
                                       value={data.id}
+                                      disabled={
+                                        user_id === loggedInUserId &&
+                                        data.id === 1
+                                          ? true
+                                          : false
+                                      }
                                     />
                                     <label
                                       className="form-check-label"
