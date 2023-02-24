@@ -104,21 +104,21 @@ const ViewCurrentUser = () => {
     }
   };
 
-  const deleteRole = async (data) => {
+  const deleteRole = (data) => {
     console.log(data, headers);
-    await axios
-      .delete(`/sam/v1/user-registration/auth/remove-role`, data, {
-        headers: headers,
-      })
-      .then((res) => {
-        if (res.data.status === 0) {
-          toast.success("Role removed successfully");
-          commonFnForSaveAndCancelClick();
-        } else {
-          toast.error("Error: Please try after some time");
-          commonFnForSaveAndCancelClick();
-        }
-      });
+    let url = "/sam/v1/user-registration/auth/remove-role";
+    axios.delete(url, data, {
+      headers: headers,
+    });
+    // .then((res) => {
+    //   if (res.data.status === 0) {
+    //     toast.success("Role removed successfully");
+    //     commonFnForSaveAndCancelClick();
+    //   } else {
+    //     toast.error("Error: Please try after some time");
+    //     commonFnForSaveAndCancelClick();
+    //   }
+    // });
   };
 
   let array = [];
