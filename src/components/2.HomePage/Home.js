@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import HomeAboutUs from "./HomeAboutUs";
 import Layout from "../1.CommonLayout/Layout";
 import Properties from "./Properties";
 import axios from "axios";
 import { useState } from "react";
 import { rootTitle } from "../../CommonFunctions";
+import Pagination from "../Pagination";
 
 function Home() {
   // useState to store data of each field e.g all states, all banks etc.
@@ -18,9 +19,11 @@ function Home() {
 
   // useState to store values of each select box for search functionality.
   const [dataToPost, setDataToPost] = useState({
-    batch_size: 10,
+    batch_size: 4,
     batch_number: 1,
   });
+
+  const { batch_size, batch_number } = dataToPost;
 
   // After we click on search button It will store data/response from api into this useState.
   const [propertyData, setPropertyData] = useState([]);
@@ -126,37 +129,63 @@ function Home() {
     }
   };
 
+  const [pageCount, setPageCount] = useState(0);
+  const paginationRef = useRef();
   // This will run after Search button click.
   const getPropertyData = async (e) => {
     e.preventDefault();
     document.getElementById("properties").scrollIntoView(true);
-    let apis = {
-      searchAPI: `${url}/count-category`,
-    };
-    // Post data and get Searched result from response.
-    await axios.post(apis.searchAPI, dataToPost).then((res) => {
-      // Store Searched results into propertyData useState.
-      // localStorage.setItem("propertyDataFromLocal", JSON.stringify(res.data));
-      setPropertyData(res.data);
-    });
     // Unhide div and display search results in card format.
     document.querySelectorAll(".display-on-search").forEach((item) => {
       item.classList.remove("d-none");
     });
+    let apis = {
+      searchAPI: `${url}/count-category`,
+    };
+    let dataForTotalCount = {
+      ...dataToPost,
+      batch_size: 1000,
+      batch_number: 1,
+    };
+
+    await axios.post(apis.searchAPI, dataForTotalCount).then((res) => {
+      if (res.data) {
+        setPageCount(Math.ceil(res.data.length / batch_size));
+      }
+    });
+
+    // Post data and get Searched result from response.
+    await axios.post(apis.searchAPI, dataToPost).then((res) => {
+      // Store Searched results into propertyData useState.
+      setPropertyData(res.data);
+      if (res.data) {
+        paginationRef.current.classList.remove("d-none");
+      } else {
+        paginationRef.current.classList.add("d-none");
+      }
+    });
   };
 
-  // Get saved properties data from local storage.
-  // const getDataFromLocal = () => {
-  //   let localData = JSON.parse(localStorage.getItem("propertyDataFromLocal"));
-  //   if (localData !== null) {
-  //     setPropertyData(localData);
-  //     if (localData.length > 0) {
-  //       document.querySelectorAll(".display-on-search").forEach((item) => {
-  //         item.classList.remove("d-none");
-  //       });
-  //     }
-  //   }
-  // };
+  // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
+  const handlePageClick = async (pageNumber) => {
+    let currentPage = pageNumber.selected + 1;
+    const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
+    setPropertyData(nextOrPrevPagePropertyData);
+  };
+
+  // Fetch more jobs on page click.
+  const fetchMoreProperties = async (currentPage) => {
+    let dataOfNextOrPrevPage = {
+      ...dataToPost,
+      batch_size: batch_size,
+      batch_number: currentPage,
+    };
+    let apis = {
+      searchAPI: `${url}/count-category`,
+    };
+    const res = await axios.post(apis.searchAPI, dataOfNextOrPrevPage);
+    return res.data;
+  };
 
   // Change navbar color on scroll on HomePage only.
   const changeNavBarColor = () => {
@@ -345,7 +374,20 @@ function Home() {
         </section>
         {/* Properties component to show property details (In card format) on click of search button */}
         {/* We are sending propertyData array (which contains our search results) as a prop */}
-        <Properties propertyData={propertyData} />
+        <section className="property-wrapper" id="properties">
+          <Properties propertyData={propertyData} />
+          <div className="container d-none" ref={paginationRef}>
+            <div className="row">
+              <div className="col-12">
+                <Pagination
+                  handlePageClick={handlePageClick}
+                  pageCount={pageCount}
+                  // handlePageClick={handlePageClick}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
         {/* About us section component */}
         <HomeAboutUs />
       </section>
