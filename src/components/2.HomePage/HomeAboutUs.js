@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import WhoWeAre from "../../images/about-us.svg";
-import WhyChooseUs from "../../images/whyUs.svg";
+import WhoWeAre from "../../images/meeting.svg";
+import WhyChooseUs from "../../images/business-deal.svg";
 
 const HomeAboutUs = () => {
   return (
@@ -26,11 +26,11 @@ const HomeAboutUs = () => {
                 </p>
               </div>
             </div>
-            <div className="col-md-6 common-col order-md-2 order-2">
+            <div className="col-md-6 common-col order-md-2 order-2 py-md-3">
               <img src={WhoWeAre} alt="about-us-img" />
             </div>
-            <div className="col-md-6 common-col order-md-3 order-4">
-              <img src={WhyChooseUs} alt="why-choose-us"/>
+            <div className="col-md-6 common-col order-md-3 order-4 py-md-3">
+              <img src={WhyChooseUs} alt="why-choose-us" />
             </div>
             <div className="col-md-6 why-choose-us-col bg-white common-col order-md-4 order-3">
               <div className="px-md-3 px-lg-0 text-dark">
