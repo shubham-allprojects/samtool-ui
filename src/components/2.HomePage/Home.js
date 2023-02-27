@@ -168,6 +168,7 @@ function Home() {
 
   // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
   const handlePageClick = async (pageNumber) => {
+    document.getElementById("properties").scrollIntoView(true);
     let currentPage = pageNumber.selected + 1;
     const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
     setPropertyData(nextOrPrevPagePropertyData);
