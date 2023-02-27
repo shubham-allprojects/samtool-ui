@@ -71,7 +71,10 @@ function App() {
             }
           />
           <Route path="/register/set-password" element={<SetPassword />} />
-          <Route path="/forgot-password/reset-password" element={<ForgotAndResetPassword />} />
+          <Route
+            path="/forgot-password/reset-password"
+            element={<ForgotAndResetPassword />}
+          />
           <Route
             path="/profile"
             element={

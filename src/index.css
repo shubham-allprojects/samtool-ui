@@ -366,14 +366,11 @@ input:-webkit-autofill:active {
 
 .home-about-wrapper .common-col {
   height: 320px;
-  width: 50% !important;
-  padding: 0 !important;
 }
 
 .home-about-wrapper .common-col img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
 }
 
 .home-about-wrapper .about-details-col,
@@ -1051,10 +1048,6 @@ input:-webkit-autofill:active {
     padding: 2rem 0;
   }
   .five-section-col {
-    width: 100% !important;
-  }
-
-  .home-about-wrapper .common-col {
     width: 100% !important;
   }
 
