@@ -147,7 +147,7 @@ function Home() {
       batch_size: 1000,
       batch_number: 1,
     };
-
+    // This api is only for getting all the records and count length of array of properties so that we can decide page numbers for pagination.
     await axios.post(apis.searchAPI, dataForTotalCount).then((res) => {
       if (res.data) {
         setPageCount(Math.ceil(res.data.length / batch_size));
