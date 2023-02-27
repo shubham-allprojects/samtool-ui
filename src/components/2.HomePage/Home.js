@@ -23,7 +23,7 @@ function Home() {
     batch_number: 1,
   });
 
-  const { batch_size, batch_number } = dataToPost;
+  const { batch_size } = dataToPost;
 
   // After we click on search button It will store data/response from api into this useState.
   const [propertyData, setPropertyData] = useState([]);
