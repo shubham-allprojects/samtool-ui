@@ -286,6 +286,10 @@ input:-webkit-autofill:active {
 
 /* Property */
 
+.property-wrapper {
+  border-bottom: 1px solid skyblue;
+}
+
 .property-card-wrapper .card,
 .admin-property-card-wrapper .card {
   background-color: transparent;

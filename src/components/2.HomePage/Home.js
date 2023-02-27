@@ -377,7 +377,7 @@ function Home() {
           <Properties propertyData={propertyData} />
           <div className="container d-none" ref={paginationRef}>
             <div className="row">
-              <div className="col-12">
+              <div className="col-12 mb-3">
                 <Pagination
                   handlePageClick={handlePageClick}
                   pageCount={pageCount}
