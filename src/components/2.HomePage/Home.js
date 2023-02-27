@@ -204,7 +204,6 @@ function Home() {
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - HOME";
     getSearchDetails();
-    // getDataFromLocal();
     changeNavBarColor();
     // eslint-disable-next-line
   }, []);
