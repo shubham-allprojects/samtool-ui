@@ -5,7 +5,7 @@ import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
 import { counter, rootTitle } from "../../src/CommonFunctions";
 import { Chart as CharJs, registerables } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Pie } from "react-chartjs-2";
 
 let orgCount = 0; // Default count of organizational users.
 let indiCount = 0; // Default count of individual users.
@@ -63,6 +63,17 @@ const AdminHomePage = () => {
         label: "Organizational",
         data: [countOfOrgUsers],
         backgroundColor: "rgb(13, 110, 253)",
+      },
+    ],
+  };
+
+  const chartData2 = {
+    labels: ["Individual", "Organizational"],
+    datasets: [
+      {
+        label: "Users",
+        data: [countOfIndividualUsers, countOfOrgUsers],
+        backgroundColor: ["orange", "rgb(13, 110, 253)"],
       },
     ],
   };
@@ -143,6 +154,9 @@ const AdminHomePage = () => {
               <div className="row mt-5">
                 <div className="col-xl-5 col-lg-7 col-md-8">
                   <Bar data={chartData} options={options}></Bar>
+                </div>
+                <div className="offset-xl-1 col-xl-3 offset-lg-1 col-lg-4 col-md-4 mt-5 mt-md-0">
+                  <Pie data={chartData2}></Pie>
                 </div>
               </div>
             </div>
