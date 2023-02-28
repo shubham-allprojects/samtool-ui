@@ -10,7 +10,7 @@ const Properties = ({ propertyData, loading }) => {
   };
 
   return (
-    <div className="container-fluid d-none display-on-search wrapper">
+    <div className="container-fluid d-none display-on-search py-3">
       <div className="row">
         {loading ? (
           <CommonSpinner spinnerColor="primary" spinnerText="Please wait...." />
