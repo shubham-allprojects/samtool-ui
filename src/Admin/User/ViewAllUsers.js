@@ -521,8 +521,7 @@ const ManageUsers = () => {
                       <tbody>
                         {orgUsers.map((user, Index) => {
                           const { company_name } = user.org_user;
-                          const { email_address, role_id, user_id } =
-                            user.user_details;
+                          const { email_address, user_id } = user.user_details;
                           let currentRolesArray = user.role;
                           let roleIdArray = [];
                           let arrayOfRoles = [];

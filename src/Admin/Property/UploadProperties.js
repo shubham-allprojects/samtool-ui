@@ -17,8 +17,7 @@ const UploadProperties = () => {
   const [currentFileIndex, setCurrentFileIndex] = useState(null);
   const [lastUploadedFileIndex, setLastUploadedFileIndex] = useState(null);
   const [currentChunkIndex, setCurrentChunkIndex] = useState(null);
-  const [uniqueUploadId, setUniqueUploadId] = useState(uuid());
-
+  const uniqueUploadId = uuid();
   const [allUseStates, setAllUseStates] = useState({
     data: [],
     tableHeadings: [],
