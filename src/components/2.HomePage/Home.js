@@ -24,6 +24,7 @@ function Home() {
   });
 
   const { batch_size } = dataToPost;
+  const [loading, setLoading] = useState(false);
 
   // After we click on search button It will store data/response from api into this useState.
   const [propertyData, setPropertyData] = useState([]);
@@ -134,6 +135,8 @@ function Home() {
   // This will run after Search button click.
   const getPropertyData = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    paginationRef.current.classList.add("d-none");
     document.getElementById("properties").scrollIntoView(true);
     // Unhide div and display search results in card format.
     document.querySelectorAll(".display-on-search").forEach((item) => {
@@ -158,11 +161,14 @@ function Home() {
     await axios.post(apis.searchAPI, dataToPost).then((res) => {
       // Store Searched results into propertyData useState.
       setPropertyData(res.data);
-      if (res.data) {
-        paginationRef.current.classList.remove("d-none");
-      } else {
-        paginationRef.current.classList.add("d-none");
-      }
+      setTimeout(() => {
+        setLoading(false);
+        if (res.data) {
+          paginationRef.current.classList.remove("d-none");
+        } else {
+          paginationRef.current.classList.add("d-none");
+        }
+      }, 1500);
     });
   };
 
@@ -375,7 +381,7 @@ function Home() {
         {/* Properties component to show property details (In card format) on click of search button */}
         {/* We are sending propertyData array (which contains our search results) as a prop */}
         <section className="property-wrapper" id="properties">
-          <Properties propertyData={propertyData} />
+          <Properties propertyData={propertyData} loading={loading} />
           <div className="container d-none" ref={paginationRef}>
             <div className="row">
               <div className="col-12 mb-3">

@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import CommonSpinner from "../../CommonSpinner";
 
-const Properties = ({ propertyData }) => {
+const Properties = ({ propertyData, loading }) => {
   // To navigate to particular route.
   const goTo = useNavigate();
   const viewProperty = () => {
@@ -11,7 +12,14 @@ const Properties = ({ propertyData }) => {
   return (
     <div className="container-fluid d-none display-on-search wrapper">
       <div className="row">
-        {propertyData ? (
+        {loading ? (
+          <CommonSpinner spinnerColor="primary" spinnerText="Please wait...." />
+        ) : !propertyData ? (
+          <div className="py-5 text-center">
+            <h2 className="text-capitalize">Sorry! No result found :(</h2>
+            <span className="">Please try with another options</span>
+          </div>
+        ) : (
           propertyData.map((property, Index) => {
             return (
               <div className="col-lg-3 col-md-4" key={Index}>
@@ -59,11 +67,6 @@ const Properties = ({ propertyData }) => {
               </div>
             );
           })
-        ) : (
-          <div className="py-5 text-center">
-            <h2 className="text-capitalize">Sorry! No result found :(</h2>
-            <span className="">Please try with another options</span>
-          </div>
         )}
       </div>
     </div>
