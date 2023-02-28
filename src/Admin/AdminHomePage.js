@@ -55,14 +55,14 @@ const AdminHomePage = () => {
     labels: ["Users"],
     datasets: [
       {
-        label: "Organizational",
-        data: [countOfOrgUsers],
-        backgroundColor: "rgb(13, 110, 253)",
-      },
-      {
         label: "Individual",
         data: [countOfIndividualUsers],
         backgroundColor: "orange",
+      },
+      {
+        label: "Organizational",
+        data: [countOfOrgUsers],
+        backgroundColor: "rgb(13, 110, 253)",
       },
     ],
   };
@@ -141,7 +141,7 @@ const AdminHomePage = () => {
                 </div>
               </div>
               <div className="row mt-5">
-                <div className="col-xl-5">
+                <div className="col-xl-5 col-lg-7 col-md-8">
                   <Bar data={chartData} options={options}></Bar>
                 </div>
               </div>
