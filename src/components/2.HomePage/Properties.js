@@ -26,7 +26,7 @@ const Properties = ({ propertyData, loading }) => {
                 <div className="property-card-wrapper">
                   <div className="card mb-4">
                     <div className="top-line"></div>
-                    <img className="card-img-top" src="images1.jpg" alt="" />
+                    <img className="card-img-top" src="images2.jpg" alt="" />
                     <div className="card-body">
                       <h3 className="card-title text-uppercase">
                         {property.title}
