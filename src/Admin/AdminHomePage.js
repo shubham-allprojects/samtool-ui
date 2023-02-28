@@ -1,16 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import AdminSideBar from "./AdminSideBar";
 import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
 import { counter, rootTitle } from "../../src/CommonFunctions";
+import { Chart as CharJs, registerables } from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 let orgCount = 0; // Default count of organizational users.
 let indiCount = 0; // Default count of individual users.
 let startCounter;
 
 const AdminHomePage = () => {
+  CharJs.register(...registerables);
   const data = JSON.parse(localStorage.getItem("data"));
+  const [countOfUsers, setCountOfUsers] = useState({
+    countOfIndividualUsers: 0,
+    countOfOrgUsers: 0,
+  });
+
+  const { countOfIndividualUsers, countOfOrgUsers } = countOfUsers;
+
   const setHeaderAndUrl = () => {
     let headers = "";
     if (data) {
@@ -20,14 +30,17 @@ const AdminHomePage = () => {
     return [headers, url];
   };
 
-  const setCountOfUsers = async () => {
+  const setTotalCountOfUsers = async () => {
     // Get and store the count of both types of Users i.e. Individual Users and Organizational Users.
     const [headers, url] = setHeaderAndUrl();
     await axios.get(`${url}/type-count`, { headers: headers }).then((res) => {
       indiCount = parseInt(res.data.individual_count);
       orgCount = parseInt(res.data.org_count);
     });
-
+    setCountOfUsers({
+      countOfIndividualUsers: indiCount,
+      countOfOrgUsers: orgCount,
+    });
     // To show counter animation on admin Home page.
     const totalCount = indiCount + orgCount;
     if (!totalCount <= 0) {
@@ -38,10 +51,28 @@ const AdminHomePage = () => {
     }
   };
 
+  const chartData = {
+    labels: ["Users"],
+    datasets: [
+      {
+        label: "Organizational",
+        data: [countOfOrgUsers],
+        backgroundColor: "rgb(13, 110, 253)",
+      },
+      {
+        label: "Individual",
+        data: [countOfIndividualUsers],
+        backgroundColor: "orange",
+      },
+    ],
+  };
+
+  const options = {};
+
   useEffect(() => {
     rootTitle.textContent = "ADMIN - HOME";
     if (data) {
-      setCountOfUsers();
+      setTotalCountOfUsers();
     }
     // eslint-disable-next-line
   }, []);
@@ -107,6 +138,11 @@ const AdminHomePage = () => {
                       </div>
                     </div>
                   </NavLink>
+                </div>
+              </div>
+              <div className="row mt-5">
+                <div className="col-xl-5">
+                  <Bar data={chartData} options={options}></Bar>
                 </div>
               </div>
             </div>
