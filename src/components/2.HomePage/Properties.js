@@ -17,7 +17,7 @@ const Properties = ({ propertyData, loading }) => {
         ) : !propertyData ? (
           <div className="py-5 text-center">
             <h2 className="text-capitalize">Sorry! No result found :(</h2>
-            <span className="">Please try with another options</span>
+            <span className="text-muted">Please try with other options</span>
           </div>
         ) : (
           propertyData.map((property, Index) => {
