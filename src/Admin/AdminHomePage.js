@@ -151,12 +151,17 @@ const AdminHomePage = () => {
                   </NavLink>
                 </div>
               </div>
-              <div className="row mt-5">
-                <div className="col-xl-5 col-lg-7 col-md-8">
-                  <Bar data={chartData} options={options}></Bar>
+              <hr className="my-4" />
+              <div className="row justify-content-center justify-content-md-start">
+                <div className="col-xl-4 col-md-6 mt-5 mt-md-0">
+                  <div className="shadow p-xl-3 p-2 border border-1 chart-wrapper">
+                    <Pie data={chartData2}></Pie>
+                  </div>
                 </div>
-                <div className="offset-xl-1 col-xl-3 offset-lg-1 col-lg-4 col-md-4 mt-5 mt-md-0">
-                  <Pie data={chartData2}></Pie>
+                <div className="col-xl-8 col-md-6">
+                  <div className="shadow p-xl-3 p-2 border border-1 chart-wrapper">
+                    <Bar data={chartData} options={options}></Bar>
+                  </div>
                 </div>
               </div>
             </div>

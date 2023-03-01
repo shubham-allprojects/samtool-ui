@@ -730,6 +730,14 @@ input:-webkit-autofill:active {
   color: #333649;
 }
 
+/* Admin Home Page */
+.chart-wrapper {
+  height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Edit Property */
 .admin-property-edit-icon {
   right: 15px;
