@@ -51,7 +51,7 @@ const AdminHomePage = () => {
     }
   };
 
-  const chartData = {
+  const barChartData = {
     labels: ["Users"],
     datasets: [
       {
@@ -67,7 +67,7 @@ const AdminHomePage = () => {
     ],
   };
 
-  const chartData2 = {
+  const pieChartData = {
     labels: ["Individual", "Organizational"],
     datasets: [
       {
@@ -78,7 +78,7 @@ const AdminHomePage = () => {
     ],
   };
 
-  const options2 = {
+  const pieChartOptions = {
     responsive: true,
     plugins: {
       title: {
@@ -88,7 +88,7 @@ const AdminHomePage = () => {
     },
   };
 
-  const options = {
+  const barChartOptions = {
     responsive: true,
     plugins: {
       title: {
@@ -190,12 +190,12 @@ const AdminHomePage = () => {
               <div className="row justify-content-center justify-content-md-start">
                 <div className="col-xl-4 col-md-6 mt-5 mt-md-0">
                   <div className="shadow p-xl-2 border border-1 chart-wrapper">
-                    <Pie data={chartData2} options={options2}></Pie>
+                    <Pie data={pieChartData} options={pieChartOptions}></Pie>
                   </div>
                 </div>
                 <div className="col-xl-8 col-md-6 mt-5 mt-md-0 pe-xl-0">
                   <div className="shadow p-xl-2 border border-1 chart-wrapper">
-                    <Bar data={chartData} options={options}></Bar>
+                    <Bar data={barChartData} options={barChartOptions}></Bar>
                   </div>
                 </div>
               </div>
