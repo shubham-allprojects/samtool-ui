@@ -968,10 +968,6 @@ input:-webkit-autofill:active {
 }
 
 @media (min-width: 1280px) {
-  .col-xl-4 {
-    width: 32% !important;
-  }
-
   .set-pass-img {
     height: 441px;
   }

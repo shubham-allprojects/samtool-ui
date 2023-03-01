@@ -193,7 +193,7 @@ const AdminHomePage = () => {
                     <Pie data={pieChartData} options={pieChartOptions}></Pie>
                   </div>
                 </div>
-                <div className="col-xl-8 mt-xl-0 mt-4 pe-xl-0 ms-xl-1">
+                <div className="col-xl-8 mt-xl-0 mt-4">
                   <div className="card shadow chart-wrapper">
                     <Bar data={barChartData} options={barChartOptions}></Bar>
                   </div>
