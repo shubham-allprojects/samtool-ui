@@ -262,10 +262,34 @@ const Profile = () => {
                 </div>
               </div>
             )}
-
-            {/* <div className="col-xl-3">
-              <div className="card">Links</div>
-            </div> */}
+            <div className="col-xl-4">
+              <div className="card p-3 profile-top-cards bg-primary">
+                <div className="profile-icon-wrapper text-center">
+                  <i className="bi bi-globe2 fs-1 text-white"></i>
+                </div>
+                <h3 className="text-center text-white">Quick Access</h3>
+                <div className="card-body text-center">
+                  <div className="row justify-content-center">
+                    <div className="col-6">
+                      <NavLink
+                        to="/reset-password"
+                        className="card py-2 profile-inner-card text-decoration-none text-dark"
+                      >
+                        <h6 className="m-0">RESET PASSWORD</h6>
+                      </NavLink>
+                    </div>
+                    <div className="col-6">
+                      <NavLink
+                        to="/edit-details"
+                        className="card py-2 profile-inner-card text-decoration-none text-dark"
+                      >
+                        <h6 className="m-0">EDIT PROFILE</h6>
+                      </NavLink>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

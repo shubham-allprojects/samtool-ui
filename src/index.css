@@ -683,7 +683,7 @@ input:-webkit-autofill:active {
 }
 
 .profile-inner-card:hover {
-  color: white;
+  color: white !important;
   border-color: white;
   background-color: var(--primary-color-hover);
   /* transform: scale(1.06); */
