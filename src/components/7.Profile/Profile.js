@@ -181,42 +181,82 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-4">
-              <div className="card p-2">
-                <div className="profile-icon-wrapper text-center">
-                  <i className="bi bi-person-vcard fs-1"></i>
-                </div>
-                <h3 className="text-center">Personal Details</h3>
-                <div className="card-body text-center">
-                  <div className="row justify-content-center">
-                    <div className="col-6">
-                      <div className="card py-2">
-                        <h6>MOBILE</h6>
-                        <small>{mobile_number}</small>
+            {user_type === "Individual User" ? (
+              <div className="col-xl-4">
+                <div className="card p-2">
+                  <div className="profile-icon-wrapper text-center">
+                    <i className="bi bi-person-vcard fs-1"></i>
+                  </div>
+                  <h3 className="text-center">Personal Details</h3>
+                  <div className="card-body text-center">
+                    <div className="row justify-content-center">
+                      <div className="col-6">
+                        <div className="card py-2">
+                          <h6>MOBILE</h6>
+                          <small>{mobile_number}</small>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-6">
-                      <div className="card py-2">
-                        <h6>PAN</h6>
-                        <small>{pan_number}</small>
+                      <div className="col-6">
+                        <div className="card py-2">
+                          <h6>PAN</h6>
+                          <small>{pan_number}</small>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-6 mt-4">
-                      <div className="card py-2">
-                        <h6>AADHAAR</h6>
-                        <small>{aadhar_number}</small>
+                      <div className="col-6 mt-4">
+                        <div className="card py-2">
+                          <h6>AADHAAR</h6>
+                          <small>{aadhar_number}</small>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-6 mt-4">
-                      <div className="card py-2">
-                        <h6>EMAIL</h6>
-                        <small>{email}</small>
+                      <div className="col-6 mt-4">
+                        <div className="card py-2">
+                          <h6>EMAIL</h6>
+                          <small>{email}</small>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="col-xl-4">
+                <div className="card p-2">
+                  <div className="profile-icon-wrapper text-center">
+                    <i className="bi bi-person-vcard fs-1"></i>
+                  </div>
+                  <h3 className="text-center">Organization Details</h3>
+                  <div className="card-body text-center">
+                    <div className="row justify-content-center">
+                      <div className="col-6">
+                        <div className="card py-2">
+                          <h6>CIN</h6>
+                          <small>{cin_number}</small>
+                        </div>
+                      </div>
+                      <div className="col-6">
+                        <div className="card py-2">
+                          <h6>TAN</h6>
+                          <small>{tan_number}</small>
+                        </div>
+                      </div>
+                      <div className="col-6 mt-4">
+                        <div className="card py-2">
+                          <h6>GST</h6>
+                          <small>{gst_number}</small>
+                        </div>
+                      </div>
+                      <div className="col-6 mt-4">
+                        <div className="card py-2">
+                          <h6>EMAIL</h6>
+                          <small>{email}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* <div className="col-xl-3">
               <div className="card">Links</div>
             </div> */}
