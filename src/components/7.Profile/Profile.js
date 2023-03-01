@@ -147,6 +147,11 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+            <div className="col-xl-9">
+              <div className="card p-3" style={{ minHeight: "100%" }}>
+                <h2>Important Highlights / Details</h2>
+              </div>
+            </div>
           </div>
           <div className="row mt-5">
             <div className="col-xl-4">
