@@ -158,7 +158,7 @@ const AdminHomePage = () => {
                     <Pie data={chartData2}></Pie>
                   </div>
                 </div>
-                <div className="col-xl-8 col-md-6">
+                <div className="col-xl-8 col-md-6 mt-5 mt-md-0">
                   <div className="shadow p-xl-3 p-2 border border-1 chart-wrapper">
                     <Bar data={chartData} options={options}></Bar>
                   </div>
