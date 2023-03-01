@@ -123,7 +123,7 @@ const Profile = () => {
         <div className="container-fluid wrapper">
           <div className="row">
             <div className="col-xl-3">
-              <div className="card profile-top-cards">
+              <div className="card">
                 <div className="text-center">
                   <img
                     src="profile.png"
@@ -150,33 +150,33 @@ const Profile = () => {
           </div>
           <div className="row mt-5">
             <div className="col-xl-4">
-              <div className="card p-3 profile-top-cards">
+              <div className="card p-3 profile-top-cards bg-primary">
                 <div className="profile-icon-wrapper text-center">
-                  <i className="bi bi-geo-alt-fill fs-1"></i>
+                  <i className="bi bi-geo-alt-fill fs-1 text-white"></i>
                 </div>
-                <h3 className="text-center">Address Details</h3>
+                <h3 className="text-center text-white">Address Details</h3>
                 <div className="card-body text-center">
                   <div className="row justify-content-center">
                     <div className="col-6">
-                      <div className="card py-2">
+                      <div className="card py-2 profile-inner-card">
                         <h6>LOCALITY</h6>
                         <small>{locality}</small>
                       </div>
                     </div>
                     <div className="col-6">
-                      <div className="card py-2">
+                      <div className="card py-2 profile-inner-card">
                         <h6>STATE</h6>
                         <small>{state_name}</small>
                       </div>
                     </div>
                     <div className="col-6 mt-4">
-                      <div className="card py-2">
+                      <div className="card py-2 profile-inner-card">
                         <h6>CITY</h6>
                         <small>{city}</small>
                       </div>
                     </div>
                     <div className="col-6 mt-4">
-                      <div className="card py-2">
+                      <div className="card py-2 profile-inner-card">
                         <h6>ZIP</h6>
                         <small>{zip}</small>
                       </div>
@@ -187,33 +187,33 @@ const Profile = () => {
             </div>
             {user_type === "Individual User" ? (
               <div className="col-xl-4">
-                <div className="card p-3 profile-top-cards">
+                <div className="card p-3 profile-top-cards bg-primary">
                   <div className="profile-icon-wrapper text-center">
-                    <i className="bi bi-person-vcard fs-1"></i>
+                    <i className="bi bi-person-vcard fs-1 text-white"></i>
                   </div>
-                  <h3 className="text-center">Personal Details</h3>
+                  <h3 className="text-center text-white">Personal Details</h3>
                   <div className="card-body text-center">
                     <div className="row justify-content-center">
                       <div className="col-6">
-                        <div className="card py-2">
+                        <div className="card py-2 profile-inner-card">
                           <h6>MOBILE</h6>
                           <small>{mobile_number}</small>
                         </div>
                       </div>
                       <div className="col-6">
-                        <div className="card py-2">
+                        <div className="card py-2 profile-inner-card">
                           <h6>PAN</h6>
                           <small>{pan_number}</small>
                         </div>
                       </div>
                       <div className="col-6 mt-4">
-                        <div className="card py-2">
+                        <div className="card py-2 profile-inner-card">
                           <h6>AADHAAR</h6>
                           <small>{aadhar_number}</small>
                         </div>
                       </div>
                       <div className="col-6 mt-4">
-                        <div className="card py-2">
+                        <div className="card py-2 profile-inner-card">
                           <h6>EMAIL</h6>
                           <small>{email}</small>
                         </div>
@@ -224,33 +224,35 @@ const Profile = () => {
               </div>
             ) : (
               <div className="col-xl-4">
-                <div className="card p-3 profile-top-cards">
+                <div className="card p-3 profile-top-cards bg-primary">
                   <div className="profile-icon-wrapper text-center">
-                    <i className="bi bi-person-vcard fs-1"></i>
+                    <i className="bi bi-person-vcard fs-1 text-white"></i>
                   </div>
-                  <h3 className="text-center">Organization Details</h3>
+                  <h3 className="text-center text-white">
+                    Organization Details
+                  </h3>
                   <div className="card-body text-center">
                     <div className="row justify-content-center">
                       <div className="col-6">
-                        <div className="card py-2">
+                        <div className="card py-2 profile-inner-card">
                           <h6>CIN</h6>
                           <small>{cin_number}</small>
                         </div>
                       </div>
                       <div className="col-6">
-                        <div className="card py-2">
+                        <div className="card py-2 profile-inner-card">
                           <h6>TAN</h6>
                           <small>{tan_number}</small>
                         </div>
                       </div>
                       <div className="col-6 mt-4">
-                        <div className="card py-2">
+                        <div className="card py-2 profile-inner-card">
                           <h6>GST</h6>
                           <small>{gst_number}</small>
                         </div>
                       </div>
                       <div className="col-6 mt-4">
-                        <div className="card py-2">
+                        <div className="card py-2 profile-inner-card">
                           <h6>EMAIL</h6>
                           <small>{email}</small>
                         </div>

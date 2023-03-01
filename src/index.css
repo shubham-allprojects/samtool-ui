@@ -30,11 +30,15 @@ code {
 }
 
 .custom-text-primary {
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
 }
 
 .custom-text-secondary {
-  color: var(--secondary-color);
+  color: var(--secondary-color) !important;
+}
+
+.custom-bg-secondary {
+  background-color: var(--secondary-color) !important;
 }
 
 /* Common css */
@@ -672,6 +676,19 @@ input:-webkit-autofill:active {
 }
 
 /* Profile */
+
+.profile-inner-card {
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.profile-inner-card:hover {
+  color: white;
+  border-color: white;
+  background-color: var(--primary-color-hover);
+  /* transform: scale(1.06); */
+  transition: 0.3s ease-in-out;
+}
 
 /* Page Not Found */
 
