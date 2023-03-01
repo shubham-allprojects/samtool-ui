@@ -74,8 +74,6 @@ const AdminHomePage = () => {
         label: "Count",
         data: [countOfIndividualUsers, countOfOrgUsers],
         backgroundColor: ["orange", "rgb(13, 110, 253)"],
-        // borderWidth: 1,
-        // borderColor: "black",
       },
     ],
   };
