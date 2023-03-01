@@ -122,7 +122,7 @@ const Profile = () => {
       <section className="profile-wrapper section-padding min-100vh">
         <div className="container-fluid wrapper">
           <div className="row justify-content-center">
-            <div className="col-xl-3">
+            <div className="col-xl-4">
               <div className="card">
                 <img
                   src="profile.png"
@@ -145,7 +145,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-3">
+            <div className="col-xl-4">
               <div className="card p-2">
                 <div className="profile-icon-wrapper text-center">
                   <i className="bi bi-geo-alt-fill fs-1"></i>
@@ -155,41 +155,71 @@ const Profile = () => {
                   <div className="row justify-content-center">
                     <div className="col-6">
                       <div className="card py-2">
-                        <h5>Locality</h5>
-                        <span>{locality}</span>
+                        <h6>LOCALITY</h6>
+                        <small>{locality}</small>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="card py-2">
-                        <h5>State</h5>
-                        <span>{state_name}</span>
+                        <h6>STATE</h6>
+                        <small>{state_name}</small>
                       </div>
                     </div>
                     <div className="col-6 mt-4">
                       <div className="card py-2">
-                        <h5>City</h5>
-                        <span>{city}</span>
+                        <h6>CITY</h6>
+                        <small>{city}</small>
                       </div>
                     </div>
                     <div className="col-6 mt-4">
                       <div className="card py-2">
-                        <h5>Zip</h5>
-                        <span>{zip}</span>
+                        <h6>ZIP</h6>
+                        <small>{zip}</small>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-xl-3">
-              <div className="profile-icon-wrapper text-center">
-                <i className="bi bi-person-vcard fs-1"></i>
+            <div className="col-xl-4">
+              <div className="card p-2">
+                <div className="profile-icon-wrapper text-center">
+                  <i className="bi bi-person-vcard fs-1"></i>
+                </div>
+                <h3 className="text-center">Personal Details</h3>
+                <div className="card-body text-center">
+                  <div className="row justify-content-center">
+                    <div className="col-6">
+                      <div className="card py-2">
+                        <h6>MOBILE</h6>
+                        <small>{mobile_number}</small>
+                      </div>
+                    </div>
+                    <div className="col-6">
+                      <div className="card py-2">
+                        <h6>PAN</h6>
+                        <small>{pan_number}</small>
+                      </div>
+                    </div>
+                    <div className="col-6 mt-4">
+                      <div className="card py-2">
+                        <h6>AADHAAR</h6>
+                        <small>{aadhar_number}</small>
+                      </div>
+                    </div>
+                    <div className="col-6 mt-4">
+                      <div className="card py-2">
+                        <h6>EMAIL</h6>
+                        <small>{email}</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="card">Personal details</div>
             </div>
-            <div className="col-xl-3">
+            {/* <div className="col-xl-3">
               <div className="card">Links</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
