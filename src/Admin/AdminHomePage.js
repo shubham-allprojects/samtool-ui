@@ -55,14 +55,14 @@ const AdminHomePage = () => {
     labels: ["Users"],
     datasets: [
       {
-        label: "Individual",
-        data: [countOfIndividualUsers],
-        backgroundColor: "orange",
+        label: "Active",
+        data: [24],
+        backgroundColor: "rgb(13, 110, 253)",
       },
       {
-        label: "Organizational",
-        data: [countOfOrgUsers],
-        backgroundColor: "rgb(13, 110, 253)",
+        label: "Inactive",
+        data: [8],
+        backgroundColor: "gray",
       },
     ],
   };
@@ -80,12 +80,22 @@ const AdminHomePage = () => {
     ],
   };
 
-  const options = {
+  const options2 = {
     responsive: true,
     plugins: {
       title: {
         display: true,
         text: "Users",
+      },
+    },
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: "Users Status",
       },
     },
   };
@@ -160,15 +170,32 @@ const AdminHomePage = () => {
                     </div>
                   </NavLink>
                 </div>
+                <div className="col-xl-3 col-md-6 mt-4 mt-xl-0">
+                  <div className="card admin-top-card text-decoration-none">
+                    <div className="row justify-content-center">
+                      <div className="col-xl-3 col-md-3 col-3">
+                        <i className="bi bi-person-fill text-white hover-color-secondary icon fs-1"></i>
+                      </div>
+                      <div className="col-xl-6 col-md-7 col-5 text-end">
+                        <span className="fw-bold text-white hover-color-secondary fs-5">
+                          <span id="usersCount" className="fs-3">
+                            count
+                          </span>
+                          <br /> Title
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <hr className="my-4" />
               <div className="row justify-content-center justify-content-md-start">
                 <div className="col-xl-4 col-md-6 mt-5 mt-md-0">
                   <div className="shadow p-xl-2 border border-1 chart-wrapper">
-                    <Pie data={chartData2} options={options}></Pie>
+                    <Pie data={chartData2} options={options2}></Pie>
                   </div>
                 </div>
-                <div className="col-xl-8 col-md-6 mt-5 mt-md-0">
+                <div className="col-xl-8 col-md-6 mt-5 mt-md-0 pe-xl-0">
                   <div className="shadow p-xl-2 border border-1 chart-wrapper">
                     <Bar data={chartData} options={options}></Bar>
                   </div>
