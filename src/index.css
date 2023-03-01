@@ -734,7 +734,6 @@ input:-webkit-autofill:active {
 .chart-wrapper {
   height: 380px !important;
   padding: 20px;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
