@@ -187,14 +187,14 @@ const AdminHomePage = () => {
                 </div>
               </div>
               <hr className="my-4" />
-              <div className="row justify-content-center justify-content-md-start">
-                <div className="col-xl-4 col-md-6 mt-5 mt-md-0">
-                  <div className="shadow p-xl-2 border border-1 chart-wrapper">
+              <div className="row">
+                <div className="col-xl-4">
+                  <div className="shadow p-md-2 border border-1 chart-wrapper">
                     <Pie data={pieChartData} options={pieChartOptions}></Pie>
                   </div>
                 </div>
-                <div className="col-xl-8 col-md-6 mt-5 mt-md-0 pe-xl-0">
-                  <div className="shadow p-xl-2 border border-1 chart-wrapper">
+                <div className="col-xl-8 mt-xl-0 mt-4 pe-xl-0">
+                  <div className="shadow p-md-2 border border-1 chart-wrapper">
                     <Bar data={barChartData} options={barChartOptions}></Bar>
                   </div>
                 </div>
