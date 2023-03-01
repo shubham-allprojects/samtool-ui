@@ -189,12 +189,12 @@ const AdminHomePage = () => {
               <hr className="my-4" />
               <div className="row">
                 <div className="col-xl-4">
-                  <div className="card shadow chart-wrapper">
+                  <div className="card chart-wrapper">
                     <Pie data={pieChartData} options={pieChartOptions}></Pie>
                   </div>
                 </div>
                 <div className="col-xl-8 mt-xl-0 mt-4">
-                  <div className="card shadow chart-wrapper">
+                  <div className="card chart-wrapper">
                     <Bar data={barChartData} options={barChartOptions}></Bar>
                   </div>
                 </div>
