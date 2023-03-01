@@ -121,14 +121,16 @@ const Profile = () => {
     <Layout>
       <section className="profile-wrapper section-padding min-100vh">
         <div className="container-fluid wrapper">
-          <div className="row justify-content-center">
-            <div className="col-xl-4">
-              <div className="card">
-                <img
-                  src="profile.png"
-                  alt="Profile Pic"
-                  className="card-img-top"
-                />
+          <div className="row">
+            <div className="col-xl-3">
+              <div className="card profile-top-cards">
+                <div className="text-center">
+                  <img
+                    src="profile.png"
+                    alt="Profile Pic"
+                    className="img-fluid"
+                  />
+                </div>
                 <div className="card-body text-center">
                   <h3 className="card-title">
                     {user_type === "Individual User"
@@ -145,8 +147,10 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="row mt-5">
             <div className="col-xl-4">
-              <div className="card p-2">
+              <div className="card p-3 profile-top-cards">
                 <div className="profile-icon-wrapper text-center">
                   <i className="bi bi-geo-alt-fill fs-1"></i>
                 </div>
@@ -183,7 +187,7 @@ const Profile = () => {
             </div>
             {user_type === "Individual User" ? (
               <div className="col-xl-4">
-                <div className="card p-2">
+                <div className="card p-3 profile-top-cards">
                   <div className="profile-icon-wrapper text-center">
                     <i className="bi bi-person-vcard fs-1"></i>
                   </div>
@@ -220,7 +224,7 @@ const Profile = () => {
               </div>
             ) : (
               <div className="col-xl-4">
-                <div className="card p-2">
+                <div className="card p-3 profile-top-cards">
                   <div className="profile-icon-wrapper text-center">
                     <i className="bi bi-person-vcard fs-1"></i>
                   </div>
