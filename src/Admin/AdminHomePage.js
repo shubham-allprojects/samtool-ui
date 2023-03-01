@@ -71,14 +71,24 @@ const AdminHomePage = () => {
     labels: ["Individual", "Organizational"],
     datasets: [
       {
-        label: "Users",
+        label: "Count",
         data: [countOfIndividualUsers, countOfOrgUsers],
         backgroundColor: ["orange", "rgb(13, 110, 253)"],
+        // borderWidth: 1,
+        // borderColor: "black",
       },
     ],
   };
 
-  const options = {};
+  const options = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: "Users",
+      },
+    },
+  };
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - HOME";
@@ -154,12 +164,12 @@ const AdminHomePage = () => {
               <hr className="my-4" />
               <div className="row justify-content-center justify-content-md-start">
                 <div className="col-xl-4 col-md-6 mt-5 mt-md-0">
-                  <div className="shadow p-xl-3 p-2 border border-1 chart-wrapper">
-                    <Pie data={chartData2}></Pie>
+                  <div className="shadow p-xl-2 border border-1 chart-wrapper">
+                    <Pie data={chartData2} options={options}></Pie>
                   </div>
                 </div>
                 <div className="col-xl-8 col-md-6 mt-5 mt-md-0">
-                  <div className="shadow p-xl-3 p-2 border border-1 chart-wrapper">
+                  <div className="shadow p-xl-2 border border-1 chart-wrapper">
                     <Bar data={chartData} options={options}></Bar>
                   </div>
                 </div>
