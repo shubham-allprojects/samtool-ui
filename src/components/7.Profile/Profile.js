@@ -3,7 +3,7 @@ import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
 import { rootTitle } from "../../CommonFunctions";
 import { NavLink } from "react-router-dom";
-import profilePic from "../../images/profile-pic.svg";
+// import profilePic from "../../images/profile-pic.svg";
 
 const Profile = () => {
   const data = JSON.parse(localStorage.getItem("data"));
