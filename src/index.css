@@ -685,11 +685,11 @@ input:-webkit-autofill:active {
 }
 
 .profile-icon-wrapper {
-  border: 2px solid var(--primary-color-hover);
-  height: 80px;
-  width: 80px;
+  border: 2px solid white;
+  height: 85px;
+  width: 85px;
   border-radius: 50%;
-  padding: 8px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1148,5 +1148,9 @@ input:-webkit-autofill:active {
   }
   .profile-wrapper h6 {
     font-size: 0.8rem;
+  }
+  .profile-icon-wrapper {
+    height: 65px;
+    width: 65px;
   }
 }
