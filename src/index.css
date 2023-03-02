@@ -1146,4 +1146,7 @@ input:-webkit-autofill:active {
   .btn-home {
     font-size: 14px !important;
   }
+  .profile-wrapper h6 {
+    font-size: 0.8rem;
+  }
 }
