@@ -137,19 +137,36 @@ const Profile = () => {
                       ? `${first_name} ${last_name}`
                       : `${company_name} - (${organization_type})`}
                   </h3>
-                  <span className="text-muted">{`${user_type} ( ${
-                    userRole === 1
-                      ? "Admin"
-                      : userRole === 2
-                      ? "Editor"
-                      : "Viewer"
-                  } )`}</span>
                 </div>
               </div>
             </div>
             <div className="col-xl-9">
-              <div className="card p-3" style={{ minHeight: "100%" }}>
-                <h2>Important Highlights / Details</h2>
+              <div
+                className="card p-3 bg-primary"
+                style={{ minHeight: "100%" }}
+              >
+                <div className="card-body text-center">
+                  <div className="row">
+                    <div className="col-xl-3">
+                      <div className="card py-2 profile-inner-card">
+                        <h6>USER TYPE</h6>
+                        <small>{user_type}</small>
+                      </div>
+                    </div>
+                    <div className="col-xl-3">
+                      <div className="card py-2 profile-inner-card">
+                        <h6>USER ROLE</h6>
+                        <small>
+                          {userRole === 1
+                            ? "Admin"
+                            : userRole === 2
+                            ? "Editor"
+                            : "Viewer"}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
