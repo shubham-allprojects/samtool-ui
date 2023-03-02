@@ -29,6 +29,10 @@ code {
   --primary-color-hover: #0a58ca;
 }
 
+.min-height-100-percent {
+  min-height: 100% !important;
+}
+
 .custom-text-primary {
   color: var(--primary-color) !important;
 }

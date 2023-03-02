@@ -122,7 +122,7 @@ const Profile = () => {
     <Layout>
       <section className="profile-wrapper section-padding min-100vh">
         <div className="container-fluid wrapper">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-xl-4">
               <div className="card">
                 <div className="card-body d-flex justify-content-center flex-column align-items-center">
@@ -143,20 +143,40 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-8">
-              <div
-                className="card p-2 bg-primary"
-                style={{ minHeight: "100%" }}
-              >
+          </div> */}
+          <div className="row">
+            <div className="col-xl-4 col-lg-6">
+              <div className="card p-2 profile-top-cards bg-primary">
+                <div className="profile-icon-wrapper text-center">
+                  <i className="bi bi-person-square fs-1 text-white"></i>
+                </div>
+                <h3 className="text-center text-white">User Details</h3>
                 <div className="card-body text-center">
                   <div className="row">
-                    <div className="col-xl-3">
+                    <div className="col-6">
+                      <div className="card py-2 profile-inner-card">
+                        {user_type === "Individual User" ? (
+                          <>
+                            <h6>USER NAME</h6>
+                            <small>
+                              {first_name} {last_name}
+                            </small>
+                          </>
+                        ) : (
+                          <>
+                            <h6>COMPANY NAME</h6>
+                            <small>{company_name}</small>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                    <div className="col-6">
                       <div className="card py-2 profile-inner-card">
                         <h6>USER TYPE</h6>
                         <small>{user_type}</small>
                       </div>
                     </div>
-                    <div className="col-xl-3">
+                    <div className="col-6 mt-4">
                       <div className="card py-2 profile-inner-card">
                         <h6>USER ROLE</h6>
                         <small>
@@ -168,12 +188,22 @@ const Profile = () => {
                         </small>
                       </div>
                     </div>
+                    {user_type === "Organizational User" ? (
+                      <>
+                        <div className="col-6 mt-4">
+                          <div className="card py-2 profile-inner-card">
+                            <h6>TYPE</h6>
+                            <small>{organization_type}</small>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="row mt-4">
             <div className="col-xl-4 col-lg-6">
               <div className="card p-2 profile-top-cards bg-primary">
                 <div className="profile-icon-wrapper text-center">
@@ -287,7 +317,7 @@ const Profile = () => {
                 </div>
               </div>
             )}
-            <div className="col-xl-4 col-lg-6 mt-4 mt-xl-0">
+            <div className="col-xl-4 col-lg-6 mt-4">
               <div className="card p-2 profile-top-cards bg-primary">
                 <div className="profile-icon-wrapper text-center">
                   <i className="bi bi-globe2 fs-1 text-white"></i>
