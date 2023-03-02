@@ -124,7 +124,7 @@ const Profile = () => {
         <div className="container-fluid wrapper">
           <div className="row">
             <div className="col-xl-4">
-              <div className="card border border-primary">
+              <div className="card">
                 <div className="card-body d-flex justify-content-center flex-column align-items-center">
                   <div className="w-50">
                     <img
