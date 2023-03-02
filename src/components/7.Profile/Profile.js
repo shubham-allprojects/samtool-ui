@@ -204,7 +204,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-lg-6">
+            <div className="col-xl-4 col-lg-6 mt-4 mt-lg-0">
               <div className="card p-2 profile-top-cards bg-primary">
                 <div className="profile-icon-wrapper text-center">
                   <i className="bi bi-geo-alt-fill fs-1 text-white"></i>
@@ -241,7 +241,7 @@ const Profile = () => {
               </div>
             </div>
             {user_type === "Individual User" ? (
-              <div className="col-xl-4 col-lg-6 mt-lg-0 mt-4">
+              <div className="col-xl-4 col-lg-6 mt-xl-0 mt-4">
                 <div className="card p-2 profile-top-cards bg-primary">
                   <div className="profile-icon-wrapper text-center">
                     <i className="bi bi-person-vcard fs-1 text-white"></i>
@@ -278,7 +278,7 @@ const Profile = () => {
                 </div>
               </div>
             ) : (
-              <div className="col-xl-4 col-lg-6 mt-lg-0 mt-4">
+              <div className="col-xl-4 col-lg-6 mt-xl-0 mt-4">
                 <div className="card p-2 profile-top-cards bg-primary">
                   <div className="profile-icon-wrapper text-center">
                     <i className="bi bi-person-vcard fs-1 text-white"></i>
