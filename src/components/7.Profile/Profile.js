@@ -147,8 +147,10 @@ const Profile = () => {
           <div className="row">
             <div className="col-xl-4 col-lg-6">
               <div className="card p-2 profile-top-cards bg-primary">
-                <div className="profile-icon-wrapper text-center">
-                  <i className="bi bi-person-square fs-1 text-white"></i>
+                <div className="d-flex justify-content-center">
+                  <div className="profile-icon-wrapper text-center">
+                    <i className="bi bi-person-square fs-1 text-white"></i>
+                  </div>
                 </div>
                 <h3 className="text-center text-white">User Details</h3>
                 <div className="card-body text-center">
@@ -206,8 +208,10 @@ const Profile = () => {
             </div>
             <div className="col-xl-4 col-lg-6 mt-4 mt-lg-0">
               <div className="card p-2 profile-top-cards bg-primary">
-                <div className="profile-icon-wrapper text-center">
-                  <i className="bi bi-geo-alt-fill fs-1 text-white"></i>
+                <div className="d-flex justify-content-center">
+                  <div className="profile-icon-wrapper text-center">
+                    <i className="bi bi-geo-alt-fill fs-1 text-white"></i>
+                  </div>
                 </div>
                 <h3 className="text-center text-white">Address Details</h3>
                 <div className="card-body text-center">
@@ -243,8 +247,10 @@ const Profile = () => {
             {user_type === "Individual User" ? (
               <div className="col-xl-4 col-lg-6 mt-xl-0 mt-4">
                 <div className="card p-2 profile-top-cards bg-primary">
-                  <div className="profile-icon-wrapper text-center">
-                    <i className="bi bi-person-vcard fs-1 text-white"></i>
+                  <div className="d-flex justify-content-center">
+                    <div className="profile-icon-wrapper text-center">
+                      <i className="bi bi-person-vcard fs-1 text-white"></i>
+                    </div>
                   </div>
                   <h3 className="text-center text-white">Personal Details</h3>
                   <div className="card-body text-center">
@@ -280,8 +286,10 @@ const Profile = () => {
             ) : (
               <div className="col-xl-4 col-lg-6 mt-xl-0 mt-4">
                 <div className="card p-2 profile-top-cards bg-primary">
-                  <div className="profile-icon-wrapper text-center">
-                    <i className="bi bi-person-vcard fs-1 text-white"></i>
+                  <div className="d-flex justify-content-center">
+                    <div className="profile-icon-wrapper text-center">
+                      <i className="bi bi-person-vcard fs-1 text-white"></i>
+                    </div>
                   </div>
                   <h3 className="text-center text-white">
                     Organization Details
@@ -319,8 +327,10 @@ const Profile = () => {
             )}
             <div className="col-xl-4 col-lg-6 mt-4">
               <div className="card p-2 profile-top-cards bg-primary">
-                <div className="profile-icon-wrapper text-center">
-                  <i className="bi bi-globe2 fs-1 text-white"></i>
+                <div className="d-flex justify-content-center">
+                  <div className="profile-icon-wrapper text-center">
+                    <i className="bi bi-globe2 fs-1 text-white"></i>
+                  </div>
                 </div>
                 <h3 className="text-center text-white">Quick Access</h3>
                 <div className="card-body text-center">
