@@ -690,13 +690,11 @@ input:-webkit-autofill:active {
   width: 80px;
   border-radius: 50%;
   padding: 8px;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--primary-color-hover);
   transition: 0.2s ease-in-out;
-  margin-bottom: 0.5rem;
 }
 
 .profile-icon-wrapper i {

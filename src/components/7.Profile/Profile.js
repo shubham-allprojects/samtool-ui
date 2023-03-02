@@ -147,13 +147,13 @@ const Profile = () => {
           <div className="row">
             <div className="col-xl-4 col-lg-6">
               <div className="card p-2 profile-top-cards bg-primary">
-                <div className="d-flex justify-content-center">
-                  <div className="profile-icon-wrapper text-center">
-                    <i className="bi bi-person-square fs-1 text-white"></i>
-                  </div>
-                </div>
-                <h3 className="text-center text-white">User Details</h3>
                 <div className="card-body text-center">
+                  <div className="d-flex justify-content-center">
+                    <div className="profile-icon-wrapper text-center">
+                      <i className="bi bi-person-square fs-1 text-white"></i>
+                    </div>
+                  </div>
+                  <h3 className="text-center text-white py-2">User Details</h3>
                   <div className="row">
                     <div className="col-6">
                       <div className="card py-2 profile-inner-card">
@@ -208,13 +208,15 @@ const Profile = () => {
             </div>
             <div className="col-xl-4 col-lg-6 mt-4 mt-lg-0">
               <div className="card p-2 profile-top-cards bg-primary">
-                <div className="d-flex justify-content-center">
-                  <div className="profile-icon-wrapper text-center">
-                    <i className="bi bi-geo-alt-fill fs-1 text-white"></i>
-                  </div>
-                </div>
-                <h3 className="text-center text-white">Address Details</h3>
                 <div className="card-body text-center">
+                  <div className="d-flex justify-content-center">
+                    <div className="profile-icon-wrapper text-center">
+                      <i className="bi bi-geo-alt-fill fs-1 text-white"></i>
+                    </div>
+                  </div>
+                  <h3 className="text-center text-white py-2">
+                    Address Details
+                  </h3>
                   <div className="row justify-content-center">
                     <div className="col-6">
                       <div className="card py-2 profile-inner-card">
@@ -247,13 +249,15 @@ const Profile = () => {
             {user_type === "Individual User" ? (
               <div className="col-xl-4 col-lg-6 mt-xl-0 mt-4">
                 <div className="card p-2 profile-top-cards bg-primary">
-                  <div className="d-flex justify-content-center">
-                    <div className="profile-icon-wrapper text-center">
-                      <i className="bi bi-person-vcard fs-1 text-white"></i>
-                    </div>
-                  </div>
-                  <h3 className="text-center text-white">Personal Details</h3>
                   <div className="card-body text-center">
+                    <div className="d-flex justify-content-center">
+                      <div className="profile-icon-wrapper text-center">
+                        <i className="bi bi-person-vcard fs-1 text-white"></i>
+                      </div>
+                    </div>
+                    <h3 className="text-center text-white py-2">
+                      Personal Details
+                    </h3>
                     <div className="row justify-content-center">
                       <div className="col-6">
                         <div className="card py-2 profile-inner-card">
@@ -286,15 +290,15 @@ const Profile = () => {
             ) : (
               <div className="col-xl-4 col-lg-6 mt-xl-0 mt-4">
                 <div className="card p-2 profile-top-cards bg-primary">
-                  <div className="d-flex justify-content-center">
-                    <div className="profile-icon-wrapper text-center">
-                      <i className="bi bi-person-vcard fs-1 text-white"></i>
-                    </div>
-                  </div>
-                  <h3 className="text-center text-white">
-                    Organization Details
-                  </h3>
                   <div className="card-body text-center">
+                    <div className="d-flex justify-content-center">
+                      <div className="profile-icon-wrapper text-center">
+                        <i className="bi bi-person-vcard fs-1 text-white"></i>
+                      </div>
+                    </div>
+                    <h3 className="text-center text-white py-2">
+                      Organization Details
+                    </h3>
                     <div className="row justify-content-center">
                       <div className="col-6">
                         <div className="card py-2 profile-inner-card">
@@ -327,13 +331,13 @@ const Profile = () => {
             )}
             <div className="col-xl-4 col-lg-6 mt-4">
               <div className="card p-2 profile-top-cards bg-primary">
-                <div className="d-flex justify-content-center">
-                  <div className="profile-icon-wrapper text-center">
-                    <i className="bi bi-globe2 fs-1 text-white"></i>
-                  </div>
-                </div>
-                <h3 className="text-center text-white">Quick Access</h3>
                 <div className="card-body text-center">
+                  <div className="d-flex justify-content-center">
+                    <div className="profile-icon-wrapper text-center">
+                      <i className="bi bi-globe2 fs-1 text-white"></i>
+                    </div>
+                  </div>
+                  <h3 className="text-center text-white py-2">Quick Access</h3>
                   <div className="row justify-content-center">
                     <div className="col-md-6">
                       <NavLink
