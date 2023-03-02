@@ -122,7 +122,7 @@ const Profile = () => {
       <section className="profile-wrapper section-padding min-100vh">
         <div className="container-fluid wrapper">
           <div className="row">
-            <div className="col-xl-3">
+            <div className="col-xl-4">
               <div className="card">
                 <div className="text-center">
                   <img
@@ -140,7 +140,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-9">
+            <div className="col-xl-8">
               <div
                 className="card p-2 bg-primary"
                 style={{ minHeight: "100%" }}
