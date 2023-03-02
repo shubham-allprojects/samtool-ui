@@ -142,7 +142,7 @@ const Profile = () => {
             </div>
             <div className="col-xl-9">
               <div
-                className="card p-3 bg-primary"
+                className="card p-2 bg-primary"
                 style={{ minHeight: "100%" }}
               >
                 <div className="card-body text-center">
@@ -170,9 +170,9 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div className="row mt-5">
-            <div className="col-xl-4">
-              <div className="card p-3 profile-top-cards bg-primary">
+          <div className="row mt-4">
+            <div className="col-xl-4 col-lg-6">
+              <div className="card p-2 profile-top-cards bg-primary">
                 <div className="profile-icon-wrapper text-center">
                   <i className="bi bi-geo-alt-fill fs-1 text-white"></i>
                 </div>
@@ -208,8 +208,8 @@ const Profile = () => {
               </div>
             </div>
             {user_type === "Individual User" ? (
-              <div className="col-xl-4">
-                <div className="card p-3 profile-top-cards bg-primary">
+              <div className="col-xl-4 col-lg-6 mt-lg-0 mt-4">
+                <div className="card p-2 profile-top-cards bg-primary">
                   <div className="profile-icon-wrapper text-center">
                     <i className="bi bi-person-vcard fs-1 text-white"></i>
                   </div>
@@ -245,8 +245,8 @@ const Profile = () => {
                 </div>
               </div>
             ) : (
-              <div className="col-xl-4">
-                <div className="card p-3 profile-top-cards bg-primary">
+              <div className="col-xl-4 col-lg-6 mt-lg-0 mt-4">
+                <div className="card p-2 profile-top-cards bg-primary">
                   <div className="profile-icon-wrapper text-center">
                     <i className="bi bi-person-vcard fs-1 text-white"></i>
                   </div>
@@ -284,15 +284,15 @@ const Profile = () => {
                 </div>
               </div>
             )}
-            <div className="col-xl-4">
-              <div className="card p-3 profile-top-cards bg-primary">
+            <div className="col-xl-4 col-lg-6 mt-4 mt-xl-0">
+              <div className="card p-2 profile-top-cards bg-primary">
                 <div className="profile-icon-wrapper text-center">
                   <i className="bi bi-globe2 fs-1 text-white"></i>
                 </div>
                 <h3 className="text-center text-white">Quick Access</h3>
                 <div className="card-body text-center">
                   <div className="row justify-content-center">
-                    <div className="col-6">
+                    <div className="col-md-6">
                       <NavLink
                         to="/reset-password"
                         className="card py-2 profile-inner-card text-decoration-none text-dark"
@@ -300,7 +300,7 @@ const Profile = () => {
                         <h6 className="m-0">RESET PASSWORD</h6>
                       </NavLink>
                     </div>
-                    <div className="col-6">
+                    <div className="col-md-6 mt-2 mt-md-0">
                       <NavLink
                         to="/edit-details"
                         className="card py-2 profile-inner-card text-decoration-none text-dark"
