@@ -3,6 +3,7 @@ import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
 import { rootTitle } from "../../CommonFunctions";
 import { NavLink } from "react-router-dom";
+import profilePic from "../../images/profile-pic.svg";
 
 const Profile = () => {
   const data = JSON.parse(localStorage.getItem("data"));
@@ -123,20 +124,22 @@ const Profile = () => {
         <div className="container-fluid wrapper">
           <div className="row">
             <div className="col-xl-4">
-              <div className="card">
-                <div className="text-center">
-                  <img
-                    src="profile.png"
-                    alt="Profile Pic"
-                    className="img-fluid"
-                  />
-                </div>
-                <div className="card-body text-center">
-                  <h3 className="card-title">
-                    {user_type === "Individual User"
-                      ? `${first_name} ${last_name}`
-                      : `${company_name} - (${organization_type})`}
-                  </h3>
+              <div className="card border border-primary">
+                <div className="card-body d-flex justify-content-center flex-column align-items-center">
+                  <div className="w-50">
+                    <img
+                      src={profilePic}
+                      alt="Profile Pic"
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="m-0 mt-3">
+                      {user_type === "Individual User"
+                        ? `${first_name} ${last_name}`
+                        : `${company_name} - (${organization_type})`}
+                    </h3>
+                  </div>
                 </div>
               </div>
             </div>
