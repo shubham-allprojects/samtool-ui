@@ -25,7 +25,11 @@ const AddProperty = () => {
     } else if (name === "max_value") {
       setFormData({ ...formData, [name]: parseInt(value) });
     } else if (name === "is_sold") {
+      const notForSale = document.getElementById("notForSale");
       if (value === "1") {
+        if (notForSale) {
+          notForSale.selected = true;
+        }
         setFormData({
           ...formData,
           [name]: parseInt(value),
@@ -54,11 +58,12 @@ const AddProperty = () => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    if (max_value > min_value) {
-      setErr({ ...err, maxValueErr: false });
-    } else {
-      setErr({ ...err, maxValueErr: true });
-    }
+    console.log(formData);
+    // if (max_value > min_value) {
+    //   setErr({ ...err, maxValueErr: false });
+    // } else {
+    //   setErr({ ...err, maxValueErr: true });
+    // }
   };
   return (
     <Layout>
@@ -71,7 +76,7 @@ const AddProperty = () => {
               <div className="container-fluid">
                 <div className="row justify-content-center">
                   <div className="col-xl-12">
-                    <form className="card p-xl-2">
+                    <form onSubmit={onFormSubmit} className="card p-xl-2">
                       <div className="card-body">
                         <h4 className="fw-bold">Add Property</h4>
                         <hr />
@@ -230,7 +235,7 @@ const AddProperty = () => {
                         </div>
 
                         {/* Row 4 */}
-                        <div className="row">
+                        <div className="row mb-3">
                           <div className="col-12">
                             <h5 className="fw-bold text-primary">
                               Dates & Availability
@@ -321,7 +326,9 @@ const AddProperty = () => {
                                 name="is_available_for_sale"
                                 className="form-select"
                               >
-                                <option value="0">No</option>
+                                <option id="notForSale" value="0">
+                                  No
+                                </option>
                                 <option value="1">Yes</option>
                               </select>
                             </div>
@@ -346,6 +353,11 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
+                        </div>
+                        <div className="row">
+                          <button type="submit" className="btn btn-primary">
+                            Add
+                          </button>
                         </div>
                       </div>
                     </form>
