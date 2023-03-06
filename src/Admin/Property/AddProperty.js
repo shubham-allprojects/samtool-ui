@@ -44,10 +44,10 @@ const AddProperty = () => {
               <div className="container-fluid">
                 <div className="row justify-content-center">
                   <div className="col-xl-12">
-                    <h4 className="fw-bold">Add Property</h4>
-                    <hr />
-                    <form className="card">
+                    <form className="card p-xl-2">
                       <div className="card-body">
+                        <h4 className="fw-bold">Add Property</h4>
+                        <hr />
                         {/* Row 1 */}
                         <div className="row mb-3">
                           <div className="col-12">
