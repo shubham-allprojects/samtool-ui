@@ -2,6 +2,7 @@
   {
     "property_type": "Commercialproperty",
     "property_number": 270336,
+    "bank_branch_id": 3,
     "saleable_area": "1000sqft",
     "carpet_area": "950sqft",
     "market_price": "",
@@ -12,10 +13,8 @@
     "mortgage_date": "2005-12-26 23:50:30",
     "is_available_for_sale": 1,
     "sale_availability_date": "2005-12-26 23:50:30",
-    "bank_branch_id": 3,
     "is_sold": 1,
     "status": "",
-
     "is_stressed": 1,
     "address_details": {
       "address": "Wakad",
