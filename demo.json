@@ -11,9 +11,9 @@
     "completion_date": "2005-12-26 23:50:30",
     "purchase_date": "2005-12-26 23:50:30",
     "mortgage_date": "2005-12-26 23:50:30",
+    "is_sold": 1,
     "is_available_for_sale": 1,
     "sale_availability_date": "2005-12-26 23:50:30",
-    "is_sold": 1,
     "status": "",
     "is_stressed": 1,
     "address_details": {

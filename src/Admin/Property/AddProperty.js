@@ -88,6 +88,24 @@ const AddProperty = () => {
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
+                                htmlFor="bank_branch_id"
+                              >
+                                Bank branch
+                              </label>
+                              <select
+                                id="bank_branch_id"
+                                name="bank_branch_id"
+                                className="form-select"
+                              >
+                                <option value="0">wxyz branch</option>
+                                <option value="1">wxxyz1 branch</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div className="col-xl-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
                                 htmlFor="saleable_area"
                               >
                                 Salable area (sq. ft.)
@@ -257,6 +275,22 @@ const AddProperty = () => {
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
                               </select>
+                            </div>
+                          </div>
+                          <div className="col-xl-4">
+                            <div className="form-group">
+                              <label
+                                htmlFor="sale_availability_date"
+                                className="form-label common-btn-font"
+                              >
+                                Sale availability
+                              </label>
+                              <input
+                                className="form-control"
+                                type="date"
+                                id="sale_availability_date"
+                                name="sale_availability_date"
+                              />
                             </div>
                           </div>
                         </div>
