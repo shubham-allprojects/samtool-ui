@@ -80,7 +80,7 @@ const AddProperty = () => {
                               Basic details
                             </h5>
                           </div>
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 col-md-6">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -98,7 +98,7 @@ const AddProperty = () => {
                               </select>
                             </div>
                           </div>
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 col-md-6">
                             <div className="form-group">
                               <label
                                 htmlFor="property_number"
@@ -114,7 +114,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 col-md-6 mt-md-3 mt-xl-0">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -138,7 +138,7 @@ const AddProperty = () => {
                           <div className="col-12">
                             <h5 className="fw-bold text-primary">Area</h5>
                           </div>
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 col-md-6">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -154,7 +154,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 col-md-6">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -177,7 +177,7 @@ const AddProperty = () => {
                           <div className="col-12">
                             <h5 className="fw-bold text-primary">Pricing</h5>
                           </div>
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 col-md-6">
                             <div className="form-group">
                               <label
                                 htmlFor="market_price"
@@ -193,7 +193,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 col-md-6">
                             <div className="form-group">
                               <label
                                 htmlFor="ready_reckoner_price"
@@ -209,7 +209,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 col-md-6 mt-md-3 mt-xl-0">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -234,7 +234,7 @@ const AddProperty = () => {
                               Dates & Availability
                             </h5>
                           </div>
-                          <div className="col-xl-4 mb-xl-3">
+                          <div className="col-xl-4 mb-3 col-md-6">
                             <div className="form-group">
                               <label
                                 htmlFor="completion_date"
@@ -250,7 +250,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4 mb-xl-3">
+                          <div className="col-xl-4 mb-3 col-md-6">
                             <div className="form-group">
                               <label
                                 htmlFor="purchase_date"
@@ -266,7 +266,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4 mb-xl-3">
+                          <div className="col-xl-4 mb-3 col-md-6">
                             <div className="form-group">
                               <label
                                 htmlFor="mortgage_date"
@@ -282,7 +282,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -302,7 +302,7 @@ const AddProperty = () => {
                             </div>
                           </div>
                           <div
-                            className={`col-xl-4 ${
+                            className={`col-xl-4 col-md-6 mb-3 mb-xl-0 ${
                               is_sold === 1 ? "d-none" : ""
                             }`}
                           >
@@ -327,7 +327,7 @@ const AddProperty = () => {
                             </div>
                           </div>
                           <div
-                            className={`col-xl-4 ${
+                            className={`col-xl-4 col-md-6 mb-3 mb-xl-0 ${
                               is_sold === 1 ? "d-none" : ""
                             }`}
                           >
