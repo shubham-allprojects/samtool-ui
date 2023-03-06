@@ -136,7 +136,18 @@ const AddProperty = () => {
                             </div>
                           </div>
                           <div className="col-xl-4">
-                       
+                            <label
+                              htmlFor="market_price"
+                              className="form-label common-btn-font"
+                            >
+                              Market price (Rs.)
+                            </label>
+                            <input
+                              className="form-control"
+                              type="number"
+                              id="market_price"
+                              name="market_price"
+                            />
                           </div>
                         </div>
                       </div>
