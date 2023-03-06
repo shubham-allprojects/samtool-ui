@@ -7,13 +7,15 @@ const AddProperty = () => {
   const [formData, setFormData] = useState({
     min_value: null,
     max_value: null,
+    is_sold: 0,
+    is_available_for_sale: 0,
   });
 
   const [err, setErr] = useState({
     maxValueErr: false,
   });
 
-  const { min_value, max_value } = formData;
+  const { min_value, max_value, is_sold, is_available_for_sale } = formData;
   const { maxValueErr } = err;
 
   const onInputChange = (e) => {
@@ -22,6 +24,23 @@ const AddProperty = () => {
       setFormData({ ...formData, [name]: parseInt(value) });
     } else if (name === "max_value") {
       setFormData({ ...formData, [name]: parseInt(value) });
+    } else if (name === "is_sold") {
+      if (value === "1") {
+        setFormData({
+          ...formData,
+          [name]: parseInt(value),
+          is_available_for_sale: 0,
+        });
+      } else {
+        setFormData({
+          ...formData,
+          [name]: parseInt(value),
+        });
+      }
+    } else if (name === "is_available_for_sale") {
+      if (value === "1") {
+      } else {
+      }
     }
   };
 
@@ -266,6 +285,7 @@ const AddProperty = () => {
                                 Is sold?
                               </label>
                               <select
+                                onChange={onInputChange}
                                 id="is_sold"
                                 name="is_sold"
                                 className="form-select"
@@ -275,7 +295,11 @@ const AddProperty = () => {
                               </select>
                             </div>
                           </div>
-                          <div className="col-xl-4">
+                          <div
+                            className={`col-xl-4 ${
+                              is_sold === 1 ? "d-none" : ""
+                            }`}
+                          >
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -284,6 +308,7 @@ const AddProperty = () => {
                                 Available for sale?
                               </label>
                               <select
+                                onChange={onInputChange}
                                 id="is_available_for_sale"
                                 name="is_available_for_sale"
                                 className="form-select"
@@ -293,7 +318,7 @@ const AddProperty = () => {
                               </select>
                             </div>
                           </div>
-                          <div className="col-xl-4">
+                          <div className={`col-xl-4`}>
                             <div className="form-group">
                               <label
                                 htmlFor="sale_availability_date"
