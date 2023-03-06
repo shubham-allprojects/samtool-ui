@@ -354,11 +354,11 @@ const AddProperty = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="row">
+                        {/* <div className="row">
                           <button type="submit" className="btn btn-primary">
                             Add
                           </button>
-                        </div>
+                        </div> */}
                       </div>
                     </form>
                   </div>
