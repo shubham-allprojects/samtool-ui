@@ -43,7 +43,69 @@ const AddProperty = () => {
             <section className="add-property-wrapper wrapper">
               <div className="container-fluid">
                 <div className="row justify-content-center">
-                  <h3 className="fw-bold">Add Property</h3>
+                  <div className="col-xl-12">
+                    <h4 className="fw-bold">Add Property</h4>
+                    <hr />
+                    <form className="card">
+                      <div className="card-body">
+                        {/* Row 1 */}
+                        <div className="row mb-3">
+                          <div className="col-xl-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="property_type"
+                              >
+                                Property type
+                              </label>
+                              <select
+                                id="property_type"
+                                name="property_type"
+                                className="form-select"
+                              >
+                                <option value="Commercial">Commercial</option>
+                                <option value="Residential">Residential</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div className="col-xl-4">
+                            <div className="form-group">
+                              <label
+                                htmlFor="property_number"
+                                className="form-label common-btn-font"
+                              >
+                                Property Number
+                              </label>
+                              <input
+                                type="text"
+                                id="property_number"
+                                name="property_number"
+                                className="form-control"
+                              />
+                            </div>
+                          </div>
+                          <div className="col-xl-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="is_available_for_sale"
+                              >
+                                Available for sale?
+                              </label>
+                              <select
+                                id="is_available_for_sale"
+                                name="is_available_for_sale"
+                                className="form-select"
+                              >
+                                <option value="Commercial">Yes</option>
+                                <option value="Residential">No</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </section>
