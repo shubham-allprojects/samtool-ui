@@ -88,19 +88,55 @@ const AddProperty = () => {
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
-                                htmlFor="is_available_for_sale"
+                                htmlFor="saleable_area"
                               >
-                                Available for sale?
+                                Salable area (sq. ft.)
                               </label>
-                              <select
-                                id="is_available_for_sale"
-                                name="is_available_for_sale"
-                                className="form-select"
-                              >
-                                <option value="Commercial">Yes</option>
-                                <option value="Residential">No</option>
-                              </select>
+                              <input
+                                type="number"
+                                className="form-control"
+                                id="saleable_area"
+                                name="saleable_area"
+                              />
                             </div>
+                          </div>
+                        </div>
+                        {/* Row 2 */}
+                        <div className="row mb-3">
+                          <div className="col-xl-4">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="carpet_area"
+                              >
+                                Carpet area (sq. ft.)
+                              </label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                id="carpet_area"
+                                name="carpet_area"
+                              />
+                            </div>
+                          </div>
+                          <div className="col-xl-4">
+                            <div className="form-group">
+                              <label
+                                htmlFor="property_number"
+                                className="form-label common-btn-font"
+                              >
+                                Property Number
+                              </label>
+                              <input
+                                type="text"
+                                id="property_number"
+                                name="property_number"
+                                className="form-control"
+                              />
+                            </div>
+                          </div>
+                          <div className="col-xl-4">
+                       
                           </div>
                         </div>
                       </div>

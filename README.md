@@ -1,6 +1,23 @@
 mkcert -key-file sam-key.pem -cert-file sam-cert.pem "localhost"  
 docker-compose -f docker-compose.dev.yml up
 
+     <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="is_available_for_sale"
+                              >
+                                Available for sale?
+                              </label>
+                              <select
+                                id="is_available_for_sale"
+                                name="is_available_for_sale"
+                                className="form-select"
+                              >
+                                <option value="Commercial">Yes</option>
+                                <option value="Residential">No</option>
+                              </select>
+                            </div>
+
    <div className="row">
                         <div className="col-xl-8">
                           <div className="form-group mb-3">
