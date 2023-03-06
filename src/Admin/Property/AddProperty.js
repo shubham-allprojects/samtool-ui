@@ -50,6 +50,11 @@ const AddProperty = () => {
                       <div className="card-body">
                         {/* Row 1 */}
                         <div className="row mb-3">
+                          <div className="col-12">
+                            <h5 className="fw-bold text-primary">
+                              Basic details
+                            </h5>
+                          </div>
                           <div className="col-xl-4">
                             <div className="form-group">
                               <label
@@ -102,6 +107,12 @@ const AddProperty = () => {
                               </select>
                             </div>
                           </div>
+                        </div>
+                        {/* Row 2 */}
+                        <div className="row mb-3">
+                          <div className="col-12">
+                            <h5 className="fw-bold text-primary">Area</h5>
+                          </div>
                           <div className="col-xl-4">
                             <div className="form-group">
                               <label
@@ -118,9 +129,6 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                        </div>
-                        {/* Row 2 */}
-                        <div className="row mb-3">
                           <div className="col-xl-4">
                             <div className="form-group">
                               <label
@@ -136,6 +144,13 @@ const AddProperty = () => {
                                 name="carpet_area"
                               />
                             </div>
+                          </div>
+                        </div>
+
+                        {/* Row 3 */}
+                        <div className="row mb-3">
+                          <div className="col-12">
+                            <h5 className="fw-bold text-primary">Pricing</h5>
                           </div>
                           <div className="col-xl-4">
                             <div className="form-group">
@@ -169,10 +184,6 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                        </div>
-
-                        {/* Row 3 */}
-                        <div className="row mb-3">
                           <div className="col-xl-4">
                             <div className="form-group">
                               <label
@@ -189,7 +200,16 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4">
+                        </div>
+
+                        {/* Row 4 */}
+                        <div className="row">
+                          <div className="col-12">
+                            <h5 className="fw-bold text-primary">
+                              Dates & Availability
+                            </h5>
+                          </div>
+                          <div className="col-xl-4 mb-xl-3">
                             <div className="form-group">
                               <label
                                 htmlFor="completion_date"
@@ -205,7 +225,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 mb-xl-3">
                             <div className="form-group">
                               <label
                                 htmlFor="purchase_date"
@@ -221,11 +241,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                        </div>
-
-                        {/* Row 4 */}
-                        <div className="row mb-3">
-                          <div className="col-xl-4">
+                          <div className="col-xl-4 mb-xl-3">
                             <div className="form-group">
                               <label
                                 htmlFor="mortgage_date"
