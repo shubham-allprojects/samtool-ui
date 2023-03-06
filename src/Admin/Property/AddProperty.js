@@ -42,17 +42,10 @@ const AddProperty = () => {
         });
       }
     } else if (name === "is_available_for_sale") {
-      if (value === "1") {
-        setFormData({
-          ...formData,
-          [name]: parseInt(value),
-        });
-      } else {
-        setFormData({
-          ...formData,
-          [name]: parseInt(value),
-        });
-      }
+      setFormData({
+        ...formData,
+        [name]: parseInt(value),
+      });
     }
   };
 
@@ -335,7 +328,7 @@ const AddProperty = () => {
                           </div>
                           <div
                             className={`col-xl-4 ${
-                              is_available_for_sale === 1 ? "" : "d-none"
+                              is_sold === 1 ? "d-none" : ""
                             }`}
                           >
                             <div className="form-group">
