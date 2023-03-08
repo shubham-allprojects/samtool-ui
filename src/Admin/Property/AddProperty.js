@@ -83,11 +83,11 @@ const AddProperty = () => {
     } else if (name === "carpet_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "market_price") {
-      commonFnToSaveFormData(name, `${value} Rs`);
+      commonFnToSaveFormData(name, value);
     } else if (name === "ready_reckoner_price") {
-      commonFnToSaveFormData(name, `${value} Rs`);
+      commonFnToSaveFormData(name, value);
     } else if (name === "expected_price") {
-      commonFnToSaveFormData(name, `${value} Rs`);
+      commonFnToSaveFormData(name, value);
     } else if (name === "completion_date") {
       commonFnToSaveFormData(name, value);
     } else if (name === "purchase_date") {
@@ -132,7 +132,7 @@ const AddProperty = () => {
       commonFnToSaveAdressDetails(name, value);
     } else if (name === "state") {
       if (value) {
-        commonFnToSaveAdressDetails(name, value);
+        commonFnToSaveAdressDetails(name, parseInt(value));
         const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
           state_id: parseInt(value),
         });
@@ -142,13 +142,13 @@ const AddProperty = () => {
         citySelectBoxRef.current.classList.add("d-none");
       }
     } else if (name === "city") {
-      commonFnToSaveAdressDetails(name, value);
+      commonFnToSaveAdressDetails(name, parseInt(value));
     } else if (name === "zip") {
       commonFnToSaveAdressDetails(name, parseInt(value));
     }
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
   };
