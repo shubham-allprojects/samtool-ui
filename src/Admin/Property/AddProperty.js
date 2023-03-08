@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 // import BreadCrumb from "./BreadCrumb";
@@ -11,12 +12,18 @@ const AddProperty = () => {
     is_available_for_sale: 0,
   });
 
-  const [err, setErr] = useState({
-    maxValueErr: false,
-  });
+  const { is_sold } = formData;
 
-  const { min_value, max_value, is_sold, is_available_for_sale } = formData;
-  const { maxValueErr } = err;
+  const [propertyCategories, setPropertyCategories] = useState([]);
+  const [banks, setBanks] = useState([]);
+
+  const getDataFromApi = async () => {
+    const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
+    setPropertyCategories(propertyCategoryRes.data);
+    const bankRes = await axios.get(`/sam/v1/property/by-bank`);
+    console.log(bankRes.data);
+    setBanks(bankRes.data);
+  };
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,12 +59,12 @@ const AddProperty = () => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    // if (max_value > min_value) {
-    //   setErr({ ...err, maxValueErr: false });
-    // } else {
-    //   setErr({ ...err, maxValueErr: true });
-    // }
   };
+
+  useEffect(() => {
+    getDataFromApi();
+  }, []);
+
   return (
     <Layout>
       <div className="container-fluid section-padding">
@@ -93,8 +100,20 @@ const AddProperty = () => {
                                 name="property_type"
                                 className="form-select"
                               >
-                                <option value="Commercial">Commercial</option>
-                                <option value="Residential">Residential</option>
+                                {propertyCategories ? (
+                                  propertyCategories.map((data) => {
+                                    return (
+                                      <option
+                                        key={data.type_id}
+                                        value={data.type_name}
+                                      >
+                                        {data.type_name}
+                                      </option>
+                                    );
+                                  })
+                                ) : (
+                                  <></>
+                                )}
                               </select>
                             </div>
                           </div>
@@ -120,7 +139,39 @@ const AddProperty = () => {
                                 className="form-label common-btn-font"
                                 htmlFor="bank_branch_id"
                               >
-                                Bank branch
+                                Bank
+                              </label>
+                              <select
+                                id="bank_branch_id"
+                                name="bank_branch_id"
+                                className="form-select"
+                                onChange={onInputChange}
+                              >
+                                <option value=""></option>
+                                {banks ? (
+                                  banks.map((data) => {
+                                    return (
+                                      <option
+                                        key={data.bank_id}
+                                        value={data.bank_id}
+                                      >
+                                        {data.bank_name}
+                                      </option>
+                                    );
+                                  })
+                                ) : (
+                                  <></>
+                                )}
+                              </select>
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mt-3">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="bank_branch_id"
+                              >
+                                Branch
                               </label>
                               <select
                                 id="bank_branch_id"
