@@ -18,20 +18,12 @@ const AddProperty = () => {
     status: "",
     is_stressed: 1,
     address_details: {
-      address: "Wakad",
       locality: "Urban",
-      flat_number: 303,
-      building_name: "Pune",
-      society_name: "ABCchouk",
-      plot_number: 1001,
-      landmark: "Pune",
-      city: "Pune",
-      zip: 456652,
-      state: "Maharashtra",
     },
   });
 
   const { is_sold } = formData;
+  const { locality } = formData.address_details;
 
   const [propertyCategories, setPropertyCategories] = useState([]);
   const [banks, setBanks] = useState([]);
@@ -52,6 +44,17 @@ const AddProperty = () => {
 
   const commonFnToSaveFormData = (name, value) => {
     setFormData({ ...formData, [name]: value });
+  };
+
+  const commonFnToSaveAdressDetails = (name, value) => {
+    setFormData({
+      ...formData,
+      address_details: {
+        ...formData.address_details,
+        [name]: value,
+        address: locality,
+      },
+    });
   };
 
   const onInputChange = async (e) => {
@@ -115,6 +118,18 @@ const AddProperty = () => {
       });
     } else if (name === "sale_availability_date") {
       commonFnToSaveFormData(name, value);
+    } else if (name === "flat_number") {
+      commonFnToSaveAdressDetails(name, parseInt(value));
+    } else if (name === "building_name") {
+      commonFnToSaveFormData(name, value);
+    } else if (name === "society_name") {
+      commonFnToSaveFormData(name, value);
+    } else if (name === "plot_number") {
+      commonFnToSaveAdressDetails(name, parseInt(value));
+    } else if (name === "locality") {
+      commonFnToSaveFormData(name, value);
+    } else if (name === "landmark") {
+      commonFnToSaveFormData(name, value);
     } else if (name === "state") {
       if (value) {
         const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
@@ -125,6 +140,10 @@ const AddProperty = () => {
       } else {
         citySelectBoxRef.current.classList.add("d-none");
       }
+    } else if (name === "city") {
+      commonFnToSaveFormData(name, value);
+    } else if (name === "zip") {
+      commonFnToSaveFormData(name, parseInt(value));
     }
   };
 
@@ -530,7 +549,7 @@ const AddProperty = () => {
                               <input
                                 id="flat_number"
                                 name="flat_number"
-                                type="number"
+                                type="text"
                                 className="form-control "
                                 onChange={onInputChange}
                               />
