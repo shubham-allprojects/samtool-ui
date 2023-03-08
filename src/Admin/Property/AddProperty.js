@@ -547,7 +547,7 @@ const AddProperty = () => {
                           </div>
                         </div>
                         {/* Row 5 - Address Details */}
-                        <div className="row mb-3">
+                        <div className="row">
                           <div className="col-12">
                             <h5 className="fw-bold text-primary">Address</h5>
                           </div>
@@ -568,7 +568,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                          <div className="col-xl-4 col-md-6 mb-3">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -585,7 +585,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                          <div className="col-xl-4 col-md-6 mb-3">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -655,7 +655,7 @@ const AddProperty = () => {
                             </div>
                           </div>
 
-                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                          <div className="col-xl-4 col-md-6 mb-3">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -689,7 +689,7 @@ const AddProperty = () => {
                             </div>
                           </div>
                           <div
-                            className="col-xl-4 col-md-6 mb-3 mb-xl-0 d-none"
+                            className="col-xl-4 col-md-6 mb-3 d-none"
                             ref={citySelectBoxRef}
                           >
                             <div className="form-group">
@@ -724,7 +724,7 @@ const AddProperty = () => {
                               </select>
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                          <div className="col-xl-4 col-md-6 mb-3">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
