@@ -590,7 +590,7 @@ const AddProperty = () => {
                             </div>
                           </div>
 
-                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                          <div className="col-xl-4 col-md-6 mb-3">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -605,6 +605,37 @@ const AddProperty = () => {
                                 className="form-control "
                                 onChange={onInputChange}
                               />
+                            </div>
+                          </div>
+
+                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="state"
+                              >
+                                State
+                              </label>
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="city"
+                              >
+                                City
+                              </label>
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="landmark"
+                              >
+                                Zip
+                              </label>
                             </div>
                           </div>
                         </div>
