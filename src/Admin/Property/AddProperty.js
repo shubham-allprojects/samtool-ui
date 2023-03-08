@@ -127,11 +127,12 @@ const AddProperty = () => {
     } else if (name === "plot_number") {
       commonFnToSaveAdressDetails(name, parseInt(value));
     } else if (name === "locality") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveAdressDetails(name, value);
     } else if (name === "landmark") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveAdressDetails(name, value);
     } else if (name === "state") {
       if (value) {
+        commonFnToSaveAdressDetails(name, value);
         const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
           state_id: parseInt(value),
         });
@@ -141,9 +142,9 @@ const AddProperty = () => {
         citySelectBoxRef.current.classList.add("d-none");
       }
     } else if (name === "city") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveAdressDetails(name, value);
     } else if (name === "zip") {
-      commonFnToSaveFormData(name, parseInt(value));
+      commonFnToSaveAdressDetails(name, parseInt(value));
     }
   };
 
@@ -549,7 +550,7 @@ const AddProperty = () => {
                               <input
                                 id="flat_number"
                                 name="flat_number"
-                                type="text"
+                                type="number"
                                 className="form-control "
                                 onChange={onInputChange}
                               />
