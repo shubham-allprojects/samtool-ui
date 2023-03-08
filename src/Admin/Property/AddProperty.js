@@ -10,11 +10,25 @@ const AddProperty = () => {
   if (data) {
     authHeader = { Authorization: data.logintoken };
   }
+
   const [formData, setFormData] = useState({
-    min_value: null,
-    max_value: null,
     is_sold: 0,
     is_available_for_sale: 0,
+    sale_availability_date: "Not Available",
+    status: "",
+    is_stressed: 1,
+    address_details: {
+      address: "Wakad",
+      locality: "Urban",
+      flat_number: 303,
+      building_name: "Pune",
+      society_name: "ABCchouk",
+      plot_number: 1001,
+      landmark: "Pune",
+      city: "Pune",
+      zip: 456652,
+      state: "Maharashtra",
+    },
   });
 
   const { is_sold } = formData;
@@ -31,12 +45,39 @@ const AddProperty = () => {
     setBanks(bankRes.data);
   };
 
+  const commonFnToSaveFormData = (name, value) => {
+    setFormData({ ...formData, [name]: value });
+  };
+
   const onInputChange = async (e) => {
     const { name, value } = e.target;
-    if (name === "min_value") {
-      setFormData({ ...formData, [name]: parseInt(value) });
-    } else if (name === "max_value") {
-      setFormData({ ...formData, [name]: parseInt(value) });
+    if (name === "property_type") {
+      if (value) {
+        commonFnToSaveFormData(name, value);
+      }
+    } else if (name === "property_number") {
+      commonFnToSaveFormData(name, value);
+    } else if (name === "bank") {
+      if (value) {
+        branchSelectBoxRef.current.classList.remove("d-none");
+        const branchRes = await axios.get(`/sam/v1/property/auth/${value}`, {
+          headers: authHeader,
+        });
+        console.log(branchRes.data);
+        setBankBranches(branchRes.data);
+      } else {
+        branchSelectBoxRef.current.classList.add("d-none");
+      }
+    } else if (name === "bank_branch_id") {
+      commonFnToSaveFormData(name, value);
+    } else if (name === "saleable_area") {
+    } else if (name === "carpet_area") {
+    } else if (name === "market_price") {
+    } else if (name === "ready_reckoner_price") {
+    } else if (name === "expected_price") {
+    } else if (name === "completion_date") {
+    } else if (name === "purchase_date") {
+    } else if (name === "mortgage_date") {
     } else if (name === "is_sold") {
       const notForSale = document.getElementById("notForSale");
       if (value === "1") {
@@ -59,17 +100,7 @@ const AddProperty = () => {
         ...formData,
         [name]: parseInt(value),
       });
-    } else if (name === "bank") {
-      if (value) {
-        branchSelectBoxRef.current.classList.remove("d-none");
-        const branchRes = await axios.get(`/sam/v1/property/auth/${value}`, {
-          headers: authHeader,
-        });
-        console.log(branchRes.data);
-        setBankBranches(branchRes.data);
-      } else {
-        branchSelectBoxRef.current.classList.add("d-none");
-      }
+    } else if (name === "sale_availability_date") {
     }
   };
 
@@ -97,7 +128,7 @@ const AddProperty = () => {
                       <div className="card-body">
                         <h4 className="fw-bold">Add Property</h4>
                         <hr />
-                        {/* Row 1 */}
+                        {/* Row 1 - Basic Details */}
                         <div className="row mb-3">
                           <div className="col-12">
                             <h5 className="fw-bold text-primary">
@@ -116,7 +147,10 @@ const AddProperty = () => {
                                 id="property_type"
                                 name="property_type"
                                 className="form-select"
+                                onChange={onInputChange}
+                                required
                               >
+                                <option value=""></option>
                                 {propertyCategories ? (
                                   propertyCategories.map((data) => {
                                     return (
@@ -147,6 +181,8 @@ const AddProperty = () => {
                                 id="property_number"
                                 name="property_number"
                                 className="form-control"
+                                onChange={onInputChange}
+                                required
                               />
                             </div>
                           </div>
@@ -163,6 +199,7 @@ const AddProperty = () => {
                                 name="bank"
                                 className="form-select"
                                 onChange={onInputChange}
+                                required
                               >
                                 <option value=""></option>
                                 {banks ? (
@@ -197,6 +234,8 @@ const AddProperty = () => {
                                 id="bank_branch_id"
                                 name="bank_branch_id"
                                 className="form-select"
+                                onChange={onInputChange}
+                                required
                               >
                                 <option value=""></option>
                                 {bankBranches ? (
@@ -217,7 +256,7 @@ const AddProperty = () => {
                             </div>
                           </div>
                         </div>
-                        {/* Row 2 */}
+                        {/* Row 2 - Area Details*/}
                         <div className="row mb-3">
                           <div className="col-12">
                             <h5 className="fw-bold text-primary">Area</h5>
@@ -235,6 +274,8 @@ const AddProperty = () => {
                                 className="form-control"
                                 id="saleable_area"
                                 name="saleable_area"
+                                onChange={onInputChange}
+                                required
                               />
                             </div>
                           </div>
@@ -251,12 +292,14 @@ const AddProperty = () => {
                                 className="form-control"
                                 id="carpet_area"
                                 name="carpet_area"
+                                onChange={onInputChange}
+                                required
                               />
                             </div>
                           </div>
                         </div>
 
-                        {/* Row 3 */}
+                        {/* Row 3 - Pricing Details */}
                         <div className="row mb-3">
                           <div className="col-12">
                             <h5 className="fw-bold text-primary">Pricing</h5>
@@ -274,6 +317,8 @@ const AddProperty = () => {
                                 type="number"
                                 id="market_price"
                                 name="market_price"
+                                onChange={onInputChange}
+                                required
                               />
                             </div>
                           </div>
@@ -290,6 +335,8 @@ const AddProperty = () => {
                                 id="ready_reckoner_price"
                                 name="ready_reckoner_price"
                                 className="form-control"
+                                onChange={onInputChange}
+                                required
                               />
                             </div>
                           </div>
@@ -306,12 +353,14 @@ const AddProperty = () => {
                                 className="form-control"
                                 id="expected_price"
                                 name="expected_price"
+                                onChange={onInputChange}
+                                required
                               />
                             </div>
                           </div>
                         </div>
 
-                        {/* Row 4 */}
+                        {/* Row 4 - Dates & Availability Details */}
                         <div className="row mb-3">
                           <div className="col-12">
                             <h5 className="fw-bold text-primary">
@@ -331,6 +380,8 @@ const AddProperty = () => {
                                 type="date"
                                 id="completion_date"
                                 name="completion_date"
+                                onChange={onInputChange}
+                                required
                               />
                             </div>
                           </div>
@@ -347,6 +398,8 @@ const AddProperty = () => {
                                 type="date"
                                 id="purchase_date"
                                 name="purchase_date"
+                                onChange={onInputChange}
+                                required
                               />
                             </div>
                           </div>
@@ -363,6 +416,8 @@ const AddProperty = () => {
                                 type="date"
                                 id="mortgage_date"
                                 name="mortgage_date"
+                                onChange={onInputChange}
+                                required
                               />
                             </div>
                           </div>
@@ -375,10 +430,11 @@ const AddProperty = () => {
                                 Is sold?
                               </label>
                               <select
-                                onChange={onInputChange}
                                 id="is_sold"
                                 name="is_sold"
                                 className="form-select"
+                                onChange={onInputChange}
+                                required
                               >
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
@@ -398,10 +454,11 @@ const AddProperty = () => {
                                 Available for sale?
                               </label>
                               <select
-                                onChange={onInputChange}
                                 id="is_available_for_sale"
                                 name="is_available_for_sale"
                                 className="form-select"
+                                onChange={onInputChange}
+                                required
                               >
                                 <option id="notForSale" value="0">
                                   No
@@ -427,15 +484,17 @@ const AddProperty = () => {
                                 type="date"
                                 id="sale_availability_date"
                                 name="sale_availability_date"
+                                onChange={onInputChange}
+                                required
                               />
                             </div>
                           </div>
                         </div>
-                        {/* <div className="row">
+                        <div className="row">
                           <button type="submit" className="btn btn-primary">
                             Add
                           </button>
-                        </div> */}
+                        </div>
                       </div>
                     </form>
                   </div>
