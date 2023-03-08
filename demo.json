@@ -17,16 +17,16 @@
     "status": "",
     "is_stressed": 1,
     "address_details": {
-      "address": "Wakad",
-      "locality": "Urban",
       "flat_number": 303,
       "building_name": "Pune",
       "society_name": "ABCchouk",
       "plot_number": 1001,
+      "locality": "Urban",
+      "address": "Wakad",
       "landmark": "Pune",
+      "state": "Maharashtra",
       "city": "Pune",
-      "zip": 456652,
-      "state": "Maharashtra"
+      "zip": 456652
     }
   }
 ]

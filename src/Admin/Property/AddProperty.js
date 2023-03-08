@@ -499,10 +499,121 @@ const AddProperty = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="row">
-                          <button type="submit" className="btn btn-primary">
-                            Add
-                          </button>
+                        {/* Row 5 - Address Details */}
+                        <div className="row mb-3">
+                          <div className="col-12">
+                            <h5 className="fw-bold text-primary">Address</h5>
+                          </div>
+                          <div className="col-xl-4 mb-3 col-md-6">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="flat_number"
+                              >
+                                Flat No.
+                              </label>
+                              <input
+                                id="flat_number"
+                                name="flat_number"
+                                type="number"
+                                className="form-control "
+                                onChange={onInputChange}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="building_name"
+                              >
+                                Building Name
+                              </label>
+                              <input
+                                id="building_name"
+                                name="building_name"
+                                type="text"
+                                className="form-control "
+                                onChange={onInputChange}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="society_name"
+                              >
+                                Society Name
+                              </label>
+                              <input
+                                id="society_name"
+                                name="society_name"
+                                type="text"
+                                className="form-control "
+                                onChange={onInputChange}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-xl-4 mb-3 col-md-6">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="plot_number"
+                              >
+                                Plot No.
+                              </label>
+                              <input
+                                id="plot_number"
+                                name="plot_number"
+                                type="number"
+                                className="form-control "
+                                onChange={onInputChange}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-xl-4 mb-3 col-md-6">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="locality"
+                              >
+                                Locality
+                              </label>
+                              <input
+                                id="locality"
+                                name="locality"
+                                type="text"
+                                className="form-control "
+                                onChange={onInputChange}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="landmark"
+                              >
+                                Landmark
+                              </label>
+                              <input
+                                id="landmark"
+                                name="landmark"
+                                type="text"
+                                className="form-control "
+                                onChange={onInputChange}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row text-end">
+                          <div className="col-12">
+                            <button type="submit" className="btn btn-primary">
+                              Add
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </form>
