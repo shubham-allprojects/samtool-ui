@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 // import BreadCrumb from "./BreadCrumb";
@@ -150,6 +151,17 @@ const AddProperty = () => {
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
+    await axios
+      .post(`/sam/v1/property/auth/single-property`, formData, {
+        headers: authHeader,
+      })
+      .then((res) => {
+        if (res.data.msg === 0) {
+          toast.success("Property added successfully");
+        } else {
+          toast.error("Internal server error");
+        }
+      });
     console.log(formData);
   };
 
