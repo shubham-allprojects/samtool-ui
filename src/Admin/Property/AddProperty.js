@@ -69,15 +69,23 @@ const AddProperty = () => {
         branchSelectBoxRef.current.classList.add("d-none");
       }
     } else if (name === "bank_branch_id") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "saleable_area") {
+      commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "carpet_area") {
+      commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "market_price") {
+      commonFnToSaveFormData(name, `${value} Rs`);
     } else if (name === "ready_reckoner_price") {
+      commonFnToSaveFormData(name, `${value} Rs`);
     } else if (name === "expected_price") {
+      commonFnToSaveFormData(name, `${value} Rs`);
     } else if (name === "completion_date") {
+      commonFnToSaveFormData(name, value);
     } else if (name === "purchase_date") {
+      commonFnToSaveFormData(name, value);
     } else if (name === "mortgage_date") {
+      commonFnToSaveFormData(name, value);
     } else if (name === "is_sold") {
       const notForSale = document.getElementById("notForSale");
       if (value === "1") {
@@ -101,6 +109,7 @@ const AddProperty = () => {
         [name]: parseInt(value),
       });
     } else if (name === "sale_availability_date") {
+      commonFnToSaveFormData(name, value);
     }
   };
 
@@ -485,7 +494,7 @@ const AddProperty = () => {
                                 id="sale_availability_date"
                                 name="sale_availability_date"
                                 onChange={onInputChange}
-                                required
+                                required={is_sold === 1 ? false : true}
                               />
                             </div>
                           </div>
