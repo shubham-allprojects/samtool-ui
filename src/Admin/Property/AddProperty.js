@@ -36,13 +36,18 @@ const AddProperty = () => {
   const [propertyCategories, setPropertyCategories] = useState([]);
   const [banks, setBanks] = useState([]);
   const [bankBranches, setBankBranches] = useState([]);
+  const [allStates, setAllStates] = useState([]);
+  const [allCities, setAllCities] = useState([]);
   const branchSelectBoxRef = useRef();
+  const citySelectBoxRef = useRef();
 
   const getDataFromApi = async () => {
     const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
     setPropertyCategories(propertyCategoryRes.data);
     const bankRes = await axios.get(`/sam/v1/property/by-bank`);
     setBanks(bankRes.data);
+    const statesRes = await axios.get(`/sam/v1/property/by-state`);
+    setAllStates(statesRes.data);
   };
 
   const commonFnToSaveFormData = (name, value) => {
@@ -110,6 +115,16 @@ const AddProperty = () => {
       });
     } else if (name === "sale_availability_date") {
       commonFnToSaveFormData(name, value);
+    } else if (name === "state") {
+      if (value) {
+        const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
+          state_id: parseInt(value),
+        });
+        setAllCities(citiesRes.data);
+        citySelectBoxRef.current.classList.remove("d-none");
+      } else {
+        citySelectBoxRef.current.classList.add("d-none");
+      }
     }
   };
 
@@ -616,9 +631,35 @@ const AddProperty = () => {
                               >
                                 State
                               </label>
+                              <select
+                                id="state"
+                                name="state"
+                                className="form-select"
+                                onChange={onInputChange}
+                                required
+                              >
+                                <option value=""></option>
+                                {allStates ? (
+                                  allStates.map((data) => {
+                                    return (
+                                      <option
+                                        key={data.state_id}
+                                        value={data.state_id}
+                                      >
+                                        {data.state_name}
+                                      </option>
+                                    );
+                                  })
+                                ) : (
+                                  <></>
+                                )}
+                              </select>
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                          <div
+                            className="col-xl-4 col-md-6 mb-3 mb-xl-0 d-none"
+                            ref={citySelectBoxRef}
+                          >
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -626,16 +667,46 @@ const AddProperty = () => {
                               >
                                 City
                               </label>
+                              <select
+                                id="city"
+                                name="city"
+                                className="form-select"
+                                onChange={onInputChange}
+                                required
+                              >
+                                <option value=""></option>
+                                {allCities ? (
+                                  allCities.map((data) => {
+                                    return (
+                                      <option
+                                        key={data.city_id}
+                                        value={data.city_id}
+                                      >
+                                        {data.city_name}
+                                      </option>
+                                    );
+                                  })
+                                ) : (
+                                  <></>
+                                )}
+                              </select>
                             </div>
                           </div>
                           <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
-                                htmlFor="landmark"
+                                htmlFor="zip"
                               >
                                 Zip
                               </label>
+                              <input
+                                type="text"
+                                onChange={onInputChange}
+                                id="zip"
+                                name="zip"
+                                className="form-control"
+                              ></input>
                             </div>
                           </div>
                         </div>
