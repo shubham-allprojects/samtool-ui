@@ -1,10 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 // import BreadCrumb from "./BreadCrumb";
 
+let authHeader = "";
 const AddProperty = () => {
+  const data = JSON.parse(localStorage.getItem("data"));
+  if (data) {
+    authHeader = { Authorization: data.logintoken };
+  }
   const [formData, setFormData] = useState({
     min_value: null,
     max_value: null,
@@ -16,16 +21,17 @@ const AddProperty = () => {
 
   const [propertyCategories, setPropertyCategories] = useState([]);
   const [banks, setBanks] = useState([]);
+  const [bankBranches, setBankBranches] = useState([]);
+  const branchSelectBoxRef = useRef();
 
   const getDataFromApi = async () => {
     const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
     setPropertyCategories(propertyCategoryRes.data);
     const bankRes = await axios.get(`/sam/v1/property/by-bank`);
-    console.log(bankRes.data);
     setBanks(bankRes.data);
   };
 
-  const onInputChange = (e) => {
+  const onInputChange = async (e) => {
     const { name, value } = e.target;
     if (name === "min_value") {
       setFormData({ ...formData, [name]: parseInt(value) });
@@ -53,6 +59,17 @@ const AddProperty = () => {
         ...formData,
         [name]: parseInt(value),
       });
+    } else if (name === "bank") {
+      if (value) {
+        branchSelectBoxRef.current.classList.remove("d-none");
+        const branchRes = await axios.get(`/sam/v1/property/auth/${value}`, {
+          headers: authHeader,
+        });
+        console.log(branchRes.data);
+        setBankBranches(branchRes.data);
+      } else {
+        branchSelectBoxRef.current.classList.add("d-none");
+      }
     }
   };
 
@@ -137,13 +154,13 @@ const AddProperty = () => {
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
-                                htmlFor="bank_branch_id"
+                                htmlFor="bank"
                               >
                                 Bank
                               </label>
                               <select
-                                id="bank_branch_id"
-                                name="bank_branch_id"
+                                id="bank"
+                                name="bank"
                                 className="form-select"
                                 onChange={onInputChange}
                               >
@@ -165,7 +182,10 @@ const AddProperty = () => {
                               </select>
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6 mt-3">
+                          <div
+                            className="col-xl-4 col-md-6 mt-3 d-none"
+                            ref={branchSelectBoxRef}
+                          >
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -178,8 +198,21 @@ const AddProperty = () => {
                                 name="bank_branch_id"
                                 className="form-select"
                               >
-                                <option value="0">wxyz branch</option>
-                                <option value="1">wxxyz1 branch</option>
+                                <option value=""></option>
+                                {bankBranches ? (
+                                  bankBranches.map((data) => {
+                                    return (
+                                      <option
+                                        key={data.branch_id}
+                                        value={data.branch_id}
+                                      >
+                                        {data.branch_name}
+                                      </option>
+                                    );
+                                  })
+                                ) : (
+                                  <></>
+                                )}
                               </select>
                             </div>
                           </div>
