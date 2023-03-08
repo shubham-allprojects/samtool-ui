@@ -121,9 +121,9 @@ const AddProperty = () => {
     } else if (name === "flat_number") {
       commonFnToSaveAdressDetails(name, parseInt(value));
     } else if (name === "building_name") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveAdressDetails(name, value);
     } else if (name === "society_name") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveAdressDetails(name, value);
     } else if (name === "plot_number") {
       commonFnToSaveAdressDetails(name, parseInt(value));
     } else if (name === "locality") {
