@@ -24,8 +24,18 @@ const AddProperty = () => {
       zip: "",
     },
   });
+  const { is_sold } = formData;
+  const { locality, state, zip } = formData.address_details;
 
+  const [propertyCategories, setPropertyCategories] = useState([]);
+  const [banks, setBanks] = useState([]);
+  const [bankBranches, setBankBranches] = useState([]);
+  const [allStates, setAllStates] = useState([]);
+  const [allCities, setAllCities] = useState([]);
+  const branchSelectBoxRef = useRef();
+  const citySelectBoxRef = useRef();
   const [zipCodeValidationMessage, setZipCodeValidationMessage] = useState("");
+  const [areaValidationMessage, setAreaValidationMessage] = useState("");
 
   // Function to validate zipCodes.
   const zipValidationByState = async (zipValue, stateId) => {
@@ -42,17 +52,6 @@ const AddProperty = () => {
         }
       });
   };
-
-  const { is_sold } = formData;
-  const { locality, state, zip } = formData.address_details;
-
-  const [propertyCategories, setPropertyCategories] = useState([]);
-  const [banks, setBanks] = useState([]);
-  const [bankBranches, setBankBranches] = useState([]);
-  const [allStates, setAllStates] = useState([]);
-  const [allCities, setAllCities] = useState([]);
-  const branchSelectBoxRef = useRef();
-  const citySelectBoxRef = useRef();
 
   const getDataFromApi = async () => {
     const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
