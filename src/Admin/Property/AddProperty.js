@@ -143,9 +143,6 @@ const AddProperty = () => {
         });
         setAllCities(citiesRes.data);
         citySelectBoxRef.current.classList.remove("d-none");
-        // if (zip) {
-        //   zipValidationByState(zip, parseInt(value));
-        // }
       } else {
         citySelectBoxRef.current.classList.add("d-none");
       }
@@ -154,9 +151,6 @@ const AddProperty = () => {
     } else if (name === "zip") {
       if (value) {
         commonFnToSaveAdressDetails(name, value);
-        // if (state) {
-        //   zipValidationByState(value, parseInt(state));
-        // }
       }
     }
   };
@@ -196,19 +190,18 @@ const AddProperty = () => {
       }
     } else {
       console.log(formData);
+      // await axios
+      //   .post(`/sam/v1/property/auth/single-property`, formData, {
+      //     headers: authHeader,
+      //   })
+      //   .then((res) => {
+      //     if (res.data.msg === 0) {
+      //       toast.success("Property added successfully");
+      //     } else {
+      //       toast.error("Internal server error");
+      //     }
+      //   });
     }
-    // await axios
-    //   .post(`/sam/v1/property/auth/single-property`, formData, {
-    //     headers: authHeader,
-    //   })
-    //   .then((res) => {
-    //     if (res.data.msg === 0) {
-    //       toast.success("Property added successfully");
-    //     } else {
-    //       toast.error("Internal server error");
-    //     }
-    //   });
-    // console.log(formData);
   };
 
   useEffect(() => {
