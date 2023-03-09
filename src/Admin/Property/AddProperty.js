@@ -6,6 +6,8 @@ import AdminSideBar from "../AdminSideBar";
 // import BreadCrumb from "./BreadCrumb";
 
 let authHeader = "";
+let zipError = false;
+let areaError = false;
 const AddProperty = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   if (data) {
@@ -24,7 +26,7 @@ const AddProperty = () => {
       zip: "",
     },
   });
-  const { is_sold } = formData;
+  const { is_sold, saleable_area, carpet_area } = formData;
   const { locality, state, zip } = formData.address_details;
 
   const [propertyCategories, setPropertyCategories] = useState([]);
@@ -36,22 +38,6 @@ const AddProperty = () => {
   const citySelectBoxRef = useRef();
   const [zipCodeValidationMessage, setZipCodeValidationMessage] = useState("");
   const [areaValidationMessage, setAreaValidationMessage] = useState("");
-
-  // Function to validate zipCodes.
-  const zipValidationByState = async (zipValue, stateId) => {
-    await axios
-      .post(`/sam/v1/customer-registration/zipcode-validation`, {
-        zipcode: zipValue,
-        state_id: stateId,
-      })
-      .then((res) => {
-        if (res.data.status === 0) {
-          setZipCodeValidationMessage("Invalid ZipCode.");
-        } else {
-          setZipCodeValidationMessage("");
-        }
-      });
-  };
 
   const getDataFromApi = async () => {
     const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
@@ -157,9 +143,9 @@ const AddProperty = () => {
         });
         setAllCities(citiesRes.data);
         citySelectBoxRef.current.classList.remove("d-none");
-        if (zip) {
-          zipValidationByState(zip, parseInt(value));
-        }
+        // if (zip) {
+        //   zipValidationByState(zip, parseInt(value));
+        // }
       } else {
         citySelectBoxRef.current.classList.add("d-none");
       }
@@ -168,27 +154,61 @@ const AddProperty = () => {
     } else if (name === "zip") {
       if (value) {
         commonFnToSaveAdressDetails(name, value);
-        if (state) {
-          zipValidationByState(value, parseInt(state));
-        }
+        // if (state) {
+        //   zipValidationByState(value, parseInt(state));
+        // }
       }
     }
   };
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
+
     await axios
-      .post(`/sam/v1/property/auth/single-property`, formData, {
-        headers: authHeader,
+      .post(`/sam/v1/customer-registration/zipcode-validation`, {
+        zipcode: zip,
+        state_id: parseInt(state),
       })
       .then((res) => {
-        if (res.data.msg === 0) {
-          toast.success("Property added successfully");
+        if (res.data.status === 0) {
+          setZipCodeValidationMessage("Invalid ZipCode.");
+          zipError = true;
         } else {
-          toast.error("Internal server error");
+          setAreaValidationMessage("");
+          zipError = false;
         }
       });
-    console.log(formData);
+
+    if (parseInt(saleable_area) < parseInt(carpet_area)) {
+      setAreaValidationMessage("Carpet area must be less than salable area.");
+      areaError = true;
+    } else {
+      setAreaValidationMessage("");
+      areaError = false;
+    }
+
+    if (zipError || areaError) {
+      if (zipError === false) {
+        setZipCodeValidationMessage("");
+      }
+      if (areaError === false) {
+        setAreaValidationMessage("");
+      }
+    } else {
+      console.log(formData);
+    }
+    // await axios
+    //   .post(`/sam/v1/property/auth/single-property`, formData, {
+    //     headers: authHeader,
+    //   })
+    //   .then((res) => {
+    //     if (res.data.msg === 0) {
+    //       toast.success("Property added successfully");
+    //     } else {
+    //       toast.error("Internal server error");
+    //     }
+    //   });
+    // console.log(formData);
   };
 
   useEffect(() => {
@@ -349,7 +369,7 @@ const AddProperty = () => {
                                 className="form-label common-btn-font"
                                 htmlFor="saleable_area"
                               >
-                                Salable area (sq. ft.)
+                                Saleable area (sq. ft.)
                               </label>
                               <input
                                 type="number"
@@ -371,12 +391,21 @@ const AddProperty = () => {
                               </label>
                               <input
                                 type="number"
-                                className="form-control"
+                                className={`form-control ${
+                                  areaValidationMessage ? "border-danger" : ""
+                                }`}
                                 id="carpet_area"
                                 name="carpet_area"
                                 onChange={onInputChange}
                                 //required
                               />
+                              <span
+                                className={`text-danger ${
+                                  areaValidationMessage ? "" : "d-none"
+                                }`}
+                              >
+                                {areaValidationMessage}
+                              </span>
                             </div>
                           </div>
                         </div>
