@@ -150,17 +150,16 @@ const AddProperty = () => {
       commonFnToSaveAdressDetails(name, parseInt(value));
     } else if (name === "zip") {
       if (value) {
-        commonFnToSaveAdressDetails(name, value);
+        commonFnToSaveAdressDetails(name, parseInt(value));
       }
     }
   };
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
-
     await axios
       .post(`/sam/v1/customer-registration/zipcode-validation`, {
-        zipcode: zip,
+        zipcode: String(zip),
         state_id: parseInt(state),
       })
       .then((res) => {

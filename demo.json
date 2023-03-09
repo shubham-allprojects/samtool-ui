@@ -24,8 +24,8 @@
       "locality": "Urban",
       "address": "Wakad",
       "landmark": "Pune",
-      "state": "Maharashtra",
-      "city": "Pune",
+      "state": 1,
+      "city": 1,
       "zip": 456652
     }
   }
