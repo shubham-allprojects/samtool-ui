@@ -155,6 +155,11 @@ const AddProperty = () => {
     }
   };
 
+  const resetValidationsOnSubmit = () => {
+    setAreaValidationMessage("");
+    setZipCodeValidationMessage("");
+  };
+
   const onFormSubmit = async (e) => {
     e.preventDefault();
     await axios
@@ -195,7 +200,9 @@ const AddProperty = () => {
         })
         .then((res) => {
           if (res.data.msg === 0) {
+            resetValidationsOnSubmit();
             toast.success("Property added successfully");
+            e.target.reset();
           } else {
             toast.error("Internal server error");
           }
