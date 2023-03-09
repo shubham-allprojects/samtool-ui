@@ -190,17 +190,17 @@ const AddProperty = () => {
       }
     } else {
       console.log(formData);
-      // await axios
-      //   .post(`/sam/v1/property/auth/single-property`, formData, {
-      //     headers: authHeader,
-      //   })
-      //   .then((res) => {
-      //     if (res.data.msg === 0) {
-      //       toast.success("Property added successfully");
-      //     } else {
-      //       toast.error("Internal server error");
-      //     }
-      //   });
+      await axios
+        .post(`/sam/v1/property/auth/single-property`, formData, {
+          headers: authHeader,
+        })
+        .then((res) => {
+          if (res.data.msg === 0) {
+            toast.success("Property added successfully");
+          } else {
+            toast.error("Internal server error");
+          }
+        });
     }
   };
 
