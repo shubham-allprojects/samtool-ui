@@ -17,7 +17,7 @@ const AddProperty = () => {
   const [formData, setFormData] = useState({
     is_sold: 0,
     is_available_for_sale: 0,
-    sale_availability_date: "Not Available",
+    sale_availability_date: "2005-12-26 23:50:30",
     status: "",
     is_stressed: 1,
     address_details: {
