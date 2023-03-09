@@ -20,11 +20,31 @@ const AddProperty = () => {
     is_stressed: 1,
     address_details: {
       locality: "Urban",
+      state: "",
+      zip: "",
     },
   });
 
+  const [zipCodeValidationMessage, setZipCodeValidationMessage] = useState("");
+
+  // Function to validate zipCodes.
+  const zipValidationByState = async (zipValue, stateId) => {
+    await axios
+      .post(`/sam/v1/customer-registration/zipcode-validation`, {
+        zipcode: zipValue,
+        state_id: stateId,
+      })
+      .then((res) => {
+        if (res.data.status === 0) {
+          setZipCodeValidationMessage("Invalid ZipCode.");
+        } else {
+          setZipCodeValidationMessage("");
+        }
+      });
+  };
+
   const { is_sold } = formData;
-  const { locality } = formData.address_details;
+  const { locality, state, zip } = formData.address_details;
 
   const [propertyCategories, setPropertyCategories] = useState([]);
   const [banks, setBanks] = useState([]);
@@ -72,7 +92,6 @@ const AddProperty = () => {
         const branchRes = await axios.get(`/sam/v1/property/auth/${value}`, {
           headers: authHeader,
         });
-        console.log(branchRes.data);
         setBankBranches(branchRes.data);
       } else {
         branchSelectBoxRef.current.classList.add("d-none");
@@ -139,13 +158,21 @@ const AddProperty = () => {
         });
         setAllCities(citiesRes.data);
         citySelectBoxRef.current.classList.remove("d-none");
+        if (zip) {
+          zipValidationByState(zip, parseInt(value));
+        }
       } else {
         citySelectBoxRef.current.classList.add("d-none");
       }
     } else if (name === "city") {
       commonFnToSaveAdressDetails(name, parseInt(value));
     } else if (name === "zip") {
-      commonFnToSaveAdressDetails(name, parseInt(value));
+      if (value) {
+        commonFnToSaveAdressDetails(name, value);
+        if (state) {
+          zipValidationByState(value, parseInt(state));
+        }
+      }
     }
   };
 
@@ -737,8 +764,19 @@ const AddProperty = () => {
                                 onChange={onInputChange}
                                 id="zip"
                                 name="zip"
-                                className="form-control"
+                                className={`form-control ${
+                                  zipCodeValidationMessage
+                                    ? "border-danger"
+                                    : ""
+                                }`}
                               ></input>
+                              <span
+                                className={`text-danger ${
+                                  zipCodeValidationMessage ? "" : "d-none"
+                                }`}
+                              >
+                                {zipCodeValidationMessage}
+                              </span>
                             </div>
                           </div>
                         </div>
