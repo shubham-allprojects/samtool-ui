@@ -243,7 +243,7 @@ const AddProperty = () => {
                                 name="property_type"
                                 className="form-select"
                                 onChange={onInputChange}
-                                //required
+                                required
                               >
                                 <option value=""></option>
                                 {propertyCategories ? (
@@ -277,7 +277,7 @@ const AddProperty = () => {
                                 name="property_number"
                                 className="form-control"
                                 onChange={onInputChange}
-                                //required
+                                required
                               />
                             </div>
                           </div>
@@ -294,7 +294,7 @@ const AddProperty = () => {
                                 name="bank"
                                 className="form-select"
                                 onChange={onInputChange}
-                                //required
+                                required
                               >
                                 <option value=""></option>
                                 {banks ? (
@@ -330,7 +330,7 @@ const AddProperty = () => {
                                 name="bank_branch_id"
                                 className="form-select"
                                 onChange={onInputChange}
-                                //required
+                                required
                               >
                                 <option value=""></option>
                                 {bankBranches ? (
@@ -370,7 +370,7 @@ const AddProperty = () => {
                                 id="saleable_area"
                                 name="saleable_area"
                                 onChange={onInputChange}
-                                //required
+                                required
                               />
                             </div>
                           </div>
@@ -390,7 +390,7 @@ const AddProperty = () => {
                                 id="carpet_area"
                                 name="carpet_area"
                                 onChange={onInputChange}
-                                //required
+                                required
                               />
                               <span
                                 className={`text-danger ${
@@ -422,7 +422,7 @@ const AddProperty = () => {
                                 id="market_price"
                                 name="market_price"
                                 onChange={onInputChange}
-                                //required
+                                required
                               />
                             </div>
                           </div>
@@ -440,7 +440,7 @@ const AddProperty = () => {
                                 name="ready_reckoner_price"
                                 className="form-control"
                                 onChange={onInputChange}
-                                //required
+                                required
                               />
                             </div>
                           </div>
@@ -458,7 +458,7 @@ const AddProperty = () => {
                                 id="expected_price"
                                 name="expected_price"
                                 onChange={onInputChange}
-                                //required
+                                required
                               />
                             </div>
                           </div>
@@ -485,7 +485,7 @@ const AddProperty = () => {
                                 id="completion_date"
                                 name="completion_date"
                                 onChange={onInputChange}
-                                //required
+                                required
                               />
                             </div>
                           </div>
@@ -503,7 +503,7 @@ const AddProperty = () => {
                                 id="purchase_date"
                                 name="purchase_date"
                                 onChange={onInputChange}
-                                //required
+                                required
                               />
                             </div>
                           </div>
@@ -521,7 +521,7 @@ const AddProperty = () => {
                                 id="mortgage_date"
                                 name="mortgage_date"
                                 onChange={onInputChange}
-                                //required
+                                required
                               />
                             </div>
                           </div>
@@ -538,7 +538,7 @@ const AddProperty = () => {
                                 name="is_sold"
                                 className="form-select"
                                 onChange={onInputChange}
-                                //required
+                                required
                               >
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
@@ -562,7 +562,7 @@ const AddProperty = () => {
                                 name="is_available_for_sale"
                                 className="form-select"
                                 onChange={onInputChange}
-                                //required
+                                required
                               >
                                 <option id="notForSale" value="0">
                                   No
@@ -589,7 +589,7 @@ const AddProperty = () => {
                                 id="sale_availability_date"
                                 name="sale_availability_date"
                                 onChange={onInputChange}
-                                //required={is_sold === 1 ? false : true}
+                                required={is_sold === 1 ? false : true}
                               />
                             </div>
                           </div>
@@ -716,7 +716,7 @@ const AddProperty = () => {
                                 name="state"
                                 className="form-select"
                                 onChange={onInputChange}
-                                //required
+                                required
                               >
                                 <option value=""></option>
                                 {allStates ? (
@@ -752,7 +752,7 @@ const AddProperty = () => {
                                 name="city"
                                 className="form-select"
                                 onChange={onInputChange}
-                                //required
+                                required
                               >
                                 <option value=""></option>
                                 {allCities ? (
