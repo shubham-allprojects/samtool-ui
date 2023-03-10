@@ -533,13 +533,11 @@ const AddProperty = () => {
                           </div>
                           <div className="col-xl-4 col-md-6 mb-3 mb-xl-0">
                             <div className="form-group">
-                              <label
-                                className="form-label common-btn-font"
-                                htmlFor="is_sold"
-                              >
+                              <label className="form-label common-btn-font">
                                 Is sold?
                               </label>
-                              <select
+                              <br />
+                              {/* <select
                                 id="is_sold"
                                 name="is_sold"
                                 className="form-select"
@@ -548,7 +546,37 @@ const AddProperty = () => {
                               >
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
-                              </select>
+                              </select> */}
+                              <div class="form-check form-check-inline">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  name="is_sold"
+                                  value="1"
+                                  onChange={onInputChange}
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="inlineRadio1"
+                                >
+                                  Yes
+                                </label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  name="is_sold"
+                                  value="0"
+                                  onChange={onInputChange}
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="inlineRadio2"
+                                >
+                                  No
+                                </label>
+                              </div>
                             </div>
                           </div>
                           <div
