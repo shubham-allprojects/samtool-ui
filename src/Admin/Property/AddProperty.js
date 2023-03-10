@@ -239,7 +239,7 @@ const AddProperty = () => {
                               Basic details
                             </h5>
                           </div>
-                          <div className="col-xl-4 col-md-6">
+                          <div className="col-xl-4 col-md-6 mt-3 mt-md-0">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -272,7 +272,7 @@ const AddProperty = () => {
                               </select>
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6">
+                          <div className="col-xl-4 col-md-6 mt-3 mt-md-0">
                             <div className="form-group">
                               <label
                                 htmlFor="property_number"
@@ -290,7 +290,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6 mt-md-3 mt-xl-0">
+                          <div className="col-xl-4 col-md-6 mt-3 mt-xl-0">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -357,6 +357,44 @@ const AddProperty = () => {
                                   <></>
                                 )}
                               </select>
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mt-3">
+                            <div className="form-group">
+                              <label className="form-label common-btn-font">
+                                Is stressed?
+                              </label>
+                              <br />
+                              <div className="form-check form-check-inline">
+                                <input
+                                  className="form-check-input"
+                                  type="radio"
+                                  name="is_stressed"
+                                  value="1"
+                                  onChange={onInputChange}
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor="inlineRadio1"
+                                >
+                                  Yes
+                                </label>
+                              </div>
+                              <div className="form-check form-check-inline">
+                                <input
+                                  className="form-check-input"
+                                  type="radio"
+                                  name="is_stressed"
+                                  value="0"
+                                  onChange={onInputChange}
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor="inlineRadio2"
+                                >
+                                  No
+                                </label>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -540,16 +578,6 @@ const AddProperty = () => {
                                 Is sold?
                               </label>
                               <br />
-                              {/* <select
-                                id="is_sold"
-                                name="is_sold"
-                                className="form-select"
-                                onChange={onInputChange}
-                                required
-                              >
-                                <option value="0">No</option>
-                                <option value="1">Yes</option>
-                              </select> */}
                               <div className="form-check form-check-inline">
                                 <input
                                   className="form-check-input"
