@@ -239,7 +239,7 @@ const AddProperty = () => {
                               Basic details
                             </h5>
                           </div>
-                          <div className="col-xl-4 col-md-6 mt-3 mt-md-0">
+                          <div className="col-xl-4 col-md-6">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -421,7 +421,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6">
+                          <div className="col-xl-4 col-md-6 mt-3 mt-md-0">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -473,7 +473,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6">
+                          <div className="col-xl-4 col-md-6 mt-3 mt-md-0">
                             <div className="form-group">
                               <label
                                 htmlFor="ready_reckoner_price"
@@ -491,7 +491,7 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6 mt-md-3 mt-xl-0">
+                          <div className="col-xl-4 col-md-6 mt-3 mt-xl-0">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -638,7 +638,7 @@ const AddProperty = () => {
                             </div>
                           </div>
                           <div
-                            className={`col-xl-4 col-md-6 mb-3 mb-xl-0 ${
+                            className={`col-xl-4 col-md-6 ${
                               is_sold === 1 ? "d-none" : ""
                             }`}
                           >
