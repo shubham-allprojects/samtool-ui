@@ -34,10 +34,11 @@ const AddProperty = () => {
   const [bankBranches, setBankBranches] = useState([]);
   const [allStates, setAllStates] = useState([]);
   const [allCities, setAllCities] = useState([]);
-  const branchSelectBoxRef = useRef();
-  const citySelectBoxRef = useRef();
   const [zipCodeValidationMessage, setZipCodeValidationMessage] = useState("");
   const [areaValidationMessage, setAreaValidationMessage] = useState("");
+  const branchSelectBoxRef = useRef();
+  const citySelectBoxRef = useRef();
+  const notSoldCheckRef = useRef();
 
   const getDataFromApi = async () => {
     const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
@@ -102,6 +103,7 @@ const AddProperty = () => {
     } else if (name === "is_sold") {
       const notForSale = document.getElementById("notForSale");
       if (value === "1") {
+        notSoldCheckRef.current.removeAttribute("checked");
         if (notForSale) {
           notForSale.selected = true;
         }
@@ -211,6 +213,7 @@ const AddProperty = () => {
   };
 
   useEffect(() => {
+    notSoldCheckRef.current.setAttribute("checked", "true");
     getDataFromApi();
   }, []);
 
@@ -547,32 +550,33 @@ const AddProperty = () => {
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
                               </select> */}
-                              <div class="form-check form-check-inline">
+                              <div className="form-check form-check-inline">
                                 <input
-                                  class="form-check-input"
+                                  className="form-check-input"
                                   type="radio"
                                   name="is_sold"
                                   value="1"
                                   onChange={onInputChange}
                                 />
                                 <label
-                                  class="form-check-label"
-                                  for="inlineRadio1"
+                                  className="form-check-label"
+                                  htmlFor="inlineRadio1"
                                 >
                                   Yes
                                 </label>
                               </div>
-                              <div class="form-check form-check-inline">
+                              <div className="form-check form-check-inline">
                                 <input
-                                  class="form-check-input"
+                                  className="form-check-input"
                                   type="radio"
                                   name="is_sold"
                                   value="0"
                                   onChange={onInputChange}
+                                  ref={notSoldCheckRef}
                                 />
                                 <label
-                                  class="form-check-label"
-                                  for="inlineRadio2"
+                                  className="form-check-label"
+                                  htmlFor="inlineRadio2"
                                 >
                                   No
                                 </label>
