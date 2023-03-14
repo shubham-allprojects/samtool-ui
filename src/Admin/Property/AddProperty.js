@@ -402,6 +402,24 @@ const AddProperty = () => {
                               </div>
                             </div>
                           </div>
+                          <div className="col-xl-4 col-md-6 mt-3">
+                            <div className="form-group">
+                              <label
+                                htmlFor="status"
+                                className="form-label common-btn-font"
+                              >
+                                Status
+                              </label>
+                              <br />
+                              <input
+                                onChange={onInputChange}
+                                id="status"
+                                name="status"
+                                type="text"
+                                className="form-control"
+                              />
+                            </div>
+                          </div>
                         </div>
                         {/* Row 2 - Area Details*/}
                         <div className="row mb-3">
