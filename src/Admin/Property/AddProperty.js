@@ -16,7 +16,7 @@ const AddProperty = () => {
 
   const [formData, setFormData] = useState({
     is_sold: 0,
-    is_available_for_sale: 0,
+    is_available_for_sale: 1,
     sale_availability_date: "2005-12-26 23:50:30",
     status: "",
     is_stressed: 1,
@@ -116,6 +116,7 @@ const AddProperty = () => {
         setFormData({
           ...formData,
           [name]: parseInt(value),
+          is_available_for_sale: 1,
         });
       }
     } else if (name === "is_available_for_sale") {
@@ -630,10 +631,10 @@ const AddProperty = () => {
                                 onChange={onInputChange}
                                 required
                               >
-                                <option id="notForSale" value="0">
-                                  No
+                                <option id="notForSale" value="1">
+                                  Yes
                                 </option>
-                                <option value="1">Yes</option>
+                                <option value="0">No</option>
                               </select>
                             </div>
                           </div>
