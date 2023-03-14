@@ -105,36 +105,24 @@ const AddProperty = () => {
       commonFnToSaveFormData(name, value);
     } else if (name === "mortgage_date") {
       commonFnToSaveFormData(name, value);
-    } 
-    // else if (name === "is_sold") {
-    //   const notForSale = document.getElementById("notForSale");
-    //   if (value === "1") {
-    //     notSoldCheckRef.current.removeAttribute("checked");
-    //     if (notForSale) {
-    //       notForSale.selected = true;
-    //     }
-    //     setFormData({
-    //       ...formData,
-    //       [name]: parseInt(value),
-    //       is_available_for_sale: 0,
-    //     });
-    //   } else {
-    //     setFormData({
-    //       ...formData,
-    //       [name]: parseInt(value),
-    //       is_available_for_sale: 1,
-    //     });
-    //   }
-    // } 
-    else if (name === "is_sold") {
+    } else if (name === "is_sold") {
+      const notForSale = document.getElementById("notForSale");
       if (value === "1") {
-        if (soldCheckRef2) {
-          soldCheckRef2.current.removeAttribute("checked");
+        notSoldCheckRef.current.removeAttribute("checked");
+        if (notForSale) {
+          notForSale.selected = true;
         }
+        setFormData({
+          ...formData,
+          [name]: parseInt(value),
+          is_available_for_sale: 0,
+        });
       } else {
-        if (soldCheckRef2) {
-          soldCheckRef2.current.setAttribute("checked", "true");
-        }
+        setFormData({
+          ...formData,
+          [name]: parseInt(value),
+          is_available_for_sale: 1,
+        });
       }
     } else if (name === "is_available_for_sale") {
       setFormData({
@@ -703,14 +691,14 @@ const AddProperty = () => {
                           >
                             <div className="form-group">
                               <label className="form-label common-btn-font">
-                                Is sold2?
+                                Is available for sale2
                               </label>
                               <br />
                               <div className="form-check form-check-inline">
                                 <input
                                   className="form-check-input"
                                   type="radio"
-                                  name="is_sold2"
+                                  name="is_available_for_sale2"
                                   value="1"
                                   onChange={onInputChange}
                                   ref={soldCheckRef2}
@@ -726,7 +714,7 @@ const AddProperty = () => {
                                 <input
                                   className="form-check-input"
                                   type="radio"
-                                  name="is_sold2"
+                                  name="is_available_for_sale2"
                                   value="0"
                                   onChange={onInputChange}
                                 />
