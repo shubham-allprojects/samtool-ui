@@ -144,18 +144,23 @@ const UploadProperties = () => {
       Math.round((dataToPost.chunk_number / dataToPost.total_chunks) * 100)
     );
     // setProgressModalOpen(true);
-    await axios.post(url, dataToPost, { headers: headers }).then((res) => {
-      setProgressModalOpen(true);
-      if (isLastChunk) {
-        if (res.data.msg === 0) {
-          // setUniqueUploadId(uuid());
-        } else {
-          setProgressModalOpen(false);
-          toast.error("Duplicate data");
-          onCancelClick();
+    try {
+      await axios.post(url, dataToPost, { headers: headers }).then((res) => {
+        setProgressModalOpen(true);
+        if (isLastChunk) {
+          if (res.data.msg === 0) {
+            // setUniqueUploadId(uuid());
+          } else {
+            setProgressModalOpen(false);
+            toast.error("Duplicate data");
+            onCancelClick();
+          }
         }
-      }
-    });
+      });
+    } catch (error) {
+      toast.error("Internal server error");
+    }
+
     if (isLastChunk) {
       setLastUploadedFileIndex(currentFileIndex);
       setCurrentChunkIndex(null);
