@@ -39,6 +39,7 @@ const AddProperty = () => {
   const branchSelectBoxRef = useRef();
   const citySelectBoxRef = useRef();
   const notSoldCheckRef = useRef();
+  const soldCheckRef2 = useRef();
 
   const getDataFromApi = async () => {
     const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
@@ -104,24 +105,36 @@ const AddProperty = () => {
       commonFnToSaveFormData(name, value);
     } else if (name === "mortgage_date") {
       commonFnToSaveFormData(name, value);
-    } else if (name === "is_sold") {
-      const notForSale = document.getElementById("notForSale");
+    } 
+    // else if (name === "is_sold") {
+    //   const notForSale = document.getElementById("notForSale");
+    //   if (value === "1") {
+    //     notSoldCheckRef.current.removeAttribute("checked");
+    //     if (notForSale) {
+    //       notForSale.selected = true;
+    //     }
+    //     setFormData({
+    //       ...formData,
+    //       [name]: parseInt(value),
+    //       is_available_for_sale: 0,
+    //     });
+    //   } else {
+    //     setFormData({
+    //       ...formData,
+    //       [name]: parseInt(value),
+    //       is_available_for_sale: 1,
+    //     });
+    //   }
+    // } 
+    else if (name === "is_sold") {
       if (value === "1") {
-        notSoldCheckRef.current.removeAttribute("checked");
-        if (notForSale) {
-          notForSale.selected = true;
+        if (soldCheckRef2) {
+          soldCheckRef2.current.removeAttribute("checked");
         }
-        setFormData({
-          ...formData,
-          [name]: parseInt(value),
-          is_available_for_sale: 0,
-        });
       } else {
-        setFormData({
-          ...formData,
-          [name]: parseInt(value),
-          is_available_for_sale: 1,
-        });
+        if (soldCheckRef2) {
+          soldCheckRef2.current.setAttribute("checked", "true");
+        }
       }
     } else if (name === "is_available_for_sale") {
       setFormData({
@@ -219,6 +232,7 @@ const AddProperty = () => {
 
   useEffect(() => {
     notSoldCheckRef.current.setAttribute("checked", "true");
+    soldCheckRef2.current.setAttribute("checked", "true");
     getDataFromApi();
   }, []);
 
@@ -680,6 +694,49 @@ const AddProperty = () => {
                                 onChange={onInputChange}
                                 required={is_sold === 1 ? false : true}
                               />
+                            </div>
+                          </div>
+                          <div
+                            className={`col-xl-4 col-md-6 mb-3 mb-xl-0 ${
+                              is_sold === 1 ? "d-none" : ""
+                            }`}
+                          >
+                            <div className="form-group">
+                              <label className="form-label common-btn-font">
+                                Is sold2?
+                              </label>
+                              <br />
+                              <div className="form-check form-check-inline">
+                                <input
+                                  className="form-check-input"
+                                  type="radio"
+                                  name="is_sold2"
+                                  value="1"
+                                  onChange={onInputChange}
+                                  ref={soldCheckRef2}
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor="inlineRadio1"
+                                >
+                                  Yes
+                                </label>
+                              </div>
+                              <div className="form-check form-check-inline">
+                                <input
+                                  className="form-check-input"
+                                  type="radio"
+                                  name="is_sold2"
+                                  value="0"
+                                  onChange={onInputChange}
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor="inlineRadio2"
+                                >
+                                  No
+                                </label>
+                              </div>
                             </div>
                           </div>
                         </div>

@@ -504,7 +504,10 @@ const Registration = () => {
         }
         setFormData({
           ...formData,
-          contact_details: { ...formData.contact_details, [name]: stateName },
+          contact_details: {
+            ...formData.contact_details,
+            [name]: parseInt(value),
+          },
         });
         const allCities = await axios.post(`/sam/v1/property/by-city`, {
           state_id: parseInt(value),
@@ -518,13 +521,18 @@ const Registration = () => {
         }
       }
     } else if (name === "city") {
-      setValues(name, value);
+      let cityName = "";
+      let getCityName = document.getElementById(`city-name-${value}`);
+      if (getCityName) {
+        cityName = getCityName.innerText;
+        setValues(name, cityName);
+      }
       setFormData({
         ...formData,
         contact_details: {
           ...formData.contact_details,
-          [name]: value,
-          address: value,
+          [name]: parseInt(value),
+          address: cityName,
         },
       });
     } else if (name === "flat_number") {
@@ -1118,7 +1126,11 @@ const Registration = () => {
                         {citiesByState
                           ? citiesByState.map((city, Index) => {
                               return (
-                                <option key={Index} value={city.city_name}>
+                                <option
+                                  id={`city-name-${city.city_id}`}
+                                  key={Index}
+                                  value={city.city_id}
+                                >
                                   {city.city_name}
                                 </option>
                               );
