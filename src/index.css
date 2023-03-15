@@ -783,6 +783,11 @@ input:-webkit-autofill:active {
 
 .property-button-wrapper {
   border-radius: 50% !important;
+  height: 40px;
+  width: 40px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Edit Property */

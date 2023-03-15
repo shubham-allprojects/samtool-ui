@@ -95,21 +95,21 @@ const ViewAllProperties = () => {
                                     " Cr."}
                                 </span>
                                 <br />
-                                <div className="mt-3">
+                                <div className="mt-3 d-flex">
                                   <NavLink
                                     to={`/admin/property/properties/view-property/${property.property_id}`}
                                     className="btn btn-sm btn-outline-success property-button-wrapper"
                                   >
                                     <i className="bi bi-eye-fill"></i>
                                   </NavLink>
-                                  <button className="ms-2 btn btn-sm btn-outline-primary property-button-wrapper">
+                                  <button className="mx-2 btn btn-sm btn-outline-primary property-button-wrapper">
                                     <i className="bi bi-pencil-fill"></i>
                                   </button>
                                   <button
                                     // onClick={() => {
                                     //   deleteProperty(property._id);
                                     // }}
-                                    className="ms-2 btn btn-sm btn-outline-danger property-button-wrapper"
+                                    className="btn btn-sm btn-outline-danger property-button-wrapper"
                                   >
                                     <i className="bi bi-trash-fill"></i>
                                   </button>
