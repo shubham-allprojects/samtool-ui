@@ -761,7 +761,7 @@ input:-webkit-autofill:active {
   position: relative;
 }
 
-/* Admin */
+/* Admin  */
 
 .scrollable-right-div {
   max-height: 100vh;
@@ -796,11 +796,7 @@ input:-webkit-autofill:active {
   align-items: center;
 }
 
-/* Edit Property */
-.admin-property-edit-icon {
-  right: 15px;
-  top: 10px;
-}
+/* Bulk upload properties*/
 
 .csv-data-table {
   height: 400px;
