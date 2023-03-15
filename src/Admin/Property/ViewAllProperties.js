@@ -98,15 +98,18 @@ const ViewAllProperties = () => {
                                 <div className="mt-3">
                                   <NavLink
                                     to={`/admin/property/properties/edit-property/${property._id}`}
-                                    className="btn btn-outline-primary"
+                                    className="btn btn-sm btn-outline-success"
                                   >
-                                    Edit
+                                    View
                                   </NavLink>
+                                  <button className="ms-2 btn btn-sm btn-outline-primary">
+                                    Edit
+                                  </button>
                                   <button
                                     // onClick={() => {
                                     //   deleteProperty(property._id);
                                     // }}
-                                    className="ms-2 btn btn-outline-danger"
+                                    className="ms-2 btn btn-sm btn-outline-danger"
                                   >
                                     Delete
                                   </button>
