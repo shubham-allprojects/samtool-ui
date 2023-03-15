@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -5,10 +6,23 @@ import { rootTitle } from "../../CommonFunctions";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
-import propertyData from "./data.json";
+// import propertyData from "./data.json";
 
+let authHeader = "";
 const ViewAllProperties = () => {
-  const [properties, setProperties] = useState(propertyData);
+  const data = JSON.parse(localStorage.getItem("data"));
+  if (data) {
+    authHeader = { Authorization: data.logintoken };
+  }
+  const [properties, setProperties] = useState([]);
+
+  const getPropertiesFromApi = async () => {
+    const propertiesRes = await axios.get(
+      `/sam/v1/property/auth/all-properties`,
+      { headers: authHeader }
+    );
+    setProperties(propertiesRes.data);
+  };
 
   const deleteProperty = (propertyId) => {
     const propertiesToShow = properties.filter((property) => {
@@ -26,6 +40,7 @@ const ViewAllProperties = () => {
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
+    getPropertiesFromApi();
   }, []);
 
   return (
@@ -63,7 +78,7 @@ const ViewAllProperties = () => {
                                   {/* {property.title} */}
                                 </h3>
                                 <span className="text-capitalize fw-bold">
-                                  {property.count + " " + property.category}
+                                  {property.category}
                                 </span>
                                 <br />
                                 <span className="text-capitalize">
@@ -95,9 +110,9 @@ const ViewAllProperties = () => {
                                     Edit
                                   </NavLink>
                                   <button
-                                    onClick={() => {
-                                      deleteProperty(property._id);
-                                    }}
+                                    // onClick={() => {
+                                    //   deleteProperty(property._id);
+                                    // }}
                                     className="ms-2 btn btn-outline-danger"
                                   >
                                     Delete
@@ -112,14 +127,14 @@ const ViewAllProperties = () => {
                   </div>
                 </div>
                 <hr />
-                <div className="text-end">
+                {/* <div className="text-end">
                   <button
                     onClick={deleteAllProperties}
                     className="btn btn-outline-danger"
                   >
                     Delete All
                   </button>
-                </div>
+                </div> */}
               </section>
             )}
           </div>
