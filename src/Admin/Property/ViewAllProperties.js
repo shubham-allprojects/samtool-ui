@@ -57,7 +57,7 @@ const ViewAllProperties = () => {
                   <div className="row">
                     {properties.map((property, Index) => {
                       return (
-                        <div className="col-lg-3 col-md-4" key={Index}>
+                        <div className="col-lg-3 col-md-6" key={Index}>
                           <div className="admin-property-card-wrapper">
                             <div className="card mb-4">
                               <div className="top-line"></div>
@@ -98,20 +98,20 @@ const ViewAllProperties = () => {
                                 <div className="mt-3">
                                   <NavLink
                                     to={`/admin/property/properties/view-property/${property.property_id}`}
-                                    className="btn btn-sm btn-outline-success"
+                                    className="btn btn-sm btn-outline-success property-button-wrapper"
                                   >
-                                    View
+                                    <i className="bi bi-eye-fill"></i>
                                   </NavLink>
-                                  <button className="ms-2 btn btn-sm btn-outline-primary">
-                                    Edit
+                                  <button className="ms-2 btn btn-sm btn-outline-primary property-button-wrapper">
+                                    <i className="bi bi-pencil-fill"></i>
                                   </button>
                                   <button
                                     // onClick={() => {
                                     //   deleteProperty(property._id);
                                     // }}
-                                    className="ms-2 btn btn-sm btn-outline-danger"
+                                    className="ms-2 btn btn-sm btn-outline-danger property-button-wrapper"
                                   >
-                                    Delete
+                                    <i className="bi bi-trash-fill"></i>
                                   </button>
                                 </div>
                               </div>

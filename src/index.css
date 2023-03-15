@@ -779,6 +779,12 @@ input:-webkit-autofill:active {
   align-items: center;
 }
 
+/* View all properties */
+
+.property-button-wrapper {
+  border-radius: 50% !important;
+}
+
 /* Edit Property */
 .admin-property-edit-icon {
   right: 15px;
