@@ -523,7 +523,8 @@ input:-webkit-autofill:active {
   color: var(--secondary-color);
 }
 
-.individual-label.active {
+.individual-label.active,
+.organization-label.active {
   color: var(--secondary-color);
   font-weight: 500;
   border-bottom: 2px solid var(--secondary-color);

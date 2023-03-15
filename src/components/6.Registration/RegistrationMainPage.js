@@ -78,16 +78,16 @@ const Registration = () => {
 
   // Things to be changed when we change form i.e. either individual or organization.
   const [toggleForms, setToggleForms] = useState({
-    individualSelected: true,
-    organizationSelected: false,
+    individualActiveClass: "active",
+    organizationActiveClass: "",
     individualDisplay: "",
     organizationDisplay: "d-none",
   });
 
   // Object destructuring.
   const {
-    individualSelected,
-    organizationSelected,
+    individualActiveClass,
+    organizationActiveClass,
     individualDisplay,
     organizationDisplay,
   } = toggleForms;
@@ -175,25 +175,6 @@ const Registration = () => {
       });
   };
 
-  const showOrganizationForm = () => {
-    resetValues();
-    setFormData({
-      ...formData,
-      contact_details: { user_type: "Organizational User" },
-    });
-
-    // Reset form fields and validations.
-    document.getElementById("individualForm").reset();
-    // Toggle checkbox and visibility of forms.
-    setToggleForms({
-      ...toggleForms,
-      organizationSelected: true,
-      organizationDisplay: "",
-      individualSelected: false,
-      individualDisplay: "d-none",
-    });
-  };
-
   const showIndividualForm = () => {
     setFormData({
       ...formData,
@@ -206,11 +187,28 @@ const Registration = () => {
 
     // Toggle checkbox and visibility of forms.
     setToggleForms({
-      ...toggleForms,
-      individualSelected: true,
+      individualActiveClass: "active",
+      organizationActiveClass: "",
       individualDisplay: "",
-      organizationSelected: false,
       organizationDisplay: "d-none",
+    });
+  };
+
+  const showOrganizationForm = () => {
+    resetValues();
+    setFormData({
+      ...formData,
+      contact_details: { user_type: "Organizational User" },
+    });
+
+    // Reset form fields and validations.
+    document.getElementById("individualForm").reset();
+    // Toggle checkbox and visibility of forms.
+    setToggleForms({
+      individualActiveClass: "",
+      organizationActiveClass: "active",
+      individualDisplay: "d-none",
+      organizationDisplay: "",
     });
   };
 
@@ -707,15 +705,15 @@ const Registration = () => {
                         </label>
                       </div> */}
                       <div
-                        className="individual-label active me-2"
+                        className={`individual-label ${individualActiveClass}`}
                         name="individual"
                         onClick={changeForm}
                       >
                         Individual
                       </div>
-                      <div>|</div>
+                      <div className="mx-2">|</div>
                       <div
-                        className="organization-label ms-2"
+                        className={`organization-label ${organizationActiveClass}`}
                         name="organization"
                         onClick={changeForm}
                       >
