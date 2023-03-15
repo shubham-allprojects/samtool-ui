@@ -47,7 +47,7 @@ const ViewAllProperties = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-8 mt-4 mt-md-0">
+          <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
             <BreadCrumb />
             <h1 className="text-center text-primary fw-bold">Properties</h1>
             <hr />

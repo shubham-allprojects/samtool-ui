@@ -123,7 +123,7 @@ const AdminHomePage = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-md-8 mt-4 mt-md-0">
+          <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
             <div className="container-fluid wrapper admin-home-wrapper">
               <div className="row">
                 <div className="col-xl-3 col-md-6">
