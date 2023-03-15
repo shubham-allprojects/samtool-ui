@@ -2,11 +2,17 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const BreadCrumb = ({ userType, emailOfCurrentUser, typeOfUser }) => {
+const BreadCrumb = ({
+  userType,
+  emailOfCurrentUser,
+  typeOfUser,
+}) => {
   const [isUserPageActive, setIsUserPageActive] = useState(false);
+  const [isPropertyPageActive, setIsPropertyPageActive] = useState(false);
   // If we are on Users section in admin then isUserPageActive will be true.
   const testFn = () => {
     setIsUserPageActive(window.location.href.includes("/admin/users"));
+    setIsPropertyPageActive(window.location.href.includes("/admin/property"));
   };
 
   useEffect(() => {
@@ -44,14 +50,15 @@ const BreadCrumb = ({ userType, emailOfCurrentUser, typeOfUser }) => {
                 <></>
               )}
             </>
+          ) : isPropertyPageActive ? (
+            <>
+              <NavLink to="/admin/property/properties" className="breadcrumb-item">
+                Properties
+              </NavLink>
+            </>
           ) : (
             <></>
           )}
-
-          {/* <NavLink to="/admin/property" className="breadcrumb-item">
-            Properties
-          </NavLink> */}
-          {/* <li className="breadcrumb-item text-secondary">{property}</li> */}
         </ol>
       </nav>
     </>
