@@ -94,7 +94,7 @@ const VerifyToken = () => {
                         type="text"
                         className="form-control"
                         placeholder="Enter Your Token"
-                        onChange={(e) => setEnteredToken(e.target.value)}
+                        onChange={(e) => setEnteredToken(e.target.value.trim())}
                         required
                       />
                     </div>
