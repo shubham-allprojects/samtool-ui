@@ -75,9 +75,12 @@ const AddProperty = () => {
     } else if (name === "bank") {
       if (value) {
         branchSelectBoxRef.current.classList.remove("d-none");
-        const branchRes = await axios.get(`/sam/v1/property/auth/${value}`, {
-          headers: authHeader,
-        });
+        const branchRes = await axios.get(
+          `/sam/v1/property/auth/bank-branches/${value}`,
+          {
+            headers: authHeader,
+          }
+        );
         setBankBranches(branchRes.data);
       } else {
         branchSelectBoxRef.current.classList.add("d-none");
