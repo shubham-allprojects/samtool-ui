@@ -32,12 +32,6 @@ const ViewAllProperties = () => {
     setProperties(propertiesToShow);
   };
 
-  const deleteAllProperties = () => {
-    toast.success("Deleted All Properties");
-    setProperties([]);
-    window.scrollTo(0, 0);
-  };
-
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
     getPropertiesFromApi();
@@ -126,15 +120,6 @@ const ViewAllProperties = () => {
                     })}
                   </div>
                 </div>
-                <hr />
-                {/* <div className="text-end">
-                  <button
-                    onClick={deleteAllProperties}
-                    className="btn btn-outline-danger"
-                  >
-                    Delete All
-                  </button>
-                </div> */}
               </section>
             )}
           </div>
