@@ -26,7 +26,7 @@ const ViewAllProperties = () => {
     setProperties(propertiesRes.data);
     setTimeout(() => {
       setLoading(false);
-    }, 800);
+    }, 600);
   };
 
   const deleteProperty = (propertyId) => {
