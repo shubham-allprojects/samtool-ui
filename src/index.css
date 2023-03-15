@@ -517,10 +517,16 @@ input:-webkit-autofill:active {
   margin-top: 0.1rem !important;
 }
 
-.toggle-label:hover {
+.individual-label:hover,
+.organization-label:hover {
   cursor: pointer;
-  color: #337ab7;
-  text-decoration: underline;
+  color: var(--secondary-color);
+}
+
+.individual-label.active {
+  color: var(--secondary-color);
+  font-weight: 500;
+  border-bottom: 2px solid var(--secondary-color);
 }
 
 .registration-address-modal {

@@ -669,8 +669,8 @@ const Registration = () => {
                       <hr />
                     </div>
                     {/*  Checkboxes - Individual & Organization */}
-                    <div className="col-lg-12">
-                      <div className="form-check form-check-inline">
+                    <div className="col-lg-12 d-flex">
+                      {/* <div className="form-check form-check-inline">
                         <input
                           className="form-check-input"
                           type="checkbox"
@@ -705,16 +705,34 @@ const Registration = () => {
                         >
                           Organization
                         </label>
+                      </div> */}
+                      <div
+                        className="individual-label active me-2"
+                        name="individual"
+                        onClick={changeForm}
+                      >
+                        Individual
+                      </div>
+                      <div>|</div>
+                      <div
+                        className="organization-label ms-2"
+                        name="organization"
+                        onClick={changeForm}
+                      >
+                        Organization
                       </div>
                     </div>
+                    <div className="col-12">
+                      <hr />
+                    </div>
+
                     {/* Individual Main Form */}
                     <form
                       id="individualForm"
                       onSubmit={onIndividualFormSubmit}
-                      action=""
                       className={`row ${individualDisplay} IndividualForm`}
                     >
-                      <div className="col-lg-12 mt-3">
+                      <div className="col-lg-12">
                         {/* Full Name */}
                         <div className="row fullNameRow">
                           <div className="col-lg-2 mb-lg-0 mb-2">Full Name</div>
