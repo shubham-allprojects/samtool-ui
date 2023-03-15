@@ -807,7 +807,7 @@ const Registration = () => {
                       action=""
                       className={`row ${organizationDisplay} OrganizationForm`}
                     >
-                      <div className="col-lg-12 mt-3">
+                      <div className="col-lg-12">
                         <div className="row organization-type-row">
                           <div className="col-lg-2 mb-lg-0 mb-2">
                             Organization Type
