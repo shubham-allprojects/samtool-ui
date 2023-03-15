@@ -705,7 +705,7 @@ const Registration = () => {
                         </label>
                       </div> */}
                       <div
-                        className={`individual-label ${individualActiveClass}`}
+                        className={`individual-label common-btn-font ${individualActiveClass}`}
                         name="individual"
                         onClick={changeForm}
                       >
@@ -713,7 +713,7 @@ const Registration = () => {
                       </div>
                       <div className="mx-2">|</div>
                       <div
-                        className={`organization-label ${organizationActiveClass}`}
+                        className={`organization-label common-btn-font ${organizationActiveClass}`}
                         name="organization"
                         onClick={changeForm}
                       >
