@@ -20,6 +20,7 @@ const ViewProperty = () => {
       { headers: authHeader }
     );
     setProperty(currentPropertyRes.data);
+    console.log(currentPropertyRes.data);
   };
 
   useEffect(() => {
