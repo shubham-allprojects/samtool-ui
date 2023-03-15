@@ -19,6 +19,8 @@ const AdminHomePage = () => {
     countOfOrgUsers: 0,
   });
 
+  const [propertyCount, setPropertyCount] = useState(0);
+
   const { countOfIndividualUsers, countOfOrgUsers } = countOfUsers;
 
   const setHeaderAndUrl = () => {
@@ -98,10 +100,20 @@ const AdminHomePage = () => {
     },
   };
 
+  const getPropertyCountFromApi = async () => {
+    const [headers] = setHeaderAndUrl();
+    const propertiesRes = await axios.get(
+      `/sam/v1/property/auth/all-properties`,
+      { headers: headers }
+    );
+    setPropertyCount(propertiesRes.data.length);
+  };
+
   useEffect(() => {
     rootTitle.textContent = "ADMIN - HOME";
     if (data) {
       setTotalCountOfUsers();
+      getPropertyCountFromApi();
     }
     // eslint-disable-next-line
   }, []);
@@ -125,7 +137,8 @@ const AdminHomePage = () => {
                       </div>
                       <div className="col-xl-6 col-md-7 col-5 text-end">
                         <span className="fw-bold text-white hover-color-secondary fs-5">
-                          <span className="fs-3">180</span> <br /> Properties
+                          <span className="fs-3">{propertyCount}</span> <br />{" "}
+                          Properties
                         </span>
                       </div>
                     </div>

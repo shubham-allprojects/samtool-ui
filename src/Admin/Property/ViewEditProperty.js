@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
-import propertyData from "./data.json";
 
 const ViewEditProperty = () => {
   const { id } = useParams();
@@ -40,18 +39,6 @@ const ViewEditProperty = () => {
   const { _id, count, category, city_name, market_value, range } = property;
   const { isReadOnly, isDisabled, editClassName, cancelUpdateBtnClassName } =
     editViewDetails;
-
-  const setCurrentProperty = () => {
-    for (let i of propertyData) {
-      if (i._id === id) {
-        setProperty(i);
-      }
-    }
-  };
-
-  useEffect(() => {
-    setCurrentProperty();
-  });
 
   return (
     <Layout>

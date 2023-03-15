@@ -6,7 +6,6 @@ import { rootTitle } from "../../CommonFunctions";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
-// import propertyData from "./data.json";
 
 let authHeader = "";
 const ViewAllProperties = () => {
