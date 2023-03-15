@@ -19,11 +19,7 @@ const AdminHomePage = () => {
     countOfIndividualUsers: 0,
     countOfOrgUsers: 0,
   });
-
-  const [propertyCount, setPropertyCount] = useState(0);
-
   const { countOfIndividualUsers, countOfOrgUsers } = countOfUsers;
-
   const setHeaderAndUrl = () => {
     let headers = "";
     if (data) {
@@ -107,7 +103,6 @@ const AdminHomePage = () => {
       `/sam/v1/property/auth/all-properties`,
       { headers: headers }
     );
-    setPropertyCount(propertiesRes.data.length);
     // To show counter animation on admin Home page.
     const totalCount = propertiesRes.data.length;
     if (!totalCount <= 0) {
