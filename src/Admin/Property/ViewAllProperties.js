@@ -6,6 +6,7 @@ import { rootTitle } from "../../CommonFunctions";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
+import CommonSpinner from "../../CommonSpinner";
 
 let authHeader = "";
 const ViewAllProperties = () => {
@@ -14,13 +15,16 @@ const ViewAllProperties = () => {
     authHeader = { Authorization: data.logintoken };
   }
   const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getPropertiesFromApi = async () => {
+    setLoading(true);
     const propertiesRes = await axios.get(
       `/sam/v1/property/auth/all-properties`,
       { headers: authHeader }
     );
     setProperties(propertiesRes.data);
+    setLoading(false);
   };
 
   const deleteProperty = (propertyId) => {
@@ -43,7 +47,14 @@ const ViewAllProperties = () => {
           <AdminSideBar />
           <div className="col-xl-10 col-md-8 mt-4 mt-md-0">
             <BreadCrumb />
-            {properties.length <= 0 ? (
+            {loading ? (
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{ minHeight: "70vh" }}
+              >
+                <CommonSpinner spinnerColor="primary" />
+              </div>
+            ) : properties.length <= 0 ? (
               <div className="d-flex align-items-center justify-content-center mt-5">
                 <h1 className="fw-bold custom-heading-color">
                   Sorry ! No Properties Found :(
