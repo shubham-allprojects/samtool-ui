@@ -49,10 +49,12 @@ const ViewAllProperties = () => {
           <AdminSideBar />
           <div className="col-xl-10 col-md-8 mt-4 mt-md-0">
             <BreadCrumb />
+            <h1 className="text-center text-primary fw-bold">Properties</h1>
+            <hr />
             {loading ? (
               <div
                 className="d-flex justify-content-center align-items-center"
-                style={{ minHeight: "70vh" }}
+                style={{ minHeight: "60vh" }}
               >
                 <CommonSpinner
                   spinnerColor="primary"
@@ -68,13 +70,11 @@ const ViewAllProperties = () => {
               </div>
             ) : (
               <section className="admin-view-all-properties mb-5">
-                <h1 className="text-center text-primary fw-bold">Properties</h1>
-                <hr />
                 <div className="container-fluid scrollable-right-div">
                   <div className="row">
                     {properties.map((property, Index) => {
                       return (
-                        <div className="col-lg-3 col-md-6" key={Index}>
+                        <div className="col-xl-3 col-md-6" key={Index}>
                           <div className="admin-property-card-wrapper">
                             <div className="card mb-4">
                               <div className="top-line"></div>
