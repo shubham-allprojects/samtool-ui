@@ -10,6 +10,7 @@ import { Bar, Pie } from "react-chartjs-2";
 let orgCount = 0; // Default count of organizational users.
 let indiCount = 0; // Default count of individual users.
 let startCounter;
+let propertyStartCounter;
 
 const AdminHomePage = () => {
   CharJs.register(...registerables);
@@ -107,6 +108,14 @@ const AdminHomePage = () => {
       { headers: headers }
     );
     setPropertyCount(propertiesRes.data.length);
+    // To show counter animation on admin Home page.
+    const totalCount = propertiesRes.data.length;
+    if (!totalCount <= 0) {
+      totalCount > 100
+        ? (propertyStartCounter = Math.floor((totalCount * 80) / 100))
+        : (propertyStartCounter = 0);
+      counter("propertyCount", propertyStartCounter, totalCount, 1000);
+    }
   };
 
   useEffect(() => {
@@ -137,8 +146,10 @@ const AdminHomePage = () => {
                       </div>
                       <div className="col-xl-6 col-md-7 col-5 text-end">
                         <span className="fw-bold text-white hover-color-secondary fs-5">
-                          <span className="fs-3">{propertyCount}</span> <br />{" "}
-                          Properties
+                          <span className="fs-3" id="propertyCount">
+                            0
+                          </span>{" "}
+                          <br /> Properties
                         </span>
                       </div>
                     </div>
