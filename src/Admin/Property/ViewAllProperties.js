@@ -24,7 +24,9 @@ const ViewAllProperties = () => {
       { headers: authHeader }
     );
     setProperties(propertiesRes.data);
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 800);
   };
 
   const deleteProperty = (propertyId) => {
@@ -52,7 +54,11 @@ const ViewAllProperties = () => {
                 className="d-flex justify-content-center align-items-center"
                 style={{ minHeight: "70vh" }}
               >
-                <CommonSpinner spinnerColor="primary" />
+                <CommonSpinner
+                  spinnerColor="primary"
+                  height="4rem"
+                  width="4rem"
+                />
               </div>
             ) : properties.length <= 0 ? (
               <div className="d-flex align-items-center justify-content-center mt-5">
