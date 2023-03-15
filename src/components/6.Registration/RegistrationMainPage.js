@@ -668,42 +668,6 @@ const Registration = () => {
                     </div>
                     {/*  Checkboxes - Individual & Organization */}
                     <div className="col-lg-12 d-flex">
-                      {/* <div className="form-check form-check-inline">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          id="individual"
-                          value="individual"
-                          readOnly
-                          checked={individualSelected}
-                        />
-                        <label
-                          className="form-check-label toggle-label"
-                          htmlFor="individual"
-                          name="individual"
-                          onClick={changeForm}
-                        >
-                          Individual
-                        </label>
-                      </div>
-                      <div className="form-check form-check-inline">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          id="organization"
-                          value="organization"
-                          readOnly
-                          checked={organizationSelected}
-                        />
-                        <label
-                          className="form-check-label toggle-label"
-                          htmlFor="organization"
-                          name="organization"
-                          onClick={changeForm}
-                        >
-                          Organization
-                        </label>
-                      </div> */}
                       <div
                         className={`individual-label common-btn-font ${individualActiveClass}`}
                         name="individual"
