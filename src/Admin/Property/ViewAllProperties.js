@@ -97,7 +97,7 @@ const ViewAllProperties = () => {
                                 <br />
                                 <div className="mt-3">
                                   <NavLink
-                                    to={`/admin/property/properties/edit-property/${property._id}`}
+                                    to={`/admin/property/properties/view-property/${property.property_id}`}
                                     className="btn btn-sm btn-outline-success"
                                   >
                                     View

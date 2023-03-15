@@ -16,7 +16,7 @@ import Contact from "./components/4.Contact/Contact";
 import PageNotFound from "./components/PageNotFound";
 import AdminHomePage from "./Admin/AdminHomePage";
 import ViewAllProperties from "./Admin/Property/ViewAllProperties";
-import ViewEditProperty from "./Admin/Property/ViewEditProperty";
+import ViewProperty from "./Admin/Property/ViewProperty";
 import UploadProperties from "./Admin/Property/UploadProperties";
 import ViewAllUsers from "./Admin/User/ViewAllUsers";
 import ViewCurrentUser from "./Admin/User/ViewCurrentUser";
@@ -114,15 +114,15 @@ function App() {
             path="/admin/property/add-property"
             element={
               // <AdminProtected>
-                <AddProperty />
+              <AddProperty />
               // </AdminProtected>
             }
           />
           <Route
-            path="/admin/property/properties/edit-property/:id"
+            path="/admin/property/properties/view-property/:id"
             element={
               <AdminProtected>
-                <ViewEditProperty />
+                <ViewProperty />
               </AdminProtected>
             }
           />

@@ -4,7 +4,7 @@ import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
 
-const ViewEditProperty = () => {
+const ViewProperty = () => {
   const { id } = useParams();
   const [property, setProperty] = useState([]);
 
@@ -207,4 +207,4 @@ const ViewEditProperty = () => {
   );
 };
 
-export default ViewEditProperty;
+export default ViewProperty;
