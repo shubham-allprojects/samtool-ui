@@ -20,8 +20,12 @@ const ViewProperty = () => {
     PIN,
     branch_name,
     carpet_area,
+    saleable_area,
     city_name,
+    state_name,
     completion_date,
+    purchase_date,
+    sale_availability_date,
     expected_price,
     market_price,
     ready_reckoner_price,
@@ -32,11 +36,9 @@ const ViewProperty = () => {
     mortgage_date,
     plot_no,
     property_number,
-    purchase_date,
-    sale_availability_date,
-    saleable_area,
+
     society_name,
-    state_name,
+
     status,
   } = property;
 
@@ -80,13 +82,32 @@ const ViewProperty = () => {
                       <span>{`${city_name}, ${state_name}.`}</span>
                     </div>
                     <hr />
-                    <div>
-                      Pricing: <br />
-                      Market Price : {parseInt(market_price) /
-                        10000000} Cr. <br />
-                      Price range : {parseInt(ready_reckoner_price) /
-                        10000000}{" "}
-                      Cr. - {parseInt(expected_price) / 10000000} Cr.
+                    <div className="row">
+                      <div className="col-12 text-center mb-3">
+                        <span className="fw-bold">Pricing:</span> <br />
+                        Market Price: {parseInt(market_price) /
+                          10000000} Cr. <br />
+                        Price range: {parseInt(ready_reckoner_price) /
+                          10000000}{" "}
+                        Cr. - {parseInt(expected_price) / 10000000} Cr.
+                      </div>
+
+                      <div className="col-12 text-center mb-3">
+                        <span className="fw-bold">Area:</span> <br />
+                        Saleable Area: {saleable_area} <br />
+                        Carpet Area: {carpet_area}
+                      </div>
+
+                      <div className="col-12 text-center mb-3">
+                        <span className="fw-bold">Address:</span> <br />
+                        {city_name} - {PIN}, {state_name}, Loaclity: {locality}
+                      </div>
+
+                      <div className="col-12 text-center mb-3">
+                        <span className="fw-bold">Dates:</span> <br />
+                        Completion date: {completion_date.split(" ")[0]} <br />
+                        Purchase date: {purchase_date.split(" ")[0]}
+                      </div>
                     </div>
                   </div>
                 </div>
