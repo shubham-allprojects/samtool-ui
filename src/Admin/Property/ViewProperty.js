@@ -105,8 +105,13 @@ const ViewProperty = () => {
 
                       <div className="col-12 text-center mb-3">
                         <span className="fw-bold">Dates:</span> <br />
-                        Completion date: {completion_date.split(" ")[0]} <br />
-                        Purchase date: {purchase_date.split(" ")[0]}
+                        Completion date:{" "}
+                        {completion_date
+                          ? completion_date.split(" ")[0]
+                          : "NA"}{" "}
+                        <br />
+                        Purchase date:{" "}
+                        {purchase_date ? purchase_date.split(" ")[0] : "NA"}
                       </div>
                     </div>
                   </div>
