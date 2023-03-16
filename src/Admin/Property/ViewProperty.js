@@ -35,7 +35,9 @@ const ViewProperty = () => {
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
             <BreadCrumb />
             <section className="admin-edit-property wrapper">
-              <div className="container-fluid"></div>
+              <div className="container-fluid">
+                <div className="row bg-info">ok</div>
+              </div>
             </section>
           </div>
         </div>
