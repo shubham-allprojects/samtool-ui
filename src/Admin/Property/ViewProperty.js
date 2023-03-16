@@ -14,6 +14,32 @@ const ViewProperty = () => {
   const { id } = useParams();
   const [property, setProperty] = useState([]);
 
+  const {
+    type_name,
+    Flat_No,
+    PIN,
+    branch_name,
+    carpet_area,
+    city_name,
+    completion_date,
+    expected_price,
+    market_price,
+    ready_reckoner_price,
+    is_available_for_sale,
+    is_sold,
+    is_stressed,
+    locality,
+    mortgage_date,
+    plot_no,
+    property_number,
+    purchase_date,
+    sale_availability_date,
+    saleable_area,
+    society_name,
+    state_name,
+    status,
+  } = property;
+
   const getCurrentProperty = async () => {
     const currentPropertyRes = await axios.get(
       `/sam/v1/property/auth/single-property/${id}`,
@@ -36,7 +62,34 @@ const ViewProperty = () => {
             <BreadCrumb />
             <section className="admin-edit-property wrapper">
               <div className="container-fluid">
-                <div className="row bg-info">ok</div>
+                <div className="row">
+                  <div className="col-xl-7 p-0">
+                    <div className="currentPropertyImgWrapper">
+                      <img
+                        src="/images2.jpg"
+                        alt="property-pic"
+                        className="img-fluid"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-5">
+                    <h3 className="text-center fw-bold text-primary">
+                      {type_name}
+                    </h3>
+                    <div className="text-center">
+                      <span>{`${city_name}, ${state_name}.`}</span>
+                    </div>
+                    <hr />
+                    <div>
+                      Pricing: <br />
+                      Market Price : {parseInt(market_price) /
+                        10000000} Cr. <br />
+                      Price range : {parseInt(ready_reckoner_price) /
+                        10000000}{" "}
+                      Cr. - {parseInt(expected_price) / 10000000} Cr.
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
           </div>
