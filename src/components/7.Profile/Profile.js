@@ -120,11 +120,11 @@ const Profile = () => {
 
   return (
     <Layout>
-      <section className="profile-wrapper section-padding min-100vh">
+      <section className="profile-wrapper section-padding min-100vh bg-primary">
         <div className="container-fluid wrapper">
           <div className="row">
             <div className="col-xl-4 col-lg-6">
-              <div className="card p-2 profile-top-cards bg-primary">
+              <div className="profile-top-cards p-2">
                 <div className="card-body text-center">
                   <div className="d-flex justify-content-center">
                     <div className="profile-icon-wrapper text-center">
@@ -244,7 +244,7 @@ const Profile = () => {
               </div>
             </div>
             <div className="col-xl-4 col-lg-6 mt-4 mt-lg-0">
-              <div className="card p-2 profile-top-cards bg-primary">
+              <div className="profile-top-cards p-2">
                 <div className="card-body text-center">
                   <div className="d-flex justify-content-center">
                     <div className="profile-icon-wrapper text-center">
@@ -283,9 +283,8 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-
             <div className="col-xl-4 col-lg-6 mt-4 mt-xl-0">
-              <div className="card p-2 profile-top-cards bg-primary">
+              <div className="profile-top-cards p-2">
                 <div className="card-body text-center">
                   <div className="d-flex justify-content-center">
                     <div className="profile-icon-wrapper text-center">
