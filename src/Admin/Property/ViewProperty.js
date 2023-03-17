@@ -175,36 +175,44 @@ const ViewProperty = () => {
                     </div>
                   </div>
                   <div className="col-xl-7">
-                    <div className="container-fluid p-0">
+                    <div className="container-fluid">
                       <div className="row">
-                        <div className="col-xl-4">
+                        <div className="col-xl-6">
                           <span className="text-muted">
                             <i className="bi bi-geo-alt pe-2"></i>Location
                           </span>
                           <h5 className="mt-2">
-                            {city_name}, {state_name}
+                            {city_name} - {PIN}, {state_name}
                           </h5>
                         </div>
-                        <div className="col-xl-4">
-                          <span className="text-muted">
-                            <i className="bi bi-pin-map-fill pe-2"></i>
-                            Saleable Area
-                          </span>
-                          <h5 className="mt-2">{saleable_area}</h5>
-                        </div>
-                        <div className="col-xl-4">
-                          <span className="text-muted">
-                            <i className="bi bi-pin-map pe-2"></i>
-                            Carpet Area
-                          </span>
-                          <h5 className="mt-2">{carpet_area}</h5>
-                        </div>
-                        <div className="col-xl-4 mt-xl-3">
+
+                        <div className="col-xl-6">
                           <span className="text-muted">
                             <i className="bi bi-bank pe-2"></i>Bank Branch
                           </span>
                           <h5 className="mt-2">{branch_name}</h5>
                         </div>
+
+                        <div className="col-12">
+                          <hr className="my-2" />
+                        </div>
+                        <div className="col-12 mb-2">
+                          <span className="text-muted">
+                            <i className="bi bi-pin-map pe-2"></i>
+                            Area
+                          </span>
+                        </div>
+
+                        <div className="col-xl-4">
+                          <small className="text-muted">Saleable Area</small>
+                          <h5 className="mt-1">{saleable_area}</h5>
+                        </div>
+
+                        <div className="col-xl-4">
+                          <small className="text-muted">Carpet Area</small>
+                          <h5 className="mt-1">{carpet_area}</h5>
+                        </div>
+
                         <div className="col-12">
                           <hr className="my-2" />
                         </div>
