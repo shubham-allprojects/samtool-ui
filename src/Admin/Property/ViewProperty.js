@@ -171,10 +171,10 @@ const ViewProperty = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-7">
+                  <div className="col-xl-7 mt-xl-0 mt-4">
                     <div className="container-fluid">
                       <div className="row">
-                        <div className="col-xl-6">
+                        <div className="col-md-6">
                           <span className="text-muted">
                             <i className="bi bi-geo-alt pe-2"></i>Location
                           </span>
@@ -182,7 +182,7 @@ const ViewProperty = () => {
                             {city_name} - {PIN}, {state_name}
                           </h5>
                         </div>
-                        <div className="col-xl-6">
+                        <div className="col-md-6">
                           <span className="text-muted">
                             <i className="bi bi-bank pe-2"></i>Bank Branch
                           </span>
@@ -197,11 +197,11 @@ const ViewProperty = () => {
                             Area
                           </span>
                         </div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-4">
                           <small className="text-muted">Saleable Area</small>
                           <h5 className="mt-1">{saleable_area}</h5>
                         </div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-4">
                           <small className="text-muted">Carpet Area</small>
                           <h5 className="mt-1">{carpet_area}</h5>
                         </div>
@@ -214,7 +214,7 @@ const ViewProperty = () => {
                             Dates
                           </span>
                         </div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-4">
                           <small className="text-muted">Completion Date</small>
                           <h5 className="mt-1">
                             {completion_date
@@ -226,7 +226,7 @@ const ViewProperty = () => {
                               : "NA"}
                           </h5>
                         </div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-4">
                           <small className="text-muted">Purchase Date</small>
                           <h5 className="mt-1">
                             {purchase_date
@@ -238,7 +238,7 @@ const ViewProperty = () => {
                               : "NA"}
                           </h5>
                         </div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-4">
                           <small className="text-muted">Mortgage Date</small>
                           <h5 className="mt-1">
                             {mortgage_date
@@ -259,14 +259,14 @@ const ViewProperty = () => {
                             Pricing
                           </span>
                         </div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-4">
                           <small className="text-muted">Market Price</small>
                           <h5 className="mt-1">
                             <i className="bi bi-currency-rupee"></i>
                             {market_price}
                           </h5>
                         </div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-4">
                           <small className="text-muted">
                             Ready Reckoner Price
                           </small>
@@ -275,7 +275,7 @@ const ViewProperty = () => {
                             {ready_reckoner_price}
                           </h5>
                         </div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-4">
                           <small className="text-muted">Expected Price</small>
                           <h5 className="mt-1">
                             <i className="bi bi-currency-rupee"></i>
@@ -291,13 +291,13 @@ const ViewProperty = () => {
                             Other Details
                           </span>
                         </div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-4">
                           <small className="text-muted">Is Sold?</small>
                           <h5 className="mt-1">
                             {is_sold === 1 ? "Yes" : "No"}
                           </h5>
                         </div>
-                        <div className="col-xl-4">
+                        <div className="col-lg-4">
                           <small className="text-muted">
                             Is Available For Sale?
                           </small>
@@ -308,7 +308,7 @@ const ViewProperty = () => {
 
                         {is_available_for_sale === 1 ? (
                           <>
-                            <div className="col-xl-4">
+                            <div className="col-lg-4">
                               <small className="text-muted">
                                 Sale Availability Date
                               </small>
