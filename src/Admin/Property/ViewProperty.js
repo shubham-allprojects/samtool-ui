@@ -156,37 +156,6 @@ const ViewProperty = () => {
                         </div>
                         <div className="col-4">
                           <div className="card p-2 text-center border-primary border-2 border">
-                            <small className="text-muted">Purchase Date</small>
-                            <small className="common-btn-font">
-                              {purchase_date
-                                ? purchase_date
-                                    .split(" ")[0]
-                                    .split("-")
-                                    .reverse()
-                                    .join("-")
-                                : "NA"}
-                            </small>
-                          </div>
-                        </div>
-                        <div className="col-4">
-                          <div className="card p-2 text-center border-primary border-2 border">
-                            <small className="text-muted">Mortgage Date</small>
-                            <small className="common-btn-font">
-                              {mortgage_date
-                                ? mortgage_date
-                                    .split(" ")[0]
-                                    .split("-")
-                                    .reverse()
-                                    .join("-")
-                                : "NA"}
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="row mt-3">
-                        <div className="col-4">
-                          <div className="card p-2 text-center border-primary border-2 border">
                             <small className="text-muted">Is stressed</small>
                             <small className="common-btn-font">
                               {is_stressed === 1 ? "Yes" : "No"}
@@ -202,28 +171,12 @@ const ViewProperty = () => {
                             </small>
                           </div>
                         </div>
-
-                        <div className="col-4">
-                          <div className="card p-2 text-center border-primary border-2 border">
-                            <small className="text-muted">Status</small>
-                            <small className="common-btn-font">{status}</small>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
                   <div className="col-xl-7">
                     <div className="container-fluid p-0">
                       <div className="row">
-                        <div className="col-xl-4">
-                          <span className="text-muted">
-                            <i className="bi bi-tag pe-2"></i>Market Price
-                          </span>
-                          <h5 className="mt-2">
-                            <i className="bi bi-currency-rupee"></i>
-                            {market_price}
-                          </h5>
-                        </div>
                         <div className="col-xl-4">
                           <span className="text-muted">
                             <i className="bi bi-geo-alt pe-2"></i>Location
@@ -234,27 +187,12 @@ const ViewProperty = () => {
                         </div>
                         <div className="col-xl-4">
                           <span className="text-muted">
-                            <i className="bi bi-calendar-check pe-2"></i>
-                            Completion Date
-                          </span>
-                          <h5 className="mt-2">
-                            {completion_date
-                              ? completion_date
-                                  .split(" ")[0]
-                                  .split("-")
-                                  .reverse()
-                                  .join("-")
-                              : "NA"}
-                          </h5>
-                        </div>
-                        <div className="col-xl-4 mt-xl-3">
-                          <span className="text-muted">
                             <i className="bi bi-pin-map-fill pe-2"></i>
                             Saleable Area
                           </span>
                           <h5 className="mt-2">{saleable_area}</h5>
                         </div>
-                        <div className="col-xl-4 mt-xl-3">
+                        <div className="col-xl-4">
                           <span className="text-muted">
                             <i className="bi bi-pin-map pe-2"></i>
                             Carpet Area
@@ -270,8 +208,67 @@ const ViewProperty = () => {
                         <div className="col-12">
                           <hr className="my-2" />
                         </div>
+                        <div className="col-12 mb-2">
+                          <span className="text-muted">
+                            <i className="bi bi-calendar-check pe-2"></i>
+                            Dates
+                          </span>
+                        </div>
+                        <div className="col-xl-4">
+                          <small className="text-muted">Completion Date</small>
+                          <h5 className="mt-1">
+                            {completion_date
+                              ? completion_date
+                                  .split(" ")[0]
+                                  .split("-")
+                                  .reverse()
+                                  .join("-")
+                              : "NA"}
+                          </h5>
+                        </div>
+
+                        <div className="col-xl-4">
+                          <small className="text-muted">Purchase Date</small>
+                          <h5 className="mt-1">
+                            {purchase_date
+                              ? purchase_date
+                                  .split(" ")[0]
+                                  .split("-")
+                                  .reverse()
+                                  .join("-")
+                              : "NA"}
+                          </h5>
+                        </div>
+
+                        <div className="col-xl-4">
+                          <small className="text-muted">Mortgage Date</small>
+                          <h5 className="mt-1">
+                            {mortgage_date
+                              ? mortgage_date
+                                  .split(" ")[0]
+                                  .split("-")
+                                  .reverse()
+                                  .join("-")
+                              : "NA"}
+                          </h5>
+                        </div>
+
                         <div className="col-12">
-                          
+                          <hr className="my-2" />
+                        </div>
+                        <div className="col-12 mb-2">
+                          <span className="text-muted">
+                            <i className="bi bi-tag pe-2"></i>
+                            Pricing
+                          </span>
+                        </div>
+
+                        <div className="col-xl-4">
+                          <small className="text-muted">Market Price</small>
+                          <h5 className="mt-1">
+                            <i className="bi bi-currency-rupee"></i>
+                            {market_price}
+                          </h5>
                         </div>
                       </div>
                     </div>
