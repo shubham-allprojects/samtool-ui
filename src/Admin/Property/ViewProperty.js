@@ -150,16 +150,43 @@ const ViewProperty = () => {
                       </button>
                     </div>
                   </div>
-                  {/* <div className="col-xl-5 d-flex justify-content-center align-items-center">
-                    <div>
-                      <h1 className="fw-bold text-primary">
-                        {type_name}
-                      </h1>
-                      <div className="text-center">
-                        <span>{`${city_name}, ${state_name}.`}</span>
+                  <div className="col-xl-7">
+                    <div className="d-flex">
+                      <div className="col-xl-4">
+                        <span className="text-muted">
+                          <i className="bi bi-tag pe-2"></i>Market Price
+                        </span>
+                        <h5 className="mt-2">
+                          <i class="bi bi-currency-rupee"></i>
+                          {market_price}
+                        </h5>
+                      </div>
+                      <div className="col-xl-4">
+                        <span className="text-muted">
+                          <i className="bi bi-geo-alt pe-2"></i>Location
+                        </span>
+                        <h5 className="mt-2">
+                          {city_name}, {state_name}
+                        </h5>
+                      </div>
+                      <div className="col-xl-4">
+                        <span className="text-muted">
+                          <i className="bi bi-calendar-check pe-2"></i>
+                          Completion Date
+                        </span>
+                        <h5 className="mt-2">
+                          {completion_date
+                            ? completion_date
+                                .split(" ")[0]
+                                .split("-")
+                                .reverse()
+                                .join("-")
+                            : "NA"}
+                        </h5>
                       </div>
                     </div>
-
+                  </div>
+                  <div className="col-xl-12">
                     <div className="row">
                       <div className="col-12 text-center mb-3">
                         <span className="fw-bold">Pricing:</span> <br />
@@ -192,7 +219,7 @@ const ViewProperty = () => {
                         {purchase_date ? purchase_date.split(" ")[0] : "NA"}
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </section>
