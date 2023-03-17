@@ -101,7 +101,10 @@ const ViewProperty = () => {
                         ></button>
                       </div>
                       <div className="carousel-inner">
-                        <div className="carousel-item active" data-bs-interval="2000">
+                        <div
+                          className="carousel-item active"
+                          data-bs-interval="2000"
+                        >
                           <img
                             src="/images2.jpg"
                             className="d-block w-100"
@@ -133,7 +136,6 @@ const ViewProperty = () => {
                           className="carousel-control-prev-icon"
                           aria-hidden="true"
                         ></span>
-                        <span className="visually-hidden">Previous</span>
                       </button>
                       <button
                         className="carousel-control-next"
@@ -145,7 +147,6 @@ const ViewProperty = () => {
                           className="carousel-control-next-icon"
                           aria-hidden="true"
                         ></span>
-                        <span className="visually-hidden">Next</span>
                       </button>
                     </div>
                   </div>
