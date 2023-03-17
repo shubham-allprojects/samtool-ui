@@ -162,13 +162,10 @@ const ViewProperty = () => {
                             </small>
                           </div>
                         </div>
-
                         <div className="col-4">
                           <div className="card p-2 text-center border-primary border-2 border">
-                            <small className="text-muted">Is sold?</small>
-                            <small className="common-btn-font">
-                              {is_sold === 1 ? "Yes" : "No"}
-                            </small>
+                            <small className="text-muted">Status</small>
+                            <small className="common-btn-font">{status}</small>
                           </div>
                         </div>
                       </div>
@@ -185,14 +182,12 @@ const ViewProperty = () => {
                             {city_name} - {PIN}, {state_name}
                           </h5>
                         </div>
-
                         <div className="col-xl-6">
                           <span className="text-muted">
                             <i className="bi bi-bank pe-2"></i>Bank Branch
                           </span>
                           <h5 className="mt-2">{branch_name}</h5>
                         </div>
-
                         <div className="col-12">
                           <hr className="my-2" />
                         </div>
@@ -202,17 +197,14 @@ const ViewProperty = () => {
                             Area
                           </span>
                         </div>
-
                         <div className="col-xl-4">
                           <small className="text-muted">Saleable Area</small>
                           <h5 className="mt-1">{saleable_area}</h5>
                         </div>
-
                         <div className="col-xl-4">
                           <small className="text-muted">Carpet Area</small>
                           <h5 className="mt-1">{carpet_area}</h5>
                         </div>
-
                         <div className="col-12">
                           <hr className="my-2" />
                         </div>
@@ -234,7 +226,6 @@ const ViewProperty = () => {
                               : "NA"}
                           </h5>
                         </div>
-
                         <div className="col-xl-4">
                           <small className="text-muted">Purchase Date</small>
                           <h5 className="mt-1">
@@ -247,7 +238,6 @@ const ViewProperty = () => {
                               : "NA"}
                           </h5>
                         </div>
-
                         <div className="col-xl-4">
                           <small className="text-muted">Mortgage Date</small>
                           <h5 className="mt-1">
@@ -260,7 +250,6 @@ const ViewProperty = () => {
                               : "NA"}
                           </h5>
                         </div>
-
                         <div className="col-12">
                           <hr className="my-2" />
                         </div>
@@ -270,7 +259,6 @@ const ViewProperty = () => {
                             Pricing
                           </span>
                         </div>
-
                         <div className="col-xl-4">
                           <small className="text-muted">Market Price</small>
                           <h5 className="mt-1">
@@ -278,7 +266,6 @@ const ViewProperty = () => {
                             {market_price}
                           </h5>
                         </div>
-
                         <div className="col-xl-4">
                           <small className="text-muted">
                             Ready Reckoner Price
@@ -288,7 +275,6 @@ const ViewProperty = () => {
                             {ready_reckoner_price}
                           </h5>
                         </div>
-
                         <div className="col-xl-4">
                           <small className="text-muted">Expected Price</small>
                           <h5 className="mt-1">
