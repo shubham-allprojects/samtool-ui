@@ -63,7 +63,7 @@ const ViewProperty = () => {
             <section className="admin-edit-property">
               <h3 className="fw-bold text-primary pb-2">{type_name}</h3>
               <div className="container-fluid border border-1 p-3">
-                <div className="row">
+                <div className="row ">
                   <div className="col-12"></div>
                   <div className="col-xl-5">
                     <div
@@ -142,9 +142,45 @@ const ViewProperty = () => {
                         ></span>
                       </button>
                     </div>
+                    <div className="container-fluid p-0">
+                      <div className="row mt-3">
+                        <div className="col-4">
+                          <div className="card p-2 text-center border-primary border-2 border">
+                            <small className="text-muted">
+                              Property Number
+                            </small>
+                            <small className="common-btn-font">
+                              {property_number}
+                            </small>
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <div className="card p-2 text-center border-primary border-2 border">
+                            <small className="text-muted">Purchase Date</small>
+                            <small className="common-btn-font">
+                              {purchase_date
+                                ? purchase_date
+                                    .split(" ")[0]
+                                    .split("-")
+                                    .reverse()
+                                    .join("-")
+                                : "NA"}
+                            </small>
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <div className="card p-2 text-center border-primary border-2 border">
+                            <small className="text-muted">Is sold?</small>
+                            <small className="common-btn-font">
+                              {is_available_for_sale === "1" ? "Yes" : "No"}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="col-xl-7">
-                    <div className="container-fluid">
+                    <div className="container-fluid p-0">
                       <div className="row">
                         <div className="col-xl-4">
                           <span className="text-muted">
@@ -178,7 +214,6 @@ const ViewProperty = () => {
                               : "NA"}
                           </h5>
                         </div>
-
                         <div className="col-xl-4 mt-xl-3">
                           <span className="text-muted">
                             <i className="bi bi-pin-map-fill pe-2"></i>
@@ -186,7 +221,6 @@ const ViewProperty = () => {
                           </span>
                           <h5 className="mt-2">{saleable_area}</h5>
                         </div>
-
                         <div className="col-xl-4 mt-xl-3">
                           <span className="text-muted">
                             <i className="bi bi-pin-map pe-2"></i>
@@ -194,51 +228,18 @@ const ViewProperty = () => {
                           </span>
                           <h5 className="mt-2">{carpet_area}</h5>
                         </div>
-
                         <div className="col-xl-4 mt-xl-3">
                           <span className="text-muted">
                             <i className="bi bi-bank pe-2"></i>Bank Branch
                           </span>
                           <h5 className="mt-2">{branch_name}</h5>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-xl-5 mt-3">
-                    <div className="row">
-                      <div className="col-4">
-                        <div className="card p-2 text-center border-primary border-2 border">
-                          <small className="text-muted">Property Number</small>
-                          <small className="common-btn-font">
-                            {property_number}
-                          </small>
-                        </div>
-                      </div>
-                      <div className="col-4">
-                        <div className="card p-2 text-center border-primary border-2 border">
-                          <small className="text-muted">Purchase Date</small>
-                          <small className="common-btn-font">
-                            {purchase_date
-                              ? purchase_date
-                                  .split(" ")[0]
-                                  .split("-")
-                                  .reverse()
-                                  .join("-")
-                              : "NA"}
-                          </small>
-                        </div>
-                      </div>
-                      <div className="col-4">
-                        <div className="card p-2 text-center border-primary border-2 border">
-                          <small className="text-muted">Is sold?</small>
-                          <small className="common-btn-font">
-                            {is_available_for_sale === "1" ? "Yes" : "No"}
-                          </small>
+                        <div className="col-12">
+                          <hr className="my-2" />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-7"></div>
                 </div>
               </div>
             </section>
