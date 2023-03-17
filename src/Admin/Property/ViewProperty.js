@@ -193,12 +193,18 @@ const ViewProperty = () => {
                           </div>
                         </div>
                       </div>
+                      <div className="col-xl-4 mt-xl-3">
+                        <span className="text-muted">
+                          <i className="bi bi-bank pe-2"></i>Bank Branch
+                        </span>
+                        <h5 className="mt-2">{branch_name}</h5>
+                      </div>
                     </div>
                   </div>
                   <div className="col-xl-5 mt-3">
                     <div className="row">
                       <div className="col-4">
-                        <div className="card p-2 text-center">
+                        <div className="card p-2 text-center border-primary border-2 border">
                           <small className="text-muted">Property Number</small>
                           <small className="common-btn-font">
                             {property_number}
@@ -206,7 +212,7 @@ const ViewProperty = () => {
                         </div>
                       </div>
                       <div className="col-4">
-                        <div className="card p-2 text-center">
+                        <div className="card p-2 text-center border-primary border-2 border">
                           <small className="text-muted">Purchase Date</small>
                           <small className="common-btn-font">
                             {purchase_date
@@ -220,7 +226,7 @@ const ViewProperty = () => {
                         </div>
                       </div>
                       <div className="col-4">
-                        <div className="card p-2 text-center">
+                        <div className="card p-2 text-center border-primary border-2 border">
                           <small className="text-muted">
                             Is available for sale
                           </small>
@@ -232,16 +238,6 @@ const ViewProperty = () => {
                     </div>
                   </div>
                   <div className="col-xl-7"></div>
-                  {/* <div className="col-xl-12">
-                    <div className="row">
-                      <div className="col-12 text-center mb-3">
-                        <span className="fw-bold">Pricing:</span> <br />
-                        Price range: {parseInt(ready_reckoner_price) /
-                          10000000}{" "}
-                        Cr. - {parseInt(expected_price) / 10000000} Cr.
-                      </div>
-                    </div>
-                  </div> */}
                 </div>
               </div>
             </section>
