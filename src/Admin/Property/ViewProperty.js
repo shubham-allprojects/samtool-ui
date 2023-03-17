@@ -178,28 +178,23 @@ const ViewProperty = () => {
                               : "NA"}
                           </h5>
                         </div>
+
+                        <div className="col-xl-4 mt-xl-3">
+                          <span className="text-muted">
+                            <i className="bi bi-pin-map-fill pe-2"></i>
+                            Saleable Area
+                          </span>
+                          <h5 className="mt-2">{saleable_area}</h5>
+                        </div>
+
                         <div className="col-xl-4 mt-xl-3">
                           <span className="text-muted">
                             <i className="bi bi-pin-map pe-2"></i>
-                            Area
+                            Carpet Area
                           </span>
-                          <div className="container-fluid mt-2">
-                            <div className="row">
-                              <div className="col-6">
-                                <small className="text-muted">
-                                  Saleable Area
-                                </small>
-                                <h5>{saleable_area}</h5>
-                              </div>
-                              <div className="col-6">
-                                <small className="text-muted">
-                                  Carpet Area
-                                </small>
-                                <h5>{carpet_area}</h5>
-                              </div>
-                            </div>
-                          </div>
+                          <h5 className="mt-2">{carpet_area}</h5>
                         </div>
+
                         <div className="col-xl-4 mt-xl-3">
                           <span className="text-muted">
                             <i className="bi bi-bank pe-2"></i>Bank Branch
