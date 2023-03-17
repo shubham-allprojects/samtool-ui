@@ -151,7 +151,7 @@ const ViewProperty = () => {
                     </div>
                   </div>
                   <div className="col-xl-7">
-                    <div className="d-flex">
+                    <div className="d-flex flex-wrap">
                       <div className="col-xl-4">
                         <span className="text-muted">
                           <i className="bi bi-tag pe-2"></i>Market Price
@@ -184,39 +184,31 @@ const ViewProperty = () => {
                             : "NA"}
                         </h5>
                       </div>
+                      <div className="col-xl-4 mt-xl-4">
+                        <span className="text-muted">
+                          <i className="bi bi-rulers pe-2"></i>
+                          Area
+                        </span>
+                        <div className="mt-2 d-flex flex-wrap">
+                          <div className="col-6">
+                            <small className="text-muted">Saleable</small>
+                            <h5>{saleable_area}</h5>
+                          </div>
+                          <div className="col-6">
+                            <small className="text-muted">Carpet</small>
+                            <h5>{carpet_area}</h5>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="col-xl-12">
                     <div className="row">
                       <div className="col-12 text-center mb-3">
                         <span className="fw-bold">Pricing:</span> <br />
-                        Market Price: {parseInt(market_price) /
-                          10000000} Cr. <br />
                         Price range: {parseInt(ready_reckoner_price) /
                           10000000}{" "}
                         Cr. - {parseInt(expected_price) / 10000000} Cr.
-                      </div>
-
-                      <div className="col-12 text-center mb-3">
-                        <span className="fw-bold">Area:</span> <br />
-                        Saleable Area: {saleable_area} <br />
-                        Carpet Area: {carpet_area}
-                      </div>
-
-                      <div className="col-12 text-center mb-3">
-                        <span className="fw-bold">Address:</span> <br />
-                        {city_name} - {PIN}, {state_name}, Loaclity: {locality}
-                      </div>
-
-                      <div className="col-12 text-center mb-3">
-                        <span className="fw-bold">Dates:</span> <br />
-                        Completion date:{" "}
-                        {completion_date
-                          ? completion_date.split(" ")[0]
-                          : "NA"}{" "}
-                        <br />
-                        Purchase date:{" "}
-                        {purchase_date ? purchase_date.split(" ")[0] : "NA"}
                       </div>
                     </div>
                   </div>
