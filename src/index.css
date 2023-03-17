@@ -52,18 +52,6 @@ code {
   width: 100% !important;
 }
 
-/* Breadcrumb in admin section */
-.breadcrumb {
-  --bs-breadcrumb-divider: ">";
-}
-
-.breadcrumb-item,
-.breadcrumb-item > *,
-.breadcrumb-item.active {
-  text-decoration: none;
-  color: var(--primary-color-hover) !important;
-}
-
 .common-btn-font {
   font-weight: 500 !important;
 }
@@ -768,6 +756,19 @@ input:-webkit-autofill:active {
 
 /* Admin  */
 
+/* Breadcrumb */
+
+.breadcrumb {
+  --bs-breadcrumb-divider: ">";
+}
+
+.breadcrumb-item,
+.breadcrumb-item > *,
+.breadcrumb-item.active {
+  text-decoration: none;
+  color: var(--primary-color-hover) !important;
+}
+
 .scrollable-right-div {
   max-height: 100vh;
   overflow-y: scroll;
@@ -834,6 +835,14 @@ input:-webkit-autofill:active {
   display: flex !important;
   justify-content: center;
   align-items: center;
+}
+
+/* View single property */
+
+.property-slider-indicators [data-bs-target] {
+  height: 11px !important;
+  width: 11px !important;
+  border-radius: 50%;
 }
 
 /* Bulk upload properties*/

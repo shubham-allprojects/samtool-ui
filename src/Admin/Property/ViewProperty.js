@@ -78,7 +78,7 @@ const ViewProperty = () => {
                       className="carousel slide"
                       data-bs-ride="carousel"
                     >
-                      <div className="carousel-indicators">
+                      <div className="carousel-indicators property-slider-indicators">
                         <button
                           type="button"
                           data-bs-target="#carouselExampleIndicators"
