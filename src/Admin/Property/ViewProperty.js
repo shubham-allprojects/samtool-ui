@@ -60,11 +60,10 @@ const ViewProperty = () => {
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
             <BreadCrumb />
-            <section className="admin-edit-property">
+            <section className="admin-edit-property mb-5">
               <h3 className="fw-bold text-primary pb-2">{type_name}</h3>
               <div className="container-fluid border border-1 p-3">
                 <div className="row ">
-                  <div className="col-12"></div>
                   <div className="col-xl-5">
                     <div
                       id="carouselExampleIndicators"
@@ -182,14 +181,14 @@ const ViewProperty = () => {
                             {city_name} - {PIN}, {state_name}
                           </h5>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 mt-md-0 mt-3">
                           <span className="text-muted">
                             <i className="bi bi-bank pe-2"></i>Bank Branch
                           </span>
                           <h5 className="mt-2">{branch_name}</h5>
                         </div>
                         <div className="col-12">
-                          <hr className="my-2" />
+                          <hr className="my-md-2 my-3" />
                         </div>
                         <div className="col-12 mb-2">
                           <span className="text-muted">
@@ -197,16 +196,16 @@ const ViewProperty = () => {
                             Area
                           </span>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
                           <small className="text-muted">Saleable Area</small>
                           <h5 className="mt-1">{saleable_area}</h5>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
                           <small className="text-muted">Carpet Area</small>
                           <h5 className="mt-1">{carpet_area}</h5>
                         </div>
                         <div className="col-12">
-                          <hr className="my-2" />
+                          <hr className="my-md-2 my-3" />
                         </div>
                         <div className="col-12 mb-2">
                           <span className="text-muted">
@@ -214,7 +213,7 @@ const ViewProperty = () => {
                             Dates
                           </span>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
                           <small className="text-muted">Completion Date</small>
                           <h5 className="mt-1">
                             {completion_date
@@ -226,7 +225,7 @@ const ViewProperty = () => {
                               : "NA"}
                           </h5>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
                           <small className="text-muted">Purchase Date</small>
                           <h5 className="mt-1">
                             {purchase_date
@@ -238,7 +237,7 @@ const ViewProperty = () => {
                               : "NA"}
                           </h5>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
                           <small className="text-muted">Mortgage Date</small>
                           <h5 className="mt-1">
                             {mortgage_date
@@ -251,7 +250,7 @@ const ViewProperty = () => {
                           </h5>
                         </div>
                         <div className="col-12">
-                          <hr className="my-2" />
+                          <hr className="my-md-2 my-3" />
                         </div>
                         <div className="col-12 mb-2">
                           <span className="text-muted">
@@ -259,14 +258,14 @@ const ViewProperty = () => {
                             Pricing
                           </span>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
                           <small className="text-muted">Market Price</small>
                           <h5 className="mt-1">
                             <i className="bi bi-currency-rupee"></i>
                             {market_price}
                           </h5>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
                           <small className="text-muted">
                             Ready Reckoner Price
                           </small>
@@ -275,7 +274,7 @@ const ViewProperty = () => {
                             {ready_reckoner_price}
                           </h5>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
                           <small className="text-muted">Expected Price</small>
                           <h5 className="mt-1">
                             <i className="bi bi-currency-rupee"></i>
@@ -283,7 +282,7 @@ const ViewProperty = () => {
                           </h5>
                         </div>
                         <div className="col-12">
-                          <hr className="my-2" />
+                          <hr className="my-md-2 my-3" />
                         </div>
                         <div className="col-12 mb-2">
                           <span className="text-muted">
@@ -291,13 +290,13 @@ const ViewProperty = () => {
                             Other Details
                           </span>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
                           <small className="text-muted">Is Sold?</small>
                           <h5 className="mt-1">
                             {is_sold === 1 ? "Yes" : "No"}
                           </h5>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
                           <small className="text-muted">
                             Is Available For Sale?
                           </small>
@@ -308,7 +307,7 @@ const ViewProperty = () => {
 
                         {is_available_for_sale === 1 ? (
                           <>
-                            <div className="col-lg-4">
+                            <div className="col-md-4">
                               <small className="text-muted">
                                 Sale Availability Date
                               </small>
