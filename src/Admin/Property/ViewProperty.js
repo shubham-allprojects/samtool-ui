@@ -36,9 +36,7 @@ const ViewProperty = () => {
     mortgage_date,
     plot_no,
     property_number,
-
     society_name,
-
     status,
   } = property;
 
@@ -146,7 +144,7 @@ const ViewProperty = () => {
                     </div>
                   </div>
                   <div className="col-xl-7">
-                    <div className="d-flex flex-wrap">
+                    <div className="row">
                       <div className="col-xl-4">
                         <span className="text-muted">
                           <i className="bi bi-tag pe-2"></i>Market Price
@@ -181,23 +179,60 @@ const ViewProperty = () => {
                       </div>
                       <div className="col-xl-4 mt-xl-3">
                         <span className="text-muted">
-                          <i className="bi bi-rulers pe-2"></i>
+                          <i className="bi bi-pin-map pe-2"></i>
                           Area
                         </span>
-                        <div className="mt-2 d-flex flex-wrap">
+                        <div className="mt-2 row">
                           <div className="col-6">
-                            <small className="text-muted">Saleable</small>
+                            <small className="text-muted">Saleable Area</small>
                             <h5>{saleable_area}</h5>
                           </div>
                           <div className="col-6">
-                            <small className="text-muted">Carpet</small>
+                            <small className="text-muted">Carpet Area</small>
                             <h5>{carpet_area}</h5>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-12">
+                  <div className="col-xl-5 mt-3">
+                    <div className="row">
+                      <div className="col-4">
+                        <div className="card p-2 text-center">
+                          <small className="text-muted">Property Number</small>
+                          <small className="common-btn-font">
+                            {property_number}
+                          </small>
+                        </div>
+                      </div>
+                      <div className="col-4">
+                        <div className="card p-2 text-center">
+                          <small className="text-muted">Purchase Date</small>
+                          <small className="common-btn-font">
+                            {purchase_date
+                              ? purchase_date
+                                  .split(" ")[0]
+                                  .split("-")
+                                  .reverse()
+                                  .join("-")
+                              : "NA"}
+                          </small>
+                        </div>
+                      </div>
+                      <div className="col-4">
+                        <div className="card p-2 text-center">
+                          <small className="text-muted">
+                            Is available for sale
+                          </small>
+                          <small className="common-btn-font">
+                            {is_available_for_sale === "1" ? "Yes" : "No"}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-7"></div>
+                  {/* <div className="col-xl-12">
                     <div className="row">
                       <div className="col-12 text-center mb-3">
                         <span className="fw-bold">Pricing:</span> <br />
@@ -206,7 +241,7 @@ const ViewProperty = () => {
                         Cr. - {parseInt(expected_price) / 10000000} Cr.
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </section>
