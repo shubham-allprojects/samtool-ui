@@ -270,6 +270,24 @@ const ViewProperty = () => {
                             {market_price}
                           </h5>
                         </div>
+
+                        <div className="col-xl-4">
+                          <small className="text-muted">
+                            Ready Reckoner Price
+                          </small>
+                          <h5 className="mt-1">
+                            <i className="bi bi-currency-rupee"></i>
+                            {ready_reckoner_price}
+                          </h5>
+                        </div>
+
+                        <div className="col-xl-4">
+                          <small className="text-muted">Expected Price</small>
+                          <h5 className="mt-1">
+                            <i className="bi bi-currency-rupee"></i>
+                            {expected_price}
+                          </h5>
+                        </div>
                       </div>
                     </div>
                   </div>
