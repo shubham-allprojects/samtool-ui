@@ -62,10 +62,11 @@ const ViewProperty = () => {
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
             <BreadCrumb />
-            <section className="admin-edit-property wrapper">
-              <div className="container-fluid">
+            <section className="admin-edit-property">
+              <h3 className="fw-bold text-primary pb-2">{type_name}</h3>
+              <div className="container-fluid border border-1 p-3">
                 <div className="row">
-                  <div className="col-xl-7 p-0">
+                  <div className="col-xl-5">
                     <div className="currentPropertyImgWrapper">
                       <img
                         src="/images2.jpg"
@@ -74,14 +75,16 @@ const ViewProperty = () => {
                       />
                     </div>
                   </div>
-                  <div className="col-xl-5">
-                    <h3 className="text-center fw-bold text-primary">
-                      {type_name}
-                    </h3>
-                    <div className="text-center">
-                      <span>{`${city_name}, ${state_name}.`}</span>
+                  {/* <div className="col-xl-5 d-flex justify-content-center align-items-center">
+                    <div>
+                      <h1 className="fw-bold text-primary">
+                        {type_name}
+                      </h1>
+                      <div className="text-center">
+                        <span>{`${city_name}, ${state_name}.`}</span>
+                      </div>
                     </div>
-                    <hr />
+
                     <div className="row">
                       <div className="col-12 text-center mb-3">
                         <span className="fw-bold">Pricing:</span> <br />
@@ -114,7 +117,7 @@ const ViewProperty = () => {
                         {purchase_date ? purchase_date.split(" ")[0] : "NA"}
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </section>

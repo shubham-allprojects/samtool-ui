@@ -47,6 +47,11 @@ code {
 
 /* Common css */
 
+.fixed-image-hw {
+  height: 100% !important;
+  width: 100% !important;
+}
+
 /* Breadcrumb in admin section */
 .breadcrumb {
   --bs-breadcrumb-divider: ">";

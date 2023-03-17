@@ -18,7 +18,7 @@ const BreadCrumb = ({ userType, emailOfCurrentUser, typeOfUser }) => {
 
   return (
     <>
-      <nav aria-label="breadcrumb" className="mt-3">
+      <nav aria-label="breadcrumb" className="mt-2">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
             <NavLink className="text-decoration-none" to="/admin">
