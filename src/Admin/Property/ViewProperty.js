@@ -16,8 +16,6 @@ const ViewProperty = () => {
 
   const {
     type_name,
-    Flat_No,
-    PIN,
     branch_name,
     carpet_area,
     saleable_area,
@@ -30,14 +28,16 @@ const ViewProperty = () => {
     market_price,
     ready_reckoner_price,
     is_available_for_sale,
+    mortgage_date,
     is_sold,
     is_stressed,
-    locality,
-    mortgage_date,
-    plot_no,
     property_number,
-    society_name,
     status,
+    society_name,
+    plot_no,
+    Flat_No,
+    PIN,
+    locality,
   } = property;
 
   const getCurrentProperty = async () => {
@@ -170,10 +170,43 @@ const ViewProperty = () => {
                         </div>
                         <div className="col-4">
                           <div className="card p-2 text-center border-primary border-2 border">
+                            <small className="text-muted">Mortgage Date</small>
+                            <small className="common-btn-font">
+                              {mortgage_date
+                                ? mortgage_date
+                                    .split(" ")[0]
+                                    .split("-")
+                                    .reverse()
+                                    .join("-")
+                                : "NA"}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="row mt-3">
+                        <div className="col-4">
+                          <div className="card p-2 text-center border-primary border-2 border">
+                            <small className="text-muted">Is stressed</small>
+                            <small className="common-btn-font">
+                              {is_stressed === 1 ? "Yes" : "No"}
+                            </small>
+                          </div>
+                        </div>
+
+                        <div className="col-4">
+                          <div className="card p-2 text-center border-primary border-2 border">
                             <small className="text-muted">Is sold?</small>
                             <small className="common-btn-font">
-                              {is_available_for_sale === "1" ? "Yes" : "No"}
+                              {is_sold === 1 ? "Yes" : "No"}
                             </small>
+                          </div>
+                        </div>
+
+                        <div className="col-4">
+                          <div className="card p-2 text-center border-primary border-2 border">
+                            <small className="text-muted">Status</small>
+                            <small className="common-btn-font">{status}</small>
                           </div>
                         </div>
                       </div>
@@ -187,7 +220,7 @@ const ViewProperty = () => {
                             <i className="bi bi-tag pe-2"></i>Market Price
                           </span>
                           <h5 className="mt-2">
-                            <i class="bi bi-currency-rupee"></i>
+                            <i className="bi bi-currency-rupee"></i>
                             {market_price}
                           </h5>
                         </div>
@@ -236,6 +269,9 @@ const ViewProperty = () => {
                         </div>
                         <div className="col-12">
                           <hr className="my-2" />
+                        </div>
+                        <div className="col-12">
+                          
                         </div>
                       </div>
                     </div>
