@@ -230,13 +230,9 @@ const ViewProperty = () => {
                       </div>
                       <div className="col-4">
                         <div className="card p-2 text-center border-primary border-2 border">
-                          <small className="text-muted">
-                            Sale Availability
-                          </small>
+                          <small className="text-muted">Is sold?</small>
                           <small className="common-btn-font">
-                            {is_available_for_sale === "1"
-                              ? "Available for sale"
-                              : "Not Available for sale"}
+                            {is_available_for_sale === "1" ? "Yes" : "No"}
                           </small>
                         </div>
                       </div>
