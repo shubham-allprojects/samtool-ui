@@ -68,11 +68,6 @@ const ViewProperty = () => {
                 <div className="row">
                   <div className="col-12"></div>
                   <div className="col-xl-5">
-                    {/* <img
-                      src="/images2.jpg"
-                      alt="property-pic"
-                      className="img-fluid"
-                    /> */}
                     <div
                       id="carouselExampleIndicators"
                       className="carousel slide"
@@ -184,7 +179,7 @@ const ViewProperty = () => {
                             : "NA"}
                         </h5>
                       </div>
-                      <div className="col-xl-4 mt-xl-4">
+                      <div className="col-xl-4 mt-xl-3">
                         <span className="text-muted">
                           <i className="bi bi-rulers pe-2"></i>
                           Area
