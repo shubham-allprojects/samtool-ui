@@ -465,16 +465,15 @@ const Registration = () => {
     } else if (name === "village") {
       setValues(name, value);
     } else if (name === "zip") {
-      if (zipCodeValidationColor !== "danger") {
-        setFormData({
-          ...formData,
-          contact_details: {
-            ...formData.contact_details,
-            [name]: parseInt(value),
-          },
-        });
-        setValues(name, value);
-      }
+      setFormData({
+        ...formData,
+        contact_details: {
+          ...formData.contact_details,
+          [name]: parseInt(value),
+        },
+      });
+      setValues(name, value);
+
       if (IdOfState !== "" && value !== "") {
         zipValidationByState(value, parseInt(IdOfState));
       }
