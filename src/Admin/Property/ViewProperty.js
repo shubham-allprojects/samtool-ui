@@ -144,60 +144,68 @@ const ViewProperty = () => {
                     </div>
                   </div>
                   <div className="col-xl-7">
-                    <div className="row">
-                      <div className="col-xl-4">
-                        <span className="text-muted">
-                          <i className="bi bi-tag pe-2"></i>Market Price
-                        </span>
-                        <h5 className="mt-2">
-                          <i class="bi bi-currency-rupee"></i>
-                          {market_price}
-                        </h5>
-                      </div>
-                      <div className="col-xl-4">
-                        <span className="text-muted">
-                          <i className="bi bi-geo-alt pe-2"></i>Location
-                        </span>
-                        <h5 className="mt-2">
-                          {city_name}, {state_name}
-                        </h5>
-                      </div>
-                      <div className="col-xl-4">
-                        <span className="text-muted">
-                          <i className="bi bi-calendar-check pe-2"></i>
-                          Completion Date
-                        </span>
-                        <h5 className="mt-2">
-                          {completion_date
-                            ? completion_date
-                                .split(" ")[0]
-                                .split("-")
-                                .reverse()
-                                .join("-")
-                            : "NA"}
-                        </h5>
-                      </div>
-                      <div className="col-xl-4 mt-xl-3">
-                        <span className="text-muted">
-                          <i className="bi bi-pin-map pe-2"></i>
-                          Area
-                        </span>
-                        <div className="mt-2 row">
-                          <div className="col-6">
-                            <small className="text-muted">Saleable Area</small>
-                            <h5>{saleable_area}</h5>
-                          </div>
-                          <div className="col-6">
-                            <small className="text-muted">Carpet Area</small>
-                            <h5>{carpet_area}</h5>
+                    <div className="container-fluid">
+                      <div className="row">
+                        <div className="col-xl-4">
+                          <span className="text-muted">
+                            <i className="bi bi-tag pe-2"></i>Market Price
+                          </span>
+                          <h5 className="mt-2">
+                            <i class="bi bi-currency-rupee"></i>
+                            {market_price}
+                          </h5>
+                        </div>
+                        <div className="col-xl-4">
+                          <span className="text-muted">
+                            <i className="bi bi-geo-alt pe-2"></i>Location
+                          </span>
+                          <h5 className="mt-2">
+                            {city_name}, {state_name}
+                          </h5>
+                        </div>
+                        <div className="col-xl-4">
+                          <span className="text-muted">
+                            <i className="bi bi-calendar-check pe-2"></i>
+                            Completion Date
+                          </span>
+                          <h5 className="mt-2">
+                            {completion_date
+                              ? completion_date
+                                  .split(" ")[0]
+                                  .split("-")
+                                  .reverse()
+                                  .join("-")
+                              : "NA"}
+                          </h5>
+                        </div>
+                        <div className="col-xl-4 mt-xl-3">
+                          <span className="text-muted">
+                            <i className="bi bi-pin-map pe-2"></i>
+                            Area
+                          </span>
+                          <div className="container-fluid mt-2">
+                            <div className="row">
+                              <div className="col-6">
+                                <small className="text-muted">
+                                  Saleable Area
+                                </small>
+                                <h5>{saleable_area}</h5>
+                              </div>
+                              <div className="col-6">
+                                <small className="text-muted">
+                                  Carpet Area
+                                </small>
+                                <h5>{carpet_area}</h5>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-xl-4 mt-xl-3">
-                        <span className="text-muted">
-                          <i className="bi bi-bank pe-2"></i>Bank Branch
-                        </span>
-                        <h5 className="mt-2">{branch_name}</h5>
+                        <div className="col-xl-4 mt-xl-3">
+                          <span className="text-muted">
+                            <i className="bi bi-bank pe-2"></i>Bank Branch
+                          </span>
+                          <h5 className="mt-2">{branch_name}</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
