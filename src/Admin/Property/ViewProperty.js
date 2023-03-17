@@ -36,8 +36,8 @@ const ViewProperty = () => {
     society_name,
     plot_no,
     Flat_No,
-    PIN,
     locality,
+    PIN,
   } = property;
 
   const getCurrentProperty = async () => {
@@ -282,6 +282,50 @@ const ViewProperty = () => {
                             {expected_price}
                           </h5>
                         </div>
+                        <div className="col-12">
+                          <hr className="my-2" />
+                        </div>
+                        <div className="col-12 mb-2">
+                          <span className="text-muted">
+                            <i className="bi bi-info-square pe-2"></i>
+                            Other Details
+                          </span>
+                        </div>
+                        <div className="col-xl-4">
+                          <small className="text-muted">Is Sold?</small>
+                          <h5 className="mt-1">
+                            {is_sold === 1 ? "Yes" : "No"}
+                          </h5>
+                        </div>
+                        <div className="col-xl-4">
+                          <small className="text-muted">
+                            Is Available For Sale?
+                          </small>
+                          <h5 className="mt-1">
+                            {is_available_for_sale === 1 ? "Yes" : "No"}
+                          </h5>
+                        </div>
+
+                        {is_available_for_sale === 1 ? (
+                          <>
+                            <div className="col-xl-4">
+                              <small className="text-muted">
+                                Sale Availability Date
+                              </small>
+                              <h5 className="mt-1">
+                                {sale_availability_date
+                                  ? sale_availability_date
+                                      .split(" ")[0]
+                                      .split("-")
+                                      .reverse()
+                                      .join("-")
+                                  : "NA"}
+                              </h5>
+                            </div>
+                          </>
+                        ) : (
+                          <></>
+                        )}
                       </div>
                     </div>
                   </div>
