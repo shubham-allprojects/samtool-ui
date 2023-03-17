@@ -31,7 +31,7 @@ const CommonFormFields = ({
             style={{ resize: "none" }}
             value={addressValue}
             readOnly
-            className={`form-control ${textAreaVisibility}`}
+            className={`form-control ${textAreaVisibility} mt-2`}
             cols="30"
             rows="4"
           ></textarea>
