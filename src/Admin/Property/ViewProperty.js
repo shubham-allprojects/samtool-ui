@@ -62,7 +62,7 @@ const ViewProperty = () => {
             <BreadCrumb />
             <section className="admin-edit-property mb-5">
               <h3 className="fw-bold text-primary pb-2">{type_name}</h3>
-              <div className="container-fluid border border-1 p-3">
+              <div className="container-fluid border p-3">
                 <div className="row ">
                   <div className="col-xl-5">
                     <div
