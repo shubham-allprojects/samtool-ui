@@ -130,12 +130,6 @@ const ViewAllProperties = () => {
                                   >
                                     <i className="bi bi-trash-fill"></i>
                                   </button>
-                                  <NavLink
-                                    to={`/admin/property/properties/single-property-documents-upload/${property.property_id}`}
-                                    className="btn btn-sm btn-outline-dark property-button-wrapper ms-2"
-                                  >
-                                    <i className="bi bi-upload"></i>
-                                  </NavLink>
                                 </div>
                               </div>
                             </div>
