@@ -77,7 +77,7 @@ const BreadCrumb = ({
               ) : propertyId ? (
                 <li className="breadcrumb-item">{propertyId}</li>
               ) : isSinglePropertyDocumentsUploadPageActive ? (
-                <li className="breadcrumb-item">Upload Documents</li>
+                <li className="breadcrumb-item">Upload Documents & Images</li>
               ) : (
                 <> </>
               )}
