@@ -5,10 +5,11 @@ import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
 import { v4 as uuid } from "uuid";
 
-const chunkSize = 1000 * 1024;
+const chunkSize = 100000;
 const SinglePropertyDocumentsUpload = () => {
   const { id } = useParams();
   const [imageFiles, setImageFiles] = useState([]);
+  const [savedImageFiles, setSavedImageFiles] = useState([]);
   const [currentImageFileIndex, setCurrentImageFileIndex] = useState(null);
   const [lastUploadedImageFileIndex, setLastUploadedImageFileIndex] =
     useState(null);
@@ -19,7 +20,7 @@ const SinglePropertyDocumentsUpload = () => {
 
   const handleImageFileChange = (e) => {
     e.preventDefault();
-    setImageFiles([...imageFiles, ...e.target.files]);
+    setSavedImageFiles([...imageFiles, ...e.target.files]);
   };
 
   const readAndUploadCurrentImageChunk = () => {
@@ -64,6 +65,7 @@ const SinglePropertyDocumentsUpload = () => {
     const isLastChunk = currentChunkIndexOfImage === chunks;
     console.warn("IS LAST CHUNK: ", isLastChunk);
     if (isLastChunk) {
+      console.log(`file with ${uniqueId} uploaded`);
       setUinqueId(uuid());
       setLastUploadedImageFileIndex(currentImageFileIndex);
       setCurrentChunkIndexOfImage(null);
@@ -105,6 +107,11 @@ const SinglePropertyDocumentsUpload = () => {
     }
   }, [currentChunkIndexOfImage]);
 
+  const postImages = (e) => {
+    e.preventDefault();
+    setImageFiles(savedImageFiles);
+  };
+
   return (
     <Layout>
       <div className="container-fluid section-padding">
@@ -131,7 +138,9 @@ const SinglePropertyDocumentsUpload = () => {
                     />
                   </div>
                   <div className="col-6">
-                    <button className="btn btn-primary">Upload</button>
+                    <button className="btn btn-primary" onClick={postImages}>
+                      Upload
+                    </button>
                   </div>
                 </div>
                 {/* <div className="row border p-4 mt-4">
