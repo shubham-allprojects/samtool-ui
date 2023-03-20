@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
+import { v4 as uuid } from "uuid";
 
 const chunkSize = 1000 * 1024;
 const SinglePropertyDocumentsUpload = () => {
@@ -13,6 +14,8 @@ const SinglePropertyDocumentsUpload = () => {
     useState(null);
   const [currentChunkIndexOfImage, setCurrentChunkIndexOfImage] =
     useState(null);
+
+  const [uniqueId, setUinqueId] = useState(uuid());
 
   const handleImageFileChange = (e) => {
     e.preventDefault();
@@ -44,13 +47,24 @@ const SinglePropertyDocumentsUpload = () => {
       file.size / chunkSize
     )} ----- Data For Chunk: ${currentChunkIndexOfImage + 1} is ====> ${data}`;
 
-    console.log(detailsToShow);
+    const detailsToPost = {
+      upload_id: uniqueId,
+      chunk_number: `${currentChunkIndexOfImage + 1}`,
+      total_chunks: `${Math.ceil(file.size / chunkSize)}`,
+      total_file_size: `${fileSize}`,
+      file_name: `${file.name}`,
+      property_id: 1,
+      data: uuid(),
+    };
+
+    console.log(detailsToPost);
 
     // const headers = { "Content-Type": "application/octet-stream" };
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndexOfImage === chunks;
     console.warn("IS LAST CHUNK: ", isLastChunk);
     if (isLastChunk) {
+      setUinqueId(uuid());
       setLastUploadedImageFileIndex(currentImageFileIndex);
       setCurrentChunkIndexOfImage(null);
     } else {
@@ -109,7 +123,12 @@ const SinglePropertyDocumentsUpload = () => {
                 <div className="row border p-4">
                   <h5 className="mb-3">Upload Property Images</h5>
                   <div className="col-4">
-                    <input onChange={handleImageFileChange} type="file" multiple className="form-control" />
+                    <input
+                      onChange={handleImageFileChange}
+                      type="file"
+                      multiple
+                      className="form-control"
+                    />
                   </div>
                   <div className="col-6">
                     <button className="btn btn-primary">Upload</button>
