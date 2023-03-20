@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const chunkSize = 1000 * 1024;
+// const chunkSize = 100000;
 let authHeader = "";
 const SinglePropertyDocumentsUpload = () => {
   const data = JSON.parse(localStorage.getItem("data"));
