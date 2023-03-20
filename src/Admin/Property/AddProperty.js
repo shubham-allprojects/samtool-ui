@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
-// import BreadCrumb from "./BreadCrumb";
+import BreadCrumb from "../BreadCrumb";
 
 let authHeader = "";
 let zipError = false;
@@ -231,8 +231,8 @@ const AddProperty = () => {
         <div className="row min-100vh position-relative">
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
-            {/* <BreadCrumb /> */}
-            <section className="add-property-wrapper wrapper">
+            <BreadCrumb />
+            <section className="add-property-wrapper mb-5">
               <div className="container-fluid">
                 <div className="row justify-content-center">
                   <div className="col-xl-12">

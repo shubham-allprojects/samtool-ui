@@ -128,7 +128,7 @@ const AdminHomePage = () => {
         <div className="row min-100vh position-relative">
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
-            <div className="container-fluid wrapper admin-home-wrapper">
+            <div className="container-fluid my-4 admin-home-wrapper">
               <div className="row">
                 <div className="col-xl-3 col-md-6">
                   <NavLink
@@ -143,7 +143,7 @@ const AdminHomePage = () => {
                         <span className="fw-bold text-white hover-color-secondary fs-5">
                           <span className="fs-3" id="propertyCount">
                             0
-                          </span>{" "}
+                          </span>
                           <br /> Properties
                         </span>
                       </div>

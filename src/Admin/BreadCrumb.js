@@ -10,10 +10,14 @@ const BreadCrumb = ({
 }) => {
   const [isUserPageActive, setIsUserPageActive] = useState(false);
   const [isPropertyPageActive, setIsPropertyPageActive] = useState(false);
+  const [isAddPropertyPageActive, setIsAddPropertyPageActive] = useState(false);
   // If we are on Users section in admin then isUserPageActive will be true.
   const testFn = () => {
     setIsUserPageActive(window.location.href.includes("/admin/users"));
     setIsPropertyPageActive(window.location.href.includes("/admin/property"));
+    setIsAddPropertyPageActive(
+      window.location.href.includes("/admin/property/add-property")
+    );
   };
 
   useEffect(() => {
@@ -59,6 +63,13 @@ const BreadCrumb = ({
               >
                 Properties
               </NavLink>
+              {isAddPropertyPageActive ? (
+                <>
+                  <li className="breadcrumb-item">Add</li>
+                </>
+              ) : (
+                <></>
+              )}
               {propertyId ? (
                 <li className="breadcrumb-item">{propertyId}</li>
               ) : (
