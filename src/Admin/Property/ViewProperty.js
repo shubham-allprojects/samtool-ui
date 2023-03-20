@@ -173,20 +173,60 @@ const ViewProperty = () => {
                   <div className="col-xl-7 mt-xl-0 mt-4">
                     <div className="container-fluid">
                       <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-12 mb-2">
                           <span className="text-muted">
-                            <i className="bi bi-geo-alt pe-2"></i>Location
+                            <i className="bi bi-geo-alt pe-2"></i>
+                            Address Details
                           </span>
-                          <h5 className="mt-2">
-                            {city_name} - {PIN}, {state_name}
-                          </h5>
                         </div>
-                        <div className="col-md-6 mt-md-0 mt-3">
-                          <span className="text-muted">
-                            <i className="bi bi-bank pe-2"></i>Bank Branch
-                          </span>
-                          <h5 className="mt-2">{branch_name}</h5>
+
+                        {Flat_No ? (
+                          <div className="col-md-4">
+                            <small className="text-muted">Flat Number</small>
+                            <h5 className="mt-1">{Flat_No}</h5>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+
+                        {plot_no ? (
+                          <div className="col-md-4">
+                            <small className="text-muted">Plot Number</small>
+                            <h5 className="mt-1">{plot_no}</h5>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+
+                        {society_name ? (
+                          <div className="col-md-4">
+                            <small className="text-muted">Society Name</small>
+                            <h5 className="mt-1">{society_name}</h5>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+
+                        <div className="col-md-4">
+                          <small className="text-muted">Locality</small>
+                          <h5 className="mt-1">{locality}</h5>
                         </div>
+
+                        <div className="col-md-4">
+                          <small className="text-muted">City</small>
+                          <h5 className="mt-1">{city_name}</h5>
+                        </div>
+
+                        <div className="col-md-4">
+                          <small className="text-muted">State</small>
+                          <h5 className="mt-1">{state_name}</h5>
+                        </div>
+
+                        <div className="col-md-4">
+                          <small className="text-muted">Zip</small>
+                          <h5 className="mt-1">{PIN}</h5>
+                        </div>
+
                         <div className="col-12">
                           <hr className="my-md-2 my-3" />
                         </div>
@@ -287,7 +327,7 @@ const ViewProperty = () => {
                         <div className="col-12 mb-2">
                           <span className="text-muted">
                             <i className="bi bi-info-square pe-2"></i>
-                            Other Details
+                            Property Availability
                           </span>
                         </div>
                         <div className="col-md-4">
@@ -325,6 +365,16 @@ const ViewProperty = () => {
                         ) : (
                           <></>
                         )}
+
+                        <div className="col-12">
+                          <hr className="my-md-2 my-3" />
+                        </div>
+                        <div className="col-md-12">
+                          <span className="text-muted">
+                            <i className="bi bi-bank pe-2"></i>Bank Branch
+                          </span>
+                          <h5 className="mt-2">{branch_name}</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
