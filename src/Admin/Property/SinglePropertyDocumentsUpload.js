@@ -65,7 +65,7 @@ const SinglePropertyDocumentsUpload = () => {
     const isLastChunk = currentChunkIndexOfImage === chunks;
     console.warn("IS LAST CHUNK: ", isLastChunk);
     if (isLastChunk) {
-      console.log(`file with ${uniqueId} uploaded`);
+      // console.log(currentImageFileIndex === savedImageFiles.length - 1);
       setUinqueId(uuid());
       setLastUploadedImageFileIndex(currentImageFileIndex);
       setCurrentChunkIndexOfImage(null);
