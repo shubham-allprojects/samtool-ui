@@ -10,7 +10,7 @@ import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
 const chunkSize = 1000 * 1024;
-// const chunkSize = 6000;
+
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
   const [saveFile, setSavedFile] = useState([]);

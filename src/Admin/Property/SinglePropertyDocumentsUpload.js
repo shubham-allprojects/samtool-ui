@@ -6,7 +6,12 @@ import BreadCrumb from "../BreadCrumb";
 import { v4 as uuid } from "uuid";
 
 const chunkSize = 100000;
+let authHeader = "";
 const SinglePropertyDocumentsUpload = () => {
+  const data = JSON.parse(localStorage.getItem("data"));
+  if (data) {
+    authHeader = { Authorization: data.logintoken };
+  }
   const { id } = useParams();
   const [imageFiles, setImageFiles] = useState([]);
   const [savedImageFiles, setSavedImageFiles] = useState([]);
