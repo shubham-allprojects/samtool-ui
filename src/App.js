@@ -27,6 +27,7 @@ import ForgotPassword from "./components/5.Login/ForgotPassword";
 import AdminProtected from "./components/AdminProtected";
 import AccessDeniedPage from "./components/AccessDeniedPage";
 import ForgotAndResetPassword from "./components/8.ForgotAndResetPassword/ForgotAndResetPassword";
+import SinglePropertyDocumentsUpload from "./Admin/Property/SinglePropertyDocumentsUpload";
 
 function App() {
   return (
@@ -115,6 +116,15 @@ function App() {
             element={
               // <AdminProtected>
               <AddProperty />
+              // </AdminProtected>
+            }
+          />
+
+          <Route
+            path="/admin/property/properties/single-property-documents-upload/:id"
+            element={
+              // <AdminProtected>
+              <SinglePropertyDocumentsUpload />
               // </AdminProtected>
             }
           />

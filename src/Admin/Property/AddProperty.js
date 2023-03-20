@@ -230,9 +230,9 @@ const AddProperty = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
+          <div className="col-xl-10 col-lg-9 col-md-8 mt- mt-md-0">
             <BreadCrumb />
-            <section className="add-property-wrapper mb-5">
+            <section className="add-property-wrapper mb-4">
               <div className="container-fluid">
                 <div className="row justify-content-center">
                   <div className="col-xl-12">

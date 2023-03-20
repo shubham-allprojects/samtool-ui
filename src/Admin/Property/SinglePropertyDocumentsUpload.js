@@ -1,10 +1,11 @@
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+import { useParams } from "react-router-dom";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 // import BreadCrumb from "./BreadCrumb";
 
-const AddProperty = () => {
+const SinglePropertyDocumentsUpload = () => {
+  const { id } = useParams();
   return (
     <Layout>
       <div className="container-fluid section-padding">
@@ -14,7 +15,7 @@ const AddProperty = () => {
             {/* <BreadCrumb /> */}
             <section className="upload-documents-wrapper wrapper">
               <div className="container-fluid">
-                <div className="row justify-content-center">hmmmm</div>
+                <div className="row justify-content-center">{id}</div>
               </div>
             </section>
           </div>
@@ -24,4 +25,4 @@ const AddProperty = () => {
   );
 };
 
-export default AddProperty;
+export default SinglePropertyDocumentsUpload;
