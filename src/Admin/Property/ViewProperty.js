@@ -59,7 +59,7 @@ const ViewProperty = () => {
         <div className="row min-100vh position-relative">
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
-            <BreadCrumb />
+            <BreadCrumb propertyId={id} />
             <section className="admin-edit-property mb-5">
               <h3 className="fw-bold text-primary pb-2">{type_name}</h3>
               <div className="container-fluid border p-3">
