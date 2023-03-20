@@ -56,10 +56,16 @@ const SinglePropertyDocumentsUpload = () => {
       total_chunks: `${Math.ceil(file.size / chunkSize)}`,
       total_file_size: `${fileSize}`,
       file_name: `${file.name}`,
-      property_id: 2,
+      property_id: 1,
       data: `${data}`,
     };
 
+    const detailsToPost2 = {
+      upload_id: uniqueId,
+      chunk_number: `${currentChunkIndexOfImage + 1}`,
+      total_chunks: `${Math.ceil(file.size / chunkSize)}`,
+      file_name: `${file.name}`,
+    };
     // console.log(detailsToPost);
 
     // const headers = { "Content-Type": "application/octet-stream" };

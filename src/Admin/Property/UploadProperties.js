@@ -10,6 +10,7 @@ import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
 const chunkSize = 1000 * 1024;
+// const chunkSize = 2024;
 
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
@@ -17,7 +18,7 @@ const UploadProperties = () => {
   const [currentFileIndex, setCurrentFileIndex] = useState(null);
   const [lastUploadedFileIndex, setLastUploadedFileIndex] = useState(null);
   const [currentChunkIndex, setCurrentChunkIndex] = useState(null);
-  const uniqueUploadId = uuid();
+  const [uniqueUploadId, setUniqueUploadId] = useState(uuid());
   const [allUseStates, setAllUseStates] = useState({
     data: [],
     tableHeadings: [],
@@ -143,7 +144,7 @@ const UploadProperties = () => {
     setProgress(
       Math.round((dataToPost.chunk_number / dataToPost.total_chunks) * 100)
     );
-    // setProgressModalOpen(true);
+    setProgressModalOpen(true);
     try {
       await axios.post(url, dataToPost, { headers: headers }).then((res) => {
         setProgressModalOpen(true);
