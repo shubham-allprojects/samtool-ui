@@ -100,8 +100,8 @@ const AdminSideBar = () => {
                           className="nav-link"
                           to="/admin/property/upload-properties"
                         >
-                          <i className="bi bi-upload me-2 text-light"></i>Upload
-                          Properties
+                          <i className="bi bi-upload me-2 text-light"></i>Bulk
+                          Upload
                         </NavLink>
                       </li>
                     </ul>
