@@ -852,7 +852,7 @@ const AddProperty = () => {
                                 name="city"
                                 className="form-select"
                                 onChange={onInputChange}
-                                required
+                                required={state !== "" ? true : false}
                               >
                                 <option value=""></option>
                                 {allCities ? (
