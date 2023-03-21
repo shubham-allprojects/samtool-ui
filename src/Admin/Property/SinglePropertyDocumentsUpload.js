@@ -6,9 +6,12 @@ import BreadCrumb from "../BreadCrumb";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
-
-const chunkSize = 1000 * 1024;
+// Original
+// const chunkSize = 1000 * 1024;
+// For Images multi chunk
 // const chunkSize = 100000;
+// For Pdf multi chunk
+const chunkSize = 69000;
 let authHeader = "";
 const SinglePropertyDocumentsUpload = () => {
   const data = JSON.parse(localStorage.getItem("data"));
