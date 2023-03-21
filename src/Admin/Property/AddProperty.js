@@ -90,7 +90,7 @@ const AddProperty = () => {
     } else if (name === "is_stressed") {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "status") {
-      commonFnToSaveFormData(name, parseInt(value));
+      commonFnToSaveFormData(name, value);
     } else if (name === "saleable_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "carpet_area") {
