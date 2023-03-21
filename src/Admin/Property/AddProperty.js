@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
@@ -14,6 +15,7 @@ const AddProperty = () => {
     authHeader = { Authorization: data.logintoken };
   }
 
+  const goTo = useNavigate();
   const [formData, setFormData] = useState({
     is_sold: 0,
     is_available_for_sale: 1,
@@ -214,6 +216,9 @@ const AddProperty = () => {
               resetValidationsOnSubmit();
               toast.success("Property added successfully");
               e.target.reset();
+              setTimeout(() => {
+                goTo("/admin/property/properties");
+              }, 2000);
             } else {
               toast.error("Internal server error");
             }
