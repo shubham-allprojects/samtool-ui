@@ -78,19 +78,23 @@ const SinglePropertyDocumentsUpload = () => {
     if (isLastChunk) {
       // console.log(currentImageFileIndex === savedImageFiles.length - 1);
       setUinqueId(uuid());
-      await axios
-        .post(`/sam/v1/property/auth/upload-images`, detailsToPost, {
-          headers: authHeader,
-        })
-        .then((res) => {
-          if (res.data.msg !== 0) {
-            toast.error("Error while uploading files");
-          } else {
-            if (currentImageFileIndex === savedImageFiles.length - 1) {
-              toast.success("Files uploaded successfully");
+      try {
+        await axios
+          .post(`/sam/v1/property/auth/upload-images`, detailsToPost, {
+            headers: authHeader,
+          })
+          .then((res) => {
+            if (res.data.msg !== 0) {
+              toast.error("Error while uploading files");
+            } else {
+              if (currentImageFileIndex === savedImageFiles.length - 1) {
+                toast.success("Files uploaded successfully");
+              }
             }
-          }
-        });
+          });
+      } catch (error) {
+        toast.error("Internal server error");
+      }
       setLastUploadedImageFileIndex(currentImageFileIndex);
       setCurrentChunkIndexOfImage(null);
     } else {
@@ -193,19 +197,23 @@ const SinglePropertyDocumentsUpload = () => {
     if (isLastChunk) {
       // console.log(currentPdfFileIndex === savedPdfFiles.length - 1);
       setUinqueIdForPdf(uuid());
-      await axios
-        .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
-          headers: authHeader,
-        })
-        .then((res) => {
-          if (res.data.msg !== 0) {
-            toast.error("Error while uploading files");
-          } else {
-            if (currentPdfFileIndex === savedPdfFiles.length - 1) {
-              toast.success("Files uploaded successfully");
+      try {
+        await axios
+          .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
+            headers: authHeader,
+          })
+          .then((res) => {
+            if (res.data.msg !== 0) {
+              toast.error("Error while uploading files");
+            } else {
+              if (currentPdfFileIndex === savedPdfFiles.length - 1) {
+                toast.success("Files uploaded successfully");
+              }
             }
-          }
-        });
+          });
+      } catch (error) {
+        toast.error("Internal server error");
+      }
       setLastUploadedPdfFileIndex(currentPdfFileIndex);
       setCurrentChunkIndexOfPdf(null);
     } else {
