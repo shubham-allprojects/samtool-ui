@@ -280,7 +280,7 @@ const SinglePropertyDocumentsUpload = () => {
                 </div>
                 <div className="row border p-4">
                   <h5 className="mb-3">Upload Property Images</h5>
-                  <div className="col-4">
+                  <div className="col-8">
                     <input
                       onChange={handleImageFileChange}
                       type="file"
@@ -288,7 +288,7 @@ const SinglePropertyDocumentsUpload = () => {
                       className="form-control"
                     />
                   </div>
-                  <div className="col-6">
+                  <div className="col-4">
                     <button className="btn btn-primary" onClick={postImages}>
                       Upload
                     </button>
@@ -296,7 +296,7 @@ const SinglePropertyDocumentsUpload = () => {
                 </div>
                 <div className="row border p-4 mt-4">
                   <h5 className="mb-3">Upload Property Documents</h5>
-                  <div className="col-4">
+                  <div className="col-8">
                     <input
                       onChange={handlePdfFileChange}
                       type="file"
@@ -304,7 +304,7 @@ const SinglePropertyDocumentsUpload = () => {
                       multiple
                     />
                   </div>
-                  <div className="col-6">
+                  <div className="col-4">
                     <button className="btn btn-primary" onClick={postPdf}>
                       Upload
                     </button>
