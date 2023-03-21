@@ -7,11 +7,11 @@ import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
 // Original
-// const chunkSize = 1000 * 1024;
+const chunkSize = 1000 * 1024;
 // For Images multi chunk
 // const chunkSize = 100000;
 // For Pdf multi chunk
-const chunkSize = 69000;
+// const chunkSize = 69000;
 let authHeader = "";
 const SinglePropertyDocumentsUpload = () => {
   const data = JSON.parse(localStorage.getItem("data"));
