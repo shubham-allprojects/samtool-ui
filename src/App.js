@@ -32,7 +32,7 @@ import SinglePropertyDocumentsUpload from "./Admin/Property/SinglePropertyDocume
 function App() {
   return (
     <>
-      <ToastContainer autoClose="2000" />
+      <ToastContainer autoClose="1800" />
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />
