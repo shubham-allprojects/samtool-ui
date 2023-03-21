@@ -684,9 +684,9 @@ input:-webkit-autofill:active {
 }
 
 .profile-inner-card:hover {
-  color: var(--secondary-color) !important;
+  color: var(--primary-color) !important;
   background-color: white !important;
-  border-color: var(--secondary-color) !important;
+  border-color: var(--primary-color) !important;
   transition: 0.3s ease-in-out;
 }
 
