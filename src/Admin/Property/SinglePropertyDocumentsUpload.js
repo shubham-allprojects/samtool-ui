@@ -69,7 +69,7 @@ const SinglePropertyDocumentsUpload = () => {
       total_chunks: `${Math.ceil(file.size / chunkSize)}`,
       file_name: `${file.name}`,
     };
-    // console.log(detailsToPost);
+    console.log(detailsToPost2);
 
     // const headers = { "Content-Type": "application/octet-stream" };
     const chunks = Math.ceil(file.size / chunkSize) - 1;
@@ -109,6 +109,7 @@ const SinglePropertyDocumentsUpload = () => {
     const isLastFile = lastUploadedImageFileIndex === imageFiles.length - 1;
     const nextFileIndex = isLastFile ? null : currentImageFileIndex + 1;
     setCurrentImageFileIndex(nextFileIndex);
+    // eslint-disable-next-line
   }, [lastUploadedImageFileIndex]);
 
   useEffect(() => {
@@ -121,6 +122,7 @@ const SinglePropertyDocumentsUpload = () => {
         );
       }
     }
+    // eslint-disable-next-line
   }, [imageFiles.length]);
 
   useEffect(() => {
@@ -133,6 +135,7 @@ const SinglePropertyDocumentsUpload = () => {
     if (currentChunkIndexOfImage !== null) {
       readAndUploadCurrentImageChunk();
     }
+    // eslint-disable-next-line
   }, [currentChunkIndexOfImage]);
 
   const postImages = (e) => {
@@ -228,6 +231,7 @@ const SinglePropertyDocumentsUpload = () => {
     const isLastFile = lastUploadedPdfFileIndex === pdfFiles.length - 1;
     const nextFileIndex = isLastFile ? null : currentPdfFileIndex + 1;
     setCurrentPdfFileIndex(nextFileIndex);
+    // eslint-disable-next-line
   }, [lastUploadedPdfFileIndex]);
 
   useEffect(() => {
@@ -238,6 +242,7 @@ const SinglePropertyDocumentsUpload = () => {
         );
       }
     }
+    // eslint-disable-next-line
   }, [pdfFiles.length]);
 
   useEffect(() => {
@@ -250,6 +255,7 @@ const SinglePropertyDocumentsUpload = () => {
     if (currentChunkIndexOfPdf !== null) {
       readAndUploadCurrentPdfChunk();
     }
+    // eslint-disable-next-line
   }, [currentChunkIndexOfPdf]);
 
   const postPdf = (e) => {

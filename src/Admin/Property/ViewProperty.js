@@ -51,6 +51,7 @@ const ViewProperty = () => {
 
   useEffect(() => {
     getCurrentProperty();
+    // eslint-disable-next-line
   }, []);
 
   return (
