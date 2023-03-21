@@ -24,7 +24,6 @@ const ViewAllProperties = () => {
       { headers: authHeader }
     );
     setProperties(propertiesRes.data);
-    console.log(propertiesRes.data);
     setTimeout(() => {
       setLoading(false);
     }, 400);
