@@ -133,6 +133,119 @@ const SinglePropertyDocumentsUpload = () => {
     setImageFiles(savedImageFiles);
   };
 
+  const [pdfFiles, setPdfFiles] = useState([]);
+  const [savedPdfFiles, setSavedPdfFiles] = useState([]);
+  const [currentPdfFileIndex, setCurrentPdfFileIndex] = useState(null);
+  const [lastUploadedPdfFileIndex, setLastUploadedPdfFileIndex] =
+    useState(null);
+  const [currentChunkIndexOfPdf, setCurrentChunkIndexOfPdf] = useState(null);
+
+  const [uniqueIdForPdf, setUinqueIdForPdf] = useState(uuid());
+
+  const handlePdfFileChange = (e) => {
+    e.preventDefault();
+    setSavedPdfFiles([...pdfFiles, ...e.target.files]);
+  };
+
+  const readAndUploadCurrentPdfChunk = () => {
+    const reader = new FileReader();
+    const file = pdfFiles[currentPdfFileIndex];
+    if (!file) {
+      return;
+    }
+    const from = currentChunkIndexOfPdf * chunkSize;
+    const to = from + chunkSize;
+    const blob = file.slice(from, to);
+    reader.onload = (e) => uploadPdfChunk(e);
+    reader.readAsDataURL(blob);
+  };
+
+  const uploadPdfChunk = async (readerEvent) => {
+    let fileSize = 0;
+    const file = pdfFiles[currentPdfFileIndex];
+    const size = Math.round(file.size / 1024) + 1;
+    fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
+    const data = readerEvent.target.result.split(",")[1];
+    const detailsToPost = {
+      upload_id: uniqueIdForPdf,
+      chunk_number: `${currentChunkIndexOfPdf + 1}`,
+      total_chunks: `${Math.ceil(file.size / chunkSize)}`,
+      total_file_size: `${fileSize}`,
+      file_name: `${file.name}`,
+      data: `${data}`,
+    };
+
+    const detailsToPost2 = {
+      upload_id: uniqueIdForPdf,
+      chunk_number: `${currentChunkIndexOfPdf + 1}`,
+      total_chunks: `${Math.ceil(file.size / chunkSize)}`,
+      file_name: `${file.name}`,
+    };
+    console.log(detailsToPost2);
+
+    // const headers = { "Content-Type": "application/octet-stream" };
+    const chunks = Math.ceil(file.size / chunkSize) - 1;
+    const isLastChunk = currentChunkIndexOfPdf === chunks;
+    console.warn("IS LAST CHUNK: ", isLastChunk);
+    if (isLastChunk) {
+      // console.log(currentPdfFileIndex === savedPdfFiles.length - 1);
+      setUinqueIdForPdf(uuid());
+      await axios
+        .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
+          headers: authHeader,
+        })
+        .then((res) => {
+          if (res.data.msg !== 0) {
+            toast.error("Error while uploading files");
+          } else {
+            if (currentPdfFileIndex === savedPdfFiles.length - 1) {
+              toast.success("Files uploaded successfully");
+            }
+          }
+        });
+      setLastUploadedPdfFileIndex(currentPdfFileIndex);
+      setCurrentChunkIndexOfPdf(null);
+    } else {
+      setCurrentChunkIndexOfPdf(currentChunkIndexOfPdf + 1);
+    }
+  };
+
+  useEffect(() => {
+    if (lastUploadedPdfFileIndex === null) {
+      return;
+    }
+    const isLastFile = lastUploadedPdfFileIndex === pdfFiles.length - 1;
+    const nextFileIndex = isLastFile ? null : currentPdfFileIndex + 1;
+    setCurrentPdfFileIndex(nextFileIndex);
+  }, [lastUploadedPdfFileIndex]);
+
+  useEffect(() => {
+    if (pdfFiles.length > 0) {
+      if (currentPdfFileIndex === null) {
+        setCurrentPdfFileIndex(
+          lastUploadedPdfFileIndex === null ? 0 : lastUploadedPdfFileIndex + 1
+        );
+      }
+    }
+  }, [pdfFiles.length]);
+
+  useEffect(() => {
+    if (currentPdfFileIndex !== null) {
+      setCurrentChunkIndexOfPdf(0);
+    }
+  }, [currentPdfFileIndex]);
+
+  useEffect(() => {
+    if (currentChunkIndexOfPdf !== null) {
+      readAndUploadCurrentPdfChunk();
+    }
+  }, [currentChunkIndexOfPdf]);
+
+  const postPdf = (e) => {
+    e.preventDefault();
+    setPdfFiles(savedPdfFiles);
+  };
+
   return (
     <Layout>
       <div className="container-fluid section-padding">
@@ -164,15 +277,22 @@ const SinglePropertyDocumentsUpload = () => {
                     </button>
                   </div>
                 </div>
-                {/* <div className="row border p-4 mt-4">
+                <div className="row border p-4 mt-4">
                   <h5 className="mb-3">Upload Property Documents</h5>
                   <div className="col-4">
-                    <input type="file" className="form-control" />
+                    <input
+                      onChange={handlePdfFileChange}
+                      type="file"
+                      className="form-control"
+                      multiple
+                    />
                   </div>
                   <div className="col-6">
-                    <button className="btn btn-primary">Upload</button>
+                    <button className="btn btn-primary" onClick={postPdf}>
+                      Upload
+                    </button>
                   </div>
-                </div> */}
+                </div>
               </div>
             </section>
           </div>
