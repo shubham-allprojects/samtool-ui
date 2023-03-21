@@ -90,7 +90,7 @@ const AddProperty = () => {
     } else if (name === "is_stressed") {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "status") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "saleable_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "carpet_area") {
@@ -204,19 +204,23 @@ const AddProperty = () => {
       }
     } else {
       console.log(formData);
-      await axios
-        .post(`/sam/v1/property/auth/single-property`, formData, {
-          headers: authHeader,
-        })
-        .then((res) => {
-          if (res.data.msg === 0) {
-            resetValidationsOnSubmit();
-            toast.success("Property added successfully");
-            e.target.reset();
-          } else {
-            toast.error("Internal server error");
-          }
-        });
+      try {
+        await axios
+          .post(`/sam/v1/property/auth/single-property`, formData, {
+            headers: authHeader,
+          })
+          .then((res) => {
+            if (res.data.msg === 0) {
+              resetValidationsOnSubmit();
+              toast.success("Property added successfully");
+              e.target.reset();
+            } else {
+              toast.error("Internal server error");
+            }
+          });
+      } catch (error) {
+        toast.error("Internal server error occurred");
+      }
     }
   };
 
@@ -414,13 +418,17 @@ const AddProperty = () => {
                                 Status
                               </label>
                               <br />
-                              <input
+                              <select
+                                name="status"
                                 onChange={onInputChange}
                                 id="status"
-                                name="status"
-                                type="text"
-                                className="form-control"
-                              />
+                                className="form-select"
+                                required
+                              >
+                                <option value=""></option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                              </select>
                             </div>
                           </div>
                         </div>
