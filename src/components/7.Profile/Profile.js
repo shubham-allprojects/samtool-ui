@@ -120,7 +120,7 @@ const Profile = () => {
 
   return (
     <Layout>
-      <section className="profile-wrapper section-padding min-100vh bg-primary">
+      <section className="profile-wrapper section-padding min-100vh bg-light">
         <div className="container-fluid wrapper">
           <div className="row">
             <div className="col-xl-4 col-lg-6">
@@ -137,7 +137,7 @@ const Profile = () => {
                       ></i>
                     </div>
                   </div>
-                  <h3 className="text-center text-white py-2">
+                  <h3 className="text-center text-primary py-2">
                     {user_type === "Individual User"
                       ? "User Details"
                       : "Organization Details"}
@@ -251,7 +251,7 @@ const Profile = () => {
                       <i className="bi bi-geo-alt-fill fs-1 text-white"></i>
                     </div>
                   </div>
-                  <h3 className="text-center text-white py-2">
+                  <h3 className="text-center text-primary py-2">
                     Address Details
                   </h3>
                   <div className="row justify-content-center">
@@ -291,7 +291,9 @@ const Profile = () => {
                       <i className="bi bi-globe2 fs-1 text-white"></i>
                     </div>
                   </div>
-                  <h3 className="text-center text-white py-2">Quick Access</h3>
+                  <h3 className="text-center text-primary py-2">
+                    Quick Access
+                  </h3>
                   <div className="row justify-content-center">
                     <div className="col-md-6">
                       <NavLink
