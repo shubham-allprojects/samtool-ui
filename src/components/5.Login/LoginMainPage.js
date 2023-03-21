@@ -71,62 +71,72 @@ const LoginMainPage = () => {
       loginBtnTxt: "Loading...",
       loginBtnClassName: "disabled",
     });
-    await axios
-      .post(
-        `/sam/v1/customer-registration/login`,
-        JSON.stringify({ username: email, password: password })
-      )
-      .then((res) => {
-        const { email, token, role_id, user_id } = res.data.token;
-        let admin = null;
-        let editor = null;
-        let viewer = null;
-        if (email !== "" && token !== "") {
-          role_id.forEach((role) => {
-            if (role.role_id === 3) {
-              viewer = 3;
-            } else if (role.role_id === 2) {
-              editor = 2;
-            } else if (role.role_id === 1) {
-              admin = 1;
-            }
-          });
-          localStorage.setItem(
-            "data",
-            JSON.stringify({
-              isLoggedIn: true,
-              user: email,
-              logintoken: token,
-              userId: user_id,
-              roleId: admin
-                ? admin
-                : editor
-                ? editor
-                : viewer
-                ? viewer
-                : viewer,
-            })
-          );
-          setTimeout(() => {
-            toast.success("Logged in Successfully !");
-          }, 1000);
-          setTimeout(() => {
-            goTo("/edit-details");
-          }, 2500);
-        } else {
-          setLoaderDetails({
-            ...loaderDetails,
-            loading: false,
-            loginBtnTxt: "Login",
-            loginBtnClassName: "",
-          });
-          setAlertDetails({
-            alertVisible: true,
-            alertMsg: "Invalid Credentials.",
-            alertClr: "danger",
-          });
-        }
+    try {
+      await axios
+        .post(
+          `/sam/v1/customer-registration/login`,
+          JSON.stringify({ username: email, password: password })
+        )
+        .then((res) => {
+          const { email, token, role_id, user_id } = res.data.token;
+          let admin = null;
+          let editor = null;
+          let viewer = null;
+          if (email !== "" && token !== "") {
+            role_id.forEach((role) => {
+              if (role.role_id === 3) {
+                viewer = 3;
+              } else if (role.role_id === 2) {
+                editor = 2;
+              } else if (role.role_id === 1) {
+                admin = 1;
+              }
+            });
+            localStorage.setItem(
+              "data",
+              JSON.stringify({
+                isLoggedIn: true,
+                user: email,
+                logintoken: token,
+                userId: user_id,
+                roleId: admin
+                  ? admin
+                  : editor
+                  ? editor
+                  : viewer
+                  ? viewer
+                  : viewer,
+              })
+            );
+            setTimeout(() => {
+              toast.success("Logged in Successfully !");
+            }, 1000);
+            setTimeout(() => {
+              goTo("/edit-details");
+            }, 2500);
+          } else {
+            setLoaderDetails({
+              ...loaderDetails,
+              loading: false,
+              loginBtnTxt: "Login",
+              loginBtnClassName: "",
+            });
+            setAlertDetails({
+              alertVisible: true,
+              alertMsg: "Invalid Credentials.",
+              alertClr: "danger",
+            });
+          }
+        });
+    } catch (error) {
+      toast.error("Internal server error, please try after some time");
+      setLoaderDetails({
+        ...loaderDetails,
+        loading: false,
+        loginBtnTxt: "Login",
+        loginBtnClassName: "",
       });
+    }
   };
 
   useEffect(() => {
