@@ -671,15 +671,22 @@ input:-webkit-autofill:active {
 
 /* Profile */
 
+.profile-top-hr {
+  height: 10px;
+  background-color: var(--secondary-color);
+}
+
 .profile-inner-card {
+  color: white !important;
+  background-color: var(--primary-color-hover) !important;
+  border: 2px solid var(--primary-color-hover) !important;
   transition: 0.3s ease-in-out;
-  cursor: pointer;
 }
 
 .profile-inner-card:hover {
-  color: white !important;
-  border-color: white;
-  background-color: var(--primary-color-hover);
+  color: var(--secondary-color) !important;
+  background-color: white !important;
+  border-color: var(--secondary-color) !important;
   transition: 0.3s ease-in-out;
 }
 
