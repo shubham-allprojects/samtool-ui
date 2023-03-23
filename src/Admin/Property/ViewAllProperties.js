@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
@@ -30,13 +30,13 @@ const ViewAllProperties = () => {
     }, 400);
   };
 
-  const deleteProperty = (propertyId) => {
-    const propertiesToShow = properties.filter((property) => {
-      return property._id !== propertyId;
-    });
-    toast.success(`Property with ID: ${propertyId} deleted Successfuly`);
-    setProperties(propertiesToShow);
-  };
+  // const deleteProperty = (propertyId) => {
+  //   const propertiesToShow = properties.filter((property) => {
+  //     return property._id !== propertyId;
+  //   });
+  //   toast.success(`Property with ID: ${propertyId} deleted Successfuly`);
+  //   setProperties(propertiesToShow);
+  // };
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
