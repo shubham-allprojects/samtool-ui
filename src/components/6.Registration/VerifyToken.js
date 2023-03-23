@@ -25,36 +25,41 @@ const VerifyToken = () => {
   const verifyUserToken = async (e) => {
     setLoading(true);
     e.preventDefault();
-    await axios
-      .post(
-        `/sam/v1/customer-registration/verify-token`,
-        JSON.stringify({ token: enteredToken })
-      )
-      .then((res) => {
-        if (res.data.status === 0) {
-          setLoading(false);
-          e.target.reset();
-          toast.success("Verification Successful !");
-          localStorage.setItem("token", enteredToken);
-          setTimeout(() => {
-            goTo("/register/set-password");
-          }, 2000);
-        } else if (res.data.status === 1) {
-          setLoading(false);
-          setAlertDetails({
-            alertVisible: true,
-            alertMsg: "Token is Expired.",
-            alertClr: "danger",
-          });
-        } else if (res.data.status === 2) {
-          setLoading(false);
-          setAlertDetails({
-            alertVisible: true,
-            alertMsg: "Token is Invalid.",
-            alertClr: "danger",
-          });
-        }
-      });
+    try {
+      await axios
+        .post(
+          `/sam/v1/customer-registration/verify-token`,
+          JSON.stringify({ token: enteredToken })
+        )
+        .then((res) => {
+          if (res.data.status === 0) {
+            setLoading(false);
+            e.target.reset();
+            toast.success("Verification Successful !");
+            localStorage.setItem("token", enteredToken);
+            setTimeout(() => {
+              goTo("/register/set-password");
+            }, 2000);
+          } else if (res.data.status === 1) {
+            setLoading(false);
+            setAlertDetails({
+              alertVisible: true,
+              alertMsg: "Token is Expired.",
+              alertClr: "danger",
+            });
+          } else if (res.data.status === 2) {
+            setLoading(false);
+            setAlertDetails({
+              alertVisible: true,
+              alertMsg: "Token is Invalid.",
+              alertClr: "danger",
+            });
+          }
+        });
+    } catch (error) {
+      setLoading(false);
+      toast.error("Internal server error!");
+    }
   };
 
   useEffect(() => {

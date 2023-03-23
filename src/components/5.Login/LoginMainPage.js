@@ -129,7 +129,7 @@ const LoginMainPage = () => {
           }
         });
     } catch (error) {
-      toast.error("Internal server error, please try after some time");
+      toast.error("Internal server error!");
       setLoaderDetails({
         ...loaderDetails,
         loading: false,

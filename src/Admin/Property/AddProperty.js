@@ -98,11 +98,11 @@ const AddProperty = () => {
     } else if (name === "carpet_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "market_price") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "ready_reckoner_price") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "expected_price") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "completion_date") {
       commonFnToSaveFormData(name, value);
     } else if (name === "purchase_date") {

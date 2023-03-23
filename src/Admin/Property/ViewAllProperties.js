@@ -98,18 +98,23 @@ const ViewAllProperties = () => {
                                 <br />
                                 <span className="text-capitalize">
                                   Market Value:{" "}
-                                  {parseInt(property.market_value) / 10000000 +
-                                    " Cr."}
+                                  {(
+                                    parseInt(property.market_value) / 10000000
+                                  ).toFixed(1) + " Cr."}
                                 </span>
                                 <br />
                                 <span className="text-capitalize">
                                   Range:{" "}
-                                  {parseInt(property.range.split("-")[0]) /
-                                    10000000 +
+                                  {(
+                                    parseInt(property.range.split("-")[0]) /
+                                    10000000
+                                  ).toFixed(1) +
                                     " Cr." +
                                     " - " +
-                                    parseInt(property.range.split("-")[1]) /
-                                      10000000 +
+                                    (
+                                      parseInt(property.range.split("-")[1]) /
+                                      10000000
+                                    ).toFixed(1) +
                                     " Cr."}
                                 </span>
                                 <br />
