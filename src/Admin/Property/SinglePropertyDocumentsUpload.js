@@ -7,12 +7,12 @@ import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
 // Original
-// const chunkSize = 100000 * 1024;
+const chunkSize = 100000 * 1024;
 // For Images multi chunk
 // const chunkSize = 600000;
 // For Pdf multi chunk
 // const chunkSize = 250000;
-const chunkSize = 250000;
+
 let authHeader = "";
 const SinglePropertyDocumentsUpload = () => {
   const data = JSON.parse(localStorage.getItem("data"));
@@ -64,13 +64,13 @@ const SinglePropertyDocumentsUpload = () => {
       data: `${data}`,
     };
 
-    const detailsToPost2 = {
+    const detailsToConsole = {
       upload_id: uniqueId,
       chunk_number: `${currentChunkIndexOfImage + 1}`,
       total_chunks: `${Math.ceil(file.size / chunkSize)}`,
       file_name: `${file.name}`,
     };
-    console.log(detailsToPost2);
+    console.log(detailsToConsole);
 
     // const headers = { "Content-Type": "application/octet-stream" };
     const chunks = Math.ceil(file.size / chunkSize) - 1;
@@ -186,13 +186,13 @@ const SinglePropertyDocumentsUpload = () => {
       data: `${data}`,
     };
 
-    const detailsToPost2 = {
+    const detailsToConsole = {
       upload_id: uniqueIdForPdf,
       chunk_number: `${currentChunkIndexOfPdf + 1}`,
       total_chunks: `${Math.ceil(file.size / chunkSize)}`,
       file_name: `${file.name}`,
     };
-    console.log(detailsToPost2);
+    console.log(detailsToConsole);
 
     // const headers = { "Content-Type": "application/octet-stream" };
     const chunks = Math.ceil(file.size / chunkSize) - 1;
