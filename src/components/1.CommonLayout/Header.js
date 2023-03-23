@@ -64,6 +64,11 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               {/* If user is not loggedIn then show these navbar links */}
+              <li>
+                <NavLink to="/" className="nav-link">
+                  Home
+                </NavLink>
+              </li>
               {!loginStatus ? (
                 <>
                   <li className="nav-item ps-lg-2">
@@ -103,19 +108,14 @@ function Header() {
                   data-bs-popper="static"
                 >
                   <li>
-                    <NavLink to="/" className="nav-link">
-                      <i className="bi bi-search text-white me-1"></i> Search
-                    </NavLink>
-                  </li>
-                  <li>
                     <NavLink className="nav-link" to="/about">
-                      <i className="bi bi-info-circle text-white me-1"></i>{" "}
+                      <i className="bi bi-info-circle text-white me-2"></i>
                       About
                     </NavLink>
                   </li>
                   <li>
                     <NavLink className="nav-link" to="/contact">
-                      <i className="bi bi-telephone text-white me-1"></i>{" "}
+                      <i className="bi bi-telephone text-white me-2"></i>
                       Contact
                     </NavLink>
                   </li>
@@ -144,7 +144,7 @@ function Header() {
                           className="nav-link"
                           onClick={logOut}
                         >
-                          <i className="bi bi-box-arrow-right text-white me-1"></i>{" "}
+                          <i className="bi bi-box-arrow-right text-white me-2"></i>
                           Logout
                         </span>
                       </li>
