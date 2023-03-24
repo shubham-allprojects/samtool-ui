@@ -9,7 +9,7 @@ import { rootTitle } from "../../CommonFunctions";
 const LoginMainPage = () => {
   // It is used to navigate to particular route.
   const goTo = useNavigate();
-  let toastAutoCloseTiming = 3000;
+  const [toastAutoCloseTiming, setToastAutoCloseTiming] = useState(6000);
   // It is used to store spinner and login-button details.
   const [loaderDetails, setLoaderDetails] = useState({
     loading: false,
@@ -82,6 +82,7 @@ const LoginMainPage = () => {
           let editor = null;
           let viewer = null;
           if (email !== "" && token !== "") {
+            setToastAutoCloseTiming(3000);
             role_id.forEach((role) => {
               if (role.role_id === 3) {
                 viewer = 3;
@@ -115,8 +116,9 @@ const LoginMainPage = () => {
             toast.success("Logged in Successfully !");
             setTimeout(() => {
               goTo("/edit-details");
-            }, toastAutoCloseTiming + 1000);
+            }, toastAutoCloseTiming - 2000);
           } else {
+            setToastAutoCloseTiming(6000);
             setLoaderDetails({
               loading: false,
               loginBtnTxt: "Login",
@@ -130,14 +132,12 @@ const LoginMainPage = () => {
           }
         });
     } catch (error) {
-      toastAutoCloseTiming = 6000;
       toast.error("Internal server error!");
       setLoaderDetails({
         loading: false,
         loginBtnTxt: "Login",
         loginBtnClassName: "",
       });
-      toastAutoCloseTiming = 3000;
     }
   };
 
