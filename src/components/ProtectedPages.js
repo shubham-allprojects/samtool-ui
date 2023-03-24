@@ -1,20 +1,19 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// LoggedIn user will not have access to the components wrapped in this component.
-const ProtectAfterLogin = ({ children }) => {
+const ProtectedPages = ({ children }) => {
   const goTo = useNavigate();
-  const checkStatusOfLogin = () => {
+  const ProtectAllPages = () => {
     const data = JSON.parse(localStorage.getItem("data"));
     if (data) {
-      goTo("/");
+      goTo("/access-denied");
     }
   };
   useEffect(() => {
-    checkStatusOfLogin();
+    ProtectAllPages();
   });
 
   return children;
 };
 
-export default ProtectAfterLogin;
+export default ProtectedPages;

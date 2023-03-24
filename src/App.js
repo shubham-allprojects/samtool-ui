@@ -8,9 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import VerifyToken from "./components/6.Registration/VerifyToken";
 import Profile from "./components/7.Profile/Profile";
 import Protected from "../src/components/Protected";
-// import { ToastContainer } from "react-toastify";
 import EditUserDetails from "./components/7.Profile/EditUserDetails";
-import ProtectAfterLogin from "../src/components/ProtectAfterLogin";
 import ScrollButton from "./components/ScrollButton";
 import Contact from "./components/4.Contact/Contact";
 import PageNotFound from "./components/PageNotFound";
@@ -28,6 +26,7 @@ import AdminProtected from "./components/AdminProtected";
 import AccessDeniedPage from "./components/AccessDeniedPage";
 import ForgotAndResetPassword from "./components/8.ForgotAndResetPassword/ForgotAndResetPassword";
 import SinglePropertyDocumentsUpload from "./Admin/Property/SinglePropertyDocumentsUpload";
+import ProtectedPages from "./components/ProtectedPages";
 
 function App() {
   return (
@@ -42,25 +41,25 @@ function App() {
           <Route
             path="/register/*"
             element={
-              <ProtectAfterLogin>
+              <ProtectedPages>
                 <Registration />
-              </ProtectAfterLogin>
+              </ProtectedPages>
             }
           />
           <Route
             path="/register/verify"
             element={
-              <ProtectAfterLogin>
+              <ProtectedPages>
                 <VerifyToken />
-              </ProtectAfterLogin>
+              </ProtectedPages>
             }
           />
           <Route
             path="/login"
             element={
-              <ProtectAfterLogin>
+              <ProtectedPages>
                 <LoginMainPage />
-              </ProtectAfterLogin>
+              </ProtectedPages>
             }
           />
           <Route
@@ -71,7 +70,14 @@ function App() {
               </Protected>
             }
           />
-          <Route path="/register/set-password" element={<SetPassword />} />
+          <Route
+            path="/register/set-password"
+            element={
+              // <ProtectedPages>
+                <SetPassword />
+              // </ProtectedPages>
+            }
+          />
           <Route
             path="/forgot-password/reset-password"
             element={<ForgotAndResetPassword />}
