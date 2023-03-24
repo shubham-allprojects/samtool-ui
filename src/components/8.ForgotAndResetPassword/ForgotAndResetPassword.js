@@ -139,6 +139,10 @@ const ForgotAndResetPassword = () => {
               setTimeout(() => {
                 goTo("/login");
               }, toastAutoCloseTiming - 2000);
+            } else {
+              setResetPassBtnClassName("");
+              setToastAutoCloseTiming(6000);
+              toast.error("Internal server error!");
             }
           });
       } catch (error) {
