@@ -10,7 +10,8 @@ function Header() {
     userEmail: "",
   });
 
-  let toastAutoCloseTiming = 2000;
+  const [toastDisplayClass, setToastDisplayClass] = useState("d-none");
+  let toastAutoCloseTiming = 2500;
   const { loginStatus, roleId, userEmail } = allUseStates;
 
   // To navigate to particular route.
@@ -18,15 +19,16 @@ function Header() {
 
   // Logout function.
   const logOut = () => {
-    toastAutoCloseTiming = 5000;
+    setToastDisplayClass("");
     toast.success("Logged Out Successfully");
     // Clear localStorage.
     localStorage.clear();
     setAllUseStates({ ...allUseStates, loginStatus: false });
     setTimeout(() => {
+      setToastDisplayClass("d-none");
       goTo("/");
       window.location.reload();
-    }, toastAutoCloseTiming - 1500);
+    }, toastAutoCloseTiming + 1000);
   };
 
   // Save status of login.
@@ -48,7 +50,10 @@ function Header() {
 
   return (
     <header className="header-wrapper">
-      <ToastContainer autoClose={toastAutoCloseTiming} />
+      <ToastContainer
+        className={toastDisplayClass}
+        autoClose={toastAutoCloseTiming}
+      />
       <nav className="navbar navbar-expand-md fixed-top">
         <div className="container-fluid">
           <span className="navbar-brand px-lg-4">Assets Class</span>
