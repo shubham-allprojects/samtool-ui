@@ -28,6 +28,7 @@ import ForgotAndResetPassword from "./components/8.ForgotAndResetPassword/Forgot
 import SinglePropertyDocumentsUpload from "./Admin/Property/SinglePropertyDocumentsUpload";
 import ProtectedPages from "./components/ProtectedPages";
 import ProtectSetPasswordPage from "./components/ProtectSetPasswordPage";
+import ProtectForgotPasswordPage from "./components/ProtectForgotPasswordPage";
 
 function App() {
   return (
@@ -81,7 +82,11 @@ function App() {
           />
           <Route
             path="/forgot-password/reset-password"
-            element={<ForgotAndResetPassword />}
+            element={
+              <ProtectForgotPasswordPage>
+                <ForgotAndResetPassword />
+              </ProtectForgotPasswordPage>
+            }
           />
           <Route
             path="/profile"
