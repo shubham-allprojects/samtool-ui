@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import changePassImg from "../../images/changePassword.svg";
 import { rootTitle } from "../../CommonFunctions";
@@ -31,6 +31,8 @@ const ChangePassword = () => {
 
   const [changePasswordBtnClassName, setChangePasswordBtnClassName] =
     useState("");
+
+  let toastAutoCloseTiming = 3000;
 
   const [alertDetails, setAlertDetails] = useState({
     alertVisible: false,
@@ -139,7 +141,7 @@ const ChangePassword = () => {
             setTimeout(() => {
               // window.location.reload();
               goTo("/login");
-            }, 2000);
+            }, toastAutoCloseTiming + 1000);
           } else {
             setChangePasswordBtnClassName("");
             setAlertDetails({
@@ -186,6 +188,7 @@ const ChangePassword = () => {
   return (
     <Layout>
       <section className="change-password-wrapper section-padding min-100vh">
+        <ToastContainer autoClose={toastAutoCloseTiming} />
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8 order-1 order-lg-2">

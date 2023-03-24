@@ -303,7 +303,7 @@ const Profile = () => {
                         to="/reset-password"
                         className="card py-2 profile-inner-card text-decoration-none"
                       >
-                        <h6 className="m-0">RESET PASSWORD</h6>
+                        <h6 className="m-0">CHANGE PASSWORD</h6>
                       </NavLink>
                     </div>
                     <div className="col-md-6 mt-2 mt-md-0">
