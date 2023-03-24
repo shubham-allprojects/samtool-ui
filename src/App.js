@@ -7,7 +7,7 @@ import Registration from "./components/6.Registration/RegistrationMainPage";
 import ScrollToTop from "./components/ScrollToTop";
 import VerifyToken from "./components/6.Registration/VerifyToken";
 import Profile from "./components/7.Profile/Profile";
-import Protected from "../src/components/Protected";
+import ProtectedForLoggedInUser from "./components/ProtectedForLoggedInUser";
 import EditUserDetails from "./components/7.Profile/EditUserDetails";
 import ScrollButton from "./components/ScrollButton";
 import Contact from "./components/4.Contact/Contact";
@@ -65,9 +65,9 @@ function App() {
           <Route
             path="/reset-password"
             element={
-              <Protected>
+              <ProtectedForLoggedInUser>
                 <ChangePassword />
-              </Protected>
+              </ProtectedForLoggedInUser>
             }
           />
           <Route
@@ -85,17 +85,17 @@ function App() {
           <Route
             path="/profile"
             element={
-              <Protected>
+              <ProtectedForLoggedInUser>
                 <Profile />
-              </Protected>
+              </ProtectedForLoggedInUser>
             }
           />
           <Route
             path="/edit-details"
             element={
-              <Protected>
+              <ProtectedForLoggedInUser>
                 <EditUserDetails />
-              </Protected>
+              </ProtectedForLoggedInUser>
             }
           />
           <Route path="/forgot-password/*" element={<ForgotPassword />} />
