@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
 
@@ -16,6 +16,7 @@ const Contact = () => {
     message: "",
   });
 
+  let toastAutoCloseTiming = 4000;
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const [captchaErr, setCaptchaErr] = useState(false);
   const captchaRef = useRef();
@@ -79,6 +80,7 @@ const Contact = () => {
   return (
     <Layout>
       <section className="contact-wrapper">
+        <ToastContainer autoClose={toastAutoCloseTiming} />
         <div className="contact-bg-img">
           <div className="container-fluid text-white">
             <div className="row contact-first-row">
