@@ -3,6 +3,7 @@ import Layout from "../1.CommonLayout/Layout";
 import resetPassImg from "../../images/resetPass.svg";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const ForgotPassword = () => {
   const [emailValue, setEmailValue] = useState("");
@@ -22,32 +23,37 @@ const ForgotPassword = () => {
 
   const resetPassword = async (e) => {
     e.preventDefault();
-    await axios
-      .post(
-        `/sam/v1/customer-registration/email-validation`,
-        JSON.stringify({ email: emailValue })
-      )
-      .then((res) => {
-        if (res.data.status === 1) {
-          e.target.reset();
-          localStorage.setItem("forgotPassUserName", emailValue);
-          setDisplayOfSections({
-            mainSectionDisplay: "d-none",
-            afterSubmitSectionDisplay: "",
-          });
-        } else {
-          setAlertDetails({
-            alertVisible: true,
-            alertClr: "danger",
-            alertMsg:
-              "Email address is either invalid or not a verified email address",
-          });
-        }
-      });
+    try {
+      await axios
+        .post(
+          `/sam/v1/customer-registration/email-validation`,
+          JSON.stringify({ email: emailValue })
+        )
+        .then((res) => {
+          if (res.data.status === 1) {
+            e.target.reset();
+            localStorage.setItem("forgotPassUserName", emailValue);
+            setDisplayOfSections({
+              mainSectionDisplay: "d-none",
+              afterSubmitSectionDisplay: "",
+            });
+          } else {
+            setAlertDetails({
+              alertVisible: true,
+              alertClr: "danger",
+              alertMsg:
+                "Email address is either invalid or not a verified email address",
+            });
+          }
+        });
+    } catch (error) {
+      toast.error("Internal server error!");
+    }
   };
   return (
     <Layout>
       <section className="forgot-password section-padding min-100vh">
+        <ToastContainer autoClose={6000} />
         <div className="container wrapper">
           <div
             className={`row justify-content-lg-between justify-content-center ${mainSectionDisplay}`}
