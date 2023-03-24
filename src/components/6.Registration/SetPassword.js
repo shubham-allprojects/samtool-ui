@@ -164,10 +164,10 @@ const SetPassword = () => {
 
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - SET PASSWORD";
-    let verifiedToken = localStorage.getItem("token");
-    if (!verifiedToken) {
-      goTo("/");
-    }
+    // let verifiedToken = localStorage.getItem("token");
+    // if (!verifiedToken) {
+    //   goTo("/");
+    // }
   });
 
   return (
