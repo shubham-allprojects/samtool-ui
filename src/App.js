@@ -8,7 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import VerifyToken from "./components/6.Registration/VerifyToken";
 import Profile from "./components/7.Profile/Profile";
 import Protected from "../src/components/Protected";
-import { ToastContainer } from "react-toastify";
+// import { ToastContainer } from "react-toastify";
 import EditUserDetails from "./components/7.Profile/EditUserDetails";
 import ProtectAfterLogin from "../src/components/ProtectAfterLogin";
 import ScrollButton from "./components/ScrollButton";
@@ -32,7 +32,7 @@ import SinglePropertyDocumentsUpload from "./Admin/Property/SinglePropertyDocume
 function App() {
   return (
     <>
-      <ToastContainer autoClose="1800" />
+      {/* <ToastContainer autoClose="1800" /> */}
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />
