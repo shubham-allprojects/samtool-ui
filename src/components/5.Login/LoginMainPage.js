@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import login from "../../images/loginsvg.svg";
 import { rootTitle } from "../../CommonFunctions";
@@ -9,7 +9,7 @@ import { rootTitle } from "../../CommonFunctions";
 const LoginMainPage = () => {
   // It is used to navigate to particular route.
   const goTo = useNavigate();
-
+  let toastAutoCloseTiming = 3000;
   // It is used to store spinner and login-button details.
   const [loaderDetails, setLoaderDetails] = useState({
     loading: false,
@@ -66,7 +66,6 @@ const LoginMainPage = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     setLoaderDetails({
-      ...loaderDetails,
       loading: true,
       loginBtnTxt: "Loading...",
       loginBtnClassName: "disabled",
@@ -108,15 +107,17 @@ const LoginMainPage = () => {
                   : viewer,
               })
             );
-            setTimeout(() => {
-              toast.success("Logged in Successfully !");
-            }, 1000);
+            setLoaderDetails({
+              loading: false,
+              loginBtnTxt: "Login",
+              loginBtnClassName: "disabled",
+            });
+            toast.success("Logged in Successfully !");
             setTimeout(() => {
               goTo("/edit-details");
-            }, 2500);
+            }, toastAutoCloseTiming + 1000);
           } else {
             setLoaderDetails({
-              ...loaderDetails,
               loading: false,
               loginBtnTxt: "Login",
               loginBtnClassName: "",
@@ -129,13 +130,14 @@ const LoginMainPage = () => {
           }
         });
     } catch (error) {
+      toastAutoCloseTiming = 6000;
       toast.error("Internal server error!");
       setLoaderDetails({
-        ...loaderDetails,
         loading: false,
         loginBtnTxt: "Login",
         loginBtnClassName: "",
       });
+      toastAutoCloseTiming = 3000;
     }
   };
 
@@ -146,6 +148,7 @@ const LoginMainPage = () => {
   return (
     <Layout>
       <section className="login-wrapper min-100vh section-padding">
+        <ToastContainer autoClose={toastAutoCloseTiming} />
         <div className="container-fluid mt-5">
           <div className="row justify-content-evenly">
             <div className="col-lg-5 col-xl-5 order-lg-1 order-2 mt-lg-0 mt-5 mb-5">
