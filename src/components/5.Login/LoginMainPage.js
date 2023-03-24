@@ -118,7 +118,6 @@ const LoginMainPage = () => {
               goTo("/edit-details");
             }, toastAutoCloseTiming - 2000);
           } else {
-            setToastAutoCloseTiming(6000);
             setLoaderDetails({
               loading: false,
               loginBtnTxt: "Login",
