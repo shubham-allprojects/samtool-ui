@@ -161,6 +161,7 @@ function Home() {
     await axios.post(apis.searchAPI, dataToPost).then((res) => {
       // Store Searched results into propertyData useState.
       setPropertyData(res.data);
+      console.log(res.data);
       setTimeout(() => {
         setLoading(false);
         if (res.data) {

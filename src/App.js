@@ -27,6 +27,7 @@ import AccessDeniedPage from "./components/AccessDeniedPage";
 import ForgotAndResetPassword from "./components/8.ForgotAndResetPassword/ForgotAndResetPassword";
 import SinglePropertyDocumentsUpload from "./Admin/Property/SinglePropertyDocumentsUpload";
 import ProtectedPages from "./components/ProtectedPages";
+import ProtectSetPasswordPage from "./components/ProtectSetPasswordPage";
 
 function App() {
   return (
@@ -73,9 +74,9 @@ function App() {
           <Route
             path="/register/set-password"
             element={
-              // <ProtectedPages>
+              <ProtectSetPasswordPage>
                 <SetPassword />
-              // </ProtectedPages>
+              </ProtectSetPasswordPage>
             }
           />
           <Route
