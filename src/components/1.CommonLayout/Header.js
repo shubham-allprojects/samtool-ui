@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
 
 function Header() {
   // This useState will store data from localStorage such as login-status, role and email of user.
@@ -10,8 +9,6 @@ function Header() {
     userEmail: "",
   });
 
-  const [toastDisplayClass, setToastDisplayClass] = useState("d-none");
-  let toastAutoCloseTiming = 2500;
   const { loginStatus, roleId, userEmail } = allUseStates;
 
   // To navigate to particular route.
@@ -19,16 +16,11 @@ function Header() {
 
   // Logout function.
   const logOut = () => {
-    setToastDisplayClass("");
-    toast.success("Logged Out Successfully");
     // Clear localStorage.
     localStorage.clear();
     setAllUseStates({ ...allUseStates, loginStatus: false });
-    setTimeout(() => {
-      setToastDisplayClass("d-none");
-      goTo("/");
-      window.location.reload();
-    }, toastAutoCloseTiming + 1000);
+    goTo("/");
+    window.location.reload();
   };
 
   // Save status of login.
@@ -50,10 +42,6 @@ function Header() {
 
   return (
     <header className="header-wrapper">
-      <ToastContainer
-        className={toastDisplayClass}
-        autoClose={toastAutoCloseTiming}
-      />
       <nav className="navbar navbar-expand-md fixed-top">
         <div className="container-fluid">
           <span className="navbar-brand px-lg-4">Assets Class</span>

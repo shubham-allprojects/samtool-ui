@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import setPassImg from "../../images/setpass.svg";
 import { rootTitle } from "../../CommonFunctions";
@@ -19,6 +19,7 @@ const ForgotAndResetPassword = () => {
   });
 
   const [resetPassBtnClassName, setResetPassBtnClassName] = useState("");
+  const [toastAutoCloseTiming, setToastAutoCloseTiming] = useState(6000);
 
   const [alertDetails, setAlertDetails] = useState({
     alertVisible: false,
@@ -121,18 +122,29 @@ const ForgotAndResetPassword = () => {
     } else {
       setResetPassBtnClassName("disabled");
       e.target.reset();
-      await axios.post(
-        `/sam/v1/customer-registration/forgot-password`,
-        JSON.stringify({
-          password: newPassword,
-          username: localStorage.getItem("forgotPassUserName"),
-        })
-      );
-      toast.success("Password Changed Successfully !");
-      localStorage.removeItem("forgotPassUserName");
-      setTimeout(() => {
-        goTo("/login");
-      }, 2000);
+      try {
+        await axios
+          .post(
+            `/sam/v1/customer-registration/forgot-password`,
+            JSON.stringify({
+              password: newPassword,
+              username: localStorage.getItem("forgotPassUserName"),
+            })
+          )
+          .then((res) => {
+            if (res.data.status === 0) {
+              setToastAutoCloseTiming(3000);
+              toast.success("Password Changed Successfully !");
+              localStorage.removeItem("forgotPassUserName");
+              setTimeout(() => {
+                goTo("/login");
+              }, toastAutoCloseTiming - 2000);
+            }
+          });
+      } catch (error) {
+        setResetPassBtnClassName("");
+        toast.error("Internal server error!");
+      }
     }
   };
 
@@ -164,14 +176,15 @@ const ForgotAndResetPassword = () => {
 
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - RESET PASSWORD";
-    let verifiedUser = localStorage.getItem("forgotPassUserName");
-    if (!verifiedUser) {
-      goTo("/");
-    }
+    // let verifiedUser = localStorage.getItem("forgotPassUserName");
+    // if (!verifiedUser) {
+    //   goTo("/");
+    // }
   });
   return (
     <Layout>
       <section className="set-password-wrapper section-padding min-100vh">
+        <ToastContainer autoClose={toastAutoCloseTiming} />
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8">
