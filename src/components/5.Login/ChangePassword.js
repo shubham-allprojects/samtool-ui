@@ -32,7 +32,7 @@ const ChangePassword = () => {
   const [changePasswordBtnClassName, setChangePasswordBtnClassName] =
     useState("");
 
-  let toastAutoCloseTiming = 3000;
+  const [toastAutoCloseTiming, setToastAutoCloseTiming] = useState(6000);
 
   const [alertDetails, setAlertDetails] = useState({
     alertVisible: false,
@@ -127,31 +127,37 @@ const ChangePassword = () => {
     } else {
       setChangePasswordBtnClassName("disabled");
       const [url, userId] = setHeaderAndUrl();
-      await axios
-        .post(`${url}/reset-password`, {
-          user_id: userId.toString(),
-          old_password: currentPassword,
-          new_password: newPassword,
-        })
-        .then((res) => {
-          if (res.data.status === 0) {
-            toast.success("Password changed successfully");
-            // Clear localStorage.
-            localStorage.clear();
-            setTimeout(() => {
-              // window.location.reload();
-              goTo("/login");
-            }, toastAutoCloseTiming + 1000);
-          } else {
-            setChangePasswordBtnClassName("");
-            setAlertDetails({
-              alertMsg: "Invalid current password",
-              alertVisible: true,
-              alertClr: "danger",
-            });
-            displayPasswordInputs();
-          }
-        });
+      try {
+        await axios
+          .post(`${url}/reset-password`, {
+            user_id: userId.toString(),
+            old_password: currentPassword,
+            new_password: newPassword,
+          })
+          .then((res) => {
+            if (res.data.status === 0) {
+              setToastAutoCloseTiming(3000);
+              toast.success("Password changed successfully");
+              // Clear localStorage.
+              localStorage.clear();
+              setTimeout(() => {
+                // window.location.reload();
+                goTo("/login");
+              }, toastAutoCloseTiming - 2000);
+            } else {
+              setChangePasswordBtnClassName("");
+              setAlertDetails({
+                alertMsg: "Invalid current password",
+                alertVisible: true,
+                alertClr: "danger",
+              });
+              displayPasswordInputs();
+            }
+          });
+      } catch (error) {
+        setChangePasswordBtnClassName("");
+        toast.error("Internal server error!");
+      }
     }
   };
 
