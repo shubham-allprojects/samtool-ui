@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
 
@@ -91,6 +91,8 @@ const EditUserDetails = () => {
     let customer_reg_url = `/sam/v1/customer-registration`;
     return [headers, url, customer_reg_url];
   };
+
+  const [toastAutoCloseTiming, setToastAutoCloseTiming] = useState(6000);
 
   // Function will get the data of user whose details are to be edited.
   const getUserToEdit = async () => {
@@ -322,13 +324,14 @@ const EditUserDetails = () => {
       email: email,
     };
     console.log(dataToPost);
-    if (!zipCodeValidationColor) {
+    try {
       await axios
         .post(`${customer_reg_url}/auth/edit-details`, dataToPost, {
           headers: headers,
         })
         .then((res) => {
           if (res.data.status === 0) {
+            setToastAutoCloseTiming(3000);
             toast.success("Details Updated Successfully");
             setAllUseStates({
               ...allUseStates,
@@ -342,13 +345,14 @@ const EditUserDetails = () => {
             });
             setTimeout(() => {
               goTo("/profile");
-            }, 3000);
+            }, toastAutoCloseTiming - 2000);
           } else {
-            toast.error("Some Error Occured");
+            setToastAutoCloseTiming(6000);
+            toast.error("Internal server error!");
           }
         });
-    } else {
-      toast.error("Invalid Form");
+    } catch (error) {
+      toast.error("Internal server error!");
     }
   };
 
@@ -361,6 +365,7 @@ const EditUserDetails = () => {
   return (
     <Layout>
       <section className="edit-details-wrapper section-padding min-100vh">
+        <ToastContainer autoClose={toastAutoCloseTiming} />
         <div className="container-fluid wrapper">
           <div className="row justify-content-center">
             <div className="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
@@ -643,7 +648,9 @@ const EditUserDetails = () => {
                           type="submit"
                           id="submit"
                           name="submit"
-                          className="btn btn-primary"
+                          className={`btn btn-primary ${
+                            zipCodeValidationColor ? "disabled" : ""
+                          }`}
                         >
                           Update
                         </button>
