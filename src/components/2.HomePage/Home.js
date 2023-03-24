@@ -156,6 +156,7 @@ function Home() {
         setPageCount(Math.ceil(res.data.length / batch_size));
       }
     });
+    console.log(dataToPost);
 
     // Post data and get Searched result from response.
     await axios.post(apis.searchAPI, dataToPost).then((res) => {
