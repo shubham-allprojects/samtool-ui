@@ -235,14 +235,18 @@ const LoginMainPage = () => {
                       loading ? "disabled" : ""
                     } w-100 common-btn-font`}
                   >
-                    <span
-                      className={`${
-                        loading ? "" : "d-none"
-                      } spinner-grow spinner-grow-sm me-2`}
-                      role="status"
-                      aria-hidden="true"
-                    ></span>
-                    {loading ? "Signing in...." : "Login"}
+                    {loading ? (
+                      <>
+                        <span
+                          className="spinner-grow spinner-grow-sm me-2"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                        Signing in....
+                      </>
+                    ) : (
+                      "Login"
+                    )}
                   </button>
                 </div>
 

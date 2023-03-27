@@ -1,8 +1,6 @@
 mkcert -key-file sam-key.pem -cert-file sam-cert.pem "localhost"  
 docker-compose -f docker-compose.dev.yml up
 
-
-
                 <div
                   className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
                     alertVisible ? "" : "d-none"
@@ -27,12 +25,15 @@ docker-compose -f docker-compose.dev.yml up
 
 
 
-
-              <span
-                    class={`spinner-grow spinner-grow-sm me-2 ${
-                      loading ? "" : "d-none"
-                    }`}
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
-                  {loading ? "Sending...." : "Send password reset email"}
+           {loading ? (
+                          <>
+                            <span
+                              className="spinner-grow spinner-grow-sm me-2"
+                              role="status"
+                              aria-hidden="true"
+                            ></span>
+                            Verifying...
+                          </>
+                        ) : (
+                          "Verify token"
+                        )}

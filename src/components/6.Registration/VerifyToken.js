@@ -60,7 +60,11 @@ const VerifyToken = () => {
         });
     } catch (error) {
       setLoading(false);
-      toast.error("Internal server error!");
+      setAlertDetails({
+        alertVisible: true,
+        alertMsg: "Internal server error",
+        alertClr: "warning",
+      });
     }
   };
 
@@ -80,21 +84,27 @@ const VerifyToken = () => {
                   Verify Your Token
                 </h3>
                 <hr />
-                {alertVisible ? (
-                  <div
-                    className={`login-alert alert alert-${alertClr} alert-dismissible show`}
-                    role="alert"
-                  >
-                    <small className="fw-bold">{alertMsg}</small>
-
+                <div
+                  className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
+                    alertVisible ? "" : "d-none"
+                  }`}
+                  role="alert"
+                >
+                  <span>
                     <i
-                      onClick={() => setAlertDetails({ alertVisible: false })}
-                      className="bi bi-x login-alert-close-btn close"
+                      className={`bi bi-exclamation-triangle-fill me-2 ${
+                        alertClr === "danger" || alertClr === "warning"
+                          ? ""
+                          : "d-none"
+                      }`}
                     ></i>
-                  </div>
-                ) : (
-                  <></>
-                )}
+                  </span>
+                  <small className="fw-bold">{alertMsg}</small>
+                  <i
+                    onClick={() => setAlertDetails({ alertVisible: false })}
+                    className="bi bi-x login-alert-close-btn close"
+                  ></i>
+                </div>
                 <div className="row mt-3">
                   <div className="col-12">
                     <div className="form-group mb-3">

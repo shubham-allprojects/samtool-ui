@@ -118,14 +118,18 @@ const ForgotPassword = () => {
                   className="btn btn-primary common-btn-font"
                   disabled={loading ? true : false}
                 >
-                  <span
-                    class={`spinner-grow spinner-grow-sm me-2 ${
-                      loading ? "" : "d-none"
-                    }`}
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
-                  {loading ? "Sending...." : "Send password reset email"}
+                  {loading ? (
+                    <>
+                      <span
+                        className="spinner-grow spinner-grow-sm me-2"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      Sending....
+                    </>
+                  ) : (
+                    "Send password reset email"
+                  )}
                 </button>
               </form>
             </div>

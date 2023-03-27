@@ -281,14 +281,18 @@ const SetPassword = () => {
                         loading ? "disabled" : ""
                       }`}
                     >
-                      <span
-                        class={`spinner-grow spinner-grow-sm me-2 ${
-                          loading ? "" : "d-none"
-                        }`}
-                        role="status"
-                        aria-hidden="true"
-                      ></span>
-                      {loading ? "Setting new password...." : "Set password"}
+                      {loading ? (
+                        <>
+                          <span
+                            className="spinner-grow spinner-grow-sm me-2"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                          Setting new password....
+                        </>
+                      ) : (
+                        "Set password"
+                      )}
                     </button>
                   </div>
                 </div>
