@@ -24,3 +24,15 @@ docker-compose -f docker-compose.dev.yml up
                     className="bi bi-x login-alert-close-btn close"
                   ></i>
                 </div>
+
+
+
+
+              <span
+                    class={`spinner-grow spinner-grow-sm me-2 ${
+                      loading ? "" : "d-none"
+                    }`}
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  {loading ? "Sending...." : "Send password reset email"}

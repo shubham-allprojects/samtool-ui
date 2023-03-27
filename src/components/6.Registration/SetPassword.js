@@ -18,8 +18,7 @@ const SetPassword = () => {
     passwordType2: "password",
   });
 
-  const [setPassBtnClassName, setSetPassBtnClassName] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [alertDetails, setAlertDetails] = useState({
     alertVisible: false,
     alertMsg: "",
@@ -119,20 +118,28 @@ const SetPassword = () => {
         passwordType2: "text",
       });
     } else {
-      setSetPassBtnClassName("disabled");
-      e.target.reset();
-      await axios.post(
-        `/sam/v1/customer-registration/set-password`,
-        JSON.stringify({
-          password: newPassword,
-          token: localStorage.getItem("token"),
-        })
-      );
-      toast.success("Password Saved Successfully !");
-      localStorage.removeItem("token");
-      setTimeout(() => {
-        goTo("/login");
-      }, 2000);
+      setLoading(true);
+      try {
+        await axios.post(
+          `/sam/v1/customer-registration/set-password`,
+          JSON.stringify({
+            password: newPassword,
+            token: localStorage.getItem("token"),
+          })
+        );
+        toast.success("Password Saved Successfully !");
+        localStorage.removeItem("token");
+        setTimeout(() => {
+          goTo("/login");
+        }, 2000);
+      } catch (error) {
+        setLoading(false);
+        setAlertDetails({
+          alertVisible: true,
+          alertMsg: "Internal server error",
+          alertClr: "warning",
+        });
+      }
     }
   };
 
@@ -175,21 +182,27 @@ const SetPassword = () => {
               <form onSubmit={onSetPasswordFormSubmit} className="card p-5">
                 <h3 className="text-center fw-bold">Set Password</h3>
                 <hr />
-                {alertVisible ? (
-                  <div
-                    className={`login-alert alert alert-${alertClr} alert-dismissible show`}
-                    role="alert"
-                  >
-                    <small className="fw-bold">{alertMsg}</small>
-
+                <div
+                  className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
+                    alertVisible ? "" : "d-none"
+                  }`}
+                  role="alert"
+                >
+                  <span>
                     <i
-                      onClick={() => setAlertDetails({ alertVisible: false })}
-                      className="bi bi-x login-alert-close-btn close"
+                      className={`bi bi-exclamation-triangle-fill me-2 ${
+                        alertClr === "danger" || alertClr === "warning"
+                          ? ""
+                          : "d-none"
+                      }`}
                     ></i>
-                  </div>
-                ) : (
-                  <div className="d-none"></div>
-                )}
+                  </span>
+                  <small className="fw-bold">{alertMsg}</small>
+                  <i
+                    onClick={() => setAlertDetails({ alertVisible: false })}
+                    className="bi bi-x login-alert-close-btn close"
+                  ></i>
+                </div>
                 <div className="row mt-3">
                   <div className="col-lg-12 mb-4">
                     <div className="form-group position-relative">
@@ -249,9 +262,18 @@ const SetPassword = () => {
                   <div className="col-lg-12">
                     <button
                       type="submit"
-                      className={`btn btn-primary common-btn-font w-100 ${setPassBtnClassName}`}
+                      className={`btn btn-primary common-btn-font w-100 ${
+                        loading ? "disabled" : ""
+                      }`}
                     >
-                      Set Password
+                      <span
+                        class={`spinner-grow spinner-grow-sm me-2 ${
+                          loading ? "" : "d-none"
+                        }`}
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      {loading ? "Setting new password...." : "Set password"}
                     </button>
                   </div>
                 </div>
