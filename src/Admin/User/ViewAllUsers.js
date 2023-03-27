@@ -213,12 +213,6 @@ const ManageUsers = () => {
     await axios
       .post(`${url}/get-users`, orgBodyData, { headers: headers })
       .then((res) => {
-        // let endTime = new Date().getTime() / 1000;
-        // console.log(
-        //   `(Method: POST) GET Organizational Users - Response Time: ${(
-        //     endTime - startTime
-        //   ).toFixed(4)} sec`
-        // );
         setUsers({
           orgUsers: res.data,
           individualUsers: [],

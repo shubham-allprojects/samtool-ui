@@ -3,13 +3,23 @@ import Layout from "../1.CommonLayout/Layout";
 import CommonFormFields from "./CommonFormFields";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useRef } from "react";
 import { rootTitle } from "../../CommonFunctions";
 
 const Registration = () => {
   const goTo = useNavigate();
   const deselectStateInput = useRef();
+
+  const [alertDetails, setAlertDetails] = useState({
+    alertVisible: false,
+    alertMsg: "",
+    alertClr: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const { alertMsg, alertClr, alertVisible } = alertDetails;
 
   // useState to store ID of state so that we can validate zipCodes for each state.
   const [IdOfState, SetIdOfState] = useState("");
@@ -591,22 +601,47 @@ const Registration = () => {
     console.log(formData);
 
     if (addressValues.labelValue === "Add Details") {
-      toast.error("Please Fill Address Details");
+      setAlertDetails({
+        alertVisible: true,
+        alertMsg: "Please fill the address details",
+        alertClr: "danger",
+      });
     } else {
-      await axios
-        .post(`/sam/v1/customer-registration/individual-customer`, formData)
-        .then(async (res) => {
-          if (res.data.status === 0) {
-            toast.success(`Success: Please check your email for verification.`);
-            e.target.reset();
-            resetValues();
-            setTimeout(() => {
-              goTo("/register/verify");
-            }, 3000);
-          } else {
-            toast.error("Form is Invalid");
-          }
+      setLoading(true);
+      try {
+        await axios
+          .post(`/sam/v1/customer-registration/individual-customer`, formData)
+          .then(async (res) => {
+            if (res.data.status === 0) {
+              setLoading(false);
+              document
+                .getElementById("registration-alert")
+                .scrollIntoView(true);
+              toast.success(
+                `Success: Please check your email for verification.`
+              );
+              e.target.reset();
+              resetValues();
+              setTimeout(() => {
+                goTo("/register/verify");
+              }, 3000);
+            } else {
+              setLoading(false);
+              setAlertDetails({
+                alertVisible: true,
+                alertMsg: "Internal server error",
+                alertClr: "warning",
+              });
+            }
+          });
+      } catch (error) {
+        setLoading(false);
+        setAlertDetails({
+          alertVisible: true,
+          alertMsg: "Internal server error",
+          alertClr: "warning",
         });
+      }
     }
   };
 
@@ -626,22 +661,47 @@ const Registration = () => {
     console.log(formData);
 
     if (addressValues.labelValue === "Add Details") {
-      toast.error("Please Fill Address Details");
+      setAlertDetails({
+        alertVisible: true,
+        alertMsg: "Please fill the address details",
+        alertClr: "danger",
+      });
     } else {
-      await axios
-        .post(`/sam/v1/customer-registration/org-customer`, formData)
-        .then(async (res) => {
-          if (res.data.status === 0) {
-            toast.success(`Success: Please check your email for verification.`);
-            e.target.reset();
-            resetValues();
-            setTimeout(() => {
-              goTo("/register/verify");
-            }, 3000);
-          } else {
-            toast.error("Form is Invalid");
-          }
+      setLoading(true);
+      try {
+        await axios
+          .post(`/sam/v1/customer-registration/org-customer`, formData)
+          .then(async (res) => {
+            if (res.data.status === 0) {
+              document
+                .getElementById("registration-alert")
+                .scrollIntoView(true);
+              setLoading(false);
+              toast.success(
+                `Success: Please check your email for verification.`
+              );
+              e.target.reset();
+              resetValues();
+              setTimeout(() => {
+                goTo("/register/verify");
+              }, 3000);
+            } else {
+              setLoading(false);
+              setAlertDetails({
+                alertVisible: true,
+                alertMsg: "Internal server error",
+                alertClr: "warning",
+              });
+            }
+          });
+      } catch (error) {
+        setLoading(false);
+        setAlertDetails({
+          alertVisible: true,
+          alertMsg: "Internal server error",
+          alertClr: "warning",
         });
+      }
     }
   };
 
@@ -654,6 +714,7 @@ const Registration = () => {
   return (
     <Layout>
       <section className="registration-wrapper min-100vh section-padding">
+        <ToastContainer autoClose={3000} />
         <div className="container-fluid">
           <div className="row justify-content-center">
             <div className="col-lg-12">
@@ -685,6 +746,32 @@ const Registration = () => {
                     </div>
                     <div className="col-12">
                       <hr />
+                    </div>
+
+                    <div className="col-xl-3" id="registration-alert">
+                      <div
+                        className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
+                          alertVisible ? "" : "d-none"
+                        }`}
+                        role="alert"
+                      >
+                        <span>
+                          <i
+                            className={`bi bi-exclamation-triangle-fill me-2 ${
+                              alertClr === "danger" || alertClr === "warning"
+                                ? ""
+                                : "d-none"
+                            }`}
+                          ></i>
+                        </span>
+                        <small className="fw-bold">{alertMsg}</small>
+                        <i
+                          onClick={() =>
+                            setAlertDetails({ alertVisible: false })
+                          }
+                          className="bi bi-x login-alert-close-btn close"
+                        ></i>
+                      </div>
                     </div>
 
                     {/* Individual Main Form */}
@@ -795,6 +882,7 @@ const Registration = () => {
                           addressValues={addressValues}
                           onInputChange={onInputChange}
                           onInputBlur={onInputBlur}
+                          loading={loading}
                         />
                       </div>
                     </form>
@@ -923,6 +1011,7 @@ const Registration = () => {
                           addressValues={addressValues}
                           onInputChange={onInputChange}
                           onInputBlur={onInputBlur}
+                          loading={loading}
                         />
                       </div>
                     </form>

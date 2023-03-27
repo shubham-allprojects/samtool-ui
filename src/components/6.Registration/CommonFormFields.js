@@ -7,6 +7,7 @@ const CommonFormFields = ({
   addressValues,
   onInputBlur,
   onInputChange,
+  loading,
 }) => {
   const { emailValidationMessage, mobileValidationMessage } = validationDetails;
   const { addressValue, labelValue, textAreaVisibility } = addressValues;
@@ -124,9 +125,25 @@ const CommonFormFields = ({
       {/* Form submit or Cancel */}
       <div className="row submitCancelRow mt-4 mb-4 mb-md-0">
         <div className="offset-lg-2 col-lg-2 col-md-4 col-6">
-          <button className="btn btn-primary text-white common-btn-font">
-            <i className="me-1 bi bi-check-lg"></i>
-            Submit
+          <button
+            className={`btn btn-primary text-white common-btn-font ${
+              loading ? "disabled" : ""
+            }`}
+            style={{ width: "100px" }}
+          >
+            {loading ? (
+              <>
+                <span
+                  className="spinner-grow spinner-grow-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              </>
+            ) : (
+              <>
+                <i className="me-1 bi bi-check-lg"></i>Submit
+              </>
+            )}
           </button>
         </div>
         <div className="col-lg-2 col-md-4 col-6">
