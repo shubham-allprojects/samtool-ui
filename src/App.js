@@ -75,9 +75,9 @@ function App() {
           <Route
             path="/register/set-password"
             element={
-              // <ProtectSetPasswordPage>
+              <ProtectSetPasswordPage>
                 <SetPassword />
-              // </ProtectSetPasswordPage>
+              </ProtectSetPasswordPage>
             }
           />
           <Route

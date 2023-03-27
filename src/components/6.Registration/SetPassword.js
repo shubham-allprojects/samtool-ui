@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import setPassImg from "../../images/setpass.svg";
 import { rootTitle } from "../../CommonFunctions";
@@ -120,18 +120,32 @@ const SetPassword = () => {
     } else {
       setLoading(true);
       try {
-        await axios.post(
-          `/sam/v1/customer-registration/set-password`,
-          JSON.stringify({
-            password: newPassword,
-            token: localStorage.getItem("token"),
-          })
-        );
-        toast.success("Password Saved Successfully !");
-        localStorage.removeItem("token");
-        setTimeout(() => {
-          goTo("/login");
-        }, 2000);
+        await axios
+          .post(
+            `/sam/v1/customer-registration/set-password`,
+            JSON.stringify({
+              password: newPassword,
+              token: localStorage.getItem("token"),
+            })
+          )
+          .then((res) => {
+            if (res.data.status === 0) {
+              setLoading(false);
+              e.target.reset();
+              toast.success("Password Saved Successfully !");
+              localStorage.removeItem("token");
+              setTimeout(() => {
+                goTo("/login");
+              }, 4000);
+            } else {
+              setLoading(false);
+              setAlertDetails({
+                alertVisible: true,
+                alertMsg: "Internal server error",
+                alertClr: "warning",
+              });
+            }
+          });
       } catch (error) {
         setLoading(false);
         setAlertDetails({
@@ -176,6 +190,7 @@ const SetPassword = () => {
   return (
     <Layout>
       <section className="set-password-wrapper section-padding min-100vh">
+        <ToastContainer autoClose={3000} />
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8">
