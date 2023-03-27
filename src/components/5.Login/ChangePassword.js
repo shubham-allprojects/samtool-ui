@@ -29,8 +29,7 @@ const ChangePassword = () => {
     passwordType2: "password",
   });
 
-  const [changePasswordBtnClassName, setChangePasswordBtnClassName] =
-    useState("");
+  const [loading, setLoading] = useState(false);
 
   const [toastAutoCloseTiming, setToastAutoCloseTiming] = useState(6000);
 
@@ -125,7 +124,7 @@ const ChangePassword = () => {
         alertClr: "danger",
       });
     } else {
-      setChangePasswordBtnClassName("disabled");
+      setLoading(true);
       const [url, userId] = setHeaderAndUrl();
       try {
         await axios
@@ -137,15 +136,15 @@ const ChangePassword = () => {
           .then((res) => {
             if (res.data.status === 0) {
               setToastAutoCloseTiming(3000);
+              setLoading(false);
               toast.success("Password changed successfully");
               // Clear localStorage.
               localStorage.clear();
               setTimeout(() => {
-                // window.location.reload();
                 goTo("/login");
               }, toastAutoCloseTiming - 2000);
             } else {
-              setChangePasswordBtnClassName("");
+              setLoading(false);
               setAlertDetails({
                 alertMsg: "Invalid current password",
                 alertVisible: true,
@@ -155,8 +154,12 @@ const ChangePassword = () => {
             }
           });
       } catch (error) {
-        setChangePasswordBtnClassName("");
-        toast.error("Internal server error!");
+        setLoading(false);
+        setAlertDetails({
+          alertMsg: "Internal server error",
+          alertVisible: true,
+          alertClr: "warning",
+        });
       }
     }
   };
@@ -201,21 +204,27 @@ const ChangePassword = () => {
               <form onSubmit={onChangePasswordFormSubmit} className="card p-5">
                 <h3 className="text-center fw-bold">Change Password</h3>
                 <hr />
-                {alertVisible ? (
-                  <div
-                    className={`login-alert alert alert-${alertClr} alert-dismissible show`}
-                    role="alert"
-                  >
-                    <small className="fw-bold">{alertMsg}</small>
-
+                <div
+                  className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
+                    alertVisible ? "" : "d-none"
+                  }`}
+                  role="alert"
+                >
+                  <span>
                     <i
-                      onClick={() => setAlertDetails({ alertVisible: false })}
-                      className="bi bi-x login-alert-close-btn close"
+                      className={`bi bi-exclamation-triangle-fill me-2 ${
+                        alertClr === "danger" || alertClr === "warning"
+                          ? ""
+                          : "d-none"
+                      }`}
                     ></i>
-                  </div>
-                ) : (
-                  <div className="d-none"></div>
-                )}
+                  </span>
+                  <small className="fw-bold">{alertMsg}</small>
+                  <i
+                    onClick={() => setAlertDetails({ alertVisible: false })}
+                    className="bi bi-x login-alert-close-btn close"
+                  ></i>
+                </div>
                 <div className="row mt-3">
                   <div className="col-lg-12 mb-4">
                     <div className="form-group">
@@ -294,9 +303,18 @@ const ChangePassword = () => {
                   <div className="col-lg-12">
                     <button
                       type="submit"
-                      className={`btn btn-primary common-btn-font w-100 ${changePasswordBtnClassName}`}
+                      className={`btn btn-primary common-btn-font w-100 ${
+                        loading ? "disabled" : ""
+                      }`}
                     >
-                      Change Password
+                      <span
+                        class={`spinner-grow spinner-grow-sm me-2 ${
+                          loading ? "" : "d-none"
+                        }`}
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      {loading ? "Changing password...." : "Change Password"}
                     </button>
                   </div>
                 </div>

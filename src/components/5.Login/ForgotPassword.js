@@ -18,11 +18,13 @@ const ForgotPassword = () => {
     afterSubmitSectionDisplay: "d-none",
   });
 
+  const [loading, setLoading] = useState(false);
   const { alertMsg, alertClr, alertVisible } = alertDetails;
   const { mainSectionDisplay, afterSubmitSectionDisplay } = displayOfSections;
 
   const resetPassword = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await axios
         .post(
@@ -38,6 +40,7 @@ const ForgotPassword = () => {
               afterSubmitSectionDisplay: "",
             });
           } else {
+            setLoading(false);
             setAlertDetails({
               alertVisible: true,
               alertClr: "danger",
@@ -47,7 +50,12 @@ const ForgotPassword = () => {
           }
         });
     } catch (error) {
-      toast.error("Internal server error!");
+      setLoading(false);
+      setAlertDetails({
+        alertVisible: true,
+        alertClr: "warning",
+        alertMsg: "Internal server error",
+      });
     }
   };
   return (
@@ -70,13 +78,21 @@ const ForgotPassword = () => {
                 <hr />
 
                 <div
-                  className={`login-alert alert alert-${alertClr} alert-dismissible show ${
+                  className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
                     alertVisible ? "" : "d-none"
                   }`}
                   role="alert"
                 >
+                  <span>
+                    <i
+                      className={`bi bi-exclamation-triangle-fill me-2 ${
+                        alertClr === "danger" || alertClr === "warning"
+                          ? ""
+                          : "d-none"
+                      }`}
+                    ></i>
+                  </span>
                   <small className="fw-bold">{alertMsg}</small>
-
                   <i
                     onClick={() => setAlertDetails({ alertVisible: false })}
                     className="bi bi-x login-alert-close-btn close"
@@ -100,8 +116,18 @@ const ForgotPassword = () => {
                     }}
                   />
                 </div>
-                <button className="btn btn-primary common-btn-font">
-                  Send password reset email
+                <button
+                  className="btn btn-primary common-btn-font"
+                  disabled={loading ? true : false}
+                >
+                  <span
+                    class={`spinner-grow spinner-grow-sm me-2 ${
+                      loading ? "" : "d-none"
+                    }`}
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  {loading ? "Sending...." : "Send password reset email"}
                 </button>
               </form>
             </div>

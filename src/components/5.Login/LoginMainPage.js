@@ -165,30 +165,27 @@ const LoginMainPage = () => {
               >
                 <h3 className="text-center fw-bold">Login</h3>
                 <hr />
-                {alertVisible ? (
-                  <div
-                    className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center`}
-                    role="alert"
-                  >
-                    <span>
-                      <i
-                        className={`bi bi-exclamation-triangle-fill me-2 ${
-                          alertClr === "danger" || alertClr === "warning"
-                            ? ""
-                            : "d-none"
-                        }`}
-                      ></i>
-                    </span>
-                    <small className="fw-bold">{alertMsg}</small>
-
+                <div
+                  className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
+                    alertVisible ? "" : "d-none"
+                  }`}
+                  role="alert"
+                >
+                  <span>
                     <i
-                      onClick={() => setAlertDetails({ alertVisible: false })}
-                      className="bi bi-x login-alert-close-btn close"
+                      className={`bi bi-exclamation-triangle-fill me-2 ${
+                        alertClr === "danger" || alertClr === "warning"
+                          ? ""
+                          : "d-none"
+                      }`}
                     ></i>
-                  </div>
-                ) : (
-                  <div className="d-none"></div>
-                )}
+                  </span>
+                  <small className="fw-bold">{alertMsg}</small>
+                  <i
+                    onClick={() => setAlertDetails({ alertVisible: false })}
+                    className="bi bi-x login-alert-close-btn close"
+                  ></i>
+                </div>
                 <h6 className="fw-bold">Login with Email</h6>
                 <div className="row">
                   <div className="col-lg-12 mb-3">
