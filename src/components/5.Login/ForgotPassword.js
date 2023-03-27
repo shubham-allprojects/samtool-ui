@@ -3,7 +3,6 @@ import Layout from "../1.CommonLayout/Layout";
 import resetPassImg from "../../images/resetPass.svg";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
 
 const ForgotPassword = () => {
   const [emailValue, setEmailValue] = useState("");
@@ -61,7 +60,6 @@ const ForgotPassword = () => {
   return (
     <Layout>
       <section className="forgot-password section-padding min-100vh">
-        <ToastContainer autoClose={6000} />
         <div className="container wrapper">
           <div
             className={`row justify-content-lg-between justify-content-center ${mainSectionDisplay}`}

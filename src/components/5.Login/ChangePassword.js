@@ -31,8 +31,6 @@ const ChangePassword = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [toastAutoCloseTiming, setToastAutoCloseTiming] = useState(6000);
-
   const [alertDetails, setAlertDetails] = useState({
     alertVisible: false,
     alertMsg: "",
@@ -135,14 +133,13 @@ const ChangePassword = () => {
           })
           .then((res) => {
             if (res.data.status === 0) {
-              setToastAutoCloseTiming(3000);
               setLoading(false);
               toast.success("Password changed successfully");
               // Clear localStorage.
               localStorage.clear();
               setTimeout(() => {
                 goTo("/login");
-              }, toastAutoCloseTiming - 2000);
+              }, 4000);
             } else {
               setLoading(false);
               setAlertDetails({
@@ -197,7 +194,7 @@ const ChangePassword = () => {
   return (
     <Layout>
       <section className="change-password-wrapper section-padding min-100vh">
-        <ToastContainer autoClose={toastAutoCloseTiming} />
+        <ToastContainer autoClose={3000} />
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8 order-1 order-lg-2">

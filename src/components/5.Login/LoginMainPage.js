@@ -9,7 +9,6 @@ import { rootTitle } from "../../CommonFunctions";
 const LoginMainPage = () => {
   // It is used to navigate to particular route.
   const goTo = useNavigate();
-  const [toastAutoCloseTiming, setToastAutoCloseTiming] = useState(6000);
   // It is used to store spinner and login-button details.
   const [loaderDetails, setLoaderDetails] = useState({
     loading: false,
@@ -82,7 +81,6 @@ const LoginMainPage = () => {
           let editor = null;
           let viewer = null;
           if (email !== "" && token !== "") {
-            setToastAutoCloseTiming(3000);
             role_id.forEach((role) => {
               if (role.role_id === 3) {
                 viewer = 3;
@@ -116,7 +114,7 @@ const LoginMainPage = () => {
             toast.success("Logged in Successfully !");
             setTimeout(() => {
               goTo("/edit-details");
-            }, toastAutoCloseTiming - 2000);
+            }, 4000);
           } else {
             setLoaderDetails({
               loading: false,
@@ -151,7 +149,7 @@ const LoginMainPage = () => {
   return (
     <Layout>
       <section className="login-wrapper min-100vh section-padding">
-        <ToastContainer autoClose={toastAutoCloseTiming} />
+        <ToastContainer autoClose={3000} />
         <div className="container-fluid mt-5">
           <div className="row justify-content-evenly">
             <div className="col-lg-5 col-xl-5 order-lg-1 order-2 mt-lg-0 mt-5 mb-5">
