@@ -94,8 +94,6 @@ const EditUserDetails = () => {
     return [headers, url, customer_reg_url];
   };
 
-  const [toastAutoCloseTiming, setToastAutoCloseTiming] = useState(6000);
-
   // Function will get the data of user whose details are to be edited.
   const getUserToEdit = async () => {
     const [headers] = setHeaderAndUrl();
@@ -289,7 +287,6 @@ const EditUserDetails = () => {
 
   // Function will run when user click on cancel button.
   const cancelEditing = async () => {
-    const [, url] = setHeaderAndUrl();
     setValidation({
       zipCodeValidationColor: "",
       zipCodeValidationMessage: "",
