@@ -242,31 +242,49 @@ const EditUserDetails = () => {
   };
 
   // Function will run when user click on edit icon / button.
-  const editDetails = () => {
-    setAllUseStates({
-      ...allUseStates,
-      isReadOnly: false,
-      editClassName: "",
-      editBtnClassName: "d-none",
-      cancelUpdateBtnClassName: "",
-      lableVisibility: "d-none",
-      selectStateClassName: "",
-      cityVisiblity: "",
-    });
+  const editDetails = async () => {
+    const [, url] = setHeaderAndUrl();
+    const { city, state_id, state_name } = originalValuesToShow;
+    try {
+      await axios
+        .post(`${url}/by-city`, {
+          state_id: state_id,
+        })
+        .then((res) => {
+          if (res.data) {
+            setAllUseStates({
+              ...allUseStates,
+              isReadOnly: false,
+              citiesFromApi: res.data,
+              editClassName: "",
+              editBtnClassName: "d-none",
+              cancelUpdateBtnClassName: "",
+              lableVisibility: "d-none",
+              selectStateClassName: "",
+              cityVisiblity: "",
+            });
+            // User's original state will be selected on state select input.
+            statesFromApi.forEach((i) => {
+              if (i.state_name === state_name) {
+                document.getElementById(
+                  `state-name-${i.state_id}`
+                ).selected = true;
+              }
+            });
 
-    // User's original state will be selected on state select input.
-    statesFromApi.forEach((i) => {
-      if (i.state_name === state_name) {
-        document.getElementById(`state-name-${i.state_id}`).selected = true;
-      }
-    });
-
-    // User's original city will be selected on city select input.
-    citiesFromApi.forEach((i) => {
-      if (i.city_name === city) {
-        document.getElementById(`${i.city_name}`).selected = true;
-      }
-    });
+            // User's original city will be selected on city select input.
+            citiesFromApi.forEach((i) => {
+              if (i.city_name === city) {
+                document.getElementById(`${i.city_name}`).selected = true;
+              }
+            });
+          } else {
+            toast.error("Internal server error");
+          }
+        });
+    } catch (error) {
+      toast.error("Internal server error");
+    }
   };
 
   // Function will run when user click on cancel button.
@@ -279,11 +297,6 @@ const EditUserDetails = () => {
 
     const { city, state_id, state_name } = originalValuesToShow;
 
-    // Get Cities using state_id from api.
-    const cityByState = await axios.post(`${url}/by-city`, {
-      state_id: state_id,
-    });
-
     setCommonUserDetails({
       ...commonUserDetails,
       city: city,
@@ -293,7 +306,6 @@ const EditUserDetails = () => {
 
     setAllUseStates({
       ...allUseStates,
-      citiesFromApi: cityByState.data,
       isReadOnly: true,
       editClassName: "editable-values",
       editBtnClassName: "",
