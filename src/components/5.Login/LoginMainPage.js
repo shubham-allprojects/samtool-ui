@@ -131,7 +131,11 @@ const LoginMainPage = () => {
           }
         });
     } catch (error) {
-      toast.error("Internal server error!");
+      setAlertDetails({
+        alertVisible: true,
+        alertMsg: "Internal server error",
+        alertClr: "warning",
+      });
       setLoaderDetails({
         loading: false,
         loginBtnTxt: "Login",
@@ -163,9 +167,18 @@ const LoginMainPage = () => {
                 <hr />
                 {alertVisible ? (
                   <div
-                    className={`login-alert alert alert-${alertClr} alert-dismissible show`}
+                    className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center`}
                     role="alert"
                   >
+                    <span>
+                      <i
+                        className={`bi bi-exclamation-triangle-fill me-2 ${
+                          alertClr === "danger" || alertClr === "warning"
+                            ? ""
+                            : "d-none"
+                        }`}
+                      ></i>
+                    </span>
                     <small className="fw-bold">{alertMsg}</small>
 
                     <i
