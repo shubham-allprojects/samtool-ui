@@ -28,6 +28,8 @@ const EditUserDetails = () => {
 
   const [orgUserDetails, setOrgUserDetails] = useState({});
 
+  const [loading, setLoading] = useState(false);
+
   // Object destructuring.
   const {
     cin_number,
@@ -324,6 +326,7 @@ const EditUserDetails = () => {
       email: email,
     };
     console.log(dataToPost);
+    setLoading(true);
     try {
       await axios
         .post(`${customer_reg_url}/auth/edit-details`, dataToPost, {
@@ -331,7 +334,7 @@ const EditUserDetails = () => {
         })
         .then((res) => {
           if (res.data.status === 0) {
-            setToastAutoCloseTiming(3000);
+            setLoading(false);
             toast.success("Details Updated Successfully");
             setAllUseStates({
               ...allUseStates,
@@ -345,13 +348,14 @@ const EditUserDetails = () => {
             });
             setTimeout(() => {
               goTo("/profile");
-            }, toastAutoCloseTiming - 2000);
+            }, 4000);
           } else {
-            setToastAutoCloseTiming(6000);
+            setLoading(false);
             toast.error("Internal server error!");
           }
         });
     } catch (error) {
+      setLoading(false);
       toast.error("Internal server error!");
     }
   };
@@ -365,7 +369,7 @@ const EditUserDetails = () => {
   return (
     <Layout>
       <section className="edit-details-wrapper section-padding min-100vh">
-        <ToastContainer autoClose={toastAutoCloseTiming} />
+        <ToastContainer autoClose={3000} />
         <div className="container-fluid wrapper">
           <div className="row justify-content-center">
             <div className="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
@@ -636,23 +640,38 @@ const EditUserDetails = () => {
                     id="update-cancel"
                   >
                     <div className="col-12">
-                      <div className="text-end">
+                      <div className="d-flex justify-content-between justify-content-md-end">
                         <button
+                          style={{ width: "150px" }}
                           onClick={cancelEditing}
                           type="button"
-                          className="btn btn-secondary me-2"
+                          className={`btn btn-secondary me-2 ${
+                            loading ? "disabled" : ""
+                          }`}
                         >
                           Cancel
                         </button>
                         <button
+                          style={{ width: "150px" }}
                           type="submit"
                           id="submit"
                           name="submit"
                           className={`btn btn-primary ${
-                            zipCodeValidationColor ? "disabled" : ""
+                            zipCodeValidationColor || loading ? "disabled" : ""
                           }`}
                         >
-                          Update
+                          {loading ? (
+                            <>
+                              <span
+                                className="spinner-grow spinner-grow-sm me-2"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                              Updating....
+                            </>
+                          ) : (
+                            "Update"
+                          )}
                         </button>
                       </div>
                     </div>
