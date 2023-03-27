@@ -18,8 +18,7 @@ const ForgotAndResetPassword = () => {
     passwordType2: "password",
   });
 
-  const [resetPassBtnClassName, setResetPassBtnClassName] = useState("");
-  const [toastAutoCloseTiming, setToastAutoCloseTiming] = useState(6000);
+  const [loading, setLoading] = useState(false);
 
   const [alertDetails, setAlertDetails] = useState({
     alertVisible: false,
@@ -120,8 +119,7 @@ const ForgotAndResetPassword = () => {
         passwordType2: "text",
       });
     } else {
-      setResetPassBtnClassName("disabled");
-      e.target.reset();
+      setLoading(true);
       try {
         await axios
           .post(
@@ -133,21 +131,28 @@ const ForgotAndResetPassword = () => {
           )
           .then((res) => {
             if (res.data.status === 0) {
-              setToastAutoCloseTiming(3000);
+              setLoading(false);
               toast.success("Password Changed Successfully !");
               localStorage.removeItem("forgotPassUserName");
               setTimeout(() => {
                 goTo("/login");
-              }, toastAutoCloseTiming - 2000);
+              }, 4000);
             } else {
-              setResetPassBtnClassName("");
-              setToastAutoCloseTiming(6000);
-              toast.error("Internal server error!");
+              setLoading(false);
+              setAlertDetails({
+                alertVisible: true,
+                alertMsg: "Internal server error",
+                alertClr: "warning",
+              });
             }
           });
       } catch (error) {
-        setResetPassBtnClassName("");
-        toast.error("Internal server error!");
+        setLoading(false);
+        setAlertDetails({
+          alertVisible: true,
+          alertMsg: "Internal server error",
+          alertClr: "warning",
+        });
       }
     }
   };
@@ -188,28 +193,35 @@ const ForgotAndResetPassword = () => {
   return (
     <Layout>
       <section className="set-password-wrapper section-padding min-100vh">
-        <ToastContainer autoClose={toastAutoCloseTiming} />
+        <ToastContainer autoClose={3000} />
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8">
               <form onSubmit={onResetPasswordFormSubmit} className="card p-5">
                 <h3 className="text-center fw-bold">Reset Password</h3>
                 <hr />
-                {alertVisible ? (
-                  <div
-                    className={`login-alert alert alert-${alertClr} alert-dismissible show`}
-                    role="alert"
-                  >
-                    <small className="fw-bold">{alertMsg}</small>
-
+                <div
+                  className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
+                    alertVisible ? "" : "d-none"
+                  }`}
+                  role="alert"
+                >
+                  <span>
                     <i
-                      onClick={() => setAlertDetails({ alertVisible: false })}
-                      className="bi bi-x login-alert-close-btn close"
+                      className={`bi bi-exclamation-triangle-fill me-2 ${
+                        alertClr === "danger" || alertClr === "warning"
+                          ? ""
+                          : "d-none"
+                      }`}
                     ></i>
-                  </div>
-                ) : (
-                  <div className="d-none"></div>
-                )}
+                  </span>
+                  <small className="fw-bold">{alertMsg}</small>
+                  <i
+                    onClick={() => setAlertDetails({ alertVisible: false })}
+                    className="bi bi-x login-alert-close-btn close"
+                  ></i>
+                </div>
+
                 <div className="row mt-3">
                   <div className="col-lg-12 mb-4">
                     <div className="form-group position-relative">
@@ -269,9 +281,22 @@ const ForgotAndResetPassword = () => {
                   <div className="col-lg-12">
                     <button
                       type="submit"
-                      className={`btn btn-primary common-btn-font w-100 ${resetPassBtnClassName}`}
+                      className={`btn btn-primary common-btn-font w-100 ${
+                        loading ? "disabled" : ""
+                      }`}
                     >
-                      Reset Password
+                      {loading ? (
+                        <>
+                          <span
+                            className="spinner-grow spinner-grow-sm me-2"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                          Resetting password....
+                        </>
+                      ) : (
+                        "Reset Password"
+                      )}
                     </button>
                   </div>
                 </div>

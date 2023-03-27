@@ -131,7 +131,7 @@ const VerifyToken = () => {
                               role="status"
                               aria-hidden="true"
                             ></span>
-                            Verifying...
+                            Verifying....
                           </>
                         ) : (
                           "Verify token"

@@ -32,7 +32,7 @@ docker-compose -f docker-compose.dev.yml up
                               role="status"
                               aria-hidden="true"
                             ></span>
-                            Verifying...
+                            Verifying....
                           </>
                         ) : (
                           "Verify token"
