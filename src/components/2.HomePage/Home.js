@@ -5,7 +5,7 @@ import Properties from "./Properties";
 import axios from "axios";
 import { useState } from "react";
 import { rootTitle } from "../../CommonFunctions";
-import Pagination from "../Pagination";
+import HomePropertyPagination from "./HomePropertyPagination";
 
 function Home() {
   // useState to store data of each field e.g all states, all banks etc.
@@ -388,10 +388,9 @@ function Home() {
           <div className="container d-none" ref={paginationRef}>
             <div className="row">
               <div className="col-12 mb-3">
-                <Pagination
+                <HomePropertyPagination
                   handlePageClick={handlePageClick}
                   pageCount={pageCount}
-                  // handlePageClick={handlePageClick}
                 />
               </div>
             </div>

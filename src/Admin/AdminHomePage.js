@@ -100,11 +100,11 @@ const AdminHomePage = () => {
   const getPropertyCountFromApi = async () => {
     const [headers] = setHeaderAndUrl();
     const propertiesRes = await axios.get(
-      `/sam/v1/property/auth/all-properties`,
+      `sam/v1/property/auth/property-count`,
       { headers: headers }
     );
     // To show counter animation on admin Home page.
-    const totalCount = propertiesRes.data.length;
+    const totalCount = propertiesRes.data.count;
     if (!totalCount <= 0) {
       totalCount > 100
         ? (propertyStartCounter = Math.floor((totalCount * 80) / 100))

@@ -9,6 +9,7 @@ import BreadCrumb from "../BreadCrumb";
 import CommonSpinner from "../../CommonSpinner";
 
 let authHeader = "";
+let batch_size = 4;
 const ViewAllProperties = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   if (data) {
@@ -19,8 +20,13 @@ const ViewAllProperties = () => {
 
   const getPropertiesFromApi = async () => {
     setLoading(true);
-    const propertiesRes = await axios.get(
+    const pageNumberAndDataCount = {
+      batch_number: 1,
+      batch_size: batch_size,
+    };
+    const propertiesRes = await axios.post(
       `/sam/v1/property/auth/all-properties`,
+      pageNumberAndDataCount,
       { headers: authHeader }
     );
     setProperties(propertiesRes.data);
