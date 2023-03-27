@@ -554,12 +554,6 @@ input:-webkit-autofill:active {
 
 /* Login */
 
-.login-wrapper .btn {
-  width: 100px;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-}
-
 .login-img {
   height: 100%;
   width: 88%;

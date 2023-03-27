@@ -10,11 +10,13 @@ const LoginMainPage = () => {
   // It is used to navigate to particular route.
   const goTo = useNavigate();
   // It is used to store spinner and login-button details.
-  const [loaderDetails, setLoaderDetails] = useState({
-    loading: false,
-    loginBtnTxt: "Login",
-    loginBtnClassName: "",
-  });
+  // const [loaderDetails, setLoaderDetails] = useState({
+  //   loading: false,
+  //   loginBtnTxt: "Login",
+  //   loginBtnClassName: "",
+  // });
+
+  const [loading, setLoading] = useState(false);
 
   // Password type and eye icon details.
   const [loginDetails, setLoginDetails] = useState({
@@ -33,7 +35,7 @@ const LoginMainPage = () => {
 
   const { email, password, eyeIcon, passwordType } = loginDetails;
   const { alertMsg, alertClr, alertVisible } = alertDetails;
-  const { loading, loginBtnClassName, loginBtnTxt } = loaderDetails;
+  // const { loading, loginBtnClassName, loginBtnTxt } = loaderDetails;
 
   const onUserNameAndPasswordChange = (e) => {
     const { name, value } = e.target;
@@ -64,11 +66,7 @@ const LoginMainPage = () => {
   // Login Function.
   const onLogin = async (e) => {
     e.preventDefault();
-    setLoaderDetails({
-      loading: true,
-      loginBtnTxt: "Loading...",
-      loginBtnClassName: "disabled",
-    });
+    setLoading(true);
     try {
       await axios
         .post(
@@ -106,21 +104,13 @@ const LoginMainPage = () => {
                   : viewer,
               })
             );
-            setLoaderDetails({
-              loading: false,
-              loginBtnTxt: "Login",
-              loginBtnClassName: "disabled",
-            });
+            setLoading(false);
             toast.success("Logged in Successfully !");
             setTimeout(() => {
               goTo("/edit-details");
             }, 4000);
           } else {
-            setLoaderDetails({
-              loading: false,
-              loginBtnTxt: "Login",
-              loginBtnClassName: "",
-            });
+            setLoading(false);
             setAlertDetails({
               alertVisible: true,
               alertMsg: "Invalid Credentials.",
@@ -134,11 +124,7 @@ const LoginMainPage = () => {
         alertMsg: "Internal server error",
         alertClr: "warning",
       });
-      setLoaderDetails({
-        loading: false,
-        loginBtnTxt: "Login",
-        loginBtnClassName: "",
-      });
+      setLoading(false);
     }
   };
 
@@ -245,7 +231,9 @@ const LoginMainPage = () => {
                 <hr />
                 <div className="text-center my-3">
                   <button
-                    className={`btn btn-primary ${loginBtnClassName} w-100 common-btn-font`}
+                    className={`btn btn-primary ${
+                      loading ? "disabled" : ""
+                    } w-100 common-btn-font`}
                   >
                     <span
                       className={`${
@@ -254,7 +242,7 @@ const LoginMainPage = () => {
                       role="status"
                       aria-hidden="true"
                     ></span>
-                    {loginBtnTxt}
+                    {loading ? "Signing in...." : "Login"}
                   </button>
                 </div>
 
