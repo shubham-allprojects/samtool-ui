@@ -393,10 +393,6 @@ const EditUserDetails = () => {
                     </div>
 
                     <div className="col-md-4 col-6 text-end">
-                      <i
-                        onClick={editDetails}
-                        className={`bi bi-pencil-square ${editBtnClassName}`}
-                      ></i>
                       <NavLink
                         to="/profile"
                         className="ms-4 text-decoration-none"
@@ -523,11 +519,18 @@ const EditUserDetails = () => {
                       </>
                     )}
                   </div>
-                  <div className="row">
+                  <div className="row mt-3">
                     <div className="col-12">
-                      <h6 className="mt-3 mb-2 text-primary">Address</h6>
+                      <h6 className="text-primary">
+                        Address
+                        <i
+                          onClick={editDetails}
+                          className={`bi bi-pencil-square text-secondary ms-4 ${editBtnClassName}`}
+                        ></i>
+                      </h6>
                     </div>
-                    <div className="col-xl-4 col-lg-4 col-md-6  col-12">
+
+                    <div className="col-xl-4 col-lg-4 col-md-6 col-12">
                       <div className="form-group mb-3">
                         <label htmlFor="address" className="form-label">
                           Block / House No.
