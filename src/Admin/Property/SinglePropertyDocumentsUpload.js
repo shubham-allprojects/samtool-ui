@@ -5,14 +5,11 @@ import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
-import { toast } from "react-toastify";
-// Original
-const chunkSize = 100000 * 1024;
-// For Images multi chunk
-// const chunkSize = 600000;
-// For Pdf multi chunk
-// const chunkSize = 250000;
-
+import { toast, ToastContainer } from "react-toastify";
+// For 2 chunks of pdf
+const chunkSize = 238 * 1024;
+// For 2 chunks of image
+// const chunkSize = 131 * 1024;
 let authHeader = "";
 const SinglePropertyDocumentsUpload = () => {
   const data = JSON.parse(localStorage.getItem("data"));
@@ -51,7 +48,7 @@ const SinglePropertyDocumentsUpload = () => {
   const uploadImageChunk = async (readerEvent) => {
     let fileSize = 0;
     const file = imageFiles[currentImageFileIndex];
-    const size = Math.round(file.size / 1024) + 1;
+    const size = Math.round(file.size / 1024);
     fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
     const data = readerEvent.target.result.split(",")[1];
     const detailsToPost = {
@@ -63,39 +60,34 @@ const SinglePropertyDocumentsUpload = () => {
       property_id: 1,
       data: `${data}`,
     };
-
-    const detailsToConsole = {
-      upload_id: uniqueId,
-      chunk_number: `${currentChunkIndexOfImage + 1}`,
-      total_chunks: `${Math.ceil(file.size / chunkSize)}`,
-      file_name: `${file.name}`,
-    };
-    console.log(detailsToConsole);
-
-    // const headers = { "Content-Type": "application/octet-stream" };
+    console.log(detailsToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndexOfImage === chunks;
     console.warn("IS LAST CHUNK: ", isLastChunk);
-    if (isLastChunk) {
-      // console.log(currentImageFileIndex === savedImageFiles.length - 1);
-      setUinqueId(uuid());
-      try {
-        await axios
-          .post(`/sam/v1/property/auth/upload-images`, detailsToPost, {
-            headers: authHeader,
-          })
-          .then((res) => {
+    try {
+      await axios
+        .post(`/sam/v1/property/auth/upload-images`, detailsToPost, {
+          headers: authHeader,
+        })
+        .then((res) => {
+          if (isLastChunk) {
             if (res.data.msg !== 0) {
               toast.error("Error while uploading files");
             } else {
               if (currentImageFileIndex === savedImageFiles.length - 1) {
                 toast.success("Files uploaded successfully");
+                setTimeout(() => {
+                  window.location.reload();
+                }, 4000);
               }
             }
-          });
-      } catch (error) {
-        toast.error("Internal server error");
-      }
+          }
+        });
+    } catch (error) {
+      toast.error("Internal server error");
+    }
+    if (isLastChunk) {
+      setUinqueId(uuid());
       setLastUploadedImageFileIndex(currentImageFileIndex);
       setCurrentChunkIndexOfImage(null);
     } else {
@@ -174,7 +166,7 @@ const SinglePropertyDocumentsUpload = () => {
   const uploadPdfChunk = async (readerEvent) => {
     let fileSize = 0;
     const file = pdfFiles[currentPdfFileIndex];
-    const size = Math.round(file.size / 1024) + 1;
+    const size = Math.round(file.size / 1024);
     fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
     const data = readerEvent.target.result.split(",")[1];
     const detailsToPost = {
@@ -185,39 +177,34 @@ const SinglePropertyDocumentsUpload = () => {
       file_name: `${file.name}`,
       data: `${data}`,
     };
-
-    const detailsToConsole = {
-      upload_id: uniqueIdForPdf,
-      chunk_number: `${currentChunkIndexOfPdf + 1}`,
-      total_chunks: `${Math.ceil(file.size / chunkSize)}`,
-      file_name: `${file.name}`,
-    };
-    console.log(detailsToConsole);
-
-    // const headers = { "Content-Type": "application/octet-stream" };
+    console.log(detailsToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndexOfPdf === chunks;
     console.warn("IS LAST CHUNK: ", isLastChunk);
-    if (isLastChunk) {
-      // console.log(currentPdfFileIndex === savedPdfFiles.length - 1);
-      setUinqueIdForPdf(uuid());
-      try {
-        await axios
-          .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
-            headers: authHeader,
-          })
-          .then((res) => {
+    try {
+      await axios
+        .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
+          headers: authHeader,
+        })
+        .then((res) => {
+          if (isLastChunk) {
             if (res.data.msg !== 0) {
               toast.error("Error while uploading files");
             } else {
               if (currentPdfFileIndex === savedPdfFiles.length - 1) {
                 toast.success("Files uploaded successfully");
+                setTimeout(() => {
+                  window.location.reload();
+                }, 4000);
               }
             }
-          });
-      } catch (error) {
-        toast.error("Internal server error");
-      }
+          }
+        });
+    } catch (error) {
+      toast.error("Internal server error");
+    }
+    if (isLastChunk) {
+      setUinqueIdForPdf(uuid());
       setLastUploadedPdfFileIndex(currentPdfFileIndex);
       setCurrentChunkIndexOfPdf(null);
     } else {
@@ -267,6 +254,7 @@ const SinglePropertyDocumentsUpload = () => {
   return (
     <Layout>
       <div className="container-fluid section-padding">
+        <ToastContainer autoClose={3000} />
         <div className="row min-100vh position-relative">
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
