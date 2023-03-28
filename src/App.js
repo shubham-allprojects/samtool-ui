@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/2.HomePage/Home";
-import ViewPropertyDetails from "./components/2.HomePage/ViewPropertyDetails";
 import LoginMainPage from "./components/5.Login/LoginMainPage";
 import SetPassword from "./components/6.Registration/SetPassword";
 import Registration from "./components/6.Registration/RegistrationMainPage";
@@ -39,7 +38,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/property" element={<ViewPropertyDetails />} />
           <Route
             path="/register/*"
             element={

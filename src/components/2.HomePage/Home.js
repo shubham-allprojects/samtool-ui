@@ -519,17 +519,38 @@ function Home() {
         ref={viewCurrentPropertyResultsRef}
         className="section-padding d-none min-100vh"
       >
-        <h1>ok</h1>
-        <button className="btn btn-primary" onClick={backToSearchResults}>
-          back
-        </button>
-        {selectedPropertyResults
-          ? selectedPropertyResults.map((property) => {
-              return (
-                <div key={property.property_id}> {property.property_id}</div>
-              );
-            })
-          : "NA"}
+        <div className="container-fluid">
+          <div className="row p-2">
+            <div className="card p-3">
+              <div>
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={backToSearchResults}
+                >
+                  <i className="bi bi-arrow-left"></i> Back
+                </button>
+              </div>
+              <div className="container-fluid mt-3">
+                <div className="row">
+                  {selectedPropertyResults ? (
+                    selectedPropertyResults.map((property) => {
+                      return (
+                        <div
+                          className="col-12 shadow-sm border"
+                          key={property.property_id}
+                        >
+                          {property.property_id}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </Layout>
   );
