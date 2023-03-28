@@ -628,90 +628,100 @@ function Home() {
                                   <div className="container-fluid">
                                     <div className="row">
                                       <div className="col-xl-3">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Property Type
-                                        </h6>
-                                        <span>{property.type_name}</span>
+                                        </small>
+                                        <div className="common-btn-font">
+                                          {property.type_name}
+                                        </div>
                                       </div>
                                       <div className="col-xl-3">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Market Price
-                                        </h6>
-                                        <span>{property.market_price} Rs.</span>
+                                        </small>
+                                        <div className="common-btn-font">
+                                          {property.market_price} Rs.
+                                        </div>
                                       </div>
                                       <div className="col-xl-3">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Ready Reckoner Price
-                                        </h6>
-                                        <span>
+                                        </small>
+                                        <div className="common-btn-font">
                                           {property.ready_reckoner_price} Rs.
-                                        </span>
+                                        </div>
                                       </div>
                                       <div className="col-xl-3">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Expected Price
-                                        </h6>
-                                        <span>
+                                        </small>
+                                        <div className="common-btn-font">
                                           {property.expected_price} Rs.
-                                        </span>
+                                        </div>
                                       </div>
                                       <div className="col-xl-3 mt-xl-4">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Status
-                                        </h6>
-                                        <span>{property.status}</span>
+                                        </small>
+                                        <div className="common-btn-font">
+                                          {property.status}
+                                        </div>
                                       </div>
                                       <div className="col-xl-3 mt-xl-4">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Saleable Area
-                                        </h6>
-                                        <span>{property.saleable_area}</span>
+                                        </small>
+                                        <div className="common-btn-font">
+                                          {property.saleable_area}
+                                        </div>
                                       </div>
                                       <div className="col-xl-3 mt-xl-4">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Carpet Area
-                                        </h6>
-                                        <span>{property.carpet_area}</span>
+                                        </small>
+                                        <div className="common-btn-font">
+                                          {property.carpet_area}
+                                        </div>
                                       </div>
                                       <div className="col-xl-3 mt-xl-4">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Is Stressed?
-                                        </h6>
-                                        <span>
+                                        </small>
+                                        <div className="common-btn-font">
                                           {property.is_stressed === 1
                                             ? "Yes"
                                             : "No"}
-                                        </span>
+                                        </div>
                                       </div>
                                       <div className="col-xl-3 mt-xl-4">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Is Sold?
-                                        </h6>
-                                        <span>
+                                        </small>
+                                        <div className="common-btn-font">
                                           {property.is_sold === 1
                                             ? "Yes"
                                             : "No"}
-                                        </span>
+                                        </div>
                                       </div>
                                       <div
                                         className={`${
                                           property.is_sold === 1 ? "d-none" : ""
                                         } col-xl-3 mt-xl-4`}
                                       >
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Is Available For Sale?
-                                        </h6>
-                                        <span>
+                                        </small>
+                                        <div className="common-btn-font">
                                           {property.is_available_for_sale === 1
                                             ? "Yes"
                                             : "No"}
-                                        </span>
+                                        </div>
                                       </div>
                                       <div className="col-xl-3 mt-xl-4">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Completion Date
-                                        </h6>
-                                        <span>
+                                        </small>
+                                        <div className="common-btn-font">
                                           {property.completion_date
                                             ? property.completion_date
                                                 .split(" ")[0]
@@ -719,13 +729,13 @@ function Home() {
                                                 .reverse()
                                                 .join("-")
                                             : "Not Available"}
-                                        </span>
+                                        </div>
                                       </div>
                                       <div className="col-xl-3 mt-xl-4">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Purchase Date
-                                        </h6>
-                                        <span>
+                                        </small>
+                                        <div className="common-btn-font">
                                           {property.purchase_date
                                             ? property.purchase_date
                                                 .split(" ")[0]
@@ -733,13 +743,13 @@ function Home() {
                                                 .reverse()
                                                 .join("-")
                                             : "Not Available"}
-                                        </span>
+                                        </div>
                                       </div>
                                       <div className="col-xl-3 mt-xl-4">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Mortgage Date
-                                        </h6>
-                                        <span>
+                                        </small>
+                                        <div className="common-btn-font">
                                           {property.mortgage_date
                                             ? property.mortgage_date
                                                 .split(" ")[0]
@@ -747,16 +757,16 @@ function Home() {
                                                 .reverse()
                                                 .join("-")
                                             : "Not Available"}
-                                        </span>
+                                        </div>
                                       </div>
                                       <div className="col-12">
                                         <hr />
                                       </div>
                                       <div className="col-xl-5">
-                                        <h6 className="text-muted fw-bold">
+                                        <small className="text-muted">
                                           Address
-                                        </h6>
-                                        <span>
+                                        </small>
+                                        <div className="common-btn-font">
                                           {`${
                                             property.Flat_No
                                               ? `Flat No:  ${property.Flat_No}, `
@@ -774,7 +784,7 @@ function Home() {
                                           } - ${property.PIN}, ${
                                             property.state_name
                                           }`}
-                                        </span>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
