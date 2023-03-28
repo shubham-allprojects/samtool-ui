@@ -522,7 +522,7 @@ function Home() {
         <div className="container-fluid">
           <div className="row p-2">
             <div className="card p-3 border-0">
-              <div>
+              <div className="mb-4">
                 <button
                   className="btn btn-sm btn-outline-primary"
                   onClick={backToSearchResults}
@@ -535,245 +535,254 @@ function Home() {
                   {selectedPropertyResults ? (
                     selectedPropertyResults.map((property) => {
                       return (
-                        <div
-                          className="col-12 border mt-4 p-0"
-                          key={property.property_id}
-                        >
-                          <div className="container-fluid">
-                            <div className="row p-2">
-                              {/* {property.property_id} */}
-                              <div className="col-xl-4 p-0">
-                                <div
-                                  id={`carouselExampleIndicators-${property.property_id}`}
-                                  className="carousel slide"
-                                  data-bs-ride="carousel"
-                                >
-                                  <div className="carousel-indicators property-slider-indicators">
-                                    <button
-                                      type="button"
-                                      data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
-                                      data-bs-slide-to="0"
-                                      className="active"
-                                      aria-current="true"
-                                      aria-label="Slide 1"
-                                    ></button>
-                                    <button
-                                      type="button"
-                                      data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
-                                      data-bs-slide-to="1"
-                                      aria-label="Slide 2"
-                                    ></button>
-                                    <button
-                                      type="button"
-                                      data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
-                                      data-bs-slide-to="2"
-                                      aria-label="Slide 3"
-                                    ></button>
-                                  </div>
-                                  <div className="carousel-inner">
-                                    <div
-                                      className="carousel-item active"
-                                      data-bs-interval="2000"
-                                    >
-                                      <img
-                                        src="/images2.jpg"
-                                        className="d-block w-100"
-                                        alt="..."
-                                      />
-                                    </div>
-                                    <div
-                                      className="carousel-item"
-                                      data-bs-interval="2000"
-                                    >
-                                      <img
-                                        src="/images2.jpg"
-                                        className="d-block w-100"
-                                        alt="..."
-                                      />
-                                    </div>
-                                    <div className="carousel-item">
-                                      <img
-                                        src="/images2.jpg"
-                                        className="d-block w-100"
-                                        alt="..."
-                                      />
-                                    </div>
-                                  </div>
-                                  <button
-                                    className="carousel-control-prev"
-                                    type="button"
-                                    data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
-                                    data-bs-slide="prev"
+                        <>
+                          <div
+                            className="col-12 border bg-light mb-4 p-0"
+                            key={property.property_id}
+                          >
+                            <div className="container-fluid">
+                              <div className="row p-2">
+                                {/* {property.property_id} */}
+                                <div className="col-xl-4 p-0">
+                                  <div
+                                    id={`carouselExampleIndicators-${property.property_id}`}
+                                    className="carousel slide"
+                                    data-bs-ride="carousel"
                                   >
-                                    <span
-                                      className="carousel-control-prev-icon"
-                                      aria-hidden="true"
-                                    ></span>
-                                  </button>
-                                  <button
-                                    className="carousel-control-next"
-                                    type="button"
-                                    data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
-                                    data-bs-slide="next"
-                                  >
-                                    <span
-                                      className="carousel-control-next-icon"
-                                      aria-hidden="true"
-                                    ></span>
-                                  </button>
+                                    <div className="carousel-indicators property-slider-indicators">
+                                      <button
+                                        type="button"
+                                        data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
+                                        data-bs-slide-to="0"
+                                        className="active"
+                                        aria-current="true"
+                                        aria-label="Slide 1"
+                                      ></button>
+                                      <button
+                                        type="button"
+                                        data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
+                                        data-bs-slide-to="1"
+                                        aria-label="Slide 2"
+                                      ></button>
+                                      <button
+                                        type="button"
+                                        data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
+                                        data-bs-slide-to="2"
+                                        aria-label="Slide 3"
+                                      ></button>
+                                    </div>
+                                    <div className="carousel-inner">
+                                      <div
+                                        className="carousel-item active"
+                                        data-bs-interval="2000"
+                                      >
+                                        <img
+                                          src="/images2.jpg"
+                                          className="d-block w-100"
+                                          alt="..."
+                                        />
+                                      </div>
+                                      <div
+                                        className="carousel-item"
+                                        data-bs-interval="2000"
+                                      >
+                                        <img
+                                          src="/images2.jpg"
+                                          className="d-block w-100"
+                                          alt="..."
+                                        />
+                                      </div>
+                                      <div className="carousel-item">
+                                        <img
+                                          src="/images2.jpg"
+                                          className="d-block w-100"
+                                          alt="..."
+                                        />
+                                      </div>
+                                    </div>
+                                    <button
+                                      className="carousel-control-prev"
+                                      type="button"
+                                      data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
+                                      data-bs-slide="prev"
+                                    >
+                                      <span
+                                        className="carousel-control-prev-icon"
+                                        aria-hidden="true"
+                                      ></span>
+                                    </button>
+                                    <button
+                                      className="carousel-control-next"
+                                      type="button"
+                                      data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
+                                      data-bs-slide="next"
+                                    >
+                                      <span
+                                        className="carousel-control-next-icon"
+                                        aria-hidden="true"
+                                      ></span>
+                                    </button>
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-xl-8 pe-0">
-                                <div className="container-fluid">
-                                  <div className="row">
-                                    <div className="col-xl-3">
-                                      <h6 className="text-muted fw-bold">
-                                        Property Type
-                                      </h6>
-                                      <span>{property.type_name}</span>
-                                    </div>
-                                    <div className="col-xl-3">
-                                      <h6 className="text-muted fw-bold">
-                                        Market Price
-                                      </h6>
-                                      <span>{property.market_price} Rs.</span>
-                                    </div>
-                                    <div className="col-xl-3">
-                                      <h6 className="text-muted fw-bold">
-                                        Ready Reckoner Price
-                                      </h6>
-                                      <span>
-                                        {property.ready_reckoner_price} Rs.
-                                      </span>
-                                    </div>
-                                    <div className="col-xl-3">
-                                      <h6 className="text-muted fw-bold">
-                                        Expected Price
-                                      </h6>
-                                      <span>{property.expected_price} Rs.</span>
-                                    </div>
-                                    <div className="col-xl-3 mt-xl-4">
-                                      <h6 className="text-muted fw-bold">
-                                        Status
-                                      </h6>
-                                      <span>{property.status}</span>
-                                    </div>
-                                    <div className="col-xl-3 mt-xl-4">
-                                      <h6 className="text-muted fw-bold">
-                                        Saleable Area
-                                      </h6>
-                                      <span>{property.saleable_area}</span>
-                                    </div>
-                                    <div className="col-xl-3 mt-xl-4">
-                                      <h6 className="text-muted fw-bold">
-                                        Carpet Area
-                                      </h6>
-                                      <span>{property.carpet_area}</span>
-                                    </div>
-                                    <div className="col-xl-3 mt-xl-4">
-                                      <h6 className="text-muted fw-bold">
-                                        Is Stressed?
-                                      </h6>
-                                      <span>
-                                        {property.is_stressed === 1
-                                          ? "Yes"
-                                          : "No"}
-                                      </span>
-                                    </div>
-                                    <div className="col-xl-3 mt-xl-4">
-                                      <h6 className="text-muted fw-bold">
-                                        Is Sold?
-                                      </h6>
-                                      <span>
-                                        {property.is_sold === 1 ? "Yes" : "No"}
-                                      </span>
-                                    </div>
-                                    <div
-                                      className={`${
-                                        property.is_sold === 1 ? "d-none" : ""
-                                      } col-xl-3 mt-xl-4`}
-                                    >
-                                      <h6 className="text-muted fw-bold">
-                                        Is Available For Sale?
-                                      </h6>
-                                      <span>
-                                        {property.is_available_for_sale === 1
-                                          ? "Yes"
-                                          : "No"}
-                                      </span>
-                                    </div>
-                                    <div className="col-xl-3 mt-xl-4">
-                                      <h6 className="text-muted fw-bold">
-                                        Completion Date
-                                      </h6>
-                                      <span>
-                                        {property.completion_date
-                                          ? property.completion_date
-                                              .split(" ")[0]
-                                              .split("-")
-                                              .reverse()
-                                              .join("-")
-                                          : "Not Available"}
-                                      </span>
-                                    </div>
-                                    <div className="col-xl-3 mt-xl-4">
-                                      <h6 className="text-muted fw-bold">
-                                        Purchase Date
-                                      </h6>
-                                      <span>
-                                        {property.purchase_date
-                                          ? property.purchase_date
-                                              .split(" ")[0]
-                                              .split("-")
-                                              .reverse()
-                                              .join("-")
-                                          : "Not Available"}
-                                      </span>
-                                    </div>
-                                    <div className="col-xl-3 mt-xl-4">
-                                      <h6 className="text-muted fw-bold">
-                                        Mortgage Date
-                                      </h6>
-                                      <span>
-                                        {property.mortgage_date
-                                          ? property.mortgage_date
-                                              .split(" ")[0]
-                                              .split("-")
-                                              .reverse()
-                                              .join("-")
-                                          : "Not Available"}
-                                      </span>
-                                    </div>
-                                    <div className="col-xl-5 mt-xl-4">
-                                      <h6 className="text-muted fw-bold">
-                                        Address
-                                      </h6>
-                                      <span>
-                                        {`${
-                                          property.Flat_No
-                                            ? `Flat No:  ${property.Flat_No}, `
-                                            : ""
-                                        } ${
-                                          property.society_name
-                                            ? `Society Name:  ${property.society_name}, `
-                                            : ""
-                                        } ${
-                                          property.plot_no
-                                            ? `Plot No:  ${property.plot_no}, `
-                                            : ""
-                                        }Locality: ${property.locality}, ${
-                                          property.city_name
-                                        } - ${property.PIN}, ${
-                                          property.state_name
-                                        }`}
-                                      </span>
+                                <div className="col-xl-8 pe-0">
+                                  <div className="container-fluid">
+                                    <div className="row">
+                                      <div className="col-xl-3">
+                                        <h6 className="text-muted fw-bold">
+                                          Property Type
+                                        </h6>
+                                        <span>{property.type_name}</span>
+                                      </div>
+                                      <div className="col-xl-3">
+                                        <h6 className="text-muted fw-bold">
+                                          Market Price
+                                        </h6>
+                                        <span>{property.market_price} Rs.</span>
+                                      </div>
+                                      <div className="col-xl-3">
+                                        <h6 className="text-muted fw-bold">
+                                          Ready Reckoner Price
+                                        </h6>
+                                        <span>
+                                          {property.ready_reckoner_price} Rs.
+                                        </span>
+                                      </div>
+                                      <div className="col-xl-3">
+                                        <h6 className="text-muted fw-bold">
+                                          Expected Price
+                                        </h6>
+                                        <span>
+                                          {property.expected_price} Rs.
+                                        </span>
+                                      </div>
+                                      <div className="col-xl-3 mt-xl-4">
+                                        <h6 className="text-muted fw-bold">
+                                          Status
+                                        </h6>
+                                        <span>{property.status}</span>
+                                      </div>
+                                      <div className="col-xl-3 mt-xl-4">
+                                        <h6 className="text-muted fw-bold">
+                                          Saleable Area
+                                        </h6>
+                                        <span>{property.saleable_area}</span>
+                                      </div>
+                                      <div className="col-xl-3 mt-xl-4">
+                                        <h6 className="text-muted fw-bold">
+                                          Carpet Area
+                                        </h6>
+                                        <span>{property.carpet_area}</span>
+                                      </div>
+                                      <div className="col-xl-3 mt-xl-4">
+                                        <h6 className="text-muted fw-bold">
+                                          Is Stressed?
+                                        </h6>
+                                        <span>
+                                          {property.is_stressed === 1
+                                            ? "Yes"
+                                            : "No"}
+                                        </span>
+                                      </div>
+                                      <div className="col-xl-3 mt-xl-4">
+                                        <h6 className="text-muted fw-bold">
+                                          Is Sold?
+                                        </h6>
+                                        <span>
+                                          {property.is_sold === 1
+                                            ? "Yes"
+                                            : "No"}
+                                        </span>
+                                      </div>
+                                      <div
+                                        className={`${
+                                          property.is_sold === 1 ? "d-none" : ""
+                                        } col-xl-3 mt-xl-4`}
+                                      >
+                                        <h6 className="text-muted fw-bold">
+                                          Is Available For Sale?
+                                        </h6>
+                                        <span>
+                                          {property.is_available_for_sale === 1
+                                            ? "Yes"
+                                            : "No"}
+                                        </span>
+                                      </div>
+                                      <div className="col-xl-3 mt-xl-4">
+                                        <h6 className="text-muted fw-bold">
+                                          Completion Date
+                                        </h6>
+                                        <span>
+                                          {property.completion_date
+                                            ? property.completion_date
+                                                .split(" ")[0]
+                                                .split("-")
+                                                .reverse()
+                                                .join("-")
+                                            : "Not Available"}
+                                        </span>
+                                      </div>
+                                      <div className="col-xl-3 mt-xl-4">
+                                        <h6 className="text-muted fw-bold">
+                                          Purchase Date
+                                        </h6>
+                                        <span>
+                                          {property.purchase_date
+                                            ? property.purchase_date
+                                                .split(" ")[0]
+                                                .split("-")
+                                                .reverse()
+                                                .join("-")
+                                            : "Not Available"}
+                                        </span>
+                                      </div>
+                                      <div className="col-xl-3 mt-xl-4">
+                                        <h6 className="text-muted fw-bold">
+                                          Mortgage Date
+                                        </h6>
+                                        <span>
+                                          {property.mortgage_date
+                                            ? property.mortgage_date
+                                                .split(" ")[0]
+                                                .split("-")
+                                                .reverse()
+                                                .join("-")
+                                            : "Not Available"}
+                                        </span>
+                                      </div>
+                                      <div className="col-12">
+                                        <hr />
+                                      </div>
+                                      <div className="col-xl-5">
+                                        <h6 className="text-muted fw-bold">
+                                          Address
+                                        </h6>
+                                        <span>
+                                          {`${
+                                            property.Flat_No
+                                              ? `Flat No:  ${property.Flat_No}, `
+                                              : ""
+                                          } ${
+                                            property.society_name
+                                              ? `Society Name:  ${property.society_name}, `
+                                              : ""
+                                          } ${
+                                            property.plot_no
+                                              ? `Plot No:  ${property.plot_no}, `
+                                              : ""
+                                          }Locality: ${property.locality}, ${
+                                            property.city_name
+                                          } - ${property.PIN}, ${
+                                            property.state_name
+                                          }`}
+                                        </span>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </>
                       );
                     })
                   ) : (
