@@ -306,52 +306,6 @@ input:-webkit-autofill:active {
   padding: 1rem 0 !important;
 }
 
-/* View Property Details */
-
-.property-full-details .property-info {
-  margin-bottom: 0.25rem;
-  font-weight: 500;
-}
-
-.view-property-main-img-div img {
-  height: 80% !important;
-}
-
-/* .property-full-details .col-lg-10 {
-  padding: 0 !important;
-} */
-
-.property-icons-div {
-  margin-top: 1rem;
-  max-height: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.property-icons-div .icons {
-  height: 50px;
-  width: 53px;
-  background-color: #58575742;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid black;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s ease-in-out;
-}
-.property-icons-div .icons:hover {
-  background-color: #585757;
-  color: white;
-  transition: 0.3s ease-in-out;
-}
-
-.other-properties .card {
-  padding: 1rem 2rem;
-  background-color: #58575733;
-  height: 122px;
-}
-
 /* Home about Us */
 
 .about-home-link {
