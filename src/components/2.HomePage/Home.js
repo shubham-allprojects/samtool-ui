@@ -623,6 +623,26 @@ function Home() {
                                   </button>
                                 </div>
                               </div>
+                              <div className="col-xl-8 pe-0">
+                                <div className="container-fluid">
+                                  <div className="row">
+                                    <div className="col-xl-4">
+                                      <h6 className="text-muted fw-bold">
+                                        Location
+                                      </h6>
+                                      <span>
+                                        {`${property.city_name} - ${property.PIN}, ${property.state_name}`}
+                                      </span>
+                                    </div>
+                                    <div className="col-xl-4">
+                                      <h6 className="text-muted fw-bold">
+                                        Market Price
+                                      </h6>
+                                      <span>{property.market_price} Rs.</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
