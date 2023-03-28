@@ -5,7 +5,7 @@ import { useRef } from "react";
 import Layout from "../../components/1.CommonLayout/Layout";
 import { rootTitle } from "../../CommonFunctions";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
@@ -150,11 +150,23 @@ const UploadProperties = () => {
         setProgressModalOpen(true);
         if (isLastChunk) {
           if (res.data.msg === 0) {
-            // setUniqueUploadId(uuid());
           } else {
             setProgressModalOpen(false);
             toast.error("Duplicate data");
             onCancelClick();
+          }
+        }
+
+        if (isLastChunk) {
+          if (res.data.msg !== 0) {
+            setProgressModalOpen(false);
+            onCancelClick();
+            toast.error("Error while uploading files");
+          } else {
+            toast.success("File uploaded successfully");
+            setTimeout(() => {
+              window.location.reload();
+            }, 4000);
           }
         }
       });
@@ -163,6 +175,7 @@ const UploadProperties = () => {
     }
 
     if (isLastChunk) {
+      setUniqueUploadId(uuid());
       setLastUploadedFileIndex(currentFileIndex);
       setCurrentChunkIndex(null);
     } else {
@@ -223,6 +236,7 @@ const UploadProperties = () => {
           e.preventDefault();
         }}
       >
+        <ToastContainer autoClose={3000} />
         <div className="row min-100vh position-relative">
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 wrapper mt-4 mt-md-0">
