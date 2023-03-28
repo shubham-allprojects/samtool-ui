@@ -530,13 +530,13 @@ function Home() {
                   <i className="bi bi-arrow-left"></i> Back
                 </button>
               </div>
-              <div className="container-fluid mt-3">
+              <div className="container-fluid">
                 <div className="row">
                   {selectedPropertyResults ? (
                     selectedPropertyResults.map((property) => {
                       return (
                         <div
-                          className="col-12 shadow-sm border"
+                          className="col-12 shadow-sm border mt-3"
                           key={property.property_id}
                         >
                           {property.property_id}
