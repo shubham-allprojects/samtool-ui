@@ -9,8 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
-const chunkSize = 1000 * 1024;
-// const chunkSize = 2024;
+const chunkSize = 0.5 * 1024;
 
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
@@ -120,9 +119,6 @@ const UploadProperties = () => {
     reader.readAsDataURL(blob);
   };
 
-  const [progress, setProgress] = useState(0);
-  const [progressModalOpen, setProgressModalOpen] = useState(false);
-
   const uploadChunk = async (readerEvent) => {
     let fileSize = 0;
     const file = files[currentFileIndex];
@@ -138,28 +134,13 @@ const UploadProperties = () => {
       file_name: file.name,
       data: data,
     };
-    console.log(dataToPost.total_chunks);
+    console.log(dataToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
-    setProgress(
-      Math.round((dataToPost.chunk_number / dataToPost.total_chunks) * 100)
-    );
-    setProgressModalOpen(true);
     try {
       await axios.post(url, dataToPost, { headers: headers }).then((res) => {
-        setProgressModalOpen(true);
-        if (isLastChunk) {
-          if (res.data.msg === 0) {
-          } else {
-            setProgressModalOpen(false);
-            toast.error("Duplicate data");
-            onCancelClick();
-          }
-        }
-
         if (isLastChunk) {
           if (res.data.msg !== 0) {
-            setProgressModalOpen(false);
             onCancelClick();
             toast.error("Error while uploading files");
           } else {
@@ -334,48 +315,6 @@ const UploadProperties = () => {
                       </button>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className={`modal fade ${progressModalOpen ? "show" : ""}`}
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-modal="true"
-        style={{ display: `${progressModalOpen ? "block" : "none"}` }}
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content bg-dark">
-            <div className="modal-header">
-              <h5 className="modal-title text-white" id="exampleModalLabel">
-                {progress === 100
-                  ? "Data uploaded successfully"
-                  : "Uploading...."}
-              </h5>
-              <button
-                type="button"
-                className="btn-close bg-white"
-                onClick={() => {
-                  setProgressModalOpen(false);
-                  onCancelClick();
-                }}
-              ></button>
-            </div>
-            <div className="modal-body">
-              <div className="progress my-2">
-                <div
-                  className="progress-bar progress-bar-animated progress-bar-striped bg-info"
-                  role="progressbar"
-                  style={{ width: `${progress}%` }}
-                  aria-valuenow="100"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  {progress}%
                 </div>
               </div>
             </div>
