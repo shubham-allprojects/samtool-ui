@@ -169,7 +169,7 @@ function Home() {
         } else {
           paginationRef.current.classList.add("d-none");
         }
-      }, 1500);
+      }, 500);
     });
   };
 
@@ -218,7 +218,7 @@ function Home() {
       "linear-gradient(0deg, rgb(2, 77, 251) 0%, rgb(0, 157, 255) 100%)";
     homePageRef.current.classList.add("d-none");
     let minValueOfproperty = parseInt(range.split("-")[0]);
-    let maxValueOfproperty = parseInt(range.split("-")[1]);
+    let maxValueOfproperty = parseInt(range.split("-")[1] + "00");
     let dataToPost = {
       property_type: type,
       city_name: city,
@@ -536,7 +536,7 @@ function Home() {
                     selectedPropertyResults.map((property) => {
                       return (
                         <div
-                          className="col-12 border mt-3 p-0"
+                          className="col-12 border mt-4 p-0"
                           key={property.property_id}
                         >
                           <div className="container-fluid">
@@ -742,6 +742,30 @@ function Home() {
                                               .reverse()
                                               .join("-")
                                           : "Not Available"}
+                                      </span>
+                                    </div>
+                                    <div className="col-xl-5 mt-xl-4">
+                                      <h6 className="text-muted fw-bold">
+                                        Address
+                                      </h6>
+                                      <span>
+                                        {`${
+                                          property.Flat_No
+                                            ? `Flat No:  ${property.Flat_No}, `
+                                            : ""
+                                        } ${
+                                          property.society_name
+                                            ? `Society Name:  ${property.society_name}, `
+                                            : ""
+                                        } ${
+                                          property.plot_no
+                                            ? `Plot No:  ${property.plot_no}, `
+                                            : ""
+                                        }Locality: ${property.locality}, ${
+                                          property.city_name
+                                        } - ${property.PIN}, ${
+                                          property.state_name
+                                        }`}
                                       </span>
                                     </div>
                                   </div>
