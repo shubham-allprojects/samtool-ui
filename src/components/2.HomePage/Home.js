@@ -626,19 +626,29 @@ function Home() {
                               <div className="col-xl-8 pe-0">
                                 <div className="container-fluid">
                                   <div className="row">
-                                    <div className="col-xl-4">
+                                    <div className="col-xl-3">
                                       <h6 className="text-muted fw-bold">
-                                        Location
+                                        Property Type
                                       </h6>
-                                      <span>
-                                        {`${property.city_name} - ${property.PIN}, ${property.state_name}`}
-                                      </span>
+                                      <span>{property.type_name}</span>
                                     </div>
-                                    <div className="col-xl-4">
+                                    <div className="col-xl-3">
                                       <h6 className="text-muted fw-bold">
                                         Market Price
                                       </h6>
                                       <span>{property.market_price} Rs.</span>
+                                    </div>
+                                    <div className="col-xl-3">
+                                      <h6 className="text-muted fw-bold">
+                                        Saleable Area
+                                      </h6>
+                                      <span>{property.saleable_area}</span>
+                                    </div>
+                                    <div className="col-xl-3">
+                                      <h6 className="text-muted fw-bold">
+                                        Carpet Area
+                                      </h6>
+                                      <span>{property.carpet_area}</span>
                                     </div>
                                   </div>
                                 </div>
