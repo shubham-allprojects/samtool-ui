@@ -440,7 +440,7 @@ function Home() {
               ) : (
                 propertyData.map((property, Index) => {
                   return (
-                    <div className="col-md-3 col-lg-4 col-md-6" key={Index}>
+                    <div className="col-xl-3 col-lg-4 col-md-6" key={Index}>
                       <div className="property-card-wrapper">
                         <div className="card mb-4">
                           <div className="top-line"></div>

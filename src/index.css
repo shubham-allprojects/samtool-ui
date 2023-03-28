@@ -317,9 +317,9 @@ input:-webkit-autofill:active {
   height: 80% !important;
 }
 
-.property-full-details .col-lg-10 {
+/* .property-full-details .col-lg-10 {
   padding: 0 !important;
-}
+} */
 
 .property-icons-div {
   margin-top: 1rem;
