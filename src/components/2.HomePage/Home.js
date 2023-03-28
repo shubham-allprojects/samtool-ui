@@ -169,7 +169,7 @@ function Home() {
         } else {
           paginationRef.current.classList.add("d-none");
         }
-      }, 500);
+      }, 100);
     });
   };
 
@@ -533,16 +533,18 @@ function Home() {
               <div className="container-fluid">
                 <div className="row">
                   {selectedPropertyResults ? (
-                    selectedPropertyResults.map((property) => {
+                    selectedPropertyResults.map((property, Index) => {
                       return (
                         <>
+                          <div className="p-0 fw-bold h4 text-primary">
+                            Property: {Index + 1}
+                          </div>
                           <div
                             className="col-12 border bg-light mb-4 p-0"
                             key={property.property_id}
                           >
                             <div className="container-fluid">
                               <div className="row p-2">
-                                {/* {property.property_id} */}
                                 <div className="col-lg-4 col-md-5 p-0">
                                   <div
                                     id={`carouselExampleIndicators-${property.property_id}`}
