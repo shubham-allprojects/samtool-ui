@@ -17,7 +17,7 @@ function Home() {
     banks: "",
   });
 
-  const [selectedPropertyResults, setSelectedPropertyResults] = useState({});
+  const [selectedPropertyResults, setSelectedPropertyResults] = useState([]);
 
   // useState to store values of each select box for search functionality.
   const [dataToPost, setDataToPost] = useState({
@@ -209,6 +209,9 @@ function Home() {
   };
 
   const viewCurrentProperty = async (type, city, range) => {
+    viewCurrentPropertyResultsRef.current.classList.remove("d-none");
+    window.scrollTo(0, 0);
+    homePageRef.current.classList.add("d-none");
     let minValueOfproperty = parseInt(range.split("-")[0]);
     let maxValueOfproperty = parseInt(range.split("-")[1]);
     let dataToPost = {
@@ -217,13 +220,21 @@ function Home() {
       minvalue: minValueOfproperty,
       maxvalue: maxValueOfproperty,
     };
-    console.log(dataToPost, selectedPropertyResults);
-    await axios
-      .post(`/sam/v1/property/view-properties`, dataToPost)
-      .then((res) => {
-        setSelectedPropertyResults(res.data);
-        console.log(res.data);
-      });
+    console.log(dataToPost);
+    try {
+      await axios
+        .post(`/sam/v1/property/view-properties`, dataToPost)
+        .then((res) => {
+          setSelectedPropertyResults(res.data);
+          console.log(res.data);
+        });
+    } catch (error) {}
+  };
+
+  const backToSearchResults = () => {
+    viewCurrentPropertyResultsRef.current.classList.add("d-none");
+    homePageRef.current.classList.remove("d-none");
+    document.getElementById("properties").scrollIntoView(true);
   };
 
   // This will run every time we refresh page or if some state change occurs.
@@ -234,9 +245,12 @@ function Home() {
     // eslint-disable-next-line
   }, []);
 
+  const homePageRef = useRef();
+  const viewCurrentPropertyResultsRef = useRef();
+
   return (
     <Layout>
-      <section className="full-home-page-section skyblue-bg">
+      <section className="full-home-page-section skyblue-bg" ref={homePageRef}>
         <section className="home-wrapper">
           <div className="container-fluid">
             {/* 5 select boxes */}
@@ -393,6 +407,7 @@ function Home() {
               </div>
             </div>
           </div>
+          {/* After clicking on search button using this div id the ui will scroll to property results div */}
           <div id="properties"></div>
           <div className="home-bottom-heading display-on-search d-none">
             <h1 className="text-center text-white">RECENT LISTINGS</h1>
@@ -492,6 +507,22 @@ function Home() {
         </section>
         {/* About us section component */}
         <HomeAboutUs />
+      </section>
+      <section
+        ref={viewCurrentPropertyResultsRef}
+        className="section-padding d-none min-100vh"
+      >
+        <h1>ok</h1>
+        <button className="btn btn-primary" onClick={backToSearchResults}>
+          back
+        </button>
+        {selectedPropertyResults
+          ? selectedPropertyResults.map((property) => {
+              return (
+                <div key={property.property_id}> {property.property_id}</div>
+              );
+            })
+          : "NA"}
       </section>
     </Layout>
   );
