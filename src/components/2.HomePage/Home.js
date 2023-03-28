@@ -440,7 +440,7 @@ function Home() {
               ) : (
                 propertyData.map((property, Index) => {
                   return (
-                    <div className="col-md-3 col-md-4" key={Index}>
+                    <div className="col-md-3 col-lg-4 col-md-6" key={Index}>
                       <div className="property-card-wrapper">
                         <div className="card mb-4">
                           <div className="top-line"></div>
@@ -520,9 +520,9 @@ function Home() {
         className="section-padding d-none min-100vh"
       >
         <div className="container-fluid">
-          <div className="row p-2">
+          <div className="row p-md-2">
             <div className="card p-3 border-0">
-              <div className="mb-4">
+              <div className="mb-3 mb-md-4">
                 <button
                   className="btn btn-sm btn-outline-primary"
                   onClick={backToSearchResults}
@@ -543,7 +543,7 @@ function Home() {
                             <div className="container-fluid">
                               <div className="row p-2">
                                 {/* {property.property_id} */}
-                                <div className="col-md-4 p-0">
+                                <div className="col-lg-4 col-md-5 p-0">
                                   <div
                                     id={`carouselExampleIndicators-${property.property_id}`}
                                     className="carousel slide"
@@ -624,10 +624,10 @@ function Home() {
                                     </button>
                                   </div>
                                 </div>
-                                <div className="col-md-8 pe-0">
+                                <div className="col-lg-8 col-md-7 pe-0">
                                   <div className="container-fluid">
                                     <div className="row">
-                                      <div className="col-xl-3 col-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-3 mt-md-0">
                                         <small className="text-muted">
                                           Property Type
                                         </small>
@@ -635,7 +635,7 @@ function Home() {
                                           {property.type_name}
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-3 mt-md-0">
                                         <small className="text-muted">
                                           Market Price
                                         </small>
@@ -643,7 +643,7 @@ function Home() {
                                           {property.market_price} Rs.
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-lg-0 mt-3">
                                         <small className="text-muted">
                                           Ready Reckoner Price
                                         </small>
@@ -651,7 +651,7 @@ function Home() {
                                           {property.ready_reckoner_price} Rs.
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4 mt-xl-0 mt-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-xl-0 mt-3">
                                         <small className="text-muted">
                                           Expected Price
                                         </small>
@@ -659,7 +659,7 @@ function Home() {
                                           {property.expected_price} Rs.
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4 mt-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                                         <small className="text-muted">
                                           Status
                                         </small>
@@ -667,7 +667,7 @@ function Home() {
                                           {property.status}
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4 mt-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                                         <small className="text-muted">
                                           Saleable Area
                                         </small>
@@ -675,7 +675,7 @@ function Home() {
                                           {property.saleable_area}
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4 mt-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                                         <small className="text-muted">
                                           Carpet Area
                                         </small>
@@ -683,7 +683,7 @@ function Home() {
                                           {property.carpet_area}
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4 mt-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                                         <small className="text-muted">
                                           Is Stressed?
                                         </small>
@@ -693,7 +693,7 @@ function Home() {
                                             : "No"}
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4 mt-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                                         <small className="text-muted">
                                           Is Sold?
                                         </small>
@@ -706,7 +706,7 @@ function Home() {
                                       <div
                                         className={`${
                                           property.is_sold === 1 ? "d-none" : ""
-                                        } col-xl-3 col-md-4 mt-md-4`}
+                                        } col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3`}
                                       >
                                         <small className="text-muted">
                                           Is Available For Sale?
@@ -717,7 +717,7 @@ function Home() {
                                             : "No"}
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4 mt-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                                         <small className="text-muted">
                                           Completion Date
                                         </small>
@@ -731,7 +731,7 @@ function Home() {
                                             : "Not Available"}
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4 mt-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                                         <small className="text-muted">
                                           Purchase Date
                                         </small>
@@ -745,7 +745,7 @@ function Home() {
                                             : "Not Available"}
                                         </div>
                                       </div>
-                                      <div className="col-xl-3 col-md-4 mt-md-4">
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                                         <small className="text-muted">
                                           Mortgage Date
                                         </small>
@@ -762,7 +762,7 @@ function Home() {
                                       <div className="col-12">
                                         <hr />
                                       </div>
-                                      <div className="col-xl-5 col-md-7">
+                                      <div className="col-xl-5 col-lg-7 col-md-10">
                                         <small className="text-muted">
                                           Address
                                         </small>
