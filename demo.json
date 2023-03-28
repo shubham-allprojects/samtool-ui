@@ -28,5 +28,42 @@
       "city": 1,
       "zip": 456652
     }
+  },
+
+  {
+    "property_id": 3,
+    "branch_name": "Bank Of Maharashtra, Pune",
+    "property_number": "100",
+    "type_name": "Plots",
+    "city_name": "Rural",
+    "state_name": "55",
+    "Flat_No": "100",
+    "plot_no": "411027",
+    "PIN": "Pearl Heights",
+    "locality": "Pune",
+    "society_name": "Maharashtra",
+    "is_stressed": 1,
+    "is_available_for_sale": 0,
+    "sale_availability_date": "2022-05-14 18:41:01",
+    "saleable_area": "1300 sq.ft.",
+    "carpet_area": "1100 sq.ft.",
+    "ready_reckoner_price": "6000000",
+    "expected_price": "8000000",
+    "market_price": "50000000",
+    "completion_date": "2022-05-20 18:41:01",
+    "purchase_date": "2022-03-20 18:41:01",
+    "mortgage_date": "2022-05-20 18:41:01",
+    "is_sold": 1,
+    "status": "1",
+    "added_by": 1,
+    "added_date": "2022-03-14 13:34:37",
+    "updated_by": {
+      "Int64": 1,
+      "Valid": true
+    },
+    " updated_date": {
+      "Time": "2022-03-14T13:34:37Z",
+      "Valid": true
+    }
   }
 ]

@@ -536,10 +536,14 @@ function Home() {
                     selectedPropertyResults.map((property) => {
                       return (
                         <div
-                          className="col-12 shadow-sm border mt-3"
+                          className="col-12 shadow-sm bg-info border mt-3 p-0"
                           key={property.property_id}
                         >
-                          {property.property_id}
+                          <div className="container-fluid">
+                            <div className="row bg-light p-2">
+                              {property.property_id}
+                            </div>
+                          </div>
                         </div>
                       );
                     })
