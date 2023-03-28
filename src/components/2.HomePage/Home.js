@@ -198,12 +198,14 @@ function Home() {
   // Change navbar color on scroll on HomePage only.
   const changeNavBarColor = () => {
     let nav = document.querySelector(".navbar");
-    nav.style.background = "#5857579a";
+    nav.classList.add("navbar-lightBg");
     window.onscroll = function () {
       if (document.documentElement.scrollTop > 150) {
         nav.classList.add("header-scrolled");
+        nav.classList.remove("navbar-lightBg");
       } else {
         nav.classList.remove("header-scrolled");
+        nav.classList.add("navbar-lightBg");
       }
     };
   };
@@ -211,6 +213,10 @@ function Home() {
   const viewCurrentProperty = async (type, city, range) => {
     viewCurrentPropertyResultsRef.current.classList.remove("d-none");
     window.scrollTo(0, 0);
+    let nav = document.querySelector(".navbar");
+
+    nav.style.background =
+      "linear-gradient(0deg, rgb(2, 77, 251) 0%, rgb(0, 157, 255) 100%)";
     homePageRef.current.classList.add("d-none");
     let minValueOfproperty = parseInt(range.split("-")[0]);
     let maxValueOfproperty = parseInt(range.split("-")[1]);
@@ -227,6 +233,7 @@ function Home() {
         .then((res) => {
           setSelectedPropertyResults(res.data);
           console.log(res.data);
+          nav.classList.remove("navbar-lightBg");
         });
     } catch (error) {}
   };
@@ -235,6 +242,8 @@ function Home() {
     viewCurrentPropertyResultsRef.current.classList.add("d-none");
     homePageRef.current.classList.remove("d-none");
     document.getElementById("properties").scrollIntoView(true);
+    let nav = document.querySelector(".navbar");
+    nav.style.background = "";
   };
 
   // This will run every time we refresh page or if some state change occurs.

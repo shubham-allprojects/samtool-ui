@@ -155,6 +155,10 @@ input:-webkit-autofill:active {
   transition: 0.3s ease-in-out;
 }
 
+.navbar.navbar-lightBg {
+  background: #5857579a;
+}
+
 .header-scrolled {
   background: var(--navbar-bg) !important;
   position: fixed !important;
