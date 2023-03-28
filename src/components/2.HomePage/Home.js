@@ -210,11 +210,10 @@ function Home() {
     };
   };
 
+  let nav = document.querySelector(".navbar");
   const viewCurrentProperty = async (type, city, range) => {
     viewCurrentPropertyResultsRef.current.classList.remove("d-none");
     window.scrollTo(0, 0);
-    let nav = document.querySelector(".navbar");
-
     nav.style.background =
       "linear-gradient(0deg, rgb(2, 77, 251) 0%, rgb(0, 157, 255) 100%)";
     homePageRef.current.classList.add("d-none");
@@ -242,7 +241,6 @@ function Home() {
     viewCurrentPropertyResultsRef.current.classList.add("d-none");
     homePageRef.current.classList.remove("d-none");
     document.getElementById("properties").scrollIntoView(true);
-    let nav = document.querySelector(".navbar");
     nav.style.background = "";
   };
 
