@@ -544,14 +544,14 @@ function Home() {
                               {/* {property.property_id} */}
                               <div className="col-xl-4 p-0">
                                 <div
-                                  id="carouselExampleIndicators"
+                                  id={`carouselExampleIndicators-${property.property_id}`}
                                   className="carousel slide"
                                   data-bs-ride="carousel"
                                 >
                                   <div className="carousel-indicators property-slider-indicators">
                                     <button
                                       type="button"
-                                      data-bs-target="#carouselExampleIndicators"
+                                      data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
                                       data-bs-slide-to="0"
                                       className="active"
                                       aria-current="true"
@@ -559,13 +559,13 @@ function Home() {
                                     ></button>
                                     <button
                                       type="button"
-                                      data-bs-target="#carouselExampleIndicators"
+                                      data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
                                       data-bs-slide-to="1"
                                       aria-label="Slide 2"
                                     ></button>
                                     <button
                                       type="button"
-                                      data-bs-target="#carouselExampleIndicators"
+                                      data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
                                       data-bs-slide-to="2"
                                       aria-label="Slide 3"
                                     ></button>
@@ -602,7 +602,7 @@ function Home() {
                                   <button
                                     className="carousel-control-prev"
                                     type="button"
-                                    data-bs-target="#carouselExampleIndicators"
+                                    data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
                                     data-bs-slide="prev"
                                   >
                                     <span
@@ -613,7 +613,7 @@ function Home() {
                                   <button
                                     className="carousel-control-next"
                                     type="button"
-                                    data-bs-target="#carouselExampleIndicators"
+                                    data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
                                     data-bs-slide="next"
                                   >
                                     <span
