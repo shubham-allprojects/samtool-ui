@@ -241,7 +241,7 @@ function Home() {
     viewCurrentPropertyResultsRef.current.classList.add("d-none");
     homePageRef.current.classList.remove("d-none");
     document.getElementById("properties").scrollIntoView(true);
-    nav.style.background = "";
+    nav.style.removeProperty("background");
   };
 
   // This will run every time we refresh page or if some state change occurs.
