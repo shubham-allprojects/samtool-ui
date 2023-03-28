@@ -640,15 +640,109 @@ function Home() {
                                     </div>
                                     <div className="col-xl-3">
                                       <h6 className="text-muted fw-bold">
+                                        Ready Reckoner Price
+                                      </h6>
+                                      <span>
+                                        {property.ready_reckoner_price} Rs.
+                                      </span>
+                                    </div>
+                                    <div className="col-xl-3">
+                                      <h6 className="text-muted fw-bold">
+                                        Expected Price
+                                      </h6>
+                                      <span>{property.expected_price} Rs.</span>
+                                    </div>
+                                    <div className="col-xl-3 mt-xl-4">
+                                      <h6 className="text-muted fw-bold">
+                                        Status
+                                      </h6>
+                                      <span>{property.status}</span>
+                                    </div>
+                                    <div className="col-xl-3 mt-xl-4">
+                                      <h6 className="text-muted fw-bold">
                                         Saleable Area
                                       </h6>
                                       <span>{property.saleable_area}</span>
                                     </div>
-                                    <div className="col-xl-3">
+                                    <div className="col-xl-3 mt-xl-4">
                                       <h6 className="text-muted fw-bold">
                                         Carpet Area
                                       </h6>
                                       <span>{property.carpet_area}</span>
+                                    </div>
+                                    <div className="col-xl-3 mt-xl-4">
+                                      <h6 className="text-muted fw-bold">
+                                        Is Stressed?
+                                      </h6>
+                                      <span>
+                                        {property.is_stressed === 1
+                                          ? "Yes"
+                                          : "No"}
+                                      </span>
+                                    </div>
+                                    <div className="col-xl-3 mt-xl-4">
+                                      <h6 className="text-muted fw-bold">
+                                        Is Sold?
+                                      </h6>
+                                      <span>
+                                        {property.is_sold === 1 ? "Yes" : "No"}
+                                      </span>
+                                    </div>
+                                    <div
+                                      className={`${
+                                        property.is_sold === 1 ? "d-none" : ""
+                                      } col-xl-3 mt-xl-4`}
+                                    >
+                                      <h6 className="text-muted fw-bold">
+                                        Is Available For Sale?
+                                      </h6>
+                                      <span>
+                                        {property.is_available_for_sale === 1
+                                          ? "Yes"
+                                          : "No"}
+                                      </span>
+                                    </div>
+                                    <div className="col-xl-3 mt-xl-4">
+                                      <h6 className="text-muted fw-bold">
+                                        Completion Date
+                                      </h6>
+                                      <span>
+                                        {property.completion_date
+                                          ? property.completion_date
+                                              .split(" ")[0]
+                                              .split("-")
+                                              .reverse()
+                                              .join("-")
+                                          : "Not Available"}
+                                      </span>
+                                    </div>
+                                    <div className="col-xl-3 mt-xl-4">
+                                      <h6 className="text-muted fw-bold">
+                                        Purchase Date
+                                      </h6>
+                                      <span>
+                                        {property.purchase_date
+                                          ? property.purchase_date
+                                              .split(" ")[0]
+                                              .split("-")
+                                              .reverse()
+                                              .join("-")
+                                          : "Not Available"}
+                                      </span>
+                                    </div>
+                                    <div className="col-xl-3 mt-xl-4">
+                                      <h6 className="text-muted fw-bold">
+                                        Mortgage Date
+                                      </h6>
+                                      <span>
+                                        {property.mortgage_date
+                                          ? property.mortgage_date
+                                              .split(" ")[0]
+                                              .split("-")
+                                              .reverse()
+                                              .join("-")
+                                          : "Not Available"}
+                                      </span>
                                     </div>
                                   </div>
                                 </div>
