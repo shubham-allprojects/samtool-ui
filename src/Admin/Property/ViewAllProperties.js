@@ -31,9 +31,7 @@ const ViewAllProperties = () => {
     );
     setProperties(propertiesRes.data);
     console.log(propertiesRes.data);
-    setTimeout(() => {
-      setLoading(false);
-    }, 400);
+    setLoading(false);
   };
 
   // const deleteProperty = (propertyId) => {

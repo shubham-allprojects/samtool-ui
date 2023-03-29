@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
 
@@ -355,9 +355,7 @@ const EditUserDetails = () => {
               selectStateClassName: "d-none",
               cityVisiblity: "d-none",
             });
-            setTimeout(() => {
-              goTo("/profile");
-            }, 4000);
+            goTo("/profile");
           } else {
             setLoading(false);
             toast.error("Internal server error!");
@@ -378,7 +376,6 @@ const EditUserDetails = () => {
   return (
     <Layout>
       <section className="edit-details-wrapper section-padding min-100vh">
-        <ToastContainer autoClose={3000} />
         <div className="container-fluid wrapper">
           <div className="row justify-content-center">
             <div className="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">

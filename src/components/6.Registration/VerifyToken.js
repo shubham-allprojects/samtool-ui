@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import verifyTokenImg from "../../images/verifytoken.svg";
 import { rootTitle } from "../../CommonFunctions";
@@ -9,9 +9,7 @@ import { rootTitle } from "../../CommonFunctions";
 const VerifyToken = () => {
   // useState to save token entered by user.
   const [enteredToken, setEnteredToken] = useState("");
-
   const [loading, setLoading] = useState(false);
-  const [toastAutoCloseTiming, setToastAutoCloseTiming] = useState(6000);
 
   // To navigate to particular route.
   const goTo = useNavigate();
@@ -34,14 +32,11 @@ const VerifyToken = () => {
         )
         .then((res) => {
           if (res.data.status === 0) {
-            setToastAutoCloseTiming(3000);
             setLoading(false);
             e.target.reset();
             toast.success("Verification Successful !");
             localStorage.setItem("token", enteredToken);
-            setTimeout(() => {
-              goTo("/register/set-password");
-            }, toastAutoCloseTiming - 2000);
+            goTo("/register/set-password");
           } else if (res.data.status === 1) {
             setLoading(false);
             setAlertDetails({
@@ -75,7 +70,6 @@ const VerifyToken = () => {
   return (
     <Layout>
       <section className="verify-token-wrapper min-100vh section-padding">
-        <ToastContainer autoClose={toastAutoCloseTiming} />
         <div className="container">
           <div className="row justify-content-evenly mt-5">
             <div className="col-xl-4 col-lg-5 col-md-6">

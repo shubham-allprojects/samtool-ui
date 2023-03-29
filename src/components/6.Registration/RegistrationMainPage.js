@@ -3,7 +3,7 @@ import Layout from "../1.CommonLayout/Layout";
 import CommonFormFields from "./CommonFormFields";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useRef } from "react";
 import { rootTitle } from "../../CommonFunctions";
 
@@ -622,9 +622,7 @@ const Registration = () => {
               );
               e.target.reset();
               resetValues();
-              setTimeout(() => {
-                goTo("/register/verify");
-              }, 3000);
+              goTo("/register/verify");
             } else {
               setLoading(false);
               setAlertDetails({
@@ -682,9 +680,7 @@ const Registration = () => {
               );
               e.target.reset();
               resetValues();
-              setTimeout(() => {
-                goTo("/register/verify");
-              }, 3000);
+              goTo("/register/verify");
             } else {
               setLoading(false);
               setAlertDetails({
@@ -714,7 +710,6 @@ const Registration = () => {
   return (
     <Layout>
       <section className="registration-wrapper min-100vh section-padding">
-        <ToastContainer autoClose={3000} />
         <div className="container-fluid">
           <div className="row justify-content-center">
             <div className="col-lg-12">

@@ -162,14 +162,12 @@ function Home() {
     await axios.post(apis.searchAPI, dataToPost).then((res) => {
       // Store Searched results into propertyData useState.
       setPropertyData(res.data);
-      setTimeout(() => {
-        setLoading(false);
-        if (res.data) {
-          paginationRef.current.classList.remove("d-none");
-        } else {
-          paginationRef.current.classList.add("d-none");
-        }
-      }, 100);
+      setLoading(false);
+      if (res.data) {
+        paginationRef.current.classList.remove("d-none");
+      } else {
+        paginationRef.current.classList.add("d-none");
+      }
     });
   };
 

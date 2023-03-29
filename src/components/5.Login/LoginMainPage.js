@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import login from "../../images/loginsvg.svg";
 import { rootTitle } from "../../CommonFunctions";
@@ -9,13 +9,6 @@ import { rootTitle } from "../../CommonFunctions";
 const LoginMainPage = () => {
   // It is used to navigate to particular route.
   const goTo = useNavigate();
-  // It is used to store spinner and login-button details.
-  // const [loaderDetails, setLoaderDetails] = useState({
-  //   loading: false,
-  //   loginBtnTxt: "Login",
-  //   loginBtnClassName: "",
-  // });
-
   const [loading, setLoading] = useState(false);
 
   // Password type and eye icon details.
@@ -106,9 +99,7 @@ const LoginMainPage = () => {
             );
             setLoading(false);
             toast.success("Logged in Successfully !");
-            setTimeout(() => {
-              goTo("/edit-details");
-            }, 4000);
+            goTo("/edit-details");
           } else {
             setLoading(false);
             setAlertDetails({
@@ -135,7 +126,6 @@ const LoginMainPage = () => {
   return (
     <Layout>
       <section className="login-wrapper min-100vh section-padding">
-        <ToastContainer autoClose={3000} />
         <div className="container-fluid mt-5">
           <div className="row justify-content-evenly">
             <div className="col-lg-5 col-xl-5 order-lg-1 order-2 mt-lg-0 mt-5 mb-5">

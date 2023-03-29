@@ -5,7 +5,7 @@ import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 // For 2 chunks of pdf
 const chunkSize = 238 * 1024;
 // For 2 chunks of image
@@ -254,7 +254,6 @@ const SinglePropertyDocumentsUpload = () => {
   return (
     <Layout>
       <div className="container-fluid section-padding">
-        <ToastContainer autoClose={3000} />
         <div className="row min-100vh position-relative">
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">

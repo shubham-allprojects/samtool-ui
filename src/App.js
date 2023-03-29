@@ -28,11 +28,12 @@ import SinglePropertyDocumentsUpload from "./Admin/Property/SinglePropertyDocume
 import ProtectedPages from "./components/ProtectedPages";
 import ProtectSetPasswordPage from "./components/ProtectSetPasswordPage";
 import ProtectForgotPasswordPage from "./components/ProtectForgotPasswordPage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
-      {/* <ToastContainer autoClose="1800" /> */}
+      <ToastContainer autoClose="3000" />
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />

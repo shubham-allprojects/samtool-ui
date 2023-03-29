@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import changePassImg from "../../images/changePassword.svg";
 import { rootTitle } from "../../CommonFunctions";
@@ -137,9 +137,7 @@ const ChangePassword = () => {
               toast.success("Password changed successfully");
               // Clear localStorage.
               localStorage.clear();
-              setTimeout(() => {
-                goTo("/login");
-              }, 4000);
+              goTo("/login");
             } else {
               setLoading(false);
               setAlertDetails({
@@ -194,7 +192,6 @@ const ChangePassword = () => {
   return (
     <Layout>
       <section className="change-password-wrapper section-padding min-100vh">
-        <ToastContainer autoClose={3000} />
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8 order-1 order-lg-2">

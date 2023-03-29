@@ -216,9 +216,7 @@ const AddProperty = () => {
               resetValidationsOnSubmit();
               toast.success("Property added successfully");
               e.target.reset();
-              setTimeout(() => {
-                goTo("/admin/property/properties");
-              }, 2000);
+              goTo("/admin/property/properties");
             } else {
               toast.error("Internal server error");
             }

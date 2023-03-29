@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import Layout from "../1.CommonLayout/Layout";
 import setPassImg from "../../images/setpass.svg";
 import { rootTitle } from "../../CommonFunctions";
@@ -134,9 +134,7 @@ const ForgotAndResetPassword = () => {
               setLoading(false);
               toast.success("Password Changed Successfully !");
               localStorage.removeItem("forgotPassUserName");
-              setTimeout(() => {
-                goTo("/login");
-              }, 4000);
+              goTo("/login");
             } else {
               setLoading(false);
               setAlertDetails({
@@ -193,7 +191,6 @@ const ForgotAndResetPassword = () => {
   return (
     <Layout>
       <section className="set-password-wrapper section-padding min-100vh">
-        <ToastContainer autoClose={3000} />
         <div className="container mt-5">
           <div className="row justify-content-lg-between justify-content-center">
             <div className="col-xl-5 col-lg-6 col-md-8">

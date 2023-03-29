@@ -5,7 +5,7 @@ import { useRef } from "react";
 import Layout from "../../components/1.CommonLayout/Layout";
 import { rootTitle } from "../../CommonFunctions";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
@@ -218,7 +218,6 @@ const UploadProperties = () => {
           e.preventDefault();
         }}
       >
-        <ToastContainer autoClose={3000} />
         <div className="row min-100vh position-relative">
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 wrapper mt-4 mt-md-0">
