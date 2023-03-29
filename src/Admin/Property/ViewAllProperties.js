@@ -58,7 +58,7 @@ const ViewAllProperties = () => {
 
   // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
   const handlePageClick = async (pageNumber) => {
-    document.getElementById("admin-view-properties-title").scrollIntoView(true);
+    window.scrollTo(0, 0);
     let currentPage = pageNumber.selected + 1;
     const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
     setProperties(nextOrPrevPagePropertyData);
@@ -98,12 +98,7 @@ const ViewAllProperties = () => {
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
             <BreadCrumb />
-            <h1
-              className="text-center text-primary fw-bold"
-              id="admin-view-properties-title"
-            >
-              Properties
-            </h1>
+            <h1 className="text-center text-primary fw-bold">Properties</h1>
             <hr />
             {loading ? (
               <div
