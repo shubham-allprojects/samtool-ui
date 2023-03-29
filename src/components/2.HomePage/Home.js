@@ -238,7 +238,7 @@ function Home() {
           });
       } catch (error) {}
     } else {
-      toast.warn("Please login to view property details");
+      toast.info("Please login to view property details");
       goTo("/login");
     }
   };
