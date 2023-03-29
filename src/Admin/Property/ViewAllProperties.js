@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 // import { toast } from "react-toastify";
 import { rootTitle } from "../../CommonFunctions";
@@ -7,9 +7,10 @@ import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
 import CommonSpinner from "../../CommonSpinner";
+import Pagination from "../../Pagination";
 
 let authHeader = "";
-let batch_size = 4;
+let propertiesPerPage = 4;
 const ViewAllProperties = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   if (data) {
@@ -18,20 +19,59 @@ const ViewAllProperties = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const [pageCount, setPageCount] = useState(0);
+  const paginationRef = useRef();
+
   const getPropertiesFromApi = async () => {
     setLoading(true);
-    const pageNumberAndDataCount = {
+    paginationRef.current.classList.add("d-none");
+    const dataToPost = {
       batch_number: 1,
-      batch_size: batch_size,
+      batch_size: propertiesPerPage,
     };
     const propertiesRes = await axios.post(
       `/sam/v1/property/auth/all-properties`,
-      pageNumberAndDataCount,
+      dataToPost,
       { headers: authHeader }
     );
-    setProperties(propertiesRes.data);
-    console.log(propertiesRes.data);
+
+    const propertyCountRes = await axios.get(
+      `/sam/v1/property/auth/property-count`,
+      { headers: authHeader }
+    );
+    if (propertyCountRes.data) {
+      setPageCount(Math.ceil(propertyCountRes.data.count / propertiesPerPage));
+    }
+    if (propertiesRes.data) {
+      paginationRef.current.classList.remove("d-none");
+      setProperties(propertiesRes.data);
+      console.log(propertiesRes.data);
+    } else {
+      paginationRef.current.classList.add("d-none");
+    }
     setLoading(false);
+  };
+
+  // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
+  const handlePageClick = async (pageNumber) => {
+    // document.getElementById("properties").scrollIntoView(true);
+    let currentPage = pageNumber.selected + 1;
+    const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
+    setProperties(nextOrPrevPagePropertyData);
+  };
+
+  // Fetch more jobs on page click.
+  const fetchMoreProperties = async (currentPage) => {
+    const dataToPost = {
+      batch_number: currentPage,
+      batch_size: propertiesPerPage,
+    };
+    const propertiesRes = await axios.post(
+      `/sam/v1/property/auth/all-properties`,
+      dataToPost,
+      { headers: authHeader }
+    );
+    return propertiesRes.data;
   };
 
   // const deleteProperty = (propertyId) => {
@@ -74,10 +114,17 @@ const ViewAllProperties = () => {
                 </h1>
               </div>
             ) : (
-              <section className="admin-view-all-properties mb-5">
+              <section className="admin-view-all-properties">
                 <div className="container-fluid scrollable-right-div">
                   <div className="row">
                     {properties.map((property, Index) => {
+                      const {
+                        category,
+                        city_name,
+                        market_value,
+                        range,
+                        property_id,
+                      } = property;
                       return (
                         <div className="col-xl-3 col-md-6" key={Index}>
                           <div className="admin-property-card-wrapper">
@@ -89,42 +136,37 @@ const ViewAllProperties = () => {
                                 alt=""
                               />
                               <div className="card-body">
-                                <h3 className="card-title text-uppercase">
-                                  {/* {property.title} */}
-                                </h3>
                                 <span className="text-capitalize fw-bold">
-                                  {property.category}
+                                  {category}
                                 </span>
                                 <br />
                                 <span className="text-capitalize">
-                                  Location: {property.city_name}
+                                  Location: {city_name}
                                 </span>
                                 <br />
                                 <span className="text-capitalize">
                                   Market Value:{" "}
-                                  {(
-                                    parseInt(property.market_value) / 10000000
-                                  ).toFixed(1) + " Cr."}
+                                  {(parseInt(market_value) / 10000000).toFixed(
+                                    1
+                                  ) + " Cr."}
                                 </span>
                                 <br />
                                 <span className="text-capitalize">
                                   Range:{" "}
                                   {(
-                                    parseInt(property.range.split("-")[0]) /
-                                    10000000
+                                    parseInt(range.split("-")[0]) / 10000000
                                   ).toFixed(1) +
                                     " Cr." +
                                     " - " +
                                     (
-                                      parseInt(property.range.split("-")[1]) /
-                                      10000000
+                                      parseInt(range.split("-")[1]) / 10000000
                                     ).toFixed(1) +
                                     " Cr."}
                                 </span>
                                 <br />
                                 <div className="mt-3 d-flex">
                                   <NavLink
-                                    to={`/admin/property/properties/view-property/${property.property_id}`}
+                                    to={`/admin/property/properties/view-property/${property_id}`}
                                     className="btn btn-sm btn-outline-success property-button-wrapper"
                                   >
                                     <i className="bi bi-eye-fill"></i>
@@ -132,12 +174,7 @@ const ViewAllProperties = () => {
                                   <button className="mx-2 btn btn-sm btn-outline-primary property-button-wrapper">
                                     <i className="bi bi-pencil-fill"></i>
                                   </button>
-                                  <button
-                                    // onClick={() => {
-                                    //   deleteProperty(property._id);
-                                    // }}
-                                    className="btn btn-sm btn-outline-danger property-button-wrapper"
-                                  >
+                                  <button className="btn btn-sm btn-outline-danger property-button-wrapper">
                                     <i className="bi bi-trash-fill"></i>
                                   </button>
                                 </div>
@@ -151,6 +188,16 @@ const ViewAllProperties = () => {
                 </div>
               </section>
             )}
+            <div className="container d-none" ref={paginationRef}>
+              <div className="row">
+                <div className="col-12 mb-3">
+                  <Pagination
+                    handlePageClick={handlePageClick}
+                    pageCount={pageCount}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
