@@ -408,7 +408,7 @@ function Home() {
             <div className="row justify-content-center py-4">
               <div className="text-center">
                 <button
-                  className={`btn btn-md btn-primary common-btn-font ${
+                  className={`btn btn-lg btn-primary common-btn-font ${
                     Object.keys(dataToPost).length > 2 ? "" : "disabled"
                   }`}
                   onClick={getPropertyData}
@@ -454,7 +454,7 @@ function Home() {
                   return (
                     <div className="col-xl-3 col-lg-4 col-md-6" key={Index}>
                       <div className="property-card-wrapper">
-                        <div className="card mb-4">
+                        <div className="card mb-2">
                           <div className="top-line"></div>
                           <img
                             className="card-img-top"
@@ -508,8 +508,7 @@ function Home() {
                                 } Crores`}
                               </span>
                             </div>
-                            <br />
-                            <div>
+                            <div className="mt-2">
                               <button
                                 onClick={() => {
                                   viewCurrentProperty(
