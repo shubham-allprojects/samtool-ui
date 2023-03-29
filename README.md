@@ -37,3 +37,27 @@ docker-compose -f docker-compose.dev.yml up
                         ) : (
                           "Verify token"
                         )}
+
+   <div className="container d-none" ref={paginationRef}>
+            <div className="row">
+              <div className="col-12 mb-3">
+                <Pagination
+                  handlePageClick={handlePageClick}
+                  pageCount={pageCount}
+                />
+              </div>
+            </div>
+          </div>
+
+          await axios.post(apis.searchAPI, dataToPost).then((res) => {
+      // Store Searched results into propertyData useState.
+      setPropertyData(res.data);
+      setTimeout(() => {
+        setLoading(false);
+        if (res.data) {
+          paginationRef.current.classList.remove("d-none");
+        } else {
+          paginationRef.current.classList.add("d-none");
+        }
+      }, 100);
+    });

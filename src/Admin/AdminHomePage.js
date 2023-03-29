@@ -5,7 +5,7 @@ import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
 import { counter, rootTitle } from "../../src/CommonFunctions";
 import { Chart as CharJs, registerables } from "chart.js";
-import { Bar, Pie } from "react-chartjs-2";
+import { Line, Pie } from "react-chartjs-2";
 
 let orgCount = 0; // Default count of organizational users.
 let indiCount = 0; // Default count of individual users.
@@ -50,18 +50,15 @@ const AdminHomePage = () => {
     }
   };
 
-  const barChartData = {
-    labels: ["Users"],
+  const lineChartData = {
+    labels: ["Active", "Inactive"],
     datasets: [
       {
-        label: "Active",
-        data: [24],
-        backgroundColor: "rgb(13, 110, 253)",
-      },
-      {
-        label: "Inactive",
-        data: [8],
-        backgroundColor: "gray",
+        fill: true,
+        label: "Count",
+        data: [15, 21],
+        borderColor: "rgb(13, 110, 253)",
+        backgroundColor: "rgba(13, 110, 253, 0.5)",
       },
     ],
   };
@@ -82,17 +79,17 @@ const AdminHomePage = () => {
     plugins: {
       title: {
         display: true,
-        text: "Users",
+        text: "Users Count",
       },
     },
   };
 
-  const barChartOptions = {
+  const lineChartOptions = {
     responsive: true,
     plugins: {
       title: {
         display: true,
-        text: "Users Status",
+        text: "Status Of Users",
       },
     },
   };
@@ -214,7 +211,10 @@ const AdminHomePage = () => {
                 </div>
                 <div className="col-xl-8 mt-xl-0 mt-4">
                   <div className="card chart-wrapper">
-                    <Bar data={barChartData} options={barChartOptions}></Bar>
+                    <Line
+                      data={lineChartData}
+                      options={lineChartOptions}
+                    ></Line>
                   </div>
                 </div>
               </div>
