@@ -7,6 +7,7 @@ import Pagination from "../../Pagination";
 import CommonSpinner from "../../CommonSpinner";
 import { useNavigate } from "react-router-dom";
 import ViewPropertyResults from "../ViewPropertyResults";
+import { toast } from "react-toastify";
 
 function Home() {
   // useState to store data of each field e.g all states, all banks etc.
@@ -237,6 +238,7 @@ function Home() {
           });
       } catch (error) {}
     } else {
+      toast.warn("Please login to view property details");
       goTo("/login");
     }
   };
