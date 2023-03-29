@@ -442,6 +442,14 @@ function Home() {
                 </div>
               ) : (
                 propertyData.map((property, Index) => {
+                  const {
+                    title,
+                    count,
+                    category,
+                    city_name,
+                    market_value,
+                    range,
+                  } = property;
                   return (
                     <div className="col-xl-3 col-lg-4 col-md-6" key={Index}>
                       <div className="property-card-wrapper">
@@ -454,30 +462,27 @@ function Home() {
                           />
                           <div className="card-body">
                             <h3 className="card-title text-uppercase">
-                              {property.title}
+                              {title}
                             </h3>
                             <span className="text-capitalize fw-bold">
-                              {property.count + " " + property.category}
+                              {count + " " + category}
                             </span>
                             <br />
                             <span className="text-capitalize">
-                              Location: {property.city_name}
+                              Location: {city_name}
                             </span>
                             <br />
                             <span className="text-capitalize">
                               Market Value:{" "}
-                              {parseInt(property.market_value) / 10000000 +
-                                " Cr."}
+                              {parseInt(market_value) / 10000000 + " Cr."}
                             </span>
                             <br />
                             <span className="text-capitalize">
                               Range:{" "}
-                              {parseInt(property.range.split("-")[0]) /
-                                10000000 +
+                              {parseInt(range.split("-")[0]) / 10000000 +
                                 " Cr." +
                                 " - " +
-                                parseInt(property.range.split("-")[1]) /
-                                  10000000 +
+                                parseInt(range.split("-")[1]) / 10000000 +
                                 " Cr."}
                             </span>
                             <br />
@@ -485,9 +490,9 @@ function Home() {
                               <button
                                 onClick={() => {
                                   viewCurrentProperty(
-                                    property.category,
-                                    property.city_name,
-                                    property.range
+                                    category,
+                                    city_name,
+                                    range
                                   );
                                 }}
                                 className="btn btn-primary common-btn-font"
@@ -537,6 +542,28 @@ function Home() {
                 <div className="row">
                   {selectedPropertyResults ? (
                     selectedPropertyResults.map((property, Index) => {
+                      const {
+                        property_id,
+                        type_name,
+                        market_price,
+                        ready_reckoner_price,
+                        expected_price,
+                        status,
+                        saleable_area,
+                        carpet_area,
+                        is_sold,
+                        is_available_for_sale,
+                        completion_date,
+                        purchase_date,
+                        mortgage_date,
+                        Flat_No,
+                        society_name,
+                        plot_no,
+                        locality,
+                        city_name,
+                        PIN,
+                        state_name,
+                      } = property;
                       return (
                         <>
                           <div className="p-0 fw-bold h4 text-primary">
@@ -544,20 +571,20 @@ function Home() {
                           </div>
                           <div
                             className="col-12 border bg-light mb-4 p-0"
-                            key={property.property_id}
+                            key={property_id}
                           >
                             <div className="container-fluid">
                               <div className="row p-2">
                                 <div className="col-lg-4 col-md-5 p-0">
                                   <div
-                                    id={`carouselExampleIndicators-${property.property_id}`}
+                                    id={`carouselExampleIndicators-${property_id}`}
                                     className="carousel slide"
                                     data-bs-ride="carousel"
                                   >
                                     <div className="carousel-indicators property-slider-indicators">
                                       <button
                                         type="button"
-                                        data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
+                                        data-bs-target={`#carouselExampleIndicators-${property_id}`}
                                         data-bs-slide-to="0"
                                         className="active"
                                         aria-current="true"
@@ -565,13 +592,13 @@ function Home() {
                                       ></button>
                                       <button
                                         type="button"
-                                        data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
+                                        data-bs-target={`#carouselExampleIndicators-${property_id}`}
                                         data-bs-slide-to="1"
                                         aria-label="Slide 2"
                                       ></button>
                                       <button
                                         type="button"
-                                        data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
+                                        data-bs-target={`#carouselExampleIndicators-${property_id}`}
                                         data-bs-slide-to="2"
                                         aria-label="Slide 3"
                                       ></button>
@@ -608,7 +635,7 @@ function Home() {
                                     <button
                                       className="carousel-control-prev"
                                       type="button"
-                                      data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
+                                      data-bs-target={`#carouselExampleIndicators-${property_id}`}
                                       data-bs-slide="prev"
                                     >
                                       <span
@@ -619,7 +646,7 @@ function Home() {
                                     <button
                                       className="carousel-control-next"
                                       type="button"
-                                      data-bs-target={`#carouselExampleIndicators-${property.property_id}`}
+                                      data-bs-target={`#carouselExampleIndicators-${property_id}`}
                                       data-bs-slide="next"
                                     >
                                       <span
@@ -637,7 +664,7 @@ function Home() {
                                           Property Type
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.type_name}
+                                          {type_name}
                                         </div>
                                       </div>
                                       <div className="col-xl-3 col-lg-4 col-6 mt-3 mt-md-0">
@@ -645,7 +672,7 @@ function Home() {
                                           Market Price
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.market_price} Rs.
+                                          {market_price} Rs.
                                         </div>
                                       </div>
                                       <div className="col-xl-3 col-lg-4 col-6 mt-lg-0 mt-3">
@@ -653,7 +680,7 @@ function Home() {
                                           Ready Reckoner Price
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.ready_reckoner_price} Rs.
+                                          {ready_reckoner_price} Rs.
                                         </div>
                                       </div>
                                       <div className="col-xl-3 col-lg-4 col-6 mt-xl-0 mt-3">
@@ -661,7 +688,7 @@ function Home() {
                                           Expected Price
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.expected_price} Rs.
+                                          {expected_price} Rs.
                                         </div>
                                       </div>
                                       <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
@@ -669,7 +696,7 @@ function Home() {
                                           Status
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.status}
+                                          {status}
                                         </div>
                                       </div>
                                       <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
@@ -677,7 +704,7 @@ function Home() {
                                           Saleable Area
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.saleable_area}
+                                          {saleable_area}
                                         </div>
                                       </div>
                                       <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
@@ -685,7 +712,7 @@ function Home() {
                                           Carpet Area
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.carpet_area}
+                                          {carpet_area}
                                         </div>
                                       </div>
                                       <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
@@ -710,14 +737,14 @@ function Home() {
                                       </div>
                                       <div
                                         className={`${
-                                          property.is_sold === 1 ? "d-none" : ""
+                                          is_sold === 1 ? "d-none" : ""
                                         } col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3`}
                                       >
                                         <small className="text-muted">
                                           Is Available For Sale?
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.is_available_for_sale === 1
+                                          {is_available_for_sale === 1
                                             ? "Yes"
                                             : "No"}
                                         </div>
@@ -727,8 +754,8 @@ function Home() {
                                           Completion Date
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.completion_date
-                                            ? property.completion_date
+                                          {completion_date
+                                            ? completion_date
                                                 .split(" ")[0]
                                                 .split("-")
                                                 .reverse()
@@ -741,8 +768,8 @@ function Home() {
                                           Purchase Date
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.purchase_date
-                                            ? property.purchase_date
+                                          {purchase_date
+                                            ? purchase_date
                                                 .split(" ")[0]
                                                 .split("-")
                                                 .reverse()
@@ -755,8 +782,8 @@ function Home() {
                                           Mortgage Date
                                         </small>
                                         <div className="common-btn-font">
-                                          {property.mortgage_date
-                                            ? property.mortgage_date
+                                          {mortgage_date
+                                            ? mortgage_date
                                                 .split(" ")[0]
                                                 .split("-")
                                                 .reverse()
@@ -773,22 +800,18 @@ function Home() {
                                         </small>
                                         <div className="common-btn-font">
                                           {`${
-                                            property.Flat_No
-                                              ? `Flat No:  ${property.Flat_No}, `
+                                            Flat_No
+                                              ? `Flat No:  ${Flat_No}, `
                                               : ""
                                           } ${
-                                            property.society_name
-                                              ? `Society Name:  ${property.society_name}, `
+                                            society_name
+                                              ? `Society Name:  ${society_name}, `
                                               : ""
                                           } ${
-                                            property.plot_no
-                                              ? `Plot No:  ${property.plot_no}, `
+                                            plot_no
+                                              ? `Plot No:  ${plot_no}, `
                                               : ""
-                                          }Locality: ${property.locality}, ${
-                                            property.city_name
-                                          } - ${property.PIN}, ${
-                                            property.state_name
-                                          }`}
+                                          }Locality: ${locality}, ${city_name} - ${PIN}, ${state_name}`}
                                         </div>
                                       </div>
                                     </div>
