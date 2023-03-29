@@ -465,29 +465,51 @@ function Home() {
                             <h3 className="card-title text-uppercase">
                               {title}
                             </h3>
-                            <span className="text-capitalize fw-bold">
-                              {count + " " + category}
-                            </span>
+                            <div className="text-capitalize text-primary fw-bold">
+                              {`${
+                                count > 1
+                                  ? count + " Properties"
+                                  : count + " Property"
+                              }`}
+                            </div>
+                            <div className="text-capitalize">
+                              <span>Type: </span>
+                              <span className="common-btn-font">
+                                {category}
+                              </span>
+                            </div>
+                            <div className="text-capitalize">
+                              <span>Location: </span>
+                              <span className="common-btn-font">
+                                {city_name}
+                              </span>
+                            </div>
+                            <div className="text-capitalize">
+                              <span>Market Price: </span>
+                              <span className="common-btn-font">
+                                <i className="bi bi-currency-rupee"></i>
+                                {`${parseInt(market_value) / 10000000} Crores`}
+                              </span>
+                            </div>
+
+                            <div className="text-capitalize">
+                              <span>Range: </span>
+                              <span className="common-btn-font">
+                                <i className="bi bi-currency-rupee"></i>
+                                {`${
+                                  parseInt(range.split("-")[0]) / 10000000
+                                } Crores`}
+                              </span>
+                              <span className="mx-2 common-btn-font">-</span>
+                              <span className="common-btn-font">
+                                <i className="bi bi-currency-rupee"></i>
+                                {`${
+                                  parseInt(range.split("-")[1]) / 10000000
+                                } Crores`}
+                              </span>
+                            </div>
                             <br />
-                            <span className="text-capitalize">
-                              Location: {city_name}
-                            </span>
-                            <br />
-                            <span className="text-capitalize">
-                              Market Value:{" "}
-                              {parseInt(market_value) / 10000000 + " Cr."}
-                            </span>
-                            <br />
-                            <span className="text-capitalize">
-                              Range:{" "}
-                              {parseInt(range.split("-")[0]) / 10000000 +
-                                " Cr." +
-                                " - " +
-                                parseInt(range.split("-")[1]) / 10000000 +
-                                " Cr."}
-                            </span>
-                            <br />
-                            <div className="mt-3">
+                            <div>
                               <button
                                 onClick={() => {
                                   viewCurrentProperty(

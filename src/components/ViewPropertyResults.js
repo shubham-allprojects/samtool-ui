@@ -132,7 +132,8 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                             <div className="col-xl-3 col-lg-4 col-6 mt-3 mt-md-0">
                               <small className="text-muted">Market Price</small>
                               <div className="common-btn-font">
-                                {market_price} Rs.
+                                <i className="bi bi-currency-rupee"></i>
+                                {parseInt(market_price) / 10000000} Crore
                               </div>
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-lg-0 mt-3">
@@ -140,7 +141,9 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 Ready Reckoner Price
                               </small>
                               <div className="common-btn-font">
-                                {ready_reckoner_price} Rs.
+                                <i className="bi bi-currency-rupee"></i>
+                                {parseInt(ready_reckoner_price) / 10000000}{" "}
+                                Crore
                               </div>
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-xl-0 mt-3">
@@ -148,7 +151,8 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 Expected Price
                               </small>
                               <div className="common-btn-font">
-                                {expected_price} Rs.
+                                <i className="bi bi-currency-rupee"></i>
+                                {parseInt(expected_price) / 10000000} Crore
                               </div>
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
