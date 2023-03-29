@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HomeAboutUs from "./HomeAboutUs";
 import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
-import { useState } from "react";
 import { rootTitle } from "../../CommonFunctions";
 import Pagination from "../../Pagination";
 import CommonSpinner from "../../CommonSpinner";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   // useState to store data of each field e.g all states, all banks etc.
@@ -16,7 +16,8 @@ function Home() {
     assetCategory: "",
     banks: "",
   });
-
+  const data = JSON.parse(localStorage.getItem("data"));
+  const goTo = useNavigate();
   const [selectedPropertyResults, setSelectedPropertyResults] = useState([]);
 
   // useState to store values of each select box for search functionality.
@@ -210,29 +211,33 @@ function Home() {
 
   let nav = document.querySelector(".navbar");
   const viewCurrentProperty = async (type, city, range) => {
-    viewCurrentPropertyResultsRef.current.classList.remove("d-none");
-    window.scrollTo(0, 0);
-    nav.style.background =
-      "linear-gradient(0deg, rgb(2, 77, 251) 0%, rgb(0, 157, 255) 100%)";
-    homePageRef.current.classList.add("d-none");
-    let minValueOfproperty = parseInt(range.split("-")[0]);
-    let maxValueOfproperty = parseInt(range.split("-")[1] + "00");
-    let dataToPost = {
-      property_type: type,
-      city_name: city,
-      minvalue: minValueOfproperty,
-      maxvalue: maxValueOfproperty,
-    };
-    console.log(dataToPost);
-    try {
-      await axios
-        .post(`/sam/v1/property/view-properties`, dataToPost)
-        .then((res) => {
-          setSelectedPropertyResults(res.data);
-          console.log(res.data);
-          nav.classList.remove("navbar-lightBg");
-        });
-    } catch (error) {}
+    if (data) {
+      viewCurrentPropertyResultsRef.current.classList.remove("d-none");
+      window.scrollTo(0, 0);
+      nav.style.background =
+        "linear-gradient(0deg, rgb(2, 77, 251) 0%, rgb(0, 157, 255) 100%)";
+      homePageRef.current.classList.add("d-none");
+      let minValueOfproperty = parseInt(range.split("-")[0]);
+      let maxValueOfproperty = parseInt(range.split("-")[1] + "00");
+      let dataToPost = {
+        property_type: type,
+        city_name: city,
+        minvalue: minValueOfproperty,
+        maxvalue: maxValueOfproperty,
+      };
+      console.log(dataToPost);
+      try {
+        await axios
+          .post(`/sam/v1/property/view-properties`, dataToPost)
+          .then((res) => {
+            setSelectedPropertyResults(res.data);
+            console.log(res.data);
+            nav.classList.remove("navbar-lightBg");
+          });
+      } catch (error) {}
+    } else {
+      goTo("/login");
+    }
   };
 
   const backToSearchResults = () => {
