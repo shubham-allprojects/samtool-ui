@@ -4,7 +4,7 @@ import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
 import { useState } from "react";
 import { rootTitle } from "../../CommonFunctions";
-import HomePropertyPagination from "./HomePropertyPagination";
+import Pagination from "../../Pagination";
 import CommonSpinner from "../../CommonSpinner";
 
 function Home() {
@@ -504,7 +504,7 @@ function Home() {
           <div className="container d-none" ref={paginationRef}>
             <div className="row">
               <div className="col-12 mb-3">
-                <HomePropertyPagination
+                <Pagination
                   handlePageClick={handlePageClick}
                   pageCount={pageCount}
                 />

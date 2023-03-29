@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-const HomePropertyPagination = ({ pageCount, handlePageClick }) => {
+const Pagination = ({ pageCount, handlePageClick }) => {
   return (
     <ReactPaginate
       containerClassName={"pagination d-flex justify-content-center"}
@@ -25,4 +25,4 @@ const HomePropertyPagination = ({ pageCount, handlePageClick }) => {
   );
 };
 
-export default HomePropertyPagination;
+export default Pagination;
