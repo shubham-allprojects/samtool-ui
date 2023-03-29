@@ -24,11 +24,13 @@ const ViewAllProperties = () => {
 
   const getPropertiesFromApi = async () => {
     setLoading(true);
+    // Hide pagination while loading.
     paginationRef.current.classList.add("d-none");
     const dataToPost = {
       batch_number: 1,
       batch_size: propertiesPerPage,
     };
+
     const propertiesRes = await axios.post(
       `/sam/v1/property/auth/all-properties`,
       dataToPost,
@@ -39,10 +41,12 @@ const ViewAllProperties = () => {
       `/sam/v1/property/auth/property-count`,
       { headers: authHeader }
     );
+
     if (propertyCountRes.data) {
       setPageCount(Math.ceil(propertyCountRes.data.count / propertiesPerPage));
     }
-    if (propertiesRes.data) {
+
+    if (propertiesRes.data.length > 0) {
       paginationRef.current.classList.remove("d-none");
       setProperties(propertiesRes.data);
       console.log(propertiesRes.data);
@@ -54,7 +58,7 @@ const ViewAllProperties = () => {
 
   // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
   const handlePageClick = async (pageNumber) => {
-    // document.getElementById("properties").scrollIntoView(true);
+    document.getElementById("admin-view-properties-title").scrollIntoView(true);
     let currentPage = pageNumber.selected + 1;
     const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
     setProperties(nextOrPrevPagePropertyData);
@@ -94,7 +98,12 @@ const ViewAllProperties = () => {
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
             <BreadCrumb />
-            <h1 className="text-center text-primary fw-bold">Properties</h1>
+            <h1
+              className="text-center text-primary fw-bold"
+              id="admin-view-properties-title"
+            >
+              Properties
+            </h1>
             <hr />
             {loading ? (
               <div
@@ -115,7 +124,7 @@ const ViewAllProperties = () => {
               </div>
             ) : (
               <section className="admin-view-all-properties">
-                <div className="container-fluid scrollable-right-div">
+                <div className="container-fluid">
                   <div className="row">
                     {properties.map((property, Index) => {
                       const {
