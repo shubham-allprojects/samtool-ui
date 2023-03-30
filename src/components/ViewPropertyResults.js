@@ -242,7 +242,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                             <div className="col-12">
                               <hr />
                             </div>
-                            <div className="col-xl-5 col-lg-7 col-md-10">
+                            <div className="col-xl-6 col-lg-10">
                               <small className="text-muted">Address</small>
                               <div className="common-btn-font">
                                 {`${Flat_No ? `Flat No:  ${Flat_No}, ` : ""} ${
