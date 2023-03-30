@@ -21,6 +21,8 @@ function Home() {
   const data = JSON.parse(localStorage.getItem("data"));
   const goTo = useNavigate();
   const [selectedPropertyResults, setSelectedPropertyResults] = useState([]);
+  const homePageRef = useRef();
+  const viewCurrentPropertyResultsRef = useRef();
 
   // useState to store values of each select box for search functionality.
   const [dataToPost, setDataToPost] = useState({
@@ -257,9 +259,6 @@ function Home() {
     changeNavBarColor();
     // eslint-disable-next-line
   }, []);
-
-  const homePageRef = useRef();
-  const viewCurrentPropertyResultsRef = useRef();
 
   return (
     <Layout>
