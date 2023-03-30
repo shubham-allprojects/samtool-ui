@@ -66,12 +66,7 @@ const BreadCrumb = ({
             </>
           ) : isPropertyPageActive ? (
             <>
-              <NavLink
-                to="/admin/property/properties"
-                className="breadcrumb-item"
-              >
-                Properties
-              </NavLink>
+              <li className="breadcrumb-item">Properties</li>
               {isAddPropertyPageActive ? (
                 <li className="breadcrumb-item">Add</li>
               ) : propertyId ? (

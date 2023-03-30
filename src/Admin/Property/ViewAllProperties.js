@@ -113,6 +113,11 @@ const ViewAllProperties = () => {
     } catch (error) {}
   };
 
+  const backToAllPropertiesPage = () => {
+    viewCurrentPropertyResultsRef.current.classList.add("d-none");
+    allPropertiesPageRef.current.classList.remove("d-none");
+  };
+
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
     getPropertiesFromApi();
@@ -123,9 +128,12 @@ const ViewAllProperties = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
+          <div
+            className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0"
+            ref={allPropertiesPageRef}
+          >
             <BreadCrumb />
-            <div ref={allPropertiesPageRef}>
+            <>
               <h1 className="text-center text-primary fw-bold">Properties</h1>
               <hr />
               {loading ? (
@@ -249,29 +257,31 @@ const ViewAllProperties = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div
-              ref={viewCurrentPropertyResultsRef}
-              className="d-none min-100vh"
-            >
+            </>
+          </div>
+          <div
+            className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0 d-none"
+            ref={viewCurrentPropertyResultsRef}
+          >
+            <>
               <div className="container-fluid">
                 <div className="row">
                   <div className="card border-0">
-                    {/* <div className="mb-3 mb-md-4">
+                    <div className="my-4">
                       <button
                         className="btn btn-sm btn-outline-primary"
-                        onClick={backToSearchResults}
+                        onClick={backToAllPropertiesPage}
                       >
                         <i className="bi bi-arrow-left"></i> Back
                       </button>
-                    </div> */}
+                    </div>
                     <ViewPropertyResults
                       selectedPropertyResults={selectedPropertyResults}
                     />
                   </div>
                 </div>
               </div>
-            </div>
+            </>
           </div>
         </div>
       </div>
