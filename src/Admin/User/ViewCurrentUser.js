@@ -105,7 +105,6 @@ const ViewCurrentUser = () => {
   };
 
   const deleteRole = (data) => {
-    console.log(data, headers);
     let url = "/sam/v1/user-registration/auth/remove-role";
     axios.delete(url, {
       headers: headers,

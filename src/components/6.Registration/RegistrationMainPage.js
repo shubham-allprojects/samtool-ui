@@ -598,7 +598,6 @@ const Registration = () => {
     fieldsToDelete.forEach((field) => {
       delete formData[field];
     });
-    console.log(formData);
 
     if (addressValues.labelValue === "Add Details") {
       setAlertDetails({
@@ -656,7 +655,6 @@ const Registration = () => {
     fieldsToDelete.forEach((field) => {
       delete formData[field];
     });
-    console.log(formData);
 
     if (addressValues.labelValue === "Add Details") {
       setAlertDetails({

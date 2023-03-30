@@ -104,7 +104,6 @@ const EditUserDetails = () => {
       await axios
         .get(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
         .then(async (res) => {
-          console.log(res.data);
           const [, url] = setHeaderAndUrl();
           const { individual_user, org_user, user_details } = res.data;
           if (individual_user) {
@@ -334,7 +333,6 @@ const EditUserDetails = () => {
       state: state_name,
       email: email,
     };
-    console.log(dataToPost);
     setLoading(true);
     try {
       await axios

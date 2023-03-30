@@ -56,7 +56,6 @@ const Contact = () => {
     setLoading(true);
     e.target.reset();
     toast.success("Message sent successfully");
-    console.log(formData);
     setLoading(false);
     setCaptchaVerified(false);
   };

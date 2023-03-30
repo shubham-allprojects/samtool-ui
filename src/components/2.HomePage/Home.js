@@ -229,13 +229,11 @@ function Home() {
         minvalue: minValueOfproperty,
         maxvalue: maxValueOfproperty,
       };
-      console.log(dataToPost);
       try {
         await axios
           .post(`/sam/v1/property/view-properties`, dataToPost)
           .then((res) => {
             setSelectedPropertyResults(res.data);
-            console.log(res.data);
             nav.classList.remove("navbar-lightBg");
           });
       } catch (error) {}

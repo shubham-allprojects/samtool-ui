@@ -53,7 +53,6 @@ const ViewAllProperties = () => {
     if (propertiesRes.data.length > 0) {
       paginationRef.current.classList.remove("d-none");
       setProperties(propertiesRes.data);
-      console.log(propertiesRes.data);
     } else {
       paginationRef.current.classList.add("d-none");
     }
@@ -102,13 +101,11 @@ const ViewAllProperties = () => {
       minvalue: minValueOfproperty,
       maxvalue: maxValueOfproperty,
     };
-    console.log(dataToPost);
     try {
       await axios
         .post(`/sam/v1/property/view-properties`, dataToPost)
         .then((res) => {
           setSelectedPropertyResults(res.data);
-          console.log(res.data);
         });
     } catch (error) {}
   };
