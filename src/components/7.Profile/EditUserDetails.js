@@ -12,7 +12,9 @@ const EditUserDetails = () => {
   const [userType, setUserType] = useState("");
 
   // To store updated user details.
-  const [commonUserDetails, setCommonUserDetails] = useState({});
+  const [commonUserDetails, setCommonUserDetails] = useState({
+    address: "Not Available",
+  });
 
   // Object destructuring.
   const {
@@ -102,6 +104,7 @@ const EditUserDetails = () => {
       await axios
         .get(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
         .then(async (res) => {
+          console.log(res.data);
           const [, url] = setHeaderAndUrl();
           const { individual_user, org_user, user_details } = res.data;
           if (individual_user) {
@@ -144,7 +147,6 @@ const EditUserDetails = () => {
             state_id,
             zip,
             email_address,
-            address,
           } = user_details;
           setUserType(user_type);
           setIdOfState(parseInt(state_id));
@@ -230,8 +232,6 @@ const EditUserDetails = () => {
       if (idOfState !== 0 && value !== "") {
         zipValidationByState(value, idOfState, customer_reg_url);
       }
-    } else if (name === "address") {
-      setCommonUserDetails({ ...commonUserDetails, [name]: value });
     } else if (name === "city") {
       setCommonUserDetails({ ...commonUserDetails, [name]: value });
     } else if (name === "locality") {
@@ -524,23 +524,6 @@ const EditUserDetails = () => {
                       </h6>
                     </div>
 
-                    <div className="col-xl-4 col-lg-4 col-md-6 col-12">
-                      <div className="form-group mb-3">
-                        <label htmlFor="address" className="form-label">
-                          Block / House No.
-                        </label>
-                        <input
-                          onChange={onInputChange}
-                          name="address"
-                          type="text"
-                          className={`form-control ${editClassName}`}
-                          id="address"
-                          defaultValue={address}
-                          readOnly={isReadOnly}
-                          required
-                        />
-                      </div>
-                    </div>
                     <div className="col-xl-4 col-lg-4 col-md-6  col-12">
                       <div className="form-group mb-3">
                         <label htmlFor="locality" className="form-label">
