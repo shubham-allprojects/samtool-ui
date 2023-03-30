@@ -29,7 +29,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
               state_name,
             } = property;
             return (
-              <>
+              <div key={Index}>
                 <div className="p-0 fw-bold h4 text-primary">
                   Property: {Index + 1}
                 </div>
@@ -260,7 +260,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                     </div>
                   </div>
                 </div>
-              </>
+              </div>
             );
           })
         ) : (

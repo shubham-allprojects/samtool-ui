@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 // import { toast } from "react-toastify";
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../../components/1.CommonLayout/Layout";
@@ -8,6 +8,7 @@ import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
 import CommonSpinner from "../../CommonSpinner";
 import Pagination from "../../Pagination";
+import ViewPropertyResults from "../../components/ViewPropertyResults";
 
 let authHeader = "";
 let propertiesPerPage = 4;
@@ -19,7 +20,7 @@ const ViewAllProperties = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedPropertyResults, setSelectedPropertyResults] = useState([]);
-  const AllPropertiesPageRef = useRef();
+  const allPropertiesPageRef = useRef();
   const viewCurrentPropertyResultsRef = useRef();
 
   const [pageCount, setPageCount] = useState(0);
@@ -90,9 +91,9 @@ const ViewAllProperties = () => {
   // };
 
   const viewCurrentProperty = async (type, city, range) => {
-    // viewCurrentPropertyResultsRef.current.classList.remove("d-none");
+    viewCurrentPropertyResultsRef.current.classList.remove("d-none");
     window.scrollTo(0, 0);
-    // homePageRef.current.classList.add("d-none");
+    allPropertiesPageRef.current.classList.add("d-none");
     let minValueOfproperty = parseInt(range.split("-")[0]);
     let maxValueOfproperty = parseInt(range.split("-")[1]);
     let dataToPost = {
@@ -124,7 +125,7 @@ const ViewAllProperties = () => {
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
             <BreadCrumb />
-            <div ref={AllPropertiesPageRef}>
+            <div ref={allPropertiesPageRef}>
               <h1 className="text-center text-primary fw-bold">Properties</h1>
               <hr />
               {loading ? (
@@ -149,13 +150,8 @@ const ViewAllProperties = () => {
                   <div className="container-fluid">
                     <div className="row">
                       {properties.map((property, Index) => {
-                        const {
-                          category,
-                          city_name,
-                          market_value,
-                          range,
-                          property_id,
-                        } = property;
+                        const { category, city_name, market_value, range } =
+                          property;
                         return (
                           <div className="col-xl-3 col-md-6" key={Index}>
                             <div className="admin-property-card-wrapper">
@@ -208,12 +204,12 @@ const ViewAllProperties = () => {
                                     </span>
                                   </div>
                                   <div className="mt-3 d-flex">
-                                    <NavLink
+                                    {/* <NavLink
                                       to={`/admin/property/properties/view-property/${property_id}`}
                                       className="btn btn-sm btn-outline-success property-button-wrapper"
                                     >
                                       <i className="bi bi-eye-fill"></i>
-                                    </NavLink>
+                                    </NavLink> */}
                                     <button
                                       className="btn btn-sm btn-outline-success property-button-wrapper"
                                       onClick={() => {
@@ -249,6 +245,28 @@ const ViewAllProperties = () => {
                     <Pagination
                       handlePageClick={handlePageClick}
                       pageCount={pageCount}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              ref={viewCurrentPropertyResultsRef}
+              className="d-none min-100vh"
+            >
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="card border-0">
+                    {/* <div className="mb-3 mb-md-4">
+                      <button
+                        className="btn btn-sm btn-outline-primary"
+                        onClick={backToSearchResults}
+                      >
+                        <i className="bi bi-arrow-left"></i> Back
+                      </button>
+                    </div> */}
+                    <ViewPropertyResults
+                      selectedPropertyResults={selectedPropertyResults}
                     />
                   </div>
                 </div>
