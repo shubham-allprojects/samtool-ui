@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
 const allowedExtensions = ["csv"];
-const chunkSize = 0.6666666667 * 1024;
+const chunkSize = 1 * 1024;
 
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
