@@ -220,7 +220,7 @@ function Home() {
         "linear-gradient(0deg, rgb(2, 77, 251) 0%, rgb(0, 157, 255) 100%)";
       homePageRef.current.classList.add("d-none");
       let minValueOfproperty = parseInt(range.split("-")[0]);
-      let maxValueOfproperty = parseInt(range.split("-")[1] + "00");
+      let maxValueOfproperty = parseInt(range.split("-")[1]);
       let dataToPost = {
         property_type: type,
         city_name: city,

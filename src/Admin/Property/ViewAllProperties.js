@@ -18,6 +18,7 @@ const ViewAllProperties = () => {
   }
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedPropertyResults, setSelectedPropertyResults] = useState([]);
 
   const [pageCount, setPageCount] = useState(0);
   const paginationRef = useRef();
@@ -85,6 +86,29 @@ const ViewAllProperties = () => {
   //   toast.success(`Property with ID: ${propertyId} deleted Successfuly`);
   //   setProperties(propertiesToShow);
   // };
+
+  const viewCurrentProperty = async (type, city, range) => {
+    // viewCurrentPropertyResultsRef.current.classList.remove("d-none");
+    window.scrollTo(0, 0);
+    // homePageRef.current.classList.add("d-none");
+    let minValueOfproperty = parseInt(range.split("-")[0]);
+    let maxValueOfproperty = parseInt(range.split("-")[1]);
+    let dataToPost = {
+      property_type: type,
+      city_name: city,
+      minvalue: minValueOfproperty,
+      maxvalue: maxValueOfproperty,
+    };
+    console.log(dataToPost);
+    try {
+      await axios
+        .post(`/sam/v1/property/view-properties`, dataToPost)
+        .then((res) => {
+          setSelectedPropertyResults(res.data);
+          console.log(res.data);
+        });
+    } catch (error) {}
+  };
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
@@ -187,6 +211,18 @@ const ViewAllProperties = () => {
                                   >
                                     <i className="bi bi-eye-fill"></i>
                                   </NavLink>
+                                  <button
+                                    className="btn btn-sm btn-outline-success property-button-wrapper"
+                                    onClick={() => {
+                                      viewCurrentProperty(
+                                        category,
+                                        city_name,
+                                        range
+                                      );
+                                    }}
+                                  >
+                                    <i className="bi bi-eye-fill"></i>
+                                  </button>
                                   <button className="mx-2 btn btn-sm btn-outline-primary property-button-wrapper">
                                     <i className="bi bi-pencil-fill"></i>
                                   </button>
