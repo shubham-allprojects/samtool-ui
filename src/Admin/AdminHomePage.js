@@ -81,8 +81,8 @@ const AdminHomePage = () => {
       {
         label: "Count",
         data: [45, 20],
-        backgroundColor: ["rgba(255, 165, 0, 0.5)", "rgba(13, 110, 253, 0.5)"],
-        borderColor: ["orange", "rgb(13, 110, 253)"],
+        backgroundColor: ["rgba(13, 110, 253, 0.5)", "rgba(255, 165, 0, 0.5)"],
+        borderColor: ["rgb(13, 110, 253)", "orange"],
       },
     ],
   };
@@ -93,8 +93,8 @@ const AdminHomePage = () => {
       {
         label: "Users",
         data: [38, 10],
-        backgroundColor: ["rgba(255, 165, 0, 0.5)", "rgba(13, 110, 253, 0.5)"],
-        borderColor: ["orange", "rgb(13, 110, 253)"],
+        backgroundColor: ["rgba(13, 110, 253, 0.5)", "rgba(255, 165, 0, 0.5)"],
+        borderColor: ["rgb(13, 110, 253)", "orange"],
       },
     ],
   };

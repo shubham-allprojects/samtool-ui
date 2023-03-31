@@ -297,7 +297,7 @@ const Profile = () => {
                     Quick Access
                   </h3>
                   <div className="profile-top-hr my-3" />
-                  <div className="row justify-content-center">
+                  <div className="row justify-content-md-start justify-content-center">
                     <div className="col-md-6">
                       <NavLink
                         to="/reset-password"
@@ -312,6 +312,18 @@ const Profile = () => {
                         className="card py-2 profile-inner-card text-decoration-none"
                       >
                         <h6 className="m-0">EDIT PROFILE</h6>
+                      </NavLink>
+                    </div>
+                    <div
+                      className={`col-md-6 mt-2 mt-md-4 ${
+                        userRole === 1 ? "" : "d-none"
+                      }`}
+                    >
+                      <NavLink
+                        to="/admin"
+                        className="card py-2 profile-inner-card text-decoration-none"
+                      >
+                        <h6 className="m-0">Administration</h6>
                       </NavLink>
                     </div>
                   </div>
