@@ -75,58 +75,14 @@ const AdminHomePage = () => {
     }
   };
 
-  const lineChart2Data = {
-    labels: ["Active", "Inactive"],
-    datasets: [
-      {
-        fill: true,
-        label: "Count",
-        data: [15, 21],
-        borderColor: "rgb(13, 110, 253)",
-        backgroundColor: "rgba(13, 110, 253, 0.5)",
-      },
-    ],
-  };
-
-  const pieChartData = {
+  const pieChart1Data = {
     labels: ["Individual", "Organizational"],
     datasets: [
       {
         label: "Count",
         data: [45, 20],
-        backgroundColor: ["orange", "rgb(13, 110, 253)"],
-      },
-    ],
-  };
-
-  const barChartData = {
-    labels: ["Users"],
-    datasets: [
-      {
-        label: "Individual",
-        data: [45],
-        backgroundColor: ["rgb(13, 110, 253)"],
-      },
-      {
-        label: "Organizational",
-        data: [20],
-        backgroundColor: ["orange"],
-      },
-    ],
-  };
-
-  const barChart2Data = {
-    labels: ["Users"],
-    datasets: [
-      {
-        label: "Active",
-        data: [38],
-        backgroundColor: ["rgb(13, 110, 253)"],
-      },
-      {
-        label: "Inactive",
-        data: [10],
-        backgroundColor: ["orange"],
+        backgroundColor: ["rgba(255, 165, 0, 0.5)", "rgba(13, 110, 253, 0.5)"],
+        borderColor: ["orange", "rgb(13, 110, 253)"],
       },
     ],
   };
@@ -137,7 +93,61 @@ const AdminHomePage = () => {
       {
         label: "Users",
         data: [38, 10],
-        backgroundColor: ["orange", "rgb(13, 110, 253)"],
+        backgroundColor: ["rgba(255, 165, 0, 0.5)", "rgba(13, 110, 253, 0.5)"],
+        borderColor: ["orange", "rgb(13, 110, 253)"],
+      },
+    ],
+  };
+
+  const barChart1Data = {
+    labels: ["Users"],
+    datasets: [
+      {
+        label: "Individual",
+        data: [45],
+        backgroundColor: "rgba(13, 110, 253, 0.5)",
+        borderColor: "rgb(13, 110, 253)",
+        borderWidth:"2"
+      },
+      {
+        label: "Organizational",
+        data: [20],
+        backgroundColor: "rgba(255, 165, 0, 0.5)",
+        borderColor: "orange",
+        borderWidth:"2"
+      },
+    ],
+  };
+
+  const barChart2Data = {
+    labels: ["Users"],
+    datasets: [
+      {
+        label: "Active",
+        data: [38],
+        backgroundColor: "rgba(13, 110, 253, 0.5)",
+        borderColor: "rgb(13, 110, 253)",
+        borderWidth:"2"
+      },
+      {
+        label: "Inactive",
+        data: [10],
+        backgroundColor: "rgba(255, 165, 0, 0.5)",
+        borderColor: "orange",
+        borderWidth:"2"
+      },
+    ],
+  };
+
+  const lineChart2Data = {
+    labels: ["Active", "Inactive"],
+    datasets: [
+      {
+        fill: true,
+        label: "Count",
+        data: [15, 21],
+        borderColor: "rgb(13, 110, 253)",
+        backgroundColor: "rgba(13, 110, 253, 0.5)",
       },
     ],
   };
@@ -277,22 +287,22 @@ const AdminHomePage = () => {
                 <div className="col-xl-6">
                   <div className="container-fluid border shadow-sm">
                     <div className="row chart-wrapper position-relative bg-light">
-                      <div className="h-100 w-100 d-flex justify-content-center position-absolute p-4">
+                      <div className="h-100 w-100 canvas-wrapper d-flex justify-content-center position-absolute p-4">
                         <Pie
                           className={`${chart1Type === "pie" ? "" : "d-none"}`}
-                          data={pieChartData}
+                          data={pieChart1Data}
                           options={chart1Options}
                         ></Pie>
                         <Bar
                           className={`${chart1Type === "bar" ? "" : "d-none"}`}
-                          data={barChartData}
+                          data={barChart1Data}
                           options={chart1Options}
                         ></Bar>
                         <Doughnut
                           className={`${
                             chart1Type === "doughnut" ? "" : "d-none"
                           }`}
-                          data={pieChartData}
+                          data={pieChart1Data}
                           options={chart1Options}
                         ></Doughnut>
                       </div>
@@ -352,7 +362,7 @@ const AdminHomePage = () => {
                 <div className="col-xl-6 mt-xl-0 mt-4">
                   <div className="container-fluid border shadow-sm">
                     <div className="row chart-wrapper position-relative bg-light">
-                      <div className="h-100 w-100 d-flex justify-content-center position-absolute p-4">
+                      <div className="h-100 w-100 canvas-wrapper d-flex justify-content-center position-absolute p-4">
                         <Line
                           className={`${chart2Type === "line" ? "" : "d-none"}`}
                           data={lineChart2Data}
