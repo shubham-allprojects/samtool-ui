@@ -5,7 +5,7 @@ import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
 import { counter, rootTitle } from "../../src/CommonFunctions";
 import { Chart as CharJs, registerables } from "chart.js";
-import { Line, Pie } from "react-chartjs-2";
+import { Line, Pie, Doughnut, Bar } from "react-chartjs-2";
 
 let orgCount = 0; // Default count of organizational users.
 let indiCount = 0; // Default count of individual users.
@@ -50,7 +50,32 @@ const AdminHomePage = () => {
     }
   };
 
-  const lineChartData = {
+  const [chart1Type, setChart1Type] = useState("pie");
+  const [chart2Type, setChart2Type] = useState("line");
+
+  const onChart1Selection = (e) => {
+    const { value } = e.target;
+    if (value === "pie") {
+      setChart1Type("pie");
+    } else if (value === "bar") {
+      setChart1Type("bar");
+    } else if (value === "doughnut") {
+      setChart1Type("doughnut");
+    }
+  };
+
+  const onChart2Selection = (e) => {
+    const { value } = e.target;
+    if (value === "line2") {
+      setChart2Type("line");
+    } else if (value === "bar2") {
+      setChart2Type("bar");
+    } else if (value === "doughnut2") {
+      setChart2Type("doughnut");
+    }
+  };
+
+  const lineChart2Data = {
     labels: ["Active", "Inactive"],
     datasets: [
       {
@@ -68,13 +93,56 @@ const AdminHomePage = () => {
     datasets: [
       {
         label: "Count",
-        data: [countOfIndividualUsers, countOfOrgUsers],
+        data: [45, 20],
         backgroundColor: ["orange", "rgb(13, 110, 253)"],
       },
     ],
   };
 
-  const pieChartOptions = {
+  const barChartData = {
+    labels: ["Users"],
+    datasets: [
+      {
+        label: "Individual",
+        data: [45],
+        backgroundColor: ["rgb(13, 110, 253)"],
+      },
+      {
+        label: "Organizational",
+        data: [20],
+        backgroundColor: ["orange"],
+      },
+    ],
+  };
+
+  const barChart2Data = {
+    labels: ["Users"],
+    datasets: [
+      {
+        label: "Active",
+        data: [38],
+        backgroundColor: ["rgb(13, 110, 253)"],
+      },
+      {
+        label: "Inactive",
+        data: [10],
+        backgroundColor: ["orange"],
+      },
+    ],
+  };
+
+  const pieChart2Data = {
+    labels: ["Active", "Inactive"],
+    datasets: [
+      {
+        label: "Users",
+        data: [38, 10],
+        backgroundColor: ["orange", "rgb(13, 110, 253)"],
+      },
+    ],
+  };
+
+  const chart1Options = {
     responsive: true,
     plugins: {
       title: {
@@ -84,7 +152,7 @@ const AdminHomePage = () => {
     },
   };
 
-  const lineChartOptions = {
+  const chart2Options = {
     responsive: true,
     plugins: {
       title: {
@@ -112,6 +180,8 @@ const AdminHomePage = () => {
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - HOME";
+    document.getElementById("pie").checked = true;
+    document.getElementById("line2").checked = true;
     if (data) {
       setTotalCountOfUsers();
       getPropertyCountFromApi();
@@ -204,17 +274,154 @@ const AdminHomePage = () => {
               </div>
               <hr className="my-4" />
               <div className="row">
-                <div className="col-xl-4">
-                  <div className="card chart-wrapper">
-                    <Pie data={pieChartData} options={pieChartOptions}></Pie>
+                <div className="col-xl-6">
+                  <div className="container-fluid border shadow-sm">
+                    <div className="row chart-wrapper position-relative bg-light">
+                      <div className="h-100 w-100 d-flex justify-content-center position-absolute p-4">
+                        <Pie
+                          className={`${chart1Type === "pie" ? "" : "d-none"}`}
+                          data={pieChartData}
+                          options={chart1Options}
+                        ></Pie>
+                        <Bar
+                          className={`${chart1Type === "bar" ? "" : "d-none"}`}
+                          data={barChartData}
+                          options={chart1Options}
+                        ></Bar>
+                        <Doughnut
+                          className={`${
+                            chart1Type === "doughnut" ? "" : "d-none"
+                          }`}
+                          data={pieChartData}
+                          options={chart1Options}
+                        ></Doughnut>
+                      </div>
+                    </div>
+                    <div className="row p-2 ">
+                      <div className="col-xl-3">
+                        <span className="common-btn-font">Chart View</span>
+                      </div>
+                      <div className="col-xl-3">
+                        <div class="form-check form-check-inline">
+                          <input
+                            onChange={onChart1Selection}
+                            class="form-check-input chart1check"
+                            type="radio"
+                            name="chart1"
+                            id="pie"
+                            value="pie"
+                          />
+                          <label class="form-check-label" for="inlineRadio2">
+                            Pie
+                          </label>
+                        </div>
+                      </div>
+                      <div className="col-xl-3">
+                        <div class="form-check form-check-inline">
+                          <input
+                            onChange={onChart1Selection}
+                            class="form-check-input chart1check"
+                            type="radio"
+                            name="chart1"
+                            id="bar"
+                            value="bar"
+                          />
+                          <label class="form-check-label" for="inlineRadio1">
+                            Bar
+                          </label>
+                        </div>
+                      </div>
+                      <div className="col-xl-3">
+                        <div class="form-check form-check-inline">
+                          <input
+                            onChange={onChart1Selection}
+                            class="form-check-input chart1check"
+                            type="radio"
+                            name="chart1"
+                            id="doughnut"
+                            value="doughnut"
+                          />
+                          <label class="form-check-label" for="inlineRadio3">
+                            Doughnut
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="col-xl-8 mt-xl-0 mt-4">
-                  <div className="card chart-wrapper">
-                    <Line
-                      data={lineChartData}
-                      options={lineChartOptions}
-                    ></Line>
+                <div className="col-xl-6 mt-xl-0 mt-4">
+                  <div className="container-fluid border shadow-sm">
+                    <div className="row chart-wrapper position-relative bg-light">
+                      <div className="h-100 w-100 d-flex justify-content-center position-absolute p-4">
+                        <Line
+                          className={`${chart2Type === "line" ? "" : "d-none"}`}
+                          data={lineChart2Data}
+                          options={chart2Options}
+                        ></Line>
+                        <Bar
+                          className={`${chart2Type === "bar" ? "" : "d-none"}`}
+                          data={barChart2Data}
+                          options={chart2Options}
+                        ></Bar>
+                        <Doughnut
+                          className={`${
+                            chart2Type === "doughnut" ? "" : "d-none"
+                          }`}
+                          data={pieChart2Data}
+                          options={chart2Options}
+                        ></Doughnut>
+                      </div>
+                    </div>
+                    <div className="row p-2 ">
+                      <div className="col-xl-3">
+                        <span className="common-btn-font">Chart View</span>
+                      </div>
+                      <div className="col-xl-3">
+                        <div class="form-check form-check-inline">
+                          <input
+                            onChange={onChart2Selection}
+                            class="form-check-input chart1check"
+                            type="radio"
+                            name="chart2"
+                            id="line2"
+                            value="line2"
+                          />
+                          <label class="form-check-label" for="line2">
+                            Line
+                          </label>
+                        </div>
+                      </div>
+                      <div className="col-xl-3">
+                        <div class="form-check form-check-inline">
+                          <input
+                            onChange={onChart2Selection}
+                            class="form-check-input chart1check"
+                            type="radio"
+                            name="chart2"
+                            id="bar2"
+                            value="bar2"
+                          />
+                          <label class="form-check-label" for="bar2">
+                            Bar
+                          </label>
+                        </div>
+                      </div>
+                      <div className="col-xl-3">
+                        <div class="form-check form-check-inline">
+                          <input
+                            onChange={onChart2Selection}
+                            class="form-check-input chart1check"
+                            type="radio"
+                            name="chart2"
+                            id="doughnut2"
+                            value="doughnut2"
+                          />
+                          <label class="form-check-label" for="doughnut2">
+                            Doughnut
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

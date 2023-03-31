@@ -757,6 +757,11 @@ input:-webkit-autofill:active {
   align-items: center;
 }
 
+.chart1check:checked {
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+
 .admin-top-card {
   background: var(--secondary-color) !important;
   transition: 0.3s ease-in-out;
