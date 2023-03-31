@@ -326,7 +326,10 @@ const AdminHomePage = () => {
                             id="pie"
                             value="pie"
                           />
-                          <label class="form-check-label" for="inlineRadio2">
+                          <label
+                            class="form-check-label"
+                            htmlFor="inlineRadio2"
+                          >
                             Pie
                           </label>
                         </div>
@@ -341,7 +344,10 @@ const AdminHomePage = () => {
                             id="bar"
                             value="bar"
                           />
-                          <label class="form-check-label" for="inlineRadio1">
+                          <label
+                            class="form-check-label"
+                            htmlFor="inlineRadio1"
+                          >
                             Bar
                           </label>
                         </div>
@@ -356,7 +362,10 @@ const AdminHomePage = () => {
                             id="doughnut"
                             value="doughnut"
                           />
-                          <label class="form-check-label" for="inlineRadio3">
+                          <label
+                            class="form-check-label"
+                            htmlFor="inlineRadio3"
+                          >
                             Doughnut
                           </label>
                         </div>
@@ -406,7 +415,7 @@ const AdminHomePage = () => {
                             id="line2"
                             value="line2"
                           />
-                          <label class="form-check-label" for="line2">
+                          <label class="form-check-label" htmlFor="line2">
                             Line
                           </label>
                         </div>
@@ -421,7 +430,7 @@ const AdminHomePage = () => {
                             id="bar2"
                             value="bar2"
                           />
-                          <label class="form-check-label" for="bar2">
+                          <label class="form-check-label" htmlFor="bar2">
                             Bar
                           </label>
                         </div>
@@ -436,7 +445,7 @@ const AdminHomePage = () => {
                             id="doughnut2"
                             value="doughnut2"
                           />
-                          <label class="form-check-label" for="doughnut2">
+                          <label class="form-check-label" htmlFor="doughnut2">
                             Doughnut
                           </label>
                         </div>
