@@ -298,10 +298,10 @@ const AdminHomePage = () => {
                       </div>
                     </div>
                     <div className="row p-2 ">
-                      <div className="col-xl-3">
+                      <div className="col-md-3">
                         <span className="common-btn-font">Chart View</span>
                       </div>
-                      <div className="col-xl-3">
+                      <div className="col-md-3 mt-md-0 mt-2 col-4">
                         <div class="form-check form-check-inline">
                           <input
                             onChange={onChart1Selection}
@@ -316,7 +316,7 @@ const AdminHomePage = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="col-xl-3">
+                      <div className="col-md-3 mt-md-0 mt-2 col-4">
                         <div class="form-check form-check-inline">
                           <input
                             onChange={onChart1Selection}
@@ -331,7 +331,7 @@ const AdminHomePage = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="col-xl-3">
+                      <div className="col-md-3 mt-md-0 mt-2 col-4">
                         <div class="form-check form-check-inline">
                           <input
                             onChange={onChart1Selection}
@@ -373,10 +373,10 @@ const AdminHomePage = () => {
                       </div>
                     </div>
                     <div className="row p-2 ">
-                      <div className="col-xl-3">
+                      <div className="col-md-3">
                         <span className="common-btn-font">Chart View</span>
                       </div>
-                      <div className="col-xl-3">
+                      <div className="col-md-3 mt-md-0 mt-2 col-4">
                         <div class="form-check form-check-inline">
                           <input
                             onChange={onChart2Selection}
@@ -391,7 +391,7 @@ const AdminHomePage = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="col-xl-3">
+                      <div className="col-md-3 mt-md-0 mt-2 col-4">
                         <div class="form-check form-check-inline">
                           <input
                             onChange={onChart2Selection}
@@ -406,7 +406,7 @@ const AdminHomePage = () => {
                           </label>
                         </div>
                       </div>
-                      <div className="col-xl-3">
+                      <div className="col-md-3 mt-md-0 mt-2 col-4">
                         <div class="form-check form-check-inline">
                           <input
                             onChange={onChart2Selection}
