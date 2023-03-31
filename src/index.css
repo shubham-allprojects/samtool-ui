@@ -1149,4 +1149,8 @@ input:-webkit-autofill:active {
     height: 65px;
     width: 65px;
   }
+
+  .canvas-wrapper canvas {
+    height: 277px !important;
+  }
 }
