@@ -416,7 +416,11 @@ const ManageUsers = () => {
                                     <div
                                       data-bs-toggle="modal"
                                       data-bs-target="#confirmDeletedModal"
-                                      className="dropdown-item"
+                                      className={`dropdown-item ${
+                                        email_address === data.user
+                                          ? "d-none"
+                                          : ""
+                                      }`}
                                       onClick={() => {
                                         onDeleteBtnClick(
                                           user_id,
