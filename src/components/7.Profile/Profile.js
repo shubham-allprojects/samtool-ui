@@ -323,7 +323,7 @@ const Profile = () => {
                         to="/admin"
                         className="card py-2 profile-inner-card text-decoration-none"
                       >
-                        <h6 className="m-0">Administration</h6>
+                        <h6 className="m-0">ADMINISTRATION</h6>
                       </NavLink>
                     </div>
                   </div>
