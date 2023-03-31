@@ -145,7 +145,7 @@ const AdminHomePage = () => {
       {
         fill: true,
         label: "Count",
-        data: [15, 21],
+        data: [38, 10],
         borderColor: "rgb(13, 110, 253)",
         backgroundColor: "rgba(13, 110, 253, 0.5)",
       },
@@ -285,7 +285,10 @@ const AdminHomePage = () => {
               <hr className="my-4" />
               <div className="row">
                 <div className="col-xl-6">
-                  <div className="container-fluid border shadow-sm">
+                  <div
+                    className="container-fluid shadow"
+                    style={{ border: "1px solid orange" }}
+                  >
                     <div className="row chart-wrapper position-relative bg-light">
                       <div className="h-100 w-100 canvas-wrapper d-flex justify-content-center position-absolute p-4">
                         <Pie
@@ -309,7 +312,9 @@ const AdminHomePage = () => {
                     </div>
                     <div className="row p-2 ">
                       <div className="col-md-3">
-                        <span className="common-btn-font">Chart View</span>
+                        <span className="common-btn-font text-primary">
+                          Chart View
+                        </span>
                       </div>
                       <div className="col-md-3 mt-md-0 mt-2 col-6">
                         <div class="form-check form-check-inline">
@@ -360,7 +365,10 @@ const AdminHomePage = () => {
                   </div>
                 </div>
                 <div className="col-xl-6 mt-xl-0 mt-4">
-                  <div className="container-fluid border shadow-sm">
+                  <div
+                    className="container-fluid shadow"
+                    style={{ border: "1px solid orange" }}
+                  >
                     <div className="row chart-wrapper position-relative bg-light">
                       <div className="h-100 w-100 canvas-wrapper d-flex justify-content-center position-absolute p-4">
                         <Line
@@ -384,7 +392,9 @@ const AdminHomePage = () => {
                     </div>
                     <div className="row p-2 ">
                       <div className="col-md-3">
-                        <span className="common-btn-font">Chart View</span>
+                        <span className="common-btn-font text-primary">
+                          Chart View
+                        </span>
                       </div>
                       <div className="col-md-3 mt-md-0 mt-2 col-6">
                         <div class="form-check form-check-inline">
