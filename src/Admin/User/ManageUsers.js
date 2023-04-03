@@ -185,9 +185,11 @@ const ManageUsers = ({ userType }) => {
                             <tr key={Index}>
                               <td>{user_id}</td>
                               <td>
-                                {userType === "Individual User"
+                                {user.individual_user
                                   ? user.individual_user.first_name
-                                  : user.org_user.company_name}
+                                  : user.org_user
+                                  ? user.org_user.company_name
+                                  : ""}
                               </td>
                               <td>{email_address}</td>
                               <td>{arrayOfRoles.join(", ")}</td>
