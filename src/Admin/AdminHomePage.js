@@ -212,17 +212,19 @@ const AdminHomePage = () => {
                     to="/admin/property/properties"
                     className="card text-decoration-none admin-top-card"
                   >
-                    <div className="row justify-content-center">
-                      <div className="col-xl-3 col-md-3 col-3">
-                        <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1"></i>
-                      </div>
-                      <div className="col-xl-6 col-md-7 col-5 text-end">
-                        <span className="fw-bold text-white hover-color-secondary fs-5">
-                          <span className="fs-3" id="propertyCount">
-                            0
-                          </span>
-                          <br /> Properties
-                        </span>
+                    <div className="container-fluid p-xl-3 p-2">
+                      <div className="row justify-content-center">
+                        <div className="col-xl-2 col-md-3 col-3">
+                          <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1"></i>
+                        </div>
+                        <div className="col-xl-10 col-md-9 col-5 text-end">
+                          <div className="fw-bold text-white hover-color-secondary fs-5">
+                            <span className="" id="propertyCount">
+                              0
+                            </span>
+                            <br /> Properties
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </NavLink>
@@ -232,14 +234,14 @@ const AdminHomePage = () => {
                     to="/admin/property/upload-properties"
                     className="card admin-top-card text-decoration-none"
                   >
-                    <div className="row justify-content-center">
-                      <div className="col-xl-3 col-md-3 col-3">
-                        <i className="bi bi-upload text-white hover-color-secondary icon fs-1"></i>
-                      </div>
-                      <div className="col-xl-6 col-md-7 col-5 text-end">
-                        <span className="fw-bold text-white hover-color-secondary fs-5">
-                          <span className="fs-4">Upload</span> <br /> Properties
-                        </span>
+                    <div className="container-fluid">
+                      <div className="row justify-content-center">
+                        <div className="col-12 text-center text-white hover-color-secondary">
+                          <div>
+                            <i className="bi bi-upload text-white hover-color-secondary icon fs-1"></i>
+                          </div>
+                          <h5 className="fw-bold">Upload Bulk Properties</h5>
+                        </div>
                       </div>
                     </div>
                   </NavLink>
@@ -249,17 +251,14 @@ const AdminHomePage = () => {
                     to="/admin/users/individual-users"
                     className="card admin-top-card text-decoration-none"
                   >
-                    <div className="row justify-content-center">
-                      <div className="col-xl-3 col-md-3 col-3">
-                        <i className="bi bi-person-circle text-white hover-color-secondary icon fs-1"></i>
-                      </div>
-                      <div className="col-xl-6 col-md-7 col-5 text-end">
-                        <span className="fw-bold text-white hover-color-secondary fs-5">
-                          <span id="" className="fs-4">
-                            Individual
-                          </span>
-                          <br /> Users
-                        </span>
+                    <div className="container-fluid">
+                      <div className="row justify-content-center">
+                        <div className="col-12 text-center text-white hover-color-secondary">
+                          <div>
+                            <i className="bi bi-person-circle text-white hover-color-secondary icon fs-1"></i>
+                          </div>
+                          <h5 className="fw-bold">Individual Users</h5>
+                        </div>
                       </div>
                     </div>
                   </NavLink>
@@ -269,17 +268,14 @@ const AdminHomePage = () => {
                     to="/admin/users/organizational-users"
                     className="card admin-top-card text-decoration-none"
                   >
-                    <div className="row justify-content-center">
-                      <div className="col-xl-3 col-md-3 col-3">
-                        <i className="bi bi-laptop-fill text-white hover-color-secondary icon fs-1"></i>
-                      </div>
-                      <div className="col-xl-6 col-md-7 col-5 text-end">
-                        <span className="fw-bold text-white hover-color-secondary fs-5">
-                          <span id="" className="fs-4">
-                            Organizational
-                          </span>
-                          <br /> Users
-                        </span>
+                    <div className="container-fluid">
+                      <div className="row justify-content-center">
+                        <div className="col-12 text-center text-white hover-color-secondary">
+                          <div>
+                            <i className="bi bi-laptop-fill text-white hover-color-secondary icon fs-1"></i>
+                          </div>
+                          <h5 className="fw-bold">Organizational Users</h5>
+                        </div>
                       </div>
                     </div>
                   </NavLink>
