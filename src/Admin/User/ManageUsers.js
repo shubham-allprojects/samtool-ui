@@ -211,7 +211,11 @@ const ManageUsers = ({ userType }) => {
                                     aria-labelledby="navbarDropdown"
                                   >
                                     <NavLink
-                                      to={`/admin/users/view-user/${user_id}`}
+                                      to={`/admin/users/${
+                                        userType === "Individual User"
+                                          ? `individual-users/`
+                                          : `organizational-users/`
+                                      }${user_id}`}
                                       className="dropdown-item"
                                     >
                                       <i className="bi bi-eye pe-1"></i> View

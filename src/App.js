@@ -190,7 +190,7 @@ function App() {
           />
 
           <Route
-            path="/admin/users/view-user/:id"
+            path="/admin/users/:type/:id"
             element={
               <AdminProtected>
                 <ViewCurrentUser />
