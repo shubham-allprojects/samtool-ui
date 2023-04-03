@@ -40,14 +40,6 @@ const AdminHomePage = () => {
       countOfIndividualUsers: indiCount,
       countOfOrgUsers: orgCount,
     });
-    // To show counter animation on admin Home page.
-    const totalCount = indiCount + orgCount;
-    if (!totalCount <= 0) {
-      totalCount > 100
-        ? (startCounter = Math.floor((totalCount * 80) / 100))
-        : (startCounter = 0);
-      counter("usersCount", startCounter, totalCount, 1000);
-    }
   };
 
   const [chart1Type, setChart1Type] = useState("pie");
@@ -214,14 +206,6 @@ const AdminHomePage = () => {
                   >
                     <div className="container-fluid p-4">
                       <div className="row justify-content-center">
-                        {/* <div className="col-6">
-                          <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1"></i>
-                        </div>
-                        <div className="col-6 text-end fw-bold text-white hover-color-secondary fs-5">
-                          <span className="fs-3" id="propertyCount">
-                            0
-                          </span>
-                        </div> */}
                         <div className="col-12 col-5 text-center fw-bold text-white hover-color-secondary fs-5">
                           <div>
                             <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1 me-4"></i>
