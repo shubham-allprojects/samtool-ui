@@ -80,7 +80,7 @@ const AdminHomePage = () => {
     datasets: [
       {
         label: "Count",
-        data: [45, 20],
+        data: [countOfIndividualUsers, countOfOrgUsers],
         backgroundColor: ["rgba(13, 110, 253, 0.5)", "rgba(255, 165, 0, 0.5)"],
         borderColor: ["rgb(13, 110, 253)", "orange"],
       },
@@ -104,14 +104,14 @@ const AdminHomePage = () => {
     datasets: [
       {
         label: "Individual",
-        data: [45],
+        data: [countOfIndividualUsers],
         backgroundColor: "rgba(13, 110, 253, 0.5)",
         borderColor: "rgb(13, 110, 253)",
         borderWidth: "2",
       },
       {
         label: "Organizational",
-        data: [20],
+        data: [countOfOrgUsers],
         backgroundColor: "rgba(255, 165, 0, 0.5)",
         borderColor: "orange",
         borderWidth: "2",
