@@ -29,6 +29,7 @@ import ProtectedPages from "./components/ProtectedPages";
 import ProtectSetPasswordPage from "./components/ProtectSetPasswordPage";
 import ProtectForgotPasswordPage from "./components/ProtectForgotPasswordPage";
 import { ToastContainer } from "react-toastify";
+import ManageIndividualUsers from "./Admin/User/ManageIndividualUsers";
 
 function App() {
   return (
@@ -110,7 +111,7 @@ function App() {
             path="/admin"
             element={
               // <AdminProtected>
-                <AdminHomePage />
+              <AdminHomePage />
               // </AdminProtected>
             }
           />
@@ -131,6 +132,14 @@ function App() {
             }
           />
 
+          <Route
+            path="/admin/users/individual-users"
+            element={
+              // <AdminProtected>
+              <ManageIndividualUsers />
+              // </AdminProtected>
+            }
+          />
           <Route
             path="/admin/property/properties/single-property-documents-upload/:id"
             element={
