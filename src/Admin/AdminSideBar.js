@@ -149,14 +149,6 @@ const AdminSideBar = () => {
                   </div>
                 </div>
               </li>
-              {/* <li className="nav-item">
-                <NavLink to="/admin/users" className="nav-link">
-                  <span className="mx-2">
-                    <i className="bi bi-person-fill text-light"></i>
-                  </span>
-                  Users
-                </NavLink>
-              </li> */}
               <hr className="text-white" />
             </ul>
           </div>

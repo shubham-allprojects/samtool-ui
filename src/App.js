@@ -135,18 +135,24 @@ function App() {
           <Route
             path="/admin/users/individual-users"
             element={
-              // <AdminProtected>
-              <ManageUsers userType="Individual User" />
-              // </AdminProtected>
+              <AdminProtected>
+                <ManageUsers
+                  key={"Individual User"}
+                  userType="Individual User"
+                />
+              </AdminProtected>
             }
           />
 
           <Route
             path="/admin/users/organizational-users"
             element={
-              // <AdminProtected>
-              <ManageUsers userType="Organizational User" />
-              // </AdminProtected>
+              <AdminProtected>
+                <ManageUsers
+                  key={"Organizational User"}
+                  userType="Organizational User"
+                />
+              </AdminProtected>
             }
           />
 

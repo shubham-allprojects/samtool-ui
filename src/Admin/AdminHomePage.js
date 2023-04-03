@@ -246,17 +246,17 @@ const AdminHomePage = () => {
                 </div>
                 <div className="col-xl-3 col-md-6 mt-4 mt-xl-0">
                   <NavLink
-                    to="/admin/users"
+                    to="/admin/users/individual-users"
                     className="card admin-top-card text-decoration-none"
                   >
                     <div className="row justify-content-center">
                       <div className="col-xl-3 col-md-3 col-3">
-                        <i className="bi bi-person-fill text-white hover-color-secondary icon fs-1"></i>
+                        <i className="bi bi-person-circle text-white hover-color-secondary icon fs-1"></i>
                       </div>
                       <div className="col-xl-6 col-md-7 col-5 text-end">
                         <span className="fw-bold text-white hover-color-secondary fs-5">
-                          <span id="usersCount" className="fs-3">
-                            0
+                          <span id="" className="fs-4">
+                            Individual
                           </span>
                           <br /> Users
                         </span>
@@ -265,21 +265,24 @@ const AdminHomePage = () => {
                   </NavLink>
                 </div>
                 <div className="col-xl-3 col-md-6 mt-4 mt-xl-0">
-                  <div className="card admin-top-card text-decoration-none">
+                  <NavLink
+                    to="/admin/users/organizational-users"
+                    className="card admin-top-card text-decoration-none"
+                  >
                     <div className="row justify-content-center">
                       <div className="col-xl-3 col-md-3 col-3">
-                        <i className="bi bi-person-fill text-white hover-color-secondary icon fs-1"></i>
+                        <i className="bi bi-laptop-fill text-white hover-color-secondary icon fs-1"></i>
                       </div>
                       <div className="col-xl-6 col-md-7 col-5 text-end">
                         <span className="fw-bold text-white hover-color-secondary fs-5">
-                          <span id="usersCount" className="fs-3">
-                            count
+                          <span id="" className="fs-4">
+                            Organizational
                           </span>
-                          <br /> Title
+                          <br /> Users
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </NavLink>
                 </div>
               </div>
               <hr className="my-4" />
