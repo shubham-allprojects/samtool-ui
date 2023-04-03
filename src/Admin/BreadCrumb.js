@@ -45,9 +45,7 @@ const BreadCrumb = ({
           </li>
           {isUserPageActive ? (
             <>
-              <NavLink to="/admin/users" className="breadcrumb-item">
-                Users
-              </NavLink>
+              <li className="breadcrumb-item">Users</li>
               {userType ? (
                 <li className="breadcrumb-item">{userType}</li>
               ) : (

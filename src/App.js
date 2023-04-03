@@ -110,9 +110,9 @@ function App() {
           <Route
             path="/admin"
             element={
-              // <AdminProtected>
-              <AdminHomePage />
-              // </AdminProtected>
+              <AdminProtected>
+                <AdminHomePage />
+              </AdminProtected>
             }
           />
           <Route
@@ -126,9 +126,9 @@ function App() {
           <Route
             path="/admin/property/add-property"
             element={
-              // <AdminProtected>
-              <AddProperty />
-              // </AdminProtected>
+              <AdminProtected>
+                <AddProperty />
+              </AdminProtected>
             }
           />
 

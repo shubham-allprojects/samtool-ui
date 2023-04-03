@@ -6,6 +6,7 @@ import AdminSideBar from "../AdminSideBar";
 import CommonSpinner from "../../CommonSpinner";
 import Pagination from "../../Pagination";
 import { toast } from "react-toastify";
+import BreadCrumb from "../BreadCrumb";
 
 const records_per_page = 2;
 let authHeader = "";
@@ -134,6 +135,7 @@ const ManageUsers = ({ userType }) => {
         <div className="row min-100vh position-relative">
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8 users-admin mt-4 mt-md-0">
+            <BreadCrumb userType={userType} />
             <div className="mt-4">
               {loading ? (
                 <>
