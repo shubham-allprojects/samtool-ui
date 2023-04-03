@@ -50,7 +50,6 @@ function Home() {
     };
     // Get all states from api.
     const allStates = await axios.get(apis.stateAPI);
-    console.log(allStates);
     // Get all banks from api.
     const allBanks = await axios.get(apis.bankAPI);
     // Get all asset Categories from api.
@@ -159,7 +158,6 @@ function Home() {
       batch_number: 1,
     };
 
-    console.log(dataToPost);
     // This api is only for getting all the records and count length of array of properties so that we can decide page numbers for pagination.
     await axios.post(apis.searchAPI, dataForTotalCount).then((res) => {
       if (res.data) {
