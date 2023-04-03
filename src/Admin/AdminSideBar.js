@@ -141,7 +141,7 @@ const AdminSideBar = () => {
                           className="nav-link"
                           to="/admin/users/organizational-users"
                         >
-                          <i className="bi bi-laptop-fill me-2 text-light"></i>
+                          <i className="bi bi-laptop me-2 text-light"></i>
                           Organizational
                         </NavLink>
                       </li>
