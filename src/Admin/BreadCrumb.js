@@ -53,9 +53,25 @@ const BreadCrumb = ({
               )}
               {emailOfCurrentUser ? (
                 <>
-                  <NavLink to="/admin/users" className="breadcrumb-item">
-                    {typeOfUser}
-                  </NavLink>
+                  {typeOfUser === "Individual User" ? (
+                    <>
+                      <NavLink
+                        to="/admin/users/individual-users"
+                        className="breadcrumb-item"
+                      >
+                        {typeOfUser}
+                      </NavLink>
+                    </>
+                  ) : (
+                    <>
+                      <NavLink
+                        to="/admin/users/organizational-users"
+                        className="breadcrumb-item"
+                      >
+                        {typeOfUser}
+                      </NavLink>
+                    </>
+                  )}
                   <li className="breadcrumb-item">{emailOfCurrentUser}</li>
                 </>
               ) : (
