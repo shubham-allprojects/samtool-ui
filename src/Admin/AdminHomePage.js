@@ -317,17 +317,17 @@ const AdminHomePage = () => {
                         </span>
                       </div>
                       <div className="col-md-3 mt-md-0 mt-2 col-6">
-                        <div class="form-check form-check-inline">
+                        <div className="form-check form-check-inline">
                           <input
                             onChange={onChart1Selection}
-                            class="form-check-input chart1check"
+                            className="form-check-input chart1check"
                             type="radio"
                             name="chart1"
                             id="pie"
                             value="pie"
                           />
                           <label
-                            class="form-check-label"
+                            className="form-check-label"
                             htmlFor="inlineRadio2"
                           >
                             Pie
@@ -335,17 +335,17 @@ const AdminHomePage = () => {
                         </div>
                       </div>
                       <div className="col-md-3 mt-md-0 mt-2 col-6">
-                        <div class="form-check form-check-inline">
+                        <div className="form-check form-check-inline">
                           <input
                             onChange={onChart1Selection}
-                            class="form-check-input chart1check"
+                            className="form-check-input chart1check"
                             type="radio"
                             name="chart1"
                             id="bar"
                             value="bar"
                           />
                           <label
-                            class="form-check-label"
+                            className="form-check-label"
                             htmlFor="inlineRadio1"
                           >
                             Bar
@@ -353,17 +353,17 @@ const AdminHomePage = () => {
                         </div>
                       </div>
                       <div className="col-md-3 mt-md-0 mt-2 col-6">
-                        <div class="form-check form-check-inline">
+                        <div className="form-check form-check-inline">
                           <input
                             onChange={onChart1Selection}
-                            class="form-check-input chart1check"
+                            className="form-check-input chart1check"
                             type="radio"
                             name="chart1"
                             id="doughnut"
                             value="doughnut"
                           />
                           <label
-                            class="form-check-label"
+                            className="form-check-label"
                             htmlFor="inlineRadio3"
                           >
                             Doughnut
@@ -406,46 +406,49 @@ const AdminHomePage = () => {
                         </span>
                       </div>
                       <div className="col-md-3 mt-md-0 mt-2 col-6">
-                        <div class="form-check form-check-inline">
+                        <div className="form-check form-check-inline">
                           <input
                             onChange={onChart2Selection}
-                            class="form-check-input chart1check"
+                            className="form-check-input chart1check"
                             type="radio"
                             name="chart2"
                             id="line2"
                             value="line2"
                           />
-                          <label class="form-check-label" htmlFor="line2">
+                          <label className="form-check-label" htmlFor="line2">
                             Line
                           </label>
                         </div>
                       </div>
                       <div className="col-md-3 mt-md-0 mt-2 col-6">
-                        <div class="form-check form-check-inline">
+                        <div className="form-check form-check-inline">
                           <input
                             onChange={onChart2Selection}
-                            class="form-check-input chart1check"
+                            className="form-check-input chart1check"
                             type="radio"
                             name="chart2"
                             id="bar2"
                             value="bar2"
                           />
-                          <label class="form-check-label" htmlFor="bar2">
+                          <label className="form-check-label" htmlFor="bar2">
                             Bar
                           </label>
                         </div>
                       </div>
                       <div className="col-md-3 mt-md-0 mt-2 col-6">
-                        <div class="form-check form-check-inline">
+                        <div className="form-check form-check-inline">
                           <input
                             onChange={onChart2Selection}
-                            class="form-check-input chart1check"
+                            className="form-check-input chart1check"
                             type="radio"
                             name="chart2"
                             id="doughnut2"
                             value="doughnut2"
                           />
-                          <label class="form-check-label" htmlFor="doughnut2">
+                          <label
+                            className="form-check-label"
+                            htmlFor="doughnut2"
+                          >
                             Doughnut
                           </label>
                         </div>
