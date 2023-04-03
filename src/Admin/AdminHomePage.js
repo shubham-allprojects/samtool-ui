@@ -214,16 +214,22 @@ const AdminHomePage = () => {
                   >
                     <div className="container-fluid p-4">
                       <div className="row justify-content-center">
-                        <div className="col-6">
+                        {/* <div className="col-6">
                           <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1"></i>
                         </div>
                         <div className="col-6 text-end fw-bold text-white hover-color-secondary fs-5">
                           <span className="fs-3" id="propertyCount">
                             0
                           </span>
-                        </div>
-                        <div className="col-12 col-5 text-end fw-bold text-white hover-color-secondary fs-5">
-                          Properties
+                        </div> */}
+                        <div className="col-12 col-5 text-center fw-bold text-white hover-color-secondary fs-5">
+                          <div>
+                            <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1 me-4"></i>
+                            <span className="fs-1" id="propertyCount">
+                              0
+                            </span>
+                          </div>
+                          <span>Properties</span>
                         </div>
                       </div>
                     </div>
