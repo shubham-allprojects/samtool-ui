@@ -59,7 +59,7 @@ const BreadCrumb = ({
                         to="/admin/users/individual-users"
                         className="breadcrumb-item"
                       >
-                        {typeOfUser}
+                        Individual Users
                       </NavLink>
                     </>
                   ) : (
@@ -68,7 +68,7 @@ const BreadCrumb = ({
                         to="/admin/users/organizational-users"
                         className="breadcrumb-item"
                       >
-                        {typeOfUser}
+                        Organizational Users
                       </NavLink>
                     </>
                   )}
