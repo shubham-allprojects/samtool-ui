@@ -212,18 +212,18 @@ const AdminHomePage = () => {
                     to="/admin/property/properties"
                     className="card text-decoration-none admin-top-card"
                   >
-                    <div className="container-fluid p-xl-3 p-2">
+                    <div className="container-fluid p-4">
                       <div className="row justify-content-center">
-                        <div className="col-xl-2 col-md-3 col-3">
+                        <div className="col-6">
                           <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1"></i>
                         </div>
-                        <div className="col-xl-10 col-md-9 col-5 text-end">
-                          <div className="fw-bold text-white hover-color-secondary fs-5">
-                            <span className="" id="propertyCount">
-                              0
-                            </span>
-                            <br /> Properties
-                          </div>
+                        <div className="col-6 text-end fw-bold text-white hover-color-secondary fs-5">
+                          <span className="fs-3" id="propertyCount">
+                            0
+                          </span>
+                        </div>
+                        <div className="col-12 col-5 text-end fw-bold text-white hover-color-secondary fs-5">
+                          Properties
                         </div>
                       </div>
                     </div>
