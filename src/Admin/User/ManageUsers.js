@@ -10,8 +10,8 @@ import { toast } from "react-toastify";
 const records_per_page = 2;
 let authHeader = "";
 
-const ManageIndividualUsers = () => {
-  const [individualUsers, setIndividualUsers] = useState([]);
+const ManageUsers = ({ userType }) => {
+  const [users, setUsers] = useState([]);
   const data = JSON.parse(localStorage.getItem("data"));
   if (data) {
     authHeader = { Authorization: data.logintoken };
@@ -19,9 +19,8 @@ const ManageIndividualUsers = () => {
 
   const url = `/sam/v1/user-registration/auth`;
   const [loading, setLoading] = useState(false);
-  const [individualUsersCount, setIndividualUsersCount] = useState(null);
+  const [totalUsersCount, setTotalUsersCount] = useState(null);
   const [pageCount, setPageCount] = useState(0);
-  const paginationRef = useRef();
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectedUserEmail, setSelectedUserEmail] = useState("");
   const [confirmDeleteUserBtnDisabled, setConfirmDeleteUserBtnDisabled] =
@@ -29,27 +28,30 @@ const ManageIndividualUsers = () => {
   const confirmDeleteInputRef = useRef();
   const [currentPageNumber, setCurrentPageNumber] = useState(null);
 
-  const getIndividualUsers = async () => {
+  const getAllUsers = async () => {
     setLoading(true);
-    const individualBodyData = {
-      type: "Individual User",
+    const dataToPost = {
+      type: userType,
       page_number: 1,
       number_of_records: records_per_page,
     };
     await axios
-      .post(`${url}/get-users`, individualBodyData, { headers: authHeader })
+      .post(`${url}/get-users`, dataToPost, { headers: authHeader })
       .then((res) => {
-        setIndividualUsers(res.data);
+        setUsers(res.data);
+        setLoading(false);
       });
-    setLoading(false);
-
     await axios
       .get(`${url}/type-count`, { headers: authHeader })
       .then((res) => {
-        setIndividualUsersCount(parseInt(res.data.individual_count));
-        setPageCount(
-          Math.ceil(parseInt(res.data.individual_count) / records_per_page)
-        );
+        let usersCount = null;
+        if (userType === "Individual User") {
+          usersCount = parseInt(res.data.individual_count);
+        } else {
+          usersCount = parseInt(res.data.org_count);
+        }
+        setTotalUsersCount(usersCount);
+        setPageCount(Math.ceil(usersCount / records_per_page));
       });
   };
 
@@ -60,17 +62,17 @@ const ManageIndividualUsers = () => {
     toggleActivePageClass(currentPage);
     setCurrentPageNumber(currentPage);
     const nextOrPrevPageUsers = await fetchMoreUsers(currentPage);
-    setIndividualUsers(nextOrPrevPageUsers);
+    setUsers(nextOrPrevPageUsers);
   };
 
   // Fetch more jobs on page click.
   const fetchMoreUsers = async (currentPage) => {
-    const individualBodyData = {
-      type: "Individual User",
+    const dataToPost = {
+      type: userType,
       page_number: currentPage,
       number_of_records: records_per_page,
     };
-    const usersRes = await axios.post(`${url}/get-users`, individualBodyData, {
+    const usersRes = await axios.post(`${url}/get-users`, dataToPost, {
       headers: authHeader,
     });
     return usersRes.data;
@@ -104,10 +106,10 @@ const ManageIndividualUsers = () => {
           toast.success(`User ${userName} deleted successfuly`);
           confirmDeleteInputRef.current.value = "";
           setConfirmDeleteUserBtnDisabled(true);
-          setIndividualUsersCount(individualUsersCount - 1);
-          if (individualUsersCount - 1 !== 0) {
+          setTotalUsersCount(totalUsersCount - 1);
+          if (totalUsersCount - 1 !== 0) {
             let newPageCount = Math.ceil(
-              (individualUsersCount - 1) / records_per_page
+              (totalUsersCount - 1) / records_per_page
             );
             setPageCount(newPageCount);
             if (newPageCount < currentPageNumber) {
@@ -116,14 +118,14 @@ const ManageIndividualUsers = () => {
               handlePageClick({ selected: currentPageNumber - 1 });
             }
           } else {
-            setIndividualUsers([]);
+            setUsers(false);
           }
         }
       });
   };
 
   useEffect(() => {
-    getIndividualUsers();
+    getAllUsers();
   }, []);
 
   return (
@@ -137,7 +139,7 @@ const ManageIndividualUsers = () => {
                 <>
                   <CommonSpinner spinnerColor="primary" />
                 </>
-              ) : individualUsers.length <= 0 ? (
+              ) : !users ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
                   <h1 className="fw-bold custom-heading-color">
                     Sorry ! No Users Found :(
@@ -150,15 +152,18 @@ const ManageIndividualUsers = () => {
                       <thead>
                         <tr>
                           <th>User ID</th>
-                          <th>Name</th>
+                          <th>
+                            {userType === "Individual User"
+                              ? "Name"
+                              : "Company Name"}
+                          </th>
                           <th>Email</th>
                           <th>Role</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {individualUsers.map((user, Index) => {
-                          const { first_name } = user.individual_user;
+                        {users.map((user, Index) => {
                           const { email_address, user_id } = user.user_details;
                           let currentRolesArray = user.role;
                           let roleIdArray = [];
@@ -179,7 +184,11 @@ const ManageIndividualUsers = () => {
                           return (
                             <tr key={Index}>
                               <td>{user_id}</td>
-                              <td>{first_name}</td>
+                              <td>
+                                {userType === "Individual User"
+                                  ? user.individual_user.first_name
+                                  : user.org_user.company_name}
+                              </td>
                               <td>{email_address}</td>
                               <td>{arrayOfRoles.join(", ")}</td>
                               <td>
@@ -231,7 +240,7 @@ const ManageIndividualUsers = () => {
                       </tbody>
                     </table>
                   </div>
-                  <div className="container mt-5">
+                  <div className="container mt-4">
                     <div className="row">
                       <Pagination
                         handlePageClick={handlePageClick}
@@ -302,4 +311,4 @@ const ManageIndividualUsers = () => {
   );
 };
 
-export default ManageIndividualUsers;
+export default ManageUsers;
