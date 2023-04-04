@@ -40,7 +40,7 @@ const AdminSideBar = () => {
       <span className="sidebar-toggle-btn-sm d-block d-md-none">
         <i
           onClick={toggleSideBarVisibility}
-          className={`bi ${icon} text-light fs-1`}
+          className={`bi ${icon} text-light fs-2`}
         ></i>
       </span>
 

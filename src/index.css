@@ -737,9 +737,10 @@ input:-webkit-autofill:active {
 .sidebar-toggle-btn-sm {
   position: absolute;
   top: 0.67rem;
-  right: 13px;
+  right: 12px;
   width: fit-content !important;
   border: 1px solid white;
+  border-radius: 5px;
 }
 
 .custom-heading-color {
