@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import CommonSpinner from "../../CommonSpinner";
@@ -303,6 +302,7 @@ const ManageUsers = ({ userType }) => {
 
   useEffect(() => {
     getAllUsers();
+    // eslint-disable-next-line
   }, []);
 
   return (
