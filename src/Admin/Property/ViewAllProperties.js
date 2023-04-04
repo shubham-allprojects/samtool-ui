@@ -126,7 +126,7 @@ const ViewAllProperties = () => {
         <div className="row min-100vh position-relative">
           <AdminSideBar />
           <div
-            className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0"
+            className="col-xl-10 col-lg-9 col-md-8"
             ref={allPropertiesPageRef}
           >
             <BreadCrumb />
@@ -257,7 +257,7 @@ const ViewAllProperties = () => {
             </>
           </div>
           <div
-            className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0 d-none"
+            className="col-xl-10 col-lg-9 col-md-8 d-none"
             ref={viewCurrentPropertyResultsRef}
           >
             <>

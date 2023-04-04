@@ -1147,4 +1147,7 @@ input:-webkit-autofill:active {
   .canvas-wrapper canvas {
     height: 278px !important;
   }
+  .admin-sidebar {
+    height: fit-content;
+  }
 }
