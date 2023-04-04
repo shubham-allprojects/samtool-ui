@@ -9,7 +9,6 @@ import { Line, Pie, Doughnut, Bar } from "react-chartjs-2";
 
 let orgCount = 0; // Default count of organizational users.
 let indiCount = 0; // Default count of individual users.
-let startCounter;
 let propertyStartCounter;
 
 const AdminHomePage = () => {
