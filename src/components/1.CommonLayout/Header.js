@@ -62,7 +62,7 @@ function Header() {
               {/* If user is not loggedIn then show these navbar links */}
               <li>
                 <NavLink to="/" className="nav-link">
-                  <i className="bi bi-house me-2"></i>
+                  <i className="bi bi-house me-2 text-light"></i>
                   Home
                 </NavLink>
               </li>
