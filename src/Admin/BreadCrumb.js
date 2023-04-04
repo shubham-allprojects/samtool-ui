@@ -46,9 +46,8 @@ const BreadCrumb = ({
           </li>
           {isUserPageActive ? (
             <>
-              <li className="breadcrumb-item">Users</li>
               {userType ? (
-                <li className="breadcrumb-item">{userType}s</li>
+                <li className="breadcrumb-item text-secondary">{userType}s</li>
               ) : (
                 <></>
               )}
@@ -81,7 +80,9 @@ const BreadCrumb = ({
                       Organizational Users
                     </li>
                   )}
-                  <li className="breadcrumb-item">{emailOfCurrentUser}</li>
+                  <li className="breadcrumb-item text-secondary">
+                    {emailOfCurrentUser}
+                  </li>
                 </>
               ) : (
                 <></>

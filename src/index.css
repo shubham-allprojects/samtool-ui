@@ -717,10 +717,6 @@ input:-webkit-autofill:active {
 
 /* Breadcrumb */
 
-.breadcrumb {
-  --bs-breadcrumb-divider: ">";
-}
-
 .breadcrumb-item,
 .breadcrumb-item > *,
 .breadcrumb-item.active {
