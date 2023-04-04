@@ -84,7 +84,7 @@ function Header() {
                 <>
                   <li className="nav-item ps-lg-2">
                     <span className="nav-link">
-                      <i className="bi bi-person-circle me-2"></i>
+                      <i className="bi bi-person-circle me-2 text-light"></i>
                       {userEmail}
                     </span>
                   </li>
