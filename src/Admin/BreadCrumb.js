@@ -7,6 +7,7 @@ const BreadCrumb = ({
   emailOfCurrentUser,
   typeOfUser,
   propertyId,
+  setDisplayClassesOfMainSections,
 }) => {
   const [isUserPageActive, setIsUserPageActive] = useState(false);
   const [isPropertyPageActive, setIsPropertyPageActive] = useState(false);
@@ -47,30 +48,38 @@ const BreadCrumb = ({
             <>
               <li className="breadcrumb-item">Users</li>
               {userType ? (
-                <li className="breadcrumb-item">{userType}</li>
+                <li className="breadcrumb-item">{userType}s</li>
               ) : (
                 <></>
               )}
               {emailOfCurrentUser ? (
                 <>
                   {typeOfUser === "Individual User" ? (
-                    <>
-                      <NavLink
-                        to="/admin/users/individual-users"
-                        className="breadcrumb-item"
-                      >
-                        Individual Users
-                      </NavLink>
-                    </>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setDisplayClassesOfMainSections({
+                          showAllUsersSectionClass: "",
+                          viewCurrentUserSectionClass: "d-none",
+                        });
+                      }}
+                      className="breadcrumb-item"
+                    >
+                      Individual Users
+                    </li>
                   ) : (
-                    <>
-                      <NavLink
-                        to="/admin/users/organizational-users"
-                        className="breadcrumb-item"
-                      >
-                        Organizational Users
-                      </NavLink>
-                    </>
+                    <li
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setDisplayClassesOfMainSections({
+                          showAllUsersSectionClass: "",
+                          viewCurrentUserSectionClass: "d-none",
+                        });
+                      }}
+                      className="breadcrumb-item"
+                    >
+                      Organizational Users
+                    </li>
                   )}
                   <li className="breadcrumb-item">{emailOfCurrentUser}</li>
                 </>

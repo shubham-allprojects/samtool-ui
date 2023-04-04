@@ -148,6 +148,7 @@ const ManageUsers = ({ userType }) => {
   };
 
   const saveCurrentUserData = async (id) => {
+    setSelectedUserId(id);
     if (data) {
       setLoggedInUserId(data.userId);
       // Get user by Id.
@@ -155,12 +156,7 @@ const ManageUsers = ({ userType }) => {
         `/sam/v1/user-registration/auth/${id}`,
         { headers: authHeader }
       );
-      if (currentUser.data) {
-        setDisplayClassesOfMainSections({
-          showAllUsersSectionClass: "d-none",
-          viewCurrentUserSectionClass: "",
-        });
-      }
+
       const typeOfUser = Object.keys(currentUser.data)[2];
       setCategoryWiseUserDetails(currentUser.data[typeOfUser]);
       setOtherDetailsOfUser(currentUser.data.user_details);
@@ -395,8 +391,11 @@ const ManageUsers = ({ userType }) => {
                                     <div
                                       className="dropdown-item"
                                       onClick={() => {
-                                        setSelectedUserId(user_id);
                                         saveCurrentUserData(user_id);
+                                        setDisplayClassesOfMainSections({
+                                          showAllUsersSectionClass: "d-none",
+                                          viewCurrentUserSectionClass: "",
+                                        });
                                       }}
                                     >
                                       <i className="bi bi-eye pe-1"></i> View
@@ -447,10 +446,15 @@ const ManageUsers = ({ userType }) => {
             <BreadCrumb
               typeOfUser={user_type}
               emailOfCurrentUser={email_address}
+              setDisplayClassesOfMainSections={setDisplayClassesOfMainSections}
             />
             <section className="admin-edit-property wrapper">
               <div className="container-fluid">
-                <h2 className="text-center mb-4">View/Edit</h2>
+                <h2 className="text-center mb-4">
+                  {user_type === "Individual User"
+                    ? `${categoryWiseUserDetails.first_name} ${categoryWiseUserDetails.middle_name} ${categoryWiseUserDetails.last_name}`
+                    : `${categoryWiseUserDetails.company_name}`}
+                </h2>
                 <div className="row justify-content-center">
                   <div className="col-xl-10 col-lg-11">
                     <form
