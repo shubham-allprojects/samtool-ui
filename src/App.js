@@ -15,7 +15,6 @@ import AdminHomePage from "./Admin/AdminHomePage";
 import ViewAllProperties from "./Admin/Property/ViewAllProperties";
 import ViewProperty from "./Admin/Property/ViewProperty";
 import UploadProperties from "./Admin/Property/UploadProperties";
-import ViewAllUsers from "./Admin/User/ViewAllUsers";
 import ViewCurrentUser from "./Admin/User/ViewCurrentUser";
 import ChangePassword from "./components/5.Login/ChangePassword";
 import AboutUs from "./components/3.About/AboutUs";
@@ -178,14 +177,6 @@ function App() {
               // <AdminProtected>
               <UploadProperties />
               // </AdminProtected>
-            }
-          />
-          <Route
-            path="/admin/users/*"
-            element={
-              <AdminProtected>
-                <ViewAllUsers />
-              </AdminProtected>
             }
           />
 
