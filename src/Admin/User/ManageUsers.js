@@ -8,7 +8,7 @@ import Pagination from "../../Pagination";
 import { toast } from "react-toastify";
 import BreadCrumb from "../BreadCrumb";
 
-const records_per_page = 2;
+const records_per_page = 4;
 let authHeader = "";
 
 let defaultRoleText = "";
@@ -448,7 +448,7 @@ const ManageUsers = ({ userType }) => {
               emailOfCurrentUser={email_address}
               setDisplayClassesOfMainSections={setDisplayClassesOfMainSections}
             />
-            <section className="admin-edit-property wrapper">
+            <section className="admin-edit-user">
               <div className="container-fluid">
                 <h2 className="text-center mb-4">
                   {user_type === "Individual User"
