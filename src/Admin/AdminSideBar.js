@@ -36,7 +36,7 @@ const AdminSideBar = () => {
     <>
       <button
         onClick={toggleSideBarVisibility}
-        className="btn btn-primary sidebar-toggle-btn-sm d-block d-md-none"
+        className="btn btn-light sidebar-toggle-btn-sm d-block d-md-none"
       >
         <i className={`bi ${icon}`}></i>
       </button>

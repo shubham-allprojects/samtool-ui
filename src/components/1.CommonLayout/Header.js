@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import CommonNavLinks from "./CommonNavLinks";
 
 function Header() {
   // This useState will store data from localStorage such as login-status, role and email of user.
@@ -61,6 +62,7 @@ function Header() {
               {/* If user is not loggedIn then show these navbar links */}
               <li>
                 <NavLink to="/" className="nav-link">
+                  <i className="bi bi-house me-2"></i>
                   Home
                 </NavLink>
               </li>
@@ -82,13 +84,14 @@ function Header() {
                 <>
                   <li className="nav-item ps-lg-2">
                     <span className="nav-link">
-                      <i className="bi bi-person-fill"></i> {userEmail}
+                      <i className="bi bi-person-circle me-2"></i>
+                      {userEmail}
                     </span>
                   </li>
                 </>
               )}
               {/* If user is not loggedIn then show these navbar links in dropdown */}
-              <li className="nav-item dropdown ps-lg-2">
+              <li className="nav-item dropdown ps-lg-2 d-md-block d-none">
                 <span
                   className="nav-link"
                   id="navbarDropdown"
@@ -102,53 +105,20 @@ function Header() {
                   className="dropdown-menu main-nav-dropdown-menu bg-primary"
                   data-bs-popper="static"
                 >
-                  <li>
-                    <NavLink className="nav-link" to="/about">
-                      <i className="bi bi-info-circle text-white me-2"></i>
-                      About
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="nav-link" to="/contact">
-                      <i className="bi bi-telephone text-white me-2"></i>
-                      Contact
-                    </NavLink>
-                  </li>
-                  {roleId && roleId === 1 ? (
-                    <li>
-                      <NavLink to="/admin" className="nav-link">
-                        <i className="bi bi-person-fill-check text-white me-2"></i>
-                        Administration
-                      </NavLink>
-                    </li>
-                  ) : (
-                    ""
-                  )}
-                  {/* If user is loggedIn then show these navbar links in dropdown */}
-                  {loginStatus ? (
-                    <>
-                      <li>
-                        <NavLink to="/profile" className="nav-link">
-                          <i className="bi bi-person-square text-white me-2"></i>
-                          Profile
-                        </NavLink>
-                      </li>
-                      <li>
-                        <span
-                          style={{ cursor: "pointer" }}
-                          className="nav-link"
-                          onClick={logOut}
-                        >
-                          <i className="bi bi-box-arrow-right text-white me-2"></i>
-                          Logout
-                        </span>
-                      </li>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+                  <CommonNavLinks
+                    roleId={roleId}
+                    loginStatus={loginStatus}
+                    logOut={logOut}
+                  />
                 </ul>
               </li>
+              <div className="d-md-none">
+                <CommonNavLinks
+                  roleId={roleId}
+                  loginStatus={loginStatus}
+                  logOut={logOut}
+                />
+              </div>
             </ul>
           </div>
         </div>
