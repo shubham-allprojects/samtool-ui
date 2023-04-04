@@ -49,7 +49,7 @@ const ManageUsers = ({ userType }) => {
   const [confirmDeleteUserBtnDisabled, setConfirmDeleteUserBtnDisabled] =
     useState(true);
   const confirmDeleteInputRef = useRef();
-  const [currentPageNumber, setCurrentPageNumber] = useState(null);
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
   const getAllUsers = async () => {
     setLoading(true);
@@ -447,6 +447,8 @@ const ManageUsers = ({ userType }) => {
               typeOfUser={user_type}
               emailOfCurrentUser={email_address}
               setDisplayClassesOfMainSections={setDisplayClassesOfMainSections}
+              handlePageClick={handlePageClick}
+              currentPageNumber={currentPageNumber - 1}
             />
             <section className="admin-edit-user">
               <div className="container-fluid">

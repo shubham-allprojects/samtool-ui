@@ -7,6 +7,8 @@ const BreadCrumb = ({
   emailOfCurrentUser,
   typeOfUser,
   setDisplayClassesOfMainSections,
+  handlePageClick,
+  currentPageNumber,
 }) => {
   const [isUserPageActive, setIsUserPageActive] = useState(false);
   const [isPropertyPageActive, setIsPropertyPageActive] = useState(false);
@@ -53,6 +55,7 @@ const BreadCrumb = ({
                     <li
                       style={{ cursor: "pointer" }}
                       onClick={() => {
+                        handlePageClick({ selected: currentPageNumber });
                         setDisplayClassesOfMainSections({
                           showAllUsersSectionClass: "",
                           viewCurrentUserSectionClass: "d-none",
@@ -66,6 +69,7 @@ const BreadCrumb = ({
                     <li
                       style={{ cursor: "pointer" }}
                       onClick={() => {
+                        handlePageClick({ selected: currentPageNumber });
                         setDisplayClassesOfMainSections({
                           showAllUsersSectionClass: "",
                           viewCurrentUserSectionClass: "d-none",
