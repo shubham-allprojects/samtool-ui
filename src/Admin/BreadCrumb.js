@@ -6,27 +6,18 @@ const BreadCrumb = ({
   userType,
   emailOfCurrentUser,
   typeOfUser,
-  propertyId,
   setDisplayClassesOfMainSections,
 }) => {
   const [isUserPageActive, setIsUserPageActive] = useState(false);
   const [isPropertyPageActive, setIsPropertyPageActive] = useState(false);
   const [isAddPropertyPageActive, setIsAddPropertyPageActive] = useState(false);
-  const [
-    isSinglePropertyDocumentsUploadPageActive,
-    setIsSinglePropertyDocumentsUploadPageActive,
-  ] = useState(false);
+
   // If we are on Users section in admin then isUserPageActive will be true.
   const testFn = () => {
     setIsUserPageActive(window.location.href.includes("/admin/users"));
     setIsPropertyPageActive(window.location.href.includes("/admin/property"));
     setIsAddPropertyPageActive(
       window.location.href.includes("/admin/property/add-property")
-    );
-    setIsSinglePropertyDocumentsUploadPageActive(
-      window.location.href.includes(
-        "/properties/single-property-documents-upload"
-      )
     );
   };
 
@@ -90,20 +81,10 @@ const BreadCrumb = ({
             </>
           ) : isPropertyPageActive ? (
             <>
-              <NavLink
-                to="/admin/property/properties"
-                className="breadcrumb-item"
-              >
-                Properties
-              </NavLink>
               {isAddPropertyPageActive ? (
-                <li className="breadcrumb-item">Add</li>
-              ) : propertyId ? (
-                <li className="breadcrumb-item">{propertyId}</li>
-              ) : isSinglePropertyDocumentsUploadPageActive ? (
-                <li className="breadcrumb-item">Upload Documents & Images</li>
+                <li className="breadcrumb-item text-secondary">Add Property</li>
               ) : (
-                <> </>
+                <li className="breadcrumb-item text-secondary">Properties</li>
               )}
             </>
           ) : (
