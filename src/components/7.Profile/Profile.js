@@ -139,7 +139,7 @@ const Profile = () => {
                   </div>
                   <h3 className="text-center text-primary pt-2">
                     {user_type === "Individual User"
-                      ? "User Details"
+                      ? "Personal Details"
                       : "Organization Details"}
                   </h3>
                   <div className="profile-top-hr my-3" />
