@@ -12,7 +12,10 @@ const AdminSideBar = () => {
   // Close and open sidebar on small screen.
   const toggleSideBarVisibility = () => {
     if (sideBarOnSmallScreen === "") {
-      setToggleClasses({ sideBarOnSmallScreen: "d-none", icon: "bi-list" });
+      setToggleClasses({
+        sideBarOnSmallScreen: "d-none",
+        icon: "bi-list",
+      });
     } else {
       setToggleClasses({ sideBarOnSmallScreen: "", icon: "bi-x-lg" });
     }
@@ -34,12 +37,13 @@ const AdminSideBar = () => {
 
   return (
     <>
-      <button
-        onClick={toggleSideBarVisibility}
-        className="btn btn-light sidebar-toggle-btn-sm d-block d-md-none"
-      >
-        <i className={`bi ${icon}`}></i>
-      </button>
+      <span className="sidebar-toggle-btn-sm d-block d-md-none">
+        <i
+          onClick={toggleSideBarVisibility}
+          className={`bi ${icon} text-light fs-1`}
+        ></i>
+      </span>
+
       <div className="col-xl-2 col-lg-3 col-md-4 admin-sidebar">
         <div className="py-3">
           <span className="offcanvas-header text-white">
