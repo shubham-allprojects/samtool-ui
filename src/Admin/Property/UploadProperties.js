@@ -7,6 +7,7 @@ import { rootTitle } from "../../CommonFunctions";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
+import BreadCrumb from "../BreadCrumb";
 
 const allowedExtensions = ["csv"];
 const chunkSize = 1 * 1024;
@@ -219,8 +220,9 @@ const UploadProperties = () => {
       >
         <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-lg-9 col-md-8 wrapper mt-4 mt-md-0">
-            <div className="container-fluid">
+          <div className="col-xl-10 col-lg-9 col-md-8">
+            <BreadCrumb />
+            <div className="container-fluid mt-4">
               <div className="row justify-content-center">
                 <div className="col-xl-7 col-md-11 shadow p-md-4 p-3 mb-5 upload-file-main-wrapper">
                   <div className="">

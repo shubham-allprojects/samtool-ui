@@ -11,6 +11,8 @@ const BreadCrumb = ({
   const [isUserPageActive, setIsUserPageActive] = useState(false);
   const [isPropertyPageActive, setIsPropertyPageActive] = useState(false);
   const [isAddPropertyPageActive, setIsAddPropertyPageActive] = useState(false);
+  const [isBulkUploadPropertyPageActive, setIsBulkUploadPropertyPageActive] =
+    useState(false);
 
   // If we are on Users section in admin then isUserPageActive will be true.
   const testFn = () => {
@@ -18,6 +20,9 @@ const BreadCrumb = ({
     setIsPropertyPageActive(window.location.href.includes("/admin/property"));
     setIsAddPropertyPageActive(
       window.location.href.includes("/admin/property/add-property")
+    );
+    setIsBulkUploadPropertyPageActive(
+      window.location.href.includes("/admin/property/upload-properties")
     );
   };
 
@@ -83,6 +88,10 @@ const BreadCrumb = ({
             <>
               {isAddPropertyPageActive ? (
                 <li className="breadcrumb-item text-secondary">Add Property</li>
+              ) : isBulkUploadPropertyPageActive ? (
+                <li className="breadcrumb-item text-secondary">
+                  Upload Bulk Properties
+                </li>
               ) : (
                 <li className="breadcrumb-item text-secondary">Properties</li>
               )}
