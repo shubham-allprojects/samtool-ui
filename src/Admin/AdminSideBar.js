@@ -40,17 +40,15 @@ const AdminSideBar = () => {
       >
         <i className={`bi ${icon}`}></i>
       </button>
-      <div
-        className={`col-xl-2 col-lg-3 col-md-4 admin-sidebar d-md-block ${sideBarOnSmallScreen}`}
-      >
+      <div className="col-xl-2 col-lg-3 col-md-4 admin-sidebar">
         <div className="py-3">
           <span className="offcanvas-header text-white">
-            <h4 className="offcanvas-title ps-4" id="offcanvasExampleLabel">
+            <h4 className="offcanvas-title ps-md-4" id="offcanvasExampleLabel">
               Admin
             </h4>
           </span>
 
-          <div className="offcanvas-body mt-md-4">
+          <div className={`offcanvas-body d-md-block ${sideBarOnSmallScreen}`}>
             <ul className="navbar-nav">
               <hr className="text-white" />
               <li className="nav-item">
