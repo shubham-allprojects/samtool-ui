@@ -843,6 +843,10 @@ input:-webkit-autofill:active {
   color: var(--primary-color-hover) !important;
 }
 
+.admin-sidebar-btn-close {
+  border-radius: 50% !important;
+}
+
 /* Media Queries */
 
 @media (min-width: 768px) {

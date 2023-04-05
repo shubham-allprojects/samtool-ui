@@ -34,11 +34,11 @@ const AdminSideBar = () => {
       >
         <div className="offcanvas-header text-white">
           <h4 className="offcanvas-title ps-md-4" id="offcanvasExampleLabel">
-            Admin
+            Administration
           </h4>
           <button
             type="button"
-            className="btn-close text-reset"
+            className="btn-close admin-sidebar-btn-close text-reset bg-white"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
           ></button>
