@@ -205,15 +205,14 @@ const Contact = () => {
 
                       <button
                         type="submit"
-                        className={`btn btn-primary w-100 mt-3 ${
-                          loading ? "disabled" : ""
-                        }`}
+                        className="btn btn-primary w-100 mt-3"
                         style={{ borderRadius: "0" }}
                         disabled={
                           full_name &&
                           email_address &&
                           message &&
-                          captchaVerified
+                          captchaVerified &&
+                          !loading
                             ? false
                             : true
                         }

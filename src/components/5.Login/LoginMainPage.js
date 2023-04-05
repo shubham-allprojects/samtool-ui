@@ -221,9 +221,8 @@ const LoginMainPage = () => {
                 <hr />
                 <div className="text-center my-3">
                   <button
-                    className={`btn btn-primary ${
-                      loading ? "disabled" : ""
-                    } w-100 common-btn-font`}
+                    disabled={loading ? true : false}
+                    className="btn btn-primary  w-100 common-btn-font"
                   >
                     {loading ? (
                       <>

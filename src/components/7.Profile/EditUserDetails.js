@@ -642,13 +642,14 @@ const EditUserDetails = () => {
                           Cancel
                         </button>
                         <button
+                          disabled={
+                            zipCodeValidationColor || loading ? true : false
+                          }
                           style={{ width: "150px" }}
                           type="submit"
                           id="submit"
                           name="submit"
-                          className={`btn btn-primary ${
-                            zipCodeValidationColor || loading ? "disabled" : ""
-                          }`}
+                          className="btn btn-primary"
                         >
                           {loading ? (
                             <>

@@ -516,7 +516,6 @@ const ManageUsers = ({ userType }) => {
                                     );
                                     if (defaultRole) {
                                       defaultRole.checked = true;
-                                      // defaultRole.disabled = true;
                                     }
                                   }
                                 });

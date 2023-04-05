@@ -277,10 +277,9 @@ const ForgotAndResetPassword = () => {
                   </div>
                   <div className="col-lg-12">
                     <button
+                      disabled={loading ? true : false}
                       type="submit"
-                      className={`btn btn-primary common-btn-font w-100 ${
-                        loading ? "disabled" : ""
-                      }`}
+                      className="btn btn-primary common-btn-font w-100"
                     >
                       {loading ? (
                         <>

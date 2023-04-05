@@ -114,9 +114,8 @@ const VerifyToken = () => {
                   <div className="col-12">
                     <div className="form-group">
                       <button
-                        className={`btn btn-primary common-btn-font w-100 ${
-                          loading ? "disabled" : ""
-                        }`}
+                        disabled={loading ? true : false}
+                        className="btn btn-primary common-btn-font w-100"
                       >
                         {loading ? (
                           <>
