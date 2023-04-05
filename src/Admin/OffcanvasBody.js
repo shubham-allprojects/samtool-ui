@@ -20,11 +20,14 @@ const OffcanvasBody = ({ canvasNumber }) => {
     }
   });
   return (
-    <div className="offcanvas-body">
+    <div className={`offcanvas-body ${canvasNumber ? "pt-0" : ""}`}>
       <ul className="navbar-nav">
         <hr className="text-white" />
         <li className="nav-item">
-          <NavLink className="nav-link admin-home-link" to="/admin">
+          <NavLink
+            className="nav-link admin-home-link sidebar-link"
+            to="/admin"
+          >
             <span className="mx-2">
               <i className="bi bi-house-fill text-light"></i>
             </span>
@@ -54,7 +57,10 @@ const OffcanvasBody = ({ canvasNumber }) => {
             <div className="card card-body bg-primary">
               <ul className="list-unstyled">
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/admin/property/properties">
+                  <NavLink
+                    className="nav-link sidebar-link"
+                    to="/admin/property/properties"
+                  >
                     <i className="bi bi-buildings text-light me-2"></i>
                     Properties
                   </NavLink>
@@ -62,7 +68,7 @@ const OffcanvasBody = ({ canvasNumber }) => {
 
                 <li className="nav-item">
                   <NavLink
-                    className="nav-link"
+                    className="nav-link sidebar-link"
                     to="/admin/property/add-property"
                   >
                     <i className="bi bi-plus-circle text-light me-2"></i>
@@ -71,7 +77,7 @@ const OffcanvasBody = ({ canvasNumber }) => {
                 </li>
                 <li className="nav-item">
                   <NavLink
-                    className="nav-link"
+                    className="nav-link sidebar-link"
                     to="/admin/property/upload-properties"
                   >
                     <i className="bi bi-upload me-2 text-light"></i>Bulk Upload
@@ -104,7 +110,7 @@ const OffcanvasBody = ({ canvasNumber }) => {
               <ul className="list-unstyled">
                 <li className="nav-item">
                   <NavLink
-                    className="nav-link"
+                    className="nav-link sidebar-link"
                     to="/admin/users/individual-users"
                   >
                     <i className="bi bi-person-circle text-light me-2"></i>
@@ -114,7 +120,7 @@ const OffcanvasBody = ({ canvasNumber }) => {
 
                 <li className="nav-item">
                   <NavLink
-                    className="nav-link"
+                    className="nav-link sidebar-link"
                     to="/admin/users/organizational-users"
                   >
                     <i className="bi bi-laptop me-2 text-light"></i>

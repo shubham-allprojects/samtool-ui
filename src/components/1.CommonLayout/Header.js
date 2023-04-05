@@ -53,11 +53,8 @@ function Header() {
               let offcanvasBackdrop = document.querySelector(
                 ".offcanvas-backdrop"
               );
-              let body = document.getElementById("body");
               if (offcanvasBackdrop) {
                 offcanvasBackdrop.classList.add("d-none");
-                body.style.removeProperty("overflow");
-                body.style.removeProperty("padding");
               }
             }}
             type="button"
