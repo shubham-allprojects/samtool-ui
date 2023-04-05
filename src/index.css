@@ -1176,6 +1176,7 @@ input:-webkit-autofill:active {
   }
 
   .canvas-wrapper canvas {
-    height: 278px !important;
+    height: 268px !important;
+    width: 268px !important;
   }
 }
