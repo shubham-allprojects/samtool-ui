@@ -70,11 +70,13 @@ function Header() {
                 <>
                   <li className="nav-item ps-lg-2">
                     <NavLink to="/login" className="nav-link">
+                      <i className="bi bi-box-arrow-in-right me-2 text-light"></i>
                       Login
                     </NavLink>
                   </li>
                   <li className="nav-item ps-lg-2">
                     <NavLink to="/register" className="nav-link">
+                      <i className="bi bi-person-vcard me-2 text-light"></i>
                       Register
                     </NavLink>
                   </li>
