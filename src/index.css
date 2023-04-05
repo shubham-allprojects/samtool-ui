@@ -831,7 +831,6 @@ input:-webkit-autofill:active {
 }
 
 .users-admin .active > .page-link,
-.users-admin .page-link.active,
 .users-admin .active > .page-link:hover {
   z-index: 3;
   background-color: var(--primary-color-hover);
