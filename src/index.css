@@ -831,22 +831,17 @@ input:-webkit-autofill:active {
 }
 
 .users-admin .active > .page-link,
-.users-admin .page-link.active {
+.users-admin .page-link.active,
+.users-admin .active > .page-link:hover {
   z-index: 3;
   background-color: var(--primary-color-hover);
   border-color: var(--primary-color-hover);
+  color: white !important;
 }
 
-.users-admin .page-link {
-  color: var(--primary-color-hover);
-}
-
+.users-admin .page-link,
 .users-admin .page-link:hover {
   color: var(--primary-color-hover) !important;
-}
-
-.users-admin .active > .page-link:hover {
-  color: white !important;
 }
 
 /* Media Queries */
