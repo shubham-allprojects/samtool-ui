@@ -1169,8 +1169,13 @@ input:-webkit-autofill:active {
     color: white !important;
   }
 
-  .register-links a:hover,
+  a:hover,
   .address-label:hover {
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
+  }
+
+  .btn-home:hover {
+    background: #3f3d56 !important;
+    color: white !important;
   }
 }
