@@ -4,8 +4,10 @@ import OffcanvasBody from "./OffcanvasBody";
 const AdminSideBar = () => {
   useEffect(() => {
     let body = document.getElementById("body");
-    let adminLinks = document.querySelectorAll(".offcanvas .sidebar-link");
-    adminLinks.forEach((link) => {
+    let adminSideBarLinks = document.querySelectorAll(
+      ".offcanvas .sidebar-link"
+    );
+    adminSideBarLinks.forEach((link) => {
       link.addEventListener("click", () => {
         body.style.removeProperty("overflow");
         body.style.removeProperty("padding");

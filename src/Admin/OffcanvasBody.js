@@ -12,11 +12,15 @@ const OffcanvasBody = ({ canvasNumber }) => {
     }
     // collapse of property and users section on sidebar will remain open until we are on 'admin/property' or 'admin/users' path.
     if (path.includes("/admin/property")) {
-      document.getElementById("propertyCollapse").classList.add("show");
-      document.getElementById("propertyCollapse2").classList.add("show");
+      document.querySelectorAll(".propertyCollapse").forEach((item) => {
+        console.log(item);
+        item.classList.add("show");
+      });
     } else if (path.includes("/admin/users")) {
-      document.getElementById("usersCollapse").classList.add("show");
-      document.getElementById("usersCollapse2").classList.add("show");
+      document.querySelectorAll(".usersCollapse").forEach((item) => {
+        console.log(item);
+        item.classList.add("show");
+      });
     }
   });
   return (
@@ -51,7 +55,7 @@ const OffcanvasBody = ({ canvasNumber }) => {
           </span>
 
           <div
-            className="collapse"
+            className="collapse propertyCollapse"
             id={`${canvasNumber ? "propertyCollapse2" : "propertyCollapse"}`}
           >
             <div className="card card-body bg-primary">
@@ -103,7 +107,7 @@ const OffcanvasBody = ({ canvasNumber }) => {
           </span>
 
           <div
-            className="collapse"
+            className="collapse usersCollapse"
             id={`${canvasNumber ? "usersCollapse2" : "usersCollapse"}`}
           >
             <div className="card card-body bg-primary">
