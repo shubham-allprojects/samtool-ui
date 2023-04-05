@@ -841,6 +841,14 @@ input:-webkit-autofill:active {
   color: var(--primary-color-hover);
 }
 
+.users-admin .page-link:hover {
+  color: var(--primary-color-hover) !important;
+}
+
+.users-admin .active > .page-link:hover {
+  color: white !important;
+}
+
 /* Media Queries */
 
 @media (min-width: 768px) {
@@ -1019,21 +1027,6 @@ input:-webkit-autofill:active {
     background-color: var(--primary-color);
   }
 
-  .users-btn:hover,
-  .users-btn.active {
-    background-color: var(--primary-color-hover) !important;
-    transition: 0.3s ease-in-out;
-    color: white !important;
-  }
-
-  .users-admin .page-link:hover {
-    color: var(--primary-color-hover);
-  }
-
-  .users-admin .active > .page-link:hover {
-    color: white;
-  }
-
   .admin-top-card:hover .hover-color-secondary {
     transition: 0.3s ease-in-out;
     color: var(--secondary-color) !important;
@@ -1177,5 +1170,10 @@ input:-webkit-autofill:active {
   .btn-home:hover {
     background: #3f3d56 !important;
     color: white !important;
+  }
+
+  .admin-users-wrapper .dropdown-item:hover {
+    color: white;
+    background-color: var(--primary-color-hover);
   }
 }
