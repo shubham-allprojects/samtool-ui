@@ -45,6 +45,25 @@ function Header() {
     <header className="header-wrapper">
       <nav className="navbar navbar-expand-md fixed-top">
         <div className="container-fluid">
+          <button
+            className={`navbar-toggler ${
+              window.location.href.includes("/admin") ? "" : "d-none"
+            }`}
+            onClick={() => {
+              let offcanvasBackdrop = document.querySelector(
+                ".offcanvas-backdrop"
+              );
+              if (offcanvasBackdrop) {
+                offcanvasBackdrop.classList.add("d-none");
+              }
+            }}
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
           <span className="navbar-brand px-lg-4">Assets Class</span>
           <button
             className="navbar-toggler"
