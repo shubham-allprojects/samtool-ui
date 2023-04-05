@@ -168,8 +168,7 @@ input:-webkit-autofill:active {
   transition: 0.3s ease-in-out;
 }
 
-.nav-link.active,
-.nav-link:hover {
+.nav-link.active {
   color: var(--secondary-color) !important;
 }
 
@@ -313,11 +312,6 @@ input:-webkit-autofill:active {
   transition: 0.2s ease-in-out;
 }
 
-.about-home-link:hover {
-  color: var(--primary-color-hover);
-  transition: 0.2s ease-in-out;
-}
-
 .home-about-wrapper .common-col {
   height: 320px;
 }
@@ -440,17 +434,6 @@ input:-webkit-autofill:active {
   transition: 0.3s ease-in-out;
 }
 
-.footer-icon-div:hover,
-.contact-icon-div:hover {
-  transition: 0.3s ease-in-out;
-  background-color: white;
-}
-
-.footer-icon-div:hover .footer-icon,
-.contact-icon-div:hover .contact-icon {
-  color: var(--secondary-color);
-}
-
 /* <----- Registration ----> */
 .registration-wrapper .form-wrapper-card {
   border: none !important;
@@ -466,12 +449,6 @@ input:-webkit-autofill:active {
 .form-text {
   font-size: 0.78em !important;
   margin-top: 0.1rem !important;
-}
-
-.individual-label:hover,
-.organization-label:hover {
-  cursor: pointer;
-  color: var(--secondary-color);
 }
 
 .individual-label.active,
@@ -494,20 +471,10 @@ input:-webkit-autofill:active {
   font-weight: 600;
 }
 
-.register-links a:hover,
-.address-label:hover {
-  border-color: var(--primary-color-hover);
-}
-
 .IndividualForm .btn-secondary,
 .OrganizationForm .btn-secondary {
   background-color: rgba(211, 211, 211, 0.647) !important;
   border: none !important;
-}
-
-.IndividualForm .btn-secondary:hover,
-.OrganizationForm .btn-secondary:hover {
-  background-color: lightgray !important;
 }
 
 /* Login */
@@ -635,13 +602,6 @@ input:-webkit-autofill:active {
   transition: 0.3s ease-in-out;
 }
 
-.profile-inner-card:hover {
-  color: var(--primary-color) !important;
-  background-color: white !important;
-  border-color: var(--primary-color) !important;
-  transition: 0.3s ease-in-out;
-}
-
 .profile-icon-wrapper {
   border: 2px solid white;
   height: 85px;
@@ -656,17 +616,6 @@ input:-webkit-autofill:active {
 }
 
 .profile-icon-wrapper i {
-  transition: 0.2s ease-in-out;
-}
-
-.profile-icon-wrapper:hover {
-  transition: 0.2s ease-in-out;
-  background-color: white;
-  border-color: var(--secondary-color);
-}
-
-.profile-icon-wrapper:hover i {
-  color: var(--secondary-color) !important;
   transition: 0.2s ease-in-out;
 }
 
@@ -690,13 +639,6 @@ input:-webkit-autofill:active {
 .btn-home {
   background: #3f3d56 !important;
   color: white !important;
-  transition: 0.3s ease-in-out !important;
-}
-
-.btn-home:hover {
-  background: white !important;
-  color: #3f3d56 !important;
-  border-color: #3f3d56 !important;
   transition: 0.3s ease-in-out !important;
 }
 
@@ -771,20 +713,8 @@ input:-webkit-autofill:active {
   justify-content: center;
 }
 
-.admin-top-card:hover {
-  transition: 0.3s ease-in-out;
-  background: white !important;
-  border-color: var(--secondary-color);
-  transform: scale(1.04);
-}
-
 .hover-color-secondary {
   transition: 0.3s ease-in-out;
-}
-
-.admin-top-card:hover .hover-color-secondary {
-  transition: 0.3s ease-in-out;
-  color: var(--secondary-color) !important;
 }
 
 /* View all properties */
@@ -866,11 +796,6 @@ input:-webkit-autofill:active {
   color: white;
 }
 
-.admin-users-wrapper .dropdown-item:hover {
-  color: white;
-  background-color: var(--primary-color);
-}
-
 .admin-users-wrapper .dropdown-menu.show {
   background: var(--primary-color-hover);
   border-color: white;
@@ -887,7 +812,6 @@ input:-webkit-autofill:active {
   opacity: 1 !important;
 }
 
-.users-btn:hover,
 .users-btn.active {
   background-color: var(--primary-color-hover) !important;
   transition: 0.3s ease-in-out;
@@ -913,13 +837,8 @@ input:-webkit-autofill:active {
   border-color: var(--primary-color-hover);
 }
 
-.users-admin .page-link,
-.users-admin .page-link:hover {
+.users-admin .page-link {
   color: var(--primary-color-hover);
-}
-
-.users-admin .active > .page-link:hover {
-  color: white;
 }
 
 /* Media Queries */
@@ -1023,6 +942,101 @@ input:-webkit-autofill:active {
   .page-not-found-wrapper,
   .access-denied-wrapper {
     padding: 200px 0 0 0;
+  }
+
+  /* hovers on large screen only */
+
+  .nav-link:hover {
+    color: var(--secondary-color) !important;
+  }
+
+  .about-home-link:hover {
+    color: var(--primary-color-hover) !important;
+    transition: 0.2s ease-in-out;
+  }
+
+  .footer-icon-div:hover,
+  .contact-icon-div:hover {
+    transition: 0.3s ease-in-out;
+    background-color: white;
+  }
+
+  .footer-icon-div:hover .footer-icon,
+  .contact-icon-div:hover .contact-icon {
+    color: var(--secondary-color);
+  }
+
+  .individual-label:hover,
+  .organization-label:hover {
+    cursor: pointer;
+    color: var(--secondary-color);
+  }
+
+  .register-links a:hover,
+  .address-label:hover {
+    border-color: var(--primary-color-hover);
+  }
+
+  .IndividualForm .btn-secondary:hover,
+  .OrganizationForm .btn-secondary:hover {
+    background-color: lightgray !important;
+  }
+
+  .profile-inner-card:hover {
+    color: var(--primary-color) !important;
+    background-color: white !important;
+    border-color: var(--primary-color) !important;
+    transition: 0.3s ease-in-out;
+  }
+
+  .profile-icon-wrapper:hover {
+    transition: 0.2s ease-in-out;
+    background-color: white;
+    border-color: var(--secondary-color);
+  }
+
+  .profile-icon-wrapper:hover i {
+    color: var(--secondary-color) !important;
+    transition: 0.2s ease-in-out;
+  }
+
+  .btn-home:hover {
+    background: white !important;
+    color: #3f3d56 !important;
+    border-color: #3f3d56 !important;
+    transition: 0.3s ease-in-out !important;
+  }
+
+  .admin-top-card:hover {
+    transition: 0.3s ease-in-out;
+    background: white !important;
+    border-color: var(--secondary-color);
+    transform: scale(1.04);
+  }
+
+  .admin-users-wrapper .dropdown-item:hover {
+    color: white;
+    background-color: var(--primary-color);
+  }
+
+  .users-btn:hover,
+  .users-btn.active {
+    background-color: var(--primary-color-hover) !important;
+    transition: 0.3s ease-in-out;
+    color: white !important;
+  }
+
+  .users-admin .page-link:hover {
+    color: var(--primary-color-hover);
+  }
+
+  .users-admin .active > .page-link:hover {
+    color: white;
+  }
+
+  .admin-top-card:hover .hover-color-secondary {
+    transition: 0.3s ease-in-out;
+    color: var(--secondary-color) !important;
   }
 }
 
@@ -1149,5 +1163,14 @@ input:-webkit-autofill:active {
   }
   .admin-sidebar {
     height: fit-content;
+  }
+
+  .nav-link:hover {
+    color: white !important;
+  }
+
+  .register-links a:hover,
+  .address-label:hover {
+    color: var(--primary-color);
   }
 }
