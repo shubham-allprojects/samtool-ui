@@ -2,36 +2,44 @@ import React, { useEffect } from "react";
 import OffcanvasBody from "./OffcanvasBody";
 
 const AdminSideBar = () => {
-  useEffect(() => {
+  const adminSidebarFunctionalities = () => {
     let body = document.getElementById("body");
     let adminSideBarLinks = document.querySelectorAll(
       ".offcanvas .sidebar-link"
     );
+    let adminDashboardLink = document.querySelectorAll(".admin-home-link");
+    let sideBarPropertyCollapse =
+      document.querySelectorAll(".propertyCollapse");
+    let sideBarUsersCollapse = document.querySelectorAll(".usersCollapse");
+
     adminSideBarLinks.forEach((link) => {
       link.addEventListener("click", () => {
         body.style.removeProperty("overflow");
         body.style.removeProperty("padding");
       });
     });
+
     const path = window.location.pathname;
     // Remove active class of link 'Dashboard' if we switch to other link.
     if (path !== "/admin") {
-      document.querySelectorAll(".admin-home-link").forEach((homeLink) => {
-        homeLink.classList.remove("active");
+      adminDashboardLink.forEach((link) => {
+        link.classList.remove("active");
       });
     }
+
     // collapse of property and users section on sidebar will remain open until we are on 'admin/property' or 'admin/users' path.
     if (path.includes("/admin/property")) {
-      document.querySelectorAll(".propertyCollapse").forEach((item) => {
-        console.log(item);
-        item.classList.add("show");
+      sideBarPropertyCollapse.forEach((collapse) => {
+        collapse.classList.add("show");
       });
     } else if (path.includes("/admin/users")) {
-      document.querySelectorAll(".usersCollapse").forEach((item) => {
-        console.log(item);
-        item.classList.add("show");
+      sideBarUsersCollapse.forEach((collapse) => {
+        collapse.classList.add("show");
       });
     }
+  };
+  useEffect(() => {
+    adminSidebarFunctionalities();
   }, []);
 
   return (
