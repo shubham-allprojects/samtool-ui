@@ -13,6 +13,25 @@ const AdminSideBar = () => {
         body.style.removeProperty("padding");
       });
     });
+    const path = window.location.pathname;
+    // Remove active class of link 'Dashboard' if we switch to other link.
+    if (path !== "/admin") {
+      document.querySelectorAll(".admin-home-link").forEach((homeLink) => {
+        homeLink.classList.remove("active");
+      });
+    }
+    // collapse of property and users section on sidebar will remain open until we are on 'admin/property' or 'admin/users' path.
+    if (path.includes("/admin/property")) {
+      document.querySelectorAll(".propertyCollapse").forEach((item) => {
+        console.log(item);
+        item.classList.add("show");
+      });
+    } else if (path.includes("/admin/users")) {
+      document.querySelectorAll(".usersCollapse").forEach((item) => {
+        console.log(item);
+        item.classList.add("show");
+      });
+    }
   }, []);
 
   return (
