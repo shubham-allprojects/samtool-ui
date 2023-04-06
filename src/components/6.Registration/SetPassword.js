@@ -284,7 +284,7 @@ const SetPassword = () => {
                             role="status"
                             aria-hidden="true"
                           ></span>
-                          Setting new password....
+                          Setting password....
                         </>
                       ) : (
                         "Set password"

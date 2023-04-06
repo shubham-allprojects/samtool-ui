@@ -334,6 +334,7 @@ const EditUserDetails = () => {
       email: email,
     };
     setLoading(true);
+    console.log(dataToPost);
     try {
       await axios
         .post(`${customer_reg_url}/auth/edit-details`, dataToPost, {
