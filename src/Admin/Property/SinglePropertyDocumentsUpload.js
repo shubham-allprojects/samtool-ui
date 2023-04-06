@@ -166,7 +166,7 @@ const SinglePropertyDocumentsUpload = () => {
     const file = pdfFiles[currentPdfFileIndex];
     const size = file.size;
     const data = readerEvent.target.result.split(",")[1];
-    let currentChunkSize = singleChunkInByte;
+    // let currentChunkSize = singleChunkInByte;
     // temp += singleChunkInByte;
     // if (temp > size) {
     //   currentChunkSize = size - (temp - singleChunkInByte);
