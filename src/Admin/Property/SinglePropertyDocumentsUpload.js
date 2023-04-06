@@ -7,8 +7,8 @@ import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-let singleChunkInKb = 116;
-const chunkSize = singleChunkInKb * 1024;
+let singleChunkInByte = 1024 * 7;
+const chunkSize = singleChunkInByte * 1024;
 let authHeader = "";
 let temp = 0;
 const SinglePropertyDocumentsUpload = () => {
@@ -166,10 +166,10 @@ const SinglePropertyDocumentsUpload = () => {
     const file = pdfFiles[currentPdfFileIndex];
     const size = file.size / 1024;
     const data = readerEvent.target.result.split(",")[1];
-    let currentChunkSize = singleChunkInKb;
-    temp += singleChunkInKb;
+    let currentChunkSize = singleChunkInByte;
+    temp += singleChunkInByte;
     if (temp > size) {
-      currentChunkSize = size - (temp - singleChunkInKb);
+      currentChunkSize = size - (temp - singleChunkInByte);
     }
     const detailsToPost = {
       upload_id: uniqueIdForPdf,
