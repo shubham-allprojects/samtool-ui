@@ -1095,15 +1095,17 @@ const Registration = () => {
                   </div>
 
                   <div className="col-md-4">
-                    <input
-                      onBlur={onInputBlur}
-                      id="locality"
-                      name="locality"
-                      type="text"
-                      className="form-control "
-                      onChange={onInputChange}
-                      placeholder="Locality, Area"
-                    />
+                    <div className="form-group mb-3">
+                      <input
+                        onBlur={onInputBlur}
+                        id="locality"
+                        name="locality"
+                        type="text"
+                        className="form-control "
+                        onChange={onInputChange}
+                        placeholder="Locality, Area"
+                      />
+                    </div>
                   </div>
 
                   <div className="col-md-4">
