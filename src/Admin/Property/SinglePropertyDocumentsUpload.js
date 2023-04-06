@@ -7,8 +7,10 @@ import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const chunkSize = 100 * 1024;
+let singleChunkInKb = 116;
+const chunkSize = singleChunkInKb * 1024;
 let authHeader = "";
+let temp = 0;
 const SinglePropertyDocumentsUpload = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   if (data) {
@@ -160,47 +162,50 @@ const SinglePropertyDocumentsUpload = () => {
     reader.onload = (e) => uploadPdfChunk(e);
     reader.readAsDataURL(blob);
   };
-
   const uploadPdfChunk = async (readerEvent) => {
-    let fileSize = 0;
     const file = pdfFiles[currentPdfFileIndex];
-    const size = Math.round(file.size / 1024);
-    fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
+    const size = file.size / 1024;
     const data = readerEvent.target.result.split(",")[1];
+    let currentChunkSize = singleChunkInKb;
+    temp += singleChunkInKb;
+    if (temp > size) {
+      currentChunkSize = size - (temp - singleChunkInKb);
+    }
     const detailsToPost = {
       upload_id: uniqueIdForPdf,
       chunk_number: `${currentChunkIndexOfPdf + 1}`,
       total_chunks: `${Math.ceil(file.size / chunkSize)}`,
-      total_file_size: `${fileSize}`,
+      total_file_size: `${size.toFixed(2)}`,
       file_name: `${file.name}`,
-      data: `${data}`,
+      chunkSizeOfCurrentChunk: currentChunkSize.toFixed(2),
+      // data: `${data}`,
     };
     console.log(detailsToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndexOfPdf === chunks;
     console.warn("IS LAST CHUNK: ", isLastChunk);
-    try {
-      await axios
-        .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
-          headers: authHeader,
-        })
-        .then((res) => {
-          if (isLastChunk) {
-            if (res.data.msg !== 0) {
-              toast.error("Error while uploading files");
-            } else {
-              if (currentPdfFileIndex === savedPdfFiles.length - 1) {
-                toast.success("Files uploaded successfully");
-                setTimeout(() => {
-                  window.location.reload();
-                }, 4000);
-              }
-            }
-          }
-        });
-    } catch (error) {
-      toast.error("Internal server error");
-    }
+    // try {
+    //   await axios
+    //     .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
+    //       headers: authHeader,
+    //     })
+    //     .then((res) => {
+    //       if (isLastChunk) {
+    //         if (res.data.msg !== 0) {
+    //           toast.error("Error while uploading files");
+    //         } else {
+    //           if (currentPdfFileIndex === savedPdfFiles.length - 1) {
+    //             toast.success("Files uploaded successfully");
+    //             setTimeout(() => {
+    //               window.location.reload();
+    //             }, 4000);
+    //           }
+    //         }
+    //       }
+    //     });
+    // } catch (error) {
+    //   toast.error("Internal server error");
+    // }
     if (isLastChunk) {
       setUinqueIdForPdf(uuid());
       setLastUploadedPdfFileIndex(currentPdfFileIndex);
