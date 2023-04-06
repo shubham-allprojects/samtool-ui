@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-let singleChunkInByte = 1024 * 24;
+let singleChunkInByte = 233;
 const chunkSize = singleChunkInByte * 1024;
 let authHeader = "";
 // let temp = 0;
@@ -46,20 +46,19 @@ const SinglePropertyDocumentsUpload = () => {
   };
 
   const uploadImageChunk = async (readerEvent) => {
-    let fileSize = 0;
     const file = imageFiles[currentImageFileIndex];
-    const size = Math.round(file.size / 1024);
-    fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
+    const size = file.size;
     const data = readerEvent.target.result.split(",")[1];
     const detailsToPost = {
       upload_id: uniqueId,
-      chunk_number: `${currentChunkIndexOfImage + 1}`,
-      total_chunks: `${Math.ceil(file.size / chunkSize)}`,
-      total_file_size: `${fileSize}`,
-      file_name: `${file.name}`,
-      property_id: 1,
-      data: `${data}`,
+      chunk_number: currentChunkIndexOfImage + 1,
+      total_chunks: Math.ceil(file.size / chunkSize),
+      chunk_size: chunkSize,
+      total_file_size: size,
+      file_name: file.name,
+      data: data,
     };
+
     console.log(detailsToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndexOfImage === chunks;
