@@ -54,10 +54,12 @@ const Contact = () => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    e.target.reset();
-    toast.success("Message sent successfully");
-    setLoading(false);
-    setCaptchaVerified(false);
+    setTimeout(() => {
+      e.target.reset();
+      toast.success("Message sent successfully");
+      setLoading(false);
+      setCaptchaVerified(false);
+    }, 2000);
   };
 
   const loadCaptchaOnRefresh = () => {
