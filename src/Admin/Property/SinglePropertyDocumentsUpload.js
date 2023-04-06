@@ -25,7 +25,7 @@ const SinglePropertyDocumentsUpload = () => {
   const [currentChunkIndexOfImage, setCurrentChunkIndexOfImage] =
     useState(null);
 
-  const [uniqueId, setUinqueId] = useState(uuid());
+  const [uniqueId, setUniqueId] = useState(uuid());
 
   const handleImageFileChange = (e) => {
     e.preventDefault();
@@ -86,7 +86,7 @@ const SinglePropertyDocumentsUpload = () => {
       toast.error("Internal server error");
     }
     if (isLastChunk) {
-      setUinqueId(uuid());
+      setUniqueId(uuid());
       setLastUploadedImageFileIndex(currentImageFileIndex);
       setCurrentChunkIndexOfImage(null);
     } else {
