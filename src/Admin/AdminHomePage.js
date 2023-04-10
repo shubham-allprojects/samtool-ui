@@ -275,7 +275,7 @@ const AdminHomePage = () => {
                 <div className="col-xl-6">
                   <div
                     className="container-fluid shadow"
-                    style={{ border: "1px solid orange" }}
+                    style={{ border: "1px solid var(--primary-color)" }}
                   >
                     <div className="row chart-wrapper position-relative bg-light">
                       <div className="h-100 w-100 canvas-wrapper d-flex justify-content-center position-absolute p-4">
@@ -364,7 +364,7 @@ const AdminHomePage = () => {
                 <div className="col-xl-6 mt-xl-0 mt-4">
                   <div
                     className="container-fluid shadow"
-                    style={{ border: "1px solid orange" }}
+                    style={{ border: "1px solid var(--primary-color)" }}
                   >
                     <div className="row chart-wrapper position-relative bg-light">
                       <div className="h-100 w-100 canvas-wrapper d-flex justify-content-center position-absolute p-4">
