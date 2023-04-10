@@ -41,9 +41,7 @@ const CommonFormFields = ({
 
       {/* Email */}
       <div className="row emailRow mt-lg-3 mt-4">
-        <div className="col-lg-2 mb-lg-0 mb-2">
-          Email Address<span className="text-danger">*</span>
-        </div>
+        <div className="col-lg-2 mb-lg-0 mb-2">Email Address</div>
         <div className="col-lg-2">
           <input
             onChange={onInputChange}
@@ -74,7 +72,7 @@ const CommonFormFields = ({
             onBlur={onInputBlur}
             name="landline_number"
             type="Number"
-            placeholder="Landline Number (Optional)"
+            placeholder="Landline (Optional)"
             className="form-control "
           />
         </div>

@@ -10,7 +10,7 @@ import { v4 as uuid } from "uuid";
 import BreadCrumb from "../BreadCrumb";
 
 const allowedExtensions = ["csv"];
-const chunkSize = 1 * 1024;
+const chunkSize = 5 * 1024 * 1024;
 
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);

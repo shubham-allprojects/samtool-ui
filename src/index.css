@@ -56,8 +56,8 @@ code {
   font-weight: 500 !important;
 }
 
-.page-item:hover {
-  cursor: pointer;
+.active > .page-link:hover {
+  color: white !important;
 }
 
 .nav-link:focus {
@@ -828,19 +828,6 @@ input:-webkit-autofill:active {
 .confirm-delete-modal .modal-content {
   background: var(--bg-gradient-blue);
   color: white;
-}
-
-.users-admin .active > .page-link,
-.users-admin .active > .page-link:hover {
-  z-index: 3;
-  background-color: var(--primary-color-hover);
-  border-color: var(--primary-color-hover);
-  color: white !important;
-}
-
-.users-admin .page-link,
-.users-admin .page-link:hover {
-  color: var(--primary-color-hover) !important;
 }
 
 .admin-sidebar-btn-close {

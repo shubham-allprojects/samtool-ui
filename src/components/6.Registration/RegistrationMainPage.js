@@ -741,7 +741,7 @@ const Registration = () => {
                       <hr />
                     </div>
 
-                    <div className="col-xl-3" id="registration-alert">
+                    <div className="col-12" id="registration-alert">
                       <div
                         className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
                           alertVisible ? "" : "d-none"
