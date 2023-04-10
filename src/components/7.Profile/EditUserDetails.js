@@ -12,9 +12,7 @@ const EditUserDetails = () => {
   const [userType, setUserType] = useState("");
 
   // To store updated user details.
-  const [commonUserDetails, setCommonUserDetails] = useState({
-    address: "Not Available",
-  });
+  const [commonUserDetails, setCommonUserDetails] = useState({});
 
   // Object destructuring.
   const {
@@ -234,7 +232,7 @@ const EditUserDetails = () => {
     } else if (name === "city") {
       setCommonUserDetails({ ...commonUserDetails, [name]: value });
     } else if (name === "locality") {
-      setCommonUserDetails({ ...commonUserDetails, [name]: value });
+      setCommonUserDetails({ ...commonUserDetails, address: value });
     }
   };
 
@@ -291,10 +289,13 @@ const EditUserDetails = () => {
       zipCodeValidationMessage: "",
     });
 
-    const { city, state_id, state_name } = originalValuesToShow;
-
+    const { city, state_id, state_name, zip, locality } = originalValuesToShow;
+    console.log(locality);
     setCommonUserDetails({
       ...commonUserDetails,
+      address: locality,
+      zip: zip,
+      locality: locality,
       city: city,
       state_id: state_id,
       state_name: state_name,
@@ -327,13 +328,14 @@ const EditUserDetails = () => {
     const [headers, , customer_reg_url] = setHeaderAndUrl();
     const dataToPost = {
       address: address,
-      locality: locality,
+      locality: address,
       city: city,
       zip: zip,
       state: state_name,
       email: email,
     };
     setLoading(true);
+    console.log(dataToPost);
     try {
       await axios
         .post(`${customer_reg_url}/auth/edit-details`, dataToPost, {
