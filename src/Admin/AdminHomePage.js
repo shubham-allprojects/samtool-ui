@@ -42,7 +42,7 @@ const AdminHomePage = () => {
   };
 
   const [chart1Type, setChart1Type] = useState("pie");
-  const [chart2Type, setChart2Type] = useState("line");
+  const [chart2Type, setChart2Type] = useState("bar");
 
   const onChart1Selection = (e) => {
     const { value } = e.target;
@@ -182,7 +182,7 @@ const AdminHomePage = () => {
   useEffect(() => {
     rootTitle.textContent = "ADMIN - HOME";
     document.getElementById("pie").checked = true;
-    document.getElementById("line2").checked = true;
+    document.getElementById("bar2").checked = true;
     if (data) {
       setTotalCountOfUsers();
       getPropertyCountFromApi();
@@ -368,16 +368,16 @@ const AdminHomePage = () => {
                   >
                     <div className="row chart-wrapper position-relative bg-light">
                       <div className="h-100 w-100 canvas-wrapper d-flex justify-content-center position-absolute p-4">
-                        <Line
-                          className={`${chart2Type === "line" ? "" : "d-none"}`}
-                          data={lineChart2Data}
-                          options={chart2Options}
-                        ></Line>
                         <Bar
                           className={`${chart2Type === "bar" ? "" : "d-none"}`}
                           data={barChart2Data}
                           options={chart2Options}
                         ></Bar>
+                        <Line
+                          className={`${chart2Type === "line" ? "" : "d-none"}`}
+                          data={lineChart2Data}
+                          options={chart2Options}
+                        ></Line>
                         <Doughnut
                           className={`${
                             chart2Type === "doughnut" ? "" : "d-none"
@@ -400,11 +400,11 @@ const AdminHomePage = () => {
                             className="form-check-input chart1check"
                             type="radio"
                             name="chart2"
-                            id="line2"
-                            value="line2"
+                            id="bar2"
+                            value="bar2"
                           />
-                          <label className="form-check-label" htmlFor="line2">
-                            Line
+                          <label className="form-check-label" htmlFor="bar2">
+                            Bar
                           </label>
                         </div>
                       </div>
@@ -415,11 +415,11 @@ const AdminHomePage = () => {
                             className="form-check-input chart1check"
                             type="radio"
                             name="chart2"
-                            id="bar2"
-                            value="bar2"
+                            id="line2"
+                            value="line2"
                           />
-                          <label className="form-check-label" htmlFor="bar2">
-                            Bar
+                          <label className="form-check-label" htmlFor="line2">
+                            Line
                           </label>
                         </div>
                       </div>
