@@ -8,7 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 let singleChunkInByte = 233;
-const chunkSize = singleChunkInByte * 1024;
+let chunkSize = singleChunkInByte * 1024;
 let authHeader = "";
 // let temp = 0;
 const SinglePropertyDocumentsUpload = () => {
@@ -48,6 +48,7 @@ const SinglePropertyDocumentsUpload = () => {
   const uploadImageChunk = async (readerEvent) => {
     const file = imageFiles[currentImageFileIndex];
     const size = file.size;
+    chunkSize = size / 2;
     const data = readerEvent.target.result.split(",")[1];
     const detailsToPost = {
       upload_id: uniqueId,
