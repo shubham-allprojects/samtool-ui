@@ -415,11 +415,14 @@ const AdminHomePage = () => {
                             className="form-check-input chart1check"
                             type="radio"
                             name="chart2"
-                            id="line2"
-                            value="line2"
+                            id="doughnut2"
+                            value="doughnut2"
                           />
-                          <label className="form-check-label" htmlFor="line2">
-                            Line
+                          <label
+                            className="form-check-label"
+                            htmlFor="doughnut2"
+                          >
+                            Doughnut
                           </label>
                         </div>
                       </div>
@@ -430,14 +433,11 @@ const AdminHomePage = () => {
                             className="form-check-input chart1check"
                             type="radio"
                             name="chart2"
-                            id="doughnut2"
-                            value="doughnut2"
+                            id="line2"
+                            value="line2"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="doughnut2"
-                          >
-                            Doughnut
+                          <label className="form-check-label" htmlFor="line2">
+                            Line
                           </label>
                         </div>
                       </div>
