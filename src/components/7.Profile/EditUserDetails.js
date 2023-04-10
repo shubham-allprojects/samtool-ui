@@ -290,7 +290,6 @@ const EditUserDetails = () => {
     });
 
     const { city, state_id, state_name, zip, locality } = originalValuesToShow;
-    console.log(locality);
     setCommonUserDetails({
       ...commonUserDetails,
       address: locality,
@@ -335,7 +334,6 @@ const EditUserDetails = () => {
       email: email,
     };
     setLoading(true);
-    console.log(dataToPost);
     try {
       await axios
         .post(`${customer_reg_url}/auth/edit-details`, dataToPost, {
