@@ -169,8 +169,12 @@ const AdminHomePage = () => {
       `sam/v1/property/auth/property-count`,
       { headers: headers }
     );
+    let arr = propertyCountRes.data;
+    let totalCount = 0;
+    arr.forEach((type) => {
+      totalCount += type.count;
+    });
     // To show counter animation on admin Home page.
-    const totalCount = propertyCountRes.data.count;
     if (!totalCount <= 0) {
       totalCount > 100
         ? (propertyStartCounter = Math.floor((totalCount * 80) / 100))
