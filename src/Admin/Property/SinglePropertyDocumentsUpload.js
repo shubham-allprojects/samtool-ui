@@ -7,9 +7,9 @@ import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-let singleChunkInByte = 233;
-let chunkSize = singleChunkInByte * 1024;
 let authHeader = "";
+let temp = 0;
+let chunkSize = 5000;
 // let temp = 0;
 const SinglePropertyDocumentsUpload = () => {
   const data = JSON.parse(localStorage.getItem("data"));
@@ -48,19 +48,24 @@ const SinglePropertyDocumentsUpload = () => {
   const uploadImageChunk = async (readerEvent) => {
     const file = imageFiles[currentImageFileIndex];
     const size = file.size;
-    chunkSize = size / 2;
+    chunkSize = (size * 40) / 100;
+    let tempChunkSize = chunkSize;
+    temp += tempChunkSize;
+    if (temp > size) {
+      tempChunkSize = size - (temp - chunkSize);
+    }
     const data = readerEvent.target.result.split(",")[1];
     const detailsToPost = {
       upload_id: uniqueId,
       chunk_number: currentChunkIndexOfImage + 1,
-      total_chunks: Math.ceil(file.size / chunkSize),
-      chunk_size: chunkSize,
+      total_chunks: Math.ceil(size / chunkSize),
+      chunk_size: tempChunkSize,
       total_file_size: size,
       file_name: file.name,
       data: data,
     };
 
-    console.log(size,data.length);
+    console.log(detailsToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndexOfImage === chunks;
     console.warn("IS LAST CHUNK: ", isLastChunk);
