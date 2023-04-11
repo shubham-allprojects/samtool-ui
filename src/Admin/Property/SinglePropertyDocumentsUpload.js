@@ -38,6 +38,7 @@ const SinglePropertyDocumentsUpload = () => {
     if (!file) {
       return;
     }
+    chunkSize = Math.round((file.size * 39) / 100);
     const from = currentChunkIndexOfImage * chunkSize;
     const to = from + chunkSize;
     const blob = file.slice(from, to);
@@ -48,7 +49,6 @@ const SinglePropertyDocumentsUpload = () => {
   const uploadImageChunk = async (readerEvent) => {
     const file = imageFiles[currentImageFileIndex];
     const size = file.size;
-    chunkSize = Math.round((size * 39) / 100);
     let tempChunkSize = chunkSize;
     temp += tempChunkSize;
     if (temp > size) {
@@ -64,7 +64,6 @@ const SinglePropertyDocumentsUpload = () => {
       file_name: file.name,
       data: data,
     };
-
     console.log(detailsToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndexOfImage === chunks;
@@ -161,6 +160,7 @@ const SinglePropertyDocumentsUpload = () => {
     if (!file) {
       return;
     }
+    chunkSize = Math.round((file.size * 39) / 100);
     const from = currentChunkIndexOfPdf * chunkSize;
     const to = from + chunkSize;
     const blob = file.slice(from, to);
@@ -170,13 +170,11 @@ const SinglePropertyDocumentsUpload = () => {
   const uploadPdfChunk = async (readerEvent) => {
     const file = pdfFiles[currentPdfFileIndex];
     const size = file.size;
-    chunkSize = Math.round((size * 39) / 100);
     let tempChunkSize = chunkSize;
     temp += tempChunkSize;
     if (temp > size) {
       tempChunkSize = size - (temp - chunkSize);
     }
-    console.log(chunkSize);
     const data = readerEvent.target.result.split(",")[1];
     const detailsToPost = {
       upload_id: uniqueIdForPdf,
