@@ -48,7 +48,7 @@ const SinglePropertyDocumentsUpload = () => {
   const uploadImageChunk = async (readerEvent) => {
     const file = imageFiles[currentImageFileIndex];
     const size = file.size;
-    chunkSize = (size * 40) / 100;
+    chunkSize = Math.round((size * 40) / 100);
     let tempChunkSize = chunkSize;
     temp += tempChunkSize;
     if (temp > size) {
