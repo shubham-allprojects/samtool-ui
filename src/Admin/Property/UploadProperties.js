@@ -10,7 +10,8 @@ import { v4 as uuid } from "uuid";
 import BreadCrumb from "../BreadCrumb";
 
 const allowedExtensions = ["csv"];
-let chunkSize = 5 * 1024 * 1024;
+let chunkSize = 0;
+let temp = 0;
 
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
@@ -113,6 +114,7 @@ const UploadProperties = () => {
     if (!file) {
       return;
     }
+    chunkSize = Math.round((file.size * 39) / 100);
     const from = currentChunkIndex * chunkSize;
     const to = from + chunkSize;
     const blob = file.slice(from, to);
@@ -121,35 +123,26 @@ const UploadProperties = () => {
   };
 
   const uploadChunk = async (readerEvent) => {
-    // let fileSize = 0;
     const file = files[currentFileIndex];
-    // const size = Math.round(file.size / 1024) + 1;
-    // fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
-    // const data = readerEvent.target.result.split(",")[1];
     const [headers, url] = setHeaderAndUrl();
-    // const dataToPost = {
-    //   upload_id: uniqueUploadId,
-    //   chunk_number: `${currentChunkIndex + 1}`,
-    //   total_chunks: `${Math.ceil(file.size / chunkSize)}`,
-    //   total_file_size: fileSize,
-    //   file_name: file.name,
-    //   data: data,
-    // };
-    // console.log(dataToPost);
-
     const size = file.size;
-    chunkSize = size / 2;
+
+    let tempChunkSize = chunkSize;
+    temp += tempChunkSize;
+    if (temp > size) {
+      tempChunkSize = size - (temp - chunkSize);
+    }
     const data = readerEvent.target.result.split(",")[1];
+
     const detailsToPost = {
       upload_id: uniqueUploadId,
       chunk_number: currentChunkIndex + 1,
       total_chunks: Math.ceil(size / chunkSize),
-      chunk_size: chunkSize,
+      chunk_size: tempChunkSize,
       total_file_size: size,
       file_name: file.name,
       data: data,
     };
-
     console.log(detailsToPost);
 
     const chunks = Math.ceil(file.size / chunkSize) - 1;
@@ -162,9 +155,9 @@ const UploadProperties = () => {
             toast.error("Error while uploading files");
           } else {
             toast.success("File uploaded successfully");
-            setTimeout(() => {
-              window.location.reload();
-            }, 4000);
+            // setTimeout(() => {
+            //   window.location.reload();
+            // }, 4000);
           }
         }
       });
