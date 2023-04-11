@@ -10,7 +10,7 @@ import { v4 as uuid } from "uuid";
 import BreadCrumb from "../BreadCrumb";
 
 const allowedExtensions = ["csv"];
-const chunkSize = 5 * 1024 * 1024;
+let chunkSize = 5 * 1024 * 1024;
 
 const UploadProperties = () => {
   const [files, setFiles] = useState([]);
@@ -41,7 +41,7 @@ const UploadProperties = () => {
     window.scrollTo(0, 0);
     setTimeout(() => {
       window.location.reload();
-    }, 2000);
+    }, 200);
   };
 
   const dataFromLocal = JSON.parse(localStorage.getItem("data"));
@@ -121,25 +121,41 @@ const UploadProperties = () => {
   };
 
   const uploadChunk = async (readerEvent) => {
-    let fileSize = 0;
+    // let fileSize = 0;
     const file = files[currentFileIndex];
-    const size = Math.round(file.size / 1024) + 1;
-    fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
-    const data = readerEvent.target.result.split(",")[1];
+    // const size = Math.round(file.size / 1024) + 1;
+    // fileSize = size >= 1024 ? (size / 1024).toFixed(1) + " MB" : size + " KB";
+    // const data = readerEvent.target.result.split(",")[1];
     const [headers, url] = setHeaderAndUrl();
-    const dataToPost = {
+    // const dataToPost = {
+    //   upload_id: uniqueUploadId,
+    //   chunk_number: `${currentChunkIndex + 1}`,
+    //   total_chunks: `${Math.ceil(file.size / chunkSize)}`,
+    //   total_file_size: fileSize,
+    //   file_name: file.name,
+    //   data: data,
+    // };
+    // console.log(dataToPost);
+
+    const size = file.size;
+    chunkSize = size / 2;
+    const data = readerEvent.target.result.split(",")[1];
+    const detailsToPost = {
       upload_id: uniqueUploadId,
-      chunk_number: `${currentChunkIndex + 1}`,
-      total_chunks: `${Math.ceil(file.size / chunkSize)}`,
-      total_file_size: fileSize,
+      chunk_number: currentChunkIndex + 1,
+      total_chunks: Math.ceil(size / chunkSize),
+      chunk_size: chunkSize,
+      total_file_size: size,
       file_name: file.name,
       data: data,
     };
-    console.log(dataToPost);
+
+    console.log(detailsToPost);
+
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
     try {
-      await axios.post(url, dataToPost, { headers: headers }).then((res) => {
+      await axios.post(url, detailsToPost, { headers: headers }).then((res) => {
         if (isLastChunk) {
           if (res.data.msg !== 0) {
             onCancelClick();
