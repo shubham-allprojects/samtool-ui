@@ -9,8 +9,8 @@ import { toast } from "react-toastify";
 
 let authHeader = "";
 let temp = 0;
-let chunkSize = 5000;
-// let temp = 0;
+let chunkSize = 0;
+
 const SinglePropertyDocumentsUpload = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   if (data) {
@@ -48,7 +48,7 @@ const SinglePropertyDocumentsUpload = () => {
   const uploadImageChunk = async (readerEvent) => {
     const file = imageFiles[currentImageFileIndex];
     const size = file.size;
-    chunkSize = Math.round((size * 40) / 100);
+    chunkSize = Math.round((size * 39) / 100);
     let tempChunkSize = chunkSize;
     temp += tempChunkSize;
     if (temp > size) {
@@ -81,9 +81,9 @@ const SinglePropertyDocumentsUpload = () => {
             } else {
               if (currentImageFileIndex === savedImageFiles.length - 1) {
                 toast.success("Files uploaded successfully");
-                setTimeout(() => {
-                  window.location.reload();
-                }, 4000);
+                // setTimeout(() => {
+                //   window.location.reload();
+                // }, 4000);
               }
             }
           }
@@ -170,22 +170,23 @@ const SinglePropertyDocumentsUpload = () => {
   const uploadPdfChunk = async (readerEvent) => {
     const file = pdfFiles[currentPdfFileIndex];
     const size = file.size;
+    chunkSize = Math.round((size * 39) / 100);
+    let tempChunkSize = chunkSize;
+    temp += tempChunkSize;
+    if (temp > size) {
+      tempChunkSize = size - (temp - chunkSize);
+    }
+    console.log(chunkSize);
     const data = readerEvent.target.result.split(",")[1];
-    // let currentChunkSize = singleChunkInByte;
-    // temp += singleChunkInByte;
-    // if (temp > size) {
-    //   currentChunkSize = size - (temp - singleChunkInByte);
-    // }
     const detailsToPost = {
       upload_id: uniqueIdForPdf,
       chunk_number: currentChunkIndexOfPdf + 1,
-      total_chunks: Math.ceil(file.size / chunkSize),
-      chunk_size: chunkSize,
+      total_chunks: Math.ceil(size / chunkSize),
+      chunk_size: tempChunkSize,
       total_file_size: size,
       file_name: file.name,
       data: data,
     };
-
     console.log(detailsToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndexOfPdf === chunks;
@@ -202,9 +203,9 @@ const SinglePropertyDocumentsUpload = () => {
             } else {
               if (currentPdfFileIndex === savedPdfFiles.length - 1) {
                 toast.success("Files uploaded successfully");
-                setTimeout(() => {
-                  window.location.reload();
-                }, 4000);
+                // setTimeout(() => {
+                //   window.location.reload();
+                // }, 4000);
               }
             }
           }
