@@ -60,7 +60,7 @@ const SinglePropertyDocumentsUpload = () => {
       data: data,
     };
 
-    console.log(detailsToPost);
+    console.log(size,data.length);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndexOfImage === chunks;
     console.warn("IS LAST CHUNK: ", isLastChunk);
