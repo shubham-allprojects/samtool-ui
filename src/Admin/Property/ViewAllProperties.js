@@ -85,7 +85,6 @@ const ViewAllProperties = () => {
       dataToPost,
       { headers: authHeader }
     );
-    console.log(propertiesRes.data);
     return propertiesRes.data;
   };
 
