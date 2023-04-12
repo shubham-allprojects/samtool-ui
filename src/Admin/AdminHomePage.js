@@ -23,8 +23,7 @@ const AdminHomePage = () => {
   const { countOfIndividualUsers, countOfOrgUsers } = countOfUsers;
   const [typeWisePropertyDetails, setTypeWisePropertyDetails] = useState({});
 
-  const { propertyTypesCount, propertyLabels, typeWiseCount } =
-    typeWisePropertyDetails;
+  const { propertyLabels, typeWiseCount } = typeWisePropertyDetails;
   const setHeaderAndUrl = () => {
     let headers = "";
     if (data) {
