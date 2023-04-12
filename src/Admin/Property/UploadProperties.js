@@ -312,7 +312,7 @@ const UploadProperties = () => {
                         })}
                       </tbody>
                     </table>
-                    <div className="text-end mt-3 bg-primary position-absolute save-cancel-btn-div">
+                    <div className="text-end mt-3 bg-light position-absolute save-cancel-btn-div">
                       <button
                         className="btn btn-success me-2"
                         onClick={postChunksToDataBase}
