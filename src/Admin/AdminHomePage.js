@@ -153,7 +153,7 @@ const AdminHomePage = () => {
     plugins: {
       title: {
         display: true,
-        text: "Users Count",
+        text: "Users",
       },
     },
   };
