@@ -76,15 +76,19 @@ const AdminHomePage = () => {
 
   const [chart1Type, setChart1Type] = useState("pie");
   const [chart2Type, setChart2Type] = useState("bar");
+  const [chart1TitleVisible, setChart1TitleVisible] = useState(true);
   const [chart2TitleVisible, setChart2TitleVisible] = useState(true);
 
   const onChart1Selection = (e) => {
     const { value } = e.target;
     if (value === "pie") {
+      setChart1TitleVisible(true);
       setChart1Type("pie");
     } else if (value === "bar") {
+      setChart1TitleVisible(false);
       setChart1Type("bar");
     } else if (value === "doughnut") {
+      setChart1TitleVisible(true);
       setChart1Type("doughnut");
     }
   };
@@ -100,7 +104,7 @@ const AdminHomePage = () => {
     }
   };
 
-  const pieChart1Data = {
+  const chart1Data = {
     labels: ["Individual", "Organizational"],
     datasets: [
       {
@@ -108,26 +112,6 @@ const AdminHomePage = () => {
         data: [countOfIndividualUsers, countOfOrgUsers],
         backgroundColor: ["rgb(13, 110, 253)", "orange"],
         borderColor: ["black"],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const barChart1Data = {
-    labels: ["Users"],
-    datasets: [
-      {
-        label: "Individual",
-        data: [countOfIndividualUsers],
-        backgroundColor: "rgb(13, 110, 253)",
-        borderColor: "black",
-        borderWidth: 1,
-      },
-      {
-        label: "Organizational",
-        data: [countOfOrgUsers],
-        backgroundColor: "orange",
-        borderColor: "black",
         borderWidth: 1,
       },
     ],
@@ -152,6 +136,9 @@ const AdminHomePage = () => {
       title: {
         display: true,
         text: "Users",
+      },
+      legend: {
+        display: chart1TitleVisible,
       },
     },
   };
@@ -309,19 +296,19 @@ const AdminHomePage = () => {
                       <div className="h-100 w-100 canvas-wrapper d-flex justify-content-center position-absolute p-4">
                         <Pie
                           className={`${chart1Type === "pie" ? "" : "d-none"}`}
-                          data={pieChart1Data}
+                          data={chart1Data}
                           options={chart1Options}
                         ></Pie>
                         <Bar
                           className={`${chart1Type === "bar" ? "" : "d-none"}`}
-                          data={barChart1Data}
+                          data={chart1Data}
                           options={chart1Options}
                         ></Bar>
                         <Doughnut
                           className={`${
                             chart1Type === "doughnut" ? "" : "d-none"
                           }`}
-                          data={pieChart1Data}
+                          data={chart1Data}
                           options={chart1Options}
                         ></Doughnut>
                       </div>
