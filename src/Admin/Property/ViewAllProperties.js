@@ -46,8 +46,15 @@ const ViewAllProperties = () => {
       { headers: authHeader }
     );
 
+    let arr = propertyCountRes.data;
+    let totalCount = 0;
+
+    arr.forEach((type) => {
+      totalCount += type.count;
+    });
+
     if (propertyCountRes.data) {
-      setPageCount(Math.ceil(propertyCountRes.data.count / propertiesPerPage));
+      setPageCount(Math.ceil(totalCount / propertiesPerPage));
     }
 
     if (propertiesRes.data.length > 0) {

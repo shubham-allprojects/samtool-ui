@@ -21,6 +21,10 @@ const AdminHomePage = () => {
     countOfOrgUsers: 0,
   });
   const { countOfIndividualUsers, countOfOrgUsers } = countOfUsers;
+  const [typeWisePropertyDetails, setTypeWisePropertyDetails] = useState({});
+
+  const { propertyTypesCount, propertyLabels, typeWiseCount } =
+    typeWisePropertyDetails;
   const setHeaderAndUrl = () => {
     let headers = "";
     if (data) {
@@ -108,13 +112,13 @@ const AdminHomePage = () => {
   };
 
   const pieChart2Data = {
-    labels: ["Active", "Inactive"],
+    labels: propertyLabels,
     datasets: [
       {
-        label: "Users",
-        data: [38, 10],
-        backgroundColor: ["rgba(13, 110, 253, 0.5)", "rgba(255, 165, 0, 0.5)"],
-        borderColor: ["rgb(13, 110, 253)", "orange"],
+        label: "Properties",
+        data: propertyTypesCount,
+        backgroundColor: ["rgba(13, 110, 253, 0.5)", "rgba(255, 165, 0, 0.5)", "red"],
+        borderColor: ["rgb(13, 110, 253)", "orange", "lightblue"],
       },
     ],
   };
@@ -200,9 +204,22 @@ const AdminHomePage = () => {
     );
     let arr = propertyCountRes.data;
     let totalCount = 0;
+    let labels = [];
+    let labelWiseCount = [];
+
     arr.forEach((type) => {
       totalCount += type.count;
+      labels.push(type.type_Name);
+      labelWiseCount.push(type.count);
     });
+
+    setTypeWisePropertyDetails({
+      propertyTypesCount: arr.length,
+      propertyLabels: labels,
+      typeWiseCount: labelWiseCount,
+    });
+
+    console.log(arr.length, labels, labelWiseCount);
     // To show counter animation on admin Home page.
     if (!totalCount <= 0) {
       totalCount > 100
