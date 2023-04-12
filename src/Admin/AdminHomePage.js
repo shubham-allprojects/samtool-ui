@@ -5,7 +5,7 @@ import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
 import { counter, rootTitle } from "../../src/CommonFunctions";
 import { Chart as CharJs, registerables } from "chart.js";
-import { Line, Pie, Doughnut, Bar } from "react-chartjs-2";
+import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 let organizationalUsersCount = 0; // Default count of organizational users.
 let individualUsersCount = 0; // Default count of individual users.
