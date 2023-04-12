@@ -139,12 +139,8 @@ const AdminHomePage = () => {
       {
         label: "Properties",
         data: typeWiseCount,
-        backgroundColor: [
-          "rgba(13, 110, 253, 0.5)",
-          "rgba(255, 165, 0, 0.5)",
-          "rgba(0, 255, 0, 0.5)",
-        ],
-        borderColor: ["blue", "orange", "green"],
+        backgroundColor: ["blue", "orange", "green"],
+        borderColor: ["black"],
         borderWidth: 1,
       },
     ],
