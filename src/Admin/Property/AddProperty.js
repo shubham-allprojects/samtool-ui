@@ -217,7 +217,9 @@ const AddProperty = () => {
               resetValidationsOnSubmit();
               toast.success("Property added successfully");
               e.target.reset();
-              goTo("/admin/property/single-property-documents-upload");
+              goTo(
+                "/admin/property/properties/single-property-documents-upload"
+              );
             } else {
               toast.error("Internal server error");
             }

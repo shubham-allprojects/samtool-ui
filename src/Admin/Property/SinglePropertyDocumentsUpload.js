@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
@@ -294,13 +293,12 @@ const SinglePropertyDocumentsUpload = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh position-relative">
           <AdminSideBar />
-          <div className="col-xl-10 col-lg-9 col-md-8 mt-4 mt-md-0">
-            <BreadCrumb />
+          <div className="col-xl-10 col-lg-9 col-md-8 wrapper mt-md-0">
             <section className="upload-documents-wrapper">
               <div className="container-fluid">
                 <div className="row">
                   <h4 className="fw-bold text-primary p-0">
-                    Property Id: {currentPropertyNumber}
+                    Property Number: {currentPropertyNumber}
                   </h4>
                   <hr />
                 </div>
