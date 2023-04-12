@@ -155,7 +155,7 @@ function App() {
           />
 
           <Route
-            path="/admin/property/single-property-documents-upload/:id"
+            path="/admin/property/single-property-documents-upload"
             element={
               // <AdminProtected>
               <SinglePropertyDocumentsUpload />
