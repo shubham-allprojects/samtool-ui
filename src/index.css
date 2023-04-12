@@ -728,6 +728,10 @@ input:-webkit-autofill:active {
   align-items: center;
 }
 
+.property-button-wrapper:hover {
+  color: white !important;
+}
+
 /* View single property */
 
 .property-slider-indicators [data-bs-target] {
