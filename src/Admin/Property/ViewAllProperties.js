@@ -224,7 +224,7 @@ const ViewAllProperties = () => {
                                           property_number
                                         );
                                       }}
-                                      to={`/admin/property/properties/single-property-documents-upload`}
+                                      to={`/admin/property/single-property-documents-upload`}
                                       className="btn btn-sm btn-outline-dark property-button-wrapper ms-2"
                                     >
                                       <i className="bi bi-upload"></i>

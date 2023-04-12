@@ -29,6 +29,12 @@ const SinglePropertyDocumentsUpload = () => {
     setSavedImageFiles([...imageFiles, ...e.target.files]);
   };
 
+  const reloadPage = () => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 4000);
+  };
+
   const readAndUploadCurrentImageChunk = () => {
     const reader = new FileReader();
     const file = imageFiles[currentImageFileIndex];
@@ -77,13 +83,12 @@ const SinglePropertyDocumentsUpload = () => {
             if (res.data.msg !== 0) {
               setImageLoading(false);
               toast.error("Error while uploading files");
+              reloadPage();
             } else {
               if (currentImageFileIndex === savedImageFiles.length - 1) {
                 setImageLoading(false);
                 toast.success("Files uploaded successfully");
-                setTimeout(() => {
-                  window.location.reload();
-                }, 4000);
+                reloadPage();
               }
             }
           }
@@ -92,6 +97,7 @@ const SinglePropertyDocumentsUpload = () => {
       if (isLastChunk) {
         setImageLoading(false);
         toast.error("Internal server error");
+        reloadPage();
       }
     }
     if (isLastChunk) {
@@ -207,13 +213,12 @@ const SinglePropertyDocumentsUpload = () => {
             if (res.data.msg !== 0) {
               setPdfLoading(false);
               toast.error("Error while uploading files");
+              reloadPage();
             } else {
               if (currentPdfFileIndex === savedPdfFiles.length - 1) {
                 setPdfLoading(false);
                 toast.success("Files uploaded successfully");
-                setTimeout(() => {
-                  window.location.reload();
-                }, 4000);
+                reloadPage();
               }
             }
           }
@@ -222,6 +227,7 @@ const SinglePropertyDocumentsUpload = () => {
       if (isLastChunk) {
         setPdfLoading(false);
         toast.error("Internal server error");
+        reloadPage();
       }
     }
     if (isLastChunk) {

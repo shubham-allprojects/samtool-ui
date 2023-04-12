@@ -218,7 +218,7 @@ const AddProperty = () => {
               toast.success("Property added successfully");
               e.target.reset();
               goTo(
-                "/admin/property/properties/single-property-documents-upload"
+                "/admin/property/single-property-documents-upload"
               );
             } else {
               toast.error("Internal server error");
