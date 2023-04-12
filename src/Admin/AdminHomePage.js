@@ -194,7 +194,6 @@ const AdminHomePage = () => {
       typeWiseCount: labelWiseCount,
     });
 
-    console.log(arr.length, labels, labelWiseCount);
     // To show counter animation on admin Home page.
     if (!totalCount <= 0) {
       totalCount > 100
