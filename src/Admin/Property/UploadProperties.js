@@ -162,7 +162,9 @@ const UploadProperties = () => {
         }
       });
     } catch (error) {
-      toast.error("Internal server error");
+      if (isLastChunk) {
+        toast.error("Internal server error");
+      }
     }
 
     if (isLastChunk) {

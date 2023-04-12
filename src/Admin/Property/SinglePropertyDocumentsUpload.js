@@ -88,7 +88,9 @@ const SinglePropertyDocumentsUpload = () => {
           }
         });
     } catch (error) {
-      toast.error("Internal server error");
+      if (isLastChunk) {
+        toast.error("Internal server error");
+      }
     }
     if (isLastChunk) {
       setUniqueId(uuid());
@@ -209,7 +211,9 @@ const SinglePropertyDocumentsUpload = () => {
           }
         });
     } catch (error) {
-      toast.error("Internal server error");
+      if (isLastChunk) {
+        toast.error("Internal server error");
+      }
     }
     if (isLastChunk) {
       setUinqueIdForPdf(uuid());
