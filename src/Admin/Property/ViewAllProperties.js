@@ -8,6 +8,7 @@ import BreadCrumb from "../BreadCrumb";
 import CommonSpinner from "../../CommonSpinner";
 import Pagination from "../../Pagination";
 import ViewProperty from "./ViewProperty";
+import { NavLink } from "react-router-dom";
 
 let authHeader = "";
 let propertiesPerPage = 4;
@@ -203,12 +204,6 @@ const ViewAllProperties = () => {
                                     </span>
                                   </div>
                                   <div className="mt-3 d-flex">
-                                    {/* <NavLink
-                                      to={`/admin/property/properties/view-property/${property_id}`}
-                                      className="btn btn-sm btn-outline-success property-button-wrapper"
-                                    >
-                                      <i className="bi bi-eye-fill"></i>
-                                    </NavLink> */}
                                     <button
                                       onClick={() => {
                                         viewCurrentProperty(property_id);
@@ -223,6 +218,12 @@ const ViewAllProperties = () => {
                                     <button className="btn btn-sm btn-outline-danger property-button-wrapper">
                                       <i className="bi bi-trash-fill"></i>
                                     </button>
+                                    <NavLink
+                                      to={`/admin/property/single-property-documents-upload`}
+                                      className="btn btn-sm btn-outline-dark property-button-wrapper ms-2"
+                                    >
+                                      <i className="bi bi-upload"></i>
+                                    </NavLink>
                                   </div>
                                 </div>
                               </div>
