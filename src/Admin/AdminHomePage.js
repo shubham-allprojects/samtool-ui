@@ -75,7 +75,7 @@ const AdminHomePage = () => {
   };
 
   const [chart1Type, setChart1Type] = useState("pie");
-  const [chart2Type, setChart2Type] = useState("doughnut");
+  const [chart2Type, setChart2Type] = useState("bar");
   const [chart2TitleVisible, setChart2TitleVisible] = useState(true);
 
   const onChart1Selection = (e) => {
