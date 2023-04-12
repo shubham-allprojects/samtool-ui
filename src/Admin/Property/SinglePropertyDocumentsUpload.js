@@ -26,6 +26,7 @@ const SinglePropertyDocumentsUpload = () => {
     useState(null);
 
   const [uniqueId, setUniqueId] = useState(uuid());
+  const [imageProgress, setImageProgress] = useState(0);
 
   const handleImageFileChange = (e) => {
     e.preventDefault();
@@ -280,7 +281,7 @@ const SinglePropertyDocumentsUpload = () => {
                 </div>
                 <div className="row border p-4">
                   <h5 className="mb-3">Upload Property Images</h5>
-                  <div className="col-8">
+                  <div className="col-md-4">
                     <input
                       onChange={handleImageFileChange}
                       type="file"
@@ -288,10 +289,29 @@ const SinglePropertyDocumentsUpload = () => {
                       className="form-control"
                     />
                   </div>
-                  <div className="col-4">
-                    <button className="btn btn-primary" onClick={postImages}>
+                  <div className="col-md-3">
+                    <button
+                      disabled={savedImageFiles.length > 0 ? false : true}
+                      className="btn btn-primary w-100"
+                      onClick={postImages}
+                    >
                       Upload
                     </button>
+                  </div>
+                  <div className="col-md-4 d-flex align-items-center">
+                    <div
+                      class={`progress w-100 ${
+                        imageProgress > 0 ? "" : "d-none"
+                      }`}
+                    >
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style={{ width: `${imageProgress}%` }}
+                      >
+                        {imageProgress} %
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="row border p-4 mt-4">
