@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
-import BreadCrumb from "../BreadCrumb";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useRef } from "react";
 
 let authHeader = "";
 let temp = 0;
@@ -24,18 +22,7 @@ const SinglePropertyDocumentsUpload = () => {
     useState(null);
   const [currentChunkIndexOfImage, setCurrentChunkIndexOfImage] =
     useState(null);
-  const imageFileRef = useRef();
   const [uniqueId, setUniqueId] = useState(uuid());
-
-  const resetImageUploadValues = () => {
-    setImageFiles([]);
-    setSavedImageFiles([]);
-    setCurrentImageFileIndex(null);
-    setLastUploadedImageFileIndex(null);
-    setCurrentChunkIndexOfImage(null);
-    setUniqueId(uuid());
-    imageFileRef.current.value = "";
-  };
 
   const handleImageFileChange = (e) => {
     e.preventDefault();
@@ -93,7 +80,7 @@ const SinglePropertyDocumentsUpload = () => {
               if (currentImageFileIndex === savedImageFiles.length - 1) {
                 setImageLoading(false);
                 toast.success("Files uploaded successfully");
-                resetImageUploadValues();
+
                 // setTimeout(() => {
                 //   window.location.reload();
                 // }, 4000);
@@ -105,7 +92,6 @@ const SinglePropertyDocumentsUpload = () => {
       if (isLastChunk) {
         setImageLoading(false);
         toast.error("Internal server error");
-        resetImageUploadValues();
       }
     }
     if (isLastChunk) {
@@ -168,6 +154,7 @@ const SinglePropertyDocumentsUpload = () => {
 
   const [uniqueIdForPdf, setUinqueIdForPdf] = useState(uuid());
   const [imageLoading, setImageLoading] = useState(false);
+  const [pdfLoading, setPdfLoading] = useState(false);
 
   const handlePdfFileChange = (e) => {
     e.preventDefault();
@@ -217,9 +204,11 @@ const SinglePropertyDocumentsUpload = () => {
         .then((res) => {
           if (isLastChunk) {
             if (res.data.msg !== 0) {
+              setPdfLoading(false);
               toast.error("Error while uploading files");
             } else {
               if (currentPdfFileIndex === savedPdfFiles.length - 1) {
+                setPdfLoading(false);
                 toast.success("Files uploaded successfully");
                 // setTimeout(() => {
                 //   window.location.reload();
@@ -230,6 +219,7 @@ const SinglePropertyDocumentsUpload = () => {
         });
     } catch (error) {
       if (isLastChunk) {
+        setPdfLoading(false);
         toast.error("Internal server error");
       }
     }
@@ -285,6 +275,7 @@ const SinglePropertyDocumentsUpload = () => {
 
   const postPdf = (e) => {
     e.preventDefault();
+    setPdfLoading(true);
     setPdfFiles(savedPdfFiles);
   };
 
@@ -304,16 +295,15 @@ const SinglePropertyDocumentsUpload = () => {
                 </div>
                 <div className="row border p-4">
                   <h5 className="mb-3">Upload Property Images</h5>
-                  <div className="col-md-4">
+                  <div className="col-xl-4 col-md-7 col-12">
                     <input
                       onChange={handleImageFileChange}
-                      ref={imageFileRef}
                       type="file"
                       multiple
                       className="form-control"
                     />
                   </div>
-                  <div className="col-md-3">
+                  <div className="col-xl-3 col-md-5 col-12 mt-4 mt-md-0">
                     <button
                       disabled={
                         savedImageFiles.length === 0 || imageLoading
@@ -339,7 +329,7 @@ const SinglePropertyDocumentsUpload = () => {
                 </div>
                 <div className="row border p-4 mt-4">
                   <h5 className="mb-3">Upload Property Documents</h5>
-                  <div className="col-8">
+                  <div className="col-xl-4 col-md-7 col-12">
                     <input
                       onChange={handlePdfFileChange}
                       type="file"
@@ -347,9 +337,25 @@ const SinglePropertyDocumentsUpload = () => {
                       multiple
                     />
                   </div>
-                  <div className="col-4">
-                    <button className="btn btn-primary" onClick={postPdf}>
-                      Upload
+                  <div className="col-xl-3 col-md-5 col-12 mt-4 mt-md-0">
+                    <button
+                      disabled={
+                        savedPdfFiles.length === 0 || pdfLoading ? true : false
+                      }
+                      className="btn btn-primary w-100"
+                      onClick={postPdf}
+                    >
+                      {pdfLoading ? (
+                        <>
+                          <div
+                            className="spinner-border spinner-border-sm text-light me-2"
+                            role="status"
+                          ></div>
+                          <span>Uploading...</span>
+                        </>
+                      ) : (
+                        "Upload"
+                      )}
                     </button>
                   </div>
                 </div>
