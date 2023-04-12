@@ -38,7 +38,6 @@ const SinglePropertyDocumentsUpload = () => {
   const readAndUploadCurrentImageChunk = () => {
     const reader = new FileReader();
     const file = imageFiles[currentImageFileIndex];
-    console.log(file);
     if (!file) {
       return;
     }
