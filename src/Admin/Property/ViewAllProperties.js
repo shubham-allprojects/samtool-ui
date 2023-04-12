@@ -163,8 +163,14 @@ const ViewAllProperties = () => {
                   <div className="container-fluid">
                     <div className="row">
                       {properties.map((property, Index) => {
-                        const { category, city_name, market_value, range } =
-                          property;
+                        const {
+                          category,
+                          city_name,
+                          market_value,
+                          expected_price,
+                          property_id,
+                          property_number,
+                        } = property;
                         return (
                           <div className="col-xl-3 col-md-6" key={Index}>
                             <div className="admin-property-card-wrapper">
@@ -199,20 +205,11 @@ const ViewAllProperties = () => {
                                   </div>
 
                                   <div className="text-capitalize">
-                                    <span>Range: </span>
+                                    <span>Expected Price: </span>
                                     <span className="common-btn-font">
                                       <i className="bi bi-currency-rupee"></i>
                                       {`${Math.round(
-                                        parseInt(range.split("-")[0]) / 10000000
-                                      )} Crores`}
-                                    </span>
-                                    <span className="mx-2 common-btn-font">
-                                      -
-                                    </span>
-                                    <span className="common-btn-font">
-                                      <i className="bi bi-currency-rupee"></i>
-                                      {`${Math.round(
-                                        parseInt(range.split("-")[1]) / 10000000
+                                        parseInt(expected_price) / 10000000
                                       )} Crores`}
                                     </span>
                                   </div>
@@ -223,16 +220,7 @@ const ViewAllProperties = () => {
                                     >
                                       <i className="bi bi-eye-fill"></i>
                                     </NavLink> */}
-                                    <button
-                                      className="btn btn-sm btn-outline-success property-button-wrapper"
-                                      onClick={() => {
-                                        viewCurrentProperty(
-                                          category,
-                                          city_name,
-                                          range
-                                        );
-                                      }}
-                                    >
+                                    <button className="btn btn-sm btn-outline-success property-button-wrapper">
                                       <i className="bi bi-eye-fill"></i>
                                     </button>
                                     <button className="mx-2 btn btn-sm btn-outline-primary property-button-wrapper">
