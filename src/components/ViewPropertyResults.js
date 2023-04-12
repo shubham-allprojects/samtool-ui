@@ -133,7 +133,10 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                               <small className="text-muted">Market Price</small>
                               <div className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
-                                {parseInt(market_price) / 10000000} Crore
+                                {Math.round(
+                                  parseInt(market_price) / 10000000
+                                )}{" "}
+                                Crore
                               </div>
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-lg-0 mt-3">
@@ -142,7 +145,9 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                               </small>
                               <div className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
-                                {parseInt(ready_reckoner_price) / 10000000}{" "}
+                                {Math.round(
+                                  parseInt(ready_reckoner_price) / 10000000
+                                )}{" "}
                                 Crore
                               </div>
                             </div>
@@ -152,7 +157,10 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                               </small>
                               <div className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
-                                {parseInt(expected_price) / 10000000} Crore
+                                {Math.round(
+                                  parseInt(expected_price) / 10000000
+                                )}{" "}
+                                Crore
                               </div>
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
