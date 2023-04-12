@@ -75,7 +75,7 @@ const AdminHomePage = () => {
   };
 
   const [chart1Type, setChart1Type] = useState("pie");
-  const [chart2Type, setChart2Type] = useState("bar");
+  const [chart2Type, setChart2Type] = useState("doughnut");
 
   const onChart1Selection = (e) => {
     const { value } = e.target;
@@ -106,19 +106,7 @@ const AdminHomePage = () => {
         label: "Count",
         data: [countOfIndividualUsers, countOfOrgUsers],
         backgroundColor: ["rgba(13, 110, 253, 0.5)", "rgba(255, 165, 0, 0.5)"],
-        borderColor: ["rgb(13, 110, 253)", "orange"],
-      },
-    ],
-  };
-
-  const pieChart2Data = {
-    labels: propertyLabels,
-    datasets: [
-      {
-        label: "Properties",
-        data: propertyTypesCount,
-        backgroundColor: ["rgba(13, 110, 253, 0.5)", "rgba(255, 165, 0, 0.5)", "red"],
-        borderColor: ["rgb(13, 110, 253)", "orange", "lightblue"],
+        borderColor: ["blue", "orange"],
       },
     ],
   };
@@ -130,7 +118,7 @@ const AdminHomePage = () => {
         label: "Individual",
         data: [countOfIndividualUsers],
         backgroundColor: "rgba(13, 110, 253, 0.5)",
-        borderColor: "rgb(13, 110, 253)",
+        borderColor: "blue",
         borderWidth: "2",
       },
       {
@@ -143,35 +131,18 @@ const AdminHomePage = () => {
     ],
   };
 
-  const barChart2Data = {
-    labels: ["Users"],
+  const chart2Data = {
+    labels: propertyLabels,
     datasets: [
       {
-        label: "Active",
-        data: [38],
-        backgroundColor: "rgba(13, 110, 253, 0.5)",
-        borderColor: "rgb(13, 110, 253)",
-        borderWidth: "2",
-      },
-      {
-        label: "Inactive",
-        data: [10],
-        backgroundColor: "rgba(255, 165, 0, 0.5)",
-        borderColor: "orange",
-        borderWidth: "2",
-      },
-    ],
-  };
-
-  const lineChart2Data = {
-    labels: ["Active", "Inactive"],
-    datasets: [
-      {
-        fill: true,
-        label: "Count",
-        data: [38, 10],
-        borderColor: "rgb(13, 110, 253)",
-        backgroundColor: "rgba(13, 110, 253, 0.5)",
+        label: "Properties",
+        data: typeWiseCount,
+        backgroundColor: [
+          "rgba(13, 110, 253, 0.5)",
+          "rgba(255, 165, 0, 0.5)",
+          "rgba(0, 255, 0, 0.5)",
+        ],
+        borderColor: ["blue", "orange", "green"],
       },
     ],
   };
@@ -191,7 +162,7 @@ const AdminHomePage = () => {
     plugins: {
       title: {
         display: true,
-        text: "Status Of Users",
+        text: "Properties",
       },
     },
   };
@@ -232,7 +203,7 @@ const AdminHomePage = () => {
   useEffect(() => {
     rootTitle.textContent = "ADMIN - HOME";
     document.getElementById("pie").checked = true;
-    document.getElementById("bar2").checked = true;
+    document.getElementById("doughnut2").checked = true;
     if (data) {
       setTotalCountOfUsers();
       getPropertyCountFromApi();
@@ -426,19 +397,15 @@ const AdminHomePage = () => {
                       <div className="h-100 w-100 canvas-wrapper d-flex justify-content-center position-absolute p-4">
                         <Bar
                           className={`${chart2Type === "bar" ? "" : "d-none"}`}
-                          data={barChart2Data}
+                          data={chart2Data}
                           options={chart2Options}
                         ></Bar>
-                        <Line
-                          className={`${chart2Type === "line" ? "" : "d-none"}`}
-                          data={lineChart2Data}
-                          options={chart2Options}
-                        ></Line>
+
                         <Doughnut
                           className={`${
                             chart2Type === "doughnut" ? "" : "d-none"
                           }`}
-                          data={pieChart2Data}
+                          data={chart2Data}
                           options={chart2Options}
                         ></Doughnut>
                       </div>
@@ -448,21 +415,6 @@ const AdminHomePage = () => {
                         <span className="common-btn-font text-primary">
                           Chart View
                         </span>
-                      </div>
-                      <div className="col-md-3 mt-md-0 mt-2 col-6">
-                        <div className="form-check form-check-inline">
-                          <input
-                            onChange={onChart2Selection}
-                            className="form-check-input chart1check"
-                            type="radio"
-                            name="chart2"
-                            id="bar2"
-                            value="bar2"
-                          />
-                          <label className="form-check-label" htmlFor="bar2">
-                            Bar
-                          </label>
-                        </div>
                       </div>
                       <div className="col-md-3 mt-md-0 mt-2 col-6">
                         <div className="form-check form-check-inline">
@@ -489,11 +441,11 @@ const AdminHomePage = () => {
                             className="form-check-input chart1check"
                             type="radio"
                             name="chart2"
-                            id="line2"
-                            value="line2"
+                            id="bar2"
+                            value="bar2"
                           />
-                          <label className="form-check-label" htmlFor="line2">
-                            Line
+                          <label className="form-check-label" htmlFor="bar2">
+                            Bar
                           </label>
                         </div>
                       </div>
