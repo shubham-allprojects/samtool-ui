@@ -81,10 +81,9 @@ const SinglePropertyDocumentsUpload = () => {
               if (currentImageFileIndex === savedImageFiles.length - 1) {
                 setImageLoading(false);
                 toast.success("Files uploaded successfully");
-
-                // setTimeout(() => {
-                //   window.location.reload();
-                // }, 4000);
+                setTimeout(() => {
+                  window.location.reload();
+                }, 4000);
               }
             }
           }
@@ -212,9 +211,9 @@ const SinglePropertyDocumentsUpload = () => {
               if (currentPdfFileIndex === savedPdfFiles.length - 1) {
                 setPdfLoading(false);
                 toast.success("Files uploaded successfully");
-                // setTimeout(() => {
-                //   window.location.reload();
-                // }, 4000);
+                setTimeout(() => {
+                  window.location.reload();
+                }, 4000);
               }
             }
           }
