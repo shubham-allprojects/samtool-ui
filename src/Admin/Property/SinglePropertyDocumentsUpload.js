@@ -55,6 +55,7 @@ const SinglePropertyDocumentsUpload = () => {
     const data = readerEvent.target.result.split(",")[1];
     const detailsToPost = {
       upload_id: uniqueId,
+      property_numner: currentPropertyNumber,
       chunk_number: currentChunkIndexOfImage + 1,
       total_chunks: Math.ceil(size / chunkSize),
       chunk_size: tempChunkSize,
@@ -185,6 +186,7 @@ const SinglePropertyDocumentsUpload = () => {
     const data = readerEvent.target.result.split(",")[1];
     const detailsToPost = {
       upload_id: uniqueIdForPdf,
+      property_numner: currentPropertyNumber,
       chunk_number: currentChunkIndexOfPdf + 1,
       total_chunks: Math.ceil(size / chunkSize),
       chunk_size: tempChunkSize,
