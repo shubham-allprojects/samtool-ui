@@ -7,9 +7,11 @@ import { counter, rootTitle } from "../../src/CommonFunctions";
 import { Chart as CharJs, registerables } from "chart.js";
 import { Line, Pie, Doughnut, Bar } from "react-chartjs-2";
 
-let orgCount = 0; // Default count of organizational users.
-let indiCount = 0; // Default count of individual users.
+let organizationalUsersCount = 0; // Default count of organizational users.
+let individualUsersCount = 0; // Default count of individual users.
 let propertyStartCounter;
+let individualUsersStartCounter;
+let organizationalUsersStartCounter;
 
 const AdminHomePage = () => {
   CharJs.register(...registerables);
@@ -32,13 +34,40 @@ const AdminHomePage = () => {
     // Get and store the count of both types of Users i.e. Individual Users and Organizational Users.
     const [headers, url] = setHeaderAndUrl();
     await axios.get(`${url}/type-count`, { headers: headers }).then((res) => {
-      indiCount = parseInt(res.data.individual_count);
-      orgCount = parseInt(res.data.org_count);
+      individualUsersCount = parseInt(res.data.individual_count);
+      organizationalUsersCount = parseInt(res.data.org_count);
     });
     setCountOfUsers({
-      countOfIndividualUsers: indiCount,
-      countOfOrgUsers: orgCount,
+      countOfIndividualUsers: individualUsersCount,
+      countOfOrgUsers: organizationalUsersCount,
     });
+    // To show counter animation on admin Home page.
+    if (!individualUsersCount <= 0) {
+      individualUsersCount > 100
+        ? (individualUsersStartCounter = Math.floor(
+            (individualUsersCount * 80) / 100
+          ))
+        : (individualUsersStartCounter = 0);
+      counter(
+        "individualCount",
+        individualUsersStartCounter,
+        individualUsersCount,
+        1000
+      );
+    }
+    if (!organizationalUsersCount <= 0) {
+      organizationalUsersCount > 100
+        ? (organizationalUsersStartCounter = Math.floor(
+            (organizationalUsersCount * 80) / 100
+          ))
+        : (organizationalUsersStartCounter = 0);
+      counter(
+        "organizationalCount",
+        organizationalUsersStartCounter,
+        organizationalUsersCount,
+        1000
+      );
+    }
   };
 
   const [chart1Type, setChart1Type] = useState("pie");
@@ -246,11 +275,14 @@ const AdminHomePage = () => {
                   >
                     <div className="container-fluid">
                       <div className="row justify-content-center">
-                        <div className="col-12 text-center text-white hover-color-secondary">
+                        <div className="col-12 col-5 text-center fw-bold text-white hover-color-secondary fs-5">
                           <div>
-                            <i className="bi bi-person-circle text-white hover-color-secondary icon fs-1"></i>
+                            <i className="bi bi-person-circle text-white hover-color-secondary icon fs-1 me-4"></i>
+                            <span className="fs-1" id="individualCount">
+                              0
+                            </span>
                           </div>
-                          <h5 className="fw-bold">Individual Users</h5>
+                          <span>Individual Users</span>
                         </div>
                       </div>
                     </div>
@@ -263,11 +295,14 @@ const AdminHomePage = () => {
                   >
                     <div className="container-fluid">
                       <div className="row justify-content-center">
-                        <div className="col-12 text-center text-white hover-color-secondary">
+                        <div className="col-12 col-5 text-center fw-bold text-white hover-color-secondary fs-5">
                           <div>
-                            <i className="bi bi-laptop-fill text-white hover-color-secondary icon fs-1"></i>
+                            <i className="bi bi-laptop-fill text-white hover-color-secondary icon fs-1 me-4"></i>
+                            <span className="fs-1" id="organizationalCount">
+                              0
+                            </span>
                           </div>
-                          <h5 className="fw-bold">Organizational Users</h5>
+                          <span>Organizational Users</span>
                         </div>
                       </div>
                     </div>

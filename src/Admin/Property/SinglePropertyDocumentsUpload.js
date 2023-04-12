@@ -6,6 +6,7 @@ import BreadCrumb from "../BreadCrumb";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useRef } from "react";
 
 let authHeader = "";
 let temp = 0;
@@ -24,9 +25,18 @@ const SinglePropertyDocumentsUpload = () => {
     useState(null);
   const [currentChunkIndexOfImage, setCurrentChunkIndexOfImage] =
     useState(null);
-
+  const imageFileRef = useRef();
   const [uniqueId, setUniqueId] = useState(uuid());
-  const [imageProgress, setImageProgress] = useState(0);
+
+  const resetImageUploadValues = () => {
+    setImageFiles([]);
+    setSavedImageFiles([]);
+    setCurrentImageFileIndex(null);
+    setLastUploadedImageFileIndex(null);
+    setCurrentChunkIndexOfImage(null);
+    setUniqueId(uuid());
+    imageFileRef.current.value = "";
+  };
 
   const handleImageFileChange = (e) => {
     e.preventDefault();
@@ -36,6 +46,7 @@ const SinglePropertyDocumentsUpload = () => {
   const readAndUploadCurrentImageChunk = () => {
     const reader = new FileReader();
     const file = imageFiles[currentImageFileIndex];
+    console.log(file);
     if (!file) {
       return;
     }
@@ -77,10 +88,13 @@ const SinglePropertyDocumentsUpload = () => {
         .then((res) => {
           if (isLastChunk) {
             if (res.data.msg !== 0) {
+              setImageLoading(false);
               toast.error("Error while uploading files");
             } else {
               if (currentImageFileIndex === savedImageFiles.length - 1) {
+                setImageLoading(false);
                 toast.success("Files uploaded successfully");
+                resetImageUploadValues();
                 // setTimeout(() => {
                 //   window.location.reload();
                 // }, 4000);
@@ -90,7 +104,9 @@ const SinglePropertyDocumentsUpload = () => {
         });
     } catch (error) {
       if (isLastChunk) {
+        setImageLoading(false);
         toast.error("Internal server error");
+        resetImageUploadValues();
       }
     }
     if (isLastChunk) {
@@ -140,6 +156,7 @@ const SinglePropertyDocumentsUpload = () => {
 
   const postImages = (e) => {
     e.preventDefault();
+    setImageLoading(true);
     setImageFiles(savedImageFiles);
   };
 
@@ -151,6 +168,7 @@ const SinglePropertyDocumentsUpload = () => {
   const [currentChunkIndexOfPdf, setCurrentChunkIndexOfPdf] = useState(null);
 
   const [uniqueIdForPdf, setUinqueIdForPdf] = useState(uuid());
+  const [imageLoading, setImageLoading] = useState(false);
 
   const handlePdfFileChange = (e) => {
     e.preventDefault();
@@ -284,6 +302,7 @@ const SinglePropertyDocumentsUpload = () => {
                   <div className="col-md-4">
                     <input
                       onChange={handleImageFileChange}
+                      ref={imageFileRef}
                       type="file"
                       multiple
                       className="form-control"
@@ -291,27 +310,26 @@ const SinglePropertyDocumentsUpload = () => {
                   </div>
                   <div className="col-md-3">
                     <button
-                      disabled={savedImageFiles.length > 0 ? false : true}
+                      disabled={
+                        savedImageFiles.length === 0 || imageLoading
+                          ? true
+                          : false
+                      }
                       className="btn btn-primary w-100"
                       onClick={postImages}
                     >
-                      Upload
+                      {imageLoading ? (
+                        <>
+                          <div
+                            className="spinner-border spinner-border-sm text-light me-2"
+                            role="status"
+                          ></div>
+                          <span>Uploading...</span>
+                        </>
+                      ) : (
+                        "Upload"
+                      )}
                     </button>
-                  </div>
-                  <div className="col-md-4 d-flex align-items-center">
-                    <div
-                      class={`progress w-100 ${
-                        imageProgress > 0 ? "" : "d-none"
-                      }`}
-                    >
-                      <div
-                        class="progress-bar"
-                        role="progressbar"
-                        style={{ width: `${imageProgress}%` }}
-                      >
-                        {imageProgress} %
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <div className="row border p-4 mt-4">
