@@ -108,6 +108,7 @@ const AdminHomePage = () => {
         data: [countOfIndividualUsers, countOfOrgUsers],
         backgroundColor: ["rgba(13, 110, 253, 0.5)", "rgba(255, 165, 0, 0.5)"],
         borderColor: ["blue", "orange"],
+        borderWidth: 1,
       },
     ],
   };
@@ -120,14 +121,14 @@ const AdminHomePage = () => {
         data: [countOfIndividualUsers],
         backgroundColor: "rgba(13, 110, 253, 0.5)",
         borderColor: "blue",
-        borderWidth: "2",
+        borderWidth: 1,
       },
       {
         label: "Organizational",
         data: [countOfOrgUsers],
         backgroundColor: "rgba(255, 165, 0, 0.5)",
         borderColor: "orange",
-        borderWidth: "2",
+        borderWidth: 1,
       },
     ],
   };
@@ -144,6 +145,7 @@ const AdminHomePage = () => {
           "rgba(0, 255, 0, 0.5)",
         ],
         borderColor: ["blue", "orange", "green"],
+        borderWidth: 1,
       },
     ],
   };
