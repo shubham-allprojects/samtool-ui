@@ -17,7 +17,7 @@ const SinglePropertyDocumentsUpload = () => {
   if (data) {
     authHeader = { Authorization: data.logintoken };
   }
-  const { id } = useParams();
+  const [currentPropertyNumber, setCurrentPropertyNumber] = useState("");
   const [imageFiles, setImageFiles] = useState([]);
   const [savedImageFiles, setSavedImageFiles] = useState([]);
   const [currentImageFileIndex, setCurrentImageFileIndex] = useState(null);
@@ -277,6 +277,13 @@ const SinglePropertyDocumentsUpload = () => {
     // eslint-disable-next-line
   }, [currentChunkIndexOfPdf]);
 
+  useEffect(() => {
+    let propertyNumber = localStorage.getItem("property_number");
+    if (propertyNumber) {
+      setCurrentPropertyNumber(propertyNumber);
+    }
+  }, []);
+
   const postPdf = (e) => {
     e.preventDefault();
     setPdfFiles(savedPdfFiles);
@@ -293,7 +300,7 @@ const SinglePropertyDocumentsUpload = () => {
               <div className="container-fluid">
                 <div className="row">
                   <h4 className="fw-bold text-primary p-0">
-                    Property Id: {id}
+                    Property Id: {currentPropertyNumber}
                   </h4>
                   <hr />
                 </div>

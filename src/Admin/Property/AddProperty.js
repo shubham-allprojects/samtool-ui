@@ -213,6 +213,7 @@ const AddProperty = () => {
           })
           .then((res) => {
             if (res.data.msg === 0) {
+              localStorage.setItem("property_number", formData.property_number);
               resetValidationsOnSubmit();
               toast.success("Property added successfully");
               e.target.reset();
