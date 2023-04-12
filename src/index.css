@@ -782,11 +782,11 @@ input:-webkit-autofill:active {
 
 .csv-data-table-wrapper {
   height: 500px;
-  overflow-y: scroll;
+  overflow: scroll;
 }
 
 .csv-data-table-wrapper .save-cancel-btn-div {
-  bottom: 0;
+  bottom: 8rem;
   left: 12px;
   right: 11px;
   padding: 1rem 0.5rem;

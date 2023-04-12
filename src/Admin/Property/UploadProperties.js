@@ -287,7 +287,7 @@ const UploadProperties = () => {
 
                 <div
                   id="showCsvDataInTable"
-                  className="col-xl-12 position-relative mb-5"
+                  className="col-xl-12 position-relative mb-5 vh-100"
                 >
                   <div
                     className={`${tableDisplayClass} csv-data-table-wrapper`}
