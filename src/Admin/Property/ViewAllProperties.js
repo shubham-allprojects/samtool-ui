@@ -1,14 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-// import { NavLink } from "react-router-dom";
-// import { toast } from "react-toastify";
+
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
 import CommonSpinner from "../../CommonSpinner";
 import Pagination from "../../Pagination";
-import ViewPropertyResults from "../../components/ViewPropertyResults";
+import ViewProperty from "./ViewProperty";
 
 let authHeader = "";
 let propertiesPerPage = 4;
@@ -19,9 +18,9 @@ const ViewAllProperties = () => {
   }
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedPropertyResults, setSelectedPropertyResults] = useState([]);
   const allPropertiesPageRef = useRef();
-  const viewCurrentPropertyResultsRef = useRef();
+  const viewCurrentPropertyRef = useRef();
+  const [selectedProperty, setSelectedProperty] = useState([]);
 
   const [pageCount, setPageCount] = useState(0);
   const paginationRef = useRef();
@@ -97,29 +96,19 @@ const ViewAllProperties = () => {
   //   setProperties(propertiesToShow);
   // };
 
-  const viewCurrentProperty = async (type, city, range) => {
-    viewCurrentPropertyResultsRef.current.classList.remove("d-none");
+  const viewCurrentProperty = async (id) => {
+    const currentPropertyRes = await axios.get(
+      `/sam/v1/property/single-property/${id}`,
+      { headers: authHeader }
+    );
+    setSelectedProperty(currentPropertyRes.data);
+    viewCurrentPropertyRef.current.classList.remove("d-none");
     window.scrollTo(0, 0);
     allPropertiesPageRef.current.classList.add("d-none");
-    let minValueOfproperty = parseInt(range.split("-")[0]);
-    let maxValueOfproperty = parseInt(range.split("-")[1]);
-    let dataToPost = {
-      property_type: type,
-      city_name: city,
-      minvalue: minValueOfproperty,
-      maxvalue: maxValueOfproperty,
-    };
-    try {
-      await axios
-        .post(`/sam/v1/property/view-properties`, dataToPost)
-        .then((res) => {
-          setSelectedPropertyResults(res.data);
-        });
-    } catch (error) {}
   };
 
   const backToAllPropertiesPage = () => {
-    viewCurrentPropertyResultsRef.current.classList.add("d-none");
+    viewCurrentPropertyRef.current.classList.add("d-none");
     allPropertiesPageRef.current.classList.remove("d-none");
   };
 
@@ -220,7 +209,12 @@ const ViewAllProperties = () => {
                                     >
                                       <i className="bi bi-eye-fill"></i>
                                     </NavLink> */}
-                                    <button className="btn btn-sm btn-outline-success property-button-wrapper">
+                                    <button
+                                      onClick={() => {
+                                        viewCurrentProperty(property_id);
+                                      }}
+                                      className="btn btn-sm btn-outline-success property-button-wrapper"
+                                    >
                                       <i className="bi bi-eye-fill"></i>
                                     </button>
                                     <button className="mx-2 btn btn-sm btn-outline-primary property-button-wrapper">
@@ -254,7 +248,7 @@ const ViewAllProperties = () => {
           </div>
           <div
             className="col-xl-10 col-lg-9 col-md-8 d-none"
-            ref={viewCurrentPropertyResultsRef}
+            ref={viewCurrentPropertyRef}
           >
             <>
               <div className="container-fluid">
@@ -268,9 +262,7 @@ const ViewAllProperties = () => {
                         <i className="bi bi-arrow-left"></i> Back
                       </button>
                     </div>
-                    <ViewPropertyResults
-                      selectedPropertyResults={selectedPropertyResults}
-                    />
+                    <ViewProperty selectedProperty={selectedProperty} />
                   </div>
                 </div>
               </div>
