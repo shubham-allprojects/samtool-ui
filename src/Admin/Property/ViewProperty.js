@@ -1,14 +1,5 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import Layout from "../../components/1.CommonLayout/Layout";
-
-let authHeader = "";
+import React from "react";
 const ViewProperty = ({ selectedProperty }) => {
-  const data = JSON.parse(localStorage.getItem("data"));
-  if (data) {
-    authHeader = { Authorization: data.logintoken };
-  }
-
   const {
     type_name,
     branch_name,
@@ -259,21 +250,21 @@ const ViewProperty = ({ selectedProperty }) => {
                   <small className="text-muted">Market Price</small>
                   <h5 className="mt-1">
                     <i className="bi bi-currency-rupee"></i>
-                    {market_price}
+                    {Math.round(market_price / 10000000)} Crore
                   </h5>
                 </div>
                 <div className="col-md-4">
                   <small className="text-muted">Ready Reckoner Price</small>
                   <h5 className="mt-1">
                     <i className="bi bi-currency-rupee"></i>
-                    {ready_reckoner_price}
+                    {Math.round(ready_reckoner_price / 10000000)} Crore
                   </h5>
                 </div>
                 <div className="col-md-4">
                   <small className="text-muted">Expected Price</small>
                   <h5 className="mt-1">
                     <i className="bi bi-currency-rupee"></i>
-                    {expected_price}
+                    {Math.round(expected_price / 10000000)} Crore
                   </h5>
                 </div>
                 <div className="col-12">
