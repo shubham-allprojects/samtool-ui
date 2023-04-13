@@ -114,31 +114,37 @@ const ViewAllProperties = () => {
   };
 
   const deleteProperty = async (propertyId) => {
-    await axios
-      .delete(`/sam/v1/property/auth/delete-property/${propertyId}`, {
-        headers: authHeader,
-      })
-      .then((res) => {
-        if (res.data.msg === 0) {
-          toast.success(`Property deleted successfully`);
-          confirmDeletePropertyInputRef.current.value = "";
-          setConfirmDeletePropertyBtnDisabled(true);
-          setTotalPropertyCount(totalPropertyCount - 1);
-          if (totalPropertyCount - 1 !== 0) {
-            let newPageCount = Math.ceil(
-              (totalPropertyCount - 1) / propertiesPerPage
-            );
-            setPageCount(newPageCount);
-            if (newPageCount < currentPageNumber) {
-              handlePageClick({ selected: currentPageNumber - 2 });
+    try {
+      await axios
+        .delete(`/sam/v1/property/auth/delete-property/${propertyId}`, {
+          headers: authHeader,
+        })
+        .then((res) => {
+          if (res.data.msg === 0) {
+            toast.success(`Property deleted successfully`);
+            confirmDeletePropertyInputRef.current.value = "";
+            setConfirmDeletePropertyBtnDisabled(true);
+            setTotalPropertyCount(totalPropertyCount - 1);
+            if (totalPropertyCount - 1 !== 0) {
+              let newPageCount = Math.ceil(
+                (totalPropertyCount - 1) / propertiesPerPage
+              );
+              setPageCount(newPageCount);
+              if (newPageCount < currentPageNumber) {
+                handlePageClick({ selected: currentPageNumber - 2 });
+              } else {
+                handlePageClick({ selected: currentPageNumber - 1 });
+              }
             } else {
-              handlePageClick({ selected: currentPageNumber - 1 });
+              setProperties(false);
             }
           } else {
-            setProperties(false);
+            toast.error("Internal server error");
           }
-        }
-      });
+        });
+    } catch (error) {
+      toast.error("Internal server error");
+    }
   };
 
   const onDeletePropertyBtnClick = (propertyId) => {

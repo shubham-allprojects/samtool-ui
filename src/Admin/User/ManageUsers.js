@@ -119,31 +119,37 @@ const ManageUsers = ({ userType }) => {
   };
 
   const deleteUser = async (userId, userName) => {
-    await axios
-      .delete(`/sam/v1/user-registration/auth/${userId}`, {
-        headers: authHeader,
-      })
-      .then((res) => {
-        if (res.data.status === 0) {
-          toast.success(`User ${userName} deleted successfully`);
-          confirmDeleteInputRef.current.value = "";
-          setConfirmDeleteUserBtnDisabled(true);
-          setTotalUsersCount(totalUsersCount - 1);
-          if (totalUsersCount - 1 !== 0) {
-            let newPageCount = Math.ceil(
-              (totalUsersCount - 1) / records_per_page
-            );
-            setPageCount(newPageCount);
-            if (newPageCount < currentPageNumber) {
-              handlePageClick({ selected: currentPageNumber - 2 });
+    try {
+      await axios
+        .delete(`/sam/v1/user-registration/auth/${userId}`, {
+          headers: authHeader,
+        })
+        .then((res) => {
+          if (res.data.status === 0) {
+            toast.success(`User ${userName} deleted successfully`);
+            confirmDeleteInputRef.current.value = "";
+            setConfirmDeleteUserBtnDisabled(true);
+            setTotalUsersCount(totalUsersCount - 1);
+            if (totalUsersCount - 1 !== 0) {
+              let newPageCount = Math.ceil(
+                (totalUsersCount - 1) / records_per_page
+              );
+              setPageCount(newPageCount);
+              if (newPageCount < currentPageNumber) {
+                handlePageClick({ selected: currentPageNumber - 2 });
+              } else {
+                handlePageClick({ selected: currentPageNumber - 1 });
+              }
             } else {
-              handlePageClick({ selected: currentPageNumber - 1 });
+              setUsers(false);
             }
           } else {
-            setUsers(false);
+            toast.error("Internal server error");
           }
-        }
-      });
+        });
+    } catch (error) {
+      toast.error("Internal server error");
+    }
   };
 
   const saveCurrentUserData = async (id) => {
