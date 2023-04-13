@@ -42,7 +42,7 @@ const UploadProperties = () => {
     window.scrollTo(0, 0);
     setTimeout(() => {
       window.location.reload();
-    }, 200);
+    }, 400);
   };
 
   const dataFromLocal = JSON.parse(localStorage.getItem("data"));
@@ -312,20 +312,22 @@ const UploadProperties = () => {
                         })}
                       </tbody>
                     </table>
-                    <div className="text-end mt-3 bg-light position-absolute save-cancel-btn-div">
-                      <button
-                        className="btn btn-success me-2"
-                        onClick={postChunksToDataBase}
-                      >
-                        Save
-                      </button>
-                      <button
-                        onClick={onCancelClick}
-                        className="btn btn-secondary"
-                      >
-                        Cancel
-                      </button>
-                    </div>
+                  </div>
+                  <div
+                    className={`text-end mt-3 bg-light  save-cancel-btn-div ${tableDisplayClass}`}
+                  >
+                    <button
+                      className="btn btn-success me-2"
+                      onClick={postChunksToDataBase}
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={onCancelClick}
+                      className="btn btn-secondary"
+                    >
+                      Cancel
+                    </button>
                   </div>
                 </div>
               </div>
