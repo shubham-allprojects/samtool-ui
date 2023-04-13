@@ -18,8 +18,8 @@ const EditProperty = () => {
   const { id } = useParams();
   const goTo = useNavigate();
   const [formData, setFormData] = useState({});
-  const { is_sold, saleable_area, carpet_area } = formData;
-  const { locality, state, zip } = formData.address_details;
+  // const { is_sold, saleable_area, carpet_area } = formData;
+  // const { locality, state, zip } = formData.address_details;
 
   const [propertyCategories, setPropertyCategories] = useState([]);
   const [banks, setBanks] = useState([]);
@@ -32,195 +32,192 @@ const EditProperty = () => {
   const citySelectBoxRef = useRef();
   const notSoldCheckRef = useRef();
 
-  const getDataFromApi = async () => {
-    const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
-    setPropertyCategories(propertyCategoryRes.data);
-    const bankRes = await axios.get(`/sam/v1/property/by-bank`);
-    setBanks(bankRes.data);
-    const statesRes = await axios.get(`/sam/v1/property/by-state`);
-    setAllStates(statesRes.data);
-  };
+  // const getDataFromApi = async () => {
+  //   const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
+  //   setPropertyCategories(propertyCategoryRes.data);
+  //   const bankRes = await axios.get(`/sam/v1/property/by-bank`);
+  //   setBanks(bankRes.data);
+  //   const statesRes = await axios.get(`/sam/v1/property/by-state`);
+  //   setAllStates(statesRes.data);
+  // };
 
-  const commonFnToSaveFormData = (name, value) => {
-    setFormData({ ...formData, [name]: value });
-  };
+  // const commonFnToSaveFormData = (name, value) => {
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
-  const commonFnToSaveAddressDetails = (name, value) => {
-    setFormData({
-      ...formData,
-      address_details: {
-        ...formData.address_details,
-        [name]: value,
-        address: locality,
-      },
-    });
-  };
+  // const commonFnToSaveAddressDetails = (name, value) => {
+  //   setFormData({
+  //     ...formData,
+  //     address_details: {
+  //       ...formData.address_details,
+  //       [name]: value,
+  //       address: locality,
+  //     },
+  //   });
+  // };
 
   const onInputChange = async (e) => {
-    const { name, value } = e.target;
-    if (name === "type_id") {
-      if (value) {
-        commonFnToSaveFormData(name, parseInt(value));
-      }
-    } else if (name === "property_number") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "bank") {
-      if (value) {
-        branchSelectBoxRef.current.classList.remove("d-none");
-        const branchRes = await axios.get(
-          `/sam/v1/property/auth/bank-branches/${value}`,
-          {
-            headers: authHeader,
-          }
-        );
-        setBankBranches(branchRes.data);
-      } else {
-        branchSelectBoxRef.current.classList.add("d-none");
-      }
-    } else if (name === "bank_branch_id") {
-      commonFnToSaveFormData(name, parseInt(value));
-    } else if (name === "is_stressed") {
-      commonFnToSaveFormData(name, parseInt(value));
-    } else if (name === "status") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "saleable_area") {
-      commonFnToSaveFormData(name, `${value} sq. ft.`);
-    } else if (name === "carpet_area") {
-      commonFnToSaveFormData(name, `${value} sq. ft.`);
-    } else if (name === "market_price") {
-      commonFnToSaveFormData(name, parseInt(value));
-    } else if (name === "ready_reckoner_price") {
-      commonFnToSaveFormData(name, parseInt(value));
-    } else if (name === "expected_price") {
-      commonFnToSaveFormData(name, parseInt(value));
-    } else if (name === "completion_date") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "purchase_date") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "mortgage_date") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "is_sold") {
-      const notForSale = document.getElementById("notForSale");
-      if (value === "1") {
-        notSoldCheckRef.current.removeAttribute("checked");
-        if (notForSale) {
-          notForSale.selected = true;
-        }
-        setFormData({
-          ...formData,
-          [name]: parseInt(value),
-          is_available_for_sale: 0,
-        });
-      } else {
-        setFormData({
-          ...formData,
-          [name]: parseInt(value),
-          is_available_for_sale: 1,
-        });
-      }
-    } else if (name === "is_available_for_sale") {
-      setFormData({
-        ...formData,
-        [name]: parseInt(value),
-      });
-    } else if (name === "sale_availability_date") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "flat_number") {
-      commonFnToSaveAddressDetails(name, parseInt(value));
-    } else if (name === "building_name") {
-      commonFnToSaveAddressDetails(name, value);
-    } else if (name === "society_name") {
-      commonFnToSaveAddressDetails(name, value);
-    } else if (name === "plot_number") {
-      commonFnToSaveAddressDetails(name, parseInt(value));
-    } else if (name === "locality") {
-      commonFnToSaveAddressDetails(name, value);
-    } else if (name === "landmark") {
-      commonFnToSaveAddressDetails(name, value);
-    } else if (name === "state") {
-      if (value) {
-        commonFnToSaveAddressDetails(name, parseInt(value));
-        const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
-          state_id: parseInt(value),
-        });
-        setAllCities(citiesRes.data);
-        citySelectBoxRef.current.classList.remove("d-none");
-      } else {
-        citySelectBoxRef.current.classList.add("d-none");
-      }
-    } else if (name === "city") {
-      commonFnToSaveAddressDetails(name, parseInt(value));
-    } else if (name === "zip") {
-      if (value) {
-        commonFnToSaveAddressDetails(name, parseInt(value));
-      }
-    }
+    // const { name, value } = e.target;
+    // if (name === "type_id") {
+    //   if (value) {
+    //     commonFnToSaveFormData(name, parseInt(value));
+    //   }
+    // } else if (name === "property_number") {
+    //   commonFnToSaveFormData(name, value);
+    // } else if (name === "bank") {
+    //   if (value) {
+    //     branchSelectBoxRef.current.classList.remove("d-none");
+    //     const branchRes = await axios.get(
+    //       `/sam/v1/property/auth/bank-branches/${value}`,
+    //       {
+    //         headers: authHeader,
+    //       }
+    //     );
+    //     setBankBranches(branchRes.data);
+    //   } else {
+    //     branchSelectBoxRef.current.classList.add("d-none");
+    //   }
+    // } else if (name === "bank_branch_id") {
+    //   commonFnToSaveFormData(name, parseInt(value));
+    // } else if (name === "is_stressed") {
+    //   commonFnToSaveFormData(name, parseInt(value));
+    // } else if (name === "status") {
+    //   commonFnToSaveFormData(name, value);
+    // } else if (name === "saleable_area") {
+    //   commonFnToSaveFormData(name, `${value} sq. ft.`);
+    // } else if (name === "carpet_area") {
+    //   commonFnToSaveFormData(name, `${value} sq. ft.`);
+    // } else if (name === "market_price") {
+    //   commonFnToSaveFormData(name, parseInt(value));
+    // } else if (name === "ready_reckoner_price") {
+    //   commonFnToSaveFormData(name, parseInt(value));
+    // } else if (name === "expected_price") {
+    //   commonFnToSaveFormData(name, parseInt(value));
+    // } else if (name === "completion_date") {
+    //   commonFnToSaveFormData(name, value);
+    // } else if (name === "purchase_date") {
+    //   commonFnToSaveFormData(name, value);
+    // } else if (name === "mortgage_date") {
+    //   commonFnToSaveFormData(name, value);
+    // } else if (name === "is_sold") {
+    //   const notForSale = document.getElementById("notForSale");
+    //   if (value === "1") {
+    //     notSoldCheckRef.current.removeAttribute("checked");
+    //     if (notForSale) {
+    //       notForSale.selected = true;
+    //     }
+    //     setFormData({
+    //       ...formData,
+    //       [name]: parseInt(value),
+    //       is_available_for_sale: 0,
+    //     });
+    //   } else {
+    //     setFormData({
+    //       ...formData,
+    //       [name]: parseInt(value),
+    //       is_available_for_sale: 1,
+    //     });
+    //   }
+    // } else if (name === "is_available_for_sale") {
+    //   setFormData({
+    //     ...formData,
+    //     [name]: parseInt(value),
+    //   });
+    // } else if (name === "sale_availability_date") {
+    //   commonFnToSaveFormData(name, value);
+    // } else if (name === "flat_number") {
+    //   commonFnToSaveAddressDetails(name, parseInt(value));
+    // } else if (name === "building_name") {
+    //   commonFnToSaveAddressDetails(name, value);
+    // } else if (name === "society_name") {
+    //   commonFnToSaveAddressDetails(name, value);
+    // } else if (name === "plot_number") {
+    //   commonFnToSaveAddressDetails(name, parseInt(value));
+    // } else if (name === "locality") {
+    //   commonFnToSaveAddressDetails(name, value);
+    // } else if (name === "landmark") {
+    //   commonFnToSaveAddressDetails(name, value);
+    // } else if (name === "state") {
+    //   if (value) {
+    //     commonFnToSaveAddressDetails(name, parseInt(value));
+    //     const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
+    //       state_id: parseInt(value),
+    //     });
+    //     setAllCities(citiesRes.data);
+    //     citySelectBoxRef.current.classList.remove("d-none");
+    //   } else {
+    //     citySelectBoxRef.current.classList.add("d-none");
+    //   }
+    // } else if (name === "city") {
+    //   commonFnToSaveAddressDetails(name, parseInt(value));
+    // } else if (name === "zip") {
+    //   if (value) {
+    //     commonFnToSaveAddressDetails(name, parseInt(value));
+    //   }
+    // }
   };
 
-  const resetValidationsOnSubmit = () => {
-    setAreaValidationMessage("");
-    setZipCodeValidationMessage("");
-  };
+  // const resetValidationsOnSubmit = () => {
+  //   setAreaValidationMessage("");
+  //   setZipCodeValidationMessage("");
+  // };
 
   const onFormSubmit = async (e) => {
-    e.preventDefault();
-    await axios
-      .post(`/sam/v1/customer-registration/zipcode-validation`, {
-        zipcode: String(zip),
-        state_id: parseInt(state),
-      })
-      .then((res) => {
-        if (res.data.status === 0) {
-          setZipCodeValidationMessage("Invalid ZipCode.");
-          zipError = true;
-        } else {
-          setAreaValidationMessage("");
-          zipError = false;
-        }
-      });
-
-    if (parseInt(saleable_area) < parseInt(carpet_area)) {
-      setAreaValidationMessage("Carpet area must be less than salable area.");
-      areaError = true;
-    } else {
-      setAreaValidationMessage("");
-      areaError = false;
-    }
-
-    if (zipError || areaError) {
-      if (zipError === false) {
-        setZipCodeValidationMessage("");
-      }
-      if (areaError === false) {
-        setAreaValidationMessage("");
-      }
-    } else {
-      console.log(formData);
-      try {
-        await axios
-          .post(`/sam/v1/property/auth/single-property`, formData, {
-            headers: authHeader,
-          })
-          .then((res) => {
-            if (res.data.msg === 0) {
-              localStorage.setItem("property_number", formData.property_number);
-              resetValidationsOnSubmit();
-              toast.success("Property added successfully");
-              e.target.reset();
-              goTo("/admin/property/single-property-documents-upload");
-            } else {
-              toast.error("Internal server error");
-            }
-          });
-      } catch (error) {
-        toast.error("Internal server error");
-      }
-    }
+    // e.preventDefault();
+    // await axios
+    //   .post(`/sam/v1/customer-registration/zipcode-validation`, {
+    //     zipcode: String(zip),
+    //     state_id: parseInt(state),
+    //   })
+    //   .then((res) => {
+    //     if (res.data.status === 0) {
+    //       setZipCodeValidationMessage("Invalid ZipCode.");
+    //       zipError = true;
+    //     } else {
+    //       setAreaValidationMessage("");
+    //       zipError = false;
+    //     }
+    //   });
+    // if (parseInt(saleable_area) < parseInt(carpet_area)) {
+    //   setAreaValidationMessage("Carpet area must be less than salable area.");
+    //   areaError = true;
+    // } else {
+    //   setAreaValidationMessage("");
+    //   areaError = false;
+    // }
+    // if (zipError || areaError) {
+    //   if (zipError === false) {
+    //     setZipCodeValidationMessage("");
+    //   }
+    //   if (areaError === false) {
+    //     setAreaValidationMessage("");
+    //   }
+    // } else {
+    //   console.log(formData);
+    //   try {
+    //     await axios
+    //       .post(`/sam/v1/property/auth/update-property`, formData, {
+    //         headers: authHeader,
+    //       })
+    //       .then((res) => {
+    //         if (res.data.msg === 0) {
+    //           resetValidationsOnSubmit();
+    //           toast.success("Property added successfully");
+    //           e.target.reset();
+    //           goTo("/admin/property/single-property-documents-upload");
+    //         } else {
+    //           toast.error("Internal server error");
+    //         }
+    //       });
+    //   } catch (error) {
+    //     toast.error("Internal server error");
+    //   }
+    // }
   };
 
   useEffect(() => {
-    notSoldCheckRef.current.setAttribute("checked", "true");
-    getDataFromApi();
+    // notSoldCheckRef.current.setAttribute("checked", "true");
+    // getDataFromApi();
   }, []);
 
   return (
@@ -236,7 +233,7 @@ const EditProperty = () => {
                   <div className="col-xl-12">
                     <form onSubmit={onFormSubmit} className="card p-xl-2">
                       <div className="card-body">
-                        <h4 className="fw-bold">Add Property</h4>
+                        <h4 className="fw-bold">Update Property</h4>
                         <hr />
                         {/* Row 1 - Basic Details */}
                         <div className="row mb-3">
@@ -639,7 +636,7 @@ const EditProperty = () => {
                               </div>
                             </div>
                           </div>
-                          <div
+                          {/* <div
                             className={`col-xl-4 col-md-6 mb-3 mb-xl-0 ${
                               is_sold === 1 ? "d-none" : ""
                             }`}
@@ -664,8 +661,8 @@ const EditProperty = () => {
                                 <option value="0">No</option>
                               </select>
                             </div>
-                          </div>
-                          <div
+                          </div> */}
+                          {/* <div
                             className={`col-xl-4 col-md-6 ${
                               is_sold === 1 ? "d-none" : ""
                             }`}
@@ -686,7 +683,7 @@ const EditProperty = () => {
                                 required={is_sold === 1 ? false : true}
                               />
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                         {/* Row 5 - Address Details */}
                         <div className="row">
@@ -846,7 +843,7 @@ const EditProperty = () => {
                                 name="city"
                                 className="form-select"
                                 onChange={onInputChange}
-                                required={state !== "" ? true : false}
+                                // required={state !== "" ? true : false}
                               >
                                 <option value=""></option>
                                 {allCities ? (
@@ -898,7 +895,7 @@ const EditProperty = () => {
                         <div className="row text-end">
                           <div className="col-12">
                             <button type="submit" className="btn btn-primary">
-                              Add
+                              Update
                             </button>
                           </div>
                         </div>

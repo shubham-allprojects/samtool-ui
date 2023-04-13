@@ -269,9 +269,18 @@ const ViewAllProperties = () => {
                                     >
                                       <i className="bi bi-eye-fill"></i>
                                     </button>
-                                    <button className="mx-2 btn btn-sm btn-outline-primary property-button-wrapper">
+                                    <NavLink
+                                      onClick={() => {
+                                        localStorage.setItem(
+                                          "propertyId",
+                                          property_id
+                                        );
+                                      }}
+                                      to="/admin/property/update-property"
+                                      className="mx-2 btn btn-sm btn-outline-primary property-button-wrapper"
+                                    >
                                       <i className="bi bi-pencil-fill"></i>
-                                    </button>
+                                    </NavLink>
                                     <button
                                       data-bs-toggle="modal"
                                       data-bs-target="#confirmDeletePropertyModal"
