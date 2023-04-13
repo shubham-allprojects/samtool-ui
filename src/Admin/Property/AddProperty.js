@@ -22,6 +22,7 @@ const AddProperty = () => {
     sale_availability_date: "2005-12-26 23:50:30",
     status: "",
     is_stressed: 1,
+    property_id: 0,
     address_details: {
       locality: "Urban",
       state: "",
@@ -68,9 +69,9 @@ const AddProperty = () => {
 
   const onInputChange = async (e) => {
     const { name, value } = e.target;
-    if (name === "property_type") {
+    if (name === "type_id") {
       if (value) {
-        commonFnToSaveFormData(name, value);
+        commonFnToSaveFormData(name, parseInt(value));
       }
     } else if (name === "property_number") {
       commonFnToSaveFormData(name, value);
@@ -217,15 +218,13 @@ const AddProperty = () => {
               resetValidationsOnSubmit();
               toast.success("Property added successfully");
               e.target.reset();
-              goTo(
-                "/admin/property/single-property-documents-upload"
-              );
+              goTo("/admin/property/single-property-documents-upload");
             } else {
               toast.error("Internal server error");
             }
           });
       } catch (error) {
-        toast.error("Internal server error occurred");
+        toast.error("Internal server error");
       }
     }
   };
@@ -261,13 +260,13 @@ const AddProperty = () => {
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
-                                htmlFor="property_type"
+                                htmlFor="type_id"
                               >
                                 Property type
                               </label>
                               <select
-                                id="property_type"
-                                name="property_type"
+                                id="type_id"
+                                name="type_id"
                                 className="form-select"
                                 onChange={onInputChange}
                                 required
@@ -278,7 +277,7 @@ const AddProperty = () => {
                                     return (
                                       <option
                                         key={data.type_id}
-                                        value={data.type_name}
+                                        value={data.type_id}
                                       >
                                         {data.type_name}
                                       </option>
