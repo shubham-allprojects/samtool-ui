@@ -119,7 +119,7 @@ const ViewAllProperties = () => {
         headers: authHeader,
       })
       .then((res) => {
-        if (res.data.status === 0) {
+        if (res.data.msg === 0) {
           toast.success(`Property deleted successfully`);
           confirmDeletePropertyInputRef.current.value = "";
           setConfirmDeletePropertyBtnDisabled(true);
