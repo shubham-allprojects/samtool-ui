@@ -6,6 +6,7 @@ import CommonSpinner from "../../CommonSpinner";
 import Pagination from "../../Pagination";
 import { toast } from "react-toastify";
 import BreadCrumb from "../BreadCrumb";
+import { toggleClassOfNextPrevPageItems } from "../../CommonFunctions";
 
 const records_per_page = 4;
 let authHeader = "";
@@ -85,6 +86,7 @@ const ManageUsers = ({ userType }) => {
     setCurrentPageNumber(currentPage);
     const nextOrPrevPageUsers = await fetchMoreUsers(currentPage);
     setUsers(nextOrPrevPageUsers);
+    toggleClassOfNextPrevPageItems();
   };
 
   // Fetch more users on page click.

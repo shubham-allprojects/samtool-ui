@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
@@ -10,6 +9,7 @@ import Pagination from "../../Pagination";
 import ViewProperty from "./ViewProperty";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
+import { toggleClassOfNextPrevPageItems } from "../../CommonFunctions";
 
 let authHeader = "";
 let propertiesPerPage = 4;
@@ -97,7 +97,7 @@ const ViewAllProperties = () => {
     setCurrentPageNumber(currentPage);
     const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
     setProperties(nextOrPrevPagePropertyData);
-    console.log(pageCount);
+    toggleClassOfNextPrevPageItems();
   };
 
   // Fetch more jobs on page click.
