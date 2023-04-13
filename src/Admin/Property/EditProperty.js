@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
@@ -9,26 +9,15 @@ import BreadCrumb from "../BreadCrumb";
 let authHeader = "";
 let zipError = false;
 let areaError = false;
-const AddProperty = () => {
+const EditProperty = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   if (data) {
     authHeader = { Authorization: data.logintoken };
   }
 
+  const { id } = useParams();
   const goTo = useNavigate();
-  const [formData, setFormData] = useState({
-    is_sold: 0,
-    is_available_for_sale: 1,
-    sale_availability_date: "2005-12-26 23:50:30",
-    status: "",
-    is_stressed: 1,
-    property_id: 0,
-    address_details: {
-      locality: "Urban",
-      state: "",
-      zip: "",
-    },
-  });
+  const [formData, setFormData] = useState({});
   const { is_sold, saleable_area, carpet_area } = formData;
   const { locality, state, zip } = formData.address_details;
 
@@ -926,4 +915,4 @@ const AddProperty = () => {
   );
 };
 
-export default AddProperty;
+export default EditProperty;
