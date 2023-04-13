@@ -97,6 +97,7 @@ const ViewAllProperties = () => {
     setCurrentPageNumber(currentPage);
     const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
     setProperties(nextOrPrevPagePropertyData);
+    console.log(pageCount);
   };
 
   // Fetch more jobs on page click.
