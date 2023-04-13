@@ -9,6 +9,7 @@ import CommonSpinner from "../../CommonSpinner";
 import Pagination from "../../Pagination";
 import ViewProperty from "./ViewProperty";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 let authHeader = "";
 let propertiesPerPage = 4;
@@ -22,9 +23,18 @@ const ViewAllProperties = () => {
   const allPropertiesPageRef = useRef();
   const viewCurrentPropertyRef = useRef();
   const [selectedProperty, setSelectedProperty] = useState([]);
-
   const [pageCount, setPageCount] = useState(0);
   const paginationRef = useRef();
+
+  // useStates for delete functionalities
+  const [selectedPropertyId, setSelectedPropertyId] = useState("");
+  const [totalPropertyCount, setTotalPropertyCount] = useState(0);
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [
+    confirmDeletePropertyBtnDisabled,
+    setConfirmDeletePropertyBtnDisabled,
+  ] = useState(true);
+  const confirmDeletePropertyInputRef = useRef();
 
   const getPropertiesFromApi = async () => {
     setLoading(true);
@@ -53,6 +63,8 @@ const ViewAllProperties = () => {
       totalCount += type.count;
     });
 
+    setTotalPropertyCount(totalCount);
+
     if (propertyCountRes.data) {
       setPageCount(Math.ceil(totalCount / propertiesPerPage));
     }
@@ -66,10 +78,23 @@ const ViewAllProperties = () => {
     setLoading(false);
   };
 
+  const toggleActivePageClass = (activePage) => {
+    let arr = document.querySelectorAll(".page-item");
+    arr.forEach((pageItem) => {
+      if (parseInt(pageItem.textContent) === activePage) {
+        pageItem.classList.add("active");
+      } else {
+        pageItem.classList.remove("active");
+      }
+    });
+  };
+
   // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
   const handlePageClick = async (pageNumber) => {
     window.scrollTo(0, 0);
     let currentPage = pageNumber.selected + 1;
+    toggleActivePageClass(currentPage);
+    setCurrentPageNumber(currentPage);
     const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
     setProperties(nextOrPrevPagePropertyData);
   };
@@ -88,13 +113,39 @@ const ViewAllProperties = () => {
     return propertiesRes.data;
   };
 
-  // const deleteProperty = (propertyId) => {
-  //   const propertiesToShow = properties.filter((property) => {
-  //     return property._id !== propertyId;
-  //   });
-  //   toast.success(`Property with ID: ${propertyId} deleted Successfuly`);
-  //   setProperties(propertiesToShow);
-  // };
+  const deleteProperty = async (propertyId) => {
+    await axios
+      .delete(`/sam/v1/property/auth/delete-property/${propertyId}`, {
+        headers: authHeader,
+      })
+      .then((res) => {
+        if (res.data.status === 0) {
+          toast.success(`Property deleted successfully`);
+          confirmDeletePropertyInputRef.current.value = "";
+          setConfirmDeletePropertyBtnDisabled(true);
+          setTotalPropertyCount(totalPropertyCount - 1);
+          if (totalPropertyCount - 1 !== 0) {
+            let newPageCount = Math.ceil(
+              (totalPropertyCount - 1) / propertiesPerPage
+            );
+            setPageCount(newPageCount);
+            if (newPageCount < currentPageNumber) {
+              handlePageClick({ selected: currentPageNumber - 2 });
+            } else {
+              handlePageClick({ selected: currentPageNumber - 1 });
+            }
+          } else {
+            setProperties(false);
+          }
+        }
+      });
+  };
+
+  const onDeletePropertyBtnClick = (propertyId) => {
+    setSelectedPropertyId(propertyId);
+    confirmDeletePropertyInputRef.current.value = "";
+    setConfirmDeletePropertyBtnDisabled(true);
+  };
 
   const viewCurrentProperty = async (id) => {
     const currentPropertyRes = await axios.get(
@@ -141,7 +192,7 @@ const ViewAllProperties = () => {
                     width="4rem"
                   />
                 </div>
-              ) : properties.length <= 0 ? (
+              ) : !properties ? (
                 <div className="d-flex align-items-center justify-content-center mt-5">
                   <h1 className="fw-bold custom-heading-color">
                     Sorry ! No Properties Found :(
@@ -214,7 +265,14 @@ const ViewAllProperties = () => {
                                     <button className="mx-2 btn btn-sm btn-outline-primary property-button-wrapper">
                                       <i className="bi bi-pencil-fill"></i>
                                     </button>
-                                    <button className="btn btn-sm btn-outline-danger property-button-wrapper">
+                                    <button
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#confirmDeletePropertyModal"
+                                      onClick={() => {
+                                        onDeletePropertyBtnClick(property_id);
+                                      }}
+                                      className="btn btn-sm btn-outline-danger property-button-wrapper"
+                                    >
                                       <i className="bi bi-trash-fill"></i>
                                     </button>
                                     <NavLink
@@ -273,6 +331,65 @@ const ViewAllProperties = () => {
                 </div>
               </div>
             </>
+          </div>
+        </div>
+      </div>
+      {/* Modal */}
+      <div
+        className="modal fade"
+        id="confirmDeletePropertyModal"
+        tabIndex="-1"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered modal-sm confirm-delete-modal">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Are you sure ?
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <label
+                htmlFor="confirm-delete-property-input"
+                className="form-label"
+              >
+                Please type{" "}
+                <span className="fw-bold">{selectedPropertyId}</span> to
+                confirm.
+              </label>
+              <input
+                onChange={(e) => {
+                  if (
+                    e.target.value.toString() === selectedPropertyId.toString()
+                  ) {
+                    setConfirmDeletePropertyBtnDisabled(false);
+                  } else {
+                    setConfirmDeletePropertyBtnDisabled(true);
+                  }
+                }}
+                ref={confirmDeletePropertyInputRef}
+                type="text"
+                name="confirm-delete-property-id"
+                id="confirm-delete-property-input"
+                className="form-control"
+              />
+              <button
+                onClick={() => {
+                  deleteProperty(selectedPropertyId);
+                }}
+                data-bs-dismiss="modal"
+                disabled={confirmDeletePropertyBtnDisabled}
+                className="btn btn-danger w-100 mt-3 fw-bold"
+              >
+                Delete User
+              </button>
+            </div>
           </div>
         </div>
       </div>

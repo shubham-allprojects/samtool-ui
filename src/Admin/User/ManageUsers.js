@@ -125,7 +125,7 @@ const ManageUsers = ({ userType }) => {
       })
       .then((res) => {
         if (res.data.status === 0) {
-          toast.success(`User ${userName} deleted successfuly`);
+          toast.success(`User ${userName} deleted successfully`);
           confirmDeleteInputRef.current.value = "";
           setConfirmDeleteUserBtnDisabled(true);
           setTotalUsersCount(totalUsersCount - 1);
@@ -403,7 +403,7 @@ const ManageUsers = ({ userType }) => {
 
                                     <div
                                       data-bs-toggle="modal"
-                                      data-bs-target="#confirmDeletedModal"
+                                      data-bs-target="#confirmDeleteUserModal"
                                       className={`dropdown-item ${
                                         email_address === data.user
                                           ? "d-none"
@@ -729,7 +729,7 @@ const ManageUsers = ({ userType }) => {
       {/* Modal */}
       <div
         className="modal fade"
-        id="confirmDeletedModal"
+        id="confirmDeleteUserModal"
         tabIndex="-1"
         aria-hidden="true"
       >
