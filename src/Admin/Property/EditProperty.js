@@ -17,7 +17,22 @@ const EditProperty = () => {
 
   const goTo = useNavigate();
   const [formData, setFormData] = useState({});
-  // const { is_sold, saleable_area, carpet_area } = formData;
+  const {
+    is_sold,
+    market_price,
+    ready_reckoner_price,
+    expected_price,
+    Flat_No,
+    plot_no,
+    saleable_area,
+    carpet_area,
+    property_number,
+    building_name,
+    society_name,
+    locality,
+    landmark,
+    PIN,
+  } = formData;
   // const { locality, state, zip } = formData.address_details;
 
   const [propertyCategories, setPropertyCategories] = useState([]);
@@ -302,6 +317,7 @@ const EditProperty = () => {
                                 id="property_number"
                                 name="property_number"
                                 className="form-control"
+                                defaultValue={property_number}
                                 onChange={onInputChange}
                                 required
                               />
@@ -455,6 +471,7 @@ const EditProperty = () => {
                                 className="form-control"
                                 id="saleable_area"
                                 name="saleable_area"
+                                defaultValue={saleable_area}
                                 onChange={onInputChange}
                                 required
                               />
@@ -475,6 +492,7 @@ const EditProperty = () => {
                                 }`}
                                 id="carpet_area"
                                 name="carpet_area"
+                                defaultValue={carpet_area}
                                 onChange={onInputChange}
                                 required
                               />
@@ -507,6 +525,7 @@ const EditProperty = () => {
                                 type="number"
                                 id="market_price"
                                 name="market_price"
+                                defaultValue={market_price}
                                 onChange={onInputChange}
                                 required
                               />
@@ -525,6 +544,7 @@ const EditProperty = () => {
                                 id="ready_reckoner_price"
                                 name="ready_reckoner_price"
                                 className="form-control"
+                                defaultValue={ready_reckoner_price}
                                 onChange={onInputChange}
                                 required
                               />
@@ -543,6 +563,7 @@ const EditProperty = () => {
                                 className="form-control"
                                 id="expected_price"
                                 name="expected_price"
+                                defaultValue={expected_price}
                                 onChange={onInputChange}
                                 required
                               />
@@ -716,7 +737,8 @@ const EditProperty = () => {
                                 id="flat_number"
                                 name="flat_number"
                                 type="number"
-                                className="form-control "
+                                className="form-control"
+                                defaultValue={Flat_No}
                                 onChange={onInputChange}
                               />
                             </div>
@@ -733,7 +755,8 @@ const EditProperty = () => {
                                 id="building_name"
                                 name="building_name"
                                 type="text"
-                                className="form-control "
+                                className="form-control"
+                                defaultValue={building_name}
                                 onChange={onInputChange}
                               />
                             </div>
@@ -750,7 +773,8 @@ const EditProperty = () => {
                                 id="society_name"
                                 name="society_name"
                                 type="text"
-                                className="form-control "
+                                className="form-control"
+                                defaultValue={society_name}
                                 onChange={onInputChange}
                               />
                             </div>
@@ -767,7 +791,8 @@ const EditProperty = () => {
                                 id="plot_number"
                                 name="plot_number"
                                 type="number"
-                                className="form-control "
+                                className="form-control"
+                                defaultValue={plot_no}
                                 onChange={onInputChange}
                               />
                             </div>
@@ -784,7 +809,8 @@ const EditProperty = () => {
                                 id="locality"
                                 name="locality"
                                 type="text"
-                                className="form-control "
+                                className="form-control"
+                                defaultValue={locality}
                                 onChange={onInputChange}
                               />
                             </div>
@@ -802,7 +828,8 @@ const EditProperty = () => {
                                 id="landmark"
                                 name="landmark"
                                 type="text"
-                                className="form-control "
+                                className="form-control"
+                                defaultValue={landmark}
                                 onChange={onInputChange}
                               />
                             </div>
@@ -890,6 +917,7 @@ const EditProperty = () => {
                                 onChange={onInputChange}
                                 id="zip"
                                 name="zip"
+                                defaultValue={PIN}
                                 className={`form-control ${
                                   zipCodeValidationMessage
                                     ? "border-danger"
