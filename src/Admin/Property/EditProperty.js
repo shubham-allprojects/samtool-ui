@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
@@ -15,7 +15,6 @@ const EditProperty = () => {
     authHeader = { Authorization: data.logintoken };
   }
 
-  const { id } = useParams();
   const goTo = useNavigate();
   const [formData, setFormData] = useState({});
   // const { is_sold, saleable_area, carpet_area } = formData;
@@ -215,7 +214,22 @@ const EditProperty = () => {
     // }
   };
 
+  const getPropertyToUpdate = async () => {
+    let propertyId = localStorage.getItem("propertyId");
+    if (propertyId) {
+      const currentPropertyRes = await axios.get(
+        `/sam/v1/property/single-property/${propertyId}`,
+        { headers: authHeader }
+      );
+      if (currentPropertyRes.data) {
+        setFormData(currentPropertyRes.data);
+        console.log(currentPropertyRes.data);
+      }
+    }
+  };
+
   useEffect(() => {
+    getPropertyToUpdate();
     // notSoldCheckRef.current.setAttribute("checked", "true");
     // getDataFromApi();
   }, []);
