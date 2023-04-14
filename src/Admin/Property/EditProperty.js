@@ -569,7 +569,11 @@ const EditProperty = () => {
                                 className="form-control"
                                 id="saleable_area"
                                 name="saleable_area"
-                                defaultValue={saleable_area}
+                                defaultValue={
+                                  saleable_area
+                                    ? parseInt(saleable_area.split("sqrt")[0])
+                                    : ""
+                                }
                                 onChange={onInputChange}
                                 required
                               />
@@ -590,7 +594,11 @@ const EditProperty = () => {
                                 }`}
                                 id="carpet_area"
                                 name="carpet_area"
-                                defaultValue={carpet_area}
+                                defaultValue={
+                                  saleable_area
+                                    ? parseInt(carpet_area.split("sqrt")[0])
+                                    : ""
+                                }
                                 onChange={onInputChange}
                                 required
                               />
