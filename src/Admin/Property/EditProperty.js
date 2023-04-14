@@ -400,8 +400,17 @@ const EditProperty = () => {
               <div className="container-fluid">
                 <div className="row justify-content-center">
                   <div className="col-xl-12">
-                    <div className={`${mainPageLoading ? "" : "d-none"}`}>
-                      <CommonSpinner />
+                    <div
+                      className={`${
+                        mainPageLoading ? "" : "d-none"
+                      } d-flex align-items-center justify-content-center`}
+                      style={{ minHeight: "60vh" }}
+                    >
+                      <CommonSpinner
+                        spinnerColor="primary"
+                        height="4rem"
+                        width="4rem"
+                      />
                     </div>
 
                     <form
