@@ -19,7 +19,9 @@ const EditProperty = () => {
   const [formData, setFormData] = useState({});
   const [currentPropertyData, setCurrentPropertyData] = useState({});
   const {
-    is_sold,
+    completion_date,
+    purchase_date,
+    mortgage_date,
     market_price,
     ready_reckoner_price,
     expected_price,
@@ -697,6 +699,11 @@ const EditProperty = () => {
                                 type="date"
                                 id="completion_date"
                                 name="completion_date"
+                                defaultValue={
+                                  completion_date
+                                    ? completion_date.split(" ")[0]
+                                    : ""
+                                }
                                 onChange={onInputChange}
                                 required
                               />
@@ -716,6 +723,11 @@ const EditProperty = () => {
                                 id="purchase_date"
                                 name="purchase_date"
                                 onChange={onInputChange}
+                                defaultValue={
+                                  purchase_date
+                                    ? purchase_date.split(" ")[0]
+                                    : ""
+                                }
                                 required
                               />
                             </div>
@@ -734,6 +746,11 @@ const EditProperty = () => {
                                 id="mortgage_date"
                                 name="mortgage_date"
                                 onChange={onInputChange}
+                                defaultValue={
+                                  mortgage_date
+                                    ? mortgage_date.split(" ")[0]
+                                    : ""
+                                }
                                 required
                               />
                             </div>
