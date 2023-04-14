@@ -187,10 +187,9 @@ const EditProperty = () => {
     await axios
       .post(`/sam/v1/customer-registration/zipcode-validation`, {
         zipcode: String(zip),
-        state_id: idOfState,
+        state_id: parseInt(idOfState),
       })
       .then((res) => {
-        console.log(zip, state_id);
         if (res.data.status === 0) {
           setZipCodeValidationMessage("Invalid ZipCode.");
           zipError = true;
