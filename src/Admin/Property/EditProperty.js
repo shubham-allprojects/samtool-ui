@@ -256,9 +256,20 @@ const EditProperty = () => {
         console.log(currentPropertyRes.data);
       }
 
+      const {
+        type_name,
+        branch_name,
+        status,
+        is_stressed,
+        state_name,
+        city_name,
+        is_sold,
+        is_available_for_sale,
+      } = currentPropertyRes.data;
+
       // Set default value for property type and make it selected in property_type select box
       propertyCategoryRes.data.forEach((i) => {
-        if (i.type_name === currentPropertyRes.data.type_name) {
+        if (i.type_name === type_name) {
           let defaultPropertyType = document.getElementById(
             `property-type-${i.type_id}`
           );
@@ -269,9 +280,7 @@ const EditProperty = () => {
       });
 
       // To make default bank selected in bank select box
-      let defaultBank = document.getElementById(
-        currentPropertyRes.data.branch_name.split(",")[0]
-      );
+      let defaultBank = document.getElementById(branch_name.split(",")[0]);
       if (defaultBank) {
         defaultBank.selected = true;
       }
@@ -285,7 +294,7 @@ const EditProperty = () => {
 
       // Set default value for branch  and make it selected in branch select box
       branchRes.data.forEach((i) => {
-        if (i.branch_name === currentPropertyRes.data.branch_name) {
+        if (i.branch_name === branch_name) {
           let defaultBranch = document.getElementById(`branch-${i.branch_id}`);
           if (defaultBranch) {
             defaultBranch.selected = true;
@@ -294,16 +303,14 @@ const EditProperty = () => {
       });
 
       // default status
-      let defaultStatus = document.getElementById(
-        `status-${currentPropertyRes.data.status}`
-      );
+      let defaultStatus = document.getElementById(`status-${status}`);
       if (defaultStatus) {
         defaultStatus.selected = true;
       }
 
       // default value of stressed status
       let defaultValueOfStressed = document.getElementById(
-        `stressed-${currentPropertyRes.data.is_stressed}`
+        `stressed-${is_stressed}`
       );
       if (defaultValueOfStressed) {
         defaultValueOfStressed.checked = true;
@@ -312,7 +319,7 @@ const EditProperty = () => {
       // default state
       let defaultStateId = "";
       statesRes.data.forEach((i) => {
-        if (i.state_name === currentPropertyRes.data.state_name) {
+        if (i.state_name === state_name) {
           defaultStateId = i.state_id;
           let defaultState = document.getElementById(`state-${i.state_id}`);
           if (defaultState) {
@@ -326,24 +333,20 @@ const EditProperty = () => {
         state_id: parseInt(defaultStateId),
       });
       setAllCities(citiesRes.data);
-      let defaultCity = document.getElementById(
-        currentPropertyRes.data.city_name
-      );
+      let defaultCity = document.getElementById(city_name);
       if (defaultCity) {
         defaultCity.selected = true;
       }
 
       // default is_sold value
-      let defaultIsSold = document.getElementById(
-        `is_sold-${currentPropertyRes.data.is_sold}`
-      );
+      let defaultIsSold = document.getElementById(`is_sold-${is_sold}`);
       if (defaultIsSold) {
         defaultIsSold.checked = true;
       }
 
       // default is_available_for_sale value
       let defaultIsAvailableForSale = document.getElementById(
-        `is_available_for_sale-${currentPropertyRes.data.is_available_for_sale}`
+        `is_available_for_sale-${is_available_for_sale}`
       );
       if (defaultIsAvailableForSale) {
         defaultIsAvailableForSale.selected = true;
