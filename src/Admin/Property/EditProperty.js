@@ -259,7 +259,7 @@ const EditProperty = () => {
   };
 
   let defaultTypeId;
-  let defaultBranchId;
+  let defaultBranchId = 2;
 
   const getCurrentPropertyDataToUpdate = async () => {
     setMainPageLoading(true);
@@ -313,49 +313,12 @@ const EditProperty = () => {
         bank_id,
       } = currentPropertyRes.data;
 
-      // Default state
-      let defaultState = document.getElementById(`state-${state_id}`);
-      if (defaultState) {
-        defaultState.selected = true;
-      }
-
-      // default city
-      const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
-        state_id: parseInt(state_id),
-      });
-      setAllCities(citiesRes.data);
-      let defaultCity = document.getElementById(city_name);
-      if (defaultCity) {
-        defaultCity.selected = true;
-      }
-
-      // To make default bank selected in bank select box
-      let defaultBank = document.getElementById(`bank-${bank_id}`);
-      if (defaultBank) {
-        defaultBank.selected = true;
-        const branchRes = await axios.get(
-          `/sam/v1/property/auth/bank-branches/${defaultBank.value}`,
-          {
-            headers: authHeader,
-          }
-        );
-        setBankBranches(branchRes.data);
-        // Set default value for branch and make it selected in branch select box
-        branchRes.data.forEach((i) => {
-          if (i.branch_name === branch_name) {
-            defaultBranchId = i.branch_id;
-            let defaultBranch = document.getElementById(
-              `branch-${i.branch_id}`
-            );
-            if (defaultBranch) {
-              defaultBranch.selected = true;
-            }
-          }
-        });
-      }
-
       setAllDefaultValues(
         propertyCategoryRes.data,
+        state_id,
+        city_name,
+        bank_id,
+        branch_name,
         type_name,
         status,
         is_stressed,
@@ -403,6 +366,10 @@ const EditProperty = () => {
 
   const setAllDefaultValues = async (
     propertyCategoryRes,
+    state_id,
+    city_name,
+    bank_id,
+    branch_name,
     type_name,
     status,
     is_stressed,
@@ -421,6 +388,45 @@ const EditProperty = () => {
         }
       }
     });
+
+    // Default state
+    let defaultState = document.getElementById(`state-${state_id}`);
+    if (defaultState) {
+      defaultState.selected = true;
+    }
+
+    // default city
+    const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
+      state_id: parseInt(state_id),
+    });
+    setAllCities(citiesRes.data);
+    let defaultCity = document.getElementById(city_name);
+    if (defaultCity) {
+      defaultCity.selected = true;
+    }
+
+    // To make default bank selected in bank select box
+    let defaultBank = document.getElementById(`bank-${bank_id}`);
+    if (defaultBank) {
+      defaultBank.selected = true;
+      const branchRes = await axios.get(
+        `/sam/v1/property/auth/bank-branches/${defaultBank.value}`,
+        {
+          headers: authHeader,
+        }
+      );
+      setBankBranches(branchRes.data);
+      // Set default value for branch and make it selected in branch select box
+      branchRes.data.forEach((i) => {
+        if (i.branch_name === branch_name) {
+          defaultBranchId = i.branch_id;
+          let defaultBranch = document.getElementById(`branch-${i.branch_id}`);
+          if (defaultBranch) {
+            defaultBranch.selected = true;
+          }
+        }
+      });
+    }
 
     // default status
     let defaultStatus = document.getElementById(`status-${status}`);
