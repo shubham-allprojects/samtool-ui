@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
@@ -16,7 +16,7 @@ const EditProperty = () => {
     authHeader = { Authorization: data.logintoken };
   }
 
-  const goTo = useNavigate();
+  // const goTo = useNavigate();
 
   const [formData, setFormData] = useState({
     address_details: {},
@@ -44,7 +44,6 @@ const EditProperty = () => {
     plot_number,
     landmark,
     zip,
-    state_id,
   } = formData.address_details;
 
   const [propertyCategories, setPropertyCategories] = useState([]);
