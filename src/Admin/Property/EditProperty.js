@@ -284,7 +284,6 @@ const EditProperty = () => {
       const {
         type_name,
         branch_name,
-        state_name,
         city_name,
         completion_date,
         sale_availability_date,
