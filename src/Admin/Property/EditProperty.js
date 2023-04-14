@@ -117,11 +117,11 @@ const EditProperty = () => {
     // } else if (name === "mortgage_date") {
     //   commonFnToSaveFormData(name, value);
     // } else if (name === "is_sold") {
-    //   const notForSale = document.getElementById("notForSale");
+    //   const is_available_for_sale-1 = document.getElementById("is_available_for_sale-1");
     //   if (value === "1") {
     //     notSoldCheckRef.current.removeAttribute("checked");
-    //     if (notForSale) {
-    //       notForSale.selected = true;
+    //     if (is_available_for_sale-1) {
+    //       is_available_for_sale-1.selected = true;
     //     }
     //     setFormData({
     //       ...formData,
@@ -333,11 +333,19 @@ const EditProperty = () => {
       }
 
       // default is_sold value
-      let defaultIsSoldValue = document.getElementById(
+      let defaultIsSold = document.getElementById(
         `is_sold-${currentPropertyRes.data.is_sold}`
       );
-      if (defaultIsSoldValue) {
-        defaultIsSoldValue.checked = true;
+      if (defaultIsSold) {
+        defaultIsSold.checked = true;
+      }
+
+      // default is_available_for_sale value
+      let defaultIsAvailableForSale = document.getElementById(
+        `is_available_for_sale-${currentPropertyRes.data.is_available_for_sale}`
+      );
+      if (defaultIsAvailableForSale) {
+        defaultIsAvailableForSale.selected = true;
       }
     }
   };
@@ -804,11 +812,8 @@ const EditProperty = () => {
                               </div>
                             </div>
                           </div>
-                          {/* <div
-                            className={`col-xl-4 col-md-6 mb-3 mb-xl-0 ${
-                              is_sold === 1 ? "d-none" : ""
-                            }`}
-                          >
+                          <div className={`col-xl-4 col-md-6 mb-3 mb-xl-0`}>
+                            {/* ${is_sold === 1 ? "d-none" : ""} */}
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -823,13 +828,15 @@ const EditProperty = () => {
                                 onChange={onInputChange}
                                 required
                               >
-                                <option id="notForSale" value="1">
+                                <option value="1" id="is_available_for_sale-1">
                                   Yes
                                 </option>
-                                <option value="0">No</option>
+                                <option value="0" id="is_available_for_sale-0">
+                                  No
+                                </option>
                               </select>
                             </div>
-                          </div> */}
+                          </div>
                           {/* <div
                             className={`col-xl-4 col-md-6 ${
                               is_sold === 1 ? "d-none" : ""
