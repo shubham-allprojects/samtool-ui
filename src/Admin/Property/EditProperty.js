@@ -267,90 +267,116 @@ const EditProperty = () => {
         is_available_for_sale,
       } = currentPropertyRes.data;
 
-      // Set default value for property type and make it selected in property_type select box
-      propertyCategoryRes.data.forEach((i) => {
-        if (i.type_name === type_name) {
-          let defaultPropertyType = document.getElementById(
-            `property-type-${i.type_id}`
-          );
-          if (defaultPropertyType) {
-            defaultPropertyType.selected = true;
-          }
-        }
-      });
-
-      // To make default bank selected in bank select box
-      let defaultBank = document.getElementById(branch_name.split(",")[0]);
-      if (defaultBank) {
-        defaultBank.selected = true;
-      }
-      const branchRes = await axios.get(
-        `/sam/v1/property/auth/bank-branches/${defaultBank.value}`,
-        {
-          headers: authHeader,
-        }
+      setAllDefaultValues(
+        propertyCategoryRes.data,
+        type_name,
+        branch_name,
+        status,
+        is_stressed,
+        state_name,
+        city_name,
+        is_sold,
+        is_available_for_sale,
+        statesRes
       );
-      setBankBranches(branchRes.data);
+    }
+  };
 
-      // Set default value for branch  and make it selected in branch select box
-      branchRes.data.forEach((i) => {
-        if (i.branch_name === branch_name) {
-          let defaultBranch = document.getElementById(`branch-${i.branch_id}`);
-          if (defaultBranch) {
-            defaultBranch.selected = true;
-          }
+  const setAllDefaultValues = async (
+    propertyCategoryRes,
+    type_name,
+    branch_name,
+    status,
+    is_stressed,
+    state_name,
+    city_name,
+    is_sold,
+    is_available_for_sale,
+    statesRes
+  ) => {
+    // Set default value for property type and make it selected in property_type select box
+    propertyCategoryRes.forEach((i) => {
+      if (i.type_name === type_name) {
+        let defaultPropertyType = document.getElementById(
+          `property-type-${i.type_id}`
+        );
+        if (defaultPropertyType) {
+          defaultPropertyType.selected = true;
         }
-      });
-
-      // default status
-      let defaultStatus = document.getElementById(`status-${status}`);
-      if (defaultStatus) {
-        defaultStatus.selected = true;
       }
+    });
 
-      // default value of stressed status
-      let defaultValueOfStressed = document.getElementById(
-        `stressed-${is_stressed}`
-      );
-      if (defaultValueOfStressed) {
-        defaultValueOfStressed.checked = true;
+    // To make default bank selected in bank select box
+    let defaultBank = document.getElementById(branch_name.split(",")[0]);
+    if (defaultBank) {
+      defaultBank.selected = true;
+    }
+    const branchRes = await axios.get(
+      `/sam/v1/property/auth/bank-branches/${defaultBank.value}`,
+      {
+        headers: authHeader,
       }
+    );
+    setBankBranches(branchRes.data);
 
-      // default state
-      let defaultStateId = "";
-      statesRes.data.forEach((i) => {
-        if (i.state_name === state_name) {
-          defaultStateId = i.state_id;
-          let defaultState = document.getElementById(`state-${i.state_id}`);
-          if (defaultState) {
-            defaultState.selected = true;
-          }
+    // Set default value for branch  and make it selected in branch select box
+    branchRes.data.forEach((i) => {
+      if (i.branch_name === branch_name) {
+        let defaultBranch = document.getElementById(`branch-${i.branch_id}`);
+        if (defaultBranch) {
+          defaultBranch.selected = true;
         }
-      });
-
-      // default city
-      const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
-        state_id: parseInt(defaultStateId),
-      });
-      setAllCities(citiesRes.data);
-      let defaultCity = document.getElementById(city_name);
-      if (defaultCity) {
-        defaultCity.selected = true;
       }
+    });
 
-      // default is_sold value
-      let defaultIsSold = document.getElementById(`is_sold-${is_sold}`);
-      if (defaultIsSold) {
-        defaultIsSold.checked = true;
-      }
+    // default status
+    let defaultStatus = document.getElementById(`status-${status}`);
+    if (defaultStatus) {
+      defaultStatus.selected = true;
+    }
 
-      // default is_available_for_sale value
-      let defaultIsAvailableForSale = document.getElementById(
-        `is_available_for_sale-${is_available_for_sale}`
-      );
-      if (defaultIsAvailableForSale) {
-        defaultIsAvailableForSale.selected = true;
+    // default value of stressed status
+    let defaultValueOfStressed = document.getElementById(
+      `stressed-${is_stressed}`
+    );
+    if (defaultValueOfStressed) {
+      defaultValueOfStressed.checked = true;
+    }
+
+    // default state
+    let defaultStateId = "";
+    statesRes.data.forEach((i) => {
+      if (i.state_name === state_name) {
+        defaultStateId = i.state_id;
+        let defaultState = document.getElementById(`state-${i.state_id}`);
+        if (defaultState) {
+          defaultState.selected = true;
+        }
       }
+    });
+
+    // default city
+    const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
+      state_id: parseInt(defaultStateId),
+    });
+    setAllCities(citiesRes.data);
+    let defaultCity = document.getElementById(city_name);
+    if (defaultCity) {
+      defaultCity.selected = true;
+    }
+
+    // default is_sold value
+    let defaultIsSold = document.getElementById(`is_sold-${is_sold}`);
+    if (defaultIsSold) {
+      defaultIsSold.checked = true;
+    }
+
+    // default is_available_for_sale value
+    let defaultIsAvailableForSale = document.getElementById(
+      `is_available_for_sale-${is_available_for_sale}`
+    );
+    if (defaultIsAvailableForSale) {
+      defaultIsAvailableForSale.selected = true;
     }
   };
 
