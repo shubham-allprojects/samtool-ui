@@ -17,31 +17,6 @@ const EditProperty = () => {
   }
 
   // const goTo = useNavigate();
-  // const [currentPropertyData, setCurrentPropertyData] = useState({});
-  // const {
-  //   completion_date,
-  //   sale_availability_date,
-  //   purchase_date,
-  //   mortgage_date,
-  //   market_price,
-  //   ready_reckoner_price,
-  //   expected_price,
-  //   flat_no,
-  //   plot_no,
-  //   saleable_area,
-  //   carpet_area,
-  //   property_number,
-  //   building_name,
-  //   society_name,
-  //   locality,
-  //   landmark,
-  //   zip,
-  //   is_sold,
-  //   is_available_for_sale,
-  //   status,
-  //   is_stressed,
-  //   property_id,
-  // } = currentPropertyData;
 
   const [formData, setFormData] = useState({
     address_details: {},
@@ -93,7 +68,7 @@ const EditProperty = () => {
   //     address_details: {
   //       ...formData.address_details,
   //       [name]: value,
-  //       address: formData.address_details.locality,
+  //       address: locality,
   //     },
   //   });
   // };
