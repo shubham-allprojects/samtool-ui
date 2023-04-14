@@ -404,12 +404,12 @@ const EditProperty = () => {
                       className={`${
                         mainPageLoading ? "" : "d-none"
                       } d-flex align-items-center justify-content-center`}
-                      style={{ minHeight: "70vh" }}
+                      style={{ minHeight: "75vh" }}
                     >
                       <CommonSpinner
                         spinnerColor="primary"
-                        height="4rem"
-                        width="4rem"
+                        height="5rem"
+                        width="5rem"
                         spinnerType="grow"
                       />
                     </div>
