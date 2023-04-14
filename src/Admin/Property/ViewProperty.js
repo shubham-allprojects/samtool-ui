@@ -21,9 +21,9 @@ const ViewProperty = ({ selectedProperty }) => {
     status,
     society_name,
     plot_no,
-    Flat_No,
+    flat_no,
     locality,
-    PIN,
+    zip,
   } = selectedProperty;
 
   return (
@@ -128,10 +128,10 @@ const ViewProperty = ({ selectedProperty }) => {
                   </span>
                 </div>
 
-                {Flat_No ? (
+                {flat_no ? (
                   <div className="col-md-4">
                     <small className="text-muted">Flat Number</small>
-                    <h5 className="mt-1">{Flat_No}</h5>
+                    <h5 className="mt-1">{flat_no}</h5>
                   </div>
                 ) : (
                   <></>
@@ -172,7 +172,7 @@ const ViewProperty = ({ selectedProperty }) => {
 
                 <div className="col-md-4">
                   <small className="text-muted">Zip</small>
-                  <h5 className="mt-1">{PIN}</h5>
+                  <h5 className="mt-1">{zip}</h5>
                 </div>
 
                 <div className="col-12">

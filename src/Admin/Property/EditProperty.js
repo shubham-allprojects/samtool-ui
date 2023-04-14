@@ -27,7 +27,7 @@ const EditProperty = () => {
     market_price,
     ready_reckoner_price,
     expected_price,
-    Flat_No,
+    flat_no,
     plot_no,
     saleable_area,
     carpet_area,
@@ -36,7 +36,7 @@ const EditProperty = () => {
     society_name,
     locality,
     landmark,
-    PIN,
+    zip,
   } = currentPropertyData;
   // const { locality, state, zip } = formData.address_details;
 
@@ -932,7 +932,7 @@ const EditProperty = () => {
                                 name="flat_number"
                                 type="number"
                                 className="form-control"
-                                defaultValue={Flat_No}
+                                defaultValue={flat_no}
                                 onChange={onInputChange}
                               />
                             </div>
@@ -1113,7 +1113,7 @@ const EditProperty = () => {
                                 onChange={onInputChange}
                                 id="zip"
                                 name="zip"
-                                defaultValue={PIN}
+                                defaultValue={zip}
                                 className={`form-control ${
                                   zipCodeValidationMessage
                                     ? "border-danger"
