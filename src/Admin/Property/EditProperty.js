@@ -266,6 +266,11 @@ const EditProperty = () => {
     // }
   };
 
+  let defaultTypeId;
+  let defaultBranchId;
+  let defaultStateId;
+  let defaultCityId;
+
   const getCurrentPropertyDataToUpdate = async () => {
     setMainPageLoading(true);
     let propertyId = localStorage.getItem("propertyId");
@@ -315,12 +320,26 @@ const EditProperty = () => {
         property_id,
       } = currentPropertyRes.data;
 
+      setAllDefaultValues(
+        propertyCategoryRes.data,
+        type_name,
+        branch_name,
+        status,
+        is_stressed,
+        state_name,
+        city_name,
+        is_sold,
+        is_available_for_sale,
+        statesRes
+      );
+
       if (currentPropertyRes.data) {
         setFormData({
+          ...formData,
           property_id: property_id,
-          // bank_branch_id: 2,
+          type_id: defaultTypeId,
+          bank_branch_id: defaultBranchId,
           property_number: property_number,
-          // type_id: 1,
           is_stressed: is_stressed,
           is_available_for_sale: is_available_for_sale,
           sale_availability_date: sale_availability_date,
@@ -342,26 +361,13 @@ const EditProperty = () => {
             society_name: society_name,
             plot_number: parseInt(plot_no),
             landmark: "Pune landmark",
-            // city: 2,
+            city: defaultCityId,
             zip: zip,
-            // state: 1,
+            state: defaultStateId,
           },
         });
         console.log(currentPropertyRes.data);
       }
-
-      setAllDefaultValues(
-        propertyCategoryRes.data,
-        type_name,
-        branch_name,
-        status,
-        is_stressed,
-        state_name,
-        city_name,
-        is_sold,
-        is_available_for_sale,
-        statesRes
-      );
     }
   };
 
@@ -380,6 +386,7 @@ const EditProperty = () => {
     // Set default value for property type and make it selected in property_type select box
     propertyCategoryRes.forEach((i) => {
       if (i.type_name === type_name) {
+        defaultTypeId = i.type_id;
         let defaultPropertyType = document.getElementById(
           `property-type-${i.type_id}`
         );
@@ -400,9 +407,10 @@ const EditProperty = () => {
         }
       );
       setBankBranches(branchRes.data);
-      // Set default value for branch  and make it selected in branch select box
+      // Set default value for branch and make it selected in branch select box
       branchRes.data.forEach((i) => {
         if (i.branch_name === branch_name) {
+          defaultBranchId = i.branch_id;
           let defaultBranch = document.getElementById(`branch-${i.branch_id}`);
           if (defaultBranch) {
             defaultBranch.selected = true;
@@ -426,7 +434,7 @@ const EditProperty = () => {
     }
 
     // default state
-    let defaultStateId = "";
+
     statesRes.data.forEach((i) => {
       if (i.state_name === state_name) {
         defaultStateId = i.state_id;
@@ -445,6 +453,7 @@ const EditProperty = () => {
     let defaultCity = document.getElementById(city_name);
     if (defaultCity) {
       defaultCity.selected = true;
+      defaultCityId = parseInt(defaultCity.value);
     }
 
     // default is_sold value
