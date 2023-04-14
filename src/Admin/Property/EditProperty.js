@@ -20,6 +20,7 @@ const EditProperty = () => {
   const [currentPropertyData, setCurrentPropertyData] = useState({});
   const {
     completion_date,
+    sale_availability_date,
     purchase_date,
     mortgage_date,
     market_price,
@@ -837,11 +838,8 @@ const EditProperty = () => {
                               </select>
                             </div>
                           </div>
-                          {/* <div
-                            className={`col-xl-4 col-md-6 ${
-                              is_sold === 1 ? "d-none" : ""
-                            }`}
-                          >
+                          <div className={`col-xl-4 col-md-6`}>
+                            {/* ${is_sold === 1 ? "d-none" : ""} */}
                             <div className="form-group">
                               <label
                                 htmlFor="sale_availability_date"
@@ -854,11 +852,16 @@ const EditProperty = () => {
                                 type="date"
                                 id="sale_availability_date"
                                 name="sale_availability_date"
+                                defaultValue={
+                                  sale_availability_date
+                                    ? sale_availability_date.split(" ")[0]
+                                    : ""
+                                }
                                 onChange={onInputChange}
-                                required={is_sold === 1 ? false : true}
+                                // required={is_sold === 1 ? false : true}
                               />
                             </div>
-                          </div> */}
+                          </div>
                         </div>
                         {/* Row 5 - Address Details */}
                         <div className="row">
