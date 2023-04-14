@@ -305,6 +305,24 @@ const EditProperty = () => {
       if (defaultValueOfStressed) {
         defaultValueOfStressed.checked = true;
       }
+
+      // default state
+      let defaultStateId = "";
+      statesRes.data.forEach((i) => {
+        if (i.state_name === currentPropertyRes.data.state_name) {
+          defaultStateId = i.state_id;
+          let defaultState = document.getElementById(`state-${i.state_id}`);
+          if (defaultState) {
+            defaultState.selected = true;
+          }
+        }
+      });
+
+      // default city
+      const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
+        state_id: parseInt(defaultStateId),
+      });
+      setAllCities(citiesRes.data);
     }
   };
 
@@ -931,7 +949,7 @@ const EditProperty = () => {
                                       <option
                                         key={data.state_id}
                                         value={data.state_id}
-                                        id={data.state_id}
+                                        id={`state-${data.state_id}`}
                                       >
                                         {data.state_name}
                                       </option>
@@ -944,8 +962,8 @@ const EditProperty = () => {
                             </div>
                           </div>
                           <div
-                            className="col-xl-4 col-md-6 mb-3 d-none"
-                            ref={citySelectBoxRef}
+                            className="col-xl-4 col-md-6 mb-3"
+                            // ref={citySelectBoxRef}
                           >
                             <div className="form-group">
                               <label
@@ -968,7 +986,7 @@ const EditProperty = () => {
                                       <option
                                         key={data.city_id}
                                         value={data.city_id}
-                                        id={data.city_id}
+                                        id={`city-${data.city_id}`}
                                       >
                                         {data.city_name}
                                       </option>
