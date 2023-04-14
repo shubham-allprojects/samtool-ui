@@ -1,22 +1,22 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
 import CommonSpinner from "../../CommonSpinner";
 
 let authHeader = "";
-let zipError = false;
-let areaError = false;
+// let zipError = false;
+// let areaError = false;
 const EditProperty = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   if (data) {
     authHeader = { Authorization: data.logintoken };
   }
 
-  const goTo = useNavigate();
+  // const goTo = useNavigate();
   // const [currentPropertyData, setCurrentPropertyData] = useState({});
   // const {
   //   completion_date,
@@ -57,8 +57,8 @@ const EditProperty = () => {
     saleable_area,
     carpet_area,
     property_number,
-    is_sold,
-    is_available_for_sale,
+    // is_sold,
+    // is_available_for_sale,
   } = formData;
   // const { locality, state, zip } = formData.address_details;
   const {
@@ -78,25 +78,25 @@ const EditProperty = () => {
   const [allCities, setAllCities] = useState([]);
   const [zipCodeValidationMessage, setZipCodeValidationMessage] = useState("");
   const [areaValidationMessage, setAreaValidationMessage] = useState("");
-  const branchSelectBoxRef = useRef();
-  const citySelectBoxRef = useRef();
+  // const branchSelectBoxRef = useRef();
+  // const citySelectBoxRef = useRef();
   const notSoldCheckRef = useRef();
   const [mainPageLoading, setMainPageLoading] = useState(false);
 
-  const commonFnToSaveFormData = (name, value) => {
-    setFormData({ ...formData, [name]: value });
-  };
+  // const commonFnToSaveFormData = (name, value) => {
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
-  const commonFnToSaveAddressDetails = (name, value) => {
-    setFormData({
-      ...formData,
-      address_details: {
-        ...formData.address_details,
-        [name]: value,
-        address: formData.address_details.locality,
-      },
-    });
-  };
+  // const commonFnToSaveAddressDetails = (name, value) => {
+  //   setFormData({
+  //     ...formData,
+  //     address_details: {
+  //       ...formData.address_details,
+  //       [name]: value,
+  //       address: formData.address_details.locality,
+  //     },
+  //   });
+  // };
 
   const onInputChange = async (e) => {
     // const { name, value } = e.target;
@@ -199,10 +199,10 @@ const EditProperty = () => {
     // }
   };
 
-  const resetValidationsOnSubmit = () => {
-    setAreaValidationMessage("");
-    setZipCodeValidationMessage("");
-  };
+  // const resetValidationsOnSubmit = () => {
+  //   setAreaValidationMessage("");
+  //   setZipCodeValidationMessage("");
+  // };
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
@@ -300,10 +300,10 @@ const EditProperty = () => {
         saleable_area,
         carpet_area,
         property_number,
-        building_name,
+        // building_name,
         society_name,
         locality,
-        landmark,
+        // landmark,
         zip,
         is_sold,
         is_available_for_sale,
@@ -468,6 +468,7 @@ const EditProperty = () => {
     getCurrentPropertyDataToUpdate();
     // notSoldCheckRef.current.setAttribute("checked", "true");
     // getDataFromApi();
+    // eslint-disable-next-line
   }, []);
 
   return (
