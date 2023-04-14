@@ -375,15 +375,11 @@ const ViewAllProperties = () => {
                 htmlFor="confirm-delete-property-input"
                 className="form-label"
               >
-                Please type{" "}
-                <span className="fw-bold">{selectedPropertyId}</span> to
-                confirm.
+                Please type <span className="fw-bold">Delete</span> to confirm.
               </label>
               <input
                 onChange={(e) => {
-                  if (
-                    e.target.value.toString() === selectedPropertyId.toString()
-                  ) {
+                  if (e.target.value === "Delete") {
                     setConfirmDeletePropertyBtnDisabled(false);
                   } else {
                     setConfirmDeletePropertyBtnDisabled(true);
@@ -403,7 +399,7 @@ const ViewAllProperties = () => {
                 disabled={confirmDeletePropertyBtnDisabled}
                 className="btn btn-danger w-100 mt-3 fw-bold"
               >
-                Delete User
+                Delete Property
               </button>
             </div>
           </div>
