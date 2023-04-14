@@ -17,7 +17,35 @@ const EditProperty = () => {
   }
 
   const goTo = useNavigate();
-  const [currentPropertyData, setCurrentPropertyData] = useState({});
+  // const [currentPropertyData, setCurrentPropertyData] = useState({});
+  // const {
+  //   completion_date,
+  //   sale_availability_date,
+  //   purchase_date,
+  //   mortgage_date,
+  //   market_price,
+  //   ready_reckoner_price,
+  //   expected_price,
+  //   flat_no,
+  //   plot_no,
+  //   saleable_area,
+  //   carpet_area,
+  //   property_number,
+  //   building_name,
+  //   society_name,
+  //   locality,
+  //   landmark,
+  //   zip,
+  //   is_sold,
+  //   is_available_for_sale,
+  //   status,
+  //   is_stressed,
+  //   property_id,
+  // } = currentPropertyData;
+
+  const [formData, setFormData] = useState({
+    address_details: {},
+  });
   const {
     completion_date,
     sale_availability_date,
@@ -31,51 +59,25 @@ const EditProperty = () => {
     saleable_area,
     carpet_area,
     property_number,
-    building_name,
-    society_name,
-    locality,
-    landmark,
-    zip,
     is_sold,
     is_available_for_sale,
     status,
     is_stressed,
     property_id,
-  } = currentPropertyData;
-
-  const [formData, setFormData] = useState({
-    property_id: property_id,
-    // bank_branch_id: 2,
-    property_number: property_number,
-    // type_id: 1,
-    is_stressed: is_stressed,
-    is_available_for_sale: is_available_for_sale,
-    sale_availability_date: sale_availability_date,
-    saleable_area: `${saleable_area} sq.ft.`,
-    carpet_area: `${carpet_area} sq.ft.`,
-    ready_reckoner_price: parseInt(ready_reckoner_price),
-    expected_price: parseInt(expected_price),
-    market_price: parseInt(market_price),
-    completion_date: completion_date,
-    purchase_date: purchase_date,
-    mortgage_date: mortgage_date,
-    is_sold: is_sold,
-    status: status,
-    address_details: {
-      address: locality,
-      locality: locality,
-      flat_number: parseInt(flat_no),
-      building_name: "Random name",
-      society_name: society_name,
-      plot_number: parseInt(plot_no),
-      landmark: "Pune landmark",
-      // city: 2,
-      zip: zip,
-      // state: 1,
-    },
-  });
-
+  } = formData;
   // const { locality, state, zip } = formData.address_details;
+  const {
+    address,
+    locality,
+    flat_number,
+    building_name,
+    society_name,
+    plot_number,
+    landmark,
+    // city: 2,
+    zip,
+    // state: 1,
+  } = formData.address_details;
 
   const [propertyCategories, setPropertyCategories] = useState([]);
   const [banks, setBanks] = useState([]);
@@ -89,29 +91,20 @@ const EditProperty = () => {
   const notSoldCheckRef = useRef();
   const [mainPageLoading, setMainPageLoading] = useState(false);
 
-  // const getDataFromApi = async () => {
-  //   const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
-  //   setPropertyCategories(propertyCategoryRes.data);
-  //   const bankRes = await axios.get(`/sam/v1/property/by-bank`);
-  //   setBanks(bankRes.data);
-  //   const statesRes = await axios.get(`/sam/v1/property/by-state`);
-  //   setAllStates(statesRes.data);
-  // };
+  const commonFnToSaveFormData = (name, value) => {
+    setFormData({ ...formData, [name]: value });
+  };
 
-  // const commonFnToSaveFormData = (name, value) => {
-  //   setFormData({ ...formData, [name]: value });
-  // };
-
-  // const commonFnToSaveAddressDetails = (name, value) => {
-  //   setFormData({
-  //     ...formData,
-  //     address_details: {
-  //       ...formData.address_details,
-  //       [name]: value,
-  //       address: locality,
-  //     },
-  //   });
-  // };
+  const commonFnToSaveAddressDetails = (name, value) => {
+    setFormData({
+      ...formData,
+      address_details: {
+        ...formData.address_details,
+        [name]: value,
+        address: formData.address_details.locality,
+      },
+    });
+  };
 
   const onInputChange = async (e) => {
     // const { name, value } = e.target;
@@ -214,13 +207,14 @@ const EditProperty = () => {
     // }
   };
 
-  // const resetValidationsOnSubmit = () => {
-  //   setAreaValidationMessage("");
-  //   setZipCodeValidationMessage("");
-  // };
+  const resetValidationsOnSubmit = () => {
+    setAreaValidationMessage("");
+    setZipCodeValidationMessage("");
+  };
 
   const onFormSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
+    console.log(formData);
     // await axios
     //   .post(`/sam/v1/customer-registration/zipcode-validation`, {
     //     zipcode: String(zip),
@@ -259,7 +253,7 @@ const EditProperty = () => {
     //       .then((res) => {
     //         if (res.data.msg === 0) {
     //           resetValidationsOnSubmit();
-    //           toast.success("Property added successfully");
+    //           toast.success("Property updated successfully");
     //           e.target.reset();
     //           goTo("/admin/property/single-property-documents-upload");
     //         } else {
@@ -291,21 +285,70 @@ const EditProperty = () => {
         `/sam/v1/property/single-property/${propertyId}`,
         { headers: authHeader }
       );
-      if (currentPropertyRes.data) {
-        setCurrentPropertyData(currentPropertyRes.data);
-        console.log(currentPropertyRes.data);
-      }
 
       const {
         type_name,
         branch_name,
-        status,
-        is_stressed,
         state_name,
         city_name,
+        completion_date,
+        sale_availability_date,
+        purchase_date,
+        mortgage_date,
+        market_price,
+        ready_reckoner_price,
+        expected_price,
+        flat_no,
+        plot_no,
+        saleable_area,
+        carpet_area,
+        property_number,
+        building_name,
+        society_name,
+        locality,
+        landmark,
+        zip,
         is_sold,
         is_available_for_sale,
+        status,
+        is_stressed,
+        property_id,
       } = currentPropertyRes.data;
+
+      if (currentPropertyRes.data) {
+        setFormData({
+          property_id: property_id,
+          // bank_branch_id: 2,
+          property_number: property_number,
+          // type_id: 1,
+          is_stressed: is_stressed,
+          is_available_for_sale: is_available_for_sale,
+          sale_availability_date: sale_availability_date,
+          saleable_area: saleable_area,
+          carpet_area: carpet_area,
+          ready_reckoner_price: parseInt(ready_reckoner_price),
+          expected_price: parseInt(expected_price),
+          market_price: parseInt(market_price),
+          completion_date: completion_date,
+          purchase_date: purchase_date,
+          mortgage_date: mortgage_date,
+          is_sold: is_sold,
+          status: status,
+          address_details: {
+            address: locality,
+            locality: locality,
+            flat_number: parseInt(flat_no),
+            building_name: "Random name",
+            society_name: society_name,
+            plot_number: parseInt(plot_no),
+            landmark: "Pune landmark",
+            // city: 2,
+            zip: zip,
+            // state: 1,
+          },
+        });
+        console.log(currentPropertyRes.data);
+      }
 
       setAllDefaultValues(
         propertyCategoryRes.data,
@@ -969,7 +1012,7 @@ const EditProperty = () => {
                                 name="flat_number"
                                 type="number"
                                 className="form-control"
-                                defaultValue={flat_no}
+                                defaultValue={flat_number}
                                 onChange={onInputChange}
                               />
                             </div>
@@ -1023,7 +1066,7 @@ const EditProperty = () => {
                                 name="plot_number"
                                 type="number"
                                 className="form-control"
-                                defaultValue={plot_no}
+                                defaultValue={plot_number}
                                 onChange={onInputChange}
                               />
                             </div>
