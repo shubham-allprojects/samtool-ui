@@ -259,15 +259,19 @@ const EditProperty = () => {
           let defaultPropertyType = document.getElementById(
             `property-type-${i.type_id}`
           );
-          defaultPropertyType.selected = true;
+          if (defaultPropertyType) {
+            defaultPropertyType.selected = true;
+          }
         }
       });
 
-      // To make default bank selected
+      // To make default bank selected in bank select box
       let defaultBank = document.getElementById(
         currentPropertyRes.data.branch_name.split(",")[0]
       );
-      defaultBank.selected = true;
+      if (defaultBank) {
+        defaultBank.selected = true;
+      }
       const branchRes = await axios.get(
         `/sam/v1/property/auth/bank-branches/${defaultBank.value}`,
         {
@@ -285,6 +289,22 @@ const EditProperty = () => {
           }
         }
       });
+
+      // default status
+      let defaultStatus = document.getElementById(
+        `status-${currentPropertyRes.data.status}`
+      );
+      if (defaultStatus) {
+        defaultStatus.selected = true;
+      }
+
+      // default value of stressed status
+      let defaultValueOfStressed = document.getElementById(
+        `stressed-${currentPropertyRes.data.is_stressed}`
+      );
+      if (defaultValueOfStressed) {
+        defaultValueOfStressed.checked = true;
+      }
     }
   };
 
@@ -452,6 +472,7 @@ const EditProperty = () => {
                                   type="radio"
                                   name="is_stressed"
                                   value="1"
+                                  id="stressed-1"
                                   onChange={onInputChange}
                                 />
                                 <label
@@ -467,6 +488,7 @@ const EditProperty = () => {
                                   type="radio"
                                   name="is_stressed"
                                   value="0"
+                                  id="stressed-0"
                                   onChange={onInputChange}
                                 />
                                 <label
@@ -495,10 +517,10 @@ const EditProperty = () => {
                                 required
                               >
                                 <option value=""></option>
-                                <option id="0" value="0">
+                                <option id="status-0" value="0">
                                   0
                                 </option>
-                                <option id="1" value="1">
+                                <option id="status-1" value="1">
                                   1
                                 </option>
                               </select>
