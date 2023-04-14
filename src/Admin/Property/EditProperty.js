@@ -323,6 +323,12 @@ const EditProperty = () => {
         state_id: parseInt(defaultStateId),
       });
       setAllCities(citiesRes.data);
+      let defaultCity = document.getElementById(
+        currentPropertyRes.data.city_name
+      );
+      if (defaultCity) {
+        defaultCity.selected = true;
+      }
     }
   };
 
@@ -986,7 +992,7 @@ const EditProperty = () => {
                                       <option
                                         key={data.city_id}
                                         value={data.city_id}
-                                        id={`city-${data.city_id}`}
+                                        id={data.city_name}
                                       >
                                         {data.city_name}
                                       </option>
