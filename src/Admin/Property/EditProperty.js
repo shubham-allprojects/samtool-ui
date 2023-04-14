@@ -17,7 +17,6 @@ const EditProperty = () => {
   }
 
   const goTo = useNavigate();
-  const [formData, setFormData] = useState({});
   const [currentPropertyData, setCurrentPropertyData] = useState({});
   const {
     completion_date,
@@ -37,7 +36,45 @@ const EditProperty = () => {
     locality,
     landmark,
     zip,
+    is_sold,
+    is_available_for_sale,
+    status,
+    is_stressed,
+    property_id,
   } = currentPropertyData;
+
+  const [formData, setFormData] = useState({
+    property_id: property_id,
+    // bank_branch_id: 2,
+    property_number: property_number,
+    // type_id: 1,
+    is_stressed: is_stressed,
+    is_available_for_sale: is_available_for_sale,
+    sale_availability_date: sale_availability_date,
+    saleable_area: `${saleable_area} sq.ft.`,
+    carpet_area: `${carpet_area} sq.ft.`,
+    ready_reckoner_price: parseInt(ready_reckoner_price),
+    expected_price: parseInt(expected_price),
+    market_price: parseInt(market_price),
+    completion_date: completion_date,
+    purchase_date: purchase_date,
+    mortgage_date: mortgage_date,
+    is_sold: is_sold,
+    status: status,
+    address_details: {
+      address: locality,
+      locality: locality,
+      flat_number: parseInt(flat_no),
+      building_name: "Random name",
+      society_name: society_name,
+      plot_number: parseInt(plot_no),
+      landmark: "Pune landmark",
+      // city: 2,
+      zip: zip,
+      // state: 1,
+    },
+  });
+
   // const { locality, state, zip } = formData.address_details;
 
   const [propertyCategories, setPropertyCategories] = useState([]);
