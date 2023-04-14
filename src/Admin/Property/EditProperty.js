@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
+import CommonSpinner from "../../CommonSpinner";
 
 let authHeader = "";
 let zipError = false;
@@ -49,6 +50,7 @@ const EditProperty = () => {
   const branchSelectBoxRef = useRef();
   const citySelectBoxRef = useRef();
   const notSoldCheckRef = useRef();
+  const [mainPageLoading, setMainPageLoading] = useState(false);
 
   // const getDataFromApi = async () => {
   //   const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
@@ -234,6 +236,7 @@ const EditProperty = () => {
   };
 
   const getCurrentPropertyDataToUpdate = async () => {
+    setMainPageLoading(true);
     let propertyId = localStorage.getItem("propertyId");
     if (propertyId) {
       // Get details from api e.g. state, banks etc.
@@ -310,24 +313,23 @@ const EditProperty = () => {
     let defaultBank = document.getElementById(branch_name.split(",")[0]);
     if (defaultBank) {
       defaultBank.selected = true;
-    }
-    const branchRes = await axios.get(
-      `/sam/v1/property/auth/bank-branches/${defaultBank.value}`,
-      {
-        headers: authHeader,
-      }
-    );
-    setBankBranches(branchRes.data);
-
-    // Set default value for branch  and make it selected in branch select box
-    branchRes.data.forEach((i) => {
-      if (i.branch_name === branch_name) {
-        let defaultBranch = document.getElementById(`branch-${i.branch_id}`);
-        if (defaultBranch) {
-          defaultBranch.selected = true;
+      const branchRes = await axios.get(
+        `/sam/v1/property/auth/bank-branches/${defaultBank.value}`,
+        {
+          headers: authHeader,
         }
-      }
-    });
+      );
+      setBankBranches(branchRes.data);
+      // Set default value for branch  and make it selected in branch select box
+      branchRes.data.forEach((i) => {
+        if (i.branch_name === branch_name) {
+          let defaultBranch = document.getElementById(`branch-${i.branch_id}`);
+          if (defaultBranch) {
+            defaultBranch.selected = true;
+          }
+        }
+      });
+    }
 
     // default status
     let defaultStatus = document.getElementById(`status-${status}`);
@@ -378,6 +380,7 @@ const EditProperty = () => {
     if (defaultIsAvailableForSale) {
       defaultIsAvailableForSale.selected = true;
     }
+    setMainPageLoading(false);
   };
 
   useEffect(() => {
@@ -397,7 +400,16 @@ const EditProperty = () => {
               <div className="container-fluid">
                 <div className="row justify-content-center">
                   <div className="col-xl-12">
-                    <form onSubmit={onFormSubmit} className="card p-xl-2">
+                    <div className={`${mainPageLoading ? "" : "d-none"}`}>
+                      <CommonSpinner />
+                    </div>
+
+                    <form
+                      onSubmit={onFormSubmit}
+                      className={`card p-xl-2 ${
+                        mainPageLoading ? "d-none" : ""
+                      }`}
+                    >
                       <div className="card-body">
                         <h4 className="fw-bold">Update Property</h4>
                         <hr />
