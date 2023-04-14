@@ -357,14 +357,10 @@ const EditProperty = () => {
       setAllDefaultValues(
         propertyCategoryRes.data,
         type_name,
-        branch_name,
         status,
         is_stressed,
-        state_name,
-        city_name,
         is_sold,
-        is_available_for_sale,
-        statesRes
+        is_available_for_sale
       );
 
       if (currentPropertyRes.data) {
@@ -408,7 +404,6 @@ const EditProperty = () => {
   const setAllDefaultValues = async (
     propertyCategoryRes,
     type_name,
-    branch_name,
     status,
     is_stressed,
     is_sold,
