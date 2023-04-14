@@ -17,6 +17,7 @@ const EditProperty = () => {
 
   const goTo = useNavigate();
   const [formData, setFormData] = useState({});
+  const [currentPropertyData, setCurrentPropertyData] = useState({});
   const {
     is_sold,
     market_price,
@@ -32,7 +33,7 @@ const EditProperty = () => {
     locality,
     landmark,
     PIN,
-  } = formData;
+  } = currentPropertyData;
   // const { locality, state, zip } = formData.address_details;
 
   const [propertyCategories, setPropertyCategories] = useState([]);
@@ -229,22 +230,66 @@ const EditProperty = () => {
     // }
   };
 
-  const getPropertyToUpdate = async () => {
+  const getCurrentPropertyDataToUpdate = async () => {
     let propertyId = localStorage.getItem("propertyId");
     if (propertyId) {
+      // Get details from api e.g. state, banks etc.
+      const propertyCategoryRes = await axios.get(
+        `/sam/v1/property/by-category`
+      );
+      setPropertyCategories(propertyCategoryRes.data);
+      const bankRes = await axios.get(`/sam/v1/property/by-bank`);
+      setBanks(bankRes.data);
+      const statesRes = await axios.get(`/sam/v1/property/by-state`);
+      setAllStates(statesRes.data);
+
+      // Get current property values
       const currentPropertyRes = await axios.get(
         `/sam/v1/property/single-property/${propertyId}`,
         { headers: authHeader }
       );
       if (currentPropertyRes.data) {
-        setFormData(currentPropertyRes.data);
+        setCurrentPropertyData(currentPropertyRes.data);
         console.log(currentPropertyRes.data);
       }
+
+      // Set default value for property type and make it selected in property_type select box
+      propertyCategoryRes.data.forEach((i) => {
+        if (i.type_name === currentPropertyRes.data.type_name) {
+          let defaultPropertyType = document.getElementById(
+            `property-type-${i.type_id}`
+          );
+          defaultPropertyType.selected = true;
+        }
+      });
+
+      // To make default bank selected
+      let defaultBank = document.getElementById(
+        currentPropertyRes.data.branch_name.split(",")[0]
+      );
+      defaultBank.selected = true;
+      const branchRes = await axios.get(
+        `/sam/v1/property/auth/bank-branches/${defaultBank.value}`,
+        {
+          headers: authHeader,
+        }
+      );
+      setBankBranches(branchRes.data);
+
+      // Set default value for branch  and make it selected in branch select box
+      branchRes.data.forEach((i) => {
+        if (i.branch_name === currentPropertyRes.data.branch_name) {
+          let defaultBranch = document.getElementById(`branch-${i.branch_id}`);
+          if (defaultBranch) {
+            defaultBranch.selected = true;
+          }
+        }
+      });
     }
   };
 
   useEffect(() => {
-    getPropertyToUpdate();
+    getCurrentPropertyDataToUpdate();
     // notSoldCheckRef.current.setAttribute("checked", "true");
     // getDataFromApi();
   }, []);
@@ -293,6 +338,7 @@ const EditProperty = () => {
                                       <option
                                         key={data.type_id}
                                         value={data.type_id}
+                                        id={`property-type-${data.type_id}`}
                                       >
                                         {data.type_name}
                                       </option>
@@ -345,6 +391,7 @@ const EditProperty = () => {
                                       <option
                                         key={data.bank_id}
                                         value={data.bank_id}
+                                        id={data.bank_name}
                                       >
                                         {data.bank_name}
                                       </option>
@@ -357,8 +404,8 @@ const EditProperty = () => {
                             </div>
                           </div>
                           <div
-                            className="col-xl-4 col-md-6 mt-3 d-none"
-                            ref={branchSelectBoxRef}
+                            className="col-xl-4 col-md-6 mt-3"
+                            // ref={branchSelectBoxRef}
                           >
                             <div className="form-group">
                               <label
@@ -381,6 +428,7 @@ const EditProperty = () => {
                                       <option
                                         key={data.branch_id}
                                         value={data.branch_id}
+                                        id={`branch-${data.branch_id}`}
                                       >
                                         {data.branch_name}
                                       </option>
@@ -447,8 +495,12 @@ const EditProperty = () => {
                                 required
                               >
                                 <option value=""></option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option id="0" value="0">
+                                  0
+                                </option>
+                                <option id="1" value="1">
+                                  1
+                                </option>
                               </select>
                             </div>
                           </div>
@@ -857,6 +909,7 @@ const EditProperty = () => {
                                       <option
                                         key={data.state_id}
                                         value={data.state_id}
+                                        id={data.state_id}
                                       >
                                         {data.state_name}
                                       </option>
@@ -893,6 +946,7 @@ const EditProperty = () => {
                                       <option
                                         key={data.city_id}
                                         value={data.city_id}
+                                        id={data.city_id}
                                       >
                                         {data.city_name}
                                       </option>
