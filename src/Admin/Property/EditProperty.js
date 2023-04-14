@@ -331,6 +331,14 @@ const EditProperty = () => {
       if (defaultCity) {
         defaultCity.selected = true;
       }
+
+      // default is_sold value
+      let defaultIsSoldValue = document.getElementById(
+        `is_sold-${currentPropertyRes.data.is_sold}`
+      );
+      if (defaultIsSoldValue) {
+        defaultIsSoldValue.checked = true;
+      }
     }
   };
 
@@ -767,6 +775,7 @@ const EditProperty = () => {
                                   type="radio"
                                   name="is_sold"
                                   value="1"
+                                  id="is_sold-1"
                                   onChange={onInputChange}
                                 />
                                 <label
@@ -782,6 +791,7 @@ const EditProperty = () => {
                                   type="radio"
                                   name="is_sold"
                                   value="0"
+                                  id="is_sold-0"
                                   onChange={onInputChange}
                                   ref={notSoldCheckRef}
                                 />
