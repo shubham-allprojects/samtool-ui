@@ -260,8 +260,6 @@ const EditProperty = () => {
 
   let defaultTypeId;
   let defaultBranchId;
-  let defaultStateId;
-  let defaultCityId;
 
   const getCurrentPropertyDataToUpdate = async () => {
     setMainPageLoading(true);
@@ -310,7 +308,51 @@ const EditProperty = () => {
         status,
         is_stressed,
         property_id,
+        state_id,
+        city_id,
+        bank_id,
       } = currentPropertyRes.data;
+
+      // Default state
+      let defaultState = document.getElementById(`state-${state_id}`);
+      if (defaultState) {
+        defaultState.selected = true;
+      }
+
+      // default city
+      const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
+        state_id: parseInt(state_id),
+      });
+      setAllCities(citiesRes.data);
+      let defaultCity = document.getElementById(city_name);
+      if (defaultCity) {
+        defaultCity.selected = true;
+      }
+
+      // To make default bank selected in bank select box
+      let defaultBank = document.getElementById(`bank-${bank_id}`);
+      if (defaultBank) {
+        defaultBank.selected = true;
+        const branchRes = await axios.get(
+          `/sam/v1/property/auth/bank-branches/${defaultBank.value}`,
+          {
+            headers: authHeader,
+          }
+        );
+        setBankBranches(branchRes.data);
+        // Set default value for branch and make it selected in branch select box
+        branchRes.data.forEach((i) => {
+          if (i.branch_name === branch_name) {
+            defaultBranchId = i.branch_id;
+            let defaultBranch = document.getElementById(
+              `branch-${i.branch_id}`
+            );
+            if (defaultBranch) {
+              defaultBranch.selected = true;
+            }
+          }
+        });
+      }
 
       setAllDefaultValues(
         propertyCategoryRes.data,
@@ -353,9 +395,9 @@ const EditProperty = () => {
             society_name: society_name,
             plot_number: parseInt(plot_no),
             landmark: "Pune landmark",
-            city: defaultCityId,
+            city: parseInt(city_id),
             zip: zip,
-            state: defaultStateId,
+            state: parseInt(state_id),
           },
         });
         console.log(currentPropertyRes.data);
@@ -369,11 +411,8 @@ const EditProperty = () => {
     branch_name,
     status,
     is_stressed,
-    state_name,
-    city_name,
     is_sold,
-    is_available_for_sale,
-    statesRes
+    is_available_for_sale
   ) => {
     // Set default value for property type and make it selected in property_type select box
     propertyCategoryRes.forEach((i) => {
@@ -388,29 +427,6 @@ const EditProperty = () => {
       }
     });
 
-    // To make default bank selected in bank select box
-    let defaultBank = document.getElementById(branch_name.split(",")[0]);
-    if (defaultBank) {
-      defaultBank.selected = true;
-      const branchRes = await axios.get(
-        `/sam/v1/property/auth/bank-branches/${defaultBank.value}`,
-        {
-          headers: authHeader,
-        }
-      );
-      setBankBranches(branchRes.data);
-      // Set default value for branch and make it selected in branch select box
-      branchRes.data.forEach((i) => {
-        if (i.branch_name === branch_name) {
-          defaultBranchId = i.branch_id;
-          let defaultBranch = document.getElementById(`branch-${i.branch_id}`);
-          if (defaultBranch) {
-            defaultBranch.selected = true;
-          }
-        }
-      });
-    }
-
     // default status
     let defaultStatus = document.getElementById(`status-${status}`);
     if (defaultStatus) {
@@ -423,29 +439,6 @@ const EditProperty = () => {
     );
     if (defaultValueOfStressed) {
       defaultValueOfStressed.checked = true;
-    }
-
-    // default state
-
-    statesRes.data.forEach((i) => {
-      if (i.state_name === state_name) {
-        defaultStateId = i.state_id;
-        let defaultState = document.getElementById(`state-${i.state_id}`);
-        if (defaultState) {
-          defaultState.selected = true;
-        }
-      }
-    });
-
-    // default city
-    const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
-      state_id: parseInt(defaultStateId),
-    });
-    setAllCities(citiesRes.data);
-    let defaultCity = document.getElementById(city_name);
-    if (defaultCity) {
-      defaultCity.selected = true;
-      defaultCityId = parseInt(defaultCity.value);
     }
 
     // default is_sold value
@@ -587,7 +580,7 @@ const EditProperty = () => {
                                       <option
                                         key={data.bank_id}
                                         value={data.bank_id}
-                                        id={data.bank_name}
+                                        id={`bank-${data.bank_id}`}
                                       >
                                         {data.bank_name}
                                       </option>
