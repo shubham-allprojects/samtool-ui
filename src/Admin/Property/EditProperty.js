@@ -54,29 +54,21 @@ const EditProperty = () => {
     market_price,
     ready_reckoner_price,
     expected_price,
-    flat_no,
-    plot_no,
     saleable_area,
     carpet_area,
     property_number,
     is_sold,
     is_available_for_sale,
-    status,
-    is_stressed,
-    property_id,
   } = formData;
   // const { locality, state, zip } = formData.address_details;
   const {
-    address,
     locality,
     flat_number,
     building_name,
     society_name,
     plot_number,
     landmark,
-    // city: 2,
     zip,
-    // state: 1,
   } = formData.address_details;
 
   const [propertyCategories, setPropertyCategories] = useState([]);
