@@ -9,7 +9,6 @@ const ViewProperty = ({ selectedProperty }) => {
     state_name,
     completion_date,
     purchase_date,
-    sale_availability_date,
     expected_price,
     market_price,
     ready_reckoner_price,
@@ -286,27 +285,6 @@ const ViewProperty = ({ selectedProperty }) => {
                     {is_available_for_sale === 1 ? "Yes" : "No"}
                   </h5>
                 </div>
-
-                {is_available_for_sale === 1 ? (
-                  <>
-                    <div className="col-md-4">
-                      <small className="text-muted">
-                        Sale Availability Date
-                      </small>
-                      <h5 className="mt-1">
-                        {sale_availability_date
-                          ? sale_availability_date
-                              .split(" ")[0]
-                              .split("-")
-                              .reverse()
-                              .join("-")
-                          : "NA"}
-                      </h5>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
 
                 <div className="col-12">
                   <hr className="my-md-2 my-3" />
