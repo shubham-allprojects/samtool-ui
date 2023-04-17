@@ -25,7 +25,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
               plot_no,
               locality,
               city_name,
-              PIN,
+              zip,
               state_name,
             } = property;
             return (
@@ -164,6 +164,19 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                               </div>
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                              <small className="text-muted">
+                                Distress value
+                              </small>
+                              <div className="common-btn-font">
+                                <i className="bi bi-currency-rupee"></i>
+                                {Math.round(
+                                  parseInt(ready_reckoner_price) / 10000000
+                                )}
+                                {".02 "}
+                                Crore
+                              </div>
+                            </div>
+                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                               <small className="text-muted">Status</small>
                               <div className="common-btn-font">{status}</div>
                             </div>
@@ -247,6 +260,32 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                   : "Not Available"}
                               </div>
                             </div>
+
+                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                              <small className="text-muted">
+                                Title clear property
+                              </small>
+                              <div className="common-btn-font">Yes</div>
+                            </div>
+                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                              <small className="text-muted">
+                                Possession of the property
+                              </small>
+                              <div className="common-btn-font">
+                                Legally attached
+                              </div>
+                            </div>
+                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                              <small className="text-muted">
+                                Sale certificate
+                              </small>
+                              <div className="common-btn-font mt-2">
+                                <button className="btn btn-sm btn-outline-primary">
+                                  View
+                                </button>
+                              </div>
+                            </div>
+
                             <div className="col-12">
                               <hr />
                             </div>
@@ -259,7 +298,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                     : ""
                                 } ${
                                   plot_no ? `Plot No:  ${plot_no}, ` : ""
-                                }Locality: ${locality}, ${city_name} - ${PIN}, ${state_name}`}
+                                }Locality: ${locality}, ${city_name} - ${zip}, ${state_name}`}
                               </div>
                             </div>
                           </div>
