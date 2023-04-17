@@ -219,7 +219,7 @@ const EditProperty = () => {
             headers: authHeader,
           })
           .then((res) => {
-            if (res.data.msg === 0) {
+            if (res.data.status === 0) {
               resetValidationsOnSubmit();
               toast.success("Property updated successfully");
               // e.target.reset();
