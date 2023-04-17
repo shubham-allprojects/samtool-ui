@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-const OffcanvasBody = ({ canvasNumber }) => {
+const OffcanvasBody = ({
+  canvasNumber,
+  propertiesLinkDisabled,
+  backToAllPropertiesPage,
+}) => {
+  useEffect(() => {
+    console.log(
+      propertiesLinkDisabled.propertiesLinkDisabled,
+      propertiesLinkDisabled.backToAllPropertiesPage
+    );
+  }, []);
+
   return (
     <div className={`offcanvas-body ${canvasNumber ? "pt-0" : ""}`}>
       <ul className="navbar-nav">
@@ -40,13 +51,24 @@ const OffcanvasBody = ({ canvasNumber }) => {
             <div className="card card-body bg-primary">
               <ul className="list-unstyled">
                 <li className="nav-item">
-                  <NavLink
-                    className="nav-link sidebar-link"
-                    to="/admin/property/properties"
-                  >
-                    <i className="bi bi-buildings text-light me-2"></i>
-                    Properties
-                  </NavLink>
+                  {propertiesLinkDisabled.propertiesLinkDisabled ? (
+                    <span
+                      style={{ cursor: "pointer" }}
+                      className="nav-link sidebar-link"
+                      onClick={propertiesLinkDisabled.backToAllPropertiesPage}
+                    >
+                      <i className="bi bi-buildings text-light me-2"></i>
+                      Properties
+                    </span>
+                  ) : (
+                    <NavLink
+                      className="nav-link sidebar-link"
+                      to="/admin/property/properties"
+                    >
+                      <i className="bi bi-buildings text-light me-2"></i>
+                      Properties
+                    </NavLink>
+                  )}
                 </li>
 
                 <li className="nav-item">

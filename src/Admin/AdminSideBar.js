@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import OffcanvasBody from "./OffcanvasBody";
 
-const AdminSideBar = () => {
+const AdminSideBar = (propertiesLinkDisabled, backToAllPropertiesPage) => {
   const adminSidebarFunctionalities = () => {
     let body = document.getElementById("body");
     let adminSideBarLinks = document.querySelectorAll(
@@ -48,10 +48,13 @@ const AdminSideBar = () => {
         <div className="py-3">
           <span className="offcanvas-header text-white">
             <h4 className="offcanvas-title ps-md-4" id="offcanvasExampleLabel">
-              Admin
+              Administration
             </h4>
           </span>
-          <OffcanvasBody />
+          <OffcanvasBody
+            propertiesLinkDisabled={propertiesLinkDisabled}
+            backToAllPropertiesPage={backToAllPropertiesPage}
+          />
         </div>
       </div>
 
@@ -72,7 +75,11 @@ const AdminSideBar = () => {
             aria-label="Close"
           ></button>
         </div>
-        <OffcanvasBody canvasNumber="2" />
+        <OffcanvasBody
+          propertiesLinkDisabled={propertiesLinkDisabled}
+          backToAllPropertiesPage={backToAllPropertiesPage}
+          canvasNumber="2"
+        />
       </div>
     </>
   );

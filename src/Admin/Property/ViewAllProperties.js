@@ -153,6 +153,7 @@ const ViewAllProperties = () => {
     confirmDeletePropertyInputRef.current.value = "";
     setConfirmDeletePropertyBtnDisabled(true);
   };
+  const [propertiesLinkDisabled, setPropertiesLinkDisabled] = useState(false);
 
   const viewCurrentProperty = async (id) => {
     const currentPropertyRes = await axios.get(
@@ -163,9 +164,11 @@ const ViewAllProperties = () => {
     viewCurrentPropertyRef.current.classList.remove("d-none");
     window.scrollTo(0, 0);
     allPropertiesPageRef.current.classList.add("d-none");
+    setPropertiesLinkDisabled(true);
   };
 
   const backToAllPropertiesPage = () => {
+    setPropertiesLinkDisabled(false);
     viewCurrentPropertyRef.current.classList.add("d-none");
     allPropertiesPageRef.current.classList.remove("d-none");
   };
@@ -179,7 +182,10 @@ const ViewAllProperties = () => {
     <Layout>
       <div className="container-fluid section-padding">
         <div className="row min-100vh position-relative">
-          <AdminSideBar />
+          <AdminSideBar
+            backToAllPropertiesPage={backToAllPropertiesPage}
+            propertiesLinkDisabled={propertiesLinkDisabled}
+          />
           <div
             className="col-xl-10 col-lg-9 col-md-8"
             ref={allPropertiesPageRef}

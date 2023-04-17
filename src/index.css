@@ -1032,6 +1032,10 @@ input:-webkit-autofill:active {
     overflow: scroll !important;
   }
 
+  .nav-link.active:hover {
+    color: var(--secondary-color) !important;
+  }
+
   .nav-link:hover {
     color: white !important;
   }
