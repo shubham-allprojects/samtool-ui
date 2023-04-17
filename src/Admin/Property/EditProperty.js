@@ -332,7 +332,7 @@ const EditProperty = () => {
             plot_number: parseInt(plot_no),
             landmark: "Pune landmark",
             city: parseInt(city_id),
-            zip: zip,
+            zip: parseInt(zip),
             state: parseInt(state_id),
           },
         });
