@@ -218,6 +218,7 @@ function Home() {
   const viewCurrentProperty = async (type, city, range) => {
     if (data) {
       viewCurrentPropertyResultsRef.current.classList.remove("d-none");
+      setDisableHomeLink(true);
       window.scrollTo(0, 0);
       nav.style.background =
         "linear-gradient(0deg, rgb(2, 77, 251) 0%, rgb(0, 157, 255) 100%)";
@@ -245,11 +246,14 @@ function Home() {
   };
 
   const backToSearchResults = () => {
+    setDisableHomeLink(false);
     viewCurrentPropertyResultsRef.current.classList.add("d-none");
     homePageRef.current.classList.remove("d-none");
     document.getElementById("properties").scrollIntoView(true);
     nav.style.removeProperty("background");
   };
+
+  const [disableHomeLink, setDisableHomeLink] = useState(false);
 
   // This will run every time we refresh page or if some state change occurs.
   useEffect(() => {
@@ -260,7 +264,10 @@ function Home() {
   }, []);
 
   return (
-    <Layout>
+    <Layout
+      backToSearchResults={backToSearchResults}
+      disableHomeLink={disableHomeLink}
+    >
       <section className="full-home-page-section skyblue-bg" ref={homePageRef}>
         <section className="home-wrapper">
           <div className="container-fluid">
