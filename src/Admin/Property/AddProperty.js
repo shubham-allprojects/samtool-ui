@@ -395,7 +395,6 @@ const AddProperty = () => {
                                 name="possession_of_the_property"
                                 className="form-select"
                                 onChange={onInputChange}
-                                required
                               >
                                 <option value=""></option>
                                 <option value="Legally attached">
@@ -420,7 +419,6 @@ const AddProperty = () => {
                                 name="title_clear_property"
                                 className="form-select"
                                 onChange={onInputChange}
-                                required
                               >
                                 <option value=""></option>
                                 <option value="yes">Yes</option>

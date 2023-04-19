@@ -341,6 +341,7 @@ const EditProperty = () => {
           },
         });
       }
+      console.log(currentPropertyRes.data);
     }
   };
 
@@ -629,7 +630,6 @@ const EditProperty = () => {
                                 name="possession_of_the_property"
                                 className="form-select"
                                 onChange={onInputChange}
-                                required
                               >
                                 <option value=""></option>
                                 <option value="Legally attached">
@@ -654,7 +654,6 @@ const EditProperty = () => {
                                 name="title_clear_property"
                                 className="form-select"
                                 onChange={onInputChange}
-                                required
                               >
                                 <option value=""></option>
                                 <option value="yes">Yes</option>
