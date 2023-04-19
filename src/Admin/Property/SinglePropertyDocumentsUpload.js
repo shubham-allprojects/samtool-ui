@@ -74,7 +74,7 @@ const SinglePropertyDocumentsUpload = () => {
     console.warn("IS LAST CHUNK: ", isLastChunk);
     try {
       await axios
-        .post(`/sam/v1/property/auth/upload-images`, detailsToPost, {
+        .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
           headers: authHeader,
         })
         .then((res) => {

@@ -1,17 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 
 const OffcanvasBody = ({
   canvasNumber,
   propertiesLinkDisabled,
-  backToAllPropertiesPage,
 }) => {
-  useEffect(() => {
-    console.log(
-      propertiesLinkDisabled.propertiesLinkDisabled,
-      propertiesLinkDisabled.backToAllPropertiesPage
-    );
-  }, []);
 
   return (
     <div className={`offcanvas-body ${canvasNumber ? "pt-0" : ""}`}>

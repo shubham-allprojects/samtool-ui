@@ -153,17 +153,17 @@ const UploadProperties = () => {
           if (res.data.msg !== 0) {
             onCancelClick();
             toast.error("Error while uploading files");
+            reloadPage();
           } else {
             toast.success("File uploaded successfully");
-            // setTimeout(() => {
-            //   window.location.reload();
-            // }, 4000);
+            reloadPage();
           }
         }
       });
     } catch (error) {
       if (isLastChunk) {
         toast.error("Internal server error");
+        reloadPage();
       }
     }
 
@@ -217,6 +217,12 @@ const UploadProperties = () => {
   useEffect(() => {
     rootTitle.textContent = "ADMIN - UPLOAD PROPERTIES";
   }, []);
+
+  const reloadPage = () => {
+    setTimeout(() => {
+      window.location.reload();
+    }, 4000);
+  };
 
   return (
     <Layout>
