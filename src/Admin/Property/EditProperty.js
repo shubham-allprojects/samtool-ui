@@ -484,20 +484,20 @@ const EditProperty = () => {
                         <hr />
                         <div className="row mb-3">
                           <div className="col-12">
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" className="btn btn-primary">
                               <span className="common-btn-font">
                                 Property ID
                               </span>
-                              <span class="badge bg-light text-primary ms-2">
+                              <span className="badge bg-light text-primary ms-2">
                                 {property_id}
                               </span>
                             </button>
 
-                            <button type="button" class="btn btn-primary ms-2">
+                            <button type="button" className="btn btn-primary ms-2">
                               <span className="common-btn-font">
                                 Property Number
                               </span>
-                              <span class="badge bg-light text-primary ms-2">
+                              <span className="badge bg-light text-primary ms-2">
                                 {property_number}
                               </span>
                             </button>
@@ -643,8 +643,8 @@ const EditProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_stressed"
-                                  value="no"
-                                  id="stressed-no"
+                                  value="No"
+                                  id="stressed-No"
                                   onChange={onInputChange}
                                 />
                                 <label
@@ -912,8 +912,8 @@ const EditProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_sold"
-                                  value="no"
-                                  id="is_sold-no"
+                                  value="No"
+                                  id="is_sold-No"
                                   onChange={onInputChange}
                                   ref={notSoldCheckRef}
                                 />

@@ -662,7 +662,7 @@ const AddProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_sold"
-                                  value="no"
+                                  value="No"
                                   onChange={onInputChange}
                                   ref={notSoldCheckRef}
                                 />
@@ -697,7 +697,7 @@ const AddProperty = () => {
                                 <option id="notForSale" value="yes">
                                   Yes
                                 </option>
-                                <option value="no">No</option>
+                                <option value="No">No</option>
                               </select>
                             </div>
                           </div>
