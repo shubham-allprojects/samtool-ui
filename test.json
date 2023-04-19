@@ -1,0 +1,85 @@
+[
+  {
+    "property_id": 16,
+
+    "bank_id": "1",
+
+    "bank_branch_id": "1",
+
+    "branch_name": "BankofBaroda,Dhanori",
+
+    "property_number": "P/3/06/01232070",
+
+    "type_id": "1",
+
+    "type_name": "ResidentialProperty",
+
+    "locality": "Rural",
+
+    "flat_no": "18",
+
+    "plot_no": "36",
+
+    "society_name": "ImperialTower2",
+
+    "zip": "400064",
+
+    "city_id": "2",
+
+    "city_name": "Mumbai",
+
+    "state_id": "1",
+
+    "state_name": "Maharashtra",
+
+    "territory": "grampanchayatlimit",
+
+    "possession_of_the_property": "Legallyattached",
+
+    "title_clear_property": "yes",
+
+    "is_stressed": "yes",
+
+    "is_available_for_sale": "yes",
+
+    "sale_availability_date": "2022-03-17 12:26:23",
+
+    "saleable_area": "800sq.ft.",
+
+    "carpet_area": "500sq.ft.",
+
+    "ready_reckoner_price": "220000000",
+
+    "expected_price": "300000000",
+
+    "market_price": "260000000",
+
+    "distress_value": "110000000",
+
+    "completion_date": "2022-03-17 12:26:23",
+
+    "purchase_date": "2022-04-0412:26:23",
+
+    "mortgage_date": "2022-03-17 12:26:23",
+
+    "is_sold": "1",
+
+    "status": "1",
+
+    "added_by": 1,
+
+    "added_date": "2022-03-14 13:34:37",
+
+    "updated_by": {
+      "Int64": 1,
+
+      "Valid": true
+    },
+
+    " updated_date": {
+      "Time": "2022-03-14T 13:34:37Z",
+
+      "Valid": true
+    }
+  }
+]

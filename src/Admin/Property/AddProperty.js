@@ -17,11 +17,11 @@ const AddProperty = () => {
 
   const goTo = useNavigate();
   const [formData, setFormData] = useState({
-    is_sold: 0,
-    is_available_for_sale: 1,
+    is_sold: "no",
+    is_available_for_sale: "yes",
     sale_availability_date: "2005-12-26 23:50:30",
     status: "1",
-    is_stressed: 1,
+    is_stressed: "yes",
     property_id: 0,
     address_details: {
       locality: "Urban",
@@ -391,7 +391,7 @@ const AddProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_stressed"
-                                  value="1"
+                                  value="yes"
                                   onChange={onInputChange}
                                 />
                                 <label
@@ -552,6 +552,24 @@ const AddProperty = () => {
                               />
                             </div>
                           </div>
+                          <div className="col-xl-4 col-md-6 mt-3">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="distress_value"
+                              >
+                                Distress Value (Rs.)
+                              </label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                id="distress_value"
+                                name="distress_value"
+                                onChange={onInputChange}
+                                required
+                              />
+                            </div>
+                          </div>
                         </div>
 
                         {/* Row 4 - Dates & Availability Details */}
@@ -626,7 +644,7 @@ const AddProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_sold"
-                                  value="1"
+                                  value="yes"
                                   onChange={onInputChange}
                                 />
                                 <label
@@ -641,7 +659,7 @@ const AddProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_sold"
-                                  value="0"
+                                  value="no"
                                   onChange={onInputChange}
                                   ref={notSoldCheckRef}
                                 />
@@ -673,10 +691,10 @@ const AddProperty = () => {
                                 onChange={onInputChange}
                                 required
                               >
-                                <option id="notForSale" value="1">
+                                <option id="notForSale" value="yes">
                                   Yes
                                 </option>
-                                <option value="0">No</option>
+                                <option value="no">No</option>
                               </select>
                             </div>
                           </div>

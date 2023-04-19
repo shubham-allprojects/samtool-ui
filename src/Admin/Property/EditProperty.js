@@ -100,7 +100,7 @@ const EditProperty = () => {
     } else if (name === "bank_branch_id") {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "is_stressed") {
-      commonFnToSaveFormData(name, parseInt(value));
+      commonFnToSaveFormData(name, value);
     }
     // else if (name === "status") {
     //   commonFnToSaveFormData(name, value);
@@ -123,27 +123,27 @@ const EditProperty = () => {
       commonFnToSaveFormData(name, value);
     } else if (name === "is_sold") {
       const notForSale = document.getElementById("notForSale");
-      if (value === "1") {
+      if (value === "yes") {
         notSoldCheckRef.current.removeAttribute("checked");
         if (notForSale) {
           notForSale.selected = true;
         }
         setFormData({
           ...formData,
-          [name]: parseInt(value),
-          is_available_for_sale: 0,
+          [name]: value,
+          is_available_for_sale: "no",
         });
       } else {
         setFormData({
           ...formData,
-          [name]: parseInt(value),
-          is_available_for_sale: 1,
+          [name]: value,
+          is_available_for_sale: "yes",
         });
       }
     } else if (name === "is_available_for_sale") {
       setFormData({
         ...formData,
-        [name]: parseInt(value),
+        [name]: value,
       });
     }
     // else if (name === "sale_availability_date") {
@@ -627,8 +627,8 @@ const EditProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_stressed"
-                                  value="1"
-                                  id="stressed-1"
+                                  value="yes"
+                                  id="stressed-yes"
                                   onChange={onInputChange}
                                 />
                                 <label
@@ -643,8 +643,8 @@ const EditProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_stressed"
-                                  value="0"
-                                  id="stressed-0"
+                                  value="no"
+                                  id="stressed-no"
                                   onChange={onInputChange}
                                 />
                                 <label
@@ -896,8 +896,8 @@ const EditProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_sold"
-                                  value="1"
-                                  id="is_sold-1"
+                                  value="yes"
+                                  id="is_sold-yes"
                                   onChange={onInputChange}
                                 />
                                 <label
@@ -912,8 +912,8 @@ const EditProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_sold"
-                                  value="0"
-                                  id="is_sold-0"
+                                  value="no"
+                                  id="is_sold-no"
                                   onChange={onInputChange}
                                   ref={notSoldCheckRef}
                                 />
@@ -942,10 +942,16 @@ const EditProperty = () => {
                                 onChange={onInputChange}
                                 required
                               >
-                                <option value="1" id="is_available_for_sale-1">
+                                <option
+                                  value="yes"
+                                  id="is_available_for_sale-yes"
+                                >
                                   Yes
                                 </option>
-                                <option value="0" id="is_available_for_sale-0">
+                                <option
+                                  value="yes"
+                                  id="is_available_for_sale-no"
+                                >
                                   No
                                 </option>
                               </select>
