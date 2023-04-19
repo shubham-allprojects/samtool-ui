@@ -92,7 +92,7 @@ const AddProperty = () => {
     } else if (name === "bank_branch_id") {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "is_stressed") {
-      commonFnToSaveFormData(name, parseInt(value));
+      commonFnToSaveFormData(name, value);
     }
     // else if (name === "status") {
     //   commonFnToSaveFormData(name, value);
@@ -115,27 +115,27 @@ const AddProperty = () => {
       commonFnToSaveFormData(name, value);
     } else if (name === "is_sold") {
       const notForSale = document.getElementById("notForSale");
-      if (value === "1") {
+      if (value === "yes") {
         notSoldCheckRef.current.removeAttribute("checked");
         if (notForSale) {
           notForSale.selected = true;
         }
         setFormData({
           ...formData,
-          [name]: parseInt(value),
-          is_available_for_sale: 0,
+          [name]: value,
+          is_available_for_sale: "No",
         });
       } else {
         setFormData({
           ...formData,
-          [name]: parseInt(value),
-          is_available_for_sale: 1,
+          [name]: value,
+          is_available_for_sale: "yes",
         });
       }
     } else if (name === "is_available_for_sale") {
       setFormData({
         ...formData,
-        [name]: parseInt(value),
+        [name]: value,
       });
     }
     // else if (name === "sale_availability_date") {
@@ -677,7 +677,7 @@ const AddProperty = () => {
                           </div>
                           <div
                             className={`col-xl-4 col-md-6 mb-3 mb-xl-0 ${
-                              is_sold === 1 ? "d-none" : ""
+                              is_sold === "yes" ? "d-none" : ""
                             }`}
                           >
                             <div className="form-group">
@@ -703,7 +703,7 @@ const AddProperty = () => {
                           </div>
                           {/* <div
                             className={`col-xl-4 col-md-6 ${
-                              is_sold === 1 ? "d-none" : ""
+                              is_sold === "yes" ? "d-none" : ""
                             }`}
                           >
                             <div className="form-group">
@@ -719,7 +719,7 @@ const AddProperty = () => {
                                 id="sale_availability_date"
                                 name="sale_availability_date"
                                 onChange={onInputChange}
-                                required={is_sold === 1 ? false : true}
+                                required={is_sold === "yes" ? false : true}
                               />
                             </div>
                           </div> */}
