@@ -618,6 +618,52 @@ const EditProperty = () => {
                           </div>
                           <div className="col-xl-4 col-md-6 mt-3">
                             <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="possession_of_the_property"
+                              >
+                                Possession of the property
+                              </label>
+                              <select
+                                id="possession_of_the_property"
+                                name="possession_of_the_property"
+                                className="form-select"
+                                onChange={onInputChange}
+                                required
+                              >
+                                <option value=""></option>
+                                <option value="Legally attached">
+                                  Legally attached
+                                </option>
+                                <option value="Owner/ Customer consent">
+                                  Owner/ Customer consent
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mt-3">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="title_clear_property"
+                              >
+                                Title clear Property
+                              </label>
+                              <select
+                                id="title_clear_property"
+                                name="title_clear_property"
+                                className="form-select"
+                                onChange={onInputChange}
+                                required
+                              >
+                                <option value=""></option>
+                                <option value="yes">Yes</option>
+                                <option value="No">No</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mt-3">
+                            <div className="form-group">
                               <label className="form-label common-btn-font">
                                 Is stressed?
                               </label>

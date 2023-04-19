@@ -413,7 +413,7 @@ const AddProperty = () => {
                                 className="form-label common-btn-font"
                                 htmlFor="title_clear_property"
                               >
-                                Possession of the property
+                                Title clear Property
                               </label>
                               <select
                                 id="title_clear_property"
