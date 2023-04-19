@@ -483,7 +483,7 @@ const EditProperty = () => {
                         <h4 className="fw-bold">Update Property</h4>
                         <hr />
                         <div className="row mb-3">
-                          <div className="col-xl-3">
+                          <div className="col-xl-3 col-md-6">
                             <div
                               className="card p-2 text-light"
                               style={{
@@ -495,7 +495,7 @@ const EditProperty = () => {
                               </span>
                             </div>
                           </div>
-                          <div className="col-xl-3">
+                          <div className="col-xl-3 col-md-6 mt-3 mt-md-0">
                             <div
                               className="card p-2 text-light"
                               style={{
