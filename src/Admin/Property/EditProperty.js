@@ -35,7 +35,6 @@ const EditProperty = () => {
     // is_sold,
     // is_available_for_sale,
   } = formData;
-  // const { locality, state, zip } = formData.address_details;
   const {
     locality,
     flat_number,
@@ -268,7 +267,6 @@ const EditProperty = () => {
         branch_name,
         city_name,
         completion_date,
-        // sale_availability_date,
         purchase_date,
         mortgage_date,
         market_price,
@@ -318,7 +316,7 @@ const EditProperty = () => {
           property_number: property_number,
           is_stressed: is_stressed,
           is_available_for_sale: is_available_for_sale,
-          // sale_availability_date: sale_availability_date,
+          sale_availability_date: "2005-12-26 23:50:30",
           saleable_area: saleable_area,
           carpet_area: carpet_area,
           ready_reckoner_price: parseInt(ready_reckoner_price),
@@ -342,7 +340,6 @@ const EditProperty = () => {
             state: parseInt(state_id),
           },
         });
-        console.log(currentPropertyRes.data);
       }
     }
   };
@@ -493,7 +490,10 @@ const EditProperty = () => {
                               </span>
                             </button>
 
-                            <button type="button" className="btn btn-primary ms-2">
+                            <button
+                              type="button"
+                              className="btn btn-primary ms-2"
+                            >
                               <span className="common-btn-font">
                                 Property Number
                               </span>
