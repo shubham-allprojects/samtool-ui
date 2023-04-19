@@ -484,14 +484,24 @@ const EditProperty = () => {
                         <hr />
                         <div className="row mb-3">
                           <div className="col-xl-3">
-                            <div className="card p-2 bg-primary text-light">
+                            <div
+                              className="card p-2 text-light"
+                              style={{
+                                backgroundColor: "var(--primary-color-hover)",
+                              }}
+                            >
                               <span className="fw-bold text-center">
                                 Property ID: {property_id}
                               </span>
                             </div>
                           </div>
                           <div className="col-xl-3">
-                            <div className="card p-2 bg-primary text-light">
+                            <div
+                              className="card p-2 text-light"
+                              style={{
+                                backgroundColor: "var(--primary-color-hover)",
+                              }}
+                            >
                               <span className="fw-bold text-center">
                                 Property Number: {property_number}
                               </span>
@@ -540,7 +550,7 @@ const EditProperty = () => {
                             </div>
                           </div>
 
-                          <div className="col-xl-4 col-md-6 mt-3 mt-xl-0">
+                          <div className="col-xl-4 col-md-6">
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -575,7 +585,7 @@ const EditProperty = () => {
                             </div>
                           </div>
                           <div
-                            className="col-xl-4 col-md-6 mt-3"
+                            className="col-xl-4 col-md-6 mt-md-0 mt-3"
                             // ref={branchSelectBoxRef}
                           >
                             <div className="form-group">
