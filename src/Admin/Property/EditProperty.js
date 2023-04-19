@@ -32,7 +32,7 @@ const EditProperty = () => {
     carpet_area,
     property_number,
     property_id,
-    // is_sold,
+    is_sold,
     // is_available_for_sale,
   } = formData;
   const {
@@ -130,7 +130,7 @@ const EditProperty = () => {
         setFormData({
           ...formData,
           [name]: value,
-          is_available_for_sale: "no",
+          is_available_for_sale: "No",
         });
       } else {
         setFormData({
@@ -926,8 +926,11 @@ const EditProperty = () => {
                               </div>
                             </div>
                           </div>
-                          <div className={`col-xl-4 col-md-6 mb-3 mb-xl-0`}>
-                            {/* ${is_sold === 1 ? "d-none" : ""} */}
+                          <div
+                            className={`col-xl-4 col-md-6 mb-3 mb-xl-0 ${
+                              is_sold === "yes" ? "d-none" : ""
+                            }`}
+                          >
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
@@ -949,8 +952,8 @@ const EditProperty = () => {
                                   Yes
                                 </option>
                                 <option
-                                  value="yes"
-                                  id="is_available_for_sale-no"
+                                  value="No"
+                                  id="is_available_for_sale-No"
                                 >
                                   No
                                 </option>
@@ -976,7 +979,7 @@ const EditProperty = () => {
                                     : ""
                                 }
                                 onChange={onInputChange}
-                                required={is_sold === 1 ? false : true}
+                                required={is_sold === "yes" ? false : true}
                               />
                             </div>
                           </div> */}
