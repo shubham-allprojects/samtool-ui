@@ -94,26 +94,26 @@ const ViewProperty = ({ selectedProperty }) => {
             </div>
             <div className="container-fluid p-0">
               <div className="row mt-3">
-                <div className="col-4">
+                <div className="col-6">
                   <div className="card p-2 text-center border-primary border-2 border">
                     <small className="text-muted">Property Number</small>
                     <small className="common-btn-font">{property_number}</small>
                   </div>
                 </div>
-                <div className="col-4">
+                <div className="col-6">
                   <div className="card p-2 text-center border-primary border-2 border">
                     <small className="text-muted">Is stressed</small>
-                    <small className="common-btn-font">
-                      {is_stressed === 1 ? "Yes" : "No"}
+                    <small className="common-btn-font text-capitalize">
+                      {is_stressed}
                     </small>
                   </div>
                 </div>
-                <div className="col-4">
+                {/* <div className="col-4">
                   <div className="card p-2 text-center border-primary border-2 border">
                     <small className="text-muted">Status</small>
                     <small className="common-btn-font">{status}</small>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -277,12 +277,12 @@ const ViewProperty = ({ selectedProperty }) => {
                 </div>
                 <div className="col-md-4">
                   <small className="text-muted">Is Sold?</small>
-                  <h5 className="mt-1">{is_sold === 1 ? "Yes" : "No"}</h5>
+                  <h5 className="mt-1 text-capitalize">{is_sold}</h5>
                 </div>
                 <div className="col-md-4">
                   <small className="text-muted">Is Available For Sale?</small>
-                  <h5 className="mt-1">
-                    {is_available_for_sale === 1 ? "Yes" : "No"}
+                  <h5 className="mt-1 text-capitalize">
+                    {is_available_for_sale}
                   </h5>
                 </div>
 
