@@ -1,85 +1,103 @@
 [
   {
-    "property_id": 16,
+    "category_id": 1,
 
-    "bank_id": "1",
+    "category_Name": "The property purchase/agreement "
+  },
 
-    "bank_branch_id": "1",
+  {
+    "category_id": 2,
 
-    "branch_name": "BankofBaroda,Dhanori",
+    "category_Name": "The title deed  "
+  },
 
-    "property_number": "P/3/06/01232070",
+  {
+    "category_id": 3,
 
-    "type_id": "1",
+    "category_Name": "The contract of sale "
+  },
 
-    "type_name": "ResidentialProperty",
+  {
+    "category_id": 4,
 
-    "locality": "Rural",
+    "category_Name": "The deed of transfer / sale certificate"
+  },
 
-    "flat_no": "18",
+  {
+    "category_id": 5,
 
-    "plot_no": "36",
+    "category_Name": "General Power of Attorney"
+  },
 
-    "society_name": "ImperialTower2",
+  {
+    "category_id": 6,
 
-    "zip": "400064",
+    "category_Name": "NOC, No objection certificate"
+  },
 
-    "city_id": "2",
+  {
+    "category_id": 7,
 
-    "city_name": "Mumbai",
+    "category_Name": "Allotment Letter"
+  },
 
-    "state_id": "1",
+  {
+    "category_id": 8,
 
-    "state_name": "Maharashtra",
+    "category_Name": "Possession Letter"
+  },
 
-    "territory": "grampanchayatlimit",
+  {
+    "category_id": 9,
 
-    "possession_of_the_property": "Legallyattached",
+    "category_Name": "Completion Certificate "
+  },
 
-    "title_clear_property": "yes",
+  {
+    "category_id": 10,
 
-    "is_stressed": "yes",
+    "category_Name": "Occupancy Certificate "
+  },
 
-    "is_available_for_sale": "yes",
+  {
+    "category_id": 11,
 
-    "sale_availability_date": "2022-03-17 12:26:23",
+    "category_Name": "Copy of Building Plan"
+  },
 
-    "saleable_area": "800sq.ft.",
+  {
+    "category_id": 12,
 
-    "carpet_area": "500sq.ft.",
+    "category_Name": "RERA document"
+  },
 
-    "ready_reckoner_price": "220000000",
+  {
+    "category_id": 13,
 
-    "expected_price": "300000000",
+    "category_Name": "Property Tax Receipts"
+  },
 
-    "market_price": "260000000",
+  {
+    "category_id": 14,
 
-    "distress_value": "110000000",
+    "category_Name": "Society details"
+  },
 
-    "completion_date": "2022-03-17 12:26:23",
+  {
+    "category_id": 15,
 
-    "purchase_date": "2022-04-0412:26:23",
+    "category_Name": "Condominium details"
+  },
 
-    "mortgage_date": "2022-03-17 12:26:23",
+  {
+    "category_id": 16,
 
-    "is_sold": "1",
+    "category_Name": "Bungalow details"
+  },
 
-    "status": "1",
+  {
+    "category_id": 17,
 
-    "added_by": 1,
-
-    "added_date": "2022-03-14 13:34:37",
-
-    "updated_by": {
-      "Int64": 1,
-
-      "Valid": true
-    },
-
-    " updated_date": {
-      "Time": "2022-03-14T 13:34:37Z",
-
-      "Valid": true
-    }
+    "category_Name": "Property images"
   }
 ]
