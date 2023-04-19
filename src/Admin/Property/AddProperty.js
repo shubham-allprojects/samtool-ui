@@ -20,7 +20,7 @@ const AddProperty = () => {
     is_sold: 0,
     is_available_for_sale: 1,
     sale_availability_date: "2005-12-26 23:50:30",
-    status: "",
+    status: "1",
     is_stressed: 1,
     property_id: 0,
     address_details: {
@@ -92,9 +92,11 @@ const AddProperty = () => {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "is_stressed") {
       commonFnToSaveFormData(name, parseInt(value));
-    } else if (name === "status") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "saleable_area") {
+    }
+    // else if (name === "status") {
+    //   commonFnToSaveFormData(name, value);
+    // }
+    else if (name === "saleable_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "carpet_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
@@ -134,9 +136,11 @@ const AddProperty = () => {
         ...formData,
         [name]: parseInt(value),
       });
-    } else if (name === "sale_availability_date") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "flat_number") {
+    }
+    // else if (name === "sale_availability_date") {
+    //   commonFnToSaveFormData(name, value);
+    // }
+    else if (name === "flat_number") {
       commonFnToSaveAddressDetails(name, parseInt(value));
     } else if (name === "building_name") {
       commonFnToSaveAddressDetails(name, value);
@@ -414,7 +418,7 @@ const AddProperty = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6 mt-3">
+                          {/* <div className="col-xl-4 col-md-6 mt-3">
                             <div className="form-group">
                               <label
                                 htmlFor="status"
@@ -435,7 +439,7 @@ const AddProperty = () => {
                                 <option value="1">1</option>
                               </select>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                         {/* Row 2 - Area Details*/}
                         <div className="row mb-3">
@@ -676,7 +680,7 @@ const AddProperty = () => {
                               </select>
                             </div>
                           </div>
-                          <div
+                          {/* <div
                             className={`col-xl-4 col-md-6 ${
                               is_sold === 1 ? "d-none" : ""
                             }`}
@@ -697,7 +701,7 @@ const AddProperty = () => {
                                 required={is_sold === 1 ? false : true}
                               />
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                         {/* Row 5 - Address Details */}
                         <div className="row">

@@ -23,7 +23,6 @@ const EditProperty = () => {
   });
   const {
     completion_date,
-    sale_availability_date,
     purchase_date,
     mortgage_date,
     market_price,
@@ -32,6 +31,7 @@ const EditProperty = () => {
     saleable_area,
     carpet_area,
     property_number,
+    property_id,
     // is_sold,
     // is_available_for_sale,
   } = formData;
@@ -80,9 +80,11 @@ const EditProperty = () => {
       if (value) {
         commonFnToSaveFormData(name, parseInt(value));
       }
-    } else if (name === "property_number") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "bank") {
+    }
+    // else if (name === "property_number") {
+    //   commonFnToSaveFormData(name, value);
+    // }
+    else if (name === "bank") {
       if (value) {
         // branchSelectBoxRef.current.classList.remove("d-none");
         const branchRes = await axios.get(
@@ -99,9 +101,11 @@ const EditProperty = () => {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "is_stressed") {
       commonFnToSaveFormData(name, parseInt(value));
-    } else if (name === "status") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "saleable_area") {
+    }
+    // else if (name === "status") {
+    //   commonFnToSaveFormData(name, value);
+    // }
+    else if (name === "saleable_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "carpet_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
@@ -141,9 +145,11 @@ const EditProperty = () => {
         ...formData,
         [name]: parseInt(value),
       });
-    } else if (name === "sale_availability_date") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "flat_number") {
+    }
+    // else if (name === "sale_availability_date") {
+    //   commonFnToSaveFormData(name, value);
+    // }
+    else if (name === "flat_number") {
       commonFnToSaveAddressDetails(name, parseInt(value));
     } else if (name === "building_name") {
       commonFnToSaveAddressDetails(name, value);
@@ -262,7 +268,7 @@ const EditProperty = () => {
         branch_name,
         city_name,
         completion_date,
-        sale_availability_date,
+        // sale_availability_date,
         purchase_date,
         mortgage_date,
         market_price,
@@ -312,7 +318,7 @@ const EditProperty = () => {
           property_number: property_number,
           is_stressed: is_stressed,
           is_available_for_sale: is_available_for_sale,
-          sale_availability_date: sale_availability_date,
+          // sale_availability_date: sale_availability_date,
           saleable_area: saleable_area,
           carpet_area: carpet_area,
           ready_reckoner_price: parseInt(ready_reckoner_price),
@@ -406,10 +412,10 @@ const EditProperty = () => {
     }
 
     // default status
-    let defaultStatus = document.getElementById(`status-${status}`);
-    if (defaultStatus) {
-      defaultStatus.selected = true;
-    }
+    // let defaultStatus = document.getElementById(`status-${status}`);
+    // if (defaultStatus) {
+    //   defaultStatus.selected = true;
+    // }
 
     // default value of stressed status
     let defaultValueOfStressed = document.getElementById(
@@ -476,6 +482,22 @@ const EditProperty = () => {
                       <div className="card-body">
                         <h4 className="fw-bold">Update Property</h4>
                         <hr />
+                        <div className="row mb-3">
+                          <div className="col-xl-3">
+                            <div className="card p-2">
+                              <span className="fw-bold text-primary text-center">
+                                Property ID: {property_id}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="col-xl-3">
+                            <div className="card p-2">
+                              <span className="fw-bold text-primary text-center">
+                                Property Number: {property_number}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
                         {/* Row 1 - Basic Details */}
                         <div className="row mb-3">
                           <div className="col-12">
@@ -517,25 +539,7 @@ const EditProperty = () => {
                               </select>
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6 mt-3 mt-md-0">
-                            <div className="form-group">
-                              <label
-                                htmlFor="property_number"
-                                className="form-label common-btn-font"
-                              >
-                                Property Number
-                              </label>
-                              <input
-                                type="text"
-                                id="property_number"
-                                name="property_number"
-                                className="form-control"
-                                defaultValue={property_number}
-                                onChange={onInputChange}
-                                required
-                              />
-                            </div>
-                          </div>
+
                           <div className="col-xl-4 col-md-6 mt-3 mt-xl-0">
                             <div className="form-group">
                               <label
@@ -647,7 +651,7 @@ const EditProperty = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-xl-4 col-md-6 mt-3">
+                          {/* <div className="col-xl-4 col-md-6 mt-3">
                             <div className="form-group">
                               <label
                                 htmlFor="status"
@@ -672,7 +676,7 @@ const EditProperty = () => {
                                 </option>
                               </select>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                         {/* Row 2 - Area Details*/}
                         <div className="row mb-3">
@@ -942,8 +946,7 @@ const EditProperty = () => {
                               </select>
                             </div>
                           </div>
-                          <div className={`col-xl-4 col-md-6`}>
-                            {/* ${is_sold === 1 ? "d-none" : ""} */}
+                          {/* <div className={`col-xl-4 col-md-6`}>
                             <div className="form-group">
                               <label
                                 htmlFor="sale_availability_date"
@@ -962,10 +965,10 @@ const EditProperty = () => {
                                     : ""
                                 }
                                 onChange={onInputChange}
-                                // required={is_sold === 1 ? false : true}
+                                required={is_sold === 1 ? false : true}
                               />
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                         {/* Row 5 - Address Details */}
                         <div className="row">
