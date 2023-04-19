@@ -12,7 +12,6 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
               market_price,
               ready_reckoner_price,
               expected_price,
-              status,
               saleable_area,
               carpet_area,
               is_sold,
@@ -29,6 +28,9 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
               state_name,
               is_stressed,
               territory,
+              distress_value,
+              title_clear_property,
+              possession_of_the_property,
             } = property;
             return (
               <div key={Index} className="p-0">
@@ -125,56 +127,75 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                       <div className="col-lg-8 col-md-7 pe-0">
                         <div className="container-fluid">
                           <div className="row">
-                            <div className="col-xl-3 col-lg-4 col-6 mt-3 mt-md-0">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-3 mt-md-0 ${
+                                type_name ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">
                                 Property Type
                               </small>
                               <div className="common-btn-font">{type_name}</div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-3 mt-md-0">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-3 mt-md-0 ${
+                                market_price ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">Market Price</small>
                               <div className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
-                                {Math.round(
-                                  parseInt(market_price) / 10000000
+                                {(parseInt(market_price) / 10000000).toFixed(
+                                  2
                                 )}{" "}
                                 Crore
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-lg-0 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-lg-0 mt-3 ${
+                                ready_reckoner_price ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">
                                 Ready Reckoner Price
                               </small>
                               <div className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
-                                {Math.round(
+                                {(
                                   parseInt(ready_reckoner_price) / 10000000
-                                )}{" "}
+                                ).toFixed(2)}{" "}
                                 Crore
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-0 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-0 mt-3 ${
+                                expected_price ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">
                                 Expected Price
                               </small>
                               <div className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
-                                {Math.round(
-                                  parseInt(expected_price) / 10000000
+                                {(parseInt(expected_price) / 10000000).toFixed(
+                                  2
                                 )}{" "}
                                 Crore
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                distress_value ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">
                                 Distress value
                               </small>
                               <div className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
-                                {Math.round(
-                                  parseInt(ready_reckoner_price) / 10000000
-                                )}
-                                {".02 "}
+                                {(parseInt(distress_value) / 10000000).toFixed(
+                                  2
+                                )}{" "}
                                 Crore
                               </div>
                             </div>
@@ -182,7 +203,11 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                               <small className="text-muted">Status</small>
                               <div className="common-btn-font">{status}</div>
                             </div> */}
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                saleable_area ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">
                                 Saleable Area
                               </small>
@@ -190,19 +215,31 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 {saleable_area}
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                carpet_area ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">Carpet Area</small>
                               <div className="common-btn-font">
                                 {carpet_area}
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                is_stressed ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">Is Stressed?</small>
                               <div className="common-btn-font text-capitalize">
                                 {is_stressed}
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                is_sold ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">Is Sold?</small>
                               <div className="common-btn-font text-capitalize">
                                 {is_sold}
@@ -210,8 +247,10 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                             </div>
                             <div
                               className={`${
-                                is_sold === 1 ? "d-none" : ""
-                              } col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3`}
+                                is_available_for_sale && is_sold === "no"
+                                  ? ""
+                                  : "d-none"
+                              } col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 `}
                             >
                               <small className="text-muted">
                                 Is Available For Sale?
@@ -220,7 +259,11 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 {is_available_for_sale}
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                completion_date ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">
                                 Completion Date
                               </small>
@@ -234,7 +277,11 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                   : "Not Available"}
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                purchase_date ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">
                                 Purchase Date
                               </small>
@@ -248,7 +295,11 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                   : "Not Available"}
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                mortgage_date ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">
                                 Mortgage Date
                               </small>
@@ -263,23 +314,39 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                               </div>
                             </div>
 
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                title_clear_property ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">
                                 Title clear property
                               </small>
-                              <div className="common-btn-font">Yes</div>
+                              <div className="common-btn-font text-capitalize">
+                                {title_clear_property}
+                              </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                possession_of_the_property ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">
                                 Possession of the property
                               </small>
-                              <div className="common-btn-font">
-                                Legally attached
+                              <div className="common-btn-font text-capitalize">
+                                {possession_of_the_property}
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            <div
+                              className={`col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 ${
+                                territory ? "" : "d-none"
+                              }`}
+                            >
                               <small className="text-muted">Territory</small>
-                              <div className="common-btn-font">{territory}</div>
+                              <div className="common-btn-font text-capitalize">
+                                {territory}
+                              </div>
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                               <small className="text-muted">
