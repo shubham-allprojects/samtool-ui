@@ -488,7 +488,7 @@ const EditProperty = () => {
                               <span className="common-btn-font">
                                 Property ID
                               </span>
-                              <span class="badge bg-dark ms-2">
+                              <span class="badge bg-light text-primary ms-2">
                                 {property_id}
                               </span>
                             </button>
@@ -497,7 +497,7 @@ const EditProperty = () => {
                               <span className="common-btn-font">
                                 Property Number
                               </span>
-                              <span class="badge bg-dark ms-2">
+                              <span class="badge bg-light text-primary ms-2">
                                 {property_number}
                               </span>
                             </button>
