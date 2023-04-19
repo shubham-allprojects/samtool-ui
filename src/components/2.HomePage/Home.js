@@ -496,8 +496,8 @@ function Home() {
                               <span>Market Price: </span>
                               <span className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
-                                {`${Math.round(
-                                  parseInt(market_value) / 10000000
+                                {`${(parseInt(market_value) / 10000000).toFixed(
+                                  2
                                 )} Crores`}
                               </span>
                             </div>
@@ -506,16 +506,16 @@ function Home() {
                               <span>Range: </span>
                               <span className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
-                                {`${Math.round(
+                                {`${(
                                   parseInt(range.split("-")[0]) / 10000000
-                                )} Crores`}
+                                ).toFixed(2)} Crores`}
                               </span>
                               <span className="mx-2 common-btn-font">-</span>
                               <span className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
-                                {`${Math.round(
+                                {`${(
                                   parseInt(range.split("-")[1]) / 10000000
-                                )} Crores`}
+                                ).toFixed(2)} Crores`}
                               </span>
                             </div>
                             <div className="mt-2">
