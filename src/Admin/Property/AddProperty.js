@@ -42,6 +42,7 @@ const AddProperty = () => {
   const branchSelectBoxRef = useRef();
   const citySelectBoxRef = useRef();
   const notSoldCheckRef = useRef();
+  const defaultIsStressedRef = useRef();
 
   const getDataFromApi = async () => {
     const propertyCategoryRes = await axios.get(`/sam/v1/property/by-category`);
@@ -235,6 +236,7 @@ const AddProperty = () => {
 
   useEffect(() => {
     notSoldCheckRef.current.setAttribute("checked", "true");
+    defaultIsStressedRef.current.setAttribute("checked", "true");
     getDataFromApi();
   }, []);
 
@@ -393,6 +395,7 @@ const AddProperty = () => {
                                   name="is_stressed"
                                   value="yes"
                                   onChange={onInputChange}
+                                  ref={defaultIsStressedRef}
                                 />
                                 <label
                                   className="form-check-label"
