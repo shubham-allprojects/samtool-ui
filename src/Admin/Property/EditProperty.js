@@ -484,15 +484,15 @@ const EditProperty = () => {
                         <hr />
                         <div className="row mb-3">
                           <div className="col-xl-3">
-                            <div className="card p-2">
-                              <span className="fw-bold text-primary text-center">
+                            <div className="card p-2 border-primary text-primary">
+                              <span className="fw-bold text-center">
                                 Property ID: {property_id}
                               </span>
                             </div>
                           </div>
                           <div className="col-xl-3">
-                            <div className="card p-2">
-                              <span className="fw-bold text-primary text-center">
+                            <div className="card p-2 border-primary text-primary">
+                              <span className="fw-bold text-center">
                                 Property Number: {property_number}
                               </span>
                             </div>
