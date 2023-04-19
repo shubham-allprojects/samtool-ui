@@ -483,29 +483,24 @@ const EditProperty = () => {
                         <h4 className="fw-bold">Update Property</h4>
                         <hr />
                         <div className="row mb-3">
-                          <div className="col-xl-3 col-md-6">
-                            <div
-                              className="card p-2 text-light"
-                              style={{
-                                backgroundColor: "var(--primary-color-hover)",
-                              }}
-                            >
-                              <span className="fw-bold text-center">
-                                Property ID: {property_id}
+                          <div className="col-12">
+                            <button type="button" class="btn btn-primary">
+                              <span className="common-btn-font">
+                                Property ID
                               </span>
-                            </div>
-                          </div>
-                          <div className="col-xl-3 col-md-6 mt-3 mt-md-0">
-                            <div
-                              className="card p-2 text-light"
-                              style={{
-                                backgroundColor: "var(--primary-color-hover)",
-                              }}
-                            >
-                              <span className="fw-bold text-center">
-                                Property Number: {property_number}
+                              <span class="badge bg-dark ms-2">
+                                {property_id}
                               </span>
-                            </div>
+                            </button>
+
+                            <button type="button" class="btn btn-primary ms-2">
+                              <span className="common-btn-font">
+                                Property Number
+                              </span>
+                              <span class="badge bg-dark ms-2">
+                                {property_number}
+                              </span>
+                            </button>
                           </div>
                         </div>
                         {/* Row 1 - Basic Details */}
