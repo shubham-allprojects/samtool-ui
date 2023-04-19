@@ -27,6 +27,8 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
               city_name,
               zip,
               state_name,
+              is_stressed,
+              territory,
             } = property;
             return (
               <div key={Index} className="p-0">
@@ -176,10 +178,10 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 Crore
                               </div>
                             </div>
-                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                            {/* <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                               <small className="text-muted">Status</small>
                               <div className="common-btn-font">{status}</div>
-                            </div>
+                            </div> */}
                             <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                               <small className="text-muted">
                                 Saleable Area
@@ -196,14 +198,14 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                               <small className="text-muted">Is Stressed?</small>
-                              <div className="common-btn-font">
-                                {property.is_stressed === 1 ? "Yes" : "No"}
+                              <div className="common-btn-font text-capitalize">
+                                {is_stressed}
                               </div>
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                               <small className="text-muted">Is Sold?</small>
-                              <div className="common-btn-font">
-                                {property.is_sold === 1 ? "Yes" : "No"}
+                              <div className="common-btn-font text-capitalize">
+                                {is_sold}
                               </div>
                             </div>
                             <div
@@ -214,8 +216,8 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                               <small className="text-muted">
                                 Is Available For Sale?
                               </small>
-                              <div className="common-btn-font">
-                                {is_available_for_sale === 1 ? "Yes" : "No"}
+                              <div className="common-btn-font text-capitalize">
+                                {is_available_for_sale}
                               </div>
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
@@ -276,6 +278,10 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                               </div>
                             </div>
                             <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                              <small className="text-muted">Territory</small>
+                              <div className="common-btn-font">{territory}</div>
+                            </div>
+                            <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
                               <small className="text-muted">
                                 Sale certificate
                               </small>
@@ -285,7 +291,6 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 </button>
                               </div>
                             </div>
-
                             <div className="col-12">
                               <hr />
                             </div>
