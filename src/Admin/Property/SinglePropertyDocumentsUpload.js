@@ -36,6 +36,7 @@ const SinglePropertyDocumentsUpload = () => {
   const [imageAllowedExtensions, setImageAllowedExtensions] = useState([]);
   const fileRef = useRef();
   const decsRef = useRef();
+  const otherCategoryInputRef = useRef();
 
   const { category_id, category_text, categoryTextColor, description } =
     documentsInfo;
@@ -50,6 +51,16 @@ const SinglePropertyDocumentsUpload = () => {
           setAllCategoriesFromDB(res.data);
         });
     } catch (error) {}
+  };
+
+  const onSaveOtherCategoryClick = () => {
+    alert(otherCategoryInputRef.current.value.trim());
+    setDocumentsInfo({
+      ...documentsInfo,
+      category_id: otherCategoryId,
+      category_text: otherCategoryInputRef.current.value,
+      categoryTextColor: "black common-btn-font",
+    });
   };
 
   const onCategoryRadioCheck = (e) => {
@@ -330,6 +341,28 @@ const SinglePropertyDocumentsUpload = () => {
                             >
                               Other
                             </label>
+                          </div>
+                          <div className="container-fluid mt-2">
+                            <div className="row">
+                              <div className="col-7">
+                                <div className="form-group">
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Enter category"
+                                    ref={otherCategoryInputRef}
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-5">
+                                <button
+                                  className="btn btn-primary"
+                                  onClick={onSaveOtherCategoryClick}
+                                >
+                                  Save
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
