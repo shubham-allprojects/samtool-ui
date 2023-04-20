@@ -393,16 +393,15 @@ const SinglePropertyDocumentsUpload = () => {
                     </div>
                   </div>
                   <div className="col-xl-3">
-                    <div className="form-group text-center">
-                      <label
-                        htmlFor=""
-                        className="form-label"
-                        style={{ visibility: "hidden" }}
-                      >
-                        Button
+                    <div className="form-group">
+                      <label htmlFor="" className="form-label fw-bold">
+                        Action
                       </label>
                       <div>
                         <button className="btn btn-primary">Upload</button>
+                        <button className="btn btn-secondary ms-2">
+                          Reset
+                        </button>
                       </div>
                     </div>
                   </div>
