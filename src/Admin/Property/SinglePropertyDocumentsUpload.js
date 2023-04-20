@@ -33,6 +33,7 @@ const SinglePropertyDocumentsUpload = () => {
   });
 
   const [allCategoriesFromDB, setAllCategoriesFromDB] = useState([]);
+  const [imageAllowedExtensions, setImageAllowedExtensions] = useState([]);
   const fileRef = useRef();
   const decsRef = useRef();
 
@@ -53,6 +54,11 @@ const SinglePropertyDocumentsUpload = () => {
 
   const onCategoryRadioCheck = (e) => {
     let categoryText = e.target.nextElementSibling.textContent;
+    if (categoryText === "Property images") {
+      setImageAllowedExtensions(["jpg", "png", "jpeg"]);
+    } else {
+      setImageAllowedExtensions([]);
+    }
     setDocumentsInfo({
       ...documentsInfo,
       category_id: parseInt(e.target.value),
@@ -343,6 +349,13 @@ const SinglePropertyDocumentsUpload = () => {
                         id="file-upload"
                         className="form-control"
                       />
+                      <small
+                        className={`text-muted ${
+                          imageAllowedExtensions.length > 0 ? "" : "d-none"
+                        }`}
+                      >
+                        Extensions allowed {imageAllowedExtensions.join(", ")}.
+                      </small>
                     </div>
                   </div>
                   <div className="col-xl-3">
