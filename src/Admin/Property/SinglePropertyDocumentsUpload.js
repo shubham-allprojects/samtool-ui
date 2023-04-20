@@ -39,7 +39,7 @@ const SinglePropertyDocumentsUpload = () => {
 
   const { category_id, category_text, categoryTextColor, description } =
     documentsInfo;
-  const [otherCategoryId, setOtherCategoryId] = useState(null);
+  let otherCategoryId = null;
   const getCategoriesFromDB = async () => {
     try {
       await axios
@@ -284,7 +284,7 @@ const SinglePropertyDocumentsUpload = () => {
                       <div className="row">
                         {allCategoriesFromDB.map((category, Index) => {
                           if (category.category_Name === "Other") {
-                            setOtherCategoryId(parseInt(category.category_id));
+                            otherCategoryId = parseInt(category.category_id);
                           }
                           return (
                             <div
