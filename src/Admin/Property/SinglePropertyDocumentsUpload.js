@@ -362,18 +362,49 @@ const SinglePropertyDocumentsUpload = () => {
                   <div className="col-xl-3">
                     <div className="form-group">
                       <label
+                        htmlFor="file-upload"
+                        className="form-label fw-bold"
+                      >
+                        File
+                      </label>
+                      <input
+                        type="file"
+                        name="file-upload"
+                        id="file-upload"
+                        className="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-xl-3">
+                    <div className="form-group">
+                      <label
                         htmlFor="description"
                         className="form-label fw-bold"
                       >
                         Description
                       </label>
                       <textarea
+                        style={{ resize: "none" }}
                         name="description"
                         id="description"
                         className="form-control"
                         rows="4"
                         placeholder="Enter category description"
                       ></textarea>
+                    </div>
+                  </div>
+                  <div className="col-xl-3">
+                    <div className="form-group text-center">
+                      <label
+                        htmlFor=""
+                        className="form-label"
+                        style={{ visibility: "hidden" }}
+                      >
+                        Button
+                      </label>
+                      <div>
+                        <button className="btn btn-primary">Upload</button>
+                      </div>
                     </div>
                   </div>
                 </div>
