@@ -383,14 +383,13 @@ const SinglePropertyDocumentsUpload = () => {
                       >
                         Description
                       </label>
-                      <textarea
-                        style={{ resize: "none" }}
+                      <input
+                        type="text"
                         name="description"
                         id="description"
                         className="form-control"
-                        rows="4"
                         placeholder="Enter category description"
-                      ></textarea>
+                      ></input>
                     </div>
                   </div>
                   <div className="col-xl-3">
