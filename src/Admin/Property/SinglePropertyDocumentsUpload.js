@@ -295,7 +295,10 @@ const SinglePropertyDocumentsUpload = () => {
               <div className="container-fluid">
                 <div className="row">
                   <h4 className="fw-bold text-primary p-0">
-                    Property Number: {currentPropertyNumber}
+                    Property Number
+                    <span class="badge bg-primary ms-2">
+                      {currentPropertyNumber}
+                    </span>
                   </h4>
                   <hr />
                 </div>
