@@ -348,12 +348,13 @@ const SinglePropertyDocumentsUpload = () => {
             <section className="upload-documents-wrapper">
               <div className="container-fluid">
                 <div className="row">
-                  <h4 className="fw-bold text-primary p-0">
+                  <h3 className="fw-bold p-0">Upload Documents</h3>
+                  <h6 className="fw-bold text-muted p-0">
                     Property Number
                     <span className="badge bg-primary ms-2">
                       {currentPropertyNumber}
                     </span>
-                  </h4>
+                  </h6>
                   <hr />
                 </div>
                 {/* <div className="row border p-4">
@@ -394,7 +395,9 @@ const SinglePropertyDocumentsUpload = () => {
                 <div className="row mb-4">
                   <div className="col-12">
                     <div className="container-fluid">
-                      <h5>Select document category</h5>
+                      <label className="form-label common-btn-font text-primary">
+                        Select document category
+                      </label>
                       <div className="row">
                         {allCategoriesFromDB.map((category, Index) => {
                           return (
@@ -445,7 +448,7 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="category_text"
-                        className="form-label common-btn-font"
+                        className="form-label common-btn-font text-primary"
                       >
                         Category
                       </label>
@@ -458,7 +461,7 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="file-upload"
-                        className="form-label common-btn-font"
+                        className="form-label common-btn-font text-primary"
                       >
                         File
                       </label>
@@ -478,7 +481,7 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="description"
-                        className="form-label common-btn-font"
+                        className="form-label common-btn-font text-primary"
                       >
                         Description
                       </label>
@@ -497,7 +500,7 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="action-buttons"
-                        className="form-label common-btn-font"
+                        className="form-label common-btn-font text-primary"
                       >
                         Action
                       </label>
@@ -512,7 +515,10 @@ const SinglePropertyDocumentsUpload = () => {
                               : false
                           }
                           className="btn btn-primary"
-                          style={{ width: "46%" }}
+                          style={{
+                            width: "46%",
+                            background: "var(--primary-color-hover)",
+                          }}
                         >
                           Upload
                         </button>
