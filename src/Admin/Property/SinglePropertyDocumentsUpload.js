@@ -299,6 +299,20 @@ const SinglePropertyDocumentsUpload = () => {
       });
     }
   };
+  const [allCategoriesFromDB, setAllCategoriesFromDB] = useState([]);
+  const getCategoriesFromDB = async () => {
+    try {
+      await axios
+        .get(`/sam/v1/property/auth/document-categories`, {
+          headers: authHeader,
+        })
+        .then((res) => {
+          setAllCategoriesFromDB(res.data);
+        });
+    } catch (error) {
+      toast.error("Failed to load property categories");
+    }
+  };
 
   useEffect(() => {
     let propertyNumber = localStorage.getItem("property_number");
