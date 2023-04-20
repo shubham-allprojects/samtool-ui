@@ -376,35 +376,57 @@ const SinglePropertyDocumentsUpload = () => {
 
                 <div className="row mb-4">
                   <div className="col-12">
-                    <h5>Select document category</h5>
                     <div className="container-fluid">
+                      <h5>Select document category</h5>
                       <div className="row">
                         {allCategoriesFromDB.map((category, Index) => {
                           return (
-                            <div
-                              className="form-check form-check-inline"
-                              key={Index}
-                            >
-                              <input
-                                className="form-check-input"
-                                type="radio"
-                                name="category_id"
-                                id="inlineRadio1"
-                                value={category.category_id}
-                              />
-                              <label
-                                className="form-check-label"
-                                htmlFor="inlineRadio1"
-                              >
-                                {category.category_Name}
-                              </label>
-                            </div>
+                            <>
+                              <div className="col-4">
+                                <div
+                                  className="form-check form-check-inline"
+                                  key={Index}
+                                >
+                                  <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="category_id"
+                                    id="category_id"
+                                    value={category.category_id}
+                                  />
+                                  <label
+                                    className="form-check-label"
+                                    htmlFor="category_id"
+                                  >
+                                    {category.category_Name}
+                                  </label>
+                                </div>
+                              </div>
+                            </>
                           );
                         })}
+                        <div className="col-4">
+                          <div className="form-check form-check-inline">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="category_id"
+                              id="category_id"
+                              value={0}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="category_id"
+                            >
+                              Other
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <hr />
                 <div className="row">
                   <div className="col-xl-3">
                     <div className="form-group">
