@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import { v4 as uuid } from "uuid";
@@ -153,148 +153,30 @@ const SinglePropertyDocumentsUpload = () => {
     setImageFiles(savedImageFiles);
   };
 
-  // const [pdfFiles, setPdfFiles] = useState([]);
-  // const [savedPdfFiles, setSavedPdfFiles] = useState([]);
-  // const [currentPdfFileIndex, setCurrentPdfFileIndex] = useState(null);
-  // const [lastUploadedPdfFileIndex, setLastUploadedPdfFileIndex] =
-  //   useState(null);
-  // const [currentChunkIndexOfPdf, setCurrentChunkIndexOfPdf] = useState(null);
-
-  // const [uniqueIdForPdf, setUinqueIdForPdf] = useState(uuid());
-  // const [pdfLoading, setPdfLoading] = useState(false);
-
-  // const handlePdfFileChange = (e) => {
-  //   e.preventDefault();
-  //   setSavedPdfFiles([...pdfFiles, ...e.target.files]);
-  // };
-
-  // const readAndUploadCurrentPdfChunk = () => {
-  //   const reader = new FileReader();
-  //   const file = pdfFiles[currentPdfFileIndex];
-  //   if (!file) {
-  //     return;
-  //   }
-  //   chunkSize = Math.round((file.size * 39) / 100);
-  //   const from = currentChunkIndexOfPdf * chunkSize;
-  //   const to = from + chunkSize;
-  //   const blob = file.slice(from, to);
-  //   reader.onload = (e) => uploadPdfChunk(e);
-  //   reader.readAsDataURL(blob);
-  // };
-  // const uploadPdfChunk = async (readerEvent) => {
-  //   const file = pdfFiles[currentPdfFileIndex];
-  //   const size = file.size;
-  //   let tempChunkSize = chunkSize;
-  //   temp += tempChunkSize;
-  //   if (temp > size) {
-  //     tempChunkSize = size - (temp - chunkSize);
-  //   }
-  //   const data = readerEvent.target.result.split(",")[1];
-  //   const detailsToPost = {
-  //     upload_id: uniqueIdForPdf,
-  //     property_numner: currentPropertyNumber,
-  //     chunk_number: currentChunkIndexOfPdf + 1,
-  //     total_chunks: Math.ceil(size / chunkSize),
-  //     chunk_size: tempChunkSize,
-  //     total_file_size: size,
-  //     file_name: file.name,
-  //     data: data,
-  //   };
-  //   console.log(detailsToPost);
-  //   const chunks = Math.ceil(file.size / chunkSize) - 1;
-  //   const isLastChunk = currentChunkIndexOfPdf === chunks;
-  //   console.warn("IS LAST CHUNK: ", isLastChunk);
-  //   try {
-  //     await axios
-  //       .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
-  //         headers: authHeader,
-  //       })
-  //       .then((res) => {
-  //         if (isLastChunk) {
-  //           if (res.data.msg !== 0) {
-  //             setPdfLoading(false);
-  //             toast.error("Error while uploading files");
-  //             reloadPage();
-  //           } else {
-  //             if (currentPdfFileIndex === savedPdfFiles.length - 1) {
-  //               setPdfLoading(false);
-  //               toast.success("Files uploaded successfully");
-  //               reloadPage();
-  //             }
-  //           }
-  //         }
-  //       });
-  //   } catch (error) {
-  //     if (isLastChunk) {
-  //       setPdfLoading(false);
-  //       toast.error("Internal server error");
-  //       reloadPage();
-  //     }
-  //   }
-  //   if (isLastChunk) {
-  //     setUinqueIdForPdf(uuid());
-  //     setLastUploadedPdfFileIndex(currentPdfFileIndex);
-  //     setCurrentChunkIndexOfPdf(null);
-  //   } else {
-  //     setCurrentChunkIndexOfPdf(currentChunkIndexOfPdf + 1);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (lastUploadedPdfFileIndex === null) {
-  //     return;
-  //   }
-  //   const isLastFile = lastUploadedPdfFileIndex === pdfFiles.length - 1;
-  //   const nextFileIndex = isLastFile ? null : currentPdfFileIndex + 1;
-  //   setCurrentPdfFileIndex(nextFileIndex);
-  //   // eslint-disable-next-line
-  // }, [lastUploadedPdfFileIndex]);
-
-  // useEffect(() => {
-  //   if (pdfFiles.length > 0) {
-  //     if (currentPdfFileIndex === null) {
-  //       setCurrentPdfFileIndex(
-  //         lastUploadedPdfFileIndex === null ? 0 : lastUploadedPdfFileIndex + 1
-  //       );
-  //     }
-  //   }
-  //   // eslint-disable-next-line
-  // }, [pdfFiles.length]);
-
-  // useEffect(() => {
-  //   if (currentPdfFileIndex !== null) {
-  //     setCurrentChunkIndexOfPdf(0);
-  //   }
-  // }, [currentPdfFileIndex]);
-
-  // useEffect(() => {
-  //   if (currentChunkIndexOfPdf !== null) {
-  //     readAndUploadCurrentPdfChunk();
-  //   }
-  //   // eslint-disable-next-line
-  // }, [currentChunkIndexOfPdf]);
-
-  // const postPdf = (e) => {
-  //   e.preventDefault();
-  //   setPdfLoading(true);
-  //   setPdfFiles(savedPdfFiles);
-  // };
-
   let defaultCategoryText = "Select one from above categories";
 
   const [documentsInfo, setDocumentsInfo] = useState({
-    category_id: null,
+    category_id: 0,
     category_text: defaultCategoryText,
     categoryTextColor: "muted",
     description: "",
   });
 
+  const onResetBtnClick = () => {
+    setDocumentsInfo({
+      category_id: 0,
+      category_text: defaultCategoryText,
+      categoryTextColor: "muted",
+      description: "",
+    });
+    setSavedImageFiles([]);
+    fileRef.current.value = "";
+    decsRef.current.value = "";
+  };
+
   const [allCategoriesFromDB, setAllCategoriesFromDB] = useState([]);
-  const [toggleInputFunctionality, setToggleInputFunctionality] = useState({
-    fileDisabled: true,
-    descDisabled: true,
-  });
-  const { fileDisabled, descDisabled } = toggleInputFunctionality;
+  const fileRef = useRef();
+  const decsRef = useRef();
 
   const { category_id, category_text, categoryTextColor, description } =
     documentsInfo;
@@ -482,13 +364,11 @@ const SinglePropertyDocumentsUpload = () => {
                       </label>
                       <input
                         onChange={handleImageFileChange}
+                        ref={fileRef}
                         type="file"
                         name="file-upload"
                         id="file-upload"
                         className="form-control"
-                        // disabled={
-                        //   category_text === defaultCategoryText ? true : false
-                        // }
                       />
                     </div>
                   </div>
@@ -502,12 +382,12 @@ const SinglePropertyDocumentsUpload = () => {
                         Description
                       </label>
                       <input
+                        ref={decsRef}
                         type="text"
                         name="description"
                         id="description"
                         className="form-control"
                         placeholder="Enter category description"
-                        // disabled={savedImageFiles.length > 0 ? false : true}
                         onChange={saveDocumentsDetails}
                       ></input>
                     </div>
@@ -539,6 +419,7 @@ const SinglePropertyDocumentsUpload = () => {
                         <button
                           className="btn btn-secondary ms-2"
                           style={{ width: "46%" }}
+                          onClick={onResetBtnClick}
                         >
                           Reset
                         </button>
