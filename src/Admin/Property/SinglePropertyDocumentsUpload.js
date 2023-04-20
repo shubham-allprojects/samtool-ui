@@ -354,7 +354,7 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="category_text"
-                        className="form-label fw-bold"
+                        className="form-label common-btn-font"
                       >
                         Category
                       </label>
@@ -367,7 +367,7 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="file-upload"
-                        className="form-label fw-bold"
+                        className="form-label common-btn-font"
                       >
                         File
                       </label>
@@ -383,7 +383,7 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="description"
-                        className="form-label fw-bold"
+                        className="form-label common-btn-font"
                       >
                         Description
                       </label>
@@ -400,7 +400,7 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="action-buttons"
-                        className="form-label fw-bold"
+                        className="form-label common-btn-font"
                       >
                         Action
                       </label>
