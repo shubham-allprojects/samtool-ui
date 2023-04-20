@@ -67,7 +67,7 @@ const SinglePropertyDocumentsUpload = () => {
     });
   };
 
-  const onOtherRadioCheck = (e) => {
+  const onOtherRadioCheck = () => {
     setDocumentsInfo({
       ...documentsInfo,
       category_id: 0,
@@ -284,7 +284,14 @@ const SinglePropertyDocumentsUpload = () => {
                       <div className="row">
                         {allCategoriesFromDB.map((category, Index) => {
                           return (
-                            <div className="col-4" key={Index}>
+                            <div
+                              className={`col-4 ${
+                                category.category_Name === "Other"
+                                  ? "d-none"
+                                  : ""
+                              }`}
+                              key={Index}
+                            >
                               <div className="form-check form-check-inline">
                                 <input
                                   onChange={onCategoryRadioCheck}
