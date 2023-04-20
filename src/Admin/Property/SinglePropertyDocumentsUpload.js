@@ -255,31 +255,6 @@ const SinglePropertyDocumentsUpload = () => {
                   </h6>
                   <hr />
                 </div>
-                {/* <div className="row border p-4">
-                  <div className="col-xl-3 col-md-5 col-12 mt-4 mt-md-0">
-                    <button
-                      disabled={
-                        savedImageFiles.length === 0 || imageLoading
-                          ? true
-                          : false
-                      }
-                      className="btn btn-primary w-100"
-                      onClick={postImages}
-                    >
-                      {imageLoading ? (
-                        <>
-                          <div
-                            className="spinner-border spinner-border-sm text-light me-2"
-                            role="status"
-                          ></div>
-                          <span>Uploading...</span>
-                        </>
-                      ) : (
-                        "Upload"
-                      )}
-                    </button>
-                  </div>
-                </div> */}
 
                 <div className="row mb-4">
                   <div className="col-12">
@@ -409,8 +384,7 @@ const SinglePropertyDocumentsUpload = () => {
                               ? true
                               : false
                           }
-                          className="btn btn-primary"
-                          style={{ width: "46%" }}
+                          className="btn btn-primary w-75"
                           onClick={postImages}
                         >
                           {imageLoading ? (
@@ -426,12 +400,11 @@ const SinglePropertyDocumentsUpload = () => {
                           )}
                         </button>
                         <button
-                          className="btn btn-secondary ms-2"
-                          style={{ width: "46%" }}
+                          className="btn btn-secondary ms-xl-2"
                           onClick={onResetBtnClick}
                           disabled={imageLoading ? true : false}
                         >
-                          Reset
+                          <i className="bi bi-x-lg"></i>
                         </button>
                       </div>
                     </div>
