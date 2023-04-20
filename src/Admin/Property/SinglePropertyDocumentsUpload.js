@@ -24,6 +24,82 @@ const SinglePropertyDocumentsUpload = () => {
     useState(null);
   const [uniqueId, setUniqueId] = useState(uuid());
   const [imageLoading, setImageLoading] = useState(false);
+  let defaultCategoryText = "Select one from above categories";
+  const [documentsInfo, setDocumentsInfo] = useState({
+    category_id: 0,
+    category_text: defaultCategoryText,
+    categoryTextColor: "muted",
+    description: "",
+  });
+
+  const [allCategoriesFromDB, setAllCategoriesFromDB] = useState([]);
+  const fileRef = useRef();
+  const decsRef = useRef();
+
+  const { category_id, category_text, categoryTextColor, description } =
+    documentsInfo;
+
+  const getCategoriesFromDB = async () => {
+    try {
+      await axios
+        .get(`/sam/v1/property/auth/document-categories`, {
+          headers: authHeader,
+        })
+        .then((res) => {
+          setAllCategoriesFromDB(res.data);
+        });
+    } catch (error) {}
+  };
+
+  const onCategoryRadioCheck = (e) => {
+    let categoryText = e.target.nextElementSibling.textContent;
+    setDocumentsInfo({
+      ...documentsInfo,
+      category_id: parseInt(e.target.value),
+      category_text: categoryText,
+      categoryTextColor: "black common-btn-font",
+    });
+  };
+
+  const onOtherRadioCheck = (e) => {
+    setDocumentsInfo({
+      ...documentsInfo,
+      category_id: 0,
+      category_text: defaultCategoryText,
+      categoryTextColor: "muted",
+    });
+  };
+
+  const onResetBtnClick = () => {
+    let allCategoryChecks = document.querySelectorAll(".category-checks");
+    setDocumentsInfo({
+      category_id: 0,
+      category_text: defaultCategoryText,
+      categoryTextColor: "muted",
+      description: "",
+    });
+    setSavedImageFiles([]);
+    fileRef.current.value = "";
+    decsRef.current.value = "";
+
+    if (allCategoryChecks) {
+      allCategoryChecks.forEach((check) => {
+        if (check.checked) {
+          check.checked = false;
+        }
+      });
+    }
+  };
+
+  const saveDocumentsDetails = (e) => {
+    const { name, value } = e.target;
+    if (name === "description") {
+      setDocumentsInfo({
+        ...documentsInfo,
+        [name]: value,
+      });
+    }
+  };
 
   const handleImageFileChange = (e) => {
     e.preventDefault();
@@ -153,84 +229,6 @@ const SinglePropertyDocumentsUpload = () => {
     setImageFiles(savedImageFiles);
   };
 
-  let defaultCategoryText = "Select one from above categories";
-
-  const [documentsInfo, setDocumentsInfo] = useState({
-    category_id: 0,
-    category_text: defaultCategoryText,
-    categoryTextColor: "muted",
-    description: "",
-  });
-
-  const onResetBtnClick = () => {
-    let allCategoryChecks = document.querySelectorAll(".category-checks");
-    setDocumentsInfo({
-      category_id: 0,
-      category_text: defaultCategoryText,
-      categoryTextColor: "muted",
-      description: "",
-    });
-    setSavedImageFiles([]);
-    fileRef.current.value = "";
-    decsRef.current.value = "";
-
-    if (allCategoryChecks) {
-      allCategoryChecks.forEach((check) => {
-        if (check.checked) {
-          check.checked = false;
-        }
-      });
-    }
-  };
-
-  const [allCategoriesFromDB, setAllCategoriesFromDB] = useState([]);
-  const fileRef = useRef();
-  const decsRef = useRef();
-
-  const { category_id, category_text, categoryTextColor, description } =
-    documentsInfo;
-
-  const onCategoryRadioCheck = (e) => {
-    let categoryText = e.target.nextElementSibling.textContent;
-    setDocumentsInfo({
-      ...documentsInfo,
-      category_id: parseInt(e.target.value),
-      category_text: categoryText,
-      categoryTextColor: "black common-btn-font",
-    });
-  };
-
-  const onOtherRadioCheck = (e) => {
-    setDocumentsInfo({
-      ...documentsInfo,
-      category_id: 0,
-      category_text: defaultCategoryText,
-      categoryTextColor: "muted",
-    });
-  };
-
-  const saveDocumentsDetails = (e) => {
-    const { name, value } = e.target;
-    if (name === "description") {
-      setDocumentsInfo({
-        ...documentsInfo,
-        [name]: value,
-      });
-    }
-  };
-
-  const getCategoriesFromDB = async () => {
-    try {
-      await axios
-        .get(`/sam/v1/property/auth/document-categories`, {
-          headers: authHeader,
-        })
-        .then((res) => {
-          setAllCategoriesFromDB(res.data);
-        });
-    } catch (error) {}
-  };
-
   useEffect(() => {
     let propertyNumber = localStorage.getItem("property_number");
     if (propertyNumber) {
@@ -258,15 +256,6 @@ const SinglePropertyDocumentsUpload = () => {
                   <hr />
                 </div>
                 {/* <div className="row border p-4">
-                  <h5 className="mb-3">Upload Property Documents</h5>
-                  <div className="col-xl-4 col-md-7 col-12">
-                    <input
-                      onChange={handleImageFileChange}
-                      type="file"
-                      multiple
-                      className="form-control"
-                    />
-                  </div>
                   <div className="col-xl-3 col-md-5 col-12 mt-4 mt-md-0">
                     <button
                       disabled={
