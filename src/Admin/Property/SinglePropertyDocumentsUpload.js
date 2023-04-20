@@ -181,7 +181,7 @@ const SinglePropertyDocumentsUpload = () => {
             } else {
               if (currentImageFileIndex === savedImageFiles.length - 1) {
                 setImageLoading(false);
-                toast.success("Files uploaded successfully");
+                toast.success("File uploaded successfully");
                 reloadPage();
               }
             }
@@ -358,6 +358,9 @@ const SinglePropertyDocumentsUpload = () => {
                         name="file-upload"
                         id="file-upload"
                         className="form-control"
+                        disabled={
+                          category_text !== defaultCategoryText ? false : true
+                        }
                       />
                       <small
                         className={`text-muted ${
