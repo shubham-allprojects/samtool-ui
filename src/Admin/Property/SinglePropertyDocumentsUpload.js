@@ -143,8 +143,8 @@ const SinglePropertyDocumentsUpload = () => {
       chunk_size: tempChunkSize,
       total_file_size: size,
       file_name: file.name,
-      category_id: 13,
-      description: "add description",
+      category_id: category_id,
+      description: description,
       data: data,
     };
     console.log(detailsToPost);
@@ -410,10 +410,8 @@ const SinglePropertyDocumentsUpload = () => {
                               : false
                           }
                           className="btn btn-primary"
-                          onClick={() => {
-                            console.log(documentsInfo);
-                          }}
                           style={{ width: "46%" }}
+                          onClick={postImages}
                         >
                           {imageLoading ? (
                             <>
