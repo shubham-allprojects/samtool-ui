@@ -415,12 +415,23 @@ const SinglePropertyDocumentsUpload = () => {
                           }}
                           style={{ width: "46%" }}
                         >
-                          Upload
+                          {imageLoading ? (
+                            <>
+                              <div
+                                className="spinner-border spinner-border-sm text-light me-2"
+                                role="status"
+                              ></div>
+                              <span>Uploading...</span>
+                            </>
+                          ) : (
+                            "Upload"
+                          )}
                         </button>
                         <button
                           className="btn btn-secondary ms-2"
                           style={{ width: "46%" }}
                           onClick={onResetBtnClick}
+                          disabled={imageLoading ? true : false}
                         >
                           Reset
                         </button>
