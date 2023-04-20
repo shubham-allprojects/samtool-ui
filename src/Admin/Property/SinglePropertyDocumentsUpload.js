@@ -299,6 +299,16 @@ const SinglePropertyDocumentsUpload = () => {
   const { category_id, category_text, categoryTextColor, description } =
     documentsInfo;
 
+  const onCategoryRadioCheck = (e) => {
+    let categoryText = e.target.nextElementSibling.textContent;
+    setDocumentsInfo({
+      ...documentsInfo,
+      category_id: e.target.value,
+      category_text: categoryText,
+      categoryTextColor: "black",
+    });
+  };
+
   const saveDocumentsDetails = (e) => {
     const { name, value } = e.target;
     if (name === "description") {
@@ -391,6 +401,7 @@ const SinglePropertyDocumentsUpload = () => {
                             <div className="col-4" key={Index}>
                               <div className="form-check form-check-inline">
                                 <input
+                                  onChange={onCategoryRadioCheck}
                                   className="form-check-input"
                                   type="radio"
                                   name="category_id"
