@@ -163,6 +163,7 @@ const SinglePropertyDocumentsUpload = () => {
   });
 
   const onResetBtnClick = () => {
+    let allCategoryChecks = document.querySelectorAll(".category-checks");
     setDocumentsInfo({
       category_id: 0,
       category_text: defaultCategoryText,
@@ -172,6 +173,14 @@ const SinglePropertyDocumentsUpload = () => {
     setSavedImageFiles([]);
     fileRef.current.value = "";
     decsRef.current.value = "";
+
+    if (allCategoryChecks) {
+      allCategoryChecks.forEach((check) => {
+        if (check.checked) {
+          check.checked = false;
+        }
+      });
+    }
   };
 
   const [allCategoriesFromDB, setAllCategoriesFromDB] = useState([]);
@@ -299,7 +308,7 @@ const SinglePropertyDocumentsUpload = () => {
                               <div className="form-check form-check-inline">
                                 <input
                                   onChange={onCategoryRadioCheck}
-                                  className="form-check-input"
+                                  className="form-check-input category-checks"
                                   type="radio"
                                   name="category_id"
                                   id="category_id"
@@ -318,7 +327,7 @@ const SinglePropertyDocumentsUpload = () => {
                         <div className="col-4">
                           <div className="form-check form-check-inline">
                             <input
-                              className="form-check-input"
+                              className="form-check-input category-checks"
                               type="radio"
                               name="category_id"
                               id="category_id"
