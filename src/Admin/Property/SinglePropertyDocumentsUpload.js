@@ -109,7 +109,17 @@ const SinglePropertyDocumentsUpload = () => {
 
   const handleImageFileChange = (e) => {
     e.preventDefault();
-    setSavedImageFiles([...imageFiles, ...e.target.files]);
+    let currentFileExtension = e.target.files[0].type.split("/")[1];
+    if (imageAllowedExtensions.length > 0) {
+      if (imageAllowedExtensions.includes(currentFileExtension)) {
+        setSavedImageFiles([...imageFiles, ...e.target.files]);
+      } else {
+        toast.error("File not allowed with this extension");
+        e.target.value = "";
+      }
+    } else {
+      setSavedImageFiles([...imageFiles, ...e.target.files]);
+    }
   };
 
   const reloadPage = () => {
