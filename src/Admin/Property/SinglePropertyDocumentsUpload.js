@@ -23,6 +23,7 @@ const SinglePropertyDocumentsUpload = () => {
   const [currentChunkIndexOfImage, setCurrentChunkIndexOfImage] =
     useState(null);
   const [uniqueId, setUniqueId] = useState(uuid());
+  const [imageLoading, setImageLoading] = useState(false);
 
   const handleImageFileChange = (e) => {
     e.preventDefault();
@@ -150,127 +151,132 @@ const SinglePropertyDocumentsUpload = () => {
     setImageFiles(savedImageFiles);
   };
 
-  const [pdfFiles, setPdfFiles] = useState([]);
-  const [savedPdfFiles, setSavedPdfFiles] = useState([]);
-  const [currentPdfFileIndex, setCurrentPdfFileIndex] = useState(null);
-  const [lastUploadedPdfFileIndex, setLastUploadedPdfFileIndex] =
-    useState(null);
-  const [currentChunkIndexOfPdf, setCurrentChunkIndexOfPdf] = useState(null);
+  // const [pdfFiles, setPdfFiles] = useState([]);
+  // const [savedPdfFiles, setSavedPdfFiles] = useState([]);
+  // const [currentPdfFileIndex, setCurrentPdfFileIndex] = useState(null);
+  // const [lastUploadedPdfFileIndex, setLastUploadedPdfFileIndex] =
+  //   useState(null);
+  // const [currentChunkIndexOfPdf, setCurrentChunkIndexOfPdf] = useState(null);
 
-  const [uniqueIdForPdf, setUinqueIdForPdf] = useState(uuid());
-  const [imageLoading, setImageLoading] = useState(false);
-  const [pdfLoading, setPdfLoading] = useState(false);
+  // const [uniqueIdForPdf, setUinqueIdForPdf] = useState(uuid());
+  // const [pdfLoading, setPdfLoading] = useState(false);
 
-  const handlePdfFileChange = (e) => {
-    e.preventDefault();
-    setSavedPdfFiles([...pdfFiles, ...e.target.files]);
-  };
+  // const handlePdfFileChange = (e) => {
+  //   e.preventDefault();
+  //   setSavedPdfFiles([...pdfFiles, ...e.target.files]);
+  // };
 
-  const readAndUploadCurrentPdfChunk = () => {
-    const reader = new FileReader();
-    const file = pdfFiles[currentPdfFileIndex];
-    if (!file) {
-      return;
-    }
-    chunkSize = Math.round((file.size * 39) / 100);
-    const from = currentChunkIndexOfPdf * chunkSize;
-    const to = from + chunkSize;
-    const blob = file.slice(from, to);
-    reader.onload = (e) => uploadPdfChunk(e);
-    reader.readAsDataURL(blob);
-  };
-  const uploadPdfChunk = async (readerEvent) => {
-    const file = pdfFiles[currentPdfFileIndex];
-    const size = file.size;
-    let tempChunkSize = chunkSize;
-    temp += tempChunkSize;
-    if (temp > size) {
-      tempChunkSize = size - (temp - chunkSize);
-    }
-    const data = readerEvent.target.result.split(",")[1];
-    const detailsToPost = {
-      upload_id: uniqueIdForPdf,
-      property_numner: currentPropertyNumber,
-      chunk_number: currentChunkIndexOfPdf + 1,
-      total_chunks: Math.ceil(size / chunkSize),
-      chunk_size: tempChunkSize,
-      total_file_size: size,
-      file_name: file.name,
-      data: data,
-    };
-    console.log(detailsToPost);
-    const chunks = Math.ceil(file.size / chunkSize) - 1;
-    const isLastChunk = currentChunkIndexOfPdf === chunks;
-    console.warn("IS LAST CHUNK: ", isLastChunk);
-    try {
-      await axios
-        .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
-          headers: authHeader,
-        })
-        .then((res) => {
-          if (isLastChunk) {
-            if (res.data.msg !== 0) {
-              setPdfLoading(false);
-              toast.error("Error while uploading files");
-              reloadPage();
-            } else {
-              if (currentPdfFileIndex === savedPdfFiles.length - 1) {
-                setPdfLoading(false);
-                toast.success("Files uploaded successfully");
-                reloadPage();
-              }
-            }
-          }
-        });
-    } catch (error) {
-      if (isLastChunk) {
-        setPdfLoading(false);
-        toast.error("Internal server error");
-        reloadPage();
-      }
-    }
-    if (isLastChunk) {
-      setUinqueIdForPdf(uuid());
-      setLastUploadedPdfFileIndex(currentPdfFileIndex);
-      setCurrentChunkIndexOfPdf(null);
-    } else {
-      setCurrentChunkIndexOfPdf(currentChunkIndexOfPdf + 1);
-    }
-  };
+  // const readAndUploadCurrentPdfChunk = () => {
+  //   const reader = new FileReader();
+  //   const file = pdfFiles[currentPdfFileIndex];
+  //   if (!file) {
+  //     return;
+  //   }
+  //   chunkSize = Math.round((file.size * 39) / 100);
+  //   const from = currentChunkIndexOfPdf * chunkSize;
+  //   const to = from + chunkSize;
+  //   const blob = file.slice(from, to);
+  //   reader.onload = (e) => uploadPdfChunk(e);
+  //   reader.readAsDataURL(blob);
+  // };
+  // const uploadPdfChunk = async (readerEvent) => {
+  //   const file = pdfFiles[currentPdfFileIndex];
+  //   const size = file.size;
+  //   let tempChunkSize = chunkSize;
+  //   temp += tempChunkSize;
+  //   if (temp > size) {
+  //     tempChunkSize = size - (temp - chunkSize);
+  //   }
+  //   const data = readerEvent.target.result.split(",")[1];
+  //   const detailsToPost = {
+  //     upload_id: uniqueIdForPdf,
+  //     property_numner: currentPropertyNumber,
+  //     chunk_number: currentChunkIndexOfPdf + 1,
+  //     total_chunks: Math.ceil(size / chunkSize),
+  //     chunk_size: tempChunkSize,
+  //     total_file_size: size,
+  //     file_name: file.name,
+  //     data: data,
+  //   };
+  //   console.log(detailsToPost);
+  //   const chunks = Math.ceil(file.size / chunkSize) - 1;
+  //   const isLastChunk = currentChunkIndexOfPdf === chunks;
+  //   console.warn("IS LAST CHUNK: ", isLastChunk);
+  //   try {
+  //     await axios
+  //       .post(`/sam/v1/property/auth/property-documents`, detailsToPost, {
+  //         headers: authHeader,
+  //       })
+  //       .then((res) => {
+  //         if (isLastChunk) {
+  //           if (res.data.msg !== 0) {
+  //             setPdfLoading(false);
+  //             toast.error("Error while uploading files");
+  //             reloadPage();
+  //           } else {
+  //             if (currentPdfFileIndex === savedPdfFiles.length - 1) {
+  //               setPdfLoading(false);
+  //               toast.success("Files uploaded successfully");
+  //               reloadPage();
+  //             }
+  //           }
+  //         }
+  //       });
+  //   } catch (error) {
+  //     if (isLastChunk) {
+  //       setPdfLoading(false);
+  //       toast.error("Internal server error");
+  //       reloadPage();
+  //     }
+  //   }
+  //   if (isLastChunk) {
+  //     setUinqueIdForPdf(uuid());
+  //     setLastUploadedPdfFileIndex(currentPdfFileIndex);
+  //     setCurrentChunkIndexOfPdf(null);
+  //   } else {
+  //     setCurrentChunkIndexOfPdf(currentChunkIndexOfPdf + 1);
+  //   }
+  // };
 
-  useEffect(() => {
-    if (lastUploadedPdfFileIndex === null) {
-      return;
-    }
-    const isLastFile = lastUploadedPdfFileIndex === pdfFiles.length - 1;
-    const nextFileIndex = isLastFile ? null : currentPdfFileIndex + 1;
-    setCurrentPdfFileIndex(nextFileIndex);
-    // eslint-disable-next-line
-  }, [lastUploadedPdfFileIndex]);
+  // useEffect(() => {
+  //   if (lastUploadedPdfFileIndex === null) {
+  //     return;
+  //   }
+  //   const isLastFile = lastUploadedPdfFileIndex === pdfFiles.length - 1;
+  //   const nextFileIndex = isLastFile ? null : currentPdfFileIndex + 1;
+  //   setCurrentPdfFileIndex(nextFileIndex);
+  //   // eslint-disable-next-line
+  // }, [lastUploadedPdfFileIndex]);
 
-  useEffect(() => {
-    if (pdfFiles.length > 0) {
-      if (currentPdfFileIndex === null) {
-        setCurrentPdfFileIndex(
-          lastUploadedPdfFileIndex === null ? 0 : lastUploadedPdfFileIndex + 1
-        );
-      }
-    }
-    // eslint-disable-next-line
-  }, [pdfFiles.length]);
+  // useEffect(() => {
+  //   if (pdfFiles.length > 0) {
+  //     if (currentPdfFileIndex === null) {
+  //       setCurrentPdfFileIndex(
+  //         lastUploadedPdfFileIndex === null ? 0 : lastUploadedPdfFileIndex + 1
+  //       );
+  //     }
+  //   }
+  //   // eslint-disable-next-line
+  // }, [pdfFiles.length]);
 
-  useEffect(() => {
-    if (currentPdfFileIndex !== null) {
-      setCurrentChunkIndexOfPdf(0);
-    }
-  }, [currentPdfFileIndex]);
+  // useEffect(() => {
+  //   if (currentPdfFileIndex !== null) {
+  //     setCurrentChunkIndexOfPdf(0);
+  //   }
+  // }, [currentPdfFileIndex]);
 
-  useEffect(() => {
-    if (currentChunkIndexOfPdf !== null) {
-      readAndUploadCurrentPdfChunk();
-    }
-    // eslint-disable-next-line
-  }, [currentChunkIndexOfPdf]);
+  // useEffect(() => {
+  //   if (currentChunkIndexOfPdf !== null) {
+  //     readAndUploadCurrentPdfChunk();
+  //   }
+  //   // eslint-disable-next-line
+  // }, [currentChunkIndexOfPdf]);
+
+  // const postPdf = (e) => {
+  //   e.preventDefault();
+  //   setPdfLoading(true);
+  //   setPdfFiles(savedPdfFiles);
+  // };
 
   useEffect(() => {
     let propertyNumber = localStorage.getItem("property_number");
@@ -278,12 +284,6 @@ const SinglePropertyDocumentsUpload = () => {
       setCurrentPropertyNumber(propertyNumber);
     }
   }, []);
-
-  const postPdf = (e) => {
-    e.preventDefault();
-    setPdfLoading(true);
-    setPdfFiles(savedPdfFiles);
-  };
 
   return (
     <Layout>
@@ -300,7 +300,7 @@ const SinglePropertyDocumentsUpload = () => {
                   <hr />
                 </div>
                 <div className="row border p-4">
-                  <h5 className="mb-3">Upload Property Images</h5>
+                  <h5 className="mb-3">Upload Property Documents</h5>
                   <div className="col-xl-4 col-md-7 col-12">
                     <input
                       onChange={handleImageFileChange}
@@ -333,7 +333,7 @@ const SinglePropertyDocumentsUpload = () => {
                     </button>
                   </div>
                 </div>
-                <div className="row border p-4 mt-4">
+                {/* <div className="row border p-4 mt-4">
                   <h5 className="mb-3">Upload Property Documents</h5>
                   <div className="col-xl-4 col-md-7 col-12">
                     <input
@@ -364,7 +364,7 @@ const SinglePropertyDocumentsUpload = () => {
                       )}
                     </button>
                   </div>
-                </div>
+                </div> */}
               </div>
             </section>
           </div>
