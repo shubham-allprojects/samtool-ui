@@ -99,5 +99,63 @@
     "category_id": 17,
 
     "category_Name": "Property images"
+  },
+
+  {
+    "upload_id": "622c22ca-b5c0-4b5a-a4b3-847ab87cb587",
+    "chunk_number": 3,
+    "total_chunks": 3,
+    "file_name": "image.jpg",
+    "chunk_size": 2844,
+    "property_number": "p123",
+    "total_file_size": 12844,
+    "category_id": 13,
+    "description": "add description",
+    "data": "+cmD/no/iTtq0X85MH/PR/EnbVov5yYP8Ano/iXi6IadYBiOH1UlTjeD07osQqYGt7OZzmMlc1rs3bwAehf//Z"
+  },
+
+  {
+    "property_id": 23,
+    "bank_branch_id": 2,
+    "property_number": "p123",
+    "type_id": 1,
+    "territory": "corporate  limit",
+    "possession_of_the_property": "Legallyattached",
+    "title_clear_property": "yes",
+    "is_stressed": "yes",
+    "is_available_for_sale": "yes",
+    "sale_availability_date": "2005-12-2623:50:30",
+    "saleable_area": "1000sqft",
+    "carpet_area": "950sqrt",
+    "ready_reckoner_price": 450000000.0,
+    "expected_price": 700000000.0,
+    "market_price": 850000000.0,
+    "distress_value": 900000000.0,
+    "completion_date": "2005-12-2623:50:30",
+    "purchase_date": "2005-12-2623:50:30",
+    "mortgage_date": "2005-12-2623:50:30",
+    "is_sold": "yes",
+    "status": "yes",
+    "address_details": {
+      "address": "Saudagar",
+
+      "locality": "Rural",
+
+      "flat_number": 303,
+
+      "building_name": "Pune",
+
+      "society_name": "Shivar chouk",
+
+      "plot_number": 1001,
+
+      "landmark": "Pune",
+
+      "city": 2,
+
+      "zip": 456652,
+
+      "state": 1
+    }
   }
 ]
