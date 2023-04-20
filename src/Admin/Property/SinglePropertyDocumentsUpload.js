@@ -39,7 +39,7 @@ const SinglePropertyDocumentsUpload = () => {
 
   const { category_id, category_text, categoryTextColor, description } =
     documentsInfo;
-
+  const [otherCategoryId, setOtherCategoryId] = useState(null);
   const getCategoriesFromDB = async () => {
     try {
       await axios
@@ -70,7 +70,7 @@ const SinglePropertyDocumentsUpload = () => {
   const onOtherRadioCheck = () => {
     setDocumentsInfo({
       ...documentsInfo,
-      category_id: 0,
+      category_id: otherCategoryId,
       category_text: defaultCategoryText,
       categoryTextColor: "muted",
     });
@@ -283,6 +283,9 @@ const SinglePropertyDocumentsUpload = () => {
                       </label>
                       <div className="row">
                         {allCategoriesFromDB.map((category, Index) => {
+                          if (category.category_Name === "Other") {
+                            setOtherCategoryId(parseInt(category.category_id));
+                          }
                           return (
                             <div
                               className={`col-4 ${
