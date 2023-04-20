@@ -291,7 +291,7 @@ const SinglePropertyDocumentsUpload = () => {
                 </div>
 
                 <div className="row mb-4">
-                  <div className="col-12">
+                  <div className="col-12 px-0">
                     <div className="container-fluid">
                       <label
                         className="form-label common-btn-font "
