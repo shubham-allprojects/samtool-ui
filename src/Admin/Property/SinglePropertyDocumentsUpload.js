@@ -359,6 +359,7 @@ const SinglePropertyDocumentsUpload = () => {
                                     className="form-control"
                                     placeholder="Enter category"
                                     ref={otherCategoryInputRef}
+                                    required
                                   />
                                 </div>
                               </div>
