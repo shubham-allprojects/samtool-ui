@@ -398,8 +398,16 @@ const SinglePropertyDocumentsUpload = () => {
                         Action
                       </label>
                       <div>
-                        <button className="btn btn-primary">Upload</button>
-                        <button className="btn btn-secondary ms-2">
+                        <button
+                          className="btn btn-primary"
+                          style={{ width: "46%" }}
+                        >
+                          Upload
+                        </button>
+                        <button
+                          className="btn btn-secondary ms-2"
+                          style={{ width: "46%" }}
+                        >
                           Reset
                         </button>
                       </div>
