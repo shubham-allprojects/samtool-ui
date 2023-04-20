@@ -283,10 +283,12 @@ const SinglePropertyDocumentsUpload = () => {
   const [documentsInfo, serDocumentsInfo] = useState({
     category_id: null,
     category_text: "Select one from above categories",
+    categoryTextColor: "muted",
     description: "",
   });
 
-  const { category_id, category_text, description } = documentsInfo;
+  const { category_id, category_text, categoryTextColor, description } =
+    documentsInfo;
 
   useEffect(() => {
     let propertyNumber = localStorage.getItem("property_number");
@@ -356,7 +358,9 @@ const SinglePropertyDocumentsUpload = () => {
                       >
                         Category
                       </label>
-                      <div className="text-muted">{category_text}</div>
+                      <div className={`text-${categoryTextColor}`}>
+                        {category_text}
+                      </div>
                     </div>
                   </div>
                   <div className="col-xl-3">
@@ -394,10 +398,13 @@ const SinglePropertyDocumentsUpload = () => {
                   </div>
                   <div className="col-xl-3">
                     <div className="form-group">
-                      <label htmlFor="" className="form-label fw-bold">
+                      <label
+                        htmlFor="action-buttons"
+                        className="form-label fw-bold"
+                      >
                         Action
                       </label>
-                      <div>
+                      <div id="action-buttons">
                         <button
                           className="btn btn-primary"
                           style={{ width: "46%" }}
