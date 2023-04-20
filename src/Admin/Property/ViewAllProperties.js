@@ -251,9 +251,9 @@ const ViewAllProperties = () => {
                                     <span>Market Price: </span>
                                     <span className="common-btn-font">
                                       <i className="bi bi-currency-rupee"></i>
-                                      {`${Math.round(
+                                      {`${(
                                         parseInt(market_value) / 10000000
-                                      )} Crores`}
+                                      ).toFixed(2)} Crores`}
                                     </span>
                                   </div>
 
@@ -261,9 +261,9 @@ const ViewAllProperties = () => {
                                     <span>Expected Price: </span>
                                     <span className="common-btn-font">
                                       <i className="bi bi-currency-rupee"></i>
-                                      {`${Math.round(
+                                      {`${(
                                         parseInt(expected_price) / 10000000
-                                      )} Crores`}
+                                      ).toFixed(2)} Crores`}
                                     </span>
                                   </div>
                                   <div className="mt-3 d-flex">

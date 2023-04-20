@@ -249,21 +249,21 @@ const ViewProperty = ({ selectedProperty }) => {
                   <small className="text-muted">Market Price</small>
                   <h5 className="mt-1">
                     <i className="bi bi-currency-rupee"></i>
-                    {Math.round(market_price / 10000000)} Crore
+                    {(market_price / 10000000).toFixed(2)} Crore
                   </h5>
                 </div>
                 <div className="col-md-4">
                   <small className="text-muted">Ready Reckoner Price</small>
                   <h5 className="mt-1">
                     <i className="bi bi-currency-rupee"></i>
-                    {Math.round(ready_reckoner_price / 10000000)} Crore
+                    {(ready_reckoner_price / 10000000).toFixed(2)} Crore
                   </h5>
                 </div>
                 <div className="col-md-4">
                   <small className="text-muted">Expected Price</small>
                   <h5 className="mt-1">
                     <i className="bi bi-currency-rupee"></i>
-                    {Math.round(expected_price / 10000000)} Crore
+                    {(expected_price / 10000000).toFixed(2)} Crore
                   </h5>
                 </div>
                 <div className="col-12">
