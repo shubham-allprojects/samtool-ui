@@ -280,12 +280,21 @@ const SinglePropertyDocumentsUpload = () => {
   //   setPdfFiles(savedPdfFiles);
   // };
 
+  let defaultCategoryText = "Select one from above categories";
+
   const [documentsInfo, setDocumentsInfo] = useState({
     category_id: null,
-    category_text: "Select one from above categories",
+    category_text: defaultCategoryText,
     categoryTextColor: "muted",
     description: "",
   });
+
+  const [allCategoriesFromDB, setAllCategoriesFromDB] = useState([]);
+  const [toggleInputFunctionality, setToggleInputFunctionality] = useState({
+    fileDisabled: true,
+    descDisabled: true,
+  });
+  const { fileDisabled, descDisabled } = toggleInputFunctionality;
 
   const { category_id, category_text, categoryTextColor, description } =
     documentsInfo;
@@ -299,7 +308,7 @@ const SinglePropertyDocumentsUpload = () => {
       });
     }
   };
-  const [allCategoriesFromDB, setAllCategoriesFromDB] = useState([]);
+
   const getCategoriesFromDB = async () => {
     try {
       await axios
@@ -309,9 +318,7 @@ const SinglePropertyDocumentsUpload = () => {
         .then((res) => {
           setAllCategoriesFromDB(res.data);
         });
-    } catch (error) {
-      toast.error("Failed to load property categories");
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -381,28 +388,23 @@ const SinglePropertyDocumentsUpload = () => {
                       <div className="row">
                         {allCategoriesFromDB.map((category, Index) => {
                           return (
-                            <>
-                              <div className="col-4">
-                                <div
-                                  className="form-check form-check-inline"
-                                  key={Index}
+                            <div className="col-4" key={Index}>
+                              <div className="form-check form-check-inline">
+                                <input
+                                  className="form-check-input"
+                                  type="radio"
+                                  name="category_id"
+                                  id="category_id"
+                                  value={category.category_id}
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor="category_id"
                                 >
-                                  <input
-                                    className="form-check-input"
-                                    type="radio"
-                                    name="category_id"
-                                    id="category_id"
-                                    value={category.category_id}
-                                  />
-                                  <label
-                                    className="form-check-label"
-                                    htmlFor="category_id"
-                                  >
-                                    {category.category_Name}
-                                  </label>
-                                </div>
+                                  {category.category_Name}
+                                </label>
                               </div>
-                            </>
+                            </div>
                           );
                         })}
                         <div className="col-4">
@@ -450,10 +452,14 @@ const SinglePropertyDocumentsUpload = () => {
                         File
                       </label>
                       <input
+                        onChange={handleImageFileChange}
                         type="file"
                         name="file-upload"
                         id="file-upload"
                         className="form-control"
+                        disabled={
+                          category_text === defaultCategoryText ? true : false
+                        }
                       />
                     </div>
                   </div>
@@ -471,6 +477,7 @@ const SinglePropertyDocumentsUpload = () => {
                         id="description"
                         className="form-control"
                         placeholder="Enter category description"
+                        disabled={savedImageFiles.length > 0 ? false : true}
                         onChange={saveDocumentsDetails}
                       ></input>
                     </div>
@@ -485,6 +492,14 @@ const SinglePropertyDocumentsUpload = () => {
                       </label>
                       <div id="action-buttons">
                         <button
+                          disabled={
+                            savedImageFiles.length === 0 ||
+                            imageLoading ||
+                            !description ||
+                            category_text === defaultCategoryText
+                              ? true
+                              : false
+                          }
                           className="btn btn-primary"
                           style={{ width: "46%" }}
                         >
