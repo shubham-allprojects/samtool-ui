@@ -19,8 +19,8 @@ const AddProperty = () => {
     titleClearYes: false,
     titleClearNo: false,
   });
-
   const { titleClearYes, titleClearNo } = possessionCheckValue;
+
   const goTo = useNavigate();
   const [formData, setFormData] = useState({
     is_sold: "no",

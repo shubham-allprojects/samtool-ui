@@ -16,8 +16,14 @@ const EditProperty = () => {
     authHeader = { Authorization: data.logintoken };
   }
 
-  // const goTo = useNavigate();
+  const [possessionCheckValue, setPossessionCheckValue] = useState({
+    titleClearYes: false,
+    titleClearNo: false,
+  });
 
+  const { titleClearYes, titleClearNo } = possessionCheckValue;
+
+  // const goTo = useNavigate();
   const [formData, setFormData] = useState({
     address_details: {},
   });
@@ -176,6 +182,24 @@ const EditProperty = () => {
     } else if (name === "zip") {
       if (value) {
         commonFnToSaveAddressDetails(name, parseInt(value));
+      }
+    } else if (name === "title_clear_property") {
+      if (value === "yes") {
+        setPossessionCheckValue({ titleClearYes: true, titleClearNo: false });
+        // setFormData({
+        //   ...formData,
+        //   [name]: value,
+        //   possession_of_property: "Owner / Customer consent",
+        // });
+      } else if (value === "No") {
+        setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
+        // setFormData({
+        //   ...formData,
+        //   [name]: value,
+        //   possession_of_property: "Legally attached",
+        // });
+      } else {
+        setPossessionCheckValue({ titleClearYes: false, titleClearNo: false });
       }
     }
   };
@@ -621,30 +645,6 @@ const EditProperty = () => {
                             <div className="form-group">
                               <label
                                 className="form-label common-btn-font"
-                                htmlFor="possession_of_the_property"
-                              >
-                                Possession of the property
-                              </label>
-                              <select
-                                id="possession_of_the_property"
-                                name="possession_of_the_property"
-                                className="form-select"
-                                onChange={onInputChange}
-                              >
-                                <option value=""></option>
-                                <option value="Legally attached">
-                                  Legally attached
-                                </option>
-                                <option value="Owner/ Customer consent">
-                                  Owner/ Customer consent
-                                </option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="col-xl-4 col-md-6 mt-3">
-                            <div className="form-group">
-                              <label
-                                className="form-label common-btn-font"
                                 htmlFor="title_clear_property"
                               >
                                 Title clear Property
@@ -659,6 +659,52 @@ const EditProperty = () => {
                                 <option value="yes">Yes</option>
                                 <option value="No">No</option>
                               </select>
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mt-3">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="possession"
+                              >
+                                Possession of the property
+                              </label>
+                              <div id="possession">
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="inlineRadioOptions"
+                                    id="possessionValue1"
+                                    value="possessionValue"
+                                    disabled
+                                    checked={titleClearNo}
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="possessionValue1"
+                                  >
+                                    Legally attached
+                                  </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="inlineRadioOptions"
+                                    id="possessionValue2"
+                                    value="possessionValue"
+                                    disabled
+                                    checked={titleClearYes}
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="possessionValue2"
+                                  >
+                                    Owner / Customer consent
+                                  </label>
+                                </div>
+                              </div>
                             </div>
                           </div>
                           <div className="col-xl-4 col-md-6 mt-3">
