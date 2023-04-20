@@ -318,6 +318,7 @@ const SinglePropertyDocumentsUpload = () => {
     let propertyNumber = localStorage.getItem("property_number");
     if (propertyNumber) {
       setCurrentPropertyNumber(propertyNumber);
+      getCategoriesFromDB();
     }
   }, []);
 
@@ -373,7 +374,36 @@ const SinglePropertyDocumentsUpload = () => {
                   </div>
                 </div> */}
 
-                <div className="row mt-4">
+                <div className="row mb-4">
+                  <div className="col-12">
+                    <h5>Select document category</h5>
+                    <div className="form-group">
+                      {allCategoriesFromDB.map((category, Index) => {
+                        return (
+                          <div
+                            className="form-check form-check-inline"
+                            key={Index}
+                          >
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="category_id"
+                              id="inlineRadio1"
+                              value={category.category_id}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="inlineRadio1"
+                            >
+                              {category.category_Name}
+                            </label>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
                   <div className="col-xl-3">
                     <div className="form-group">
                       <label
