@@ -348,7 +348,7 @@ const SinglePropertyDocumentsUpload = () => {
                 </div>
 
                 <div className="row mt-4">
-                  <div className="col-xl-4">
+                  <div className="col-xl-3">
                     <div className="form-group">
                       <label
                         htmlFor="category_text"
@@ -357,6 +357,23 @@ const SinglePropertyDocumentsUpload = () => {
                         Category
                       </label>
                       <div className="text-muted">{category_text}</div>
+                    </div>
+                  </div>
+                  <div className="col-xl-3">
+                    <div className="form-group">
+                      <label
+                        htmlFor="description"
+                        className="form-label fw-bold"
+                      >
+                        Description
+                      </label>
+                      <textarea
+                        name="description"
+                        id="description"
+                        className="form-control"
+                        rows="4"
+                        placeholder="Enter category description"
+                      ></textarea>
                     </div>
                   </div>
                 </div>
