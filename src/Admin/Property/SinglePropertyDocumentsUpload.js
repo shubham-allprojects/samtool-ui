@@ -61,6 +61,8 @@ const SinglePropertyDocumentsUpload = () => {
       category_text: otherCategoryInputRef.current.value,
       categoryTextColor: "black common-btn-font",
     });
+    otherCategoryInputRef.current.value = "";
+    otherCategoryWrapperRef.current.classList.add("d-none");
   };
 
   const onCategoryRadioCheck = (e) => {
