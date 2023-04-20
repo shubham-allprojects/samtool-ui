@@ -37,6 +37,7 @@ const SinglePropertyDocumentsUpload = () => {
   const fileRef = useRef();
   const decsRef = useRef();
   const otherCategoryInputRef = useRef();
+  const otherCategoryWrapperRef = useRef();
 
   const { category_id, category_text, categoryTextColor, description } =
     documentsInfo;
@@ -54,7 +55,6 @@ const SinglePropertyDocumentsUpload = () => {
   };
 
   const onSaveOtherCategoryClick = () => {
-    alert(otherCategoryInputRef.current.value.trim());
     setDocumentsInfo({
       ...documentsInfo,
       category_id: otherCategoryId,
@@ -76,15 +76,20 @@ const SinglePropertyDocumentsUpload = () => {
       category_text: categoryText,
       categoryTextColor: "black common-btn-font",
     });
+    otherCategoryInputRef.current.value = "";
+    otherCategoryWrapperRef.current.classList.add("d-none");
   };
 
-  const onOtherRadioCheck = () => {
-    setDocumentsInfo({
-      ...documentsInfo,
-      category_id: otherCategoryId,
-      category_text: defaultCategoryText,
-      categoryTextColor: "muted",
-    });
+  const onOtherRadioCheck = (e) => {
+    if (e.target.checked === true) {
+      setDocumentsInfo({
+        ...documentsInfo,
+        category_id: otherCategoryId,
+        category_text: defaultCategoryText,
+        categoryTextColor: "muted",
+      });
+      otherCategoryWrapperRef.current.classList.remove("d-none");
+    }
   };
 
   const onResetBtnClick = () => {
@@ -342,7 +347,10 @@ const SinglePropertyDocumentsUpload = () => {
                               Other
                             </label>
                           </div>
-                          <div className="container-fluid mt-2">
+                          <div
+                            className="container-fluid mt-2 d-none"
+                            ref={otherCategoryWrapperRef}
+                          >
                             <div className="row">
                               <div className="col-7">
                                 <div className="form-group">
