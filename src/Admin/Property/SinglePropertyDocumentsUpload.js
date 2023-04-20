@@ -280,6 +280,14 @@ const SinglePropertyDocumentsUpload = () => {
   //   setPdfFiles(savedPdfFiles);
   // };
 
+  const [documentsInfo, serDocumentsInfo] = useState({
+    category_id: null,
+    category_text: "Select one from above categories",
+    description: "",
+  });
+
+  const { category_id, category_text, description } = documentsInfo;
+
   useEffect(() => {
     let propertyNumber = localStorage.getItem("property_number");
     if (propertyNumber) {
@@ -336,6 +344,20 @@ const SinglePropertyDocumentsUpload = () => {
                         "Upload"
                       )}
                     </button>
+                  </div>
+                </div>
+
+                <div className="row mt-4">
+                  <div className="col-xl-4">
+                    <div className="form-group">
+                      <label
+                        htmlFor="category_text"
+                        className="form-label fw-bold"
+                      >
+                        Category
+                      </label>
+                      <div className="text-muted">{category_text}</div>
+                    </div>
                   </div>
                 </div>
                 {/* <div className="row border p-4 mt-4">

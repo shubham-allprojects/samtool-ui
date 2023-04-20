@@ -447,7 +447,7 @@ const AddProperty = () => {
                                   />
                                   <label
                                     className="form-check-label"
-                                    for="possessionValue1"
+                                    htmlFor="possessionValue1"
                                   >
                                     Legally attached
                                   </label>
@@ -464,7 +464,7 @@ const AddProperty = () => {
                                   />
                                   <label
                                     className="form-check-label"
-                                    for="possessionValue2"
+                                    htmlFor="possessionValue2"
                                   >
                                     Owner / Customer consent
                                   </label>
