@@ -17,7 +17,7 @@ const ViewProperty = ({ selectedProperty }) => {
     is_sold,
     is_stressed,
     property_number,
-    status,
+    // status,
     society_name,
     plot_no,
     flat_no,
