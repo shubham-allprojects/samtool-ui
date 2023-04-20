@@ -61,12 +61,14 @@ const SinglePropertyDocumentsUpload = () => {
     const data = readerEvent.target.result.split(",")[1];
     const detailsToPost = {
       upload_id: uniqueId,
-      property_numner: currentPropertyNumber,
+      property_number: currentPropertyNumber,
       chunk_number: currentChunkIndexOfImage + 1,
       total_chunks: Math.ceil(size / chunkSize),
       chunk_size: tempChunkSize,
       total_file_size: size,
       file_name: file.name,
+      category_id: 13,
+      description: "add description",
       data: data,
     };
     console.log(detailsToPost);
@@ -296,7 +298,7 @@ const SinglePropertyDocumentsUpload = () => {
                 <div className="row">
                   <h4 className="fw-bold text-primary p-0">
                     Property Number
-                    <span class="badge bg-primary ms-2">
+                    <span className="badge bg-primary ms-2">
                       {currentPropertyNumber}
                     </span>
                   </h4>

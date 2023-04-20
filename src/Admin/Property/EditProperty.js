@@ -670,9 +670,9 @@ const EditProperty = () => {
                                 Possession of the property
                               </label>
                               <div id="possession">
-                                <div class="form-check form-check-inline">
+                                <div className="form-check form-check-inline">
                                   <input
-                                    class="form-check-input"
+                                    className="form-check-input"
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="possessionValue1"
@@ -681,15 +681,15 @@ const EditProperty = () => {
                                     checked={titleClearNo}
                                   />
                                   <label
-                                    class="form-check-label"
+                                    className="form-check-label"
                                     for="possessionValue1"
                                   >
                                     Legally attached
                                   </label>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                <div className="form-check form-check-inline">
                                   <input
-                                    class="form-check-input"
+                                    className="form-check-input"
                                     type="radio"
                                     name="inlineRadioOptions"
                                     id="possessionValue2"
@@ -698,7 +698,7 @@ const EditProperty = () => {
                                     checked={titleClearYes}
                                   />
                                   <label
-                                    class="form-check-label"
+                                    className="form-check-label"
                                     for="possessionValue2"
                                   >
                                     Owner / Customer consent
