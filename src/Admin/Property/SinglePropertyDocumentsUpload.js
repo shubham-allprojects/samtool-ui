@@ -194,7 +194,7 @@ const SinglePropertyDocumentsUpload = () => {
     let categoryText = e.target.nextElementSibling.textContent;
     setDocumentsInfo({
       ...documentsInfo,
-      category_id: e.target.value,
+      category_id: parseInt(e.target.value),
       category_text: categoryText,
       categoryTextColor: "black common-btn-font",
     });
@@ -421,6 +421,9 @@ const SinglePropertyDocumentsUpload = () => {
                               : false
                           }
                           className="btn btn-primary"
+                          onClick={() => {
+                            console.log(documentsInfo);
+                          }}
                           style={{ width: "46%" }}
                         >
                           Upload
@@ -436,38 +439,6 @@ const SinglePropertyDocumentsUpload = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="row border p-4 mt-4">
-                  <h5 className="mb-3">Upload Property Documents</h5>
-                  <div className="col-xl-4 col-md-7 col-12">
-                    <input
-                      onChange={handlePdfFileChange}
-                      type="file"
-                      className="form-control"
-                      multiple
-                    />
-                  </div>
-                  <div className="col-xl-3 col-md-5 col-12 mt-4 mt-md-0">
-                    <button
-                      disabled={
-                        savedPdfFiles.length === 0 || pdfLoading ? true : false
-                      }
-                      className="btn btn-primary w-100"
-                      onClick={postPdf}
-                    >
-                      {pdfLoading ? (
-                        <>
-                          <div
-                            className="spinner-border spinner-border-sm text-light me-2"
-                            role="status"
-                          ></div>
-                          <span>Uploading...</span>
-                        </>
-                      ) : (
-                        "Upload"
-                      )}
-                    </button>
-                  </div>
-                </div> */}
               </div>
             </section>
           </div>
