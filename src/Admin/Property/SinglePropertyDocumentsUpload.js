@@ -305,7 +305,7 @@ const SinglePropertyDocumentsUpload = () => {
       ...documentsInfo,
       category_id: e.target.value,
       category_text: categoryText,
-      categoryTextColor: "black",
+      categoryTextColor: "black common-btn-font",
     });
   };
 
@@ -395,7 +395,10 @@ const SinglePropertyDocumentsUpload = () => {
                 <div className="row mb-4">
                   <div className="col-12">
                     <div className="container-fluid">
-                      <label className="form-label common-btn-font text-primary">
+                      <label
+                        className="form-label common-btn-font "
+                        style={{ color: "var(--primary-color-hover)" }}
+                      >
                         Select document category
                       </label>
                       <div className="row">
@@ -448,7 +451,8 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="category_text"
-                        className="form-label common-btn-font text-primary"
+                        className="form-label common-btn-font "
+                        style={{ color: "var(--primary-color-hover)" }}
                       >
                         Category
                       </label>
@@ -461,7 +465,8 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="file-upload"
-                        className="form-label common-btn-font text-primary"
+                        className="form-label common-btn-font "
+                        style={{ color: "var(--primary-color-hover)" }}
                       >
                         File
                       </label>
@@ -481,7 +486,8 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="description"
-                        className="form-label common-btn-font text-primary"
+                        className="form-label common-btn-font "
+                        style={{ color: "var(--primary-color-hover)" }}
                       >
                         Description
                       </label>
@@ -500,7 +506,8 @@ const SinglePropertyDocumentsUpload = () => {
                     <div className="form-group">
                       <label
                         htmlFor="action-buttons"
-                        className="form-label common-btn-font text-primary"
+                        className="form-label common-btn-font "
+                        style={{ color: "var(--primary-color-hover)" }}
                       >
                         Action
                       </label>
@@ -515,10 +522,7 @@ const SinglePropertyDocumentsUpload = () => {
                               : false
                           }
                           className="btn btn-primary"
-                          style={{
-                            width: "46%",
-                            background: "var(--primary-color-hover)",
-                          }}
+                          style={{ width: "46%" }}
                         >
                           Upload
                         </button>
