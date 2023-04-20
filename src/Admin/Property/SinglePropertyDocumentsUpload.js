@@ -309,6 +309,15 @@ const SinglePropertyDocumentsUpload = () => {
     });
   };
 
+  const onOtherRadioCheck = (e) => {
+    setDocumentsInfo({
+      ...documentsInfo,
+      category_id: 0,
+      category_text: defaultCategoryText,
+      categoryTextColor: "muted",
+    });
+  };
+
   const saveDocumentsDetails = (e) => {
     const { name, value } = e.target;
     if (name === "description") {
@@ -432,6 +441,7 @@ const SinglePropertyDocumentsUpload = () => {
                               name="category_id"
                               id="category_id"
                               value={0}
+                              onChange={onOtherRadioCheck}
                             />
                             <label
                               className="form-check-label"
@@ -476,9 +486,9 @@ const SinglePropertyDocumentsUpload = () => {
                         name="file-upload"
                         id="file-upload"
                         className="form-control"
-                        disabled={
-                          category_text === defaultCategoryText ? true : false
-                        }
+                        // disabled={
+                        //   category_text === defaultCategoryText ? true : false
+                        // }
                       />
                     </div>
                   </div>
@@ -497,7 +507,7 @@ const SinglePropertyDocumentsUpload = () => {
                         id="description"
                         className="form-control"
                         placeholder="Enter category description"
-                        disabled={savedImageFiles.length > 0 ? false : true}
+                        // disabled={savedImageFiles.length > 0 ? false : true}
                         onChange={saveDocumentsDetails}
                       ></input>
                     </div>
