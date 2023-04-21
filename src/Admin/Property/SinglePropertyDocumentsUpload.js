@@ -457,7 +457,7 @@ const SinglePropertyDocumentsUpload = () => {
                         className="form-label common-btn-font "
                         style={{ color: "var(--primary-color-hover)" }}
                       >
-                        Description
+                        Document Description
                       </label>
                       <input
                         ref={decsRef}
@@ -465,7 +465,7 @@ const SinglePropertyDocumentsUpload = () => {
                         name="description"
                         id="description"
                         className="form-control"
-                        placeholder="Enter category description"
+                        placeholder="Description (min. 2 words)"
                         onChange={saveDocumentsDetails}
                       ></input>
                     </div>
