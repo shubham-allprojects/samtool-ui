@@ -186,14 +186,14 @@ const AddProperty = () => {
         setFormData({
           ...formData,
           [name]: value,
-          possession_of_property: "Owner / Customer consent",
+          possession_of_the_property: "Owner / Customer consent",
         });
       } else if (value === "No") {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
         setFormData({
           ...formData,
           [name]: value,
-          possession_of_property: "Legally attached",
+          possession_of_the_property: "Legally attached",
         });
       } else {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: false });

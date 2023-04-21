@@ -40,8 +40,6 @@ const EditProperty = () => {
     property_id,
     is_sold,
     territory,
-    possession_of_the_property,
-    title_clear_property,
     distress_value,
     // is_available_for_sale,
   } = formData;
@@ -197,14 +195,14 @@ const EditProperty = () => {
         setFormData({
           ...formData,
           [name]: value,
-          possession_of_property: "Owner / Customer consent",
+          possession_of_the_property: "Owner / Customer consent",
         });
       } else if (value === "No") {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
         setFormData({
           ...formData,
           [name]: value,
-          possession_of_property: "Legally attached",
+          possession_of_the_property: "Legally attached",
         });
       } else {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: false });
