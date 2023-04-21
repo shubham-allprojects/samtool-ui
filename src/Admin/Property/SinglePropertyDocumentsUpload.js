@@ -54,7 +54,8 @@ const SinglePropertyDocumentsUpload = () => {
     } catch (error) {}
   };
 
-  const onSaveOtherCategoryClick = () => {
+  const onSaveOtherCategoryClick = (e) => {
+    e.preventDefault();
     let otherCategoryValue = otherCategoryInputRef.current.value.trim();
     if (otherCategoryValue !== "") {
       setDocumentsInfo({
@@ -63,7 +64,7 @@ const SinglePropertyDocumentsUpload = () => {
         category_text: otherCategoryValue,
         categoryTextColor: "black common-btn-font",
       });
-      otherCategoryInputRef.current.value = "";
+      e.target.reset();
       otherCategoryWrapperRef.current.classList.add("d-none");
     }
   };
@@ -356,7 +357,10 @@ const SinglePropertyDocumentsUpload = () => {
                             className="container-fluid mt-2 d-none"
                             ref={otherCategoryWrapperRef}
                           >
-                            <div className="row">
+                            <form
+                              onSubmit={onSaveOtherCategoryClick}
+                              className="row"
+                            >
                               <div className="col-7">
                                 <div className="form-group">
                                   <input
@@ -370,13 +374,13 @@ const SinglePropertyDocumentsUpload = () => {
                               </div>
                               <div className="col-5">
                                 <button
+                                  type="submit"
                                   className="btn btn-primary"
-                                  onClick={onSaveOtherCategoryClick}
                                 >
                                   Save
                                 </button>
                               </div>
-                            </div>
+                            </form>
                           </div>
                         </div>
                       </div>
