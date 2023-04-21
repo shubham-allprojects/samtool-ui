@@ -1,107 +1,5 @@
 [
   {
-    "category_id": 1,
-
-    "category_Name": "The property purchase/agreement "
-  },
-
-  {
-    "category_id": 2,
-
-    "category_Name": "The title deed  "
-  },
-
-  {
-    "category_id": 3,
-
-    "category_Name": "The contract of sale "
-  },
-
-  {
-    "category_id": 4,
-
-    "category_Name": "The deed of transfer / sale certificate"
-  },
-
-  {
-    "category_id": 5,
-
-    "category_Name": "General Power of Attorney"
-  },
-
-  {
-    "category_id": 6,
-
-    "category_Name": "NOC, No objection certificate"
-  },
-
-  {
-    "category_id": 7,
-
-    "category_Name": "Allotment Letter"
-  },
-
-  {
-    "category_id": 8,
-
-    "category_Name": "Possession Letter"
-  },
-
-  {
-    "category_id": 9,
-
-    "category_Name": "Completion Certificate "
-  },
-
-  {
-    "category_id": 10,
-
-    "category_Name": "Occupancy Certificate "
-  },
-
-  {
-    "category_id": 11,
-
-    "category_Name": "Copy of Building Plan"
-  },
-
-  {
-    "category_id": 12,
-
-    "category_Name": "RERA document"
-  },
-
-  {
-    "category_id": 13,
-
-    "category_Name": "Property Tax Receipts"
-  },
-
-  {
-    "category_id": 14,
-
-    "category_Name": "Society details"
-  },
-
-  {
-    "category_id": 15,
-
-    "category_Name": "Condominium details"
-  },
-
-  {
-    "category_id": 16,
-
-    "category_Name": "Bungalow details"
-  },
-
-  {
-    "category_id": 17,
-
-    "category_Name": "Property images"
-  },
-
-  {
     "upload_id": "622c22ca-b5c0-4b5a-a4b3-847ab87cb587",
     "chunk_number": 3,
     "total_chunks": 3,
@@ -115,13 +13,15 @@
   },
 
   {
+    "territory": "corporate limit",
+    "possession_of_the_property": "Legally attached",
+    "title_clear_property": "yes",
+    "distress_value": 900000000.0,
+
     "property_id": 23,
     "bank_branch_id": 2,
     "property_number": "p123",
     "type_id": 1,
-    "territory": "corporate  limit",
-    "possession_of_the_property": "Legallyattached",
-    "title_clear_property": "yes",
     "is_stressed": "yes",
     "is_available_for_sale": "yes",
     "sale_availability_date": "2005-12-2623:50:30",
@@ -130,7 +30,6 @@
     "ready_reckoner_price": 450000000.0,
     "expected_price": 700000000.0,
     "market_price": 850000000.0,
-    "distress_value": 900000000.0,
     "completion_date": "2005-12-2623:50:30",
     "purchase_date": "2005-12-2623:50:30",
     "mortgage_date": "2005-12-2623:50:30",

@@ -26,7 +26,7 @@ const AddProperty = () => {
     is_sold: "no",
     is_available_for_sale: "yes",
     sale_availability_date: "2005-12-26 23:50:30",
-    status: "1",
+    status: "yes",
     is_stressed: "yes",
     property_id: 0,
     address_details: {
@@ -113,6 +113,8 @@ const AddProperty = () => {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "expected_price") {
       commonFnToSaveFormData(name, parseInt(value));
+    } else if (name === "distress_value") {
+      commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "completion_date") {
       commonFnToSaveFormData(name, value);
     } else if (name === "purchase_date") {
@@ -179,18 +181,18 @@ const AddProperty = () => {
     } else if (name === "title_clear_property") {
       if (value === "yes") {
         setPossessionCheckValue({ titleClearYes: true, titleClearNo: false });
-        // setFormData({
-        //   ...formData,
-        //   [name]: value,
-        //   possession_of_property: "Owner / Customer consent",
-        // });
+        setFormData({
+          ...formData,
+          [name]: value,
+          possession_of_property: "Owner / Customer consent",
+        });
       } else if (value === "No") {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
-        // setFormData({
-        //   ...formData,
-        //   [name]: value,
-        //   possession_of_property: "Legally attached",
-        // });
+        setFormData({
+          ...formData,
+          [name]: value,
+          possession_of_property: "Legally attached",
+        });
       } else {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: false });
       }
@@ -509,6 +511,24 @@ const AddProperty = () => {
                                   No
                                 </label>
                               </div>
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mt-3">
+                            <div className="form-group">
+                              <label
+                                htmlFor="territory"
+                                className="form-label common-btn-font"
+                              >
+                                Territory
+                              </label>
+                              <input
+                                type="text"
+                                id="territory"
+                                name="territory"
+                                className="form-control"
+                                onChange={onInputChange}
+                                required
+                              />
                             </div>
                           </div>
                           {/* <div className="col-xl-4 col-md-6 mt-3">
