@@ -494,8 +494,6 @@ const EditProperty = () => {
 
   useEffect(() => {
     getCurrentPropertyDataToUpdate();
-    // notSoldCheckRef.current.setAttribute("checked", "true");
-    // getDataFromApi();
     // eslint-disable-next-line
   }, []);
 
