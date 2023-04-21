@@ -87,6 +87,7 @@ const SinglePropertyDocumentsUpload = () => {
       category_text: categoryText,
       categoryTextColor: "black common-btn-font",
     });
+    setOtherCategoryBlankCharErr(false);
     otherCategoryInputRef.current.value = "";
     otherCategoryWrapperRef.current.classList.add("d-none");
   };
