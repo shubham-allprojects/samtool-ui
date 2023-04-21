@@ -484,7 +484,8 @@ const SinglePropertyDocumentsUpload = () => {
                           disabled={
                             savedImageFiles.length === 0 ||
                             imageLoading ||
-                            !description ||
+                            description.trim() === "" ||
+                            description.trim().split(" ").length < 2 ||
                             category_text === defaultCategoryText
                               ? true
                               : false
