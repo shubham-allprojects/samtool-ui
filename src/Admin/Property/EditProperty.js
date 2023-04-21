@@ -483,7 +483,6 @@ const EditProperty = () => {
     let defaultTitleClear = document.getElementById(
       `title_clear_property-${title_clear_property}`
     );
-    console.log(defaultTitleClear);
     if (defaultTitleClear) {
       defaultTitleClear.selected = true;
     }
