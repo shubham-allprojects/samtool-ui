@@ -340,7 +340,8 @@ const EditProperty = () => {
         status,
         is_stressed,
         is_sold,
-        is_available_for_sale
+        is_available_for_sale,
+        title_clear_property
       );
 
       if (currentPropertyRes.data) {
@@ -395,7 +396,8 @@ const EditProperty = () => {
     status,
     is_stressed,
     is_sold,
-    is_available_for_sale
+    is_available_for_sale,
+    title_clear_property
   ) => {
     // Set default value for property type and make it selected in property_type select box
     propertyCategoryRes.forEach((i) => {
@@ -475,6 +477,15 @@ const EditProperty = () => {
     );
     if (defaultIsAvailableForSale) {
       defaultIsAvailableForSale.selected = true;
+    }
+
+    // default title_clear_property value
+    let defaultTitleClear = document.getElementById(
+      `title_clear_property-${title_clear_property}`
+    );
+    console.log(defaultTitleClear);
+    if (defaultTitleClear) {
+      defaultTitleClear.selected = true;
     }
     setMainPageLoading(false);
   };
