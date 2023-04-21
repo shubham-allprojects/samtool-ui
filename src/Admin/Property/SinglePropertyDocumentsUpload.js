@@ -34,6 +34,8 @@ const SinglePropertyDocumentsUpload = () => {
 
   const [allCategoriesFromDB, setAllCategoriesFromDB] = useState([]);
   const [imageAllowedExtensions, setImageAllowedExtensions] = useState([]);
+  const [otherCategoryBlankCharErr, setOtherCategoryBlankCharErr] =
+    useState(false);
   const fileRef = useRef();
   const decsRef = useRef();
   const otherCategoryInputRef = useRef();
@@ -64,8 +66,11 @@ const SinglePropertyDocumentsUpload = () => {
         category_text: otherCategoryValue,
         categoryTextColor: "black common-btn-font",
       });
+      setOtherCategoryBlankCharErr(false);
       e.target.reset();
       otherCategoryWrapperRef.current.classList.add("d-none");
+    } else {
+      setOtherCategoryBlankCharErr(true);
     }
   };
 
@@ -365,7 +370,11 @@ const SinglePropertyDocumentsUpload = () => {
                                 <div className="form-group">
                                   <input
                                     type="text"
-                                    className="form-control"
+                                    className={`form-control ${
+                                      otherCategoryBlankCharErr
+                                        ? "border-danger"
+                                        : ""
+                                    }`}
                                     placeholder="Enter category"
                                     ref={otherCategoryInputRef}
                                     required
@@ -380,6 +389,13 @@ const SinglePropertyDocumentsUpload = () => {
                                   Save
                                 </button>
                               </div>
+                              <small
+                                className={`text-danger ${
+                                  otherCategoryBlankCharErr ? "" : "d-none"
+                                }`}
+                              >
+                                Blank characters are not allowed
+                              </small>
                             </form>
                           </div>
                         </div>
