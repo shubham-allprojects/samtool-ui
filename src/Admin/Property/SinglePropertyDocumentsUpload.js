@@ -55,14 +55,17 @@ const SinglePropertyDocumentsUpload = () => {
   };
 
   const onSaveOtherCategoryClick = () => {
-    setDocumentsInfo({
-      ...documentsInfo,
-      category_id: otherCategoryId,
-      category_text: otherCategoryInputRef.current.value,
-      categoryTextColor: "black common-btn-font",
-    });
-    otherCategoryInputRef.current.value = "";
-    otherCategoryWrapperRef.current.classList.add("d-none");
+    let otherCategoryValue = otherCategoryInputRef.current.value.trim();
+    if (otherCategoryValue !== "") {
+      setDocumentsInfo({
+        ...documentsInfo,
+        category_id: otherCategoryId,
+        category_text: otherCategoryValue,
+        categoryTextColor: "black common-btn-font",
+      });
+      otherCategoryInputRef.current.value = "";
+      otherCategoryWrapperRef.current.classList.add("d-none");
+    }
   };
 
   const onCategoryRadioCheck = (e) => {
