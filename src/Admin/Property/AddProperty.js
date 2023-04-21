@@ -103,7 +103,9 @@ const AddProperty = () => {
     // else if (name === "status") {
     //   commonFnToSaveFormData(name, value);
     // }
-    else if (name === "saleable_area") {
+    else if (name === "territory") {
+      commonFnToSaveFormData(name, value);
+    } else if (name === "saleable_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "carpet_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);

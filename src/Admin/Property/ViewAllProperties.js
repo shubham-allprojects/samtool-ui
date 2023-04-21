@@ -161,6 +161,7 @@ const ViewAllProperties = () => {
       { headers: authHeader }
     );
     setSelectedProperty(currentPropertyRes.data);
+    console.log(currentPropertyRes.data);
     viewCurrentPropertyRef.current.classList.remove("d-none");
     window.scrollTo(0, 0);
     allPropertiesPageRef.current.classList.add("d-none");
