@@ -114,7 +114,9 @@ const SinglePropertyDocumentsUpload = () => {
     setSavedImageFiles([]);
     fileRef.current.value = "";
     decsRef.current.value = "";
-
+    otherCategoryInputRef.current.value = "";
+    otherCategoryWrapperRef.current.classList.add("d-none");
+    setOtherCategoryBlankCharErr(false);
     if (allCategoryChecks) {
       allCategoryChecks.forEach((check) => {
         if (check.checked) {
