@@ -487,6 +487,11 @@ const EditProperty = () => {
     if (defaultTitleClear) {
       defaultTitleClear.selected = true;
     }
+    if (title_clear_property === "yes") {
+      setPossessionCheckValue({ titleClearYes: true, titleClearNo: false });
+    } else {
+      setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
+    }
     setMainPageLoading(false);
   };
 
