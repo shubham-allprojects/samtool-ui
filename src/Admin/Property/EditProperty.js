@@ -39,6 +39,10 @@ const EditProperty = () => {
     property_number,
     property_id,
     is_sold,
+    territory,
+    possession_of_the_property,
+    title_clear_property,
+    distress_value,
     // is_available_for_sale,
   } = formData;
   const {
@@ -110,7 +114,9 @@ const EditProperty = () => {
     // else if (name === "status") {
     //   commonFnToSaveFormData(name, value);
     // }
-    else if (name === "saleable_area") {
+    else if (name === "territory") {
+      commonFnToSaveFormData(name, value);
+    } else if (name === "saleable_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "carpet_area") {
       commonFnToSaveFormData(name, `${value} sq. ft.`);
@@ -119,6 +125,8 @@ const EditProperty = () => {
     } else if (name === "ready_reckoner_price") {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "expected_price") {
+      commonFnToSaveFormData(name, parseInt(value));
+    } else if (name === "distress_value") {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "completion_date") {
       commonFnToSaveFormData(name, value);
@@ -186,18 +194,18 @@ const EditProperty = () => {
     } else if (name === "title_clear_property") {
       if (value === "yes") {
         setPossessionCheckValue({ titleClearYes: true, titleClearNo: false });
-        // setFormData({
-        //   ...formData,
-        //   [name]: value,
-        //   possession_of_property: "Owner / Customer consent",
-        // });
+        setFormData({
+          ...formData,
+          [name]: value,
+          possession_of_property: "Owner / Customer consent",
+        });
       } else if (value === "No") {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
-        // setFormData({
-        //   ...formData,
-        //   [name]: value,
-        //   possession_of_property: "Legally attached",
-        // });
+        setFormData({
+          ...formData,
+          [name]: value,
+          possession_of_property: "Legally attached",
+        });
       } else {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: false });
       }
@@ -314,6 +322,10 @@ const EditProperty = () => {
         state_id,
         city_id,
         bank_id,
+        territory,
+        possession_of_the_property,
+        title_clear_property,
+        distress_value,
       } = currentPropertyRes.data;
 
       setIdOfState(state_id);
@@ -351,6 +363,10 @@ const EditProperty = () => {
           mortgage_date: mortgage_date,
           is_sold: is_sold,
           status: status,
+          territory: territory,
+          possession_of_the_property: possession_of_the_property,
+          title_clear_property: title_clear_property,
+          distress_value: distress_value,
           address_details: {
             address: locality,
             locality: locality,
@@ -654,10 +670,18 @@ const EditProperty = () => {
                                 name="title_clear_property"
                                 className="form-select"
                                 onChange={onInputChange}
+                                required
                               >
                                 <option value=""></option>
-                                <option value="yes">Yes</option>
-                                <option value="No">No</option>
+                                <option
+                                  id="title_clear_property-yes"
+                                  value="yes"
+                                >
+                                  Yes
+                                </option>
+                                <option id="title_clear_property-No" value="No">
+                                  No
+                                </option>
                               </select>
                             </div>
                           </div>
@@ -745,6 +769,25 @@ const EditProperty = () => {
                                   No
                                 </label>
                               </div>
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mt-3">
+                            <div className="form-group">
+                              <label
+                                htmlFor="territory"
+                                className="form-label common-btn-font"
+                              >
+                                Territory
+                              </label>
+                              <input
+                                type="text"
+                                id="territory"
+                                name="territory"
+                                className="form-control"
+                                defaultValue={territory}
+                                onChange={onInputChange}
+                                required
+                              />
                             </div>
                           </div>
                           {/* <div className="col-xl-4 col-md-6 mt-3">
@@ -894,6 +937,25 @@ const EditProperty = () => {
                                 name="expected_price"
                                 defaultValue={expected_price}
                                 onChange={onInputChange}
+                                required
+                              />
+                            </div>
+                          </div>
+                          <div className="col-xl-4 col-md-6 mt-3">
+                            <div className="form-group">
+                              <label
+                                className="form-label common-btn-font"
+                                htmlFor="distress_value"
+                              >
+                                Distress Value (Rs.)
+                              </label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                id="distress_value"
+                                name="distress_value"
+                                onChange={onInputChange}
+                                defaultValue={distress_value}
                                 required
                               />
                             </div>

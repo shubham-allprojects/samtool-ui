@@ -23,7 +23,7 @@ const AddProperty = () => {
 
   const goTo = useNavigate();
   const [formData, setFormData] = useState({
-    is_sold: "no",
+    is_sold: "No",
     is_available_for_sale: "yes",
     sale_availability_date: "2005-12-26 23:50:30",
     status: "yes",
@@ -423,6 +423,7 @@ const AddProperty = () => {
                                 name="title_clear_property"
                                 className="form-select"
                                 onChange={onInputChange}
+                                required
                               >
                                 <option value=""></option>
                                 <option value="yes">Yes</option>
