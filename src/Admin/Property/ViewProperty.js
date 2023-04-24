@@ -124,12 +124,22 @@ const ViewProperty = ({ selectedProperty }) => {
           <div className="col-xl-7 mt-xl-0 mt-4">
             <div className="container-fluid">
               <div className="row">
-                <div className="col-12 mb-2">
-                  <span className="text-muted">
-                    <i className="bi bi-geo-alt pe-2"></i>
-                    Address Details
-                  </span>
-                </div>
+                {flat_no ||
+                plot_no ||
+                society_name ||
+                locality ||
+                city_name ||
+                state_name ||
+                zip ? (
+                  <div className="col-12 mb-2">
+                    <span className="text-muted">
+                      <i className="bi bi-geo-alt pe-2"></i>
+                      Address Details
+                    </span>
+                  </div>
+                ) : (
+                  <></>
+                )}
 
                 {flat_no ? (
                   <div className="col-md-4">
@@ -158,64 +168,101 @@ const ViewProperty = ({ selectedProperty }) => {
                   <></>
                 )}
 
-                <div className="col-md-4">
-                  <small className="text-muted">Locality</small>
-                  <h5 className="mt-1">{locality}</h5>
-                </div>
+                {locality ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Locality</small>
+                    <h5 className="mt-1">{locality}</h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
 
-                <div className="col-md-4">
-                  <small className="text-muted">City</small>
-                  <h5 className="mt-1">{city_name}</h5>
-                </div>
+                {city_name ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">City</small>
+                    <h5 className="mt-1">{city_name}</h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
 
-                <div className="col-md-4">
-                  <small className="text-muted">State</small>
-                  <h5 className="mt-1">{state_name}</h5>
-                </div>
+                {state_name ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">State</small>
+                    <h5 className="mt-1">{state_name}</h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
 
-                <div className="col-md-4">
-                  <small className="text-muted">Zip</small>
-                  <h5 className="mt-1">{zip}</h5>
-                </div>
-
-                <div className="col-12">
-                  <hr className="my-md-2 my-3" />
-                </div>
-                <div className="col-12 mb-2">
-                  <span className="text-muted">
-                    <i className="bi bi-pin-map pe-2"></i>
-                    Area
-                  </span>
-                </div>
-                <div className="col-md-4">
-                  <small className="text-muted">Saleable Area</small>
-                  <h5 className="mt-1">{saleable_area}</h5>
-                </div>
-                <div className="col-md-4">
-                  <small className="text-muted">Carpet Area</small>
-                  <h5 className="mt-1">{carpet_area}</h5>
-                </div>
-                <div className="col-12">
-                  <hr className="my-md-2 my-3" />
-                </div>
-                <div className="col-12 mb-2">
-                  <span className="text-muted">
-                    <i className="bi bi-calendar-check pe-2"></i>
-                    Dates
-                  </span>
-                </div>
-                <div className="col-md-4">
-                  <small className="text-muted">Completion Date</small>
-                  <h5 className="mt-1">
-                    {completion_date
-                      ? completion_date
-                          .split(" ")[0]
-                          .split("-")
-                          .reverse()
-                          .join("-")
-                      : "NA"}
-                  </h5>
-                </div>
+                {zip ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Zip</small>
+                    <h5 className="mt-1">{zip}</h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {saleable_area || carpet_area ? (
+                  <>
+                    <div className="col-12">
+                      <hr className="my-md-2 my-3" />
+                    </div>
+                    <div className="col-12 mb-2">
+                      <span className="text-muted">
+                        <i className="bi bi-pin-map pe-2"></i>
+                        Area
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {saleable_area ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Saleable Area</small>
+                    <h5 className="mt-1">{saleable_area}</h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {carpet_area ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Carpet Area</small>
+                    <h5 className="mt-1">{carpet_area}</h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {completion_date || purchase_date || mortgage_date ? (
+                  <>
+                    <div className="col-12">
+                      <hr className="my-md-2 my-3" />
+                    </div>
+                    <div className="col-12 mb-2">
+                      <span className="text-muted">
+                        <i className="bi bi-calendar-check pe-2"></i>
+                        Dates
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {completion_date ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Completion Date</small>
+                    <h5 className="mt-1">
+                      {completion_date
+                        .split(" ")[0]
+                        .split("-")
+                        .reverse()
+                        .join("-")}
+                    </h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
                 {purchase_date ? (
                   <div className="col-md-4">
                     <small className="text-muted">Purchase Date</small>
