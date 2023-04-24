@@ -98,26 +98,31 @@ const ViewProperty = ({ selectedProperty }) => {
             </div>
             <div className="container-fluid p-0">
               <div className="row mt-3">
-                <div className="col-6">
-                  <div className="card p-2 text-center border-primary border-2 border">
-                    <small className="text-muted">Property Number</small>
-                    <small className="common-btn-font">{property_number}</small>
+                {property_number ? (
+                  <div className="col-6">
+                    <div className="card p-2 text-center border-primary border-2 border">
+                      <small className="text-muted">Property Number</small>
+                      <small className="common-btn-font">
+                        {property_number}
+                      </small>
+                    </div>
                   </div>
-                </div>
-                <div className="col-6">
-                  <div className="card p-2 text-center border-primary border-2 border">
-                    <small className="text-muted">Is stressed</small>
-                    <small className="common-btn-font text-capitalize">
-                      {is_stressed}
-                    </small>
+                ) : (
+                  <></>
+                )}
+
+                {is_stressed ? (
+                  <div className="col-6">
+                    <div className="card p-2 text-center border-primary border-2 border">
+                      <small className="text-muted">Is stressed</small>
+                      <small className="common-btn-font text-capitalize">
+                        {is_stressed}
+                      </small>
+                    </div>
                   </div>
-                </div>
-                {/* <div className="col-4">
-                  <div className="card p-2 text-center border-primary border-2 border">
-                    <small className="text-muted">Status</small>
-                    <small className="common-btn-font">{status}</small>
-                  </div>
-                </div> */}
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
