@@ -240,75 +240,116 @@ const ViewProperty = ({ selectedProperty }) => {
                       : "NA"}
                   </h5>
                 </div>
-                <div className="col-12">
-                  <hr className="my-md-2 my-3" />
-                </div>
-                <div className="col-12 mb-2">
-                  <span className="text-muted">
-                    <i className="bi bi-tag pe-2"></i>
-                    Pricing
-                  </span>
-                </div>
-                <div className="col-md-4">
-                  <small className="text-muted">Market Price</small>
-                  <h5 className="mt-1">
-                    <i className="bi bi-currency-rupee"></i>
-                    {(market_price / 10000000).toFixed(2)} Crore
-                  </h5>
-                </div>
-                <div className="col-md-4">
-                  <small className="text-muted">Ready Reckoner Price</small>
-                  <h5 className="mt-1">
-                    <i className="bi bi-currency-rupee"></i>
-                    {(ready_reckoner_price / 10000000).toFixed(2)} Crore
-                  </h5>
-                </div>
-                <div className="col-md-4">
-                  <small className="text-muted">Expected Price</small>
-                  <h5 className="mt-1">
-                    <i className="bi bi-currency-rupee"></i>
-                    {(expected_price / 10000000).toFixed(2)} Crore
-                  </h5>
-                </div>
-                <div className="col-md-4 mt-2">
-                  <small className="text-muted">Distress Value</small>
-                  <h5 className="mt-1">
-                    <i className="bi bi-currency-rupee"></i>
-                    {(distress_value / 10000000).toFixed(2)} Crore
-                  </h5>
-                </div>
-                <div className="col-12">
-                  <hr className="my-md-2 my-3" />
-                </div>
-                <div className="col-12 mb-2">
-                  <span className="text-muted">
-                    <i className="bi bi-building-check pe-2"></i>
-                    Property Availability
-                  </span>
-                </div>
-                <div className="col-md-4">
-                  <small className="text-muted">Is Sold?</small>
-                  <h5 className="mt-1 text-capitalize">{is_sold}</h5>
-                </div>
-                <div className="col-md-4">
-                  <small className="text-muted">Is Available For Sale?</small>
-                  <h5 className="mt-1 text-capitalize">
-                    {is_available_for_sale}
-                  </h5>
-                </div>
+                {market_price ||
+                ready_reckoner_price ||
+                expected_price ||
+                distress_value ? (
+                  <>
+                    <div className="col-12">
+                      <hr className="my-md-2 my-3" />
+                    </div>
+                    <div className="col-12 mb-2">
+                      <span className="text-muted">
+                        <i className="bi bi-tag pe-2"></i>
+                        Pricing
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {market_price ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Market Price</small>
+                    <h5 className="mt-1">
+                      <i className="bi bi-currency-rupee"></i>
+                      {(market_price / 10000000).toFixed(2)} Crore
+                    </h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {ready_reckoner_price ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Ready Reckoner Price</small>
+                    <h5 className="mt-1">
+                      <i className="bi bi-currency-rupee"></i>
+                      {(ready_reckoner_price / 10000000).toFixed(2)} Crore
+                    </h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {expected_price ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Expected Price</small>
+                    <h5 className="mt-1">
+                      <i className="bi bi-currency-rupee"></i>
+                      {(expected_price / 10000000).toFixed(2)} Crore
+                    </h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {distress_value ? (
+                  <div className="col-md-4 mt-2">
+                    <small className="text-muted">Distress Value</small>
+                    <h5 className="mt-1">
+                      <i className="bi bi-currency-rupee"></i>
+                      {(distress_value / 10000000).toFixed(2)} Crore
+                    </h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {is_sold || is_available_for_sale ? (
+                  <>
+                    <div className="col-12">
+                      <hr className="my-md-2 my-3" />
+                    </div>
+                    <div className="col-12 mb-2">
+                      <span className="text-muted">
+                        <i className="bi bi-building-check pe-2"></i>
+                        Property Availability
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {is_sold ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Is Sold?</small>
+                    <h5 className="mt-1 text-capitalize">{is_sold}</h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {is_available_for_sale ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Is Available For Sale?</small>
+                    <h5 className="mt-1 text-capitalize">
+                      {is_available_for_sale}
+                    </h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
 
-                <div className="col-12">
-                  <hr className="my-md-2 my-3" />
-                </div>
                 {branch_name ||
                 territory ||
                 title_clear_property ||
                 possession_of_the_property ? (
-                  <div className="col-12">
-                    <span className="text-muted">
-                      <i className="bi bi-info-square pe-2"></i>Other details
-                    </span>
-                  </div>
+                  <>
+                    <div className="col-12">
+                      <hr className="my-md-2 my-3" />
+                    </div>
+                    <div className="col-12">
+                      <span className="text-muted">
+                        <i className="bi bi-info-square pe-2"></i>Other details
+                      </span>
+                    </div>
+                  </>
                 ) : (
                   <></>
                 )}
