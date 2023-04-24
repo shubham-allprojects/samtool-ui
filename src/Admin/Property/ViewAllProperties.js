@@ -41,7 +41,7 @@ const ViewAllProperties = () => {
     // Hide pagination while loading.
     paginationRef.current.classList.add("d-none");
     let dataToPost = {};
-    if (samplePage !== 0) {
+    if (samplePage !== 1) {
       dataToPost = {
         batch_number: samplePage,
         batch_size: propertiesPerPage,
@@ -103,6 +103,7 @@ const ViewAllProperties = () => {
     let currentPage = pageNumber.selected + 1;
     toggleActivePageClass(currentPage);
     setCurrentPageNumber(currentPage);
+    localStorage.setItem("currentPageOfAdminViewProperties", currentPage);
     const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
     setProperties(nextOrPrevPagePropertyData);
     toggleClassOfNextPrevPageItems();
@@ -184,7 +185,12 @@ const ViewAllProperties = () => {
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
-    getPropertiesFromApi(1);
+    let activePage = localStorage.getItem("currentPageOfAdminViewProperties");
+    if (activePage) {
+      getPropertiesFromApi(parseInt(activePage));
+    } else {
+      getPropertiesFromApi(1);
+    }
   }, []);
 
   return (
