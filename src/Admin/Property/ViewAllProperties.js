@@ -236,37 +236,53 @@ const ViewAllProperties = () => {
                                   alt=""
                                 />
                                 <div className="card-body">
-                                  <div className="text-capitalize">
-                                    <span>Type: </span>
-                                    <span className="common-btn-font">
-                                      {category}
-                                    </span>
-                                  </div>
-                                  <div className="text-capitalize">
-                                    <span>Location: </span>
-                                    <span className="common-btn-font">
-                                      {city_name}
-                                    </span>
-                                  </div>
-                                  <div className="text-capitalize">
-                                    <span>Market Price: </span>
-                                    <span className="common-btn-font">
-                                      <i className="bi bi-currency-rupee"></i>
-                                      {`${(
-                                        parseInt(market_value) / 10000000
-                                      ).toFixed(2)} Cr.`}
-                                    </span>
-                                  </div>
+                                  {category ? (
+                                    <div className="text-capitalize">
+                                      <span>Type: </span>
+                                      <span className="common-btn-font">
+                                        {category}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {city_name ? (
+                                    <div className="text-capitalize">
+                                      <span>Location: </span>
+                                      <span className="common-btn-font">
+                                        {city_name}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
+                                  {market_value ? (
+                                    <div className="text-capitalize">
+                                      <span>Market Price: </span>
+                                      <span className="common-btn-font">
+                                        <i className="bi bi-currency-rupee"></i>
+                                        {`${(
+                                          parseInt(market_value) / 10000000
+                                        ).toFixed(2)} Cr.`}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
 
-                                  <div className="text-capitalize">
-                                    <span>Expected Price: </span>
-                                    <span className="common-btn-font">
-                                      <i className="bi bi-currency-rupee"></i>
-                                      {`${(
-                                        parseInt(expected_price) / 10000000
-                                      ).toFixed(2)} Cr.`}
-                                    </span>
-                                  </div>
+                                  {expected_price ? (
+                                    <div className="text-capitalize">
+                                      <span>Expected Price: </span>
+                                      <span className="common-btn-font">
+                                        <i className="bi bi-currency-rupee"></i>
+                                        {`${(
+                                          parseInt(expected_price) / 10000000
+                                        ).toFixed(2)} Cr.`}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    <></>
+                                  )}
                                   <div className="mt-3 d-flex">
                                     <button
                                       onClick={() => {
