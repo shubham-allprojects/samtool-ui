@@ -498,7 +498,7 @@ function Home() {
                                 <i className="bi bi-currency-rupee"></i>
                                 {`${(parseInt(market_value) / 10000000).toFixed(
                                   2
-                                )} Crores`}
+                                )} Cr.`}
                               </span>
                             </div>
 
@@ -508,14 +508,14 @@ function Home() {
                                 <i className="bi bi-currency-rupee"></i>
                                 {`${(
                                   parseInt(range.split("-")[0]) / 10000000
-                                ).toFixed(2)} Crores`}
+                                ).toFixed(2)} Cr.`}
                               </span>
                               <span className="mx-2 common-btn-font">-</span>
                               <span className="common-btn-font">
                                 <i className="bi bi-currency-rupee"></i>
                                 {`${(
                                   parseInt(range.split("-")[1]) / 10000000
-                                ).toFixed(2)} Crores`}
+                                ).toFixed(2)} Cr.`}
                               </span>
                             </div>
                             <div className="mt-2">

@@ -148,7 +148,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 {(parseInt(market_price) / 10000000).toFixed(
                                   2
                                 )}{" "}
-                                Crore
+                                Cr.
                               </div>
                             </div>
                             <div
@@ -164,7 +164,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 {(
                                   parseInt(ready_reckoner_price) / 10000000
                                 ).toFixed(2)}{" "}
-                                Crore
+                                Cr.
                               </div>
                             </div>
                             <div
@@ -180,7 +180,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 {(parseInt(expected_price) / 10000000).toFixed(
                                   2
                                 )}{" "}
-                                Crore
+                                Cr.
                               </div>
                             </div>
                             <div
@@ -196,7 +196,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 {(parseInt(distress_value) / 10000000).toFixed(
                                   2
                                 )}{" "}
-                                Crore
+                                Cr.
                               </div>
                             </div>
                             {/* <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">

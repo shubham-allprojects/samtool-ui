@@ -254,7 +254,7 @@ const ViewAllProperties = () => {
                                       <i className="bi bi-currency-rupee"></i>
                                       {`${(
                                         parseInt(market_value) / 10000000
-                                      ).toFixed(2)} Crores`}
+                                      ).toFixed(2)} Cr.`}
                                     </span>
                                   </div>
 
@@ -264,7 +264,7 @@ const ViewAllProperties = () => {
                                       <i className="bi bi-currency-rupee"></i>
                                       {`${(
                                         parseInt(expected_price) / 10000000
-                                      ).toFixed(2)} Crores`}
+                                      ).toFixed(2)} Cr.`}
                                     </span>
                                   </div>
                                   <div className="mt-3 d-flex">

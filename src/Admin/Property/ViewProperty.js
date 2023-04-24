@@ -319,7 +319,7 @@ const ViewProperty = ({ selectedProperty }) => {
                     <small className="text-muted">Market Price</small>
                     <h5 className="mt-1">
                       <i className="bi bi-currency-rupee"></i>
-                      {(market_price / 10000000).toFixed(2)} Crore
+                      {(market_price / 10000000).toFixed(2)} Cr.
                     </h5>
                   </div>
                 ) : (
@@ -330,7 +330,7 @@ const ViewProperty = ({ selectedProperty }) => {
                     <small className="text-muted">Ready Reckoner Price</small>
                     <h5 className="mt-1">
                       <i className="bi bi-currency-rupee"></i>
-                      {(ready_reckoner_price / 10000000).toFixed(2)} Crore
+                      {(ready_reckoner_price / 10000000).toFixed(2)} Cr.
                     </h5>
                   </div>
                 ) : (
@@ -341,7 +341,7 @@ const ViewProperty = ({ selectedProperty }) => {
                     <small className="text-muted">Expected Price</small>
                     <h5 className="mt-1">
                       <i className="bi bi-currency-rupee"></i>
-                      {(expected_price / 10000000).toFixed(2)} Crore
+                      {(expected_price / 10000000).toFixed(2)} Cr.
                     </h5>
                   </div>
                 ) : (
@@ -352,7 +352,7 @@ const ViewProperty = ({ selectedProperty }) => {
                     <small className="text-muted">Distress Value</small>
                     <h5 className="mt-1">
                       <i className="bi bi-currency-rupee"></i>
-                      {(distress_value / 10000000).toFixed(2)} Crore
+                      {(distress_value / 10000000).toFixed(2)} Cr.
                     </h5>
                   </div>
                 ) : (
