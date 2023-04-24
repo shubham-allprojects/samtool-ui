@@ -216,30 +216,34 @@ const ViewProperty = ({ selectedProperty }) => {
                       : "NA"}
                   </h5>
                 </div>
-                <div className="col-md-4">
-                  <small className="text-muted">Purchase Date</small>
-                  <h5 className="mt-1">
-                    {purchase_date
-                      ? purchase_date
-                          .split(" ")[0]
-                          .split("-")
-                          .reverse()
-                          .join("-")
-                      : "NA"}
-                  </h5>
-                </div>
-                <div className="col-md-4">
-                  <small className="text-muted">Mortgage Date</small>
-                  <h5 className="mt-1">
-                    {mortgage_date
-                      ? mortgage_date
-                          .split(" ")[0]
-                          .split("-")
-                          .reverse()
-                          .join("-")
-                      : "NA"}
-                  </h5>
-                </div>
+                {purchase_date ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Purchase Date</small>
+                    <h5 className="mt-1">
+                      {purchase_date
+                        .split(" ")[0]
+                        .split("-")
+                        .reverse()
+                        .join("-")}
+                    </h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {mortgage_date ? (
+                  <div className="col-md-4">
+                    <small className="text-muted">Mortgage Date</small>
+                    <h5 className="mt-1">
+                      {mortgage_date
+                        .split(" ")[0]
+                        .split("-")
+                        .reverse()
+                        .join("-")}
+                    </h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
                 {market_price ||
                 ready_reckoner_price ||
                 expected_price ||
