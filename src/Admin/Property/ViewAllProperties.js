@@ -15,6 +15,9 @@ let authHeader = "";
 let propertiesPerPage = 4;
 const ViewAllProperties = () => {
   const data = JSON.parse(localStorage.getItem("data"));
+  let activePageFromLocal = localStorage.getItem(
+    "currentPageOfAdminViewProperties"
+  );
   if (data) {
     authHeader = { Authorization: data.logintoken };
   }
@@ -73,13 +76,24 @@ const ViewAllProperties = () => {
 
     setTotalPropertyCount(totalCount);
 
+    let totalPages = Math.ceil(totalCount / propertiesPerPage);
     if (propertyCountRes.data) {
-      setPageCount(Math.ceil(totalCount / propertiesPerPage));
+      setPageCount(totalPages);
     }
 
     if (propertiesRes.data.length > 0) {
       paginationRef.current.classList.remove("d-none");
       setProperties(propertiesRes.data);
+      if (activePageFromLocal) {
+        let allPages = document.querySelectorAll(".page-item");
+        allPages.forEach((item) => {
+          if (item.textContent === activePageFromLocal) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
+        });
+      }
     } else {
       paginationRef.current.classList.add("d-none");
     }
@@ -185,9 +199,9 @@ const ViewAllProperties = () => {
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
-    let activePage = localStorage.getItem("currentPageOfAdminViewProperties");
-    if (activePage) {
-      getPropertiesFromApi(parseInt(activePage));
+
+    if (activePageFromLocal) {
+      getPropertiesFromApi(parseInt(activePageFromLocal));
     } else {
       getPropertiesFromApi(1);
     }
