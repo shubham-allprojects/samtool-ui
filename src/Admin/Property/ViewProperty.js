@@ -23,6 +23,10 @@ const ViewProperty = ({ selectedProperty }) => {
     flat_no,
     locality,
     zip,
+    territory,
+    title_clear_property,
+    possession_of_the_property,
+    distress_value,
   } = selectedProperty;
 
   return (
@@ -266,6 +270,13 @@ const ViewProperty = ({ selectedProperty }) => {
                     {(expected_price / 10000000).toFixed(2)} Crore
                   </h5>
                 </div>
+                <div className="col-md-4 mt-2">
+                  <small className="text-muted">Distress Value</small>
+                  <h5 className="mt-1">
+                    <i className="bi bi-currency-rupee"></i>
+                    {(distress_value / 10000000).toFixed(2)} Crore
+                  </h5>
+                </div>
                 <div className="col-12">
                   <hr className="my-md-2 my-3" />
                 </div>
@@ -289,11 +300,32 @@ const ViewProperty = ({ selectedProperty }) => {
                 <div className="col-12">
                   <hr className="my-md-2 my-3" />
                 </div>
-                <div className="col-md-12">
+                <div className="col-12">
                   <span className="text-muted">
-                    <i className="bi bi-bank pe-2"></i>Bank Branch
+                    <i className="bi bi-bank pe-2"></i>Other details
                   </span>
-                  <h5 className="mt-2">{branch_name}</h5>
+                </div>
+                <div className="col-md-6">
+                  <small className="text-muted">Branch</small>
+                  <h5 className="mt-1 text-capitalize">{branch_name}</h5>
+                </div>
+                <div className="col-md-6">
+                  <small className="text-muted">Territory</small>
+                  <h5 className="mt-1 text-capitalize">{territory}</h5>
+                </div>
+                <div className="col-md-6 mt-2">
+                  <small className="text-muted">Title clear property</small>
+                  <h5 className="mt-1 text-capitalize">
+                    {title_clear_property}
+                  </h5>
+                </div>
+                <div className="col-md-6 mt-2">
+                  <small className="text-muted">
+                    Possession of the property
+                  </small>
+                  <h5 className="mt-1 text-capitalize">
+                    {possession_of_the_property}
+                  </h5>
                 </div>
               </div>
             </div>
