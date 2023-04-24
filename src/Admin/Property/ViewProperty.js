@@ -282,7 +282,7 @@ const ViewProperty = ({ selectedProperty }) => {
                 </div>
                 <div className="col-12 mb-2">
                   <span className="text-muted">
-                    <i className="bi bi-info-square pe-2"></i>
+                    <i className="bi bi-building-check pe-2"></i>
                     Property Availability
                   </span>
                 </div>
@@ -300,33 +300,56 @@ const ViewProperty = ({ selectedProperty }) => {
                 <div className="col-12">
                   <hr className="my-md-2 my-3" />
                 </div>
-                <div className="col-12">
-                  <span className="text-muted">
-                    <i className="bi bi-bank pe-2"></i>Other details
-                  </span>
-                </div>
-                <div className="col-md-6">
-                  <small className="text-muted">Branch</small>
-                  <h5 className="mt-1 text-capitalize">{branch_name}</h5>
-                </div>
-                <div className="col-md-6">
-                  <small className="text-muted">Territory</small>
-                  <h5 className="mt-1 text-capitalize">{territory}</h5>
-                </div>
-                <div className="col-md-6 mt-2">
-                  <small className="text-muted">Title clear property</small>
-                  <h5 className="mt-1 text-capitalize">
-                    {title_clear_property}
-                  </h5>
-                </div>
-                <div className="col-md-6 mt-2">
-                  <small className="text-muted">
-                    Possession of the property
-                  </small>
-                  <h5 className="mt-1 text-capitalize">
-                    {possession_of_the_property}
-                  </h5>
-                </div>
+                {branch_name ||
+                territory ||
+                title_clear_property ||
+                possession_of_the_property ? (
+                  <div className="col-12">
+                    <span className="text-muted">
+                      <i className="bi bi-info-square pe-2"></i>Other details
+                    </span>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {branch_name ? (
+                  <div className="col-md-6">
+                    <small className="text-muted">Branch</small>
+                    <h5 className="mt-1 text-capitalize">{branch_name}</h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {territory ? (
+                  <div className="col-md-6">
+                    <small className="text-muted">Territory</small>
+                    <h5 className="mt-1 text-capitalize">{territory}</h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {title_clear_property ? (
+                  <div className="col-md-6 mt-2">
+                    <small className="text-muted">Title clear property</small>
+                    <h5 className="mt-1 text-capitalize">
+                      {title_clear_property}
+                    </h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
+                {possession_of_the_property ? (
+                  <div className="col-md-6 mt-2">
+                    <small className="text-muted">
+                      Possession of the property
+                    </small>
+                    <h5 className="mt-1 text-capitalize">
+                      {possession_of_the_property}
+                    </h5>
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
