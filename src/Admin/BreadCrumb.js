@@ -13,15 +13,20 @@ const BreadCrumb = ({
   const [isUserPageActive, setIsUserPageActive] = useState(false);
   const [isPropertyPageActive, setIsPropertyPageActive] = useState(false);
   const [isAddPropertyPageActive, setIsAddPropertyPageActive] = useState(false);
+  const [isUpdatePropertyPageActive, setIsUpdatePropertyPageActive] =
+    useState(false);
   const [isBulkUploadPropertyPageActive, setIsBulkUploadPropertyPageActive] =
     useState(false);
 
   // If we are on Users section in admin then isUserPageActive will be true.
-  const testFn = () => {
+  const checkActivePages = () => {
     setIsUserPageActive(window.location.href.includes("/admin/users"));
     setIsPropertyPageActive(window.location.href.includes("/admin/property"));
     setIsAddPropertyPageActive(
       window.location.href.includes("/admin/property/add-property")
+    );
+    setIsUpdatePropertyPageActive(
+      window.location.href.includes("/admin/property/update-property")
     );
     setIsBulkUploadPropertyPageActive(
       window.location.href.includes("/admin/property/upload-properties")
@@ -29,7 +34,7 @@ const BreadCrumb = ({
   };
 
   useEffect(() => {
-    testFn();
+    checkActivePages();
     // eslint-disable-next-line
   }, []);
 
@@ -96,6 +101,13 @@ const BreadCrumb = ({
                 <li className="breadcrumb-item text-secondary">
                   Upload Bulk Properties
                 </li>
+              ) : isUpdatePropertyPageActive ? (
+                <NavLink
+                  to="/admin/property/properties"
+                  className="breadcrumb-item"
+                >
+                  Properties
+                </NavLink>
               ) : (
                 <li className="breadcrumb-item text-secondary">Properties</li>
               )}
