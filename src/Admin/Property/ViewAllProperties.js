@@ -50,7 +50,7 @@ const ViewAllProperties = () => {
       dataToPost,
       { headers: authHeader }
     );
-
+    console.log(propertiesRes.data);
     const propertyCountRes = await axios.get(
       `/sam/v1/property/auth/property-count`,
       { headers: authHeader }
