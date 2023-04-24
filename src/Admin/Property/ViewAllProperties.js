@@ -36,14 +36,22 @@ const ViewAllProperties = () => {
   ] = useState(true);
   const confirmDeletePropertyInputRef = useRef();
 
-  const getPropertiesFromApi = async () => {
+  const getPropertiesFromApi = async (samplePage) => {
     setLoading(true);
     // Hide pagination while loading.
     paginationRef.current.classList.add("d-none");
-    const dataToPost = {
-      batch_number: 1,
-      batch_size: propertiesPerPage,
-    };
+    let dataToPost = {};
+    if (samplePage !== 0) {
+      dataToPost = {
+        batch_number: samplePage,
+        batch_size: propertiesPerPage,
+      };
+    } else {
+      dataToPost = {
+        batch_number: 1,
+        batch_size: propertiesPerPage,
+      };
+    }
 
     const propertiesRes = await axios.post(
       `/sam/v1/property/auth/all-properties`,
@@ -176,7 +184,7 @@ const ViewAllProperties = () => {
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
-    getPropertiesFromApi();
+    getPropertiesFromApi(1);
   }, []);
 
   return (
