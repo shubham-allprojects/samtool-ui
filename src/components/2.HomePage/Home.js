@@ -451,14 +451,8 @@ function Home() {
                 </div>
               ) : (
                 propertyData.map((property, Index) => {
-                  const {
-                    title,
-                    count,
-                    category,
-                    city_name,
-                    market_value,
-                    range,
-                  } = property;
+                  const { count, category, city_name, market_value, range } =
+                    property;
                   return (
                     <div className="col-xl-3 col-lg-4 col-md-6" key={Index}>
                       <div className="property-card-wrapper">
@@ -470,54 +464,71 @@ function Home() {
                             alt=""
                           />
                           <div className="card-body">
-                            <h3 className="card-title text-uppercase">
-                              {title}
-                            </h3>
-                            <div className="text-capitalize text-primary fw-bold">
-                              {`${
-                                count > 1
-                                  ? count + " Properties"
-                                  : count + " Property"
-                              }`}
-                            </div>
-                            <div className="text-capitalize">
-                              <span>Type: </span>
-                              <span className="common-btn-font">
-                                {category}
-                              </span>
-                            </div>
-                            <div className="text-capitalize">
-                              <span>Location: </span>
-                              <span className="common-btn-font">
-                                {city_name}
-                              </span>
-                            </div>
-                            <div className="text-capitalize">
-                              <span>Market Price: </span>
-                              <span className="common-btn-font">
-                                <i className="bi bi-currency-rupee"></i>
-                                {`${(parseInt(market_value) / 10000000).toFixed(
-                                  2
-                                )} Cr.`}
-                              </span>
-                            </div>
+                            {count ? (
+                              <div className="text-capitalize text-primary fw-bold">
+                                {`${
+                                  count > 1
+                                    ? count + " Properties"
+                                    : count + " Property"
+                                }`}
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {category ? (
+                              <div className="text-capitalize">
+                                <span>Type: </span>
+                                <span className="common-btn-font">
+                                  {category}
+                                </span>
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {city_name ? (
+                              <div className="text-capitalize">
+                                <span>Location: </span>
+                                <span className="common-btn-font">
+                                  {city_name}
+                                </span>
+                              </div>
+                            ) : (
+                              <></>
+                            )}
+                            {market_value ? (
+                              <div className="text-capitalize">
+                                <span>Market Price: </span>
+                                <span className="common-btn-font">
+                                  <i className="bi bi-currency-rupee"></i>
+                                  {`${(
+                                    parseInt(market_value) / 10000000
+                                  ).toFixed(2)} Cr.`}
+                                </span>
+                              </div>
+                            ) : (
+                              <></>
+                            )}
 
-                            <div className="text-capitalize">
-                              <span>Range: </span>
-                              <span className="common-btn-font">
-                                <i className="bi bi-currency-rupee"></i>
-                                {`${(
-                                  parseInt(range.split("-")[0]) / 10000000
-                                ).toFixed(2)} Cr.`}
-                              </span>
-                              <span className="mx-2 common-btn-font">-</span>
-                              <span className="common-btn-font">
-                                <i className="bi bi-currency-rupee"></i>
-                                {`${(
-                                  parseInt(range.split("-")[1]) / 10000000
-                                ).toFixed(2)} Cr.`}
-                              </span>
-                            </div>
+                            {range ? (
+                              <div className="text-capitalize">
+                                <span>Range: </span>
+                                <span className="common-btn-font">
+                                  <i className="bi bi-currency-rupee"></i>
+                                  {`${(
+                                    parseInt(range.split("-")[0]) / 10000000
+                                  ).toFixed(2)} Cr.`}
+                                </span>
+                                <span className="mx-2 common-btn-font">-</span>
+                                <span className="common-btn-font">
+                                  <i className="bi bi-currency-rupee"></i>
+                                  {`${(
+                                    parseInt(range.split("-")[1]) / 10000000
+                                  ).toFixed(2)} Cr.`}
+                                </span>
+                              </div>
+                            ) : (
+                              <></>
+                            )}
                             <div className="mt-2">
                               <button
                                 onClick={() => {
