@@ -1740,7 +1740,7 @@ const ViewAllProperties = () => {
                               <button
                                 disabled={updateBtnLoading ? true : false}
                                 type="submit"
-                                className="btn btn-primary w-100"
+                                className="btn btn-primary common-btn-font w-100"
                               >
                                 {updateBtnLoading ? (
                                   <>
