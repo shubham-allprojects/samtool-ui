@@ -862,7 +862,11 @@ const ViewAllProperties = () => {
             ref={editPropertyRef}
           >
             <>
-              <section className="add-property-wrapper wrapper">
+              <BreadCrumb
+                isUpdatePropertyPageActive={true}
+                backToAllPropertiesPage={backToAllPropertiesPage}
+              />
+              <section className="add-property-wrapper mb-4">
                 <div className="container-fluid">
                   <div className="row justify-content-center">
                     <div className="col-xl-12">

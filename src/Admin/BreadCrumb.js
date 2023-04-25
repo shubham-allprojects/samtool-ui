@@ -9,12 +9,13 @@ const BreadCrumb = ({
   setDisplayClassesOfMainSections,
   handlePageClick,
   currentPageNumber,
+  isUpdatePropertyPageActive,
+  backToAllPropertiesPage,
 }) => {
   const [isUserPageActive, setIsUserPageActive] = useState(false);
   const [isPropertyPageActive, setIsPropertyPageActive] = useState(false);
   const [isAddPropertyPageActive, setIsAddPropertyPageActive] = useState(false);
-  const [isUpdatePropertyPageActive, setIsUpdatePropertyPageActive] =
-    useState(false);
+
   const [isBulkUploadPropertyPageActive, setIsBulkUploadPropertyPageActive] =
     useState(false);
 
@@ -24,9 +25,6 @@ const BreadCrumb = ({
     setIsPropertyPageActive(window.location.href.includes("/admin/property"));
     setIsAddPropertyPageActive(
       window.location.href.includes("/admin/property/add-property")
-    );
-    setIsUpdatePropertyPageActive(
-      window.location.href.includes("/admin/property/update-property")
     );
     setIsBulkUploadPropertyPageActive(
       window.location.href.includes("/admin/property/upload-properties")
@@ -116,7 +114,18 @@ const BreadCrumb = ({
                   </li>
                 </>
               ) : isUpdatePropertyPageActive ? (
-                <></>
+                <>
+                  <li
+                    style={{ cursor: "pointer" }}
+                    className="breadcrumb-item"
+                    onClick={backToAllPropertiesPage}
+                  >
+                    Properties
+                  </li>
+                  <li className="breadcrumb-item text-secondary">
+                    Update property
+                  </li>
+                </>
               ) : (
                 <li className="breadcrumb-item text-secondary">Properties</li>
               )}
