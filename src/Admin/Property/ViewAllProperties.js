@@ -22,6 +22,7 @@ const ViewAllProperties = () => {
   }
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [updateBtnLoading, setUpdateBtnLoading] = useState(false);
   const allPropertiesPageRef = useRef();
   const viewCurrentPropertyRef = useRef();
   const editPropertyRef = useRef();
@@ -381,6 +382,7 @@ const ViewAllProperties = () => {
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
+    setUpdateBtnLoading(true);
     console.log(JSON.stringify(formData));
     await axios
       .post(`/sam/v1/customer-registration/zipcode-validation`, {
@@ -391,6 +393,7 @@ const ViewAllProperties = () => {
         if (res.data.status === 0) {
           setZipCodeValidationMessage("Invalid ZipCode.");
           zipError = true;
+          setUpdateBtnLoading(false);
         } else {
           setAreaValidationMessage("");
           zipError = false;
@@ -399,6 +402,7 @@ const ViewAllProperties = () => {
     if (parseInt(saleable_area) < parseInt(carpet_area)) {
       setAreaValidationMessage("Carpet area must be less than salable area.");
       areaError = true;
+      setUpdateBtnLoading(false);
     } else {
       setAreaValidationMessage("");
       areaError = false;
@@ -421,14 +425,15 @@ const ViewAllProperties = () => {
             if (res.data.status === 0) {
               resetValidationsOnSubmit();
               toast.success("Property updated successfully");
-              // e.target.reset();
-              // goTo("/admin/property/properties");
+              setUpdateBtnLoading(false);
             } else {
               toast.error("Internal server error");
+              setUpdateBtnLoading(false);
             }
           });
       } catch (error) {
         toast.error("Internal server error");
+        setUpdateBtnLoading(false);
       }
     }
   };
@@ -1731,7 +1736,11 @@ const ViewAllProperties = () => {
                           </div>
                           <div className="row text-end">
                             <div className="col-12">
-                              <button type="submit" className="btn btn-primary">
+                              <button
+                                disabled={updateBtnLoading ? true : false}
+                                type="submit"
+                                className="btn btn-primary"
+                              >
                                 Update
                               </button>
                             </div>
