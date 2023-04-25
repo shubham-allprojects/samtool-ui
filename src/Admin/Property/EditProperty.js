@@ -270,6 +270,7 @@ const EditProperty = () => {
   };
 
   let defaultTypeId;
+  let defaultBranchId = 2;
 
   const getCurrentPropertyDataToUpdate = async () => {
     setMainPageLoading(true);
@@ -323,7 +324,6 @@ const EditProperty = () => {
         possession_of_the_property,
         title_clear_property,
         distress_value,
-        bank_branch_id,
       } = currentPropertyRes.data;
 
       setIdOfState(state_id);
@@ -339,8 +339,7 @@ const EditProperty = () => {
         is_stressed,
         is_sold,
         is_available_for_sale,
-        title_clear_property,
-        bank_branch_id
+        title_clear_property
       );
 
       if (currentPropertyRes.data) {
@@ -348,7 +347,7 @@ const EditProperty = () => {
           ...formData,
           property_id: property_id,
           type_id: defaultTypeId,
-          bank_branch_id: bank_branch_id,
+          bank_branch_id: defaultBranchId,
           property_number: property_number,
           is_stressed: is_stressed,
           is_available_for_sale: is_available_for_sale,
@@ -396,8 +395,7 @@ const EditProperty = () => {
     is_stressed,
     is_sold,
     is_available_for_sale,
-    title_clear_property,
-    bank_branch_id
+    title_clear_property
   ) => {
     // Set default value for property type and make it selected in property_type select box
     propertyCategoryRes.forEach((i) => {
@@ -440,11 +438,22 @@ const EditProperty = () => {
       );
       setBankBranches(branchRes.data);
       // Set default value for branch and make it selected in branch select box
-      let defaultBranch = document.getElementById(`branch-${bank_branch_id}`);
-      if (defaultBranch) {
-        defaultBranch.selected = true;
-      }
+      branchRes.data.forEach((i) => {
+        if (i.branch_name === branch_name) {
+          defaultBranchId = i.branch_id;
+          let defaultBranch = document.getElementById(`branch-${i.branch_id}`);
+          if (defaultBranch) {
+            defaultBranch.selected = true;
+          }
+        }
+      });
     }
+
+    // default status
+    // let defaultStatus = document.getElementById(`status-${status}`);
+    // if (defaultStatus) {
+    //   defaultStatus.selected = true;
+    // }
 
     // default value of stressed status
     let defaultValueOfStressed = document.getElementById(
