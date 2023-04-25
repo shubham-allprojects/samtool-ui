@@ -667,8 +667,8 @@ const ViewAllProperties = () => {
       <div className="container-fluid section-padding">
         <div className="row min-100vh position-relative">
           <AdminSideBar
-            backToAllPropertiesPage={backToAllPropertiesPage}
             propertiesLinkDisabled={propertiesLinkDisabled}
+            backToAllPropertiesPage={backToAllPropertiesPage}
           />
           <div
             className="col-xl-10 col-lg-9 col-md-8"
