@@ -1734,14 +1734,22 @@ const ViewAllProperties = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="row text-end">
-                            <div className="col-12">
+                          <hr />
+                          <div className="row justify-content-end pt-2">
+                            <div className="col-xl-2 col-12">
                               <button
                                 disabled={updateBtnLoading ? true : false}
                                 type="submit"
-                                className="btn btn-primary"
+                                className="btn btn-primary w-100"
                               >
-                                Update
+                                {updateBtnLoading ? (
+                                  <>
+                                    <span className="spinner-grow spinner-grow-sm me-2"></span>
+                                    Updating...
+                                  </>
+                                ) : (
+                                  "Update"
+                                )}
                               </button>
                             </div>
                           </div>
