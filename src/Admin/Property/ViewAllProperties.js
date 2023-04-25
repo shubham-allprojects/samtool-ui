@@ -39,29 +39,7 @@ const ViewAllProperties = () => {
   ] = useState(true);
   const confirmDeletePropertyInputRef = useRef();
 
-  const getPropertiesFromApi = async (samplePage) => {
-    setLoading(true);
-    // Hide pagination while loading.
-    paginationRef.current.classList.add("d-none");
-    let dataToPost = {};
-    if (samplePage !== 1) {
-      dataToPost = {
-        batch_number: samplePage,
-        batch_size: propertiesPerPage,
-      };
-    } else {
-      dataToPost = {
-        batch_number: 1,
-        batch_size: propertiesPerPage,
-      };
-    }
-
-    const propertiesRes = await axios.post(
-      `/sam/v1/property/auth/all-properties`,
-      dataToPost,
-      { headers: authHeader }
-    );
-    console.log(propertiesRes.data);
+  const setPaginationTotalPagesCount = async () => {
     const propertyCountRes = await axios.get(
       `/sam/v1/property/auth/property-count`,
       { headers: authHeader }
@@ -80,6 +58,32 @@ const ViewAllProperties = () => {
     if (propertyCountRes.data) {
       setPageCount(totalPages);
     }
+  };
+
+  const getPropertiesFromApi = async () => {
+    setLoading(true);
+    // Hide pagination while loading.
+    paginationRef.current.classList.add("d-none");
+    let dataToPost = { batch_number: 1, batch_size: propertiesPerPage };
+    // if (samplePage !== 1) {
+    //   dataToPost = {
+    //     batch_number: samplePage,
+    //     batch_size: propertiesPerPage,
+    //   };
+    // } else {
+    //   dataToPost = {
+    //     batch_number: 1,
+    //     batch_size: propertiesPerPage,
+    //   };
+    // }
+
+    const propertiesRes = await axios.post(
+      `/sam/v1/property/auth/all-properties`,
+      dataToPost,
+      { headers: authHeader }
+    );
+    console.log(propertiesRes.data);
+    setPaginationTotalPagesCount();
 
     if (propertiesRes.data.length > 0) {
       paginationRef.current.classList.remove("d-none");
@@ -200,11 +204,12 @@ const ViewAllProperties = () => {
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
 
-    if (activePageFromLocal) {
-      getPropertiesFromApi(parseInt(activePageFromLocal));
-    } else {
-      getPropertiesFromApi(1);
-    }
+    // if (activePageFromLocal) {
+    //   getPropertiesFromApi(parseInt(activePageFromLocal));
+    // } else {
+    //   getPropertiesFromApi(1);
+    // }
+    getPropertiesFromApi();
   }, []);
 
   return (
