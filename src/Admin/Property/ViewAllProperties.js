@@ -176,6 +176,7 @@ const ViewAllProperties = () => {
   const backToAllPropertiesPage = () => {
     setPropertiesLinkDisabled(false);
     viewCurrentPropertyRef.current.classList.add("d-none");
+    editPropertyRef.current.classList.add("d-none");
     allPropertiesPageRef.current.classList.remove("d-none");
   };
 
