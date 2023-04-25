@@ -62,6 +62,7 @@ const ViewAllProperties = () => {
 
   const getPropertiesFromApi = async (samplePage) => {
     setLoading(true);
+    setPaginationTotalPagesCount();
     // Hide pagination while loading.
     paginationRef.current.classList.add("d-none");
     let dataToPost = {};
@@ -76,14 +77,12 @@ const ViewAllProperties = () => {
         batch_size: propertiesPerPage,
       };
     }
-
     const propertiesRes = await axios.post(
       `/sam/v1/property/auth/all-properties`,
       dataToPost,
       { headers: authHeader }
     );
     console.log(propertiesRes.data);
-    setPaginationTotalPagesCount();
 
     if (propertiesRes.data.length > 0) {
       paginationRef.current.classList.remove("d-none");
