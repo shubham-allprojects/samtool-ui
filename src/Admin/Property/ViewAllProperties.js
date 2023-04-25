@@ -39,7 +39,29 @@ const ViewAllProperties = () => {
   ] = useState(true);
   const confirmDeletePropertyInputRef = useRef();
 
-  const setPaginationTotalPagesCount = async () => {
+  const getPropertiesFromApi = async (samplePage) => {
+    setLoading(true);
+    // Hide pagination while loading.
+    paginationRef.current.classList.add("d-none");
+    let dataToPost = {};
+    if (samplePage !== 1) {
+      dataToPost = {
+        batch_number: samplePage,
+        batch_size: propertiesPerPage,
+      };
+    } else {
+      dataToPost = {
+        batch_number: 1,
+        batch_size: propertiesPerPage,
+      };
+    }
+
+    const propertiesRes = await axios.post(
+      `/sam/v1/property/auth/all-properties`,
+      dataToPost,
+      { headers: authHeader }
+    );
+    console.log(propertiesRes.data);
     const propertyCountRes = await axios.get(
       `/sam/v1/property/auth/property-count`,
       { headers: authHeader }
@@ -58,45 +80,20 @@ const ViewAllProperties = () => {
     if (propertyCountRes.data) {
       setPageCount(totalPages);
     }
-  };
-
-  const getPropertiesFromApi = async (samplePage) => {
-    setLoading(true);
-    setPaginationTotalPagesCount();
-    // Hide pagination while loading.
-    paginationRef.current.classList.add("d-none");
-    let dataToPost = {};
-    if (samplePage !== 1) {
-      dataToPost = {
-        batch_number: samplePage,
-        batch_size: propertiesPerPage,
-      };
-    } else {
-      dataToPost = {
-        batch_number: 1,
-        batch_size: propertiesPerPage,
-      };
-    }
-    const propertiesRes = await axios.post(
-      `/sam/v1/property/auth/all-properties`,
-      dataToPost,
-      { headers: authHeader }
-    );
-    console.log(propertiesRes.data);
 
     if (propertiesRes.data.length > 0) {
       paginationRef.current.classList.remove("d-none");
       setProperties(propertiesRes.data);
-      // if (activePageFromLocal) {
-      //   let allPages = document.querySelectorAll(".page-item");
-      //   allPages.forEach((item) => {
-      //     if (item.textContent === activePageFromLocal) {
-      //       item.classList.add("active");
-      //     } else {
-      //       item.classList.remove("active");
-      //     }
-      //   });
-      // }
+      if (activePageFromLocal) {
+        let allPages = document.querySelectorAll(".page-item");
+        allPages.forEach((item) => {
+          if (item.textContent === activePageFromLocal) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
+        });
+      }
     } else {
       paginationRef.current.classList.add("d-none");
     }
@@ -202,7 +199,6 @@ const ViewAllProperties = () => {
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
-
     if (activePageFromLocal) {
       getPropertiesFromApi(parseInt(activePageFromLocal));
     } else {
