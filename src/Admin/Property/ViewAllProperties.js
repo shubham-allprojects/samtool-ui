@@ -440,6 +440,7 @@ const ViewAllProperties = () => {
     if (propertyId) {
       allPropertiesPageRef.current.classList.add("d-none");
       editPropertyRef.current.classList.remove("d-none");
+      setPropertiesLinkDisabled(true);
       // Get details from api e.g. state, banks etc.
       const propertyCategoryRes = await axios.get(
         `/sam/v1/property/by-category`
