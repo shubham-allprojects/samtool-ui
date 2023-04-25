@@ -89,6 +89,7 @@ const ViewAllProperties = () => {
         allPages.forEach((item) => {
           if (item.textContent === activePageFromLocal) {
             item.classList.add("active");
+            toggleClassOfNextPrevPageItems();
           } else {
             item.classList.remove("active");
           }
@@ -117,10 +118,10 @@ const ViewAllProperties = () => {
     let currentPage = pageNumber.selected + 1;
     toggleActivePageClass(currentPage);
     setCurrentPageNumber(currentPage);
-    localStorage.setItem("currentPageOfAdminViewProperties", currentPage);
     const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
     setProperties(nextOrPrevPagePropertyData);
     toggleClassOfNextPrevPageItems();
+    localStorage.setItem("currentPageOfAdminViewProperties", currentPage);
   };
 
   // Fetch more jobs on page click.
