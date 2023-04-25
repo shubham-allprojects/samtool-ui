@@ -28,7 +28,6 @@ import ProtectSetPasswordPage from "./components/ProtectSetPasswordPage";
 import ProtectForgotPasswordPage from "./components/ProtectForgotPasswordPage";
 import { ToastContainer } from "react-toastify";
 import ManageUsers from "./Admin/User/ManageUsers";
-import EditProperty from "./Admin/Property/EditProperty";
 
 function App() {
   return (
@@ -126,16 +125,7 @@ function App() {
             path="/admin/property/add-property"
             element={
               // <AdminProtected>
-                <AddProperty />
-              // </AdminProtected>
-            }
-          />
-
-          <Route
-            path="/admin/property/update-property"
-            element={
-              // <AdminProtected>
-                <EditProperty />
+              <AddProperty />
               // </AdminProtected>
             }
           />
