@@ -33,6 +33,12 @@ const BreadCrumb = ({
     );
   };
 
+  let sampleLink = (
+    <NavLink to="/admin/property/properties" className="breadcrumb-item">
+      Properties
+    </NavLink>
+  );
+
   useEffect(() => {
     checkActivePages();
     // eslint-disable-next-line
@@ -96,18 +102,21 @@ const BreadCrumb = ({
           ) : isPropertyPageActive ? (
             <>
               {isAddPropertyPageActive ? (
-                <li className="breadcrumb-item text-secondary">Add Property</li>
+                <>
+                  {sampleLink}
+                  <li className="breadcrumb-item text-secondary">
+                    Add Property
+                  </li>
+                </>
               ) : isBulkUploadPropertyPageActive ? (
-                <li className="breadcrumb-item text-secondary">
-                  Upload Bulk Properties
-                </li>
+                <>
+                  {sampleLink}
+                  <li className="breadcrumb-item text-secondary">
+                    Upload Bulk Properties
+                  </li>
+                </>
               ) : isUpdatePropertyPageActive ? (
-                <NavLink
-                  to="/admin/property/properties"
-                  className="breadcrumb-item"
-                >
-                  Properties
-                </NavLink>
+                <></>
               ) : (
                 <li className="breadcrumb-item text-secondary">Properties</li>
               )}
