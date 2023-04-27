@@ -99,78 +99,82 @@ const EditUserDetails = () => {
     const [headers] = setHeaderAndUrl();
     if (data) {
       const userId = data.userId;
-      await axios
-        .get(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
-        .then(async (res) => {
-          const [, url] = setHeaderAndUrl();
-          const { individual_user, org_user, user_details } = res.data;
-          if (individual_user) {
+      try {
+        await axios
+          .get(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
+          .then(async (res) => {
+            const [, url] = setHeaderAndUrl();
+            const { individual_user, org_user, user_details } = res.data;
+            if (individual_user) {
+              const {
+                first_name,
+                middle_name,
+                last_name,
+                pan_number,
+                aadhar_number,
+              } = individual_user;
+              setIndividualUserDetails({
+                first_name: first_name,
+                middle_name: middle_name,
+                last_name: last_name,
+                pan_number: pan_number,
+                aadhar_number: aadhar_number,
+              });
+            } else if (org_user) {
+              const {
+                cin_number,
+                company_name,
+                gst_number,
+                organization_type,
+                tan_number,
+              } = org_user;
+              setOrgUserDetails({
+                cin_number: cin_number,
+                company_name: company_name,
+                gst_number: gst_number,
+                organization_type: organization_type,
+                tan_number: tan_number,
+              });
+            }
             const {
-              first_name,
-              middle_name,
-              last_name,
-              pan_number,
-              aadhar_number,
-            } = individual_user;
-            setIndividualUserDetails({
-              first_name: first_name,
-              middle_name: middle_name,
-              last_name: last_name,
-              pan_number: pan_number,
-              aadhar_number: aadhar_number,
+              user_type,
+              mobile_number,
+              locality,
+              city,
+              state_name,
+              state_id,
+              zip,
+              email_address,
+            } = user_details;
+            setUserType(user_type);
+            setIdOfState(parseInt(state_id));
+            setCommonUserDetails({
+              state_id: parseInt(state_id),
+              address: address,
+              mobile_number: mobile_number,
+              locality: locality,
+              city: city,
+              state_name: state_name,
+              zip: zip,
+              email: email_address,
+              user_type: user_type,
             });
-          } else if (org_user) {
-            const {
-              cin_number,
-              company_name,
-              gst_number,
-              organization_type,
-              tan_number,
-            } = org_user;
-            setOrgUserDetails({
-              cin_number: cin_number,
-              company_name: company_name,
-              gst_number: gst_number,
-              organization_type: organization_type,
-              tan_number: tan_number,
+            // Get Cities using state_id from api.
+            const cityByState = await axios.post(`${url}/by-city`, {
+              state_id: state_id,
             });
-          }
-          const {
-            user_type,
-            mobile_number,
-            locality,
-            city,
-            state_name,
-            state_id,
-            zip,
-            email_address,
-          } = user_details;
-          setUserType(user_type);
-          setIdOfState(parseInt(state_id));
-          setCommonUserDetails({
-            state_id: parseInt(state_id),
-            address: address,
-            mobile_number: mobile_number,
-            locality: locality,
-            city: city,
-            state_name: state_name,
-            zip: zip,
-            email: email_address,
-            user_type: user_type,
+            // Get States from api.
+            const allStates = await axios.get(`${url}/by-state`);
+            setAllUseStates({
+              ...allUseStates,
+              citiesFromApi: cityByState.data,
+              statesFromApi: allStates.data,
+            });
+            SetOriginalValuesToShow(user_details);
           });
-          // Get Cities using state_id from api.
-          const cityByState = await axios.post(`${url}/by-city`, {
-            state_id: state_id,
-          });
-          // Get States from api.
-          const allStates = await axios.get(`${url}/by-state`);
-          setAllUseStates({
-            ...allUseStates,
-            citiesFromApi: cityByState.data,
-            statesFromApi: allStates.data,
-          });
-          SetOriginalValuesToShow(user_details);
-        });
+      } catch (error) {
+        toast.error("Internal server error");
+      }
     }
   };
 
