@@ -300,20 +300,24 @@ const ManageUsers = ({ userType }) => {
       deleteRole(data);
     }
 
-    await axios
-      .post(
-        `/sam/v1/user-registration/auth/add-role`,
-        { user_id: user_id, roles: rolesToPost },
-        {
-          headers: authHeader,
-        }
-      )
-      .then((res) => {
-        if (res.data.status === 0) {
-          toast.success("Roles updated successfully");
-          commonFnForSaveAndCancelClick();
-        }
-      });
+    try {
+      await axios
+        .post(
+          `/sam/v1/user-registration/auth/add-role`,
+          { user_id: user_id, roles: rolesToPost },
+          {
+            headers: authHeader,
+          }
+        )
+        .then((res) => {
+          if (res.data.status === 0) {
+            toast.success("Roles updated successfully");
+            commonFnForSaveAndCancelClick();
+          }
+        });
+    } catch (error) {
+      toast.error("Internal server error");
+    }
   };
 
   useEffect(() => {
