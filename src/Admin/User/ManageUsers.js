@@ -201,7 +201,7 @@ const ManageUsers = ({ userType }) => {
         );
         setRoles(allRoles.data);
       } catch (error) {
-        toast.error("Failed to get user role");
+        toast.error("Failed to get user role/roles");
       }
     }
   };
