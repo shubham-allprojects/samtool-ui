@@ -58,24 +58,28 @@ const ManageUsers = ({ userType }) => {
       page_number: 1,
       number_of_records: records_per_page,
     };
-    await axios
-      .post(`${url}/get-users`, dataToPost, { headers: authHeader })
-      .then((res) => {
-        setUsers(res.data);
-        setLoading(false);
-      });
-    await axios
-      .get(`${url}/type-count`, { headers: authHeader })
-      .then((res) => {
-        let usersCount = null;
-        if (userType === "Individual User") {
-          usersCount = parseInt(res.data.individual_count);
-        } else {
-          usersCount = parseInt(res.data.org_count);
-        }
-        setTotalUsersCount(usersCount);
-        setPageCount(Math.ceil(usersCount / records_per_page));
-      });
+    try {
+      await axios
+        .post(`${url}/get-users`, dataToPost, { headers: authHeader })
+        .then((res) => {
+          setUsers(res.data);
+          setLoading(false);
+        });
+      await axios
+        .get(`${url}/type-count`, { headers: authHeader })
+        .then((res) => {
+          let usersCount = null;
+          if (userType === "Individual User") {
+            usersCount = parseInt(res.data.individual_count);
+          } else {
+            usersCount = parseInt(res.data.org_count);
+          }
+          setTotalUsersCount(usersCount);
+          setPageCount(Math.ceil(usersCount / records_per_page));
+        });
+    } catch (error) {
+      console.log("Internal server error");
+    }
   };
 
   // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
@@ -188,13 +192,17 @@ const ManageUsers = ({ userType }) => {
       defaultRoleIds = roleIdArray;
 
       // Get all roles.
-      const allRoles = await axios.get(
-        `/sam/v1/user-registration/auth/all-roles`,
-        {
-          headers: authHeader,
-        }
-      );
-      setRoles(allRoles.data);
+      try {
+        const allRoles = await axios.get(
+          `/sam/v1/user-registration/auth/all-roles`,
+          {
+            headers: authHeader,
+          }
+        );
+        setRoles(allRoles.data);
+      } catch (error) {
+        toast.error("Failed to get user role");
+      }
     }
   };
 

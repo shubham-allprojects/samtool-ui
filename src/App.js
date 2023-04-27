@@ -28,8 +28,16 @@ import ProtectSetPasswordPage from "./components/ProtectSetPasswordPage";
 import ProtectForgotPasswordPage from "./components/ProtectForgotPasswordPage";
 import { ToastContainer } from "react-toastify";
 import ManageUsers from "./Admin/User/ManageUsers";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    // if (localStorage.length !== 0) {
+    //   localStorage.clear();
+    //   window.location.reload();
+    // }
+  }, []);
+
   return (
     <>
       <ToastContainer autoClose="3000" />
