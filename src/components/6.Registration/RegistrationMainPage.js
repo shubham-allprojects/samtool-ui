@@ -347,33 +347,37 @@ const Registration = () => {
         contact_details: { ...formData.contact_details, [name]: value },
       });
       // If input field is email then post its value to api for validating.
-      await axios
-        .post(
-          `/sam/v1/customer-registration/email-validation`,
-          JSON.stringify({ email: value })
-        )
-        .then((res) => {
-          var emailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-          if (res.data.status === 1) {
-            setValidationDetails({
-              ...validationDetails,
-              emailValidationMessage: "Email id already exists.",
-            });
-            style.borderColor = "red";
-          } else if (!emailFormat.test(value)) {
-            setValidationDetails({
-              ...validationDetails,
-              emailValidationMessage: "Invalid email Id.",
-            });
-            style.borderColor = "red";
-          } else {
-            setValidationDetails({
-              ...validationDetails,
-              emailValidationMessage: "",
-            });
-            style.borderColor = "";
-          }
-        });
+      try {
+        await axios
+          .post(
+            `/sam/v1/customer-registration/email-validation`,
+            JSON.stringify({ email: value })
+          )
+          .then((res) => {
+            var emailFormat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+            if (res.data.status === 1) {
+              setValidationDetails({
+                ...validationDetails,
+                emailValidationMessage: "Email id already exists.",
+              });
+              style.borderColor = "red";
+            } else if (!emailFormat.test(value)) {
+              setValidationDetails({
+                ...validationDetails,
+                emailValidationMessage: "Invalid email Id.",
+              });
+              style.borderColor = "red";
+            } else {
+              setValidationDetails({
+                ...validationDetails,
+                emailValidationMessage: "",
+              });
+              style.borderColor = "";
+            }
+          });
+      } catch (error) {
+        toast.error("Error while validating email");
+      }
     } else if (name === "landline_number") {
       if (value) {
         setFormData({
