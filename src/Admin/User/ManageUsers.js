@@ -240,12 +240,16 @@ const ManageUsers = ({ userType }) => {
     otherDetailsOfUser;
   const { classOnEditClick, classOnPageLoad } = viewUserDetails;
 
-  const deleteRole = (data) => {
+  const deleteRole = async (data) => {
     let url = "/sam/v1/user-registration/auth/remove-role";
-    axios.delete(url, {
-      headers: authHeader,
-      data: data,
-    });
+    try {
+      await axios.delete(url, {
+        headers: authHeader,
+        data: data,
+      });
+    } catch (error) {
+      toast.error("Internal server error");
+    }
   };
 
   let array = [];
