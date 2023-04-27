@@ -376,7 +376,7 @@ const Registration = () => {
             }
           });
       } catch (error) {
-        toast.error("Error while validating email");
+        toast.error("Server error while validating email");
       }
     } else if (name === "landline_number") {
       if (value) {
@@ -394,35 +394,39 @@ const Registration = () => {
         contact_details: { ...formData.contact_details, [name]: value },
       });
       // If input field is mobile then post its value to api for validating.
-      await axios
-        .post(
-          `/sam/v1/customer-registration/mobilenumber-validation`,
-          JSON.stringify({ mobile_number: value })
-        )
-        .then((res) => {
-          if (res.data.status === 1) {
-            // Store validation message and validation color.
-            setValidationDetails({
-              ...validationDetails,
-              mobileValidationMessage: "Mobile number already exists.",
-            });
-            style.borderColor = "red";
-          } else if (res.data.status === 2) {
-            // Store validation message and validation color.
-            setValidationDetails({
-              ...validationDetails,
-              mobileValidationMessage: "Invalid Mobile Number Entered.",
-            });
-            style.borderColor = "red";
-          } else {
-            // Store validation message and validation color.
-            setValidationDetails({
-              ...validationDetails,
-              mobileValidationMessage: "",
-            });
-            style.borderColor = "";
-          }
-        });
+      try {
+        await axios
+          .post(
+            `/sam/v1/customer-registration/mobilenumber-validation`,
+            JSON.stringify({ mobile_number: value })
+          )
+          .then((res) => {
+            if (res.data.status === 1) {
+              // Store validation message and validation color.
+              setValidationDetails({
+                ...validationDetails,
+                mobileValidationMessage: "Mobile number already exists.",
+              });
+              style.borderColor = "red";
+            } else if (res.data.status === 2) {
+              // Store validation message and validation color.
+              setValidationDetails({
+                ...validationDetails,
+                mobileValidationMessage: "Invalid Mobile Number Entered.",
+              });
+              style.borderColor = "red";
+            } else {
+              // Store validation message and validation color.
+              setValidationDetails({
+                ...validationDetails,
+                mobileValidationMessage: "",
+              });
+              style.borderColor = "";
+            }
+          });
+      } catch (error) {
+        toast.error("Server error while validating mobile");
+      }
     }
   };
 
