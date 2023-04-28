@@ -3,15 +3,15 @@ import { NavLink } from "react-router-dom";
 import AdminSideBar from "./AdminSideBar";
 import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
-import { counter, rootTitle } from "../../src/CommonFunctions";
+import { rootTitle } from "../../src/CommonFunctions";
 import { Chart as CharJs, registerables } from "chart.js";
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 let organizationalUsersCount = 0; // Default count of organizational users.
 let individualUsersCount = 0; // Default count of individual users.
-let propertyStartCounter;
-let individualUsersStartCounter;
-let organizationalUsersStartCounter;
+// let propertyStartCounter;
+// let individualUsersStartCounter;
+// let organizationalUsersStartCounter;
 
 const AdminHomePage = () => {
   CharJs.register(...registerables);
@@ -24,6 +24,7 @@ const AdminHomePage = () => {
   const [typeWisePropertyDetails, setTypeWisePropertyDetails] = useState({});
   const [totalPropertiesCount, setTotalPropertiesCount] = useState(null);
   const [propertyCountLoading, setPropertyCountLoading] = useState(false);
+  const [usersCountLoading, setUsersCountLoading] = useState(false);
   const { propertyLabels, typeWiseCount } = typeWisePropertyDetails;
   const setHeaderAndUrl = () => {
     let headers = "";
@@ -36,6 +37,7 @@ const AdminHomePage = () => {
 
   const setTotalCountOfUsers = async () => {
     // Get and store the count of both types of Users i.e. Individual Users and Organizational Users.
+    setUsersCountLoading(true);
     const [headers, url] = setHeaderAndUrl();
     await axios.get(`${url}/type-count`, { headers: headers }).then((res) => {
       individualUsersCount = parseInt(res.data.individual_count);
@@ -45,33 +47,37 @@ const AdminHomePage = () => {
       countOfIndividualUsers: individualUsersCount,
       countOfOrgUsers: organizationalUsersCount,
     });
+
+    setTimeout(() => {
+      setUsersCountLoading(false);
+    }, 4000);
     // To show counter animation on admin Home page.
-    if (!individualUsersCount <= 0) {
-      individualUsersCount > 100
-        ? (individualUsersStartCounter = Math.floor(
-            (individualUsersCount * 80) / 100
-          ))
-        : (individualUsersStartCounter = 0);
-      counter(
-        "individualCount",
-        individualUsersStartCounter,
-        individualUsersCount,
-        1000
-      );
-    }
-    if (!organizationalUsersCount <= 0) {
-      organizationalUsersCount > 100
-        ? (organizationalUsersStartCounter = Math.floor(
-            (organizationalUsersCount * 80) / 100
-          ))
-        : (organizationalUsersStartCounter = 0);
-      counter(
-        "organizationalCount",
-        organizationalUsersStartCounter,
-        organizationalUsersCount,
-        1000
-      );
-    }
+    // if (!individualUsersCount <= 0) {
+    //   individualUsersCount > 100
+    //     ? (individualUsersStartCounter = Math.floor(
+    //         (individualUsersCount * 80) / 100
+    //       ))
+    //     : (individualUsersStartCounter = 0);
+    //   counter(
+    //     "individualCount",
+    //     individualUsersStartCounter,
+    //     individualUsersCount,
+    //     1000
+    //   );
+    // }
+    // if (!organizationalUsersCount <= 0) {
+    //   organizationalUsersCount > 100
+    //     ? (organizationalUsersStartCounter = Math.floor(
+    //         (organizationalUsersCount * 80) / 100
+    //       ))
+    //     : (organizationalUsersStartCounter = 0);
+    //   counter(
+    //     "organizationalCount",
+    //     organizationalUsersStartCounter,
+    //     organizationalUsersCount,
+    //     1000
+    //   );
+    // }
   };
 
   const [chart1Type, setChart1Type] = useState("pie");
@@ -224,7 +230,6 @@ const AdminHomePage = () => {
                         <div className="col-12 col-5 text-center fw-bold text-white hover-color-secondary fs-5">
                           <div>
                             <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1 me-4"></i>
-
                             {propertyCountLoading ? (
                               <span className="fs-2 spinner spinner-border"></span>
                             ) : (
@@ -266,9 +271,13 @@ const AdminHomePage = () => {
                         <div className="col-12 col-5 text-center fw-bold text-white hover-color-secondary fs-5">
                           <div>
                             <i className="bi bi-person-circle text-white hover-color-secondary icon fs-1 me-4"></i>
-                            <span className="fs-1" id="individualCount">
-                              0
-                            </span>
+                            {usersCountLoading ? (
+                              <span className="fs-2 spinner spinner-border"></span>
+                            ) : (
+                              <span className="fs-1" id="individualCount">
+                                {individualUsersCount}
+                              </span>
+                            )}
                           </div>
                           <span>Individual Users</span>
                         </div>
@@ -286,9 +295,13 @@ const AdminHomePage = () => {
                         <div className="col-12 col-5 text-center fw-bold text-white hover-color-secondary fs-5">
                           <div>
                             <i className="bi bi-laptop-fill text-white hover-color-secondary icon fs-1 me-4"></i>
-                            <span className="fs-1" id="organizationalCount">
-                              0
-                            </span>
+                            {usersCountLoading ? (
+                              <span className="fs-2 spinner spinner-border"></span>
+                            ) : (
+                              <span className="fs-1" id="organizationalCount">
+                                {organizationalUsersCount}
+                              </span>
+                            )}
                           </div>
                           <span>Organizational Users</span>
                         </div>
