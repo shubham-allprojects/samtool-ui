@@ -22,7 +22,8 @@ const AdminHomePage = () => {
   });
   const { countOfIndividualUsers, countOfOrgUsers } = countOfUsers;
   const [typeWisePropertyDetails, setTypeWisePropertyDetails] = useState({});
-
+  const [totalPropertiesCount, setTotalPropertiesCount] = useState(null);
+  const [propertyCountLoading, setPropertyCountLoading] = useState(false);
   const { propertyLabels, typeWiseCount } = typeWisePropertyDetails;
   const setHeaderAndUrl = () => {
     let headers = "";
@@ -156,6 +157,7 @@ const AdminHomePage = () => {
   };
 
   const getPropertyCountFromApi = async () => {
+    setPropertyCountLoading(true);
     const [headers] = setHeaderAndUrl();
     const propertyCountRes = await axios.get(
       `sam/v1/property/auth/property-count`,
@@ -172,19 +174,25 @@ const AdminHomePage = () => {
       labelWiseCount.push(type.count);
     });
 
+    setTotalPropertiesCount(totalCount);
+
     setTypeWisePropertyDetails({
       propertyTypesCount: arr.length,
       propertyLabels: labels,
       typeWiseCount: labelWiseCount,
     });
 
+    setTimeout(() => {
+      setPropertyCountLoading(false);
+    }, 2000);
+
     // To show counter animation on admin Home page.
-    if (!totalCount <= 0) {
-      totalCount > 100
-        ? (propertyStartCounter = Math.floor((totalCount * 80) / 100))
-        : (propertyStartCounter = 0);
-      counter("propertyCount", propertyStartCounter, totalCount, 1000);
-    }
+    // if (!totalCount <= 0) {
+    //   totalCount > 100
+    //     ? (propertyStartCounter = Math.floor((totalCount * 80) / 100))
+    //     : (propertyStartCounter = 0);
+    //   counter("propertyCount", propertyStartCounter, totalCount, 1000);
+    // }
   };
 
   useEffect(() => {
@@ -216,9 +224,14 @@ const AdminHomePage = () => {
                         <div className="col-12 col-5 text-center fw-bold text-white hover-color-secondary fs-5">
                           <div>
                             <i className="bi bi-buildings-fill text-white hover-color-secondary icon fs-1 me-4"></i>
-                            <span className="fs-1" id="propertyCount">
-                              0
-                            </span>
+
+                            {propertyCountLoading ? (
+                              <span className="fs-2 spinner spinner-border"></span>
+                            ) : (
+                              <span className="fs-1" id="propertyCount">
+                                {totalPropertiesCount}
+                              </span>
+                            )}
                           </div>
                           <span>Properties</span>
                         </div>
