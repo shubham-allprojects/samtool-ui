@@ -150,8 +150,9 @@ const UploadProperties = () => {
     try {
       await axios.post(url, detailsToPost, { headers: headers }).then((res) => {
         if (isLastChunk) {
+          console.log(res.data);
           if (res.data.msg !== 0) {
-            onCancelClick();
+            // onCancelClick();
             toast.error("Error while uploading files");
             reloadPage();
           } else {
@@ -219,9 +220,9 @@ const UploadProperties = () => {
   }, []);
 
   const reloadPage = () => {
-    setTimeout(() => {
-      window.location.reload();
-    }, 4000);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 4000);
   };
 
   return (
