@@ -55,7 +55,6 @@ const ViewAllProperties = () => {
       dataToPost,
       { headers: authHeader }
     );
-    console.log(propertiesRes.data);
     const propertyCountRes = await axios.get(
       `/sam/v1/property/auth/property-count`,
       { headers: authHeader }
@@ -167,7 +166,6 @@ const ViewAllProperties = () => {
       { headers: authHeader }
     );
     setSelectedProperty(currentPropertyRes.data);
-    console.log(currentPropertyRes.data);
     viewCurrentPropertyRef.current.classList.remove("d-none");
     window.scrollTo(0, 0);
     allPropertiesPageRef.current.classList.add("d-none");
@@ -383,7 +381,6 @@ const ViewAllProperties = () => {
   const onFormSubmit = async (e) => {
     e.preventDefault();
     setUpdateBtnLoading(true);
-    console.log(JSON.stringify(formData));
     await axios
       .post(`/sam/v1/customer-registration/zipcode-validation`, {
         zipcode: String(zip),
@@ -415,7 +412,6 @@ const ViewAllProperties = () => {
         setAreaValidationMessage("");
       }
     } else {
-      console.log(formData);
       try {
         await axios
           .post(`/sam/v1/property/auth/update-property`, formData, {
@@ -553,7 +549,6 @@ const ViewAllProperties = () => {
           },
         });
       }
-      console.log(currentPropertyRes.data);
     }
   };
 

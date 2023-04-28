@@ -144,7 +144,6 @@ const UploadProperties = () => {
       data: data,
     };
     console.log(detailsToPost);
-
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
     try {

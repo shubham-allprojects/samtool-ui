@@ -78,7 +78,7 @@ const ManageUsers = ({ userType }) => {
           setPageCount(Math.ceil(usersCount / records_per_page));
         });
     } catch (error) {
-      console.log("Internal server error");
+      toast.error("Internal server error");
     }
   };
 

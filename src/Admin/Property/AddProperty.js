@@ -239,7 +239,6 @@ const AddProperty = () => {
         setAreaValidationMessage("");
       }
     } else {
-      console.log(formData);
       try {
         await axios
           .post(`/sam/v1/property/auth/single-property`, formData, {
