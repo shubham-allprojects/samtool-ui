@@ -94,6 +94,7 @@ const SinglePropertyDocumentsUpload = () => {
 
   const onOtherRadioCheck = (e) => {
     if (e.target.checked === true) {
+      setImageAllowedExtensions([]);
       setDocumentsInfo({
         ...documentsInfo,
         category_id: otherCategoryId,
