@@ -408,7 +408,7 @@ const SinglePropertyDocumentsUpload = () => {
                 </div>
                 <hr />
                 <div className="row">
-                  <div className="col-xl-3">
+                  <div className="col-xl-3 col-md-6">
                     <div className="form-group">
                       <label
                         htmlFor="category_text"
@@ -422,7 +422,7 @@ const SinglePropertyDocumentsUpload = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-3">
+                  <div className="col-xl-3 col-md-6 mt-md-0 mt-3">
                     <div className="form-group">
                       <label
                         htmlFor="file-upload"
@@ -451,7 +451,7 @@ const SinglePropertyDocumentsUpload = () => {
                       </small>
                     </div>
                   </div>
-                  <div className="col-xl-3">
+                  <div className="col-xl-3 col-md-6 mt-xl-0 mt-3">
                     <div className="form-group">
                       <label
                         htmlFor="description"
@@ -471,7 +471,7 @@ const SinglePropertyDocumentsUpload = () => {
                       ></input>
                     </div>
                   </div>
-                  <div className="col-xl-3">
+                  <div className="col-xl-3 col-md-6 mt-xl-0 mt-3">
                     <div className="form-group">
                       <label
                         htmlFor="action-buttons"
@@ -480,7 +480,10 @@ const SinglePropertyDocumentsUpload = () => {
                       >
                         Action
                       </label>
-                      <div id="action-buttons">
+                      <div
+                        id="action-buttons"
+                        className="d-flex justify-content-between"
+                      >
                         <button
                           disabled={
                             savedImageFiles.length === 0 ||
@@ -507,7 +510,8 @@ const SinglePropertyDocumentsUpload = () => {
                           )}
                         </button>
                         <button
-                          className="btn btn-secondary ms-xl-2"
+                          className="btn btn-secondary"
+                          style={{ width: "22%" }}
                           onClick={onResetBtnClick}
                           disabled={imageLoading ? true : false}
                         >
