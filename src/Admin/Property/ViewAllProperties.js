@@ -894,27 +894,34 @@ const ViewAllProperties = () => {
                           <h4 className="fw-bold">Update Property</h4>
                           <hr />
                           <div className="row mb-3">
-                            <div className="col-12">
-                              <button type="button" className="btn btn-primary">
-                                <span className="common-btn-font">
-                                  Property ID
-                                </span>
-                                <span className="badge bg-light text-primary ms-2">
-                                  {property_id}
-                                </span>
-                              </button>
+                            <div className="col-12 d-md-flex justify-content-md-start">
+                              <div>
+                                <button
+                                  type="button"
+                                  className="btn btn-primary"
+                                >
+                                  <span className="common-btn-font">
+                                    Property ID
+                                  </span>
+                                  <span className="badge bg-light text-primary ms-2">
+                                    {property_id}
+                                  </span>
+                                </button>
+                              </div>
 
-                              <button
-                                type="button"
-                                className="btn btn-primary ms-2"
-                              >
-                                <span className="common-btn-font">
-                                  Property Number
-                                </span>
-                                <span className="badge bg-light text-primary ms-2">
-                                  {property_number}
-                                </span>
-                              </button>
+                              <div>
+                                <button
+                                  type="button"
+                                  className="btn btn-primary ms-md-2 mt-md-0 mt-3"
+                                >
+                                  <span className="common-btn-font">
+                                    Property Number
+                                  </span>
+                                  <span className="badge bg-light text-primary ms-2">
+                                    {property_number}
+                                  </span>
+                                </button>
+                              </div>
                             </div>
                           </div>
                           {/* Row 1 - Basic Details */}
