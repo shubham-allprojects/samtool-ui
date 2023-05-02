@@ -344,7 +344,7 @@ const SinglePropertyDocumentsUpload = () => {
                             </div>
                           );
                         })}
-                        <div className="col-4">
+                        <div className="col-xl-4">
                           <div className="form-check form-check-inline">
                             <input
                               className="form-check-input category-checks"
@@ -369,7 +369,7 @@ const SinglePropertyDocumentsUpload = () => {
                               onSubmit={onSaveOtherCategoryClick}
                               className="row"
                             >
-                              <div className="col-7">
+                              <div className="col-xl-7 col-lg-4 col-md-5 col-8">
                                 <div className="form-group">
                                   <input
                                     type="text"
@@ -384,7 +384,7 @@ const SinglePropertyDocumentsUpload = () => {
                                   />
                                 </div>
                               </div>
-                              <div className="col-5">
+                              <div className="col-xl-5 col-lg-4 col-md-5 col-4 p-0">
                                 <button
                                   type="submit"
                                   className="btn btn-primary"
