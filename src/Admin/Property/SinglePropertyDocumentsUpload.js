@@ -318,7 +318,7 @@ const SinglePropertyDocumentsUpload = () => {
                           }
                           return (
                             <div
-                              className={`col-4 ${
+                              className={`col-xl-4 ${
                                 category.category_Name === "Other"
                                   ? "d-none"
                                   : ""
