@@ -28,15 +28,26 @@ import ProtectSetPasswordPage from "./components/ProtectSetPasswordPage";
 import ProtectForgotPasswordPage from "./components/ProtectForgotPasswordPage";
 import { ToastContainer } from "react-toastify";
 import ManageUsers from "./Admin/User/ManageUsers";
-import { useEffect } from "react";
+// import { useEffect } from "react";
+// import axios from "axios";
 
 function App() {
-  useEffect(() => {
-    // if (localStorage.length !== 0) {
-    //   localStorage.clear();
-    //   window.location.reload();
-    // }
-  }, []);
+  // const logOutUserIfTokenIsNotValid = async () => {
+  //   const data = JSON.parse(localStorage.getItem("data"));
+  //   if (data) {
+  //     try {
+  //       await axios.get(`/sam/v1/property/auth/property-count`, {
+  //         headers: { Authorization: data.logintoken },
+  //       });
+  //     } catch (error) {
+  //       localStorage.clear();
+  //       window.location.reload();
+  //     }
+  //   }
+  // };
+  // useEffect(() => {
+  //   logOutUserIfTokenIsNotValid();
+  // }, []);
 
   return (
     <>
