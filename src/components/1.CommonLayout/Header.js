@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import CommonNavLinks from "./CommonNavLinks";
+import axios from "axios";
 
 function Header({ backToSearchResults, disableHomeLink }) {
   // This useState will store data from localStorage such as login-status, role and email of user.
@@ -25,14 +26,24 @@ function Header({ backToSearchResults, disableHomeLink }) {
   };
 
   // Save status of login.
-  const setStatusOfLogin = () => {
+  const setStatusOfLogin = async () => {
     // data is the loggedIn user's data from localStorage.
     const data = JSON.parse(localStorage.getItem("data"));
-    if (data) {
+    try {
+      await axios.get(`/sam/v1/property/auth/property-count`, {
+        headers: { Authorization: data.logintoken },
+      });
       setAllUseStates({
         loginStatus: true,
         roleId: data.roleId,
         userEmail: data.user,
+      });
+    } catch (error) {
+      localStorage.clear();
+      setAllUseStates({
+        loginStatus: false,
+        roleId: null,
+        userEmail: "",
       });
     }
   };
