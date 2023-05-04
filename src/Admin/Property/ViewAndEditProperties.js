@@ -15,7 +15,7 @@ let authHeader = "";
 let propertiesPerPage = 4;
 let zipError = false;
 let areaError = false;
-const ViewAllProperties = () => {
+const ViewAndEditProperties = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   if (data) {
     authHeader = { Authorization: data.logintoken };
@@ -1824,4 +1824,4 @@ const ViewAllProperties = () => {
   );
 };
 
-export default ViewAllProperties;
+export default ViewAndEditProperties;
