@@ -12,7 +12,7 @@ import ScrollButton from "./components/ScrollButton";
 import Contact from "./components/4.Contact/Contact";
 import PageNotFound from "./components/PageNotFound";
 import AdminHomePage from "./Admin/AdminHomePage";
-import ViewAndEditProperties from "./Admin/Property/ViewAndEditProperties";
+import ViewEditDeleteProperties from "./Admin/Property/ViewEditDeleteProperties";
 import ViewProperty from "./Admin/Property/ViewProperty";
 import UploadProperties from "./Admin/Property/UploadProperties";
 import ChangePassword from "./components/5.Login/ChangePassword";
@@ -117,7 +117,7 @@ function App() {
             path="/admin/property/properties/*"
             element={
               <AdminProtected>
-                <ViewAndEditProperties />
+                <ViewEditDeleteProperties />
               </AdminProtected>
             }
           />
