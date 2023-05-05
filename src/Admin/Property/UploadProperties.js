@@ -143,13 +143,17 @@ const UploadProperties = () => {
       file_name: file.name,
       data: data,
     };
-    console.log(detailsToPost);
+    // console.log(detailsToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
     try {
       await axios.post(url, detailsToPost, { headers: headers }).then((res) => {
         if (isLastChunk) {
-          console.log(res.data);
+          let arr = [];
+          res.data.forEach((data) => {
+            arr.push(data.property_number);
+          });
+          console.log(arr);
           if (res.data.msg !== 0) {
             // onCancelClick();
             toast.error("Error while uploading files");
