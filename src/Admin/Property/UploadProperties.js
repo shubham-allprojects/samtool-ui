@@ -153,17 +153,17 @@ const UploadProperties = () => {
           if (res.data.msg !== 0) {
             // onCancelClick();
             toast.error("Error while uploading files");
-            reloadPage();
+            // reloadPage();
           } else {
             toast.success("File uploaded successfully");
-            reloadPage();
+            // reloadPage();
           }
         }
       });
     } catch (error) {
       if (isLastChunk) {
         toast.error("Internal server error");
-        reloadPage();
+        // reloadPage();
       }
     }
 
