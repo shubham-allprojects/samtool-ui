@@ -29,22 +29,24 @@ function Header({ backToSearchResults, disableHomeLink }) {
   const setStatusOfLogin = async () => {
     // data is the loggedIn user's data from localStorage.
     const data = JSON.parse(localStorage.getItem("data"));
-    try {
-      await axios.get(`/sam/v1/property/auth/property-count`, {
-        headers: { Authorization: data.logintoken },
-      });
-      setAllUseStates({
-        loginStatus: true,
-        roleId: data.roleId,
-        userEmail: data.user,
-      });
-    } catch (error) {
-      localStorage.clear();
-      setAllUseStates({
-        loginStatus: false,
-        roleId: null,
-        userEmail: "",
-      });
+    if (data) {
+      try {
+        await axios.get(`/sam/v1/property/auth/property-count`, {
+          headers: { Authorization: data.logintoken },
+        });
+        setAllUseStates({
+          loginStatus: true,
+          roleId: data.roleId,
+          userEmail: data.user,
+        });
+      } catch (error) {
+        localStorage.removeItem("data");
+        setAllUseStates({
+          loginStatus: false,
+          roleId: null,
+          userEmail: "",
+        });
+      }
     }
   };
 
