@@ -48,9 +48,8 @@ const AdminHomePage = () => {
       countOfOrgUsers: organizationalUsersCount,
     });
 
-    setTimeout(() => {
-      setUsersCountLoading(false);
-    }, 4000);
+    setUsersCountLoading(false);
+
     // To show counter animation on admin Home page.
     // if (!individualUsersCount <= 0) {
     //   individualUsersCount > 100
@@ -188,9 +187,7 @@ const AdminHomePage = () => {
       typeWiseCount: labelWiseCount,
     });
 
-    setTimeout(() => {
-      setPropertyCountLoading(false);
-    }, 2000);
+    setPropertyCountLoading(false);
 
     // To show counter animation on admin Home page.
     // if (!totalCount <= 0) {

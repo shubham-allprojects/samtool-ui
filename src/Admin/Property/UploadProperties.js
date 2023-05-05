@@ -14,6 +14,13 @@ let chunkSize = 0;
 let temp = 0;
 
 const UploadProperties = () => {
+  // Bootstrap alert details.
+  const [alertDetails, setAlertDetails] = useState({
+    alertVisible: false,
+    alertMsg: "",
+    alertClr: "",
+  });
+  const { alertMsg, alertClr, alertVisible } = alertDetails;
   const [files, setFiles] = useState([]);
   const [saveFile, setSavedFile] = useState([]);
   const [currentFileIndex, setCurrentFileIndex] = useState(null);
@@ -148,15 +155,28 @@ const UploadProperties = () => {
     const isLastChunk = currentChunkIndex === chunks;
     try {
       await axios.post(url, detailsToPost, { headers: headers }).then((res) => {
+        console.log(res.data, isLastChunk);
         if (isLastChunk) {
           let arr = [];
           res.data.forEach((data) => {
             arr.push(data.property_number);
           });
-          console.log(arr);
+          let duplicateProperties = arr.join(", ");
+          let alertMessage = "";
+          if (arr.length > 1) {
+            alertMessage = `Failed to upload properties with property numbers ${duplicateProperties}`;
+          } else {
+            alertMessage = `Failed to upload property with property number ${duplicateProperties}`;
+          }
           if (res.data.msg !== 0) {
             // onCancelClick();
-            toast.error("Error while uploading files");
+            // toast.error("Error while uploading files");
+            setAlertDetails({
+              alertVisible: true,
+              alertMsg: alertMessage,
+              alertClr: "danger",
+            });
+            window.scrollTo(0, 0);
             // reloadPage();
           } else {
             toast.success("File uploaded successfully");
@@ -243,6 +263,28 @@ const UploadProperties = () => {
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8">
             <BreadCrumb />
+
+            <div
+              className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
+                alertVisible ? "" : "d-none"
+              }`}
+              role="alert"
+            >
+              <span>
+                <i
+                  className={`bi bi-exclamation-triangle-fill me-2 ${
+                    alertClr === "danger" || alertClr === "warning"
+                      ? ""
+                      : "d-none"
+                  }`}
+                ></i>
+              </span>
+              <small className="fw-bold">{alertMsg}</small>
+              <i
+                onClick={() => setAlertDetails({ alertVisible: false })}
+                className="bi bi-x login-alert-close-btn close"
+              ></i>
+            </div>
             <div className="container-fluid mt-4">
               <div className="row justify-content-center">
                 <div className="col-xl-7 col-md-11 shadow p-md-4 p-3 mb-5 upload-file-main-wrapper">
