@@ -143,12 +143,6 @@ function Home() {
   const getPropertyData = async (e) => {
     e.preventDefault();
     setLoading(true);
-    paginationRef.current.classList.add("d-none");
-    document.getElementById("properties").scrollIntoView(true);
-    // Unhide div and display search results in card format.
-    document.querySelectorAll(".display-on-search").forEach((item) => {
-      item.classList.remove("d-none");
-    });
     let apis = {
       searchAPI: `${url}/count-category`,
     };
@@ -158,23 +152,34 @@ function Home() {
       batch_number: 1,
     };
 
-    // This api is only for getting all the records and count length of array of properties so that we can decide page numbers for pagination.
-    await axios.post(apis.searchAPI, dataForTotalCount).then((res) => {
-      if (res.data) {
-        setPageCount(Math.ceil(res.data.length / batch_size));
-      }
-    });
-    // Post data and get Searched result from response.
-    await axios.post(apis.searchAPI, dataToPost).then((res) => {
-      // Store Searched results into propertyData useState.
-      setPropertyData(res.data);
+    try {
+      // This api is only for getting all the records and count length of array of properties so that we can decide page numbers for pagination.
+      await axios.post(apis.searchAPI, dataForTotalCount).then((res) => {
+        if (res.data) {
+          setPageCount(Math.ceil(res.data.length / batch_size));
+        }
+      });
+      // Post data and get Searched result from response.
+      await axios.post(apis.searchAPI, dataToPost).then((res) => {
+        // Store Searched results into propertyData useState.
+        setPropertyData(res.data);
+        setLoading(false);
+        if (res.data) {
+          paginationRef.current.classList.add("d-none");
+          document.getElementById("properties").scrollIntoView(true);
+          // Unhide div and display search results in card format.
+          document.querySelectorAll(".display-on-search").forEach((item) => {
+            item.classList.remove("d-none");
+          });
+          paginationRef.current.classList.remove("d-none");
+        } else {
+          paginationRef.current.classList.add("d-none");
+        }
+      });
+    } catch (error) {
+      toast.error("Internal server error");
       setLoading(false);
-      if (res.data) {
-        paginationRef.current.classList.remove("d-none");
-      } else {
-        paginationRef.current.classList.add("d-none");
-      }
-    });
+    }
   };
 
   // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
