@@ -124,9 +124,9 @@ function App() {
           <Route
             path="/admin/property/add-property"
             element={
-              // <AdminProtected>
-              <AddProperty />
-              // </AdminProtected>
+              <AdminProtected>
+                <AddProperty />
+              </AdminProtected>
             }
           />
 
@@ -157,9 +157,9 @@ function App() {
           <Route
             path="/admin/property/single-property-documents-upload"
             element={
-              // <AdminProtected>
-              <SinglePropertyDocumentsUpload />
-              // </AdminProtected>
+              <AdminProtected>
+                <SinglePropertyDocumentsUpload />
+              </AdminProtected>
             }
           />
           <Route
@@ -173,9 +173,9 @@ function App() {
           <Route
             path="/admin/property/upload-properties"
             element={
-              // <AdminProtected>
-              <UploadProperties />
-              // </AdminProtected>
+              <AdminProtected>
+                <UploadProperties />
+              </AdminProtected>
             }
           />
 
