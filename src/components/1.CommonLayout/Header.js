@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function Header({ backToSearchResults, disableHomeLink }) {
+  const data = JSON.parse(localStorage.getItem("data"));
   // This useState will store data from localStorage such as login-status, role and email of user.
   const [allUseStates, setAllUseStates] = useState({
     loginStatus: false,
@@ -28,32 +29,30 @@ function Header({ backToSearchResults, disableHomeLink }) {
 
   // Save status of login.
   const setStatusOfLogin = async () => {
-    // data is the loggedIn user's data from localStorage.
-    const data = JSON.parse(localStorage.getItem("data"));
-    if (data) {
-      try {
-        await axios.get(`/sam/v1/property/auth/property-count`, {
-          headers: { Authorization: data.logintoken },
-        });
-        setAllUseStates({
-          loginStatus: true,
-          roleId: data.roleId,
-          userEmail: data.user,
-        });
-      } catch (error) {
-        localStorage.removeItem("data");
-        setAllUseStates({
-          loginStatus: false,
-          roleId: null,
-          userEmail: "",
-        });
-        goTo("/login");
-      }
+    try {
+      await axios.get(`/sam/v1/property/auth/property-count`, {
+        headers: { Authorization: data.logintoken },
+      });
+      setAllUseStates({
+        loginStatus: true,
+        roleId: data.roleId,
+        userEmail: data.user,
+      });
+    } catch (error) {
+      localStorage.removeItem("data");
+      setAllUseStates({
+        loginStatus: false,
+        roleId: null,
+        userEmail: "",
+      });
+      goTo("/login");
     }
   };
 
   useEffect(() => {
-    setStatusOfLogin();
+    if (data) {
+      setStatusOfLogin();
+    }
   }, []);
 
   return (
