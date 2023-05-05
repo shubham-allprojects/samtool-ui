@@ -325,7 +325,9 @@ const ManageUsers = ({ userType }) => {
   };
 
   useEffect(() => {
-    getAllUsers();
+    if (data) {
+      getAllUsers();
+    }
     // eslint-disable-next-line
   }, []);
 

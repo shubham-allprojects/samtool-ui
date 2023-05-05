@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import CommonNavLinks from "./CommonNavLinks";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function Header({ backToSearchResults, disableHomeLink }) {
   // This useState will store data from localStorage such as login-status, role and email of user.
@@ -46,6 +47,7 @@ function Header({ backToSearchResults, disableHomeLink }) {
           roleId: null,
           userEmail: "",
         });
+        goTo("/login");
       }
     }
   };

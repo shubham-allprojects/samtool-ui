@@ -280,7 +280,9 @@ const SinglePropertyDocumentsUpload = () => {
     let propertyNumber = localStorage.getItem("property_number");
     if (propertyNumber) {
       setCurrentPropertyNumber(propertyNumber);
-      getCategoriesFromDB();
+      if (data) {
+        getCategoriesFromDB();
+      }
     }
   }, []);
 

@@ -264,7 +264,9 @@ const AddProperty = () => {
   useEffect(() => {
     notSoldCheckRef.current.setAttribute("checked", "true");
     defaultIsStressedRef.current.setAttribute("checked", "true");
-    getDataFromApi();
+    if (data) {
+      getDataFromApi();
+    }
   }, []);
 
   return (

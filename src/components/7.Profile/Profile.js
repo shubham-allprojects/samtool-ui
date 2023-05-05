@@ -114,7 +114,9 @@ const Profile = () => {
 
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - PROFILE";
-    getUserProfileDetails();
+    if (data) {
+      getUserProfileDetails();
+    }
     // eslint-disable-next-line
   }, []);
 

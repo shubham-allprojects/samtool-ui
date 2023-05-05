@@ -659,7 +659,9 @@ const ViewEditDeleteProperties = () => {
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
-    getPropertiesFromApi();
+    if (data) {
+      getPropertiesFromApi();
+    }
   }, []);
 
   return (

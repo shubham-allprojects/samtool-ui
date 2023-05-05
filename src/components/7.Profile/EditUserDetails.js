@@ -371,7 +371,9 @@ const EditUserDetails = () => {
 
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - EDIT DETAILS";
-    getUserToEdit();
+    if (data) {
+      getUserToEdit();
+    }
     // eslint-disable-next-line
   }, []);
 
