@@ -143,6 +143,8 @@ function Home() {
   const getPropertyData = async (e) => {
     e.preventDefault();
     setLoading(true);
+    paginationRef.current.classList.add("d-none");
+    document.getElementById("properties").scrollIntoView(true);
     let apis = {
       searchAPI: `${url}/count-category`,
     };
@@ -165,8 +167,6 @@ function Home() {
         setPropertyData(res.data);
         setLoading(false);
         if (res.data) {
-          paginationRef.current.classList.add("d-none");
-          document.getElementById("properties").scrollIntoView(true);
           // Unhide div and display search results in card format.
           document.querySelectorAll(".display-on-search").forEach((item) => {
             item.classList.remove("d-none");
@@ -177,6 +177,7 @@ function Home() {
         }
       });
     } catch (error) {
+      document.getElementById("properties").scrollIntoView(false);
       toast.error("Internal server error");
       setLoading(false);
     }
