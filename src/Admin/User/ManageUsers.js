@@ -77,7 +77,9 @@ const ManageUsers = ({ userType }) => {
           setTotalUsersCount(usersCount);
           setPageCount(Math.ceil(usersCount / records_per_page));
         });
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
