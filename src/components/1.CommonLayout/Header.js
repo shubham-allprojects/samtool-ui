@@ -30,25 +30,30 @@ function Header({ backToSearchResults, disableHomeLink }) {
   // Save status of login.
   const setStatusOfLogin = async () => {
     if (data) {
-      try {
-        let res = await axios.get(`/sam/v1/user-registration/logout`, {
-          headers: { Authorization: data.logintoken },
-        });
-        if (res.data === "Valid user") {
-          setAllUseStates({
-            loginStatus: true,
-            roleId: data.roleId,
-            userEmail: data.user,
-          });
-        } else {
-          localStorage.removeItem("data");
-          setAllUseStates({
-            loginStatus: false,
-            roleId: null,
-            userEmail: "",
-          });
-        }
-      } catch (error) {}
+      setAllUseStates({
+        loginStatus: true,
+        roleId: data.roleId,
+        userEmail: data.user,
+      });
+      // try {
+      //   let res = await axios.get(`/sam/v1/user-registration/logout`, {
+      //     headers: { Authorization: data.logintoken },
+      //   });
+      //   if (res.data === "Valid user") {
+      //     setAllUseStates({
+      //       loginStatus: true,
+      //       roleId: data.roleId,
+      //       userEmail: data.user,
+      //     });
+      //   } else {
+      //     localStorage.removeItem("data");
+      //     setAllUseStates({
+      //       loginStatus: false,
+      //       roleId: null,
+      //       userEmail: "",
+      //     });
+      //   }
+      // } catch (error) {}
     }
   };
 
