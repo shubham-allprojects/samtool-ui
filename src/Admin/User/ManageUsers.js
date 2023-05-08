@@ -77,9 +77,7 @@ const ManageUsers = ({ userType }) => {
           setTotalUsersCount(usersCount);
           setPageCount(Math.ceil(usersCount / records_per_page));
         });
-    } catch (error) {
-      toast.error("Internal server error");
-    }
+    } catch (error) {}
   };
 
   // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
@@ -200,9 +198,7 @@ const ManageUsers = ({ userType }) => {
           }
         );
         setRoles(allRoles.data);
-      } catch (error) {
-        toast.error("Failed to get user role/roles");
-      }
+      } catch (error) {}
     }
   };
 

@@ -170,7 +170,6 @@ const UploadProperties = () => {
           }
           if (res.data.msg !== 0) {
             // onCancelClick();
-            // toast.error("Error while uploading files");
             setAlertDetails({
               alertVisible: true,
               alertMsg: alertMessage,

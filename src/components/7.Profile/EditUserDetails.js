@@ -172,9 +172,7 @@ const EditUserDetails = () => {
             });
             SetOriginalValuesToShow(user_details);
           });
-      } catch (error) {
-        toast.error("Internal server error");
-      }
+      } catch (error) {}
     }
   };
 
