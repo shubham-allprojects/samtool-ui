@@ -164,9 +164,9 @@ const UploadProperties = () => {
           let duplicateProperties = arr.join(", ");
           let alertMessage = "";
           if (arr.length > 1) {
-            alertMessage = `Failed to upload properties with property numbers ${duplicateProperties}`;
+            alertMessage = `Duplicate Records Found; Failed to upload properties with property numbers ${duplicateProperties}`;
           } else {
-            alertMessage = `Failed to upload property with property number ${duplicateProperties}`;
+            alertMessage = `Duplicate Record Found; Failed to upload property with property number ${duplicateProperties}`;
           }
           if (res.data.msg !== 0) {
             // onCancelClick();
