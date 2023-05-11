@@ -360,7 +360,7 @@ const ViewEditDeleteProperties = () => {
           [name]: value,
           possession_of_the_property: "Owner / Customer consent",
         });
-      } else if (value === "No") {
+      } else if (value === "no") {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
         setFormData({
           ...formData,
@@ -1065,7 +1065,7 @@ const ViewEditDeleteProperties = () => {
                                   </option>
                                   <option
                                     id="title_clear_property-No"
-                                    value="No"
+                                    value="no"
                                   >
                                     No
                                   </option>
@@ -1145,8 +1145,8 @@ const ViewEditDeleteProperties = () => {
                                     className="form-check-input"
                                     type="radio"
                                     name="is_stressed"
-                                    value="No"
-                                    id="stressed-No"
+                                    value="no"
+                                    id="stressed-no"
                                     onChange={onInputChange}
                                   />
                                   <label
@@ -1452,8 +1452,8 @@ const ViewEditDeleteProperties = () => {
                                     className="form-check-input"
                                     type="radio"
                                     name="is_sold"
-                                    value="No"
-                                    id="is_sold-No"
+                                    value="no"
+                                    id="is_sold-no"
                                     onChange={onInputChange}
                                     ref={notSoldCheckRef}
                                   />
@@ -1492,8 +1492,8 @@ const ViewEditDeleteProperties = () => {
                                     Yes
                                   </option>
                                   <option
-                                    value="No"
-                                    id="is_available_for_sale-No"
+                                    value="no"
+                                    id="is_available_for_sale-no"
                                   >
                                     No
                                   </option>

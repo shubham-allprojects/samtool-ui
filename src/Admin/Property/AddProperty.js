@@ -23,7 +23,7 @@ const AddProperty = () => {
 
   const goTo = useNavigate();
   const [formData, setFormData] = useState({
-    is_sold: "No",
+    is_sold: "no",
     is_available_for_sale: "yes",
     sale_availability_date: "2005-12-26 23:50:30",
     status: "yes",
@@ -133,7 +133,7 @@ const AddProperty = () => {
         setFormData({
           ...formData,
           [name]: value,
-          is_available_for_sale: "No",
+          is_available_for_sale: "no",
         });
       } else {
         setFormData({
@@ -188,7 +188,7 @@ const AddProperty = () => {
           [name]: value,
           possession_of_the_property: "Owner / Customer consent",
         });
-      } else if (value === "No") {
+      } else if (value === "no") {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
         setFormData({
           ...formData,
@@ -428,7 +428,7 @@ const AddProperty = () => {
                               >
                                 <option value=""></option>
                                 <option value="yes">Yes</option>
-                                <option value="No">No</option>
+                                <option value="no">No</option>
                               </select>
                             </div>
                           </div>
@@ -776,7 +776,7 @@ const AddProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_sold"
-                                  value="No"
+                                  value="no"
                                   onChange={onInputChange}
                                   ref={notSoldCheckRef}
                                 />
@@ -811,7 +811,7 @@ const AddProperty = () => {
                                 <option id="notForSale" value="yes">
                                   Yes
                                 </option>
-                                <option value="No">No</option>
+                                <option value="no">No</option>
                               </select>
                             </div>
                           </div>

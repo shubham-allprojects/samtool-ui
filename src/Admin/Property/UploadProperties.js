@@ -179,14 +179,14 @@ const UploadProperties = () => {
             // reloadPage();
           } else {
             toast.success("File uploaded successfully");
-            // reloadPage();
+            reloadPage();
           }
         }
       });
     } catch (error) {
       if (isLastChunk) {
         toast.error("Internal server error");
-        // reloadPage();
+        reloadPage();
       }
     }
 
