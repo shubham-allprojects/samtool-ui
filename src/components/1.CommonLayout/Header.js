@@ -29,8 +29,8 @@ function Header({ backToSearchResults, disableHomeLink }) {
 
   // Save status of login.
   const setStatusOfLogin = async () => {
-    if(!window.location.href.includes("/login")){
-      localStorage.removeItem("userSession")
+    if (!window.location.href.includes("/login")) {
+      localStorage.removeItem("userSession");
     }
     if (data) {
       // setAllUseStates({
@@ -42,18 +42,19 @@ function Header({ backToSearchResults, disableHomeLink }) {
         let res = await axios.get(`/sam/v1/user-registration/logout`, {
           headers: { Authorization: data.logintoken },
         });
-        if (res.data === "Valid user") {
-          setAllUseStates({
-            loginStatus: true,
-            roleId: data.roleId,
-            userEmail: data.user,
-          });
-        } else {
+        console.log(res);
+        if (res.data === "Session expired or Invalid user") {
           localStorage.removeItem("data");
           setAllUseStates({
             loginStatus: false,
             roleId: null,
             userEmail: "",
+          });
+        } else {
+          setAllUseStates({
+            loginStatus: true,
+            roleId: data.roleId,
+            userEmail: data.user,
           });
         }
       } catch (error) {}
