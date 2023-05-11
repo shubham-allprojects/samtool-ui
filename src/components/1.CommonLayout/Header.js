@@ -29,6 +29,9 @@ function Header({ backToSearchResults, disableHomeLink }) {
 
   // Save status of login.
   const setStatusOfLogin = async () => {
+    if(!window.location.href.includes("/login")){
+      localStorage.removeItem("userSession")
+    }
     if (data) {
       // setAllUseStates({
       //   loginStatus: true,

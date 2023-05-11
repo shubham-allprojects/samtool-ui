@@ -121,6 +121,14 @@ const LoginMainPage = () => {
 
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - LOGIN";
+    let userSession = localStorage.getItem("userSession");
+    if (userSession) {
+      setAlertDetails({
+        alertVisible: true,
+        alertMsg: "Your session has expired",
+        alertClr: "warning",
+      });
+    }
   }, []);
 
   return (

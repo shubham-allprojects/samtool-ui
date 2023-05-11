@@ -16,6 +16,7 @@ const ProtectedForLoggedInUser = ({ children }) => {
         });
         if (res.data !== "Valid user") {
           localStorage.removeItem("data");
+          localStorage.setItem("userSession", "invalid");
           goTo("/login");
         }
       } catch (error) {}
