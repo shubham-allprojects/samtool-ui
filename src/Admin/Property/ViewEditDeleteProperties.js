@@ -413,11 +413,13 @@ const ViewEditDeleteProperties = () => {
       }
     } else {
       try {
+        console.log(JSON.stringify(formData));
         await axios
           .post(`/sam/v1/property/auth/update-property`, formData, {
             headers: authHeader,
           })
           .then((res) => {
+            console.log(res.data);
             if (res.data.status === 0) {
               resetValidationsOnSubmit();
               toast.success("Property updated successfully");
