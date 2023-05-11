@@ -45,6 +45,8 @@ function Header({ backToSearchResults, disableHomeLink }) {
         console.log(res);
         if (res.data === "Session expired or Invalid user") {
           localStorage.removeItem("data");
+          localStorage.setItem("userSession", "invalid");
+          goTo("/login");
           setAllUseStates({
             loginStatus: false,
             roleId: null,
