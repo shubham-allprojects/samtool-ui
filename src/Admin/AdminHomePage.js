@@ -9,9 +9,6 @@ import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 let organizationalUsersCount = 0; // Default count of organizational users.
 let individualUsersCount = 0; // Default count of individual users.
-// let propertyStartCounter;
-// let individualUsersStartCounter;
-// let organizationalUsersStartCounter;
 
 const AdminHomePage = () => {
   CharJs.register(...registerables);
@@ -22,7 +19,7 @@ const AdminHomePage = () => {
   });
   const { countOfIndividualUsers, countOfOrgUsers } = countOfUsers;
   const [typeWisePropertyDetails, setTypeWisePropertyDetails] = useState({});
-  const [totalPropertiesCount, setTotalPropertiesCount] = useState(null);
+  const [totalPropertiesCount, setTotalPropertiesCount] = useState(0);
   const [propertyCountLoading, setPropertyCountLoading] = useState(false);
   const [usersCountLoading, setUsersCountLoading] = useState(false);
   const { propertyLabels, typeWiseCount } = typeWisePropertyDetails;
