@@ -383,6 +383,7 @@ const UploadProperties = () => {
                   type="button"
                   className="btn-close"
                   onClick={() => {
+                    setErrorModalDetails({ errorModalOpen: false });
                     window.location.reload();
                   }}
                 ></button>
