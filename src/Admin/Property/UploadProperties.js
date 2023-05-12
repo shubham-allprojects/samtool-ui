@@ -387,7 +387,7 @@ const UploadProperties = () => {
                   }}
                 ></button>
               </div>
-              <div className="modal-body">
+              <div className="modal-body common-btn-font">
                 Failed to upload properties with property numbers
               </div>
             </div>
