@@ -849,6 +849,10 @@ input:-webkit-autofill:active {
   border-color: #842029;
 }
 
+.duplicate-property-error-modal .btn-close:focus {
+  box-shadow: 0 0 0 0.25rem rgba(132, 32, 41, 0.24);
+}
+
 .admin-sidebar-btn-close {
   border-radius: 50% !important;
 }

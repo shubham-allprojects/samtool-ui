@@ -16,7 +16,7 @@ let temp = 0;
 const UploadProperties = () => {
   // Bootstrap alert details.
   const [errorModalDetails, setErrorModalDetails] = useState({
-    errorModalOpen: true,
+    errorModalOpen: false,
     errorHeading: "",
     errorMessage: "",
   });
@@ -176,7 +176,6 @@ const UploadProperties = () => {
               errorMessage: customErrorMessage,
             });
             window.scrollTo(0, 0);
-            // reloadPage();
           } else {
             toast.success("File uploaded successfully");
             reloadPage();
@@ -263,6 +262,19 @@ const UploadProperties = () => {
           <div className="col-xl-10 col-lg-9 col-md-8">
             <BreadCrumb />
             <div className="container-fluid mt-4">
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  setErrorModalDetails({
+                    errorModalOpen: true,
+                    errorHeading: "Duplicate Records Error",
+                    errorMessage:
+                      "Failed to upload properties with property numbers NEW1, NEW2, NEW3, NEW4",
+                  });
+                }}
+              >
+                Test
+              </button>
               <div className="row justify-content-center">
                 <div className="col-xl-7 col-md-11 shadow p-md-4 p-3 mb-5 upload-file-main-wrapper">
                   <div className="">
@@ -375,9 +387,8 @@ const UploadProperties = () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">
-                  {errorHeading}{" "}
                   <i className="bi bi-exclamation-triangle-fill me-2"></i>
-                  Duplicate Records Error
+                  {errorHeading}
                 </h5>
                 <button
                   type="button"
@@ -388,9 +399,7 @@ const UploadProperties = () => {
                   }}
                 ></button>
               </div>
-              <div className="modal-body common-btn-font">
-                Failed to upload properties with property numbers
-              </div>
+              <div className="modal-body common-btn-font">{errorMessage}</div>
             </div>
           </div>
         </div>
