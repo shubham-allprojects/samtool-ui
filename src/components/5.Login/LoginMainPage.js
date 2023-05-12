@@ -128,20 +128,12 @@ const LoginMainPage = () => {
         alertMsg: "Your session has expired",
         alertClr: "warning",
       });
-      localStorage.removeItem("userSession");
     }
   }, []);
 
   return (
     <Layout>
-      <section
-        onLoad={() => {
-          if (!localStorage.getItem("userSession")) {
-            setAlertDetails({ alertVisible: false });
-          }
-        }}
-        className="login-wrapper min-100vh section-padding"
-      >
+      <section className="login-wrapper min-100vh section-padding">
         <div className="container-fluid mt-5">
           <div className="row justify-content-evenly">
             <div className="col-lg-5 col-xl-5 order-lg-1 order-2 mt-lg-0 mt-5 mb-5">
