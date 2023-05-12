@@ -15,12 +15,12 @@ let temp = 0;
 
 const UploadProperties = () => {
   // Bootstrap alert details.
-  const [alertDetails, setAlertDetails] = useState({
-    alertVisible: false,
-    alertMsg: "",
-    alertClr: "",
+  const [errorModalDetails, setErrorModalDetails] = useState({
+    errorModalOpen: true,
+    errorHeading: "",
+    errorMessage: "",
   });
-  const { alertMsg, alertClr, alertVisible } = alertDetails;
+  const { errorModalOpen, errorHeading, errorMessage } = errorModalDetails;
   const [files, setFiles] = useState([]);
   const [saveFile, setSavedFile] = useState([]);
   const [currentFileIndex, setCurrentFileIndex] = useState(null);
@@ -162,18 +162,18 @@ const UploadProperties = () => {
             arr.push(data.property_number);
           });
           let duplicateProperties = arr.join(", ");
-          let alertMessage = "";
+          let customErrorMessage = "";
           if (arr.length > 1) {
-            alertMessage = `Duplicate Records Found; Failed to upload properties with property numbers ${duplicateProperties}`;
+            customErrorMessage = `Failed to upload properties with property numbers ${duplicateProperties}`;
           } else {
-            alertMessage = `Duplicate Record Found; Failed to upload property with property number ${duplicateProperties}`;
+            customErrorMessage = `Failed to upload property with property number ${duplicateProperties}`;
           }
           if (res.data.msg !== 0) {
             // onCancelClick();
-            setAlertDetails({
-              alertVisible: true,
-              alertMsg: alertMessage,
-              alertClr: "danger",
+            setErrorModalDetails({
+              errorModalOpen: true,
+              errorHeading: "Duplicate Records Error",
+              errorMessage: customErrorMessage,
             });
             window.scrollTo(0, 0);
             // reloadPage();
@@ -242,9 +242,9 @@ const UploadProperties = () => {
   }, []);
 
   const reloadPage = () => {
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 4000);
+    setTimeout(() => {
+      window.location.reload();
+    }, 4000);
   };
 
   return (
@@ -262,28 +262,6 @@ const UploadProperties = () => {
           <AdminSideBar />
           <div className="col-xl-10 col-lg-9 col-md-8">
             <BreadCrumb />
-
-            <div
-              className={`login-alert alert alert-${alertClr} alert-dismissible show d-flex align-items-center ${
-                alertVisible ? "" : "d-none"
-              }`}
-              role="alert"
-            >
-              <span>
-                <i
-                  className={`bi bi-exclamation-triangle-fill me-2 ${
-                    alertClr === "danger" || alertClr === "warning"
-                      ? ""
-                      : "d-none"
-                  }`}
-                ></i>
-              </span>
-              <small className="fw-bold">{alertMsg}</small>
-              <i
-                onClick={() => setAlertDetails({ alertVisible: false })}
-                className="bi bi-x login-alert-close-btn close"
-              ></i>
-            </div>
             <div className="container-fluid mt-4">
               <div className="row justify-content-center">
                 <div className="col-xl-7 col-md-11 shadow p-md-4 p-3 mb-5 upload-file-main-wrapper">
@@ -381,6 +359,36 @@ const UploadProperties = () => {
                     </button>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Modal */}
+        <div
+          className={`modal fade ${errorModalOpen ? "show d-block" : "d-none"}`}
+          id="duplicatePropertyErrorModal"
+          tabIndex="-1"
+          aria-hidden="true"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
+        >
+          <div className="modal-dialog modal-dialog-centered modal-sm duplicate-property-error-modal">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  {errorHeading}{" "}
+                  <i className="bi bi-exclamation-triangle-fill me-2"></i>
+                  Duplicate Records Error
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                ></button>
+              </div>
+              <div className="modal-body">
+                Failed to upload properties with property numbers
               </div>
             </div>
           </div>

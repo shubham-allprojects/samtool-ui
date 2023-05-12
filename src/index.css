@@ -829,9 +829,24 @@ input:-webkit-autofill:active {
 .confirm-delete-modal {
   --bs-modal-width: 400px !important;
 }
+
 .confirm-delete-modal .modal-content {
   background: var(--bg-gradient-blue);
   color: white;
+}
+
+.duplicate-property-error-modal {
+  --bs-modal-width: 600px !important;
+}
+
+.duplicate-property-error-modal .modal-content {
+  background: #f8d7da;
+  color: #842029;
+  border-color: #f5c2c7;
+}
+
+.duplicate-property-error-modal .modal-header {
+  border-color: #842029;
 }
 
 .admin-sidebar-btn-close {
