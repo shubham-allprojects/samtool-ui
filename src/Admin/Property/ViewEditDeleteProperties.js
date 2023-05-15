@@ -270,7 +270,8 @@ const ViewEditDeleteProperties = () => {
     } else if (name === "bank_branch_id") {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "is_stressed") {
-      commonFnToSaveFormData(name, value);
+      console.log(value);
+      commonFnToSaveFormData(name, parseInt(value));
     }
     // else if (name === "status") {
     //   commonFnToSaveFormData(name, value);
@@ -297,27 +298,27 @@ const ViewEditDeleteProperties = () => {
       commonFnToSaveFormData(name, value);
     } else if (name === "is_sold") {
       const notForSale = document.getElementById("notForSale");
-      if (value === "yes") {
+      if (value === "1") {
         notSoldCheckRef.current.removeAttribute("checked");
         if (notForSale) {
           notForSale.selected = true;
         }
         setFormData({
           ...formData,
-          [name]: value,
-          is_available_for_sale: "no",
+          [name]: parseInt(value),
+          is_available_for_sale: 0,
         });
       } else {
         setFormData({
           ...formData,
-          [name]: value,
-          is_available_for_sale: "yes",
+          [name]: parseInt(value),
+          is_available_for_sale: 1,
         });
       }
     } else if (name === "is_available_for_sale") {
       setFormData({
         ...formData,
-        [name]: value,
+        [name]: parseInt(value),
       });
     }
     // else if (name === "sale_availability_date") {
@@ -353,18 +354,18 @@ const ViewEditDeleteProperties = () => {
         commonFnToSaveAddressDetails(name, parseInt(value));
       }
     } else if (name === "title_clear_property") {
-      if (value === "yes") {
+      if (value === "1") {
         setPossessionCheckValue({ titleClearYes: true, titleClearNo: false });
         setFormData({
           ...formData,
-          [name]: value,
+          [name]: parseInt(value),
           possession_of_the_property: "Owner / Customer consent",
         });
-      } else if (value === "no") {
+      } else if (value === "0") {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
         setFormData({
           ...formData,
-          [name]: value,
+          [name]: parseInt(value),
           possession_of_the_property: "Legally attached",
         });
       } else {
@@ -520,8 +521,8 @@ const ViewEditDeleteProperties = () => {
           type_id: defaultTypeId,
           bank_branch_id: parseInt(bank_branch_id),
           property_number: property_number,
-          is_stressed: is_stressed,
-          is_available_for_sale: is_available_for_sale,
+          is_stressed: parseInt(is_stressed),
+          is_available_for_sale: parseInt(is_available_for_sale),
           sale_availability_date: "2005-12-26 23:50:30",
           saleable_area: saleable_area,
           carpet_area: carpet_area,
@@ -531,11 +532,11 @@ const ViewEditDeleteProperties = () => {
           completion_date: completion_date,
           purchase_date: purchase_date,
           mortgage_date: mortgage_date,
-          is_sold: is_sold,
+          is_sold: parseInt(is_sold),
           status: status,
           territory: territory,
           possession_of_the_property: possession_of_the_property,
-          title_clear_property: title_clear_property,
+          title_clear_property: parseInt(title_clear_property),
           distress_value: distress_value,
           address_details: {
             address: locality,
@@ -651,7 +652,7 @@ const ViewEditDeleteProperties = () => {
     if (defaultTitleClear) {
       defaultTitleClear.selected = true;
     }
-    if (title_clear_property === "yes") {
+    if (title_clear_property === "1") {
       setPossessionCheckValue({ titleClearYes: true, titleClearNo: false });
     } else {
       setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
@@ -1057,16 +1058,10 @@ const ViewEditDeleteProperties = () => {
                                   required
                                 >
                                   <option value=""></option>
-                                  <option
-                                    id="title_clear_property-yes"
-                                    value="yes"
-                                  >
+                                  <option id="title_clear_property-1" value="1">
                                     Yes
                                   </option>
-                                  <option
-                                    id="title_clear_property-no"
-                                    value="no"
-                                  >
+                                  <option id="title_clear_property-0" value="0">
                                     No
                                   </option>
                                 </select>
@@ -1129,8 +1124,8 @@ const ViewEditDeleteProperties = () => {
                                     className="form-check-input"
                                     type="radio"
                                     name="is_stressed"
-                                    value="yes"
-                                    id="stressed-yes"
+                                    value="1"
+                                    id="stressed-1"
                                     onChange={onInputChange}
                                   />
                                   <label
@@ -1145,8 +1140,8 @@ const ViewEditDeleteProperties = () => {
                                     className="form-check-input"
                                     type="radio"
                                     name="is_stressed"
-                                    value="no"
-                                    id="stressed-no"
+                                    value="0"
+                                    id="stressed-0"
                                     onChange={onInputChange}
                                   />
                                   <label
@@ -1436,8 +1431,8 @@ const ViewEditDeleteProperties = () => {
                                     className="form-check-input"
                                     type="radio"
                                     name="is_sold"
-                                    value="yes"
-                                    id="is_sold-yes"
+                                    value="1"
+                                    id="is_sold-1"
                                     onChange={onInputChange}
                                   />
                                   <label
@@ -1452,8 +1447,8 @@ const ViewEditDeleteProperties = () => {
                                     className="form-check-input"
                                     type="radio"
                                     name="is_sold"
-                                    value="no"
-                                    id="is_sold-no"
+                                    value="0"
+                                    id="is_sold-0"
                                     onChange={onInputChange}
                                     ref={notSoldCheckRef}
                                   />
@@ -1468,7 +1463,7 @@ const ViewEditDeleteProperties = () => {
                             </div>
                             <div
                               className={`col-xl-4 col-md-6 mb-3 mb-xl-0 ${
-                                is_sold === "yes" ? "d-none" : ""
+                                is_sold === 1 ? "d-none" : ""
                               }`}
                             >
                               <div className="form-group">
@@ -1486,43 +1481,20 @@ const ViewEditDeleteProperties = () => {
                                   required
                                 >
                                   <option
-                                    value="yes"
-                                    id="is_available_for_sale-yes"
+                                    value="1"
+                                    id="is_available_for_sale-1"
                                   >
                                     Yes
                                   </option>
                                   <option
-                                    value="no"
-                                    id="is_available_for_sale-no"
+                                    value="0"
+                                    id="is_available_for_sale-0"
                                   >
                                     No
                                   </option>
                                 </select>
                               </div>
                             </div>
-                            {/* <div className={`col-xl-4 col-md-6`}>
-                            <div className="form-group">
-                              <label
-                                htmlFor="sale_availability_date"
-                                className="form-label common-btn-font"
-                              >
-                                Sale availability
-                              </label>
-                              <input
-                                className="form-control"
-                                type="date"
-                                id="sale_availability_date"
-                                name="sale_availability_date"
-                                defaultValue={
-                                  sale_availability_date
-                                    ? sale_availability_date.split(" ")[0]
-                                    : ""
-                                }
-                                onChange={onInputChange}
-                                required={is_sold === "yes" ? false : true}
-                              />
-                            </div>
-                          </div> */}
                           </div>
                           {/* Row 5 - Address Details */}
                           <div className="row">
