@@ -26,16 +26,16 @@ import SinglePropertyDocumentsUpload from "./Admin/Property/SinglePropertyDocume
 import ProtectedPages from "./components/ProtectedPages";
 import ProtectSetPasswordPage from "./components/ProtectSetPasswordPage";
 import ProtectForgotPasswordPage from "./components/ProtectForgotPasswordPage";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import ManageUsers from "./Admin/User/ManageUsers";
 import { useEffect } from "react";
 
 function App() {
-  const MINUTE_MS = 60000;
+  const MINUTE_MS = 10000;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("calls every minute");
+      toast.success("calls every minute");
     }, MINUTE_MS);
 
     return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
