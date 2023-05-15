@@ -29,17 +29,36 @@ import ProtectForgotPasswordPage from "./components/ProtectForgotPasswordPage";
 import { ToastContainer, toast } from "react-toastify";
 import ManageUsers from "./Admin/User/ManageUsers";
 import { useEffect } from "react";
+import axios from "axios";
 
 function App() {
-  const MINUTE_MS = 10000;
+  const MINUTE_MS = 65000;
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     toast.success("calls every minute");
-  //   }, MINUTE_MS);
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const data = JSON.parse(localStorage.getItem("data"));
+      console.log("api start");
+      if (data) {
+        try {
+          let res = await axios.get(`/sam/v1/user-registration/logout`, {
+            headers: { Authorization: data.logintoken },
+          });
 
-  //   return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  // }, []);
+          if (res.data !== "Session expired or Invalid user") {
+            let remainingTime = parseInt(res.data.split(" ")[4]);
+            console.log(remainingTime);
+            if (remainingTime === 5) {
+              toast.warn("Your session will expire in 5 minute");
+            }
+          }
+        } catch (error) {
+          console.log("error");
+        }
+      }
+    }, MINUTE_MS);
+
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  }, []);
   return (
     <>
       <ToastContainer autoClose="3000" />
