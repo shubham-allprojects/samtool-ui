@@ -116,7 +116,7 @@ const ViewProperty = ({ selectedProperty }) => {
                     <div className="card p-2 text-center border-primary border-2 border">
                       <small className="text-muted">Is stressed</small>
                       <small className="common-btn-font text-capitalize">
-                        {is_stressed}
+                        {is_stressed === "1" ? "Yes" : "No"}
                       </small>
                     </div>
                   </div>
@@ -376,7 +376,9 @@ const ViewProperty = ({ selectedProperty }) => {
                 {is_sold ? (
                   <div className="col-md-4">
                     <small className="text-muted">Is Sold?</small>
-                    <h5 className="mt-1 text-capitalize">{is_sold}</h5>
+                    <h5 className="mt-1 text-capitalize">
+                      {is_sold === "1" ? "Yes" : "No"}
+                    </h5>
                   </div>
                 ) : (
                   <></>
@@ -385,7 +387,7 @@ const ViewProperty = ({ selectedProperty }) => {
                   <div className="col-md-4">
                     <small className="text-muted">Is Available For Sale?</small>
                     <h5 className="mt-1 text-capitalize">
-                      {is_available_for_sale}
+                      {is_available_for_sale === "1" ? "Yes" : "No"}
                     </h5>
                   </div>
                 ) : (
@@ -429,7 +431,7 @@ const ViewProperty = ({ selectedProperty }) => {
                   <div className="col-md-6 mt-2">
                     <small className="text-muted">Title clear property</small>
                     <h5 className="mt-1 text-capitalize">
-                      {title_clear_property}
+                      {title_clear_property === "1" ? "Yes" : "No"}
                     </h5>
                   </div>
                 ) : (
