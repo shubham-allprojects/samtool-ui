@@ -155,8 +155,8 @@ const UploadProperties = () => {
     const isLastChunk = currentChunkIndex === chunks;
     try {
       await axios.post(url, detailsToPost, { headers: headers }).then((res) => {
-        console.log(res.data, isLastChunk);
         if (isLastChunk) {
+          console.log(res.data, isLastChunk);
           let arr = [];
           res.data.forEach((data) => {
             arr.push(data.property_number);
@@ -168,24 +168,23 @@ const UploadProperties = () => {
           } else {
             customErrorMessage = `Failed to upload property with property number ${duplicateProperties}`;
           }
-          if (res.data.msg !== 0) {
-            // onCancelClick();
+          if (res.data.msg === 0) {
+            toast.success("File uploaded successfully");
+            // reloadPage();
+          } else {
             setErrorModalDetails({
               errorModalOpen: true,
               errorHeading: "Duplicate Records Error",
               errorMessage: customErrorMessage,
             });
             window.scrollTo(0, 0);
-          } else {
-            toast.success("File uploaded successfully");
-            reloadPage();
           }
         }
       });
     } catch (error) {
       if (isLastChunk) {
-        toast.error("Internal server error");
-        reloadPage();
+        // toast.error("Internal server error");
+        // reloadPage();
       }
     }
 
@@ -262,19 +261,6 @@ const UploadProperties = () => {
           <div className="col-xl-10 col-lg-9 col-md-8">
             <BreadCrumb />
             <div className="container-fluid mt-4">
-              <button
-                className="btn btn-primary"
-                onClick={() => {
-                  setErrorModalDetails({
-                    errorModalOpen: true,
-                    errorHeading: "Duplicate Records Error",
-                    errorMessage:
-                      "Failed to upload properties with property numbers NEW1, NEW2, NEW3, NEW4",
-                  });
-                }}
-              >
-                Test
-              </button>
               <div className="row justify-content-center">
                 <div className="col-xl-7 col-md-11 shadow p-md-4 p-3 mb-5 upload-file-main-wrapper">
                   <div className="">

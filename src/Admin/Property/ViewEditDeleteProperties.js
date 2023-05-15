@@ -305,7 +305,7 @@ const ViewEditDeleteProperties = () => {
         setFormData({
           ...formData,
           [name]: value,
-          is_available_for_sale: "No",
+          is_available_for_sale: "no",
         });
       } else {
         setFormData({
@@ -1005,7 +1005,7 @@ const ViewEditDeleteProperties = () => {
                               </div>
                             </div>
                             <div
-                              className="col-xl-4 col-md-6 mt-md-0 mt-3"
+                              className="col-xl-4 col-md-6 mt-xl-0 mt-3"
                               // ref={branchSelectBoxRef}
                             >
                               <div className="form-group">
@@ -1064,7 +1064,7 @@ const ViewEditDeleteProperties = () => {
                                     Yes
                                   </option>
                                   <option
-                                    id="title_clear_property-No"
+                                    id="title_clear_property-no"
                                     value="no"
                                   >
                                     No

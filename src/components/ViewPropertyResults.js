@@ -247,7 +247,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                             </div>
                             <div
                               className={`${
-                                is_available_for_sale && is_sold === "No"
+                                is_available_for_sale && is_sold === "no"
                                   ? ""
                                   : "d-none"
                               } col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 `}
