@@ -23,11 +23,11 @@ const AddProperty = () => {
 
   const goTo = useNavigate();
   const [formData, setFormData] = useState({
-    is_sold: "no",
-    is_available_for_sale: "yes",
+    is_sold: 0,
+    is_available_for_sale: 1,
     sale_availability_date: "2005-12-26 23:50:30",
     status: "yes",
-    is_stressed: "yes",
+    is_stressed: 1,
     property_id: 0,
     address_details: {
       locality: "Urban",
@@ -98,7 +98,7 @@ const AddProperty = () => {
     } else if (name === "bank_branch_id") {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "is_stressed") {
-      commonFnToSaveFormData(name, value);
+      commonFnToSaveFormData(name, parseInt(value));
     }
     // else if (name === "status") {
     //   commonFnToSaveFormData(name, value);
@@ -125,27 +125,27 @@ const AddProperty = () => {
       commonFnToSaveFormData(name, value);
     } else if (name === "is_sold") {
       const notForSale = document.getElementById("notForSale");
-      if (value === "yes") {
+      if (value === "1") {
         notSoldCheckRef.current.removeAttribute("checked");
         if (notForSale) {
           notForSale.selected = true;
         }
         setFormData({
           ...formData,
-          [name]: value,
-          is_available_for_sale: "no",
+          [name]: parseInt(value),
+          is_available_for_sale: 0,
         });
       } else {
         setFormData({
           ...formData,
-          [name]: value,
-          is_available_for_sale: "yes",
+          [name]: parseInt(value),
+          is_available_for_sale: 1,
         });
       }
     } else if (name === "is_available_for_sale") {
       setFormData({
         ...formData,
-        [name]: value,
+        [name]: parseInt(value),
       });
     }
     // else if (name === "sale_availability_date") {
@@ -181,18 +181,18 @@ const AddProperty = () => {
         commonFnToSaveAddressDetails(name, parseInt(value));
       }
     } else if (name === "title_clear_property") {
-      if (value === "yes") {
+      if (value === "1") {
         setPossessionCheckValue({ titleClearYes: true, titleClearNo: false });
         setFormData({
           ...formData,
-          [name]: value,
+          [name]: parseInt(value),
           possession_of_the_property: "Owner / Customer consent",
         });
-      } else if (value === "no") {
+      } else if (value === "0") {
         setPossessionCheckValue({ titleClearYes: false, titleClearNo: true });
         setFormData({
           ...formData,
-          [name]: value,
+          [name]: parseInt(value),
           possession_of_the_property: "Legally attached",
         });
       } else {
@@ -427,8 +427,8 @@ const AddProperty = () => {
                                 required
                               >
                                 <option value=""></option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
                               </select>
                             </div>
                           </div>
@@ -489,7 +489,7 @@ const AddProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_stressed"
-                                  value="yes"
+                                  value="1"
                                   onChange={onInputChange}
                                   ref={defaultIsStressedRef}
                                 />
@@ -761,7 +761,7 @@ const AddProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_sold"
-                                  value="yes"
+                                  value="1"
                                   onChange={onInputChange}
                                 />
                                 <label
@@ -776,7 +776,7 @@ const AddProperty = () => {
                                   className="form-check-input"
                                   type="radio"
                                   name="is_sold"
-                                  value="no"
+                                  value="0"
                                   onChange={onInputChange}
                                   ref={notSoldCheckRef}
                                 />
@@ -791,7 +791,7 @@ const AddProperty = () => {
                           </div>
                           <div
                             className={`col-xl-4 col-md-6 mb-3 mb-xl-0 ${
-                              is_sold === "yes" ? "d-none" : ""
+                              is_sold === 1 ? "d-none" : ""
                             }`}
                           >
                             <div className="form-group">
@@ -808,16 +808,16 @@ const AddProperty = () => {
                                 onChange={onInputChange}
                                 required
                               >
-                                <option id="notForSale" value="yes">
+                                <option id="notForSale" value="1">
                                   Yes
                                 </option>
-                                <option value="no">No</option>
+                                <option value="0">No</option>
                               </select>
                             </div>
                           </div>
                           {/* <div
                             className={`col-xl-4 col-md-6 ${
-                              is_sold === "yes" ? "d-none" : ""
+                              is_sold === "1" ? "d-none" : ""
                             }`}
                           >
                             <div className="form-group">
@@ -833,7 +833,7 @@ const AddProperty = () => {
                                 id="sale_availability_date"
                                 name="sale_availability_date"
                                 onChange={onInputChange}
-                                required={is_sold === "yes" ? false : true}
+                                required={is_sold === "1" ? false : true}
                               />
                             </div>
                           </div> */}
