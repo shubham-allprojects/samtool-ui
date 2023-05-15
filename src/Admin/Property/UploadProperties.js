@@ -183,7 +183,7 @@ const UploadProperties = () => {
       });
     } catch (error) {
       if (isLastChunk) {
-        // toast.error("Internal server error");
+        toast.error("Internal server error");
         // reloadPage();
       }
     }
@@ -374,7 +374,7 @@ const UploadProperties = () => {
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">
                   <i className="bi bi-exclamation-triangle-fill me-2"></i>
-                  {errorHeading}
+                  {errorHeading} !
                 </h5>
                 <button
                   type="button"
