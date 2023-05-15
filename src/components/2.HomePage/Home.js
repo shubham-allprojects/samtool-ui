@@ -242,6 +242,7 @@ function Home() {
           .post(`/sam/v1/property/view-properties`, dataToPost)
           .then((res) => {
             setSelectedPropertyResults(res.data);
+            console.log(res.data);
             nav.classList.remove("navbar-lightBg");
           });
       } catch (error) {}

@@ -33,13 +33,13 @@ import { useEffect } from "react";
 function App() {
   const MINUTE_MS = 10000;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      toast.success("calls every minute");
-    }, MINUTE_MS);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     toast.success("calls every minute");
+  //   }, MINUTE_MS);
 
-    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  }, []);
+  //   return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  // }, []);
   return (
     <>
       <ToastContainer autoClose="3000" />

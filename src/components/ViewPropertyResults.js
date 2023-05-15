@@ -232,7 +232,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                             >
                               <small className="text-muted">Is Stressed?</small>
                               <div className="common-btn-font text-capitalize">
-                                {is_stressed}
+                                {is_stressed === "1" ? "Yes" : "No"}
                               </div>
                             </div>
                             <div
@@ -242,12 +242,12 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                             >
                               <small className="text-muted">Is Sold?</small>
                               <div className="common-btn-font text-capitalize">
-                                {is_sold}
+                                {is_sold === "1" ? "Yes" : "No"}
                               </div>
                             </div>
                             <div
                               className={`${
-                                is_available_for_sale && is_sold === "no"
+                                is_available_for_sale && is_sold === "0"
                                   ? ""
                                   : "d-none"
                               } col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3 `}
@@ -256,7 +256,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 Is Available For Sale?
                               </small>
                               <div className="common-btn-font text-capitalize">
-                                {is_available_for_sale}
+                                {is_available_for_sale === "1" ? "Yes" : "No"}
                               </div>
                             </div>
                             <div
@@ -323,7 +323,7 @@ const ViewPropertyResults = ({ selectedPropertyResults }) => {
                                 Title clear property
                               </small>
                               <div className="common-btn-font text-capitalize">
-                                {title_clear_property}
+                                {title_clear_property === "1" ? "Yes" : "No"}
                               </div>
                             </div>
                             <div
