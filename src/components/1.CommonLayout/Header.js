@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import CommonNavLinks from "./CommonNavLinks";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 function Header({ backToSearchResults, disableHomeLink }) {
   const data = JSON.parse(localStorage.getItem("data"));
@@ -33,11 +32,6 @@ function Header({ backToSearchResults, disableHomeLink }) {
       localStorage.removeItem("userSession");
     }
     if (data) {
-      // setAllUseStates({
-      //   loginStatus: true,
-      //   roleId: data.roleId,
-      //   userEmail: data.user,
-      // });
       try {
         let res = await axios.get(`/sam/v1/user-registration/logout`, {
           headers: { Authorization: data.logintoken },
@@ -64,6 +58,7 @@ function Header({ backToSearchResults, disableHomeLink }) {
 
   useEffect(() => {
     setStatusOfLogin();
+    // eslint-disable-next-line
   }, []);
 
   return (

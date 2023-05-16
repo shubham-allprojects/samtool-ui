@@ -155,23 +155,23 @@ const UploadProperties = () => {
     const isLastChunk = currentChunkIndex === chunks;
     try {
       await axios.post(url, detailsToPost, { headers: headers }).then((res) => {
+        console.log(res.data, isLastChunk);
         if (isLastChunk) {
-          console.log(res.data, isLastChunk);
-          let arr = [];
-          res.data.forEach((data) => {
-            arr.push(data.property_number);
-          });
-          let duplicateProperties = arr.join(", ");
-          let customErrorMessage = "";
-          if (arr.length > 1) {
-            customErrorMessage = `Failed to upload properties with property numbers ${duplicateProperties}`;
-          } else {
-            customErrorMessage = `Failed to upload property with property number ${duplicateProperties}`;
-          }
           if (res.data.msg === 0) {
             toast.success("File uploaded successfully");
-            // reloadPage();
+            reloadPage();
           } else {
+            let arr = [];
+            res.data.forEach((data) => {
+              arr.push(data.property_number);
+            });
+            let duplicateProperties = arr.join(", ");
+            let customErrorMessage = "";
+            if (arr.length > 1) {
+              customErrorMessage = `Failed to upload properties with property numbers ${duplicateProperties}`;
+            } else {
+              customErrorMessage = `Failed to upload property with property number ${duplicateProperties}`;
+            }
             setErrorModalDetails({
               errorModalOpen: true,
               errorHeading: "Duplicate Records Error",
@@ -184,7 +184,7 @@ const UploadProperties = () => {
     } catch (error) {
       if (isLastChunk) {
         toast.error("Internal server error");
-        // reloadPage();
+        reloadPage();
       }
     }
 
