@@ -45,8 +45,8 @@ function App() {
               headers: { Authorization: data.logintoken },
             });
 
-            if (res.data !== "Session expired or Invalid user") {
-              let remainingTime = parseInt(res.data.split(" ")[4]);
+            if (res.data !== "Session expired or invalid user") {
+              let remainingTime = parseInt(res.data.TimeRemaining);
               if (remainingTime === 5) {
                 toast.warn("Your session will expire in 5 minute");
                 localStorage.setItem("remainingTime", 5);

@@ -42,7 +42,7 @@ function Header({ backToSearchResults, disableHomeLink }) {
         let res = await axios.get(`/sam/v1/user-registration/logout`, {
           headers: { Authorization: data.logintoken },
         });
-        if (res.data === "Session expired or Invalid user") {
+        if (res.data === "Session expired or invalid user") {
           localStorage.removeItem("data");
           localStorage.setItem("userSession", "invalid");
           goTo("/login");
