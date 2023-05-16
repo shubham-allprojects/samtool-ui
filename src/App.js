@@ -28,36 +28,39 @@ import ProtectSetPasswordPage from "./components/ProtectSetPasswordPage";
 import ProtectForgotPasswordPage from "./components/ProtectForgotPasswordPage";
 import { ToastContainer, toast } from "react-toastify";
 import ManageUsers from "./Admin/User/ManageUsers";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
-  const MINUTE_MS = 65000;
-
+  const MINUTE_MS = 1000;
   useEffect(() => {
-    const interval = setInterval(async () => {
-      const data = JSON.parse(localStorage.getItem("data"));
-      console.log("api start");
-      if (data) {
-        try {
-          let res = await axios.get(`/sam/v1/user-registration/logout`, {
-            headers: { Authorization: data.logintoken },
-          });
+    const sessionTimeRemaining = localStorage.getItem("remainingTime");
+    if (!sessionTimeRemaining) {
+      const interval = setInterval(async () => {
+        const data = JSON.parse(localStorage.getItem("data"));
+        console.log("api start");
+        if (data) {
+          try {
+            let res = await axios.get(`/sam/v1/user-registration/logout`, {
+              headers: { Authorization: data.logintoken },
+            });
 
-          if (res.data !== "Session expired or Invalid user") {
-            let remainingTime = parseInt(res.data.split(" ")[4]);
-            console.log(remainingTime);
-            if (remainingTime === 5) {
-              toast.warn("Your session will expire in 5 minute");
+            if (res.data !== "Session expired or Invalid user") {
+              let remainingTime = parseInt(res.data.split(" ")[4]);
+              if (remainingTime === 5) {
+                toast.warn("Your session will expire in 5 minute");
+                localStorage.setItem("remainingTime", 5);
+                clearInterval(interval);
+              }
             }
+          } catch (error) {
+            console.log("error");
           }
-        } catch (error) {
-          console.log("error");
         }
-      }
-    }, MINUTE_MS);
+      }, MINUTE_MS);
 
-    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+      return () => clearInterval(interval);
+    }
   }, []);
   return (
     <>

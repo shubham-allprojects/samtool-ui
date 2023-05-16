@@ -17,6 +17,7 @@ const AdminProtected = ({ children }) => {
           });
           if (res.data === "Session expired or Invalid user") {
             localStorage.removeItem("data");
+            localStorage.removeItem("remainingTime");
             localStorage.setItem("userSession", "invalid");
             goTo("/login");
           }
