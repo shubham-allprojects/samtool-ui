@@ -155,7 +155,6 @@ const UploadProperties = () => {
     const isLastChunk = currentChunkIndex === chunks;
     try {
       await axios.post(url, detailsToPost, { headers: headers }).then((res) => {
-        console.log(res.data, isLastChunk);
         if (isLastChunk) {
           if (res.data.msg === 0) {
             toast.success("File uploaded successfully");
