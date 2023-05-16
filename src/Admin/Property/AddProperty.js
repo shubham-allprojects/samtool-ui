@@ -251,8 +251,10 @@ const AddProperty = () => {
               toast.success("Property added successfully");
               e.target.reset();
               goTo("/admin/property/single-property-documents-upload");
-            } else {
-              toast.error("Internal server error");
+            } else if (res.data.msg === 2) {
+              toast.error(
+                `Property with property number: ${formData.property_number} already exists`
+              );
             }
           });
       } catch (error) {
