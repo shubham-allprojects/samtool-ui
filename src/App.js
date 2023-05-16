@@ -28,7 +28,7 @@ import ProtectSetPasswordPage from "./components/ProtectSetPasswordPage";
 import ProtectForgotPasswordPage from "./components/ProtectForgotPasswordPage";
 import { ToastContainer, toast } from "react-toastify";
 import ManageUsers from "./Admin/User/ManageUsers";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 
 function App() {
