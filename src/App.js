@@ -38,7 +38,6 @@ function App() {
     if (!sessionTimeRemaining) {
       const interval = setInterval(async () => {
         const data = JSON.parse(localStorage.getItem("data"));
-        console.log("api start");
         if (data) {
           try {
             let res = await axios.get(`/sam/v1/user-registration/logout`, {
