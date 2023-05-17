@@ -163,6 +163,7 @@ const ViewEditDeleteProperties = () => {
   const [propertiesLinkDisabled, setPropertiesLinkDisabled] = useState(false);
 
   const viewCurrentProperty = async (id) => {
+    console.log(id);
     const currentPropertyRes = await axios.get(
       `/sam/v1/property/single-property/${id}`,
       { headers: authHeader }
@@ -433,7 +434,7 @@ const ViewEditDeleteProperties = () => {
               resetValidationsOnSubmit();
               toast.success("Property updated successfully");
               setUpdateBtnLoading(false);
-              window.scrollTo(0,0)
+              window.scrollTo(0, 0);
             } else {
               toast.error("Internal server error");
               setUpdateBtnLoading(false);
