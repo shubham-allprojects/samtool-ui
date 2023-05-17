@@ -433,6 +433,7 @@ const ViewEditDeleteProperties = () => {
               resetValidationsOnSubmit();
               toast.success("Property updated successfully");
               setUpdateBtnLoading(false);
+              window.scrollTo(0,0)
             } else {
               toast.error("Internal server error");
               setUpdateBtnLoading(false);
