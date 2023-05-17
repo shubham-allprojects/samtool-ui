@@ -175,7 +175,6 @@ const ViewEditDeleteProperties = () => {
   };
 
   const backToAllPropertiesPage = async () => {
-    console.log(storedDataToPost);
     const propertiesRes = await axios.post(
       `/sam/v1/property/auth/all-properties`,
       storedDataToPost,
