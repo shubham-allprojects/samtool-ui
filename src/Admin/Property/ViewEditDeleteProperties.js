@@ -34,6 +34,7 @@ const ViewEditDeleteProperties = () => {
   const [selectedPropertyId, setSelectedPropertyId] = useState("");
   const [totalPropertyCount, setTotalPropertyCount] = useState(0);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [storedDataToPost, setStoredDataToPost] = useState({});
   const [
     confirmDeletePropertyBtnDisabled,
     setConfirmDeletePropertyBtnDisabled,
@@ -49,7 +50,7 @@ const ViewEditDeleteProperties = () => {
       batch_number: 1,
       batch_size: propertiesPerPage,
     };
-
+    setStoredDataToPost(dataToPost);
     const propertiesRes = await axios.post(
       `/sam/v1/property/auth/all-properties`,
       dataToPost,
@@ -111,6 +112,7 @@ const ViewEditDeleteProperties = () => {
       batch_number: currentPage,
       batch_size: propertiesPerPage,
     };
+    setStoredDataToPost(dataToPost);
     const propertiesRes = await axios.post(
       `/sam/v1/property/auth/all-properties`,
       dataToPost,
@@ -172,7 +174,14 @@ const ViewEditDeleteProperties = () => {
     setPropertiesLinkDisabled(true);
   };
 
-  const backToAllPropertiesPage = () => {
+  const backToAllPropertiesPage = async () => {
+    console.log(storedDataToPost);
+    const propertiesRes = await axios.post(
+      `/sam/v1/property/auth/all-properties`,
+      storedDataToPost,
+      { headers: authHeader }
+    );
+    setProperties(propertiesRes.data);
     setPropertiesLinkDisabled(false);
     viewCurrentPropertyRef.current.classList.add("d-none");
     editPropertyRef.current.classList.add("d-none");
