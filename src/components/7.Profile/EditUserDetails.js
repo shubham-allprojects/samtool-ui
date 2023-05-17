@@ -385,7 +385,11 @@ const EditUserDetails = () => {
                 <div className="card-body">
                   <div className="row">
                     <div className="col-md-8 col-6">
-                      <h6 className="mb-2 text-primary">Personal Details</h6>
+                      <h6 className="mb-2 text-primary">
+                        {user_type === "Individual User"
+                          ? "Personal Details"
+                          : "Organization Details"}
+                      </h6>
                     </div>
 
                     <div className="col-md-4 col-6 text-end">
