@@ -143,6 +143,10 @@ function Home() {
   const getPropertyData = async (e) => {
     e.preventDefault();
     setLoading(true);
+    // Unhide div and display search results in card format.
+    document.querySelectorAll(".display-on-search").forEach((item) => {
+      item.classList.remove("d-none");
+    });
     paginationRef.current.classList.add("d-none");
     document.getElementById("properties").scrollIntoView(true);
     let apis = {
@@ -167,10 +171,6 @@ function Home() {
         setPropertyData(res.data);
         setLoading(false);
         if (res.data) {
-          // Unhide div and display search results in card format.
-          document.querySelectorAll(".display-on-search").forEach((item) => {
-            item.classList.remove("d-none");
-          });
           paginationRef.current.classList.remove("d-none");
         } else {
           paginationRef.current.classList.add("d-none");
