@@ -28,8 +28,10 @@ const Registration = () => {
   const [states, setStates] = useState([]);
   // Function to get all states from api so that we can map states in select state field.
   const getAllSates = async () => {
-    const allStates = await axios.get(`/sam/v1/property/by-state`);
-    setStates(allStates.data);
+    try {
+      const allStates = await axios.get(`/sam/v1/property/by-state`);
+      setStates(allStates.data);
+    } catch (error) {}
   };
 
   // useState to store address Details.

@@ -127,29 +127,30 @@ const AdminHomePage = () => {
 
   const getPropertyCountFromApi = async (authHeaders) => {
     setPropertyCountLoading(true);
-    const propertyCountRes = await axios.get(
-      `sam/v1/property/auth/property-count`,
-      { headers: { Authorization: authHeaders } }
-    );
-    let arr = propertyCountRes.data;
-    let totalCount = 0;
-    let labels = [];
-    let labelWiseCount = [];
+    try {
+      const propertyCountRes = await axios.get(
+        `sam/v1/property/auth/property-count`,
+        { headers: { Authorization: authHeaders } }
+      );
+      let arr = propertyCountRes.data;
+      let totalCount = 0;
+      let labels = [];
+      let labelWiseCount = [];
 
-    arr.forEach((type) => {
-      totalCount += type.count;
-      labels.push(type.type_Name);
-      labelWiseCount.push(type.count);
-    });
+      arr.forEach((type) => {
+        totalCount += type.count;
+        labels.push(type.type_Name);
+        labelWiseCount.push(type.count);
+      });
 
-    setTotalPropertiesCount(totalCount);
+      setTotalPropertiesCount(totalCount);
 
-    setTypeWisePropertyDetails({
-      propertyTypesCount: arr.length,
-      propertyLabels: labels,
-      typeWiseCount: labelWiseCount,
-    });
-
+      setTypeWisePropertyDetails({
+        propertyTypesCount: arr.length,
+        propertyLabels: labels,
+        typeWiseCount: labelWiseCount,
+      });
+    } catch (error) {}
     setPropertyCountLoading(false);
   };
 

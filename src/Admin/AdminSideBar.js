@@ -47,7 +47,7 @@ const AdminSideBar = (propertiesLinkDisabled, backToAllPropertiesPage) => {
       <div className="col-xl-2 col-lg-3 col-md-4 admin-sidebar d-none d-md-block">
         <div className="py-3">
           <span className="offcanvas-header text-white">
-            <h4 className="offcanvas-title ps-md-4" id="offcanvasExampleLabel">
+            <h4 className="offcanvas-title ps-md-2" id="offcanvasExampleLabel">
               Administration
             </h4>
           </span>
@@ -65,7 +65,7 @@ const AdminSideBar = (propertiesLinkDisabled, backToAllPropertiesPage) => {
         aria-labelledby="offcanvasExampleLabel"
       >
         <div className="offcanvas-header text-white">
-          <h4 className="offcanvas-title ps-md-4" id="offcanvasExampleLabel">
+          <h4 className="offcanvas-title ps-md-2" id="offcanvasExampleLabel">
             Administration
           </h4>
           <button

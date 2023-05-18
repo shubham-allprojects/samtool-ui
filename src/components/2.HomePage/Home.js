@@ -48,20 +48,22 @@ function Home() {
       bankAPI: `${url}/by-bank`,
       categoryAPI: `${url}/by-category`,
     };
-    // Get all states from api.
-    const allStates = await axios.get(apis.stateAPI);
-    // Get all banks from api.
-    const allBanks = await axios.get(apis.bankAPI);
-    // Get all asset Categories from api.
-    const assetCategories = await axios.get(apis.categoryAPI);
+    try {
+      // Get all states from api.
+      const allStates = await axios.get(apis.stateAPI);
+      // Get all banks from api.
+      const allBanks = await axios.get(apis.bankAPI);
+      // Get all asset Categories from api.
+      const assetCategories = await axios.get(apis.categoryAPI);
 
-    // store states, banks and asset categories into searchFields useState.
-    setSearchFields({
-      ...searchFields,
-      states: allStates.data,
-      banks: allBanks.data,
-      assetCategory: assetCategories.data,
-    });
+      // store states, banks and asset categories into searchFields useState.
+      setSearchFields({
+        ...searchFields,
+        states: allStates.data,
+        banks: allBanks.data,
+        assetCategory: assetCategories.data,
+      });
+    } catch (error) {}
   };
 
   // This function will run on change of input fields.
