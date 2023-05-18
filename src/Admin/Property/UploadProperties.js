@@ -12,6 +12,7 @@ import BreadCrumb from "../BreadCrumb";
 const allowedExtensions = ["csv"];
 let chunkSize = 0;
 let temp = 0;
+let authHeaders = "";
 
 const UploadProperties = () => {
   // Bootstrap alert details.
@@ -53,17 +54,12 @@ const UploadProperties = () => {
   };
 
   const dataFromLocal = JSON.parse(localStorage.getItem("data"));
-  const setHeaderAndUrl = () => {
-    let headers = "";
-    if (dataFromLocal) {
-      headers = {
-        Authorization: dataFromLocal.logintoken,
-        "Content-Type": "application/octet-stream",
-      };
-    }
-    let url = `/sam/v1/property/auth/upload-chunk`;
-    return [headers, url];
-  };
+  if (dataFromLocal) {
+    authHeaders = {
+      Authorization: dataFromLocal.logintoken,
+      "Content-Type": "application/octet-stream",
+    };
+  }
 
   const readFileFunction = (inputFile) => {
     setFileName(inputFile.name);
@@ -131,9 +127,7 @@ const UploadProperties = () => {
 
   const uploadChunk = async (readerEvent) => {
     const file = files[currentFileIndex];
-    const [headers, url] = setHeaderAndUrl();
     const size = file.size;
-
     let tempChunkSize = chunkSize;
     temp += tempChunkSize;
     if (temp > size) {
@@ -150,36 +144,39 @@ const UploadProperties = () => {
       file_name: file.name,
       data: data,
     };
-    // console.log(detailsToPost);
     const chunks = Math.ceil(file.size / chunkSize) - 1;
     const isLastChunk = currentChunkIndex === chunks;
     try {
-      await axios.post(url, detailsToPost, { headers: headers }).then((res) => {
-        if (isLastChunk) {
-          if (res.data.msg === 0) {
-            toast.success("File uploaded successfully");
-            reloadPage();
-          } else {
-            let arr = [];
-            res.data.forEach((data) => {
-              arr.push(data.property_number);
-            });
-            let duplicateProperties = arr.join(", ");
-            let customErrorMessage = "";
-            if (arr.length > 1) {
-              customErrorMessage = `Failed to upload properties with property numbers ${duplicateProperties}`;
+      await axios
+        .post(`/sam/v1/property/auth/upload-chunk`, detailsToPost, {
+          headers: authHeaders,
+        })
+        .then((res) => {
+          if (isLastChunk) {
+            if (res.data.msg === 0) {
+              toast.success("File uploaded successfully");
+              reloadPage();
             } else {
-              customErrorMessage = `Failed to upload property with property number ${duplicateProperties}`;
+              let arr = [];
+              res.data.forEach((data) => {
+                arr.push(data.property_number);
+              });
+              let duplicateProperties = arr.join(", ");
+              let customErrorMessage = "";
+              if (arr.length > 1) {
+                customErrorMessage = `Failed to upload properties with property numbers ${duplicateProperties}`;
+              } else {
+                customErrorMessage = `Failed to upload property with property number ${duplicateProperties}`;
+              }
+              setErrorModalDetails({
+                errorModalOpen: true,
+                errorHeading: "Duplicate Records Error",
+                errorMessage: customErrorMessage,
+              });
+              window.scrollTo(0, 0);
             }
-            setErrorModalDetails({
-              errorModalOpen: true,
-              errorHeading: "Duplicate Records Error",
-              errorMessage: customErrorMessage,
-            });
-            window.scrollTo(0, 0);
           }
-        }
-      });
+        });
     } catch (error) {
       if (isLastChunk) {
         toast.error("Internal server error");
