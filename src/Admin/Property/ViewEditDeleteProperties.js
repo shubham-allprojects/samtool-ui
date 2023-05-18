@@ -163,7 +163,6 @@ const ViewEditDeleteProperties = () => {
   const [propertiesLinkDisabled, setPropertiesLinkDisabled] = useState(false);
 
   const viewCurrentProperty = async (id) => {
-    console.log(id);
     const currentPropertyRes = await axios.get(
       `/sam/v1/property/single-property/${id}`,
       { headers: authHeader }
@@ -359,7 +358,6 @@ const ViewEditDeleteProperties = () => {
             headers: authHeader,
           })
           .then((res) => {
-            console.log(res.data);
             if (res.data.status === 0) {
               resetValidationsOnSubmit();
               toast.success("Property updated successfully");
@@ -402,7 +400,6 @@ const ViewEditDeleteProperties = () => {
         `/sam/v1/property/single-property/${propertyId}`,
         { headers: authHeader }
       );
-      console.log(currentPropertyRes.data);
       const {
         type_id,
         completion_date,

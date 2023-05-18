@@ -33,40 +33,5 @@
     "possession_of_the_property": "Legally attached",
     "title_clear_property": 1,
     "distress_value": "110000000"
-  },
-
-  {
-    "address_details": {
-      "address": "Pune landmark",
-      "locality": "Pune landmark",
-      "flat_number": 45,
-      "building_name": "Random name",
-      "society_name": "Platinum",
-      "plot_number": 100,
-      "landmark": "Pune landmark",
-      "city": 1,
-      "zip": 411026,
-      "state": 1
-    },
-    "property_id": 2,
-    "bank_branch_id": 3,
-    "property_number": "PROP/2",
-    "is_stressed": 1,
-    "is_available_for_sale": 0,
-    "sale_availability_date": "2005-12-26 23:50:30",
-    "saleable_area": "1500 sq.ft.",
-    "carpet_area": "1000 sq.ft.",
-    "ready_reckoner_price": 100000000,
-    "expected_price": 180000000,
-    "market_price": 150000000,
-    "completion_date": "2022-07-11 18:41:01",
-    "purchase_date": "2022-02-11 18:41:01",
-    "mortgage_date": "2022-07-10",
-    "is_sold": 1,
-    "status": "1",
-    "territory": "gram panchayat limit",
-    "possession_of_the_property": "Legally attached",
-    "title_clear_property": 0,
-    "distress_value": 101000000
   }
 ]
