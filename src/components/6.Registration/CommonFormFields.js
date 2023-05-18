@@ -100,7 +100,7 @@ const CommonFormFields = ({
       {/* SAM T & C */}
       <div className="row register-links mt-3">
         <div className="offset-lg-2 col-lg-4">
-          <NavLink to="/">SAM Terms and Conditions</NavLink>
+          <NavLink to="/register">SAM Terms and Conditions</NavLink>
         </div>
       </div>
       {/* Agree T & C */}
