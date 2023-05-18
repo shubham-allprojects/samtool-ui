@@ -171,7 +171,8 @@ const EditUserDetails = () => {
   };
 
   // Function to validate zipCodes.
-  const zipValidationByState = async (zipValue, stateId, customerUrl) => {
+  const zipValidationByState = async (zipValue, stateId) => {
+    let customerUrl = `/sam/v1/customer-registration`;
     await axios
       .post(`${customerUrl}/zipcode-validation`, {
         zipcode: zipValue.toString(),
@@ -207,11 +208,7 @@ const EditUserDetails = () => {
       });
 
       setIdOfState(parseInt(value));
-      zipValidationByState(
-        zip,
-        parseInt(value),
-        `/sam/v1/customer-registration`
-      );
+      zipValidationByState(zip, parseInt(value));
       let stateName = "";
       let getStateName = document.getElementById(`state-name-${value}`);
       if (getStateName) {
@@ -226,7 +223,7 @@ const EditUserDetails = () => {
     } else if (name === "zip") {
       setCommonUserDetails({ ...commonUserDetails, zip: parseInt(value) });
       if (idOfState !== 0 && value !== "") {
-        zipValidationByState(value, idOfState, `/sam/v1/customer-registration`);
+        zipValidationByState(value, idOfState);
       }
     } else if (name === "city") {
       setCommonUserDetails({ ...commonUserDetails, [name]: value });
