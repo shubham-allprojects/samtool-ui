@@ -5,18 +5,12 @@ import Layout from "../1.CommonLayout/Layout";
 import changePassImg from "../../images/changePassword.svg";
 import { rootTitle } from "../../CommonFunctions";
 import axios from "axios";
-
+let userId = "";
 const ChangePassword = () => {
   const data = JSON.parse(localStorage.getItem("data"));
-  const setHeaderAndUrl = () => {
-    let userId = "";
-    if (data) {
-      userId = data.userId;
-    }
-    let url = `/sam/v1/customer-registration/`;
-
-    return [url, userId];
-  };
+  if (data) {
+    userId = data.userId;
+  }
 
   //  Important variables for storing password data as well as validation data.
   const [details, setDetails] = useState({
@@ -123,10 +117,9 @@ const ChangePassword = () => {
       });
     } else {
       setLoading(true);
-      const [url, userId] = setHeaderAndUrl();
       try {
         await axios
-          .post(`${url}/reset-password`, {
+          .post(`/sam/v1/customer-registration/reset-password`, {
             user_id: userId.toString(),
             old_password: currentPassword,
             new_password: newPassword,

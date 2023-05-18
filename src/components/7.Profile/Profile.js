@@ -3,10 +3,15 @@ import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
 import { rootTitle } from "../../CommonFunctions";
 import { NavLink } from "react-router-dom";
-// import profilePic from "../../images/profile-pic.svg";
 
+let authHeaders = "";
+let role = "";
 const Profile = () => {
   const data = JSON.parse(localStorage.getItem("data"));
+  if (data) {
+    authHeaders = { Authorization: data.logintoken };
+    role = data.roleId;
+  }
   const [userRole, setUserRole] = useState("");
   // To store updated user details.
   const [commonUserDetails, setCommonUserDetails] = useState({});
@@ -32,26 +37,15 @@ const Profile = () => {
   const { first_name, last_name, pan_number, aadhar_number } =
     individualUserDetails;
 
-  // Function will provide login token of user from localStorage and also some urls are stored in this function.
-  const setHeaderAndUrl = () => {
-    let headers = "";
-    let role = "";
-    if (data) {
-      headers = { Authorization: data.logintoken };
-      role = data.roleId;
-    }
-    let url = `/sam/v1/user-registration/auth`;
-    return [headers, url, role];
-  };
-
   // Function will get the data of user whose details are to be edited.
   const getUserProfileDetails = async () => {
-    const [headers, url, role] = setHeaderAndUrl();
     if (data) {
       setUserRole(role);
       const userId = data.userId;
       await axios
-        .get(`${url}/${userId}`, { headers: headers })
+        .get(`/sam/v1/user-registration/auth/${userId}`, {
+          headers: authHeaders,
+        })
         .then(async (res) => {
           const { individual_user, org_user, user_details } = res.data;
           if (individual_user) {
