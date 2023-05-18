@@ -243,17 +243,6 @@ const ViewEditDeleteProperties = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const commonFnToSaveAddressDetails = (name, value) => {
-    setFormData({
-      ...formData,
-      address_details: {
-        ...formData.address_details,
-        [name]: value,
-        address: locality,
-      },
-    });
-  };
-
   const onInputChange = async (e) => {
     const { name, value } = e.target;
     if (name === "bank") {
@@ -291,6 +280,7 @@ const ViewEditDeleteProperties = () => {
           is_available_for_sale: 0,
         });
       } else {
+        document.getElementById("is_available_for_sale-1").selected = true;
         setFormData({
           ...formData,
           [name]: parseInt(value),
@@ -387,7 +377,6 @@ const ViewEditDeleteProperties = () => {
     }
   };
 
-  let defaultTypeId;
   const [otherValuesToShow, setOtherValuesToShow] = useState({});
   const { type_name, state_name, city_name } = otherValuesToShow;
 
@@ -413,11 +402,9 @@ const ViewEditDeleteProperties = () => {
         `/sam/v1/property/single-property/${propertyId}`,
         { headers: authHeader }
       );
-      // console.log(currentPropertyRes.data);
+      console.log(currentPropertyRes.data);
       const {
-        type_name,
-        branch_name,
-        city_name,
+        type_id,
         completion_date,
         purchase_date,
         mortgage_date,
@@ -438,7 +425,6 @@ const ViewEditDeleteProperties = () => {
         is_stressed,
         property_id,
         state_id,
-        state_name,
         city_id,
         bank_id,
         territory,
@@ -451,14 +437,7 @@ const ViewEditDeleteProperties = () => {
       setIdOfState(state_id);
 
       setAllDefaultValues(
-        propertyCategoryRes.data,
-        state_id,
-        city_name,
         bank_id,
-        branch_name,
-        type_name,
-        status,
-        is_stressed,
         is_sold,
         is_available_for_sale,
         title_clear_property,
@@ -469,7 +448,7 @@ const ViewEditDeleteProperties = () => {
         setFormData({
           ...formData,
           property_id: property_id,
-          type_id: defaultTypeId,
+          type_id: parseInt(type_id),
           bank_branch_id: parseInt(bank_branch_id),
           property_number: property_number,
           is_stressed: parseInt(is_stressed),
