@@ -13,8 +13,6 @@ import { toggleClassOfNextPrevPageItems } from "../../CommonFunctions";
 
 let authHeader = "";
 let propertiesPerPage = 4;
-let zipError = false;
-let areaError = false;
 const ViewEditDeleteProperties = () => {
   const data = JSON.parse(localStorage.getItem("data"));
   if (data) {
@@ -488,6 +486,7 @@ const ViewEditDeleteProperties = () => {
     if (data) {
       getPropertiesFromApi();
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
