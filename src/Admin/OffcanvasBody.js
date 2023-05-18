@@ -1,11 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const OffcanvasBody = ({
-  canvasNumber,
-  propertiesLinkDisabled,
-}) => {
-
+const OffcanvasBody = ({ canvasNumber, propertiesLinkDisabled }) => {
   return (
     <div className={`offcanvas-body ${canvasNumber ? "pt-0" : ""}`}>
       <ul className="navbar-nav">

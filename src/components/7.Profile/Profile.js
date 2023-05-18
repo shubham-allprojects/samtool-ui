@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
-import { rootTitle } from "../../CommonFunctions";
-import { NavLink } from "react-router-dom";
+import { checkLoginSession, rootTitle } from "../../CommonFunctions";
+import { NavLink, useNavigate } from "react-router-dom";
 
 let authHeaders = "";
 let role = "";
@@ -106,10 +106,18 @@ const Profile = () => {
     }
   };
 
+  const goTo = useNavigate();
+
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - PROFILE";
     if (data) {
-      getUserProfileDetails();
+      checkLoginSession(data.logintoken).then((res) => {
+        if (res === "Valid") {
+          getUserProfileDetails();
+        } else {
+          goTo("/login");
+        }
+      });
     }
     // eslint-disable-next-line
   }, []);

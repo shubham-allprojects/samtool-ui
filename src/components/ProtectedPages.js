@@ -13,7 +13,7 @@ const ProtectedPages = ({ children }) => {
         });
         if (res.data === "Session expired or invalid user") {
           localStorage.removeItem("data");
-          localStorage.removeItem("remainingTime")
+          localStorage.removeItem("remainingTime");
           localStorage.setItem("userSession", "invalid");
           goTo("/login");
         } else {

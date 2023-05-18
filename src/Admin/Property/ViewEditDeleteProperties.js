@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-import { rootTitle } from "../../CommonFunctions";
+import { checkLoginSession, rootTitle } from "../../CommonFunctions";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
 import CommonSpinner from "../../CommonSpinner";
 import Pagination from "../../Pagination";
 import ViewProperty from "./ViewProperty";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { toggleClassOfNextPrevPageItems } from "../../CommonFunctions";
 
@@ -40,10 +40,8 @@ const ViewEditDeleteProperties = () => {
   const confirmDeletePropertyInputRef = useRef();
 
   const getPropertiesFromApi = async () => {
-    setLoading(true);
     // Hide pagination while loading.
     paginationRef.current.classList.add("d-none");
-    setLoading(true);
     let dataToPost = {
       batch_number: 1,
       batch_size: propertiesPerPage,
@@ -481,10 +479,19 @@ const ViewEditDeleteProperties = () => {
     setMainPageLoading(false);
   };
 
+  const goTo = useNavigate();
+
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";
     if (data) {
-      getPropertiesFromApi();
+      setLoading(true);
+      checkLoginSession(data.logintoken).then((res) => {
+        if (res === "Valid") {
+          getPropertiesFromApi();
+        } else {
+          goTo("/login");
+        }
+      });
     }
     // eslint-disable-next-line
   }, []);

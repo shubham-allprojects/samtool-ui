@@ -56,7 +56,6 @@ const ManageUsers = ({ userType }) => {
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
   const getAllUsers = async () => {
-    setLoading(true);
     const dataToPost = {
       type: userType,
       page_number: 1,
@@ -328,8 +327,9 @@ const ManageUsers = ({ userType }) => {
 
   useEffect(() => {
     if (data) {
+      setLoading(true);
       checkLoginSession(data.logintoken).then((res) => {
-        if (res === "valid") {
+        if (res === "Valid") {
           getAllUsers();
         } else {
           goTo("/login");

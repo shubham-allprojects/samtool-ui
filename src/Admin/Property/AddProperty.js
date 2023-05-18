@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
+import { checkLoginSession } from "../../CommonFunctions";
 
 let authHeader = "";
 let zipError = false;
@@ -267,7 +268,13 @@ const AddProperty = () => {
     notSoldCheckRef.current.setAttribute("checked", "true");
     defaultIsStressedRef.current.setAttribute("checked", "true");
     if (data) {
-      getDataFromApi();
+      checkLoginSession(data.logintoken).then((res) => {
+        if (res === "Valid") {
+          getDataFromApi();
+        } else {
+          goTo("/login");
+        }
+      });
     }
   }, []);
 

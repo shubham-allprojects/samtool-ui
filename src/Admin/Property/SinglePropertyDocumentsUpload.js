@@ -4,6 +4,8 @@ import AdminSideBar from "../AdminSideBar";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { checkLoginSession } from "../../CommonFunctions";
+import { useNavigate } from "react-router-dom";
 
 let authHeader = "";
 let temp = 0;
@@ -14,6 +16,7 @@ const SinglePropertyDocumentsUpload = () => {
   if (data) {
     authHeader = { Authorization: data.logintoken };
   }
+  const goTo = useNavigate();
   const [currentPropertyNumber, setCurrentPropertyNumber] = useState("");
   const [imageFiles, setImageFiles] = useState([]);
   const [savedImageFiles, setSavedImageFiles] = useState([]);
@@ -281,9 +284,16 @@ const SinglePropertyDocumentsUpload = () => {
     if (propertyNumber) {
       setCurrentPropertyNumber(propertyNumber);
       if (data) {
-        getCategoriesFromDB();
+        checkLoginSession(data.logintoken).then((res) => {
+          if (res === "Valid") {
+            getCategoriesFromDB();
+          } else {
+            goTo("/login");
+          }
+        });
       }
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

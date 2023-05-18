@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import CommonNavLinks from "./CommonNavLinks";
-import axios from "axios";
+import { checkLoginSession } from "../../CommonFunctions";
 
 function Header({ backToSearchResults, disableHomeLink }) {
   const data = JSON.parse(localStorage.getItem("data"));
@@ -31,28 +31,47 @@ function Header({ backToSearchResults, disableHomeLink }) {
     if (!window.location.href.includes("/login")) {
       localStorage.removeItem("userSession");
     }
+    // if (data) {
+    //   try {
+    //     let res = await axios.get(`/sam/v1/user-registration/logout`, {
+    //       headers: { Authorization: data.logintoken },
+    //     });
+    //     if (res.data === "Session expired or invalid user") {
+    //       localStorage.removeItem("data");
+    //       localStorage.setItem("userSession", "invalid");
+    //       goTo("/login");
+    //       setAllUseStates({
+    //         loginStatus: false,
+    //         roleId: null,
+    //         userEmail: "",
+    //       });
+    //     } else {
+    //       setAllUseStates({
+    //         loginStatus: true,
+    //         roleId: data.roleId,
+    //         userEmail: data.user,
+    //       });
+    //     }
+    //   } catch (error) {}
+    // }
+
     if (data) {
-      try {
-        let res = await axios.get(`/sam/v1/user-registration/logout`, {
-          headers: { Authorization: data.logintoken },
-        });
-        if (res.data === "Session expired or invalid user") {
-          localStorage.removeItem("data");
-          localStorage.setItem("userSession", "invalid");
-          goTo("/login");
-          setAllUseStates({
-            loginStatus: false,
-            roleId: null,
-            userEmail: "",
-          });
-        } else {
+      checkLoginSession(data.logintoken).then((res) => {
+        if (res === "Valid") {
           setAllUseStates({
             loginStatus: true,
             roleId: data.roleId,
             userEmail: data.user,
           });
+        } else {
+          setAllUseStates({
+            loginStatus: false,
+            roleId: null,
+            userEmail: "",
+          });
+          goTo("/login");
         }
-      } catch (error) {}
+      });
     }
   };
 

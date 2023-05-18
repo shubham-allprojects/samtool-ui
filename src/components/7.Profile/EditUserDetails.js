@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { rootTitle } from "../../CommonFunctions";
+import { checkLoginSession, rootTitle } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
 let authHeaders = "";
 
@@ -362,7 +362,13 @@ const EditUserDetails = () => {
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - EDIT DETAILS";
     if (data) {
-      getUserToEdit();
+      checkLoginSession(data.logintoken).then((res) => {
+        if (res === "Valid") {
+          getUserToEdit();
+        } else {
+          goTo("/login");
+        }
+      });
     }
     // eslint-disable-next-line
   }, []);

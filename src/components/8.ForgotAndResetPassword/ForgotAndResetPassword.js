@@ -183,10 +183,6 @@ const ForgotAndResetPassword = () => {
 
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - RESET PASSWORD";
-    // let verifiedUser = localStorage.getItem("forgotPassUserName");
-    // if (!verifiedUser) {
-    //   goTo("/");
-    // }
   });
   return (
     <Layout>

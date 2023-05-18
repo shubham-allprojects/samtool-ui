@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AdminSideBar from "./AdminSideBar";
 import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
-import { rootTitle } from "../../src/CommonFunctions";
+import { checkLoginSession, rootTitle } from "../../src/CommonFunctions";
 import { Chart as CharJs, registerables } from "chart.js";
 import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
@@ -25,7 +25,7 @@ const AdminHomePage = () => {
 
   const setTotalCountOfUsers = async (authHeaders) => {
     // Get and store the count of both types of Users i.e. Individual Users and Organizational Users.
-    setUsersCountLoading(true);
+
     try {
       await axios
         .get(`/sam/v1/user-registration/auth/type-count`, {
@@ -126,7 +126,6 @@ const AdminHomePage = () => {
   };
 
   const getPropertyCountFromApi = async (authHeaders) => {
-    setPropertyCountLoading(true);
     try {
       const propertyCountRes = await axios.get(
         `sam/v1/property/auth/property-count`,
@@ -153,14 +152,22 @@ const AdminHomePage = () => {
     } catch (error) {}
     setPropertyCountLoading(false);
   };
-
+  const goTo = useNavigate();
   useEffect(() => {
     rootTitle.textContent = "ADMIN - HOME";
     document.getElementById("pie").checked = true;
     document.getElementById("bar2").checked = true;
     if (data) {
-      setTotalCountOfUsers(data.logintoken);
-      getPropertyCountFromApi(data.logintoken);
+      setUsersCountLoading(true);
+      setPropertyCountLoading(true);
+      checkLoginSession(data.logintoken).then((res) => {
+        if (res === "Valid") {
+          setTotalCountOfUsers(data.logintoken);
+          getPropertyCountFromApi(data.logintoken);
+        } else {
+          goTo("/login");
+        }
+      });
     }
     // eslint-disable-next-line
   }, []);
