@@ -256,17 +256,8 @@ const ViewEditDeleteProperties = () => {
 
   const onInputChange = async (e) => {
     const { name, value } = e.target;
-    if (name === "type_id") {
+    if (name === "bank") {
       if (value) {
-        commonFnToSaveFormData(name, parseInt(value));
-      }
-    }
-    // else if (name === "property_number") {
-    //   commonFnToSaveFormData(name, value);
-    // }
-    else if (name === "bank") {
-      if (value) {
-        // branchSelectBoxRef.current.classList.remove("d-none");
         const branchRes = await axios.get(
           `/sam/v1/property/auth/bank-branches/${value}`,
           {
@@ -274,24 +265,9 @@ const ViewEditDeleteProperties = () => {
           }
         );
         setBankBranches(branchRes.data);
-      } else {
-        // branchSelectBoxRef.current.classList.add("d-none");
       }
     } else if (name === "bank_branch_id") {
       commonFnToSaveFormData(name, parseInt(value));
-    } else if (name === "is_stressed") {
-      console.log(value);
-      commonFnToSaveFormData(name, parseInt(value));
-    }
-    // else if (name === "status") {
-    //   commonFnToSaveFormData(name, value);
-    // }
-    else if (name === "territory") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "saleable_area") {
-      commonFnToSaveFormData(name, `${value} sq. ft.`);
-    } else if (name === "carpet_area") {
-      commonFnToSaveFormData(name, `${value} sq. ft.`);
     } else if (name === "market_price") {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "ready_reckoner_price") {
@@ -300,10 +276,6 @@ const ViewEditDeleteProperties = () => {
       commonFnToSaveFormData(name, parseInt(value));
     } else if (name === "distress_value") {
       commonFnToSaveFormData(name, parseInt(value));
-    } else if (name === "completion_date") {
-      commonFnToSaveFormData(name, value);
-    } else if (name === "purchase_date") {
-      commonFnToSaveFormData(name, value);
     } else if (name === "mortgage_date") {
       commonFnToSaveFormData(name, value);
     } else if (name === "is_sold") {
@@ -330,39 +302,6 @@ const ViewEditDeleteProperties = () => {
         ...formData,
         [name]: parseInt(value),
       });
-    }
-    // else if (name === "sale_availability_date") {
-    //   commonFnToSaveFormData(name, value);
-    // }
-    else if (name === "flat_number") {
-      commonFnToSaveAddressDetails(name, parseInt(value));
-    } else if (name === "building_name") {
-      commonFnToSaveAddressDetails(name, value);
-    } else if (name === "society_name") {
-      commonFnToSaveAddressDetails(name, value);
-    } else if (name === "plot_number") {
-      commonFnToSaveAddressDetails(name, parseInt(value));
-    } else if (name === "locality") {
-      commonFnToSaveAddressDetails(name, value);
-    } else if (name === "landmark") {
-      commonFnToSaveAddressDetails(name, value);
-    } else if (name === "state") {
-      if (value) {
-        commonFnToSaveAddressDetails(name, parseInt(value));
-        const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
-          state_id: parseInt(value),
-        });
-        setAllCities(citiesRes.data);
-        // citySelectBoxRef.current.classList.remove("d-none");
-      } else {
-        // citySelectBoxRef.current.classList.add("d-none");
-      }
-    } else if (name === "city") {
-      commonFnToSaveAddressDetails(name, parseInt(value));
-    } else if (name === "zip") {
-      if (value) {
-        commonFnToSaveAddressDetails(name, parseInt(value));
-      }
     } else if (name === "title_clear_property") {
       if (value === "1") {
         setPossessionCheckValue({ titleClearYes: true, titleClearNo: false });
@@ -568,48 +507,12 @@ const ViewEditDeleteProperties = () => {
   };
 
   const setAllDefaultValues = async (
-    propertyCategoryRes,
-    state_id,
-    city_name,
     bank_id,
-    branch_name,
-    type_name,
-    status,
-    is_stressed,
     is_sold,
     is_available_for_sale,
     title_clear_property,
     bank_branch_id
   ) => {
-    // Set default value for property type and make it selected in property_type select box
-    // propertyCategoryRes.forEach((i) => {
-    //   if (i.type_name === type_name) {
-    //     defaultTypeId = i.type_id;
-    //     let defaultPropertyType = document.getElementById(
-    //       `property-type-${i.type_id}`
-    //     );
-    //     if (defaultPropertyType) {
-    //       defaultPropertyType.selected = true;
-    //     }
-    //   }
-    // });
-
-    // Default state
-    let defaultState = document.getElementById(`state-${state_id}`);
-    if (defaultState) {
-      defaultState.selected = true;
-    }
-
-    // default city
-    const citiesRes = await axios.post(`/sam/v1/property/by-city`, {
-      state_id: parseInt(state_id),
-    });
-    setAllCities(citiesRes.data);
-    let defaultCity = document.getElementById(city_name);
-    if (defaultCity) {
-      defaultCity.selected = true;
-    }
-
     // To make default bank selected in bank select box
     let defaultBank = document.getElementById(`bank-${bank_id}`);
     if (defaultBank) {
@@ -627,20 +530,6 @@ const ViewEditDeleteProperties = () => {
       if (defaultBranch) {
         defaultBranch.selected = true;
       }
-    }
-
-    // default status
-    // let defaultStatus = document.getElementById(`status-${status}`);
-    // if (defaultStatus) {
-    //   defaultStatus.selected = true;
-    // }
-
-    // default value of stressed status
-    let defaultValueOfStressed = document.getElementById(
-      `stressed-${is_stressed}`
-    );
-    if (defaultValueOfStressed) {
-      defaultValueOfStressed.checked = true;
     }
 
     // default is_sold value
@@ -983,7 +872,6 @@ const ViewEditDeleteProperties = () => {
                                   name="bank"
                                   className="form-select"
                                   onChange={onInputChange}
-                                  disabled
                                 >
                                   <option value=""></option>
                                   {banks ? (
@@ -1004,10 +892,7 @@ const ViewEditDeleteProperties = () => {
                                 </select>
                               </div>
                             </div>
-                            <div
-                              className="col-xl-4 col-md-6 mt-xl-0 mt-3"
-                              // ref={branchSelectBoxRef}
-                            >
+                            <div className="col-xl-4 col-md-6 mt-xl-0 mt-3">
                               <div className="form-group">
                                 <label
                                   className="form-label common-btn-font"
@@ -1020,7 +905,6 @@ const ViewEditDeleteProperties = () => {
                                   name="bank_branch_id"
                                   className="form-select"
                                   onChange={onInputChange}
-                                  disabled
                                 >
                                   <option value=""></option>
                                   {bankBranches ? (
@@ -1054,7 +938,6 @@ const ViewEditDeleteProperties = () => {
                                   name="title_clear_property"
                                   className="form-select"
                                   onChange={onInputChange}
-                                  disabled
                                 >
                                   <option value=""></option>
                                   <option id="title_clear_property-1" value="1">
