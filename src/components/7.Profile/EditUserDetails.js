@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { rootTitle } from "../../CommonFunctions";
 import Layout from "../1.CommonLayout/Layout";
+let authHeaders = "";
 
 const EditUserDetails = () => {
   // To store original details of user. It is required when user click on cancel button of edit form.
@@ -83,27 +84,20 @@ const EditUserDetails = () => {
   // To navigate to particular route.
   const goTo = useNavigate();
   const data = JSON.parse(localStorage.getItem("data"));
-  // Function will provide login token of user from localStorage and also some urls are stored in this function.
-  const setHeaderAndUrl = () => {
-    let headers = "";
-    if (data) {
-      headers = { Authorization: data.logintoken };
-    }
-    let url = `/sam/v1/property`;
-    let customer_reg_url = `/sam/v1/customer-registration`;
-    return [headers, url, customer_reg_url];
-  };
+  if (data) {
+    authHeaders = { Authorization: data.logintoken };
+  }
 
   // Function will get the data of user whose details are to be edited.
   const getUserToEdit = async () => {
-    const [headers] = setHeaderAndUrl();
     if (data) {
       const userId = data.userId;
       try {
         await axios
-          .get(`/sam/v1/user-registration/auth/${userId}`, { headers: headers })
+          .get(`/sam/v1/user-registration/auth/${userId}`, {
+            headers: authHeaders,
+          })
           .then(async (res) => {
-            const [, url] = setHeaderAndUrl();
             const { individual_user, org_user, user_details } = res.data;
             if (individual_user) {
               const {
@@ -160,11 +154,11 @@ const EditUserDetails = () => {
               user_type: user_type,
             });
             // Get Cities using state_id from api.
-            const cityByState = await axios.post(`${url}/by-city`, {
+            const cityByState = await axios.post(`/sam/v1/property/by-city`, {
               state_id: state_id,
             });
             // Get States from api.
-            const allStates = await axios.get(`${url}/by-state`);
+            const allStates = await axios.get(`/sam/v1/property/by-state`);
             setAllUseStates({
               ...allUseStates,
               citiesFromApi: cityByState.data,
@@ -202,10 +196,9 @@ const EditUserDetails = () => {
 
   const onInputChange = async (e) => {
     const { name, value } = e.target;
-    const [, url, customer_reg_url] = setHeaderAndUrl();
     // If input is state then post selected state id to api for getting cities based on selected state.
     if (name === "state_name") {
-      const cityByState = await axios.post(`${url}/by-city`, {
+      const cityByState = await axios.post(`/sam/v1/property/by-city`, {
         state_id: parseInt(value),
       });
       setAllUseStates({
@@ -214,7 +207,11 @@ const EditUserDetails = () => {
       });
 
       setIdOfState(parseInt(value));
-      zipValidationByState(zip, parseInt(value), customer_reg_url);
+      zipValidationByState(
+        zip,
+        parseInt(value),
+        `/sam/v1/customer-registration`
+      );
       let stateName = "";
       let getStateName = document.getElementById(`state-name-${value}`);
       if (getStateName) {
@@ -229,7 +226,7 @@ const EditUserDetails = () => {
     } else if (name === "zip") {
       setCommonUserDetails({ ...commonUserDetails, zip: parseInt(value) });
       if (idOfState !== 0 && value !== "") {
-        zipValidationByState(value, idOfState, customer_reg_url);
+        zipValidationByState(value, idOfState, `/sam/v1/customer-registration`);
       }
     } else if (name === "city") {
       setCommonUserDetails({ ...commonUserDetails, [name]: value });
@@ -240,11 +237,10 @@ const EditUserDetails = () => {
 
   // Function will run when user click on edit icon / button.
   const editDetails = async () => {
-    const [, url] = setHeaderAndUrl();
     const { city, state_id, state_name } = originalValuesToShow;
     try {
       await axios
-        .post(`${url}/by-city`, {
+        .post(`/sam/v1/property/by-city`, {
           state_id: state_id,
         })
         .then((res) => {
@@ -326,7 +322,6 @@ const EditUserDetails = () => {
   // Function will run on update button click.
   const updateDetails = async (e) => {
     e.preventDefault();
-    const [headers, , customer_reg_url] = setHeaderAndUrl();
     const dataToPost = {
       address: address,
       locality: address,
@@ -338,8 +333,8 @@ const EditUserDetails = () => {
     setLoading(true);
     try {
       await axios
-        .post(`${customer_reg_url}/auth/edit-details`, dataToPost, {
-          headers: headers,
+        .post(`/sam/v1/customer-registration/auth/edit-details`, dataToPost, {
+          headers: authHeaders,
         })
         .then((res) => {
           if (res.data.status === 0) {
