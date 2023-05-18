@@ -6,7 +6,11 @@ import CommonSpinner from "../../CommonSpinner";
 import Pagination from "../../Pagination";
 import { toast } from "react-toastify";
 import BreadCrumb from "../BreadCrumb";
-import { toggleClassOfNextPrevPageItems } from "../../CommonFunctions";
+import {
+  checkLoginSession,
+  toggleClassOfNextPrevPageItems,
+} from "../../CommonFunctions";
+import { useNavigate } from "react-router-dom";
 
 const records_per_page = 4;
 let authHeader = "";
@@ -21,6 +25,7 @@ const ManageUsers = ({ userType }) => {
     authHeader = { Authorization: data.logintoken };
   }
 
+  const goTo = useNavigate();
   const [otherDetailsOfUser, setOtherDetailsOfUser] = useState({});
   const [categoryWiseUserDetails, setCategoryWiseUserDetails] = useState({});
   const [roles, setRoles] = useState([]);
@@ -323,7 +328,13 @@ const ManageUsers = ({ userType }) => {
 
   useEffect(() => {
     if (data) {
-      getAllUsers();
+      checkLoginSession(data.logintoken).then((res) => {
+        if (res === "valid") {
+          getAllUsers();
+        } else {
+          goTo("/login");
+        }
+      });
     }
     // eslint-disable-next-line
   }, []);

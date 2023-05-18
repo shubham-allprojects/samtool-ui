@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const toggleClassOfNextPrevPageItems = () => {
   let activePageItem = document.querySelector(".page-item.active");
   if (activePageItem) {
@@ -26,3 +28,19 @@ export const toggleClassOfNextPrevPageItems = () => {
 };
 
 export const rootTitle = document.getElementById("root-title");
+
+export const checkLoginSession = async (token) => {
+  try {
+    let res = await axios.get(`/sam/v1/user-registration/logout`, {
+      headers: { Authorization: token },
+    });
+    if (res.data === "Session expired or invalid user") {
+      localStorage.removeItem("data");
+      localStorage.removeItem("remainingTime");
+      localStorage.setItem("userSession", "invalid");
+      return "Invalid";
+    } else {
+      return "Valid";
+    }
+  } catch (error) {}
+};
