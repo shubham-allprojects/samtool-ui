@@ -213,6 +213,7 @@ const ViewEditDeleteProperties = () => {
     is_sold,
     territory,
     distress_value,
+    is_stressed,
     // is_available_for_sale,
   } = formData;
   const {
@@ -448,6 +449,8 @@ const ViewEditDeleteProperties = () => {
   };
 
   let defaultTypeId;
+  const [otherValuesToShow, setOtherValuesToShow] = useState({});
+  const { type_name, state_name, city_name } = otherValuesToShow;
 
   const getCurrentPropertyDataToUpdate = async (propertyId) => {
     setMainPageLoading(true);
@@ -471,7 +474,7 @@ const ViewEditDeleteProperties = () => {
         `/sam/v1/property/single-property/${propertyId}`,
         { headers: authHeader }
       );
-
+      // console.log(currentPropertyRes.data);
       const {
         type_name,
         branch_name,
@@ -487,10 +490,8 @@ const ViewEditDeleteProperties = () => {
         saleable_area,
         carpet_area,
         property_number,
-        // building_name,
         society_name,
         locality,
-        // landmark,
         zip,
         is_sold,
         is_available_for_sale,
@@ -498,6 +499,7 @@ const ViewEditDeleteProperties = () => {
         is_stressed,
         property_id,
         state_id,
+        state_name,
         city_id,
         bank_id,
         territory,
@@ -506,7 +508,7 @@ const ViewEditDeleteProperties = () => {
         distress_value,
         bank_branch_id,
       } = currentPropertyRes.data;
-
+      setOtherValuesToShow(currentPropertyRes.data);
       setIdOfState(state_id);
 
       setAllDefaultValues(
@@ -580,17 +582,17 @@ const ViewEditDeleteProperties = () => {
     bank_branch_id
   ) => {
     // Set default value for property type and make it selected in property_type select box
-    propertyCategoryRes.forEach((i) => {
-      if (i.type_name === type_name) {
-        defaultTypeId = i.type_id;
-        let defaultPropertyType = document.getElementById(
-          `property-type-${i.type_id}`
-        );
-        if (defaultPropertyType) {
-          defaultPropertyType.selected = true;
-        }
-      }
-    });
+    // propertyCategoryRes.forEach((i) => {
+    //   if (i.type_name === type_name) {
+    //     defaultTypeId = i.type_id;
+    //     let defaultPropertyType = document.getElementById(
+    //       `property-type-${i.type_id}`
+    //     );
+    //     if (defaultPropertyType) {
+    //       defaultPropertyType.selected = true;
+    //     }
+    //   }
+    // });
 
     // Default state
     let defaultState = document.getElementById(`state-${state_id}`);
@@ -946,40 +948,27 @@ const ViewEditDeleteProperties = () => {
                                 Basic details
                               </h5>
                             </div>
-                            <div className="col-xl-4 col-md-6">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="type_id"
-                                >
-                                  Property type
-                                </label>
-                                <select
-                                  id="type_id"
-                                  name="type_id"
-                                  className="form-select"
-                                  onChange={onInputChange}
-                                  required
-                                >
-                                  <option value=""></option>
-                                  {propertyCategories ? (
-                                    propertyCategories.map((data) => {
-                                      return (
-                                        <option
-                                          key={data.type_id}
-                                          value={data.type_id}
-                                          id={`property-type-${data.type_id}`}
-                                        >
-                                          {data.type_name}
-                                        </option>
-                                      );
-                                    })
-                                  ) : (
-                                    <></>
-                                  )}
-                                </select>
+                            {type_name ? (
+                              <div className="col-xl-4 col-md-6">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="type_name"
+                                  >
+                                    Property type
+                                  </label>
+                                  <input
+                                    id="type_name"
+                                    type="text"
+                                    className="form-control"
+                                    defaultValue={type_name}
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
+                            ) : (
+                              <></>
+                            )}
 
                             <div className="col-xl-4 col-md-6">
                               <div className="form-group">
@@ -994,7 +983,7 @@ const ViewEditDeleteProperties = () => {
                                   name="bank"
                                   className="form-select"
                                   onChange={onInputChange}
-                                  required
+                                  disabled
                                 >
                                   <option value=""></option>
                                   {banks ? (
@@ -1031,7 +1020,7 @@ const ViewEditDeleteProperties = () => {
                                   name="bank_branch_id"
                                   className="form-select"
                                   onChange={onInputChange}
-                                  required
+                                  disabled
                                 >
                                   <option value=""></option>
                                   {bankBranches ? (
@@ -1065,7 +1054,7 @@ const ViewEditDeleteProperties = () => {
                                   name="title_clear_property"
                                   className="form-select"
                                   onChange={onInputChange}
-                                  required
+                                  disabled
                                 >
                                   <option value=""></option>
                                   <option id="title_clear_property-1" value="1">
@@ -1123,152 +1112,111 @@ const ViewEditDeleteProperties = () => {
                                 </div>
                               </div>
                             </div>
-                            <div className="col-xl-4 col-md-6 mt-3">
-                              <div className="form-group">
-                                <label className="form-label common-btn-font">
-                                  Is stressed?
-                                </label>
-                                <br />
-                                <div className="form-check form-check-inline">
-                                  <input
-                                    className="form-check-input"
-                                    type="radio"
-                                    name="is_stressed"
-                                    value="1"
-                                    id="stressed-1"
-                                    onChange={onInputChange}
-                                  />
+                            {is_stressed ? (
+                              <div className="col-xl-4 col-md-6 mt-3">
+                                <div className="form-group">
                                   <label
-                                    className="form-check-label"
-                                    htmlFor="inlineRadio1"
+                                    htmlFor="is_stressed"
+                                    className="form-label common-btn-font"
                                   >
-                                    Yes
+                                    Is stressed?
                                   </label>
-                                </div>
-                                <div className="form-check form-check-inline">
                                   <input
-                                    className="form-check-input"
-                                    type="radio"
-                                    name="is_stressed"
-                                    value="0"
-                                    id="stressed-0"
-                                    onChange={onInputChange}
+                                    id="is_stressed"
+                                    type="text"
+                                    className="form-control"
+                                    defaultValue={
+                                      is_stressed === 1 ? "Yes" : "No"
+                                    }
+                                    disabled
                                   />
-                                  <label
-                                    className="form-check-label"
-                                    htmlFor="inlineRadio2"
-                                  >
-                                    No
-                                  </label>
                                 </div>
                               </div>
-                            </div>
-                            <div className="col-xl-4 col-md-6 mt-3">
-                              <div className="form-group">
-                                <label
-                                  htmlFor="territory"
-                                  className="form-label common-btn-font"
-                                >
-                                  Territory
-                                </label>
-                                <input
-                                  type="text"
-                                  id="territory"
-                                  name="territory"
-                                  className="form-control"
-                                  defaultValue={territory}
-                                  onChange={onInputChange}
-                                  required
-                                />
+                            ) : (
+                              <></>
+                            )}
+                            {territory ? (
+                              <div className="col-xl-4 col-md-6 mt-3">
+                                <div className="form-group">
+                                  <label
+                                    htmlFor="territory"
+                                    className="form-label common-btn-font"
+                                  >
+                                    Territory
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="territory"
+                                    name="territory"
+                                    className="form-control"
+                                    defaultValue={territory}
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            {/* <div className="col-xl-4 col-md-6 mt-3">
-                            <div className="form-group">
-                              <label
-                                htmlFor="status"
-                                className="form-label common-btn-font"
-                              >
-                                Status
-                              </label>
-                              <br />
-                              <select
-                                name="status"
-                                onChange={onInputChange}
-                                id="status"
-                                className="form-select"
-                                required
-                              >
-                                <option value=""></option>
-                                <option id="status-0" value="0">
-                                  0
-                                </option>
-                                <option id="status-1" value="1">
-                                  1
-                                </option>
-                              </select>
-                            </div>
-                          </div> */}
+                            ) : (
+                              <></>
+                            )}
                           </div>
                           {/* Row 2 - Area Details*/}
                           <div className="row mb-3">
                             <div className="col-12">
                               <h5 className="fw-bold text-primary">Area</h5>
                             </div>
-                            <div className="col-xl-4 col-md-6">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="saleable_area"
-                                >
-                                  Saleable area (sq. ft.)
-                                </label>
-                                <input
-                                  type="number"
-                                  className="form-control"
-                                  id="saleable_area"
-                                  name="saleable_area"
-                                  defaultValue={
-                                    saleable_area
-                                      ? parseInt(saleable_area.split("sqrt")[0])
-                                      : ""
-                                  }
-                                  onChange={onInputChange}
-                                  required
-                                />
+                            {saleable_area ? (
+                              <div className="col-xl-4 col-md-6">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="saleable_area"
+                                  >
+                                    Saleable area (sq. ft.)
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="saleable_area"
+                                    name="saleable_area"
+                                    defaultValue={
+                                      saleable_area
+                                        ? parseInt(
+                                            saleable_area.split("sqrt")[0]
+                                          )
+                                        : ""
+                                    }
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div className="col-xl-4 col-md-6 mt-3 mt-md-0">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="carpet_area"
-                                >
-                                  Carpet area (sq. ft.)
-                                </label>
-                                <input
-                                  type="number"
-                                  className={`form-control ${
-                                    areaValidationMessage ? "border-danger" : ""
-                                  }`}
-                                  id="carpet_area"
-                                  name="carpet_area"
-                                  defaultValue={
-                                    saleable_area
-                                      ? parseInt(carpet_area.split("sqrt")[0])
-                                      : ""
-                                  }
-                                  onChange={onInputChange}
-                                  required
-                                />
-                                <span
-                                  className={`text-danger ${
-                                    areaValidationMessage ? "" : "d-none"
-                                  }`}
-                                >
-                                  {areaValidationMessage}
-                                </span>
+                            ) : (
+                              <></>
+                            )}
+                            {carpet_area ? (
+                              <div className="col-xl-4 col-md-6 mt-3 mt-md-0">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="carpet_area"
+                                  >
+                                    Carpet area (sq. ft.)
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="carpet_area"
+                                    name="carpet_area"
+                                    defaultValue={
+                                      saleable_area
+                                        ? parseInt(carpet_area.split("sqrt")[0])
+                                        : ""
+                                    }
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
+                            ) : (
+                              <></>
+                            )}
                           </div>
 
                           {/* Row 3 - Pricing Details */}
@@ -1361,52 +1309,58 @@ const ViewEditDeleteProperties = () => {
                                 Dates & Availability
                               </h5>
                             </div>
-                            <div className="col-xl-4 mb-3 col-md-6">
-                              <div className="form-group">
-                                <label
-                                  htmlFor="completion_date"
-                                  className="form-label common-btn-font"
-                                >
-                                  Completion date
-                                </label>
-                                <input
-                                  className="form-control"
-                                  type="date"
-                                  id="completion_date"
-                                  name="completion_date"
-                                  defaultValue={
-                                    completion_date
-                                      ? completion_date.split(" ")[0]
-                                      : ""
-                                  }
-                                  onChange={onInputChange}
-                                  required
-                                />
+                            {completion_date ? (
+                              <div className="col-xl-4 mb-3 col-md-6">
+                                <div className="form-group">
+                                  <label
+                                    htmlFor="completion_date"
+                                    className="form-label common-btn-font"
+                                  >
+                                    Completion date
+                                  </label>
+                                  <input
+                                    className="form-control"
+                                    type="date"
+                                    id="completion_date"
+                                    name="completion_date"
+                                    defaultValue={
+                                      completion_date
+                                        ? completion_date.split(" ")[0]
+                                        : ""
+                                    }
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div className="col-xl-4 mb-3 col-md-6">
-                              <div className="form-group">
-                                <label
-                                  htmlFor="purchase_date"
-                                  className="form-label common-btn-font"
-                                >
-                                  Purchase date
-                                </label>
-                                <input
-                                  className="form-control"
-                                  type="date"
-                                  id="purchase_date"
-                                  name="purchase_date"
-                                  onChange={onInputChange}
-                                  defaultValue={
-                                    purchase_date
-                                      ? purchase_date.split(" ")[0]
-                                      : ""
-                                  }
-                                  required
-                                />
+                            ) : (
+                              <></>
+                            )}
+                            {purchase_date ? (
+                              <div className="col-xl-4 mb-3 col-md-6">
+                                <div className="form-group">
+                                  <label
+                                    htmlFor="purchase_date"
+                                    className="form-label common-btn-font"
+                                  >
+                                    Purchase date
+                                  </label>
+                                  <input
+                                    className="form-control"
+                                    type="date"
+                                    id="purchase_date"
+                                    name="purchase_date"
+                                    defaultValue={
+                                      purchase_date
+                                        ? purchase_date.split(" ")[0]
+                                        : ""
+                                    }
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
+                            ) : (
+                              <></>
+                            )}
                             <div className="col-xl-4 mb-3 col-md-6">
                               <div className="form-group">
                                 <label
@@ -1511,216 +1465,204 @@ const ViewEditDeleteProperties = () => {
                             <div className="col-12">
                               <h5 className="fw-bold text-primary">Address</h5>
                             </div>
-                            <div className="col-xl-4 mb-3 col-md-6">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="flat_number"
-                                >
-                                  Flat No.
-                                </label>
-                                <input
-                                  id="flat_number"
-                                  name="flat_number"
-                                  type="number"
-                                  className="form-control"
-                                  defaultValue={flat_number}
-                                  onChange={onInputChange}
-                                />
+                            {flat_number ? (
+                              <div className="col-xl-4 mb-3 col-md-6">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="flat_number"
+                                  >
+                                    Flat No.
+                                  </label>
+                                  <input
+                                    id="flat_number"
+                                    name="flat_number"
+                                    type="number"
+                                    className="form-control"
+                                    defaultValue={flat_number}
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div className="col-xl-4 col-md-6 mb-3">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="building_name"
-                                >
-                                  Building Name
-                                </label>
-                                <input
-                                  id="building_name"
-                                  name="building_name"
-                                  type="text"
-                                  className="form-control"
-                                  defaultValue={building_name}
-                                  onChange={onInputChange}
-                                />
+                            ) : (
+                              <></>
+                            )}
+                            {building_name ? (
+                              <div className="col-xl-4 col-md-6 mb-3">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="building_name"
+                                  >
+                                    Building Name
+                                  </label>
+                                  <input
+                                    id="building_name"
+                                    name="building_name"
+                                    type="text"
+                                    className="form-control"
+                                    defaultValue={building_name}
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div className="col-xl-4 col-md-6 mb-3">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="society_name"
-                                >
-                                  Society Name
-                                </label>
-                                <input
-                                  id="society_name"
-                                  name="society_name"
-                                  type="text"
-                                  className="form-control"
-                                  defaultValue={society_name}
-                                  onChange={onInputChange}
-                                />
+                            ) : (
+                              <></>
+                            )}
+                            {society_name ? (
+                              <div className="col-xl-4 col-md-6 mb-3">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="society_name"
+                                  >
+                                    Society Name
+                                  </label>
+                                  <input
+                                    id="society_name"
+                                    name="society_name"
+                                    type="text"
+                                    className="form-control"
+                                    defaultValue={society_name}
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div className="col-xl-4 mb-3 col-md-6">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="plot_number"
-                                >
-                                  Plot No.
-                                </label>
-                                <input
-                                  id="plot_number"
-                                  name="plot_number"
-                                  type="number"
-                                  className="form-control"
-                                  defaultValue={plot_number}
-                                  onChange={onInputChange}
-                                />
+                            ) : (
+                              <></>
+                            )}
+                            {plot_number ? (
+                              <div className="col-xl-4 mb-3 col-md-6">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="plot_number"
+                                  >
+                                    Plot No.
+                                  </label>
+                                  <input
+                                    id="plot_number"
+                                    name="plot_number"
+                                    type="number"
+                                    className="form-control"
+                                    defaultValue={plot_number}
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div className="col-xl-4 mb-3 col-md-6">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="locality"
-                                >
-                                  Locality
-                                </label>
-                                <input
-                                  id="locality"
-                                  name="locality"
-                                  type="text"
-                                  className="form-control"
-                                  defaultValue={locality}
-                                  onChange={onInputChange}
-                                />
+                            ) : (
+                              <></>
+                            )}
+                            {locality ? (
+                              <div className="col-xl-4 mb-3 col-md-6">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="locality"
+                                  >
+                                    Locality
+                                  </label>
+                                  <input
+                                    id="locality"
+                                    name="locality"
+                                    type="text"
+                                    className="form-control"
+                                    defaultValue={locality}
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
+                            ) : (
+                              <></>
+                            )}
 
-                            <div className="col-xl-4 col-md-6 mb-3">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="landmark"
-                                >
-                                  Landmark
-                                </label>
-                                <input
-                                  id="landmark"
-                                  name="landmark"
-                                  type="text"
-                                  className="form-control"
-                                  defaultValue={landmark}
-                                  onChange={onInputChange}
-                                />
+                            {landmark ? (
+                              <div className="col-xl-4 col-md-6 mb-3">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="landmark"
+                                  >
+                                    Landmark
+                                  </label>
+                                  <input
+                                    id="landmark"
+                                    name="landmark"
+                                    type="text"
+                                    className="form-control"
+                                    defaultValue={landmark}
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
+                            ) : (
+                              <></>
+                            )}
 
-                            <div className="col-xl-4 col-md-6 mb-3">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="state"
-                                >
-                                  State
-                                </label>
-                                <select
-                                  id="state"
-                                  name="state"
-                                  className="form-select"
-                                  onChange={onInputChange}
-                                  required
-                                >
-                                  <option value=""></option>
-                                  {allStates ? (
-                                    allStates.map((data) => {
-                                      return (
-                                        <option
-                                          key={data.state_id}
-                                          value={data.state_id}
-                                          id={`state-${data.state_id}`}
-                                        >
-                                          {data.state_name}
-                                        </option>
-                                      );
-                                    })
-                                  ) : (
-                                    <></>
-                                  )}
-                                </select>
+                            {state_name ? (
+                              <div className="col-xl-4 col-md-6 mb-3">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="state"
+                                  >
+                                    State
+                                  </label>
+                                  <input
+                                    id="state"
+                                    name="state"
+                                    className="form-control"
+                                    defaultValue={state_name}
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div
-                              className="col-xl-4 col-md-6 mb-3"
-                              // ref={citySelectBoxRef}
-                            >
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="city"
-                                >
-                                  City
-                                </label>
-                                <select
-                                  id="city"
-                                  name="city"
-                                  className="form-select"
-                                  onChange={onInputChange}
-                                  // required={state !== "" ? true : false}
-                                >
-                                  <option value=""></option>
-                                  {allCities ? (
-                                    allCities.map((data) => {
-                                      return (
-                                        <option
-                                          key={data.city_id}
-                                          value={data.city_id}
-                                          id={data.city_name}
-                                        >
-                                          {data.city_name}
-                                        </option>
-                                      );
-                                    })
-                                  ) : (
-                                    <></>
-                                  )}
-                                </select>
+                            ) : (
+                              <></>
+                            )}
+                            {city_name ? (
+                              <div className="col-xl-4 col-md-6 mb-3">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="city"
+                                  >
+                                    City
+                                  </label>
+                                  <input
+                                    id="city"
+                                    name="city"
+                                    className="form-control"
+                                    defaultValue={city_name}
+                                    disabled
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div className="col-xl-4 col-md-6 mb-3">
-                              <div className="form-group">
-                                <label
-                                  className="form-label common-btn-font"
-                                  htmlFor="zip"
-                                >
-                                  Zip
-                                </label>
-                                <input
-                                  type="text"
-                                  onChange={onInputChange}
-                                  id="zip"
-                                  name="zip"
-                                  defaultValue={zip}
-                                  className={`form-control ${
-                                    zipCodeValidationMessage
-                                      ? "border-danger"
-                                      : ""
-                                  }`}
-                                ></input>
-                                <span
-                                  className={`text-danger ${
-                                    zipCodeValidationMessage ? "" : "d-none"
-                                  }`}
-                                >
-                                  {zipCodeValidationMessage}
-                                </span>
+                            ) : (
+                              <></>
+                            )}
+                            {zip ? (
+                              <div className="col-xl-4 col-md-6 mb-3">
+                                <div className="form-group">
+                                  <label
+                                    className="form-label common-btn-font"
+                                    htmlFor="zip"
+                                  >
+                                    Zip
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="zip"
+                                    name="zip"
+                                    defaultValue={zip}
+                                    disabled
+                                    className="form-control"
+                                  ></input>
+                                </div>
                               </div>
-                            </div>
+                            ) : (
+                              <></>
+                            )}
                           </div>
                           <hr />
                           <div className="row justify-content-end pt-2">
