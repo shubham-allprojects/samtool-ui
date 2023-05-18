@@ -224,19 +224,10 @@ const ViewEditDeleteProperties = () => {
     landmark,
     zip,
   } = formData.address_details;
-
-  const [propertyCategories, setPropertyCategories] = useState([]);
   const [banks, setBanks] = useState([]);
   const [bankBranches, setBankBranches] = useState([]);
-  const [allStates, setAllStates] = useState([]);
-  const [allCities, setAllCities] = useState([]);
-  const [zipCodeValidationMessage, setZipCodeValidationMessage] = useState("");
-  const [areaValidationMessage, setAreaValidationMessage] = useState("");
-  // const branchSelectBoxRef = useRef();
-  // const citySelectBoxRef = useRef();
   const notSoldCheckRef = useRef();
   const [mainPageLoading, setMainPageLoading] = useState(false);
-  const [idOfState, setIdOfState] = useState();
 
   const commonFnToSaveFormData = (name, value) => {
     setFormData({ ...formData, [name]: value });
@@ -312,66 +303,28 @@ const ViewEditDeleteProperties = () => {
     }
   };
 
-  const resetValidationsOnSubmit = () => {
-    setAreaValidationMessage("");
-    setZipCodeValidationMessage("");
-  };
-
   const onFormSubmit = async (e) => {
     e.preventDefault();
     setUpdateBtnLoading(true);
-    await axios
-      .post(`/sam/v1/customer-registration/zipcode-validation`, {
-        zipcode: String(zip),
-        state_id: parseInt(idOfState),
-      })
-      .then((res) => {
-        if (res.data.status === 0) {
-          setZipCodeValidationMessage("Invalid ZipCode.");
-          zipError = true;
-          setUpdateBtnLoading(false);
-        } else {
-          setAreaValidationMessage("");
-          zipError = false;
-        }
-      });
-    if (parseInt(saleable_area) < parseInt(carpet_area)) {
-      setAreaValidationMessage("Carpet area must be less than salable area.");
-      areaError = true;
+    try {
+      console.log(JSON.stringify(formData));
+      await axios
+        .post(`/sam/v1/property/auth/update-property`, formData, {
+          headers: authHeader,
+        })
+        .then((res) => {
+          if (res.data.status === 0) {
+            toast.success("Property updated successfully");
+            setUpdateBtnLoading(false);
+            window.scrollTo(0, 0);
+          } else {
+            toast.error("Internal server error");
+            setUpdateBtnLoading(false);
+          }
+        });
+    } catch (error) {
+      toast.error("Internal server error");
       setUpdateBtnLoading(false);
-    } else {
-      setAreaValidationMessage("");
-      areaError = false;
-    }
-    if (zipError || areaError) {
-      if (zipError === false) {
-        setZipCodeValidationMessage("");
-      }
-      if (areaError === false) {
-        setAreaValidationMessage("");
-      }
-    } else {
-      try {
-        console.log(JSON.stringify(formData));
-        await axios
-          .post(`/sam/v1/property/auth/update-property`, formData, {
-            headers: authHeader,
-          })
-          .then((res) => {
-            if (res.data.status === 0) {
-              resetValidationsOnSubmit();
-              toast.success("Property updated successfully");
-              setUpdateBtnLoading(false);
-              window.scrollTo(0, 0);
-            } else {
-              toast.error("Internal server error");
-              setUpdateBtnLoading(false);
-            }
-          });
-      } catch (error) {
-        toast.error("Internal server error");
-        setUpdateBtnLoading(false);
-      }
     }
   };
 
@@ -385,15 +338,9 @@ const ViewEditDeleteProperties = () => {
       allPropertiesPageRef.current.classList.add("d-none");
       editPropertyRef.current.classList.remove("d-none");
       setPropertiesLinkDisabled(true);
-      // Get details from api e.g. state, banks etc.
-      const propertyCategoryRes = await axios.get(
-        `/sam/v1/property/by-category`
-      );
-      setPropertyCategories(propertyCategoryRes.data);
+      // Get details from api.
       const bankRes = await axios.get(`/sam/v1/property/by-bank`);
       setBanks(bankRes.data);
-      const statesRes = await axios.get(`/sam/v1/property/by-state`);
-      setAllStates(statesRes.data);
 
       // Get current property values
       const currentPropertyRes = await axios.get(
@@ -431,7 +378,6 @@ const ViewEditDeleteProperties = () => {
         bank_branch_id,
       } = currentPropertyRes.data;
       setOtherValuesToShow(currentPropertyRes.data);
-      setIdOfState(state_id);
 
       setAllDefaultValues(
         bank_id,
