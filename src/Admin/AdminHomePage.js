@@ -9,7 +9,6 @@ import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
 let organizationalUsersCount = 0; // Default count of organizational users.
 let individualUsersCount = 0; // Default count of individual users.
-
 const AdminHomePage = () => {
   CharJs.register(...registerables);
   const data = JSON.parse(localStorage.getItem("data"));
@@ -23,57 +22,23 @@ const AdminHomePage = () => {
   const [propertyCountLoading, setPropertyCountLoading] = useState(false);
   const [usersCountLoading, setUsersCountLoading] = useState(false);
   const { propertyLabels, typeWiseCount } = typeWisePropertyDetails;
-  const setHeaderAndUrl = () => {
-    let headers = "";
-    if (data) {
-      headers = { Authorization: data.logintoken };
-    }
-    let url = `/sam/v1/user-registration/auth`;
-    return [headers, url];
-  };
 
-  const setTotalCountOfUsers = async () => {
+  const setTotalCountOfUsers = async (authHeaders) => {
     // Get and store the count of both types of Users i.e. Individual Users and Organizational Users.
     setUsersCountLoading(true);
-    const [headers, url] = setHeaderAndUrl();
-    await axios.get(`${url}/type-count`, { headers: headers }).then((res) => {
-      individualUsersCount = parseInt(res.data.individual_count);
-      organizationalUsersCount = parseInt(res.data.org_count);
-    });
+    await axios
+      .get(`/sam/v1/user-registration/auth/type-count`, {
+        headers: { Authorization: authHeaders },
+      })
+      .then((res) => {
+        individualUsersCount = parseInt(res.data.individual_count);
+        organizationalUsersCount = parseInt(res.data.org_count);
+      });
     setCountOfUsers({
       countOfIndividualUsers: individualUsersCount,
       countOfOrgUsers: organizationalUsersCount,
     });
-
     setUsersCountLoading(false);
-
-    // To show counter animation on admin Home page.
-    // if (!individualUsersCount <= 0) {
-    //   individualUsersCount > 100
-    //     ? (individualUsersStartCounter = Math.floor(
-    //         (individualUsersCount * 80) / 100
-    //       ))
-    //     : (individualUsersStartCounter = 0);
-    //   counter(
-    //     "individualCount",
-    //     individualUsersStartCounter,
-    //     individualUsersCount,
-    //     1000
-    //   );
-    // }
-    // if (!organizationalUsersCount <= 0) {
-    //   organizationalUsersCount > 100
-    //     ? (organizationalUsersStartCounter = Math.floor(
-    //         (organizationalUsersCount * 80) / 100
-    //       ))
-    //     : (organizationalUsersStartCounter = 0);
-    //   counter(
-    //     "organizationalCount",
-    //     organizationalUsersStartCounter,
-    //     organizationalUsersCount,
-    //     1000
-    //   );
-    // }
   };
 
   const [chart1Type, setChart1Type] = useState("pie");
@@ -158,12 +123,11 @@ const AdminHomePage = () => {
     },
   };
 
-  const getPropertyCountFromApi = async () => {
+  const getPropertyCountFromApi = async (authHeaders) => {
     setPropertyCountLoading(true);
-    const [headers] = setHeaderAndUrl();
     const propertyCountRes = await axios.get(
       `sam/v1/property/auth/property-count`,
-      { headers: headers }
+      { headers: { Authorization: authHeaders } }
     );
     let arr = propertyCountRes.data;
     let totalCount = 0;
@@ -185,14 +149,6 @@ const AdminHomePage = () => {
     });
 
     setPropertyCountLoading(false);
-
-    // To show counter animation on admin Home page.
-    // if (!totalCount <= 0) {
-    //   totalCount > 100
-    //     ? (propertyStartCounter = Math.floor((totalCount * 80) / 100))
-    //     : (propertyStartCounter = 0);
-    //   counter("propertyCount", propertyStartCounter, totalCount, 1000);
-    // }
   };
 
   useEffect(() => {
@@ -200,8 +156,8 @@ const AdminHomePage = () => {
     document.getElementById("pie").checked = true;
     document.getElementById("bar2").checked = true;
     if (data) {
-      setTotalCountOfUsers();
-      getPropertyCountFromApi();
+      setTotalCountOfUsers(data.logintoken);
+      getPropertyCountFromApi(data.logintoken);
     }
     // eslint-disable-next-line
   }, []);
