@@ -26,18 +26,20 @@ const AdminHomePage = () => {
   const setTotalCountOfUsers = async (authHeaders) => {
     // Get and store the count of both types of Users i.e. Individual Users and Organizational Users.
     setUsersCountLoading(true);
-    await axios
-      .get(`/sam/v1/user-registration/auth/type-count`, {
-        headers: { Authorization: authHeaders },
-      })
-      .then((res) => {
-        individualUsersCount = parseInt(res.data.individual_count);
-        organizationalUsersCount = parseInt(res.data.org_count);
+    try {
+      await axios
+        .get(`/sam/v1/user-registration/auth/type-count`, {
+          headers: { Authorization: authHeaders },
+        })
+        .then((res) => {
+          individualUsersCount = parseInt(res.data.individual_count);
+          organizationalUsersCount = parseInt(res.data.org_count);
+        });
+      setCountOfUsers({
+        countOfIndividualUsers: individualUsersCount,
+        countOfOrgUsers: organizationalUsersCount,
       });
-    setCountOfUsers({
-      countOfIndividualUsers: individualUsersCount,
-      countOfOrgUsers: organizationalUsersCount,
-    });
+    } catch (error) {}
     setUsersCountLoading(false);
   };
 

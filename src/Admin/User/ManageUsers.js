@@ -10,7 +10,6 @@ import { toggleClassOfNextPrevPageItems } from "../../CommonFunctions";
 
 const records_per_page = 4;
 let authHeader = "";
-
 let defaultRoleText = "";
 let defaultRoleIds = [];
 let rolesToRemove = [];
