@@ -165,7 +165,7 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                           id="collapseExample"
                         >
                           <div className="docs-list-table-wrapper">
-                            <table className="table table-striped">
+                            <table className="table">
                               {/* <thead>
                                 <tr>
                                   <th scope="col">#</th>
