@@ -123,6 +123,36 @@ const ViewProperty = ({ selectedProperty }) => {
                 ) : (
                   <></>
                 )}
+
+                <div className="col-12 mt-3">
+                  <div className="card p-2 text-center border-primary border-2 border position-relative">
+                    <div
+                      className="container-fluid"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample"
+                      aria-bs-expanded="false"
+                      aria-bs-controls="collapseExample"
+                    >
+                      <div className="row">
+                        <div className="col-12 d-flex justify-content-between">
+                          <span className="">View Documents</span>
+                          <span>
+                            <i className="bi bi-chevron-down"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="collapse mt-2" id="collapseExample">
+                      <div className="card card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high
+                        life accusamus terry richardson ad squid. Nihil anim
+                        keffiyeh helvetica, craft beer labore wes anderson cred
+                        nesciunt sapiente ea proident.
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
