@@ -126,7 +126,6 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
 
                 {propertyDocumentsList ? (
                   <>
-                    {" "}
                     <div className="col-12 mt-3">
                       <div className="card p-2 text-center border-primary border-2 border position-relative">
                         <div
@@ -150,7 +149,10 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                         >
                           <div className="row">
                             <div className="col-12 d-flex justify-content-between">
-                              <span className="">View Documents</span>
+                              <span className="fw-bold">
+                                <i class="bi bi-file-earmark pe-2"></i>
+                                Documents
+                              </span>
                               <span className="chevRonDown">
                                 <i className="bi bi-chevron-down"></i>
                               </span>
@@ -163,14 +165,14 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                           id="collapseExample"
                         >
                           <div className="docs-list-table-wrapper">
-                            <table className="table">
-                              <thead>
+                            <table className="table table-striped">
+                              {/* <thead>
                                 <tr>
                                   <th scope="col">#</th>
                                   <th scope="col">Document</th>
                                   <th scope="col">Action</th>
                                 </tr>
-                              </thead>
+                              </thead> */}
                               <tbody>
                                 {propertyDocumentsList.map(
                                   (document, Index) => {
