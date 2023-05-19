@@ -159,11 +159,27 @@ const ViewProperty = ({ selectedProperty }) => {
                       className="collapse mt-2 documents-list-collapse"
                       id="collapseExample"
                     >
-                      <div className="card card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high
-                        life accusamus terry richardson ad squid. Nihil anim
-                        keffiyeh helvetica, craft beer labore wes anderson cred
-                        nesciunt sapiente ea proident.
+                      <div className="docs-list-table-wrapper">
+                        <table className="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Document</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>
+                                <button className="btn btn-sm btn-primary">
+                                  view
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
