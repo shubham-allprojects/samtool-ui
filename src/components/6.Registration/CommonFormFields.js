@@ -16,7 +16,9 @@ const CommonFormFields = ({
     <>
       {/* Address Row 1 */}
       <div className="row addressRow1 mt-lg-3 mt-4">
-        <div className="col-lg-2 mb-lg-0 mb-2">Address</div>
+        <div className="col-lg-2 mb-lg-0 mb-2">
+          Address<span className="text-danger fw-bold">*</span>
+        </div>
         <div className="col-lg-6 mb-lg-0 mb-2">
           <a
             href="/anyValue"
@@ -41,7 +43,9 @@ const CommonFormFields = ({
 
       {/* Email */}
       <div className="row emailRow mt-lg-3 mt-4">
-        <div className="col-lg-2 mb-lg-0 mb-2">Email Address</div>
+        <div className="col-lg-2 mb-lg-0 mb-2">
+          Email Address<span className="text-danger fw-bold">*</span>
+        </div>
         <div className="col-lg-2">
           <input
             onChange={onInputChange}
@@ -64,7 +68,7 @@ const CommonFormFields = ({
       {/* Contact */}
       <div className="row contactRow mt-lg-3 mt-4">
         <div className="col-lg-2 mb-lg-0 mb-2">
-          Contact Number
+          Landline<span className="ps-1 text-muted">(optional)</span>
           {/* <span className="text-danger">*</span> */}
         </div>
         <div className="col-lg-2 mb-lg-0 mb-2">
@@ -72,9 +76,12 @@ const CommonFormFields = ({
             onBlur={onInputBlur}
             name="landline_number"
             type="Number"
-            placeholder="Landline (Optional)"
+            placeholder="Landline"
             className="form-control "
           />
+        </div>
+        <div className="col-lg-2 mb-lg-0 mb-2">
+          Mobile Number<span className="text-danger fw-bold">*</span>
         </div>
         <div className="col-lg-2 mb-lg-0 mb-2">
           <input

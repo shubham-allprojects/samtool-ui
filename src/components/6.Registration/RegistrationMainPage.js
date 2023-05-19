@@ -786,7 +786,10 @@ const Registration = () => {
                       <div className="col-lg-12">
                         {/* Full Name */}
                         <div className="row fullNameRow">
-                          <div className="col-lg-2 mb-lg-0 mb-2">Full Name</div>
+                          <div className="col-lg-2 mb-lg-0 mb-2">
+                            Full Name
+                            <span className="text-danger fw-bold">*</span>
+                          </div>
                           <div className="col-lg-2 mb-lg-0 mb-2">
                             <input
                               onChange={onInputChange}
@@ -825,6 +828,7 @@ const Registration = () => {
                         <div className="row aadhaarPanRow mt-lg-3 mt-4">
                           <div className="col-lg-2 mb-lg-0 mb-2">
                             Aadhaar Number
+                            <span className="text-danger fw-bold">*</span>
                           </div>
                           <div className="col-lg-2 mb-lg-0 mb-3">
                             <input
@@ -853,6 +857,7 @@ const Registration = () => {
                           </div>
                           <div className="col-lg-2 mb-lg-0 mb-2">
                             PAN Number
+                            <span className="text-danger fw-bold">*</span>
                           </div>
                           <div className="col-lg-2 mb-lg-0">
                             <input
@@ -901,6 +906,7 @@ const Registration = () => {
                         <div className="row organization-type-row">
                           <div className="col-lg-2 mb-lg-0 mb-2">
                             Organization Type
+                            <span className="text-danger fw-bold">*</span>
                           </div>
                           <div className="col-lg-2">
                             <select
@@ -929,6 +935,7 @@ const Registration = () => {
                         <div className="row nameGstRow  mt-lg-3 mt-2">
                           <div className="col-lg-2 mb-lg-0 mb-2">
                             Organization Name
+                            <span className="text-danger fw-bold">*</span>
                           </div>
                           <div className="col-lg-2 mb-lg-0 mb-2">
                             <input
@@ -942,6 +949,7 @@ const Registration = () => {
                           </div>
                           <div className="col-lg-2 mb-lg-0 mb-2">
                             GST Number
+                            <span className="text-danger fw-bold">*</span>
                           </div>
                           <div className="col-lg-2">
                             <input
@@ -967,6 +975,7 @@ const Registration = () => {
                         <div className="row AadhaarPanRow  mt-lg-3 mt-2">
                           <div className="col-lg-2 mb-lg-0 mb-2">
                             TAN Number
+                            <span className="text-danger fw-bold">*</span>
                           </div>
                           <div className="col-lg-2">
                             <input
@@ -988,6 +997,7 @@ const Registration = () => {
                           </div>
                           <div className="col-lg-2 my-lg-0 my-2">
                             CIN Number
+                            <span className="text-danger fw-bold">*</span>
                           </div>
                           <div className="col-lg-2">
                             <input
@@ -1056,6 +1066,13 @@ const Registration = () => {
                 <div className="row">
                   <div className="col-md-4">
                     <div className="form-group mb-3">
+                      <label
+                        htmlFor="flat_number"
+                        className="form-label common-btn-font"
+                      >
+                        Flat Number
+                        <span className="ps-1 text-muted">(optional)</span>
+                      </label>
                       <input
                         id="flat_number"
                         name="flat_number"
@@ -1068,6 +1085,13 @@ const Registration = () => {
                   </div>
                   <div className="col-md-4">
                     <div className="form-group mb-3">
+                      <label
+                        htmlFor="building_name"
+                        className="form-label common-btn-font"
+                      >
+                        Building Name
+                        <span className="ps-1 text-muted">(optional)</span>
+                      </label>
                       <input
                         id="building_name"
                         name="building_name"
@@ -1080,6 +1104,13 @@ const Registration = () => {
                   </div>
                   <div className="col-md-4">
                     <div className="form-group mb-3">
+                      <label
+                        htmlFor="society_name"
+                        className="form-label common-btn-font"
+                      >
+                        Society Name
+                        <span className="ps-1 text-muted">(optional)</span>
+                      </label>
                       <input
                         id="society_name"
                         name="society_name"
@@ -1093,6 +1124,13 @@ const Registration = () => {
 
                   <div className="col-md-4">
                     <div className="form-group mb-3">
+                      <label
+                        htmlFor="plot_number"
+                        className="form-label common-btn-font"
+                      >
+                        Plot Number
+                        <span className="ps-1 text-muted">(optional)</span>
+                      </label>
                       <input
                         id="plot_number"
                         name="plot_number"
@@ -1106,6 +1144,13 @@ const Registration = () => {
 
                   <div className="col-md-4">
                     <div className="form-group mb-3">
+                      <label
+                        htmlFor="locality"
+                        className="form-label common-btn-font"
+                      >
+                        Plot Number
+                        <span className="text-danger fw-bold">*</span>
+                      </label>
                       <input
                         onBlur={onInputBlur}
                         id="locality"
@@ -1120,6 +1165,13 @@ const Registration = () => {
 
                   <div className="col-md-4">
                     <div className="form-group mb-3">
+                      <label
+                        htmlFor="landmark"
+                        className="form-label common-btn-font"
+                      >
+                        Landmark
+                        <span className="text-danger fw-bold">*</span>
+                      </label>
                       <input
                         id="landmark"
                         name="landmark"
@@ -1133,6 +1185,13 @@ const Registration = () => {
 
                   <div className="col-md-4">
                     <div className="form-group mb-3">
+                      <label
+                        htmlFor="village"
+                        className="form-label common-btn-font"
+                      >
+                        Village
+                        <span className="text-danger fw-bold">*</span>
+                      </label>
                       <input
                         id="village"
                         name="village"
@@ -1146,6 +1205,13 @@ const Registration = () => {
                   <hr />
                   <div className="col-md-4">
                     <div className="form-group mb-3">
+                      <label
+                        htmlFor="state"
+                        className="form-label common-btn-font"
+                      >
+                        State
+                        <span className="text-danger fw-bold">*</span>
+                      </label>
                       <select
                         onChange={onInputChange}
                         onBlur={onInputBlur}
@@ -1160,7 +1226,7 @@ const Registration = () => {
                           value=""
                           style={{ color: "gray" }}
                         >
-                          State
+                          Select state
                         </option>
                         {states
                           ? states.map((state, Index) => {
@@ -1180,6 +1246,13 @@ const Registration = () => {
                   </div>
                   <div className={`col-md-4 ${cityVisibilityClass}`}>
                     <div className="form-group mb-3">
+                      <label
+                        htmlFor="city"
+                        className="form-label common-btn-font"
+                      >
+                        City
+                        <span className="text-danger fw-bold">*</span>
+                      </label>
                       <select
                         onChange={onInputChange}
                         onBlur={onInputBlur}
@@ -1194,7 +1267,7 @@ const Registration = () => {
                           value=""
                           style={{ color: "gray" }}
                         >
-                          City
+                          Select city
                         </option>
                         {citiesByState
                           ? citiesByState.map((city, Index) => {
@@ -1214,6 +1287,13 @@ const Registration = () => {
                   </div>
                   <div className="col-md-4">
                     <div className="form-group mb-3">
+                      <label
+                        htmlFor="zip"
+                        className="form-label common-btn-font"
+                      >
+                        ZIP Code
+                        <span className="text-danger fw-bold">*</span>
+                      </label>
                       <input
                         type="text"
                         onChange={onInputChange}
