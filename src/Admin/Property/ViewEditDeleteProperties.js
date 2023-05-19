@@ -160,6 +160,11 @@ const ViewEditDeleteProperties = () => {
   const [propertiesLinkDisabled, setPropertiesLinkDisabled] = useState(false);
 
   const viewCurrentProperty = async (id) => {
+    setViewSinglePropertyPageLoading(true);
+    viewCurrentPropertyRef.current.classList.remove("d-none");
+    window.scrollTo(0, 0);
+    allPropertiesPageRef.current.classList.add("d-none");
+    setPropertiesLinkDisabled(true);
     const currentPropertyRes = await axios.get(
       `/sam/v1/property/single-property/${id}`,
       { headers: authHeader }
@@ -171,10 +176,7 @@ const ViewEditDeleteProperties = () => {
     setSelectedProperty(currentPropertyRes.data);
     setPropertyDocumentsList(propertyDocsListRes.data);
     console.log(propertyDocsListRes.data);
-    viewCurrentPropertyRef.current.classList.remove("d-none");
-    window.scrollTo(0, 0);
-    allPropertiesPageRef.current.classList.add("d-none");
-    setPropertiesLinkDisabled(true);
+    setViewSinglePropertyPageLoading(false);
   };
 
   const backToAllPropertiesPage = async () => {
@@ -231,6 +233,8 @@ const ViewEditDeleteProperties = () => {
   const [bankBranches, setBankBranches] = useState([]);
   const notSoldCheckRef = useRef();
   const [mainPageLoading, setMainPageLoading] = useState(false);
+  const [viewSinglePropertyPageLoading, setViewSinglePropertyPageLoading] =
+    useState(false);
 
   const commonFnToSaveFormData = (name, value) => {
     setFormData({ ...formData, [name]: value });
@@ -682,22 +686,36 @@ const ViewEditDeleteProperties = () => {
           >
             <>
               <div className="container-fluid">
-                <div className="row">
-                  <div className="card border-0">
-                    <div className="my-4">
-                      <button
-                        className="btn btn-sm btn-outline-primary"
-                        onClick={backToAllPropertiesPage}
-                      >
-                        <i className="bi bi-arrow-left"></i> Back
-                      </button>
-                    </div>
-                    <ViewProperty
-                      selectedProperty={selectedProperty}
-                      propertyDocumentsList={propertyDocumentsList}
+                {viewSinglePropertyPageLoading ? (
+                  <div
+                    className="d-flex align-items-center justify-content-center"
+                    style={{ minHeight: "75vh" }}
+                  >
+                    <CommonSpinner
+                      spinnerColor="primary"
+                      height="5rem"
+                      width="5rem"
+                      spinnerType="grow"
                     />
                   </div>
-                </div>
+                ) : (
+                  <div className="row">
+                    <div className="card border-0">
+                      <div className="my-4">
+                        <button
+                          className="btn btn-sm btn-outline-primary"
+                          onClick={backToAllPropertiesPage}
+                        >
+                          <i className="bi bi-arrow-left"></i> Back
+                        </button>
+                      </div>
+                      <ViewProperty
+                        selectedProperty={selectedProperty}
+                        propertyDocumentsList={propertyDocumentsList}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             </>
           </div>
