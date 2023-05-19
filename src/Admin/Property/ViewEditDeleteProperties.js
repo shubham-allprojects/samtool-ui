@@ -25,6 +25,7 @@ const ViewEditDeleteProperties = () => {
   const viewCurrentPropertyRef = useRef();
   const editPropertyRef = useRef();
   const [selectedProperty, setSelectedProperty] = useState([]);
+  const [propertyDocumentsList, setPropertyDocumentsList] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const paginationRef = useRef();
 
@@ -163,7 +164,13 @@ const ViewEditDeleteProperties = () => {
       `/sam/v1/property/single-property/${id}`,
       { headers: authHeader }
     );
+    const propertyDocsListRes = await axios.get(
+      `/sam/v1/property/auth/property_document_list/${id}`,
+      { headers: authHeader }
+    );
     setSelectedProperty(currentPropertyRes.data);
+    setPropertyDocumentsList(propertyDocsListRes.data);
+    console.log(propertyDocsListRes.data);
     viewCurrentPropertyRef.current.classList.remove("d-none");
     window.scrollTo(0, 0);
     allPropertiesPageRef.current.classList.add("d-none");
@@ -685,7 +692,10 @@ const ViewEditDeleteProperties = () => {
                         <i className="bi bi-arrow-left"></i> Back
                       </button>
                     </div>
-                    <ViewProperty selectedProperty={selectedProperty} />
+                    <ViewProperty
+                      selectedProperty={selectedProperty}
+                      propertyDocumentsList={propertyDocumentsList}
+                    />
                   </div>
                 </div>
               </div>

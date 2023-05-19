@@ -1,5 +1,5 @@
 import React from "react";
-const ViewProperty = ({ selectedProperty }) => {
+const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
   const {
     type_name,
     branch_name,
@@ -124,66 +124,79 @@ const ViewProperty = ({ selectedProperty }) => {
                   <></>
                 )}
 
-                <div className="col-12 mt-3">
-                  <div className="card p-2 text-center border-primary border-2 border position-relative">
-                    <div
-                      className="container-fluid"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseExample"
-                      onClick={() => {
-                        const docsListCollapse = document.querySelector(
-                          ".documents-list-collapse"
-                        );
-                        if (docsListCollapse.getAttribute("style") === "") {
-                          document
-                            .querySelector(".chevRonDown")
-                            .classList.remove("rotate-180deg");
-                        } else {
-                          document
-                            .querySelector(".chevRonDown")
-                            .classList.add("rotate-180deg");
-                        }
-                      }}
-                    >
-                      <div className="row">
-                        <div className="col-12 d-flex justify-content-between">
-                          <span className="">View Documents</span>
-                          <span className="chevRonDown">
-                            <i className="bi bi-chevron-down"></i>
-                          </span>
+                {propertyDocumentsList ? (
+                  <>
+                    {" "}
+                    <div className="col-12 mt-3">
+                      <div className="card p-2 text-center border-primary border-2 border position-relative">
+                        <div
+                          className="container-fluid"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseExample"
+                          onClick={() => {
+                            const docsListCollapse = document.querySelector(
+                              ".documents-list-collapse"
+                            );
+                            if (docsListCollapse.getAttribute("style") === "") {
+                              document
+                                .querySelector(".chevRonDown")
+                                .classList.remove("rotate-180deg");
+                            } else {
+                              document
+                                .querySelector(".chevRonDown")
+                                .classList.add("rotate-180deg");
+                            }
+                          }}
+                        >
+                          <div className="row">
+                            <div className="col-12 d-flex justify-content-between">
+                              <span className="">View Documents</span>
+                              <span className="chevRonDown">
+                                <i className="bi bi-chevron-down"></i>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          className="collapse mt-2 documents-list-collapse"
+                          id="collapseExample"
+                        >
+                          <div className="docs-list-table-wrapper">
+                            <table className="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Document</th>
+                                  <th scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {propertyDocumentsList.map(
+                                  (document, Index) => {
+                                    return (
+                                      <tr key={Index}>
+                                        <th scope="row">{Index + 1}</th>
+                                        <td>{document.document_name}</td>
+                                        <td>
+                                          <button className="btn btn-sm btn-primary">
+                                            view
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    );
+                                  }
+                                )}
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </div>
-
-                    <div
-                      className="collapse mt-2 documents-list-collapse"
-                      id="collapseExample"
-                    >
-                      <div className="docs-list-table-wrapper">
-                        <table className="table">
-                          <thead>
-                            <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">Document</th>
-                              <th scope="col">Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>
-                                <button className="btn btn-sm btn-primary">
-                                  view
-                                </button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>
