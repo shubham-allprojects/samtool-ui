@@ -1148,7 +1148,7 @@ const Registration = () => {
                         htmlFor="locality"
                         className="form-label common-btn-font"
                       >
-                        Plot Number
+                        Locality
                         <span className="text-danger fw-bold">*</span>
                       </label>
                       <input
