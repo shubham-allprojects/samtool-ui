@@ -130,20 +130,35 @@ const ViewProperty = ({ selectedProperty }) => {
                       className="container-fluid"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseExample"
-                      aria-bs-expanded="false"
-                      aria-bs-controls="collapseExample"
+                      onClick={() => {
+                        const docsListCollapse = document.querySelector(
+                          ".documents-list-collapse"
+                        );
+                        if (docsListCollapse.getAttribute("style") === "") {
+                          document
+                            .querySelector(".chevRonDown")
+                            .classList.remove("rotate-180deg");
+                        } else {
+                          document
+                            .querySelector(".chevRonDown")
+                            .classList.add("rotate-180deg");
+                        }
+                      }}
                     >
                       <div className="row">
                         <div className="col-12 d-flex justify-content-between">
                           <span className="">View Documents</span>
-                          <span>
+                          <span className="chevRonDown">
                             <i className="bi bi-chevron-down"></i>
                           </span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="collapse mt-2" id="collapseExample">
+                    <div
+                      className="collapse mt-2 documents-list-collapse"
+                      id="collapseExample"
+                    >
                       <div className="card card-body">
                         Anim pariatur cliche reprehenderit, enim eiusmod high
                         life accusamus terry richardson ad squid. Nihil anim

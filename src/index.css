@@ -29,6 +29,15 @@ code {
   --primary-color-hover: #0a58ca;
 }
 
+.rotate-180deg {
+  transform: rotate(180deg);
+  transition: 0.3s ease-in-out;
+}
+
+.chevRonDown {
+  transition: 0.3s ease-in-out;
+}
+
 .min-height-100-percent {
   min-height: 100% !important;
 }
