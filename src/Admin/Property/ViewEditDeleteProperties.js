@@ -175,7 +175,7 @@ const ViewEditDeleteProperties = () => {
     );
     setSelectedProperty(currentPropertyRes.data);
     setPropertyDocumentsList(propertyDocsListRes.data);
-    console.log(propertyDocsListRes.data);
+    console.log(propertyDocsListRes.data, id);
     setViewSinglePropertyPageLoading(false);
   };
 

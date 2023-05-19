@@ -150,7 +150,7 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                           <div className="row">
                             <div className="col-12 d-flex justify-content-between">
                               <span className="fw-bold">
-                                <i class="bi bi-file-earmark pe-2"></i>
+                                <i className="bi bi-file-earmark pe-2"></i>
                                 Documents
                               </span>
                               <span className="chevRonDown">
