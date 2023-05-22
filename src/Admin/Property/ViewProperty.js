@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
   const {
     type_name,
@@ -166,13 +167,6 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                         >
                           <div className="docs-list-table-wrapper">
                             <table className="table">
-                              {/* <thead>
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">Document</th>
-                                  <th scope="col">Action</th>
-                                </tr>
-                              </thead> */}
                               <tbody>
                                 {propertyDocumentsList.map(
                                   (document, Index) => {
@@ -197,7 +191,28 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                     </div>
                   </>
                 ) : (
-                  <></>
+                  <>
+                    <div className="col-12 mt-3">
+                      <div className="card p-2 text-center border-primary border-2 border">
+                        <span className="text-muted">
+                          No documents available.
+                        </span>
+
+                        <NavLink
+                          onClick={() => {
+                            localStorage.setItem(
+                              "property_number",
+                              property_number
+                            );
+                          }}
+                          to={`/admin/property/single-property-documents-upload`}
+                          className="text-decoration-none mt-1"
+                        >
+                          <i className="bi bi-upload me-2"></i>Upload documents
+                        </NavLink>
+                      </div>
+                    </div>
+                  </>
                 )}
               </div>
             </div>
