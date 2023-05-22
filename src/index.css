@@ -749,6 +749,20 @@ input:-webkit-autofill:active {
   border-radius: 50%;
 }
 
+.property-documents-list-refresh-icon-wrapper {
+  height: 25px;
+  width: 25px;
+  border: 1px solid var(--primary-color-hover);
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+}
+
+.property-documents-list-refresh-icon-wrapper:hover {
+  background-color: var(--primary-color-hover);
+}
+
 /* Bulk upload properties*/
 
 .csv-data-table {

@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
+const ViewProperty = ({
+  selectedProperty,
+  propertyDocumentsList,
+  getListOfPropertyDocuments,
+}) => {
   const {
     type_name,
     branch_name,
@@ -18,6 +22,7 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
     is_sold,
     is_stressed,
     property_number,
+    property_id,
     // status,
     society_name,
     plot_no,
@@ -154,9 +159,10 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                                 <i className="bi bi-file-earmark pe-2"></i>
                                 Documents
                               </span>
-                              <span className="chevRonDown">
+
+                              <div className="chevRonDown">
                                 <i className="bi bi-chevron-down"></i>
-                              </span>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -167,6 +173,25 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                         >
                           <div className="docs-list-table-wrapper">
                             <table className="table">
+                              {/* <thead>
+                                <tr>
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                  <th
+                                    scope="col"
+                                    className="d-flex justify-content-center"
+                                  >
+                                    <div
+                                      className="property-documents-list-refresh-icon-wrapper"
+                                      onClick={() => {
+                                        getListOfPropertyDocuments(property_id);
+                                      }}
+                                    >
+                                      <i className="bi bi-arrow-clockwise text-white"></i>
+                                    </div>
+                                  </th>
+                                </tr>
+                              </thead> */}
                               <tbody>
                                 {propertyDocumentsList.map(
                                   (document, Index) => {
@@ -193,10 +218,10 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                 ) : (
                   <>
                     <div className="col-12 mt-3">
-                      <div className="card p-2 text-center border-primary border-2 border">
-                        <span className="text-muted">
+                      <div className="card p-2 text-center border-primary border-2 border position-relative">
+                        <div className="text-muted">
                           No documents available.
-                        </span>
+                        </div>
 
                         <NavLink
                           target="_blank"
@@ -212,6 +237,15 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                         >
                           <i className="bi bi-upload me-2"></i>Upload documents
                         </NavLink>
+
+                        <div
+                          className="property-documents-list-refresh-icon-wrapper"
+                          onClick={() => {
+                            getListOfPropertyDocuments(property_id);
+                          }}
+                        >
+                          <i className="bi bi-arrow-clockwise text-white"></i>
+                        </div>
                       </div>
                     </div>
                   </>

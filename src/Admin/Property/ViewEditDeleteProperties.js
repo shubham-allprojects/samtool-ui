@@ -169,14 +169,18 @@ const ViewEditDeleteProperties = () => {
       `/sam/v1/property/single-property/${id}`,
       { headers: authHeader }
     );
+
+    setSelectedProperty(currentPropertyRes.data);
+    getListOfPropertyDocuments(id);
+    setViewSinglePropertyPageLoading(false);
+  };
+
+  const getListOfPropertyDocuments = async (id) => {
     const propertyDocsListRes = await axios.get(
       `/sam/v1/property/auth/property_document_list/${id}`,
       { headers: authHeader }
     );
-    setSelectedProperty(currentPropertyRes.data);
     setPropertyDocumentsList(propertyDocsListRes.data);
-    console.log(propertyDocsListRes.data, id);
-    setViewSinglePropertyPageLoading(false);
   };
 
   const backToAllPropertiesPage = async () => {
@@ -714,6 +718,7 @@ const ViewEditDeleteProperties = () => {
                       <ViewProperty
                         selectedProperty={selectedProperty}
                         propertyDocumentsList={propertyDocumentsList}
+                        getListOfPropertyDocuments={getListOfPropertyDocuments}
                       />
                     </div>
                   </div>
