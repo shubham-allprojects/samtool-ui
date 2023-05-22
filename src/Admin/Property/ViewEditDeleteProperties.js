@@ -646,6 +646,8 @@ const ViewEditDeleteProperties = () => {
                                       <i className="bi bi-trash-fill"></i>
                                     </button>
                                     <NavLink
+                                      target="_blank"
+                                      rel="noopener noreferrer"
                                       onClick={() => {
                                         localStorage.setItem(
                                           "property_number",

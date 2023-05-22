@@ -199,6 +199,8 @@ const ViewProperty = ({ selectedProperty, propertyDocumentsList }) => {
                         </span>
 
                         <NavLink
+                          target="_blank"
+                          rel="noopener noreferrer"
                           onClick={() => {
                             localStorage.setItem(
                               "property_number",
