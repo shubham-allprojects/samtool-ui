@@ -18,7 +18,7 @@ const SinglePropertyDocumentsUpload = () => {
     authHeader = { Authorization: data.logintoken };
   }
   const goTo = useNavigate();
-  const [mainPageLoading, setMainPageLoading] = useState(false);
+  const [categoriesLoading, setCategoriesLoading] = useState(false);
   const [currentPropertyNumber, setCurrentPropertyNumber] = useState("");
   const [imageFiles, setImageFiles] = useState([]);
   const [savedImageFiles, setSavedImageFiles] = useState([]);
@@ -57,10 +57,10 @@ const SinglePropertyDocumentsUpload = () => {
         })
         .then((res) => {
           setAllCategoriesFromDB(res.data);
-          setMainPageLoading(false);
+          setCategoriesLoading(false);
         });
     } catch (error) {
-      setMainPageLoading(false);
+      setCategoriesLoading(false);
     }
   };
 
@@ -285,7 +285,7 @@ const SinglePropertyDocumentsUpload = () => {
   };
 
   useEffect(() => {
-    setMainPageLoading(true);
+    setCategoriesLoading(true);
     let propertyNumber = localStorage.getItem("property_number");
     if (propertyNumber) {
       setCurrentPropertyNumber(propertyNumber);
@@ -324,7 +324,7 @@ const SinglePropertyDocumentsUpload = () => {
                 <div className="row mb-4">
                   <div className="col-12 px-0">
                     <div className="container-fluid">
-                      {mainPageLoading ? (
+                      {categoriesLoading ? (
                         <CommonSpinner
                           spinnerColor="primary"
                           spinnerType="grow"
