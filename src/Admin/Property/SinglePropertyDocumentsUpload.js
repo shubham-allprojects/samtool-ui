@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { checkLoginSession } from "../../CommonFunctions";
 import { useNavigate } from "react-router-dom";
+import CommonSpinner from "../../CommonSpinner";
 
 let authHeader = "";
 let temp = 0;
@@ -17,6 +18,7 @@ const SinglePropertyDocumentsUpload = () => {
     authHeader = { Authorization: data.logintoken };
   }
   const goTo = useNavigate();
+  const [mainPageLoading, setMainPageLoading] = useState(false);
   const [currentPropertyNumber, setCurrentPropertyNumber] = useState("");
   const [imageFiles, setImageFiles] = useState([]);
   const [savedImageFiles, setSavedImageFiles] = useState([]);
@@ -55,8 +57,11 @@ const SinglePropertyDocumentsUpload = () => {
         })
         .then((res) => {
           setAllCategoriesFromDB(res.data);
+          setMainPageLoading(false);
         });
-    } catch (error) {}
+    } catch (error) {
+      setMainPageLoading(false);
+    }
   };
 
   const onSaveOtherCategoryClick = (e) => {
@@ -280,6 +285,7 @@ const SinglePropertyDocumentsUpload = () => {
   };
 
   useEffect(() => {
+    setMainPageLoading(true);
     let propertyNumber = localStorage.getItem("property_number");
     if (propertyNumber) {
       setCurrentPropertyNumber(propertyNumber);
@@ -318,104 +324,116 @@ const SinglePropertyDocumentsUpload = () => {
                 <div className="row mb-4">
                   <div className="col-12 px-0">
                     <div className="container-fluid">
-                      <label
-                        className="form-label common-btn-font "
-                        style={{ color: "var(--primary-color-hover)" }}
-                      >
-                        Select document category
-                      </label>
-                      <div className="row">
-                        {allCategoriesFromDB.map((category, Index) => {
-                          if (category.category_Name === "Other") {
-                            otherCategoryId = parseInt(category.category_id);
-                          }
-                          return (
-                            <div
-                              className={`col-xl-4 ${
-                                category.category_Name === "Other"
-                                  ? "d-none"
-                                  : ""
-                              }`}
-                              key={Index}
-                            >
+                      {mainPageLoading ? (
+                        <CommonSpinner
+                          spinnerColor="primary"
+                          spinnerType="grow"
+                        />
+                      ) : (
+                        <>
+                          {" "}
+                          <label
+                            className="form-label common-btn-font "
+                            style={{ color: "var(--primary-color-hover)" }}
+                          >
+                            Select document category
+                          </label>
+                          <div className="row">
+                            {allCategoriesFromDB.map((category, Index) => {
+                              if (category.category_Name === "Other") {
+                                otherCategoryId = parseInt(
+                                  category.category_id
+                                );
+                              }
+                              return (
+                                <div
+                                  className={`col-xl-4 ${
+                                    category.category_Name === "Other"
+                                      ? "d-none"
+                                      : ""
+                                  }`}
+                                  key={Index}
+                                >
+                                  <div className="form-check form-check-inline">
+                                    <input
+                                      onChange={onCategoryRadioCheck}
+                                      className="form-check-input category-checks"
+                                      type="radio"
+                                      name="category_id"
+                                      id="category_id"
+                                      value={category.category_id}
+                                    />
+                                    <label
+                                      className="form-check-label"
+                                      htmlFor="category_id"
+                                    >
+                                      {category.category_Name}
+                                    </label>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                            <div className="col-xl-4">
                               <div className="form-check form-check-inline">
                                 <input
-                                  onChange={onCategoryRadioCheck}
                                   className="form-check-input category-checks"
                                   type="radio"
                                   name="category_id"
                                   id="category_id"
-                                  value={category.category_id}
+                                  value={0}
+                                  onChange={onOtherRadioCheck}
                                 />
                                 <label
                                   className="form-check-label"
                                   htmlFor="category_id"
                                 >
-                                  {category.category_Name}
+                                  Other
                                 </label>
                               </div>
-                            </div>
-                          );
-                        })}
-                        <div className="col-xl-4">
-                          <div className="form-check form-check-inline">
-                            <input
-                              className="form-check-input category-checks"
-                              type="radio"
-                              name="category_id"
-                              id="category_id"
-                              value={0}
-                              onChange={onOtherRadioCheck}
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="category_id"
-                            >
-                              Other
-                            </label>
-                          </div>
-                          <div
-                            className="container-fluid mt-2 d-none"
-                            ref={otherCategoryWrapperRef}
-                          >
-                            <form
-                              onSubmit={onSaveOtherCategoryClick}
-                              className="row"
-                            >
-                              <div className="col-xl-7 col-lg-4 col-md-5 col-8">
-                                <div className="form-group">
-                                  <input
-                                    type="text"
-                                    className={`form-control ${
-                                      otherCategoryBlankCharErr
-                                        ? "border-danger"
-                                        : ""
-                                    }`}
-                                    placeholder="Enter category"
-                                    ref={otherCategoryInputRef}
-                                    required
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-xl-5 col-lg-4 col-md-5 col-4 p-0">
-                                <button
-                                  type="submit"
-                                  className="btn btn-primary"
-                                >
-                                  Save
-                                </button>
-                              </div>
-                              <small
-                                className={`text-danger ${
-                                  otherCategoryBlankCharErr ? "" : "d-none"
-                                }`}
+                              <div
+                                className="container-fluid mt-2 d-none"
+                                ref={otherCategoryWrapperRef}
                               >
-                                Blank characters are not allowed
-                              </small>
-                            </form>
+                                <form
+                                  onSubmit={onSaveOtherCategoryClick}
+                                  className="row"
+                                >
+                                  <div className="col-xl-7 col-lg-4 col-md-5 col-8">
+                                    <div className="form-group">
+                                      <input
+                                        type="text"
+                                        className={`form-control ${
+                                          otherCategoryBlankCharErr
+                                            ? "border-danger"
+                                            : ""
+                                        }`}
+                                        placeholder="Enter category"
+                                        ref={otherCategoryInputRef}
+                                        required
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="col-xl-5 col-lg-4 col-md-5 col-4 p-0">
+                                    <button
+                                      type="submit"
+                                      className="btn btn-primary"
+                                    >
+                                      Save
+                                    </button>
+                                  </div>
+                                  <small
+                                    className={`text-danger ${
+                                      otherCategoryBlankCharErr ? "" : "d-none"
+                                    }`}
+                                  >
+                                    Blank characters are not allowed
+                                  </small>
+                                </form>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
