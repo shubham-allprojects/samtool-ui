@@ -276,6 +276,7 @@ const AddProperty = () => {
         }
       });
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -307,6 +308,7 @@ const AddProperty = () => {
                                 htmlFor="type_id"
                               >
                                 Property type
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <select
                                 id="type_id"
@@ -340,6 +342,7 @@ const AddProperty = () => {
                                 className="form-label common-btn-font"
                               >
                                 Property Number
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 type="text"
@@ -358,6 +361,7 @@ const AddProperty = () => {
                                 htmlFor="bank"
                               >
                                 Bank
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <select
                                 id="bank"
@@ -394,6 +398,7 @@ const AddProperty = () => {
                                 htmlFor="bank_branch_id"
                               >
                                 Branch
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <select
                                 id="bank_branch_id"
@@ -427,6 +432,7 @@ const AddProperty = () => {
                                 htmlFor="title_clear_property"
                               >
                                 Title clear Property
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <select
                                 id="title_clear_property"
@@ -491,6 +497,7 @@ const AddProperty = () => {
                             <div className="form-group">
                               <label className="form-label common-btn-font">
                                 Is stressed?
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <br />
                               <div className="form-check form-check-inline">
@@ -533,6 +540,7 @@ const AddProperty = () => {
                                 className="form-label common-btn-font"
                               >
                                 Territory
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 type="text"
@@ -579,6 +587,7 @@ const AddProperty = () => {
                                 htmlFor="saleable_area"
                               >
                                 Saleable area (sq. ft.)
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 type="number"
@@ -597,6 +606,7 @@ const AddProperty = () => {
                                 htmlFor="carpet_area"
                               >
                                 Carpet area (sq. ft.)
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 type="number"
@@ -631,6 +641,7 @@ const AddProperty = () => {
                                 className="form-label common-btn-font"
                               >
                                 Market price (Rs.)
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 className="form-control"
@@ -649,6 +660,7 @@ const AddProperty = () => {
                                 className="form-label common-btn-font"
                               >
                                 Ready reckoner price (Rs.)
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 type="number"
@@ -667,6 +679,7 @@ const AddProperty = () => {
                                 htmlFor="expected_price"
                               >
                                 Expected price (Rs.)
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 type="number"
@@ -685,6 +698,7 @@ const AddProperty = () => {
                                 htmlFor="distress_value"
                               >
                                 Distress Value (Rs.)
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 type="number"
@@ -712,6 +726,7 @@ const AddProperty = () => {
                                 className="form-label common-btn-font"
                               >
                                 Completion date
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 className="form-control"
@@ -730,6 +745,7 @@ const AddProperty = () => {
                                 className="form-label common-btn-font"
                               >
                                 Purchase date
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 className="form-control"
@@ -748,6 +764,7 @@ const AddProperty = () => {
                                 className="form-label common-btn-font"
                               >
                                 Mortgage date
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 className="form-control"
@@ -763,6 +780,7 @@ const AddProperty = () => {
                             <div className="form-group">
                               <label className="form-label common-btn-font">
                                 Is sold?
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <br />
                               <div className="form-check form-check-inline">
@@ -809,6 +827,7 @@ const AddProperty = () => {
                                 htmlFor="is_available_for_sale"
                               >
                                 Available for sale?
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <select
                                 id="is_available_for_sale"
@@ -859,6 +878,7 @@ const AddProperty = () => {
                                 htmlFor="flat_number"
                               >
                                 Flat No.
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 id="flat_number"
@@ -876,6 +896,7 @@ const AddProperty = () => {
                                 htmlFor="building_name"
                               >
                                 Building Name
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 id="building_name"
@@ -893,6 +914,7 @@ const AddProperty = () => {
                                 htmlFor="society_name"
                               >
                                 Society Name
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 id="society_name"
@@ -910,6 +932,7 @@ const AddProperty = () => {
                                 htmlFor="plot_number"
                               >
                                 Plot No.
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 id="plot_number"
@@ -927,6 +950,7 @@ const AddProperty = () => {
                                 htmlFor="locality"
                               >
                                 Locality
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 id="locality"
@@ -945,6 +969,7 @@ const AddProperty = () => {
                                 htmlFor="landmark"
                               >
                                 Landmark
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 id="landmark"
@@ -963,6 +988,7 @@ const AddProperty = () => {
                                 htmlFor="state"
                               >
                                 State
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <select
                                 id="state"
@@ -999,6 +1025,7 @@ const AddProperty = () => {
                                 htmlFor="city"
                               >
                                 City
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <select
                                 id="city"
@@ -1032,6 +1059,7 @@ const AddProperty = () => {
                                 htmlFor="zip"
                               >
                                 Zip
+                                <span className="fw-bold text-danger">*</span>
                               </label>
                               <input
                                 type="text"

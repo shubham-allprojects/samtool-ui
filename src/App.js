@@ -204,9 +204,9 @@ function App() {
           <Route
             path="/admin/property/upload-properties"
             element={
-              // <AdminProtected>
-              <UploadProperties />
-              // </AdminProtected>
+              <AdminProtected>
+                <UploadProperties />
+              </AdminProtected>
             }
           />
 
