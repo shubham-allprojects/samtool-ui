@@ -303,261 +303,259 @@ const SinglePropertyDocumentsUpload = () => {
   }, []);
 
   return (
-    <Layout>
-      <div className="container-fluid section-padding">
-        <div className="row min-100vh position-relative">
-          <AdminSideBar />
-          <div className="col-xl-10 col-lg-9 col-md-8 wrapper mt-md-0">
-            <section className="upload-documents-wrapper">
-              <div className="container-fluid">
-                <div className="row">
-                  <h3 className="fw-bold p-0">Upload Documents</h3>
-                  <h6 className="fw-bold text-muted p-0">
-                    Property Number
-                    <span className="badge bg-primary ms-2">
-                      {currentPropertyNumber}
-                    </span>
-                  </h6>
-                  <hr />
-                </div>
+    // <Layout>
+    <div className="container-fluid skyblue-bg">
+      <div className="row min-100vh position-relative justify-content-center">
+        {/* <AdminSideBar /> */}
+        <div className="col-11 wrapper mt-md-0">
+          <section className="upload-documents-wrapper">
+            <div className="container-fluid">
+              <div className="row">
+                <h3 className="fw-bold p-0">Upload Documents</h3>
+                <h6 className="fw-bold text-muted p-0">
+                  Property Number
+                  <span className="badge bg-primary ms-2">
+                    {currentPropertyNumber}
+                  </span>
+                </h6>
+                <hr />
+              </div>
 
-                <div className="row mb-4">
-                  <div className="col-12 px-0">
-                    <div className="container-fluid">
-                      {categoriesLoading ? (
-                        <CommonSpinner
-                          spinnerColor="primary"
-                          spinnerType="grow"
-                        />
-                      ) : (
-                        <>
-                          {" "}
-                          <label
-                            className="form-label common-btn-font "
-                            style={{ color: "var(--primary-color-hover)" }}
-                          >
-                            Select document category
-                          </label>
-                          <div className="row">
-                            {allCategoriesFromDB.map((category, Index) => {
-                              if (category.category_Name === "Other") {
-                                otherCategoryId = parseInt(
-                                  category.category_id
-                                );
-                              }
-                              return (
-                                <div
-                                  className={`col-xl-4 ${
-                                    category.category_Name === "Other"
-                                      ? "d-none"
-                                      : ""
-                                  }`}
-                                  key={Index}
-                                >
-                                  <div className="form-check form-check-inline">
+              <div className="row mb-4">
+                <div className="col-12 px-0">
+                  <div className="container-fluid">
+                    {categoriesLoading ? (
+                      <CommonSpinner
+                        spinnerColor="primary"
+                        spinnerType="grow"
+                      />
+                    ) : (
+                      <>
+                        {" "}
+                        <label
+                          className="form-label common-btn-font "
+                          style={{ color: "var(--primary-color-hover)" }}
+                        >
+                          Select document category
+                        </label>
+                        <div className="row">
+                          {allCategoriesFromDB.map((category, Index) => {
+                            if (category.category_Name === "Other") {
+                              otherCategoryId = parseInt(category.category_id);
+                            }
+                            return (
+                              <div
+                                className={`col-xl-4 ${
+                                  category.category_Name === "Other"
+                                    ? "d-none"
+                                    : ""
+                                }`}
+                                key={Index}
+                              >
+                                <div className="form-check form-check-inline">
+                                  <input
+                                    onChange={onCategoryRadioCheck}
+                                    className="form-check-input category-checks"
+                                    type="radio"
+                                    name="category_id"
+                                    id="category_id"
+                                    value={category.category_id}
+                                  />
+                                  <label
+                                    className="form-check-label"
+                                    htmlFor="category_id"
+                                  >
+                                    {category.category_Name}
+                                  </label>
+                                </div>
+                              </div>
+                            );
+                          })}
+                          <div className="col-xl-4">
+                            <div className="form-check form-check-inline">
+                              <input
+                                className="form-check-input category-checks"
+                                type="radio"
+                                name="category_id"
+                                id="category_id"
+                                value={0}
+                                onChange={onOtherRadioCheck}
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="category_id"
+                              >
+                                Other
+                              </label>
+                            </div>
+                            <div
+                              className="container-fluid mt-2 d-none"
+                              ref={otherCategoryWrapperRef}
+                            >
+                              <form
+                                onSubmit={onSaveOtherCategoryClick}
+                                className="row"
+                              >
+                                <div className="col-xl-7 col-lg-4 col-md-5 col-8">
+                                  <div className="form-group">
                                     <input
-                                      onChange={onCategoryRadioCheck}
-                                      className="form-check-input category-checks"
-                                      type="radio"
-                                      name="category_id"
-                                      id="category_id"
-                                      value={category.category_id}
+                                      type="text"
+                                      className={`form-control ${
+                                        otherCategoryBlankCharErr
+                                          ? "border-danger"
+                                          : ""
+                                      }`}
+                                      placeholder="Enter category"
+                                      ref={otherCategoryInputRef}
+                                      required
                                     />
-                                    <label
-                                      className="form-check-label"
-                                      htmlFor="category_id"
-                                    >
-                                      {category.category_Name}
-                                    </label>
                                   </div>
                                 </div>
-                              );
-                            })}
-                            <div className="col-xl-4">
-                              <div className="form-check form-check-inline">
-                                <input
-                                  className="form-check-input category-checks"
-                                  type="radio"
-                                  name="category_id"
-                                  id="category_id"
-                                  value={0}
-                                  onChange={onOtherRadioCheck}
-                                />
-                                <label
-                                  className="form-check-label"
-                                  htmlFor="category_id"
-                                >
-                                  Other
-                                </label>
-                              </div>
-                              <div
-                                className="container-fluid mt-2 d-none"
-                                ref={otherCategoryWrapperRef}
-                              >
-                                <form
-                                  onSubmit={onSaveOtherCategoryClick}
-                                  className="row"
-                                >
-                                  <div className="col-xl-7 col-lg-4 col-md-5 col-8">
-                                    <div className="form-group">
-                                      <input
-                                        type="text"
-                                        className={`form-control ${
-                                          otherCategoryBlankCharErr
-                                            ? "border-danger"
-                                            : ""
-                                        }`}
-                                        placeholder="Enter category"
-                                        ref={otherCategoryInputRef}
-                                        required
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="col-xl-5 col-lg-4 col-md-5 col-4 p-0">
-                                    <button
-                                      type="submit"
-                                      className="btn btn-primary"
-                                    >
-                                      Save
-                                    </button>
-                                  </div>
-                                  <small
-                                    className={`text-danger ${
-                                      otherCategoryBlankCharErr ? "" : "d-none"
-                                    }`}
+                                <div className="col-xl-5 col-lg-4 col-md-5 col-4 p-0">
+                                  <button
+                                    type="submit"
+                                    className="btn btn-primary"
                                   >
-                                    Blank characters are not allowed
-                                  </small>
-                                </form>
-                              </div>
+                                    Save
+                                  </button>
+                                </div>
+                                <small
+                                  className={`text-danger ${
+                                    otherCategoryBlankCharErr ? "" : "d-none"
+                                  }`}
+                                >
+                                  Blank characters are not allowed
+                                </small>
+                              </form>
                             </div>
                           </div>
-                        </>
-                      )}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div className="row">
+                <div className="col-xl-3 col-md-6">
+                  <div className="form-group">
+                    <label
+                      htmlFor="category_text"
+                      className="form-label common-btn-font "
+                      style={{ color: "var(--primary-color-hover)" }}
+                    >
+                      Category
+                    </label>
+                    <div className={`text-${categoryTextColor}`}>
+                      {category_text}
                     </div>
                   </div>
                 </div>
-                <hr />
-                <div className="row">
-                  <div className="col-xl-3 col-md-6">
-                    <div className="form-group">
-                      <label
-                        htmlFor="category_text"
-                        className="form-label common-btn-font "
-                        style={{ color: "var(--primary-color-hover)" }}
-                      >
-                        Category
-                      </label>
-                      <div className={`text-${categoryTextColor}`}>
-                        {category_text}
-                      </div>
-                    </div>
+                <div className="col-xl-3 col-md-6 mt-md-0 mt-3">
+                  <div className="form-group">
+                    <label
+                      htmlFor="file-upload"
+                      className="form-label common-btn-font "
+                      style={{ color: "var(--primary-color-hover)" }}
+                    >
+                      File
+                    </label>
+                    <input
+                      onChange={handleImageFileChange}
+                      ref={fileRef}
+                      type="file"
+                      name="file-upload"
+                      id="file-upload"
+                      className="form-control"
+                      disabled={
+                        category_text !== defaultCategoryText ? false : true
+                      }
+                    />
+                    <small
+                      className={`text-muted ${
+                        imageAllowedExtensions.length > 0 ? "" : "d-none"
+                      }`}
+                    >
+                      Extensions allowed {imageAllowedExtensions.join(", ")}.
+                    </small>
                   </div>
-                  <div className="col-xl-3 col-md-6 mt-md-0 mt-3">
-                    <div className="form-group">
-                      <label
-                        htmlFor="file-upload"
-                        className="form-label common-btn-font "
-                        style={{ color: "var(--primary-color-hover)" }}
-                      >
-                        File
-                      </label>
-                      <input
-                        onChange={handleImageFileChange}
-                        ref={fileRef}
-                        type="file"
-                        name="file-upload"
-                        id="file-upload"
-                        className="form-control"
+                </div>
+                <div className="col-xl-3 col-md-6 mt-xl-0 mt-3">
+                  <div className="form-group">
+                    <label
+                      htmlFor="description"
+                      className="form-label common-btn-font "
+                      style={{ color: "var(--primary-color-hover)" }}
+                    >
+                      Document Description
+                    </label>
+                    <input
+                      ref={decsRef}
+                      type="text"
+                      name="description"
+                      id="description"
+                      className="form-control"
+                      placeholder="Description (min. 2 words)"
+                      onChange={saveDocumentsDetails}
+                    ></input>
+                  </div>
+                </div>
+                <div className="col-xl-3 col-md-6 mt-xl-0 mt-3">
+                  <div className="form-group">
+                    <label
+                      htmlFor="action-buttons"
+                      className="form-label common-btn-font "
+                      style={{ color: "var(--primary-color-hover)" }}
+                    >
+                      Action
+                    </label>
+                    <div
+                      id="action-buttons"
+                      className="d-flex justify-content-between"
+                    >
+                      <button
                         disabled={
-                          category_text !== defaultCategoryText ? false : true
+                          savedImageFiles.length === 0 ||
+                          imageLoading ||
+                          description.trim() === "" ||
+                          description.trim().split(" ").length < 2 ||
+                          category_text === defaultCategoryText
+                            ? true
+                            : false
                         }
-                      />
-                      <small
-                        className={`text-muted ${
-                          imageAllowedExtensions.length > 0 ? "" : "d-none"
-                        }`}
+                        className="btn btn-primary w-75"
+                        onClick={postImages}
                       >
-                        Extensions allowed {imageAllowedExtensions.join(", ")}.
-                      </small>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-md-6 mt-xl-0 mt-3">
-                    <div className="form-group">
-                      <label
-                        htmlFor="description"
-                        className="form-label common-btn-font "
-                        style={{ color: "var(--primary-color-hover)" }}
+                        {imageLoading ? (
+                          <>
+                            <div
+                              className="spinner-border spinner-border-sm text-light me-2"
+                              role="status"
+                            ></div>
+                            <span>Uploading...</span>
+                          </>
+                        ) : (
+                          "Upload"
+                        )}
+                      </button>
+                      <button
+                        className="btn btn-secondary"
+                        style={{ width: "22%" }}
+                        onClick={onResetBtnClick}
+                        disabled={imageLoading ? true : false}
                       >
-                        Document Description
-                      </label>
-                      <input
-                        ref={decsRef}
-                        type="text"
-                        name="description"
-                        id="description"
-                        className="form-control"
-                        placeholder="Description (min. 2 words)"
-                        onChange={saveDocumentsDetails}
-                      ></input>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-md-6 mt-xl-0 mt-3">
-                    <div className="form-group">
-                      <label
-                        htmlFor="action-buttons"
-                        className="form-label common-btn-font "
-                        style={{ color: "var(--primary-color-hover)" }}
-                      >
-                        Action
-                      </label>
-                      <div
-                        id="action-buttons"
-                        className="d-flex justify-content-between"
-                      >
-                        <button
-                          disabled={
-                            savedImageFiles.length === 0 ||
-                            imageLoading ||
-                            description.trim() === "" ||
-                            description.trim().split(" ").length < 2 ||
-                            category_text === defaultCategoryText
-                              ? true
-                              : false
-                          }
-                          className="btn btn-primary w-75"
-                          onClick={postImages}
-                        >
-                          {imageLoading ? (
-                            <>
-                              <div
-                                className="spinner-border spinner-border-sm text-light me-2"
-                                role="status"
-                              ></div>
-                              <span>Uploading...</span>
-                            </>
-                          ) : (
-                            "Upload"
-                          )}
-                        </button>
-                        <button
-                          className="btn btn-secondary"
-                          style={{ width: "22%" }}
-                          onClick={onResetBtnClick}
-                          disabled={imageLoading ? true : false}
-                        >
-                          <i className="bi bi-x-lg"></i>
-                        </button>
-                      </div>
+                        <i className="bi bi-x-lg"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-            </section>
-          </div>
+            </div>
+          </section>
         </div>
       </div>
-    </Layout>
+    </div>
+    // </Layout>
   );
 };
 
