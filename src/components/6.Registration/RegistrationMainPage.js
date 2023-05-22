@@ -58,7 +58,7 @@ const Registration = () => {
     plot_number,
     locality,
     landmark,
-    village,
+    // village,
     state,
     city,
     zip,
@@ -117,7 +117,7 @@ const Registration = () => {
       society_name: "",
       plot_number: "",
       locality: "",
-      village: "",
+      // village: "",
       landmark: "",
       state: "",
       city: "",
@@ -144,7 +144,6 @@ const Registration = () => {
       plot_number ? `Plot No: ${plot_number}` : "",
       `Locality: ${locality}`,
       `Landmark: ${landmark}`,
-      `Village: ${village}`,
       `State: ${state}`,
       `City: ${city}`,
       `Zip Code: ${zip}`,
@@ -482,8 +481,8 @@ const Registration = () => {
       setValues(name, value);
     } else if (name === "landmark") {
       setValues(name, value);
-    } else if (name === "village") {
-      setValues(name, value);
+      // } else if (name === "village") {
+      //   setValues(name, value);
     } else if (name === "zip") {
       setFormData({
         ...formData,
@@ -1183,7 +1182,7 @@ const Registration = () => {
                     </div>
                   </div>
 
-                  <div className="col-md-4">
+                  {/* <div className="col-md-4">
                     <div className="form-group mb-3">
                       <label
                         htmlFor="village"
@@ -1201,7 +1200,7 @@ const Registration = () => {
                         placeholder="Village"
                       />
                     </div>
-                  </div>
+                  </div> */}
                   <hr />
                   <div className="col-md-4">
                     <div className="form-group mb-3">
@@ -1317,7 +1316,6 @@ const Registration = () => {
                       onClick={onAddressFormSubmit}
                       className={`btn btn-primary ${
                         locality &&
-                        village &&
                         landmark &&
                         state &&
                         city &&
