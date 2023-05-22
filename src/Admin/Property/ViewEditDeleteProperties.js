@@ -169,10 +169,8 @@ const ViewEditDeleteProperties = () => {
       `/sam/v1/property/single-property/${id}`,
       { headers: authHeader }
     );
-
     setSelectedProperty(currentPropertyRes.data);
     getListOfPropertyDocuments(id);
-    setViewSinglePropertyPageLoading(false);
   };
 
   const getListOfPropertyDocuments = async (id) => {
@@ -181,6 +179,7 @@ const ViewEditDeleteProperties = () => {
       { headers: authHeader }
     );
     setPropertyDocumentsList(propertyDocsListRes.data);
+    setViewSinglePropertyPageLoading(false);
   };
 
   const backToAllPropertiesPage = async () => {
