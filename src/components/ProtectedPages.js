@@ -1,12 +1,17 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { checkLoginSession } from "../CommonFunctions";
 
 const ProtectedPages = ({ children }) => {
   const goTo = useNavigate();
   const ProtectAllPages = async () => {
     const data = JSON.parse(localStorage.getItem("data"));
     if (data) {
-      goTo("/access-denied");
+      checkLoginSession(data.logintoken).then((res) => {
+        if (res === "Valid") {
+          goTo("/access-denied");
+        }
+      });
     }
   };
   useEffect(() => {

@@ -55,6 +55,7 @@ function App() {
               }
             }
           } else {
+            localStorage.setItem("userSession", "invalid");
             goTo("/login");
           }
         } catch (error) {
@@ -100,7 +101,7 @@ function App() {
             }
           />
           <Route
-            path="/reset-password"
+            path="/change-password"
             element={
               <ProtectedForLoggedInUser>
                 <ChangePassword />

@@ -114,8 +114,6 @@ const Profile = () => {
       checkLoginSession(data.logintoken).then((res) => {
         if (res === "Valid") {
           getUserProfileDetails();
-        } else {
-          goTo("/login");
         }
       });
     }
@@ -304,7 +302,7 @@ const Profile = () => {
                   <div className="row justify-content-md-start justify-content-center">
                     <div className="col-md-6">
                       <NavLink
-                        to="/reset-password"
+                        to="/change-password"
                         className="card py-2 profile-inner-card text-decoration-none"
                       >
                         <h6 className="m-0">CHANGE PASSWORD</h6>

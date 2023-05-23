@@ -365,8 +365,6 @@ const EditUserDetails = () => {
       checkLoginSession(data.logintoken).then((res) => {
         if (res === "Valid") {
           getUserToEdit();
-        } else {
-          goTo("/login");
         }
       });
     }
