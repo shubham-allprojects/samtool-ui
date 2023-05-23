@@ -679,6 +679,7 @@ const ViewProperty = ({
                       <object
                         className="w-100 h-100"
                         data={srcOfFile}
+                        aria-labelledby="property-documents"
                         frameborder="0"
                       ></object>
                     ) : (
