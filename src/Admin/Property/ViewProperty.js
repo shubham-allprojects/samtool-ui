@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+let cnt = 0;
+let authHeader = "";
+
 const ViewProperty = ({
   selectedProperty,
   propertyDocumentsList,
   getListOfPropertyDocuments,
 }) => {
+  const data = JSON.parse(localStorage.getItem("data"));
+  if (data) {
+    authHeader = { Authorization: data.logintoken };
+  }
   const {
     type_name,
     branch_name,
@@ -34,6 +42,54 @@ const ViewProperty = ({
     possession_of_the_property,
     distress_value,
   } = selectedProperty;
+  let s1 = "";
+  let combinedBinaryFormatOfChunks = "";
+  const [fileName, setFileName] = useState();
+  const getChunksOfDocuments = async (documentId, propertyId) => {
+    let dataToPost = {
+      document_id: documentId,
+      property_id: propertyId,
+      chunk_number: cnt,
+      chunk_size: 2000000,
+    };
+    console.log(dataToPost);
+    await axios
+      .post(`/sam/v1/property/auth/property-docs`, dataToPost, {
+        headers: authHeader,
+      })
+      .then(async (res) => {
+        if (s1 !== res.data.data) {
+          s1 += res.data.data;
+          // console.log(res.data.data);
+          combinedBinaryFormatOfChunks += window.atob(res.data.data);
+          if (res.data.last_chunk !== true) {
+            cnt += 1;
+            getChunksOfDocuments();
+          } else {
+            let dataString = "";
+            setFileName(res.data.file_name);
+            let fileExtension = res.data.file_name.split(".")[1];
+            if (fileExtension === "pdf") {
+              // setTypeOfFile("pdf");
+              dataString = "data:application/pdf;base64,";
+            } else if (
+              fileExtension === "jpg" ||
+              fileExtension === "jpeg" ||
+              fileExtension === "png"
+            ) {
+              // setTypeOfFile("image");
+              // document.getElementById("exampleModal").classList.add("show");
+              dataString = `data:image/${fileExtension};base64,`;
+            }
+            let originalBase64 = window.btoa(combinedBinaryFormatOfChunks);
+            const base64Data = originalBase64;
+            const base64Response = await fetch(`${dataString}${base64Data}`);
+            const blob = await base64Response.blob();
+            window.open(URL.createObjectURL(blob));
+          }
+        }
+      });
+  };
 
   return (
     <section className="admin-edit-property mb-5">
@@ -200,7 +256,15 @@ const ViewProperty = ({
                                         <th scope="row">{Index + 1}</th>
                                         <td>{document.document_name}</td>
                                         <td>
-                                          <button className="btn btn-sm btn-primary">
+                                          <button
+                                            onClick={() => {
+                                              getChunksOfDocuments(
+                                                document.document_id,
+                                                property_id
+                                              );
+                                            }}
+                                            className="btn btn-sm btn-primary"
+                                          >
                                             view
                                           </button>
                                         </td>
