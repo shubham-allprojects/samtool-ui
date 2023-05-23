@@ -45,7 +45,7 @@ function App() {
 
           if (res.data !== "Session expired or invalid user") {
             let remainingTime = parseInt(res.data.TimeRemaining);
-            console.log("Time Remaining = ", remainingTime);
+            // console.log("Time Remaining = ", remainingTime);
             if (remainingTime === 5) {
               const sessionTimeRemaining =
                 localStorage.getItem("remainingTime");
