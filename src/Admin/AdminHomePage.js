@@ -164,8 +164,6 @@ const AdminHomePage = () => {
         if (res === "Valid") {
           setTotalCountOfUsers(data.logintoken);
           getPropertyCountFromApi(data.logintoken);
-        } else {
-          goTo("/login");
         }
       });
     }

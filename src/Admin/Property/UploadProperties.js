@@ -235,13 +235,13 @@ const UploadProperties = () => {
   const goTo = useNavigate();
   useEffect(() => {
     rootTitle.textContent = "ADMIN - UPLOAD PROPERTIES";
-    if (dataFromLocal) {
-      checkLoginSession(dataFromLocal.logintoken).then((res) => {
-        if (res !== "Valid") {
-          goTo("/login");
-        }
-      });
-    }
+    // if (dataFromLocal) {
+    //   checkLoginSession(dataFromLocal.logintoken).then((res) => {
+    //     if (res !== "Valid") {
+    //       goTo("/login");
+    //     }
+    //   });
+    // }
     // eslint-disable-next-line
   }, []);
 

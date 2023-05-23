@@ -502,8 +502,6 @@ const ViewEditDeleteProperties = () => {
       checkLoginSession(data.logintoken).then((res) => {
         if (res === "Valid") {
           getPropertiesFromApi();
-        } else {
-          goTo("/login");
         }
       });
     }

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./components/2.HomePage/Home";
 import LoginMainPage from "./components/5.Login/LoginMainPage";
 import SetPassword from "./components/6.Registration/SetPassword";
@@ -33,34 +33,40 @@ import axios from "axios";
 
 function App() {
   const MINUTE_MS = 1000;
+  const goTo = useNavigate();
   useEffect(() => {
-    const sessionTimeRemaining = localStorage.getItem("remainingTime");
-    if (!sessionTimeRemaining) {
-      const interval = setInterval(async () => {
-        const data = JSON.parse(localStorage.getItem("data"));
-        if (data) {
-          try {
-            let res = await axios.get(`/sam/v1/user-registration/logout`, {
-              headers: { Authorization: data.logintoken },
-            });
+    const interval = setInterval(async () => {
+      const data = JSON.parse(localStorage.getItem("data"));
+      if (data) {
+        try {
+          let res = await axios.get(`/sam/v1/user-registration/logout`, {
+            headers: { Authorization: data.logintoken },
+          });
 
-            if (res.data !== "Session expired or invalid user") {
-              let remainingTime = parseInt(res.data.TimeRemaining);
-              if (remainingTime === 5) {
+          if (res.data !== "Session expired or invalid user") {
+            let remainingTime = parseInt(res.data.TimeRemaining);
+            console.log("Time Remaining = ", remainingTime);
+            if (remainingTime === 5) {
+              const sessionTimeRemaining =
+                localStorage.getItem("remainingTime");
+              if (sessionTimeRemaining === null) {
                 toast.warn("Your session will expire in 5 minutes");
                 localStorage.setItem("remainingTime", 5);
-                clearInterval(interval);
               }
             }
-          } catch (error) {
-            console.log("error");
+          } else {
+            goTo("/login");
           }
+        } catch (error) {
+          console.log("error");
         }
-      }, MINUTE_MS);
+      }
+    }, MINUTE_MS);
 
-      return () => clearInterval(interval);
-    }
+    return () => clearInterval(interval);
+    // eslint-disable-next-line
   }, []);
+
   return (
     <>
       <ToastContainer autoClose="3000" />

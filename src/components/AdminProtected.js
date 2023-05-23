@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { checkLoginSession } from "../CommonFunctions";
 
 // Only loggedIn user will have access to the components wrapped in this component.
 const AdminProtected = ({ children }) => {
@@ -8,9 +8,15 @@ const AdminProtected = ({ children }) => {
   const checkIsAdmin = async () => {
     const data = JSON.parse(localStorage.getItem("data"));
     if (data) {
-      if (data.roleId !== 1) {
-        goTo("/access-denied");
-      }
+      checkLoginSession(data.logintoken).then((res) => {
+        if (res === "Valid") {
+          if (data.roleId !== 1) {
+            goTo("/access-denied");
+          }
+        } else {
+          goTo("/login");
+        }
+      });
     } else {
       goTo("/access-denied");
     }

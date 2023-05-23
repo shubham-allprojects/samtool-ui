@@ -271,8 +271,6 @@ const AddProperty = () => {
       checkLoginSession(data.logintoken).then((res) => {
         if (res === "Valid") {
           getDataFromApi();
-        } else {
-          goTo("/login");
         }
       });
     }

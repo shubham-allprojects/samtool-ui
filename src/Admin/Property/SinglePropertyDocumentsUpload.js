@@ -293,9 +293,10 @@ const SinglePropertyDocumentsUpload = () => {
         checkLoginSession(data.logintoken).then((res) => {
           if (res === "Valid") {
             getCategoriesFromDB();
-          } else {
-            goTo("/login");
-          }
+          } 
+          // else {
+          //   goTo("/login");
+          // }
         });
       }
     }

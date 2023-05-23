@@ -331,8 +331,6 @@ const ManageUsers = ({ userType }) => {
       checkLoginSession(data.logintoken).then((res) => {
         if (res === "Valid") {
           getAllUsers();
-        } else {
-          goTo("/login");
         }
       });
     }
