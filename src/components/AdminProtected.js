@@ -8,15 +8,9 @@ const AdminProtected = ({ children }) => {
   const checkIsAdmin = async () => {
     const data = JSON.parse(localStorage.getItem("data"));
     if (data) {
-      checkLoginSession(data.logintoken).then((res) => {
-        if (res === "Valid") {
-          if (data.roleId !== 1) {
-            goTo("/access-denied");
-          }
-        } else {
-          goTo("/login");
-        }
-      });
+      if (data.roleId !== 1) {
+        goTo("/access-denied");
+      }
     } else {
       goTo("/access-denied");
     }
