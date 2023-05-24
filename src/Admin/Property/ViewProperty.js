@@ -661,17 +661,19 @@ const ViewProperty = ({
         aria-hidden="true"
       >
         <div className="modal-dialog modal-xl">
-          <div className="modal-content">
+          <div className="modal-content bg-dark text-white">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
                 {fileName ? fileName : ""}
               </h5>
               <button
                 type="button"
-                className="btn-close"
+                className="btn btn-dark"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              ></button>
+              >
+                <i className="bi bi-x-lg"></i>
+              </button>
             </div>
             <div className="modal-body">
               <div className="container-fluid">

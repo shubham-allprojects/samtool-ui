@@ -108,7 +108,7 @@ small {
 }
 
 .skyblue-bg {
-  background: rgba(135, 207, 235, 0.25);
+  background: rgba(135, 207, 235, 0.25) !important;
 }
 
 p {
