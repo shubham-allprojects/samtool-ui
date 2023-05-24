@@ -11,6 +11,7 @@ const ViewProperty = ({
 }) => {
   const data = JSON.parse(localStorage.getItem("data"));
   const [srcOfFile, setSrcOfFile] = useState(null);
+  const [fileExtension, setFileExtension] = useState(null);
   if (data) {
     authHeader = { Authorization: data.logintoken };
   }
@@ -70,6 +71,7 @@ const ViewProperty = ({
             let dataString = "";
             setFileName(res.data.file_name);
             let fileExtension = res.data.file_name.split(".")[1];
+            setFileExtension(fileExtension);
             if (fileExtension === "pdf") {
               // setTypeOfFile("pdf");
               dataString = "data:application/pdf;base64,";
@@ -676,12 +678,23 @@ const ViewProperty = ({
                 <div className="row justify-content-center">
                   <div className="col-12" style={{ height: "65vh" }}>
                     {srcOfFile ? (
-                      <object
-                        className="w-100 h-100"
-                        data={srcOfFile}
-                        aria-labelledby="property-documents"
-                        frameborder="0"
-                      ></object>
+                      fileExtension === "jpg" ||
+                      fileExtension === "jpeg" ||
+                      fileExtension === "png" ? (
+                        <img
+                          src={srcOfFile}
+                          className="h-100 w-100"
+                          alt="property"
+                          style={{ objectFit: "contain" }}
+                        />
+                      ) : (
+                        <object
+                          className="w-100 h-100"
+                          data={srcOfFile}
+                          aria-labelledby="property-documents"
+                          frameborder="0"
+                        ></object>
+                      )
                     ) : (
                       <></>
                     )}
