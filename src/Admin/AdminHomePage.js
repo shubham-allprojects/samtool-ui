@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AdminSideBar from "./AdminSideBar";
 import Layout from "../components/1.CommonLayout/Layout";
 import axios from "axios";
@@ -152,7 +152,6 @@ const AdminHomePage = () => {
     } catch (error) {}
     setPropertyCountLoading(false);
   };
-  const goTo = useNavigate();
   useEffect(() => {
     rootTitle.textContent = "ADMIN - HOME";
     document.getElementById("pie").checked = true;

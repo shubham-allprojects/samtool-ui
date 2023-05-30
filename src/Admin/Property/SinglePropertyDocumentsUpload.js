@@ -1,11 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import Layout from "../../components/1.CommonLayout/Layout";
-import AdminSideBar from "../AdminSideBar";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { checkLoginSession } from "../../CommonFunctions";
-import { useNavigate } from "react-router-dom";
 import CommonSpinner from "../../CommonSpinner";
 
 let authHeader = "";
@@ -17,7 +14,6 @@ const SinglePropertyDocumentsUpload = () => {
   if (data) {
     authHeader = { Authorization: data.logintoken };
   }
-  const goTo = useNavigate();
   const [categoriesLoading, setCategoriesLoading] = useState(false);
   const [currentPropertyNumber, setCurrentPropertyNumber] = useState("");
   const [imageFiles, setImageFiles] = useState([]);
@@ -293,10 +289,7 @@ const SinglePropertyDocumentsUpload = () => {
         checkLoginSession(data.logintoken).then((res) => {
           if (res === "Valid") {
             getCategoriesFromDB();
-          } 
-          // else {
-          //   goTo("/login");
-          // }
+          }
         });
       }
     }

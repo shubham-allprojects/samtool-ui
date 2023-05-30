@@ -10,7 +10,6 @@ import {
   checkLoginSession,
   toggleClassOfNextPrevPageItems,
 } from "../../CommonFunctions";
-import { useNavigate } from "react-router-dom";
 
 const records_per_page = 4;
 let authHeader = "";
@@ -24,8 +23,6 @@ const ManageUsers = ({ userType }) => {
   if (data) {
     authHeader = { Authorization: data.logintoken };
   }
-
-  const goTo = useNavigate();
   const [otherDetailsOfUser, setOtherDetailsOfUser] = useState({});
   const [categoryWiseUserDetails, setCategoryWiseUserDetails] = useState({});
   const [roles, setRoles] = useState([]);

@@ -7,7 +7,7 @@ import BreadCrumb from "../BreadCrumb";
 import CommonSpinner from "../../CommonSpinner";
 import Pagination from "../../Pagination";
 import ViewProperty from "./ViewProperty";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { toggleClassOfNextPrevPageItems } from "../../CommonFunctions";
 
@@ -202,7 +202,6 @@ const ViewEditDeleteProperties = () => {
 
   const { titleClearYes, titleClearNo } = possessionCheckValue;
 
-  // const goTo = useNavigate();
   const [formData, setFormData] = useState({
     address_details: {},
   });
@@ -492,8 +491,6 @@ const ViewEditDeleteProperties = () => {
     }
     setMainPageLoading(false);
   };
-
-  const goTo = useNavigate();
 
   useEffect(() => {
     rootTitle.textContent = "ADMIN - PROPERTIES";

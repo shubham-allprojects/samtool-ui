@@ -3,12 +3,11 @@ import AdminSideBar from "../AdminSideBar";
 import Papa from "papaparse";
 import { useRef } from "react";
 import Layout from "../../components/1.CommonLayout/Layout";
-import { checkLoginSession, rootTitle } from "../../CommonFunctions";
+import { rootTitle } from "../../CommonFunctions";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 import BreadCrumb from "../BreadCrumb";
-import { useNavigate } from "react-router-dom";
 
 const allowedExtensions = ["csv"];
 let chunkSize = 0;
@@ -232,16 +231,8 @@ const UploadProperties = () => {
     setFiles(saveFile);
   };
 
-  const goTo = useNavigate();
   useEffect(() => {
     rootTitle.textContent = "ADMIN - UPLOAD PROPERTIES";
-    // if (dataFromLocal) {
-    //   checkLoginSession(dataFromLocal.logintoken).then((res) => {
-    //     if (res !== "Valid") {
-    //       goTo("/login");
-    //     }
-    //   });
-    // }
     // eslint-disable-next-line
   }, []);
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
 import { checkLoginSession, rootTitle } from "../../CommonFunctions";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 let authHeaders = "";
 let role = "";
@@ -105,8 +105,6 @@ const Profile = () => {
         });
     }
   };
-
-  const goTo = useNavigate();
 
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - PROFILE";
