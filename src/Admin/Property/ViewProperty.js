@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import axios from "axios";
 let cnt = 0;
 let authHeader = "";
@@ -678,7 +679,7 @@ const ViewProperty = ({
             <div className="modal-body">
               <div className="container-fluid">
                 <div className="row justify-content-center">
-                  <div className="col-12" style={{ height: "65vh" }}>
+                  <div className="col-12 p-0" style={{ height: "65vh" }}>
                     {srcOfFile ? (
                       fileExtension === "jpg" ||
                       fileExtension === "jpeg" ||
@@ -690,12 +691,17 @@ const ViewProperty = ({
                           style={{ objectFit: "contain" }}
                         />
                       ) : (
-                        <object
-                          className="w-100 h-100"
-                          data={srcOfFile}
-                          aria-labelledby="property-documents"
-                          frameborder="0"
-                        ></object>
+                        // <object
+                        //   className="w-100 h-100"
+                        //   data={srcOfFile}
+                        //   aria-labelledby="property-documents"
+                        //   frameborder="0"
+                        // ></object>
+
+                        <DocViewer
+                          documents={[{ uri: srcOfFile }]}
+                          pluginRenderers={DocViewerRenderers}
+                        />
                       )
                     ) : (
                       <></>
