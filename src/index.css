@@ -246,40 +246,54 @@ input:-webkit-autofill:active {
 }
 
 .home-wrapper .five-box-row {
-  background-color: rgba(255, 255, 255, 0.658);
-  height: 140px;
+  background-color: rgba(255, 255, 255, 0.558);
+  height: 120px;
   align-items: center;
   justify-content: center;
   width: fit-content;
+  padding: 2rem !important;
 }
 
-.home-wrapper .five-section-col .inner-box {
+.home-wrapper .more-filters-dropdown-menu {
+  min-width: 30rem !important;
+}
+
+/* .home-wrapper .five-section-col .inner-box {
   border-radius: 14px;
   border: 2px solid;
   min-width: 140px;
+} */
+
+.home-wrapper .inner-box label {
+  font-weight: 500;
+  font-size: 14px;
 }
 
-.home-wrapper .five-section-col .inner-box label {
-  padding: 12px 0 12px 10px;
-  font-weight: bold;
+.home-wrapper .inner-box .form-select-sm {
+  height: 34px;
 }
 
-.home-wrapper .five-section-col .inner-box .select-div {
+/* .home-wrapper .five-section-col .inner-box .select-div {
   display: flex;
   justify-content: center;
-}
+} */
 
-.home-wrapper .five-section-col .inner-box .select-div select {
+/* .home-wrapper .five-section-col .inner-box .select-div select {
   width: 98%;
   border-radius: 14px;
   background-color: transparent;
   box-shadow: none;
   border-color: none !important;
+} */
+
+.home-wrapper .inner-box .select-div select {
+  box-shadow: none;
+  border-color: none !important;
 }
 
-.home-wrapper .five-section-col .inner-box .select-div select:focus {
+/* .home-wrapper .five-section-col .inner-box .select-div select:focus {
   border-color: rgba(128, 128, 128, 0.486) !important;
-}
+} */
 
 .home-wrapper .home-bottom-heading {
   position: absolute;
@@ -923,9 +937,9 @@ input:-webkit-autofill:active {
 }
 
 @media (min-width: 1024px) {
-  .five-section-col {
+  /* .five-section-col {
     flex: 0 0 auto !important;
-  }
+  } */
 
   .set-pass-img {
     height: 435px;
@@ -1143,13 +1157,18 @@ input:-webkit-autofill:active {
     padding: 100px 0 50px 0;
     background-attachment: fixed;
   }
+
   .home-wrapper .five-box-row {
     height: fit-content;
-    padding: 2rem 0;
   }
-  .five-section-col {
+
+  .home-wrapper .more-filters-dropdown-menu {
+    min-width: 100% !important;
+  }
+
+  /* .five-section-col {
     width: 100% !important;
-  }
+  } */
 
   .profile-wrapper .profile-details-div {
     height: fit-content;

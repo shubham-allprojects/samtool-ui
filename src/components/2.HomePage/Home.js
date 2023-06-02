@@ -73,7 +73,7 @@ function Home() {
       addressAPI: `${url}/by-address`,
     };
     const { name, value } = e.target;
-    const fiveSectionCol = document.querySelectorAll(".five-section-col");
+    // const fiveSectionCol = document.querySelectorAll(".");
 
     if (name === "states") {
       // Store state id ( if available ) into dataToPost useState (It is required for search functionality).
@@ -89,12 +89,12 @@ function Home() {
       // Store cities data into searchField useState.
       setSearchFields({ ...searchFields, cities: cityByState.data });
       // Unhide city select box when we select state.
-      document.getElementById("city-col").classList.remove("d-none");
+      // document.getElementById("city-col").classList.remove("d-none");
       // This is to set width of background white box based on number of select input boxes.
-      fiveSectionCol.forEach((col) => {
-        col.classList.remove("w-30");
-        col.classList.add("w-22");
-      });
+      // fiveSectionCol.forEach((col) => {
+      //   col.classList.remove("col-md-2");
+      //   col.classList.add("col-md-2");
+      // });
     } else if (name === "cities") {
       // Store city id ( if available ) into dataToPost useState (It is required for search functionality).
       if (value) {
@@ -109,12 +109,12 @@ function Home() {
       // Store locality data into searchField useState.
       setSearchFields({ ...searchFields, localities: localityByCity.data });
       // Unhide select box when we select city.
-      document.getElementById("locality-col").classList.remove("d-none");
+      // document.getElementById("locality-col").classList.remove("d-none");
       // This is to set width of background white box based on number of select input boxes.
-      fiveSectionCol.forEach((col) => {
-        col.classList.remove("w-22");
-        col.classList.add("w-18");
-      });
+      // fiveSectionCol.forEach((col) => {
+      //   col.classList.remove("w-22");
+      //   col.classList.add("w-18");
+      // });
     } else if (name === "localities") {
       // Store locality value ( if available ) into dataToPost useState (It is required for search functionality).
       if (value) {
@@ -281,9 +281,10 @@ function Home() {
         <section className="home-wrapper">
           <div className="container-fluid">
             {/* 5 select boxes */}
-            <div className="home-top-row">
+
+            <div className="d-flex justify-content-center">
               <div className="row five-box-row">
-                <div className="five-section-col w-30 col-12">
+                <div className=" col-md-2 col-12">
                   <div className="inner-box">
                     <label htmlFor="state">State</label>
                     <div className="select-div">
@@ -308,10 +309,7 @@ function Home() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="five-section-col w-30 col-12 d-none mt-3 mt-md-0"
-                  id="city-col"
-                >
+                <div className=" col-md-2 col-12  mt-3 mt-md-0" id="city-col">
                   <div className="inner-box">
                     <label htmlFor="city">City</label>
                     <div className="select-div">
@@ -337,7 +335,7 @@ function Home() {
                   </div>
                 </div>
                 <div
-                  className="five-section-col w-30 col-12 d-none mt-3 mt-md-0"
+                  className=" col-md-2 col-12  mt-3 mt-md-0"
                   id="locality-col"
                 >
                   <div className="inner-box">
@@ -368,7 +366,7 @@ function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="five-section-col w-30 col-12 mt-3 mt-md-0">
+                <div className=" col-md-2 col-12 mt-3 mt-md-0">
                   <div className="inner-box">
                     <label htmlFor="asset">Asset Category</label>
                     <div className="select-div">
@@ -393,7 +391,7 @@ function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="five-section-col w-30 col-12 mt-3 mt-md-0">
+                <div className=" col-md-2 col-12 mt-3 mt-md-0">
                   <div className="inner-box">
                     <label htmlFor="bank">Bank</label>
                     <div className="select-div">
@@ -418,13 +416,125 @@ function Home() {
                     </div>
                   </div>
                 </div>
+                <div className=" col-md-2 col-12 mt-3 mt-md-0">
+                  <div className="inner-box">
+                    <label htmlFor="more-filters">More Filters</label>
+                    <div class="dropdown">
+                      <div
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        className="form-select form-select-sm"
+                      ></div>
+                      <ul
+                        class="dropdown-menu more-filters-dropdown-menu"
+                        aria-labelledby="dropdownMenuButton1"
+                      >
+                        <div className="container-fluid p-3">
+                          <form className="row justify-content-center">
+                            <div className="col-md-6 mb-3">
+                              <div className="inner-box">
+                                <label htmlFor="filter1">Filter 1</label>
+                                <div className="select-div">
+                                  <select
+                                    id="filter1"
+                                    name="filter1"
+                                    className="form-select form-select-sm"
+                                    aria-label=".form-select-sm example"
+                                  >
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <div className="inner-box">
+                                <label htmlFor="filter1">Filter 2</label>
+                                <div className="select-div">
+                                  <select
+                                    id="filter2"
+                                    name="filter2"
+                                    className="form-select form-select-sm"
+                                    aria-label=".form-select-sm example"
+                                  >
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <div className="inner-box">
+                                <label htmlFor="filter1">Filter 3</label>
+                                <div className="select-div">
+                                  <select
+                                    id="filter3"
+                                    name="filter3"
+                                    className="form-select form-select-sm"
+                                    aria-label=".form-select-sm example"
+                                  >
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-md-6 mb-3">
+                              <div className="inner-box">
+                                <label htmlFor="filter1">Filter 4</label>
+                                <div className="select-div">
+                                  <select
+                                    id="filter4"
+                                    name="filter4"
+                                    className="form-select form-select-sm"
+                                    aria-label=".form-select-sm example"
+                                  >
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="inner-box">
+                                <label htmlFor="filter1">Filter 5</label>
+                                <div className="select-div">
+                                  <select
+                                    id="filter5"
+                                    name="filter5"
+                                    className="form-select form-select-sm"
+                                    aria-label=".form-select-sm example"
+                                  >
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="inner-box">
+                                <label htmlFor="filter1">Filter 6</label>
+                                <div className="select-div">
+                                  <select
+                                    id="filter6"
+                                    name="filter6"
+                                    className="form-select form-select-sm"
+                                    aria-label=".form-select-sm example"
+                                  >
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+
             {/* Search button*/}
-            <div className="row justify-content-center py-4">
+            <div className="row justify-content-center py-4 search-btn-wrapper">
               <div className="text-center">
                 <button
-                  className={`btn btn-lg btn-primary common-btn-font ${
+                  className={`btn btn-primary common-btn-font ${
                     Object.keys(dataToPost).length > 2 ? "" : "disabled"
                   }`}
                   onClick={getPropertyData}
