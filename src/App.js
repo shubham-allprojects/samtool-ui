@@ -30,6 +30,7 @@ import { ToastContainer, toast } from "react-toastify";
 import ManageUsers from "./Admin/User/ManageUsers";
 import { useEffect } from "react";
 import axios from "axios";
+import ViewSearchResults from "./components/2.HomePage/ViewSearchResults";
 
 function App() {
   const MINUTE_MS = 1000;
@@ -74,6 +75,10 @@ function App() {
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route
+            path="/property-search-results"
+            element={<ViewSearchResults />}
+          />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
           <Route

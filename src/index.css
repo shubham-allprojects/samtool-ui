@@ -254,8 +254,12 @@ input:-webkit-autofill:active {
   padding: 2rem !important;
 }
 
-.home-wrapper .more-filters-dropdown-menu {
+.more-filters-dropdown-menu {
   min-width: 30rem !important;
+}
+
+.extra-filters-row {
+  background: var(--bg-gradient-orange);
 }
 
 /* .home-wrapper .five-section-col .inner-box {
@@ -1162,7 +1166,7 @@ input:-webkit-autofill:active {
     height: fit-content;
   }
 
-  .home-wrapper .more-filters-dropdown-menu {
+  .more-filters-dropdown-menu {
     min-width: 100% !important;
   }
 
