@@ -11,7 +11,7 @@ const ViewSearchResults = () => {
               className="row extra-filters-row justify-content-center align-items-center"
               style={{ height: "80px" }}
             >
-              <div className="col-xl-1 col-md-2 col-12">
+              <div className="col-xl-1 col-md-2 col-12 mt-3 mt-md-0">
                 <div className="inner-box">
                   {/* <label htmlFor="bank">Bank</label> */}
                   <div className="select-div">
@@ -36,7 +36,7 @@ const ViewSearchResults = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-xl-1 col-md-2 col-12">
+              <div className="col-xl-1 col-md-2 col-12 mt-3 mt-md-0">
                 <div className="inner-box">
                   {/* <label htmlFor="bank">Bank</label> */}
                   <div className="select-div">
@@ -61,7 +61,7 @@ const ViewSearchResults = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-xl-1 col-md-2 col-12">
+              <div className="col-xl-1 col-md-2 col-12 mt-3 mt-md-0">
                 <div className="inner-box">
                   {/* <label htmlFor="bank">Bank</label> */}
                   <div className="select-div">
@@ -86,7 +86,7 @@ const ViewSearchResults = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-xl-1 col-md-2 col-12">
+              <div className="col-xl-1 col-md-2 col-12 mt-3 mt-md-0">
                 <div className="inner-box">
                   {/* <label htmlFor="bank">Bank</label> */}
                   <div className="select-div">
@@ -111,7 +111,7 @@ const ViewSearchResults = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-2 col-12">
+              <div className="col-md-2 col-12 mt-3 mt-md-0">
                 <div className="inner-box">
                   {/* <label htmlFor="more-filters">More Filters</label> */}
                   <div class="dropdown">
@@ -120,7 +120,9 @@ const ViewSearchResults = () => {
                       aria-expanded="false"
                       className="form-select"
                     >
-                      More Filters
+                      <option value="" style={{ overflow: "hidden" }}>
+                        More Filters
+                      </option>
                     </div>
                     <ul
                       class="dropdown-menu more-filters-dropdown-menu"
@@ -224,8 +226,10 @@ const ViewSearchResults = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-2 col-12">
-                <button className="btn btn-primary">search</button>
+              <div className="col-lg-1 col-md-2 col-12 my-3 my-md-0 p-lg-0">
+                <button className="btn btn-primary w-100 text-center">
+                  Search
+                </button>
               </div>
             </div>
           </div>

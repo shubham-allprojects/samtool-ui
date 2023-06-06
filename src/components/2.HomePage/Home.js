@@ -335,7 +335,7 @@ function Home() {
                   </div>
                 </div>
                 {/* <div
-                  className=" col-md-2 col-12  mt-3 mt-md-0"
+                  className=" col-md-2 col-12 mt-3 mt-md-0"
                   id="locality-col"
                 >
                   <div className="inner-box">

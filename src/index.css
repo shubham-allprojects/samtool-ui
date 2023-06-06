@@ -1162,8 +1162,9 @@ input:-webkit-autofill:active {
     background-attachment: fixed;
   }
 
-  .home-wrapper .five-box-row {
-    height: fit-content;
+  .home-wrapper .five-box-row,
+  .extra-filters-row {
+    height: fit-content !important;
   }
 
   .more-filters-dropdown-menu {
