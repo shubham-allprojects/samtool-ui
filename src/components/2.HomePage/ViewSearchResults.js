@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import Layout from "../1.CommonLayout/Layout";
 
 const ViewSearchResults = () => {
-  const [propertyMinPrices, setPropertyMinPrices] = useState([
+  let propertyMinPrices = [
     10000000, 50000000, 100000000, 150000000, 200000000, 250000000, 300000000,
     350000000, 400000000, 450000000, 500000000,
-  ]);
+  ];
 
   let maxPricesOfProperty = [
     10000000, 50000000, 100000000, 150000000, 200000000, 250000000, 300000000,
     350000000, 400000000, 450000000, 500000000, 550000000,
   ];
+
+  const [filtersCount, setFiltersCount] = useState(2);
 
   const [propertyMaxPrices, setPropertyMaxPrices] =
     useState(maxPricesOfProperty);
@@ -25,8 +27,25 @@ const ViewSearchResults = () => {
       } else {
         setPropertyMaxPrices(maxPricesOfProperty);
       }
+    } else if (name === "maxPrice") {
+    } else if (name === "territory") {
+    } else if (name === "title_clear_property") {
+    } else if (name === "carpet_area") {
     }
   };
+
+  const onInputBlur = (e) => {
+    const { name, value } = e.target;
+    if (name === "carpet_area") {
+      if (value) {
+        setFiltersCount(filtersCount + 1);
+      } else {
+        setFiltersCount(filtersCount - 1);
+      }
+    }
+  };
+
+  // {"batch_number": 1,"batch_size": 3,"city_id": 1,"state_id": 1,"type_id": 2,"territory":"gram panchayat limit","title_clear_property":1,"market_price":110000000.00,"expected_price":400000.00,"carpet_area":"500 sq.ft."}
   return (
     <>
       <Layout>
@@ -146,7 +165,7 @@ const ViewSearchResults = () => {
                       className="form-select"
                     >
                       <option value="" style={{ overflow: "hidden" }}>
-                        More Filters
+                        More Filters {filtersCount}
                       </option>
                     </div>
                     <ul
@@ -212,62 +231,65 @@ const ViewSearchResults = () => {
                           </div>
                           <div className="col-md-6 mb-3">
                             <div className="inner-box">
-                              <label htmlFor="filter1">Filter 3</label>
+                              <label
+                                htmlFor="title_clear_property"
+                                className="form-label common-btn-font"
+                              >
+                                Title clear property
+                              </label>
                               <div className="select-div">
                                 <select
-                                  id="filter3"
-                                  name="filter3"
+                                  id="title_clear_property"
+                                  name="title_clear_property"
                                   className="form-select form-select-sm"
                                   aria-label=".form-select-sm example"
+                                  onChange={onInputChange}
                                 >
-                                  <option value=""></option>
+                                  <option value="1">Yes</option>
+                                  <option value="0">No</option>
                                 </select>
                               </div>
                             </div>
                           </div>
                           <div className="col-md-6 mb-3">
                             <div className="inner-box">
-                              <label htmlFor="filter1">Filter 4</label>
+                              <label
+                                htmlFor="territory"
+                                className="form-label common-btn-font"
+                              >
+                                Territory
+                              </label>
                               <div className="select-div">
                                 <select
-                                  id="filter4"
-                                  name="filter4"
+                                  id="territory"
+                                  name="territory"
                                   className="form-select form-select-sm"
                                   aria-label=".form-select-sm example"
+                                  onChange={onInputChange}
                                 >
-                                  <option value=""></option>
+                                  <option value="Gram Panchayat Limit">
+                                    Gram Panchayat Limit
+                                  </option>
                                 </select>
                               </div>
                             </div>
                           </div>
                           <div className="col-md-6">
                             <div className="inner-box">
-                              <label htmlFor="filter1">Filter 5</label>
-                              <div className="select-div">
-                                <select
-                                  id="filter5"
-                                  name="filter5"
-                                  className="form-select form-select-sm"
-                                  aria-label=".form-select-sm example"
-                                >
-                                  <option value=""></option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-6">
-                            <div className="inner-box">
-                              <label htmlFor="filter1">Filter 6</label>
-                              <div className="select-div">
-                                <select
-                                  id="filter6"
-                                  name="filter6"
-                                  className="form-select form-select-sm"
-                                  aria-label=".form-select-sm example"
-                                >
-                                  <option value=""></option>
-                                </select>
-                              </div>
+                              <label
+                                htmlFor="carpet_area"
+                                className="form-label common-btn-font"
+                              >
+                                Carpet Area (sqft)
+                              </label>
+                              <input
+                                id="carpet_area"
+                                name="carpet_area"
+                                className="form-control form-control-sm"
+                                type="number"
+                                onChange={onInputChange}
+                                onBlur={onInputBlur}
+                              />
                             </div>
                           </div>
                         </form>
