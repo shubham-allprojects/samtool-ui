@@ -284,7 +284,7 @@ function Home() {
 
             <div className="d-flex justify-content-center">
               <div className="row five-box-row">
-                <div className=" col-md-4 col-12">
+                <div className="col-xl-2 col-lg-3 col-md-4 col-12">
                   <div className="inner-box">
                     <label htmlFor="state">State</label>
                     <div className="select-div">
@@ -309,7 +309,10 @@ function Home() {
                     </div>
                   </div>
                 </div>
-                <div className=" col-md-4 col-12  mt-3 mt-md-0" id="city-col">
+                <div
+                  className="col-xl-2 col-lg-3 col-md-4 col-12  mt-3 mt-md-0"
+                  id="city-col"
+                >
                   <div className="inner-box">
                     <label htmlFor="city">City</label>
                     <div className="select-div">
@@ -335,7 +338,7 @@ function Home() {
                   </div>
                 </div>
                 {/* <div
-                  className=" col-md-2 col-12 mt-3 mt-md-0"
+                  className="col-md-2 col-12 mt-3 mt-md-0"
                   id="locality-col"
                 >
                   <div className="inner-box">
@@ -366,7 +369,7 @@ function Home() {
                     </div>
                   </div>
                 </div> */}
-                <div className=" col-md-4 col-12 mt-3 mt-md-0">
+                <div className="col-xl-2 col-lg-3 col-md-4 col-12 mt-3 mt-md-0">
                   <div className="inner-box">
                     <label htmlFor="asset">Asset Category</label>
                     <div className="select-div">
@@ -391,7 +394,7 @@ function Home() {
                     </div>
                   </div>
                 </div>
-                {/* <div className=" col-md-2 col-12 mt-3 mt-md-0">
+                {/* <div className="col-md-2 col-12 mt-3 mt-md-0">
                   <div className="inner-box">
                     <label htmlFor="bank">Bank</label>
                     <div className="select-div">
@@ -416,7 +419,7 @@ function Home() {
                     </div>
                   </div>
                 </div> */}
-                {/* <div className=" col-md-2 col-12 mt-3 mt-md-0">
+                {/* <div className="col-md-2 col-12 mt-3 mt-md-0">
                   <div className="inner-box">
                     <label htmlFor="more-filters">More Filters</label>
                     <div class="dropdown">
