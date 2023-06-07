@@ -40,9 +40,7 @@ const ViewSearchResults = () => {
     const { name, value } = e.target;
     if (name === "minPrice") {
       if (value) {
-        if (minPriceValue) {
-        } else if (maxPriceValue) {
-        } else {
+        if (!minPriceValue && !maxPriceValue) {
           setFiltersCount(filtersCount + 1);
         }
         let intValue = parseInt(value);
@@ -52,31 +50,25 @@ const ViewSearchResults = () => {
       } else {
         setFormData({ ...formData, minPriceValue: "" });
         setPropertyMaxPrices(maxPricesOfProperty);
-        if (maxPriceValue) {
-        } else {
+        if (!maxPriceValue) {
           setFiltersCount(filtersCount - 1);
         }
       }
     } else if (name === "maxPrice") {
       if (value) {
-        if (minPriceValue) {
-        } else if (maxPriceValue) {
-        } else {
+        if (!minPriceValue && !maxPriceValue) {
           setFiltersCount(filtersCount + 1);
         }
         setFormData({ ...formData, maxPriceValue: value });
       } else {
         setFormData({ ...formData, maxPriceValue: "" });
-        if (minPriceValue) {
-        } else {
+        if (!minPriceValue) {
           setFiltersCount(filtersCount - 1);
         }
       }
     } else if (name === "minArea") {
       if (value) {
-        if (minAreaValue) {
-        } else if (maxAreaValue) {
-        } else {
+        if (!minAreaValue && !maxAreaValue) {
           setFiltersCount(filtersCount + 1);
         }
         let intValue = parseInt(value);
@@ -86,23 +78,19 @@ const ViewSearchResults = () => {
       } else {
         setFormData({ ...formData, minAreaValue: "" });
         setPropertyMaxArea(maxAreaOfProperty);
-        if (maxAreaValue) {
-        } else {
+        if (!maxAreaValue) {
           setFiltersCount(filtersCount - 1);
         }
       }
     } else if (name === "maxArea") {
       if (value) {
-        if (minAreaValue) {
-        } else if (maxAreaValue) {
-        } else {
+        if (!minAreaValue && !maxAreaValue) {
           setFiltersCount(filtersCount + 1);
         }
         setFormData({ ...formData, maxAreaValue: value });
       } else {
         setFormData({ ...formData, maxAreaValue: "" });
-        if (minAreaValue) {
-        } else {
+        if (!minAreaValue) {
           setFiltersCount(filtersCount - 1);
         }
       }
