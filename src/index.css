@@ -261,7 +261,7 @@ input:-webkit-autofill:active {
 .more-filters-dropdown-menu {
   min-width: 31rem !important;
   max-height: 24rem !important;
-  overflow-y: scroll !important;
+  overflow-y: auto !important;
 }
 
 .extra-filters-row {
