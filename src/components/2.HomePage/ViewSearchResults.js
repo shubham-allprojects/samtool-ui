@@ -210,7 +210,6 @@ const ViewSearchResults = () => {
               </div>
               <div className="col-md-2 col-12 mt-3 mt-md-0">
                 <div className="inner-box">
-                  {/* <label htmlFor="more-filters">More Filters</label> */}
                   <div className="dropdown">
                     <div
                       data-bs-toggle="dropdown"
@@ -274,7 +273,9 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-2 text-center">to</div>
+                          <div className="col-md-2 text-center mb-3 mb-md-0">
+                            to
+                          </div>
                           <div className="col-md-5 mb-3">
                             <div className="inner-box">
                               <div className="select-div">
@@ -372,7 +373,9 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-2 text-center">to</div>
+                          <div className="col-md-2 text-center mb-3 mb-md-0">
+                            to
+                          </div>
                           <div className="col-md-5 mb-3">
                             <div className="inner-box">
                               <div className="select-div">
