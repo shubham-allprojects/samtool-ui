@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../1.CommonLayout/Layout";
 
 const ViewSearchResults = () => {
+  const [propertyMinPrices, setPropertyMinPrices] = useState([
+    10000000, 50000000, 100000000, 150000000, 200000000, 250000000, 300000000,
+    350000000, 400000000, 450000000, 500000000,
+  ]);
+
+  let maxPricesOfProperty = [
+    10000000, 50000000, 100000000, 150000000, 200000000, 250000000, 300000000,
+    350000000, 400000000, 450000000, 500000000, 550000000,
+  ];
+
+  const [propertyMaxPrices, setPropertyMaxPrices] =
+    useState(maxPricesOfProperty);
+
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "minPrice") {
+      if (value) {
+        let intValue = parseInt(value);
+        let indexOfValue = maxPricesOfProperty.indexOf(intValue);
+        setPropertyMaxPrices(maxPricesOfProperty.slice(indexOfValue + 1));
+      } else {
+        setPropertyMaxPrices(maxPricesOfProperty);
+      }
+    }
+  };
   return (
     <>
       <Layout>
@@ -129,33 +154,58 @@ const ViewSearchResults = () => {
                       aria-labelledby="dropdownMenuButton1"
                     >
                       <div className="container-fluid p-3">
-                        <form className="row justify-content-center">
-                          <div className="col-md-6 mb-3">
+                        <form className="row">
+                          <div className="col-12">
+                            <label
+                              htmlFor=""
+                              className="form-label common-btn-font"
+                            >
+                              Price (<i className="bi bi-currency-rupee"></i>)
+                            </label>
+                          </div>
+                          <div className="col-md-5 mb-3">
                             <div className="inner-box">
-                              <label htmlFor="filter1">Filter 1</label>
+                              {/* <label htmlFor="filter1">Filter 1</label> */}
                               <div className="select-div">
                                 <select
-                                  id="filter1"
-                                  name="filter1"
+                                  id="minPrice"
+                                  name="minPrice"
                                   className="form-select form-select-sm"
                                   aria-label=".form-select-sm example"
+                                  onChange={onInputChange}
                                 >
-                                  <option value=""></option>
+                                  <option value="">Min</option>
+                                  {propertyMinPrices.map((price, Index) => {
+                                    return (
+                                      <option value={price} key={Index}>
+                                        {price}
+                                      </option>
+                                    );
+                                  })}
                                 </select>
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-6 mb-3">
+                          <div className="col-md-1">to</div>
+                          <div className="col-md-5 mb-3">
                             <div className="inner-box">
-                              <label htmlFor="filter1">Filter 2</label>
+                              {/* <label htmlFor="filter1">Filter 2</label> */}
                               <div className="select-div">
                                 <select
-                                  id="filter2"
-                                  name="filter2"
+                                  id="maxPrice"
+                                  name="maxPrice"
                                   className="form-select form-select-sm"
                                   aria-label=".form-select-sm example"
+                                  onChange={onInputChange}
                                 >
-                                  <option value=""></option>
+                                  <option value="">Max</option>
+                                  {propertyMaxPrices.map((price, Index) => {
+                                    return (
+                                      <option value={price} key={Index}>
+                                        {price}
+                                      </option>
+                                    );
+                                  })}
                                 </select>
                               </div>
                             </div>
