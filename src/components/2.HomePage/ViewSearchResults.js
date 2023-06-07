@@ -12,17 +12,29 @@ const ViewSearchResults = () => {
     350000000, 400000000, 450000000, 500000000, 550000000,
   ];
 
+  let propertyMinArea = [
+    100, 200, 300, 400, 500, 1000, 1500, 2000, 3000, 4000, 5000, 10000, 25000,
+  ];
+  let maxAreaOfProperty = [
+    100, 200, 300, 400, 500, 1000, 1500, 2000, 3000, 4000, 5000, 10000, 25000,
+    50000,
+  ];
+
   const [formData, setFormData] = useState({
     minPriceValue: "",
     maxPriceValue: "",
+    minAreaValue: "",
+    maxAreaValue: "",
   });
 
-  const { minPriceValue, maxPriceValue } = formData;
+  const { minPriceValue, maxPriceValue, minAreaValue, maxAreaValue } = formData;
 
   const [filtersCount, setFiltersCount] = useState(2);
 
   const [propertyMaxPrices, setPropertyMaxPrices] =
     useState(maxPricesOfProperty);
+
+  const [propertyMaxArea, setPropertyMaxArea] = useState(maxAreaOfProperty);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -60,13 +72,45 @@ const ViewSearchResults = () => {
           setFiltersCount(filtersCount - 1);
         }
       }
+    } else if (name === "minArea") {
+      if (value) {
+        if (minAreaValue) {
+        } else if (maxAreaValue) {
+        } else {
+          setFiltersCount(filtersCount + 1);
+        }
+        let intValue = parseInt(value);
+        let indexOfValue = maxAreaOfProperty.indexOf(intValue);
+        setPropertyMaxArea(maxAreaOfProperty.slice(indexOfValue + 1));
+        setFormData({ ...formData, minAreaValue: value });
+      } else {
+        setFormData({ ...formData, minAreaValue: "" });
+        setPropertyMaxArea(maxAreaOfProperty);
+        if (maxAreaValue) {
+        } else {
+          setFiltersCount(filtersCount - 1);
+        }
+      }
+    } else if (name === "maxArea") {
+      if (value) {
+        if (minAreaValue) {
+        } else if (maxAreaValue) {
+        } else {
+          setFiltersCount(filtersCount + 1);
+        }
+        setFormData({ ...formData, maxAreaValue: value });
+      } else {
+        setFormData({ ...formData, maxAreaValue: "" });
+        if (minAreaValue) {
+        } else {
+          setFiltersCount(filtersCount - 1);
+        }
+      }
     } else if (name === "territory") {
     } else if (name === "title_clear_property") {
-    } else if (name === "carpet_area") {
     }
   };
 
-  // {"batch_number": 1,"batch_size": 3,"city_id": 1,"state_id": 1,"type_id": 2,"territory":"gram panchayat limit","title_clear_property":1,"market_price":110000000.00,"expected_price":400000.00,"carpet_area":"500 sq.ft."}
   return (
     <>
       <Layout>
@@ -222,7 +266,6 @@ const ViewSearchResults = () => {
                           </div>
                           <div className="col-md-5 mb-3">
                             <div className="inner-box">
-                              {/* <label htmlFor="filter1">Filter 1</label> */}
                               <div className="select-div">
                                 <select
                                   id="minPrice"
@@ -243,10 +286,9 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-1">to</div>
+                          <div className="col-md-2 text-center">to</div>
                           <div className="col-md-5 mb-3">
                             <div className="inner-box">
-                              {/* <label htmlFor="filter1">Filter 2</label> */}
                               <div className="select-div">
                                 <select
                                   id="maxPrice"
@@ -312,21 +354,57 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-6">
+                          <div className="col-12">
+                            <label
+                              htmlFor=""
+                              className="form-label common-btn-font"
+                            >
+                              Carpet Area ( sqft )
+                            </label>
+                          </div>
+                          <div className="col-md-5 mb-3">
                             <div className="inner-box">
-                              <label
-                                htmlFor="carpet_area"
-                                className="form-label common-btn-font"
-                              >
-                                Carpet Area (sqft)
-                              </label>
-                              <input
-                                id="carpet_area"
-                                name="carpet_area"
-                                className="form-control form-control-sm"
-                                type="number"
-                                onChange={onInputChange}
-                              />
+                              <div className="select-div">
+                                <select
+                                  id="minArea"
+                                  name="minArea"
+                                  className="form-select form-select-sm"
+                                  aria-label=".form-select-sm example"
+                                  onChange={onInputChange}
+                                >
+                                  <option value="">Min</option>
+                                  {propertyMinArea.map((area, Index) => {
+                                    return (
+                                      <option value={area} key={Index}>
+                                        {area}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-md-2">to</div>
+                          <div className="col-md-5 mb-3">
+                            <div className="inner-box">
+                              <div className="select-div">
+                                <select
+                                  id="maxArea"
+                                  name="maxArea"
+                                  className="form-select form-select-sm"
+                                  aria-label=".form-select-sm example"
+                                  onChange={onInputChange}
+                                >
+                                  <option value="">Max</option>
+                                  {propertyMaxArea.map((area, Index) => {
+                                    return (
+                                      <option value={area} key={Index}>
+                                        {area}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
+                              </div>
                             </div>
                           </div>
                         </form>
