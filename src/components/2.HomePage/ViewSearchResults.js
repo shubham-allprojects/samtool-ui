@@ -298,7 +298,7 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-6 my-3">
+                          <div className="col-md-6 mb-3">
                             <div className="inner-box">
                               <label
                                 htmlFor="title_clear_property"
@@ -320,7 +320,7 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-6 my-3">
+                          <div className="col-md-6 mb-3">
                             <div className="inner-box">
                               <label
                                 htmlFor="territory"
@@ -343,7 +343,7 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-12 mt-3">
+                          <div className="col-12">
                             <label
                               htmlFor=""
                               className="form-label common-btn-font"
@@ -454,7 +454,7 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-6 my-3">
+                          <div className="col-md-6 mb-3">
                             <div className="inner-box">
                               <label
                                 htmlFor="title_clear_property"
@@ -476,7 +476,7 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-6 my-3">
+                          <div className="col-md-6 mb-3">
                             <div className="inner-box">
                               <label
                                 htmlFor="territory"
@@ -499,7 +499,7 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-12 mt-3">
+                          <div className="col-12">
                             <label
                               htmlFor=""
                               className="form-label common-btn-font"
