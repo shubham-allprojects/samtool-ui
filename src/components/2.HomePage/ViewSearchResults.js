@@ -49,7 +49,7 @@ const ViewSearchResults = () => {
   return (
     <>
       <Layout>
-        <section className="section-padding">
+        <section className="section-padding searched-results-wrapper">
           <div className="container-fluid min-100vh">
             <div
               className="row extra-filters-row justify-content-center align-items-center"
@@ -164,11 +164,28 @@ const ViewSearchResults = () => {
                       aria-expanded="false"
                       className="form-select"
                     >
-                      <option value="" style={{ overflow: "hidden" }}>
-                        More Filters {filtersCount}
-                      </option>
+                      <div
+                        value=""
+                        style={{
+                          overflow: "hidden",
+                          fontWeight: "normal",
+                          display: "block",
+                          whiteSpaceCollapse: "collapse",
+                          textWrap: "nowrap",
+                          minHeight: "1.2em",
+                          padding: "0px 2px 1px",
+                        }}
+                      >
+                        <span className="me-2 badge bg-dark">
+                          {filtersCount}
+                        </span>
+                        More Filters
+                      </div>
                     </div>
                     <ul
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
                       class="dropdown-menu more-filters-dropdown-menu"
                       aria-labelledby="dropdownMenuButton1"
                     >
