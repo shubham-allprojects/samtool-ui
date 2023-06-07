@@ -149,6 +149,10 @@ input:-webkit-autofill:active {
   min-height: 100vh !important;
 }
 
+.min-200vh {
+  min-height: 200vh !important;
+}
+
 .section-padding {
   padding: 3.9rem 0 0 0;
 }
@@ -256,7 +260,7 @@ input:-webkit-autofill:active {
 
 .more-filters-dropdown-menu {
   min-width: 31rem !important;
-  max-height: 25rem !important;
+  max-height: 24rem !important;
   overflow-y: scroll !important;
 }
 

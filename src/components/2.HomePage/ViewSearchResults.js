@@ -103,7 +103,7 @@ const ViewSearchResults = () => {
     <>
       <Layout>
         <section className="section-padding searched-results-wrapper">
-          <div className="container-fluid min-100vh">
+          <div className="container-fluid min-200vh">
             <div
               className="row extra-filters-row justify-content-center align-items-center"
               style={{ height: "80px" }}
@@ -399,8 +399,7 @@ const ViewSearchResults = () => {
                             </div>
                           </div>
 
-
-                          {/* <div className="col-12">
+                          <div className="col-12">
                             <label
                               htmlFor=""
                               className="form-label common-btn-font"
@@ -554,7 +553,7 @@ const ViewSearchResults = () => {
                                 </select>
                               </div>
                             </div>
-                          </div> */}
+                          </div>
                         </form>
                       </div>
                     </ul>
