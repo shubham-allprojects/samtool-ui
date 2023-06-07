@@ -12,6 +12,13 @@ const ViewSearchResults = () => {
     350000000, 400000000, 450000000, 500000000, 550000000,
   ];
 
+  const [formData, setFormData] = useState({
+    minPriceValue: "",
+    maxPriceValue: "",
+  });
+
+  const { minPriceValue, maxPriceValue } = formData;
+
   const [filtersCount, setFiltersCount] = useState(2);
 
   const [propertyMaxPrices, setPropertyMaxPrices] =
@@ -21,27 +28,41 @@ const ViewSearchResults = () => {
     const { name, value } = e.target;
     if (name === "minPrice") {
       if (value) {
+        if (minPriceValue) {
+        } else if (maxPriceValue) {
+        } else {
+          setFiltersCount(filtersCount + 1);
+        }
         let intValue = parseInt(value);
         let indexOfValue = maxPricesOfProperty.indexOf(intValue);
         setPropertyMaxPrices(maxPricesOfProperty.slice(indexOfValue + 1));
+        setFormData({ ...formData, minPriceValue: value });
       } else {
+        setFormData({ ...formData, minPriceValue: "" });
         setPropertyMaxPrices(maxPricesOfProperty);
+        if (maxPriceValue) {
+        } else {
+          setFiltersCount(filtersCount - 1);
+        }
       }
     } else if (name === "maxPrice") {
+      if (value) {
+        if (minPriceValue) {
+        } else if (maxPriceValue) {
+        } else {
+          setFiltersCount(filtersCount + 1);
+        }
+        setFormData({ ...formData, maxPriceValue: value });
+      } else {
+        setFormData({ ...formData, maxPriceValue: "" });
+        if (minPriceValue) {
+        } else {
+          setFiltersCount(filtersCount - 1);
+        }
+      }
     } else if (name === "territory") {
     } else if (name === "title_clear_property") {
     } else if (name === "carpet_area") {
-    }
-  };
-
-  const onInputBlur = (e) => {
-    const { name, value } = e.target;
-    if (name === "carpet_area") {
-      if (value) {
-        setFiltersCount(filtersCount + 1);
-      } else {
-        setFiltersCount(filtersCount - 1);
-      }
     }
   };
 
@@ -158,7 +179,7 @@ const ViewSearchResults = () => {
               <div className="col-md-2 col-12 mt-3 mt-md-0">
                 <div className="inner-box">
                   {/* <label htmlFor="more-filters">More Filters</label> */}
-                  <div class="dropdown">
+                  <div className="dropdown">
                     <div
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
@@ -186,7 +207,7 @@ const ViewSearchResults = () => {
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
-                      class="dropdown-menu more-filters-dropdown-menu"
+                      className="dropdown-menu more-filters-dropdown-menu"
                       aria-labelledby="dropdownMenuButton1"
                     >
                       <div className="container-fluid p-3">
@@ -305,7 +326,6 @@ const ViewSearchResults = () => {
                                 className="form-control form-control-sm"
                                 type="number"
                                 onChange={onInputChange}
-                                onBlur={onInputBlur}
                               />
                             </div>
                           </div>
