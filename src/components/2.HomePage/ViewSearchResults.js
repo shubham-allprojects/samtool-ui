@@ -399,7 +399,7 @@ const ViewSearchResults = () => {
                             </div>
                           </div>
 
-                          <div className="col-12">
+                          {/* <div className="col-12">
                             <label
                               htmlFor=""
                               className="form-label common-btn-font"
@@ -553,7 +553,7 @@ const ViewSearchResults = () => {
                                 </select>
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                         </form>
                       </div>
                     </ul>
