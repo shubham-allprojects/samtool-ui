@@ -264,6 +264,16 @@ input:-webkit-autofill:active {
   overflow-y: auto !important;
 }
 
+.more-filters-dropdown-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.more-filters-dropdown-menu::-webkit-scrollbar-track-piece {
+  background: #eee;
+}
+.more-filters-dropdown-menu::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+}
+
 .extra-filters-row {
   background: var(--bg-gradient-orange);
 }
