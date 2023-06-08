@@ -238,7 +238,7 @@ const ViewSearchResults = () => {
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
-                      className="dropdown-menu more-filters-dropdown-menu"
+                      className="dropdown-menu more-filters-dropdown-menu shadow"
                       aria-labelledby="dropdownMenuButton1"
                     >
                       <div className="container-fluid p-3">
