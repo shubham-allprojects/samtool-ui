@@ -25,9 +25,16 @@ const ViewSearchResults = () => {
     maxPriceValue: "",
     minAreaValue: "",
     maxAreaValue: "",
+    propertyAge: "",
   });
 
-  const { minPriceValue, maxPriceValue, minAreaValue, maxAreaValue } = formData;
+  const {
+    minPriceValue,
+    maxPriceValue,
+    minAreaValue,
+    maxAreaValue,
+    propertyAge,
+  } = formData;
 
   const [filtersCount, setFiltersCount] = useState(2);
 
@@ -94,8 +101,18 @@ const ViewSearchResults = () => {
           setFiltersCount(filtersCount - 1);
         }
       }
-    } else if (name === "territory") {
-    } else if (name === "title_clear_property") {
+    } else if (name === "propertyAge") {
+      if (value) {
+        setFormData({ ...formData, propertyAge: value });
+        if (!propertyAge) {
+          setFiltersCount(filtersCount + 1);
+        }
+      } else {
+        setFormData({ ...formData, propertyAge: "" });
+        if (propertyAge) {
+          setFiltersCount(filtersCount - 1);
+        }
+      }
     }
   };
 
@@ -394,6 +411,34 @@ const ViewSearchResults = () => {
                                       </option>
                                     );
                                   })}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-12">
+                            <label
+                              htmlFor=""
+                              className="form-label common-btn-font"
+                            >
+                              Age of Property
+                            </label>
+                          </div>
+                          <div className="col-md-5 mb-3">
+                            <div className="inner-box">
+                              <div className="select-div">
+                                <select
+                                  id="propertyAge"
+                                  name="propertyAge"
+                                  className="form-select form-select-sm"
+                                  aria-label=".form-select-sm example"
+                                  onChange={onInputChange}
+                                >
+                                  <option value="">Select age</option>
+                                  <option value="1">Less than 1 year</option>
+                                  <option value="3">Less than 3 years</option>
+                                  <option value="5">Less than 5 years</option>
+                                  <option value="10">Less than 10 years</option>
+                                  <option value="10">More than 10 years</option>
                                 </select>
                               </div>
                             </div>
