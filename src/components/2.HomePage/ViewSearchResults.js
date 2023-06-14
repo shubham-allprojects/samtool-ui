@@ -268,7 +268,7 @@ const ViewSearchResults = () => {
                               Price (<i className="bi bi-currency-rupee"></i>)
                             </label>
                           </div>
-                          <div className="col-md-5 mb-3">
+                          <div className="col-md-6 mb-3">
                             <div className="inner-box">
                               <div className="select-div">
                                 <select
@@ -290,10 +290,10 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-2 text-center mb-3 mb-md-0">
+                          {/* <div className="col-md-2 text-center mb-3 mb-md-0">
                             to
-                          </div>
-                          <div className="col-md-5 mb-3">
+                          </div> */}
+                          <div className="col-md-6 mb-3">
                             <div className="inner-box">
                               <div className="select-div">
                                 <select
@@ -368,7 +368,7 @@ const ViewSearchResults = () => {
                               Carpet Area ( sqft )
                             </label>
                           </div>
-                          <div className="col-md-5 mb-3">
+                          <div className="col-md-6 mb-3">
                             <div className="inner-box">
                               <div className="select-div">
                                 <select
@@ -390,10 +390,10 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-md-2 text-center mb-3 mb-md-0">
+                          {/* <div className="col-md-2 text-center mb-3 mb-md-0">
                             to
-                          </div>
-                          <div className="col-md-5 mb-3">
+                          </div> */}
+                          <div className="col-md-6 mb-3">
                             <div className="inner-box">
                               <div className="select-div">
                                 <select
@@ -423,7 +423,7 @@ const ViewSearchResults = () => {
                               Age of Property
                             </label>
                           </div>
-                          <div className="col-md-5 mb-3">
+                          <div className="col-md-6 mb-3">
                             <div className="inner-box">
                               <div className="select-div">
                                 <select
@@ -433,7 +433,7 @@ const ViewSearchResults = () => {
                                   aria-label=".form-select-sm example"
                                   onChange={onInputChange}
                                 >
-                                  <option value="">Select age</option>
+                                  <option value=""></option>
                                   <option value="1">Less than 1 year</option>
                                   <option value="3">Less than 3 years</option>
                                   <option value="5">Less than 5 years</option>
@@ -443,162 +443,6 @@ const ViewSearchResults = () => {
                               </div>
                             </div>
                           </div>
-
-                          {/* <div className="col-12">
-                            <label
-                              htmlFor=""
-                              className="form-label common-btn-font"
-                            >
-                              Price (<i className="bi bi-currency-rupee"></i>)
-                            </label>
-                          </div>
-                          <div className="col-md-5 mb-3">
-                            <div className="inner-box">
-                              <div className="select-div">
-                                <select
-                                  id="minPrice"
-                                  name="minPrice"
-                                  className="form-select form-select-sm"
-                                  aria-label=".form-select-sm example"
-                                  onChange={onInputChange}
-                                >
-                                  <option value="">Min</option>
-                                  {propertyMinPrices.map((price, Index) => {
-                                    return (
-                                      <option value={price} key={Index}>
-                                        {price}
-                                      </option>
-                                    );
-                                  })}
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-2 text-center mb-3 mb-md-0">
-                            to
-                          </div>
-                          <div className="col-md-5 mb-3">
-                            <div className="inner-box">
-                              <div className="select-div">
-                                <select
-                                  id="maxPrice"
-                                  name="maxPrice"
-                                  className="form-select form-select-sm"
-                                  aria-label=".form-select-sm example"
-                                  onChange={onInputChange}
-                                >
-                                  <option value="">Max</option>
-                                  {propertyMaxPrices.map((price, Index) => {
-                                    return (
-                                      <option value={price} key={Index}>
-                                        {price}
-                                      </option>
-                                    );
-                                  })}
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-6 mb-3">
-                            <div className="inner-box">
-                              <label
-                                htmlFor="title_clear_property"
-                                className="form-label common-btn-font"
-                              >
-                                Title clear property
-                              </label>
-                              <div className="select-div">
-                                <select
-                                  id="title_clear_property"
-                                  name="title_clear_property"
-                                  className="form-select form-select-sm"
-                                  aria-label=".form-select-sm example"
-                                  onChange={onInputChange}
-                                >
-                                  <option value="1">Yes</option>
-                                  <option value="0">No</option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-6 mb-3">
-                            <div className="inner-box">
-                              <label
-                                htmlFor="territory"
-                                className="form-label common-btn-font"
-                              >
-                                Territory
-                              </label>
-                              <div className="select-div">
-                                <select
-                                  id="territory"
-                                  name="territory"
-                                  className="form-select form-select-sm"
-                                  aria-label=".form-select-sm example"
-                                  onChange={onInputChange}
-                                >
-                                  <option value="Gram Panchayat Limit">
-                                    Gram Panchayat Limit
-                                  </option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-12">
-                            <label
-                              htmlFor=""
-                              className="form-label common-btn-font"
-                            >
-                              Carpet Area ( sqft )
-                            </label>
-                          </div>
-                          <div className="col-md-5 mb-3">
-                            <div className="inner-box">
-                              <div className="select-div">
-                                <select
-                                  id="minArea"
-                                  name="minArea"
-                                  className="form-select form-select-sm"
-                                  aria-label=".form-select-sm example"
-                                  onChange={onInputChange}
-                                >
-                                  <option value="">Min</option>
-                                  {propertyMinArea.map((area, Index) => {
-                                    return (
-                                      <option value={area} key={Index}>
-                                        {area}
-                                      </option>
-                                    );
-                                  })}
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-2 text-center mb-3 mb-md-0">
-                            to
-                          </div>
-                          <div className="col-md-5 mb-3">
-                            <div className="inner-box">
-                              <div className="select-div">
-                                <select
-                                  id="maxArea"
-                                  name="maxArea"
-                                  className="form-select form-select-sm"
-                                  aria-label=".form-select-sm example"
-                                  onChange={onInputChange}
-                                >
-                                  <option value="">Max</option>
-                                  {propertyMaxArea.map((area, Index) => {
-                                    return (
-                                      <option value={area} key={Index}>
-                                        {area}
-                                      </option>
-                                    );
-                                  })}
-                                </select>
-                              </div>
-                            </div>
-                          </div> */}
                         </form>
                       </div>
                     </ul>
