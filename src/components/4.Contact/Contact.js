@@ -51,15 +51,19 @@ const Contact = () => {
     }
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      e.target.reset();
-      toast.success("Message sent successfully");
-      setLoading(false);
-      setCaptchaVerified(false);
-    }, 2000);
+    try {
+      await axios.post(``, JSON.stringify(formData)).then((res) => {
+        if (res.status === 0) {
+          e.target.reset();
+          toast.success("Message sent successfully");
+          setLoading(false);
+          setCaptchaVerified(false);
+        }
+      });
+    } catch (error) {}
   };
 
   const loadCaptchaOnRefresh = () => {
