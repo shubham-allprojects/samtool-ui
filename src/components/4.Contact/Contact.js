@@ -8,11 +8,12 @@ import {
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
+import axios from "axios";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    full_name: "",
-    email_address: "",
+    name: "",
+    email: "",
     message: "",
   });
 
@@ -39,12 +40,12 @@ const Contact = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const { full_name, email_address, message } = formData;
+  const { name, email, message } = formData;
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "full_name") {
+    if (name === "name") {
       setFormData({ ...formData, [name]: value });
-    } else if (name === "email_address") {
+    } else if (name === "email") {
       setFormData({ ...formData, [name]: value });
     } else if (name === "message") {
       setFormData({ ...formData, [name]: value });
@@ -54,16 +55,18 @@ const Contact = () => {
   const onFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      await axios.post(``, JSON.stringify(formData)).then((res) => {
-        if (res.status === 0) {
-          e.target.reset();
-          toast.success("Message sent successfully");
-          setLoading(false);
-          setCaptchaVerified(false);
-        }
-      });
-    } catch (error) {}
+    console.log(JSON.stringify(formData));
+    // try {
+    //   await axios.post(``, JSON.stringify(formData)).then((res) => {
+    //     if (res.status === 0) {
+    //       e.target.reset();
+    //       toast.success("Message sent successfully");
+    //       setLoading(false);
+    //       setCaptchaVerified(false);
+    //     }
+    //   });
+    // } catch (error) {}
+    setLoading(false);
   };
 
   const loadCaptchaOnRefresh = () => {
@@ -122,7 +125,7 @@ const Contact = () => {
                       <div className="form-group mb-3">
                         <input
                           onChange={onInputChange}
-                          name="full_name"
+                          name="name"
                           type="text"
                           className="form-control contact-us-form-control"
                           placeholder="Your Name"
@@ -133,7 +136,7 @@ const Contact = () => {
                         <input
                           onChange={onInputChange}
                           type="email"
-                          name="email_address"
+                          name="email"
                           className="form-control contact-us-form-control"
                           placeholder="Email Address"
                           required
@@ -214,8 +217,8 @@ const Contact = () => {
                         className="btn btn-primary w-100 mt-3"
                         style={{ borderRadius: "0" }}
                         disabled={
-                          full_name &&
-                          email_address &&
+                          name &&
+                          email &&
                           message &&
                           captchaVerified &&
                           !loading
