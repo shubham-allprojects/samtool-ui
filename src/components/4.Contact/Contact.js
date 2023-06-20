@@ -57,7 +57,7 @@ const Contact = () => {
     setLoading(true);
     console.log(JSON.stringify(formData));
     // try {
-    //   await axios.post(``, JSON.stringify(formData)).then((res) => {
+    //   await axios.post(`/sam/v1/customer-registration/contact-details`, JSON.stringify(formData)).then((res) => {
     //     if (res.status === 0) {
     //       e.target.reset();
     //       toast.success("Message sent successfully");

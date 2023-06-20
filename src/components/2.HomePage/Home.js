@@ -659,9 +659,16 @@ function Home() {
                                     range
                                   );
                                 }}
-                                className="btn btn-primary common-btn-font"
+                                className="btn btn-primary common-btn-font me-1"
+                                style={{ width: "30%" }}
                               >
                                 View
+                              </button>
+                              <button
+                                className="btn btn-primary common-btn-font"
+                                style={{ width: "30%" }}
+                              >
+                                Contact
                               </button>
                             </div>
                           </div>
