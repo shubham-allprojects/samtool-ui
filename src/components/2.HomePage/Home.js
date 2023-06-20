@@ -659,19 +659,25 @@ function Home() {
                                     range
                                   );
                                 }}
-                                className="btn btn-primary common-btn-font me-1"
+                                className="btn btn-primary common-btn-font me-2"
                                 style={{ width: "30%" }}
                               >
                                 View
                               </button>
-                              <button
-                                data-bs-toggle="modal"
-                                data-bs-target="#commentModal"
-                                className="btn btn-primary common-btn-font"
-                                style={{ width: "30%" }}
-                              >
-                                Contact
-                              </button>
+                              {data ? (
+                                <>
+                                  <button
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#commentModal"
+                                    className="btn btn-primary common-btn-font"
+                                    style={{ width: "30%" }}
+                                  >
+                                    Contact
+                                  </button>
+                                </>
+                              ) : (
+                                <></>
+                              )}
                             </div>
                           </div>
                         </div>
