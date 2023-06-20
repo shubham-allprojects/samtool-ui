@@ -422,14 +422,14 @@ function Home() {
                 {/* <div className="col-md-2 col-12 mt-3 mt-md-0">
                   <div className="inner-box">
                     <label htmlFor="more-filters">More Filters</label>
-                    <div class="dropdown">
+                    <div className="dropdown">
                       <div
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                         className="form-select form-select-sm"
                       ></div>
                       <ul
-                        class="dropdown-menu more-filters-dropdown-menu"
+                        className="dropdown-menu more-filters-dropdown-menu"
                         aria-labelledby="dropdownMenuButton1"
                       >
                         <div className="container-fluid p-3">
@@ -722,44 +722,42 @@ function Home() {
       {/* comment modal */}
 
       <div
-        class="modal fade"
+        className="modal fade"
         id="commentModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            {/* <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Modal title
-              </h5>
+        <div className="modal-dialog modal-dialog-centered">
+          <div
+            className="modal-content"
+            style={{ background: "rgba(135, 207, 235, 0.85)" }}
+          >
+            <div className="d-flex p-2 justify-content-end">
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
-            </div> */}
-            <div class="modal-body">
+            </div>
+            <div className="modal-body pt-0">
               <textarea
-                placeholder="some placeholder here"
+                placeholder="Enter your comments"
                 name=""
                 id=""
                 rows="5"
                 className="form-control"
                 style={{ resize: "none" }}
               ></textarea>
-              <div class="mt-2">
+              <div className="mt-3">
                 <button
                   type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
+                  className="btn btn-primary w-100 common-btn-font"
                 >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Save changes
+                  <span>
+                    <i className="bi bi-send-fill me-2"></i>Send
+                  </span>
                 </button>
               </div>
             </div>
