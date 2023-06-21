@@ -76,7 +76,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
-            path="/property-search-results"
+            path="/property-search-results/:data"
             element={<ViewSearchResults />}
           />
           <Route path="/about" element={<AboutUs />} />

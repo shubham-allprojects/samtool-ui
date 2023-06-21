@@ -1,7 +1,86 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../1.CommonLayout/Layout";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import CommonSpinner from "../../CommonSpinner";
+import Pagination from "../../Pagination";
 
 const ViewSearchResults = () => {
+  const { data } = useParams();
+  const dataToPost = JSON.parse(decodeURIComponent(data));
+  const [modifiedDataToPost, setModifiedDataToPost] = useState(dataToPost);
+  const [loading, setLoading] = useState(false);
+  const [pageCount, setPageCount] = useState(0);
+  const paginationRef = useRef();
+  const { batch_size } = dataToPost;
+  const [propertyData, setPropertyData] = useState([]);
+  const localData = JSON.parse(localStorage.getItem("data"));
+
+  const getPropertyData = async () => {
+    setLoading(true);
+    // Unhide div and display search results in card format.
+    // document.querySelectorAll(".display-on-search").forEach((item) => {
+    //   item.classList.remove("d-none");
+    // });
+    paginationRef.current.classList.add("d-none");
+    window.scrollTo(0, 0);
+    let apis = {
+      searchAPI: `/sam/v1/property/count-category`,
+    };
+    let dataForTotalCount = {
+      ...dataToPost,
+      batch_size: 1000,
+      batch_number: 1,
+    };
+    try {
+      // This api is only for getting all the records and count length of array of properties so that we can decide page numbers for pagination.
+      await axios.post(apis.searchAPI, dataForTotalCount).then((res) => {
+        if (res.data) {
+          setPageCount(Math.ceil(res.data.length / batch_size));
+          console.log(Math.ceil(res.data.length / batch_size));
+        }
+      });
+      // Post data and get Searched result from response.
+      await axios.post(apis.searchAPI, dataToPost).then((res) => {
+        // Store Searched results into propertyData useState.
+        setPropertyData(res.data);
+        console.log(res.data);
+        setLoading(false);
+        if (res.data) {
+          paginationRef.current.classList.remove("d-none");
+        } else {
+          paginationRef.current.classList.add("d-none");
+        }
+      });
+    } catch (error) {
+      toast.error("Internal server error");
+      setLoading(false);
+    }
+  };
+
+  // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
+  const handlePageClick = async (pageNumber) => {
+    window.scrollTo(0, 0);
+    let currentPage = pageNumber.selected + 1;
+    const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
+    setPropertyData(nextOrPrevPagePropertyData);
+  };
+
+  // Fetch more jobs on page click.
+  const fetchMoreProperties = async (currentPage) => {
+    let dataOfNextOrPrevPage = {
+      ...dataToPost,
+      batch_size: batch_size,
+      batch_number: currentPage,
+    };
+    let apis = {
+      searchAPI: `/sam/v1/property/count-category`,
+    };
+    const res = await axios.post(apis.searchAPI, dataOfNextOrPrevPage);
+    return res.data;
+  };
+
   let propertyMinPrices = [
     10000000, 50000000, 100000000, 150000000, 200000000, 250000000, 300000000,
     350000000, 400000000, 450000000, 500000000,
@@ -115,6 +194,12 @@ const ViewSearchResults = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (dataToPost) {
+      getPropertyData();
+    }
+  }, []);
 
   return (
     <>
@@ -458,8 +543,206 @@ const ViewSearchResults = () => {
                 </button>
               </div>
             </div>
+            <div className="property-wrapper">
+              <div className="container-fluid display-on-search py-3">
+                <div className="row">
+                  {loading ? (
+                    <CommonSpinner
+                      spinnerColor="primary"
+                      spinnerText="Please wait...."
+                    />
+                  ) : !propertyData ? (
+                    <div className="py-5 text-center">
+                      <h2 className="text-capitalize">
+                        Sorry! No result found :(
+                      </h2>
+                      <span className="text-muted">
+                        Please try with other options
+                      </span>
+                    </div>
+                  ) : (
+                    propertyData.map((property, Index) => {
+                      const {
+                        count,
+                        category,
+                        city_name,
+                        market_value,
+                        range,
+                      } = property;
+                      return (
+                        <div className="col-xl-3 col-lg-4 col-md-6" key={Index}>
+                          <div className="property-card-wrapper">
+                            <div className="card mb-2">
+                              <div className="top-line"></div>
+                              <img
+                                className="card-img-top"
+                                src="/images2.jpg"
+                                alt=""
+                              />
+                              <div className="card-body">
+                                {count ? (
+                                  <div className="text-capitalize text-primary fw-bold">
+                                    {`${
+                                      count > 1
+                                        ? count + " Properties"
+                                        : count + " Property"
+                                    }`}
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
+                                {category ? (
+                                  <div className="text-capitalize">
+                                    <span>Type: </span>
+                                    <span className="common-btn-font">
+                                      {category}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
+                                {city_name ? (
+                                  <div className="text-capitalize">
+                                    <span>Location: </span>
+                                    <span className="common-btn-font">
+                                      {city_name}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
+                                {market_value ? (
+                                  <div className="text-capitalize">
+                                    <span>Market Price: </span>
+                                    <span className="common-btn-font">
+                                      <i className="bi bi-currency-rupee"></i>
+                                      {`${(
+                                        parseInt(market_value) / 10000000
+                                      ).toFixed(2)} Cr.`}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
+
+                                {range ? (
+                                  <div className="text-capitalize">
+                                    <span>Range: </span>
+                                    <span className="common-btn-font">
+                                      <i className="bi bi-currency-rupee"></i>
+                                      {`${(
+                                        parseInt(range.split("-")[0]) / 10000000
+                                      ).toFixed(2)} Cr.`}
+                                    </span>
+                                    <span className="mx-2 common-btn-font">
+                                      -
+                                    </span>
+                                    <span className="common-btn-font">
+                                      <i className="bi bi-currency-rupee"></i>
+                                      {`${(
+                                        parseInt(range.split("-")[1]) / 10000000
+                                      ).toFixed(2)} Cr.`}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
+                                <div className="mt-2">
+                                  <button
+                                    // onClick={() => {
+                                    //   viewCurrentProperty(
+                                    //     category,
+                                    //     city_name,
+                                    //     range
+                                    //   );
+                                    // }}
+                                    className="btn btn-primary common-btn-font me-2"
+                                    style={{ width: "30%" }}
+                                  >
+                                    View
+                                  </button>
+                                  {localData ? (
+                                    <>
+                                      <button
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#commentModal"
+                                        className="btn btn-primary common-btn-font"
+                                        style={{ width: "30%" }}
+                                      >
+                                        Contact
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+              <div className="container d-none" ref={paginationRef}>
+                <div className="row">
+                  <div className="col-12 mb-3">
+                    <Pagination
+                      handlePageClick={handlePageClick}
+                      pageCount={pageCount}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
+        {/* comment modal */}
+
+        <div
+          className="modal fade"
+          id="commentModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div
+              className="modal-content"
+              style={{ background: "rgba(135, 207, 235, 0.85)" }}
+            >
+              <div className="d-flex p-2 justify-content-end">
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body pt-0">
+                <textarea
+                  placeholder="Enter your comments"
+                  name=""
+                  id=""
+                  rows="5"
+                  className="form-control"
+                  style={{ resize: "none" }}
+                ></textarea>
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    className="btn btn-primary w-100 common-btn-font"
+                  >
+                    <span>
+                      <i className="bi bi-send-fill me-2"></i>Send
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </Layout>
     </>
   );

@@ -5,7 +5,7 @@ import axios from "axios";
 import { rootTitle } from "../../CommonFunctions";
 import Pagination from "../../Pagination";
 import CommonSpinner from "../../CommonSpinner";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ViewPropertyResults from "../ViewPropertyResults";
 import { toast } from "react-toastify";
 
@@ -141,71 +141,6 @@ function Home() {
 
   const [pageCount, setPageCount] = useState(0);
   const paginationRef = useRef();
-  // This will run after Search button click.
-  const getPropertyData = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    // Unhide div and display search results in card format.
-    document.querySelectorAll(".display-on-search").forEach((item) => {
-      item.classList.remove("d-none");
-    });
-    paginationRef.current.classList.add("d-none");
-    document.getElementById("properties").scrollIntoView(true);
-    let apis = {
-      searchAPI: `${url}/count-category`,
-    };
-    let dataForTotalCount = {
-      ...dataToPost,
-      batch_size: 1000,
-      batch_number: 1,
-    };
-    try {
-      // This api is only for getting all the records and count length of array of properties so that we can decide page numbers for pagination.
-      await axios.post(apis.searchAPI, dataForTotalCount).then((res) => {
-        if (res.data) {
-          setPageCount(Math.ceil(res.data.length / batch_size));
-        }
-      });
-      // Post data and get Searched result from response.
-      await axios.post(apis.searchAPI, dataToPost).then((res) => {
-        // Store Searched results into propertyData useState.
-        setPropertyData(res.data);
-        console.log(res);
-        setLoading(false);
-        if (res.data) {
-          paginationRef.current.classList.remove("d-none");
-        } else {
-          paginationRef.current.classList.add("d-none");
-        }
-      });
-    } catch (error) {
-      document.getElementById("properties").scrollIntoView(false);
-      toast.error("Internal server error");
-      setLoading(false);
-    }
-  };
-
-  // This will run when we click any page link in pagination. e.g. prev, 1, 2, 3, 4, next.
-  const handlePageClick = async (pageNumber) => {
-    document.getElementById("properties").scrollIntoView(true);
-    let currentPage = pageNumber.selected + 1;
-    const nextOrPrevPagePropertyData = await fetchMoreProperties(currentPage);
-    setPropertyData(nextOrPrevPagePropertyData);
-  };
-
-  // Fetch more jobs on page click.
-  const fetchMoreProperties = async (currentPage) => {
-    let dataOfNextOrPrevPage = {
-      ...dataToPost,
-      batch_size: batch_size,
-      batch_number: currentPage,
-    };
-    let apis = {
-      searchAPI: `${url}/count-category`,
-    };
-    const res = await axios.post(apis.searchAPI, dataOfNextOrPrevPage);
-    return res.data;
-  };
 
   // Change navbar color on scroll on HomePage only.
   const changeNavBarColor = () => {
@@ -536,165 +471,26 @@ function Home() {
             {/* Search button*/}
             <div className="row justify-content-center py-4 search-btn-wrapper">
               <div className="text-center">
-                <button
+                {/* <button
                   className={`btn btn-primary common-btn-font ${
                     Object.keys(dataToPost).length > 2 ? "" : "disabled"
                   }`}
                   onClick={getPropertyData}
                 >
                   Search
-                </button>
-              </div>
-            </div>
-          </div>
-          {/* After clicking on search button using this div id the ui will scroll to property results div */}
-          <div id="properties"></div>
-          <div className="home-bottom-heading display-on-search d-none">
-            <h1 className="text-center text-white">RECENT LISTINGS</h1>
-          </div>
-        </section>
-        {/* Properties component to show property details (In card format) on click of search button */}
-        {/* We are sending propertyData array (which contains our search results) as a prop */}
-        <section className="property-wrapper">
-          <div className="container-fluid d-none display-on-search py-3">
-            <div className="row">
-              {loading ? (
-                <CommonSpinner
-                  spinnerColor="primary"
-                  spinnerText="Please wait...."
-                />
-              ) : !propertyData ? (
-                <div className="py-5 text-center">
-                  <h2 className="text-capitalize">Sorry! No result found :(</h2>
-                  <span className="text-muted">
-                    Please try with other options
-                  </span>
-                </div>
-              ) : (
-                propertyData.map((property, Index) => {
-                  const { count, category, city_name, market_value, range } =
-                    property;
-                  return (
-                    <div className="col-xl-3 col-lg-4 col-md-6" key={Index}>
-                      <div className="property-card-wrapper">
-                        <div className="card mb-2">
-                          <div className="top-line"></div>
-                          <img
-                            className="card-img-top"
-                            src="images2.jpg"
-                            alt=""
-                          />
-                          <div className="card-body">
-                            {count ? (
-                              <div className="text-capitalize text-primary fw-bold">
-                                {`${
-                                  count > 1
-                                    ? count + " Properties"
-                                    : count + " Property"
-                                }`}
-                              </div>
-                            ) : (
-                              <></>
-                            )}
-                            {category ? (
-                              <div className="text-capitalize">
-                                <span>Type: </span>
-                                <span className="common-btn-font">
-                                  {category}
-                                </span>
-                              </div>
-                            ) : (
-                              <></>
-                            )}
-                            {city_name ? (
-                              <div className="text-capitalize">
-                                <span>Location: </span>
-                                <span className="common-btn-font">
-                                  {city_name}
-                                </span>
-                              </div>
-                            ) : (
-                              <></>
-                            )}
-                            {market_value ? (
-                              <div className="text-capitalize">
-                                <span>Market Price: </span>
-                                <span className="common-btn-font">
-                                  <i className="bi bi-currency-rupee"></i>
-                                  {`${(
-                                    parseInt(market_value) / 10000000
-                                  ).toFixed(2)} Cr.`}
-                                </span>
-                              </div>
-                            ) : (
-                              <></>
-                            )}
-
-                            {range ? (
-                              <div className="text-capitalize">
-                                <span>Range: </span>
-                                <span className="common-btn-font">
-                                  <i className="bi bi-currency-rupee"></i>
-                                  {`${(
-                                    parseInt(range.split("-")[0]) / 10000000
-                                  ).toFixed(2)} Cr.`}
-                                </span>
-                                <span className="mx-2 common-btn-font">-</span>
-                                <span className="common-btn-font">
-                                  <i className="bi bi-currency-rupee"></i>
-                                  {`${(
-                                    parseInt(range.split("-")[1]) / 10000000
-                                  ).toFixed(2)} Cr.`}
-                                </span>
-                              </div>
-                            ) : (
-                              <></>
-                            )}
-                            <div className="mt-2">
-                              <button
-                                onClick={() => {
-                                  viewCurrentProperty(
-                                    category,
-                                    city_name,
-                                    range
-                                  );
-                                }}
-                                className="btn btn-primary common-btn-font me-2"
-                                style={{ width: "30%" }}
-                              >
-                                View
-                              </button>
-                              {data ? (
-                                <>
-                                  <button
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#commentModal"
-                                    className="btn btn-primary common-btn-font"
-                                    style={{ width: "30%" }}
-                                  >
-                                    Contact
-                                  </button>
-                                </>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })
-              )}
-            </div>
-          </div>
-          <div className="container d-none" ref={paginationRef}>
-            <div className="row">
-              <div className="col-12 mb-3">
-                <Pagination
-                  handlePageClick={handlePageClick}
-                  pageCount={pageCount}
-                />
+                </button> */}
+                <NavLink
+                  className={`btn btn-primary common-btn-font ${
+                    Object.keys(dataToPost).length > 2 ? "" : "disabled"
+                  }`}
+                  to={{
+                    pathname: `/property-search-results/${encodeURIComponent(
+                      JSON.stringify(dataToPost)
+                    )}`,
+                  }}
+                >
+                  Search
+                </NavLink>
               </div>
             </div>
           </div>
