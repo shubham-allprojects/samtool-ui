@@ -18,6 +18,7 @@ const ViewSearchResults = () => {
   const localData = JSON.parse(localStorage.getItem("data"));
 
   const getPropertyData = async () => {
+    console.log(dataToPost);
     setLoading(true);
     paginationRef.current.classList.add("d-none");
     window.scrollTo(0, 0);
@@ -34,14 +35,12 @@ const ViewSearchResults = () => {
       await axios.post(apis.searchAPI, dataForTotalCount).then((res) => {
         if (res.data) {
           setPageCount(Math.ceil(res.data.length / batch_size));
-          console.log(Math.ceil(res.data.length / batch_size));
         }
       });
       // Post data and get Searched result from response.
       await axios.post(apis.searchAPI, dataToPost).then((res) => {
         // Store Searched results into propertyData useState.
         setPropertyData(res.data);
-        console.log(res.data);
         setLoading(false);
         if (res.data) {
           paginationRef.current.classList.remove("d-none");

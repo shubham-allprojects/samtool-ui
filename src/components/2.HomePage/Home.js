@@ -69,6 +69,7 @@ function Home() {
         setDataToPost({ ...dataToPost, state_id: parseInt(value) });
       } else {
         delete dataToPost.state_id;
+        delete dataToPost.city_id;
       }
       // If input is state then post selected state id to api for getting cities based on selected state.
       const cityByState = await axios.post(apis.cityAPI, {
