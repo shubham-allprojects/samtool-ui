@@ -8,21 +8,17 @@ import Pagination from "../../Pagination";
 
 const ViewSearchResults = () => {
   const { data } = useParams();
-  const dataToPost = JSON.parse(decodeURIComponent(data));
-  const [modifiedDataToPost, setModifiedDataToPost] = useState(dataToPost);
+  const dataFromParams = JSON.parse(decodeURIComponent(data));
+  const [dataToPost, setDataToPost] = useState(dataFromParams);
   const [loading, setLoading] = useState(false);
   const [pageCount, setPageCount] = useState(0);
   const paginationRef = useRef();
-  const { batch_size } = dataToPost;
+  const { batch_size } = dataFromParams;
   const [propertyData, setPropertyData] = useState([]);
   const localData = JSON.parse(localStorage.getItem("data"));
 
   const getPropertyData = async () => {
     setLoading(true);
-    // Unhide div and display search results in card format.
-    // document.querySelectorAll(".display-on-search").forEach((item) => {
-    //   item.classList.remove("d-none");
-    // });
     paginationRef.current.classList.add("d-none");
     window.scrollTo(0, 0);
     let apis = {

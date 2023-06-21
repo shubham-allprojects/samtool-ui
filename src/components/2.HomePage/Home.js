@@ -3,8 +3,6 @@ import HomeAboutUs from "./HomeAboutUs";
 import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
 import { rootTitle } from "../../CommonFunctions";
-import Pagination from "../../Pagination";
-import CommonSpinner from "../../CommonSpinner";
 import { NavLink, useNavigate } from "react-router-dom";
 import ViewPropertyResults from "../ViewPropertyResults";
 import { toast } from "react-toastify";
@@ -30,23 +28,15 @@ function Home() {
     batch_number: 1,
   });
 
-  const { batch_size } = dataToPost;
-  const [loading, setLoading] = useState(false);
-
-  // After we click on search button It will store data/response from api into this useState.
-  const [propertyData, setPropertyData] = useState([]);
-
   // Object destructuring.
   const { states, assetCategory, cities, localities, banks } = searchFields;
-
-  const url = `/sam/v1/property`;
 
   // It will fetch all states, banks, assets from api and will map those values to respective select fields.
   const getSearchDetails = async () => {
     let apis = {
-      stateAPI: `${url}/by-state`,
-      bankAPI: `${url}/by-bank`,
-      categoryAPI: `${url}/by-category`,
+      stateAPI: `/sam/v1/property/by-state`,
+      bankAPI: `/sam/v1/property/by-bank`,
+      categoryAPI: `/sam/v1/property/by-category`,
     };
     try {
       // Get all states from api.
@@ -69,12 +59,10 @@ function Home() {
   // This function will run on change of input fields.
   const onFieldsChange = async (e) => {
     let apis = {
-      cityAPI: `${url}/by-city`,
-      addressAPI: `${url}/by-address`,
+      cityAPI: `/sam/v1/property/by-city`,
+      addressAPI: `/sam/v1/property/by-address`,
     };
     const { name, value } = e.target;
-    // const fiveSectionCol = document.querySelectorAll(".");
-
     if (name === "states") {
       // Store state id ( if available ) into dataToPost useState (It is required for search functionality).
       if (value) {
@@ -88,13 +76,6 @@ function Home() {
       });
       // Store cities data into searchField useState.
       setSearchFields({ ...searchFields, cities: cityByState.data });
-      // Unhide city select box when we select state.
-      // document.getElementById("city-col").classList.remove("d-none");
-      // This is to set width of background white box based on number of select input boxes.
-      // fiveSectionCol.forEach((col) => {
-      //   col.classList.remove("col-md-2");
-      //   col.classList.add("col-md-2");
-      // });
     } else if (name === "cities") {
       // Store city id ( if available ) into dataToPost useState (It is required for search functionality).
       if (value) {
@@ -108,13 +89,6 @@ function Home() {
       });
       // Store locality data into searchField useState.
       setSearchFields({ ...searchFields, localities: localityByCity.data });
-      // Unhide select box when we select city.
-      // document.getElementById("locality-col").classList.remove("d-none");
-      // This is to set width of background white box based on number of select input boxes.
-      // fiveSectionCol.forEach((col) => {
-      //   col.classList.remove("w-22");
-      //   col.classList.add("w-18");
-      // });
     } else if (name === "localities") {
       // Store locality value ( if available ) into dataToPost useState (It is required for search functionality).
       if (value) {
@@ -471,14 +445,6 @@ function Home() {
             {/* Search button*/}
             <div className="row justify-content-center py-4 search-btn-wrapper">
               <div className="text-center">
-                {/* <button
-                  className={`btn btn-primary common-btn-font ${
-                    Object.keys(dataToPost).length > 2 ? "" : "disabled"
-                  }`}
-                  onClick={getPropertyData}
-                >
-                  Search
-                </button> */}
                 <NavLink
                   className={`btn btn-primary common-btn-font ${
                     Object.keys(dataToPost).length > 2 ? "" : "disabled"
