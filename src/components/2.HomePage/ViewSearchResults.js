@@ -261,10 +261,11 @@ const ViewSearchResults = () => {
                             dataFromParams.state_id &&
                             optionToSelectByDefault
                           ) {
-                            if (
-                              String(dataFromParams.state_id) ===
-                              String(state.state_id)
-                            ) {
+                            if (dataFromParams.state_id === state.state_id) {
+                              console.log(
+                                typeof dataFromParams.state_id,
+                                typeof state.state_id
+                              );
                               optionToSelectByDefault.selected = true;
                             }
                           }
