@@ -83,7 +83,7 @@ const ViewSearchResults = () => {
         }
       });
     } catch (error) {
-      toast.error("Internal server error");
+      // toast.error("Internal server error");
       setLoading(false);
     }
   };
@@ -348,7 +348,7 @@ const ViewSearchResults = () => {
                       //   onChange={onFieldsChange}
                     >
                       <option value="">Bank</option>
-                      {/* {banks
+                      {banks
                         ? banks.map((bank, Index) => {
                             return (
                               <option key={Index} value={bank.bank_id}>
@@ -356,7 +356,7 @@ const ViewSearchResults = () => {
                               </option>
                             );
                           })
-                        : ""} */}
+                        : ""}
                     </select>
                   </div>
                 </div>
