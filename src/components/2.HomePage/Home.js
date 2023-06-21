@@ -487,52 +487,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-      {/* comment modal */}
-
-      <div
-        className="modal fade"
-        id="commentModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div
-            className="modal-content"
-            style={{ background: "rgba(135, 207, 235, 0.85)" }}
-          >
-            <div className="d-flex p-2 justify-content-end">
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body pt-0">
-              <textarea
-                placeholder="Enter your comments"
-                name=""
-                id=""
-                rows="5"
-                className="form-control"
-                style={{ resize: "none" }}
-              ></textarea>
-              <div className="mt-3">
-                <button
-                  type="button"
-                  className="btn btn-primary w-100 common-btn-font"
-                >
-                  <span>
-                    <i className="bi bi-send-fill me-2"></i>Send
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </Layout>
   );
 }

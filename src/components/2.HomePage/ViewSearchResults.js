@@ -16,6 +16,40 @@ const ViewSearchResults = () => {
   const { batch_size } = dataFromParams;
   const [propertyData, setPropertyData] = useState([]);
   const localData = JSON.parse(localStorage.getItem("data"));
+  const [searchFields, setSearchFields] = useState({
+    states: "",
+    cities: "",
+    localities: "",
+    assetCategory: "",
+    banks: "",
+  });
+
+  const { states, assetCategory, cities, localities, banks } = searchFields;
+
+  // It will fetch all states, banks, assets from api and will map those values to respective select fields.
+  const getSearchDetails = async () => {
+    let apis = {
+      stateAPI: `/sam/v1/property/by-state`,
+      bankAPI: `/sam/v1/property/by-bank`,
+      categoryAPI: `/sam/v1/property/by-category`,
+    };
+    try {
+      // Get all states from api.
+      const allStates = await axios.get(apis.stateAPI);
+      // Get all banks from api.
+      const allBanks = await axios.get(apis.bankAPI);
+      // Get all asset Categories from api.
+      const assetCategories = await axios.get(apis.categoryAPI);
+
+      // store states, banks and asset categories into searchFields useState.
+      setSearchFields({
+        ...searchFields,
+        states: allStates.data,
+        banks: allBanks.data,
+        assetCategory: assetCategories.data,
+      });
+    } catch (error) {}
+  };
 
   const getPropertyData = async () => {
     console.log(dataToPost);
@@ -193,6 +227,7 @@ const ViewSearchResults = () => {
   useEffect(() => {
     if (dataToPost) {
       getPropertyData();
+      getSearchDetails();
     }
   }, []);
 
@@ -217,15 +252,35 @@ const ViewSearchResults = () => {
                       //   onChange={onFieldsChange}
                     >
                       <option value="">State</option>
-                      {/* {banks
-                        ? banks.map((bank, Index) => {
-                            return (
-                              <option key={Index} value={bank.bank_id}>
-                                {bank.bank_name}
-                              </option>
-                            );
-                          })
-                        : ""} */}
+                      {states ? (
+                        states.map((state, Index) => {
+                          let optionToSelectByDefault = document.getElementById(
+                            `stateFilter-${state.state_id}`
+                          );
+                          if (
+                            dataFromParams.state_id &&
+                            optionToSelectByDefault
+                          ) {
+                            if (
+                              String(dataFromParams.state_id) ===
+                              String(state.state_id)
+                            ) {
+                              optionToSelectByDefault.selected = true;
+                            }
+                          }
+                          return (
+                            <option
+                              id={`stateFilter-${state.state_id}`}
+                              key={Index}
+                              value={state.state_id}
+                            >
+                              {state.state_name}
+                            </option>
+                          );
+                        })
+                      ) : (
+                        <></>
+                      )}
                     </select>
                   </div>
                 </div>
@@ -698,7 +753,7 @@ const ViewSearchResults = () => {
         <div
           className="modal fade"
           id="commentModal"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
