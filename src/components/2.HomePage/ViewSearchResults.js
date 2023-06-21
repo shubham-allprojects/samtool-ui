@@ -773,7 +773,7 @@ const ViewSearchResults = () => {
               </div>
               <div className="modal-body pt-0">
                 <textarea
-                  placeholder="Enter your comments"
+                  placeholder="Enter your message here"
                   name=""
                   id=""
                   rows="5"
