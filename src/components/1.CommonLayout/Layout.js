@@ -2,13 +2,10 @@ import React from "react";
 import Footers from "./Footer";
 import Header from "./Header";
 
-const Layout = ({ children, backToSearchResults, disableHomeLink }) => {
+const Layout = ({ children }) => {
   return (
     <>
-      <Header
-        backToSearchResults={backToSearchResults}
-        disableHomeLink={disableHomeLink}
-      />
+      <Header />
       {children}
       <Footers />
     </>

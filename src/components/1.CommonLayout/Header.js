@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import CommonNavLinks from "./CommonNavLinks";
 import { checkLoginSession } from "../../CommonFunctions";
 
-function Header({ backToSearchResults, disableHomeLink }) {
+function Header() {
   const data = JSON.parse(localStorage.getItem("data"));
   // This useState will store data from localStorage such as login-status, role and email of user.
   const [allUseStates, setAllUseStates] = useState({
@@ -95,26 +95,12 @@ function Header({ backToSearchResults, disableHomeLink }) {
           <div className="collapse navbar-collapse mt-2 mt-md-0" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               {/* If user is not loggedIn then show these navbar links */}
-              {disableHomeLink ? (
-                <li>
-                  <span
-                    style={{ cursor: "pointer" }}
-                    onClick={backToSearchResults}
-                    className="nav-link"
-                  >
-                    <i className="bi bi-house me-2 text-light"></i>
-                    Home
-                  </span>
-                </li>
-              ) : (
-                <li>
-                  <NavLink to="/" className="nav-link">
-                    <i className="bi bi-house me-2 text-light"></i>
-                    Home
-                  </NavLink>
-                </li>
-              )}
-
+              <li>
+                <NavLink to="/" className="nav-link">
+                  <i className="bi bi-house me-2 text-light"></i>
+                  Home
+                </NavLink>
+              </li>
               {!loginStatus ? (
                 <>
                   <li className="nav-item ps-lg-2">

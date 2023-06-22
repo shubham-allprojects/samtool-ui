@@ -4,7 +4,6 @@ import Layout from "../1.CommonLayout/Layout";
 import axios from "axios";
 import { rootTitle } from "../../CommonFunctions";
 import { NavLink, useNavigate } from "react-router-dom";
-import ViewPropertyResults from "../ViewPropertyResults";
 import { toast } from "react-toastify";
 
 function Home() {
@@ -16,9 +15,8 @@ function Home() {
     assetCategory: "",
     banks: "",
   });
-  const data = JSON.parse(localStorage.getItem("data"));
+
   const goTo = useNavigate();
-  const [selectedPropertyResults, setSelectedPropertyResults] = useState([]);
   const homePageRef = useRef();
   const viewCurrentPropertyResultsRef = useRef();
 
@@ -114,9 +112,6 @@ function Home() {
     }
   };
 
-  const [pageCount, setPageCount] = useState(0);
-  const paginationRef = useRef();
-
   // Change navbar color on scroll on HomePage only.
   const changeNavBarColor = () => {
     let nav = document.querySelector(".navbar");
@@ -132,48 +127,6 @@ function Home() {
     };
   };
 
-  let nav = document.querySelector(".navbar");
-  const viewCurrentProperty = async (type, city, range) => {
-    if (data) {
-      viewCurrentPropertyResultsRef.current.classList.remove("d-none");
-      setDisableHomeLink(true);
-      window.scrollTo(0, 0);
-      nav.style.background =
-        "linear-gradient(0deg, rgb(2, 77, 251) 0%, rgb(0, 157, 255) 100%)";
-      homePageRef.current.classList.add("d-none");
-      let minValueOfproperty = parseInt(range.split("-")[0]);
-      let maxValueOfproperty = parseInt(range.split("-")[1]);
-      let dataToPost = {
-        property_type: type,
-        city_name: city,
-        minvalue: minValueOfproperty,
-        maxvalue: maxValueOfproperty,
-      };
-      try {
-        await axios
-          .post(`/sam/v1/property/view-properties`, dataToPost)
-          .then((res) => {
-            setSelectedPropertyResults(res.data);
-            console.log(res.data);
-            nav.classList.remove("navbar-lightBg");
-          });
-      } catch (error) {}
-    } else {
-      toast.info("Please login to view property details");
-      goTo("/login");
-    }
-  };
-
-  const backToSearchResults = () => {
-    setDisableHomeLink(false);
-    viewCurrentPropertyResultsRef.current.classList.add("d-none");
-    homePageRef.current.classList.remove("d-none");
-    document.getElementById("properties").scrollIntoView(true);
-    nav.style.removeProperty("background");
-  };
-
-  const [disableHomeLink, setDisableHomeLink] = useState(false);
-
   // This will run every time we refresh page or if some state change occurs.
   useEffect(() => {
     rootTitle.textContent = "SAM TOOL - HOME";
@@ -183,10 +136,7 @@ function Home() {
   }, []);
 
   return (
-    <Layout
-      backToSearchResults={backToSearchResults}
-      disableHomeLink={disableHomeLink}
-    >
+    <Layout>
       <section className="full-home-page-section skyblue-bg" ref={homePageRef}>
         <section className="home-wrapper">
           <div className="container-fluid">
@@ -328,28 +278,6 @@ function Home() {
         </section>
         {/* About us section component */}
         <HomeAboutUs />
-      </section>
-      <section
-        ref={viewCurrentPropertyResultsRef}
-        className="section-padding d-none min-100vh"
-      >
-        <div className="container-fluid">
-          <div className="row p-md-2">
-            <div className="card p-3 border-0">
-              <div className="mb-3 mb-md-4">
-                <button
-                  className="btn btn-sm btn-outline-primary"
-                  onClick={backToSearchResults}
-                >
-                  <i className="bi bi-arrow-left"></i> Back
-                </button>
-              </div>
-              <ViewPropertyResults
-                selectedPropertyResults={selectedPropertyResults}
-              />
-            </div>
-          </div>
-        </div>
       </section>
     </Layout>
   );
