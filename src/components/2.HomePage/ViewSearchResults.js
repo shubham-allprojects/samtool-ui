@@ -81,6 +81,7 @@ const ViewSearchResults = () => {
       await axios.post(apis.searchAPI, dataToPost).then((res) => {
         // Store Searched results into propertyData useState.
         setPropertyData(res.data);
+        console.log(dataToPost);
         setLoading(false);
         if (res.data) {
           paginationRef.current.classList.remove("d-none");
@@ -232,8 +233,8 @@ const ViewSearchResults = () => {
 
   useEffect(() => {
     if (dataToPost) {
-      getPropertyData();
       getSearchDetails();
+      getPropertyData();
     }
   }, []);
 
@@ -268,10 +269,6 @@ const ViewSearchResults = () => {
                             optionToSelectByDefault
                           ) {
                             if (dataFromParams.state_id === state.state_id) {
-                              console.log(
-                                typeof dataFromParams.state_id,
-                                typeof state.state_id
-                              );
                               optionToSelectByDefault.selected = true;
                             }
                           }
@@ -306,8 +303,24 @@ const ViewSearchResults = () => {
                       <option value="">City</option>
                       {cities
                         ? cities.map((city, Index) => {
+                            let optionToSelectByDefault =
+                              document.getElementById(
+                                `cityFilter-${city.city_id}`
+                              );
+                            if (
+                              dataFromParams.city_id &&
+                              optionToSelectByDefault
+                            ) {
+                              if (dataFromParams.city_id === city.city_id) {
+                                optionToSelectByDefault.selected = true;
+                              }
+                            }
                             return (
-                              <option key={Index} value={city.city_id}>
+                              <option
+                                id={`cityFilter-${city.city_id}`}
+                                key={Index}
+                                value={city.city_id}
+                              >
                                 {city.city_name}
                               </option>
                             );
@@ -319,25 +332,40 @@ const ViewSearchResults = () => {
               </div>
               <div className="col-xl-1 col-md-2 col-12 mt-3 mt-md-0">
                 <div className="inner-box">
-                  {/* <label htmlFor="bank">Bank</label> */}
                   <div className="select-div">
                     <select
-                      name="bank"
-                      id="bank"
+                      name="category"
+                      id="category"
                       className="form-select"
                       aria-label=".form-select-sm example"
                       //   onChange={onFieldsChange}
                     >
                       <option value="">Category</option>
-                      {/* {banks
-                        ? banks.map((bank, Index) => {
+                      {assetCategory
+                        ? assetCategory.map((category, Index) => {
+                            let optionToSelectByDefault =
+                              document.getElementById(
+                                `categoryFilter-${category.type_id}`
+                              );
+                            if (
+                              dataFromParams.type_id &&
+                              optionToSelectByDefault
+                            ) {
+                              if (dataFromParams.type_id === category.type_id) {
+                                optionToSelectByDefault.selected = true;
+                              }
+                            }
                             return (
-                              <option key={Index} value={bank.bank_id}>
-                                {bank.bank_name}
+                              <option
+                                id={`categoryFilter-${category.type_id}`}
+                                key={Index}
+                                value={category.type_id}
+                              >
+                                {category.type_name}
                               </option>
                             );
                           })
-                        : ""} */}
+                        : ""}
                     </select>
                   </div>
                 </div>
