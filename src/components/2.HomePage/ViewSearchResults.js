@@ -23,7 +23,6 @@ const ViewSearchResults = () => {
     assetCategory: "",
     banks: "",
   });
-
   const { states, assetCategory, cities, localities, banks } = searchFields;
 
   // It will fetch all states, banks, assets from api and will map those values to respective select fields.
@@ -40,11 +39,18 @@ const ViewSearchResults = () => {
       const allBanks = await axios.get(apis.bankAPI);
       // Get all asset Categories from api.
       const assetCategories = await axios.get(apis.categoryAPI);
+      let cityByState = {};
+      if (dataFromParams.state_id) {
+        cityByState = await axios.post(`/sam/v1/property/by-city`, {
+          state_id: dataFromParams.state_id,
+        });
+      }
 
       // store states, banks and asset categories into searchFields useState.
       setSearchFields({
         ...searchFields,
         states: allStates.data,
+        cities: cityByState.data,
         banks: allBanks.data,
         assetCategory: assetCategories.data,
       });
@@ -298,15 +304,15 @@ const ViewSearchResults = () => {
                       //   onChange={onFieldsChange}
                     >
                       <option value="">City</option>
-                      {/* {banks
-                        ? banks.map((bank, Index) => {
+                      {cities
+                        ? cities.map((city, Index) => {
                             return (
-                              <option key={Index} value={bank.bank_id}>
-                                {bank.bank_name}
+                              <option key={Index} value={city.city_id}>
+                                {city.city_name}
                               </option>
                             );
                           })
-                        : ""} */}
+                        : ""}
                     </select>
                   </div>
                 </div>
