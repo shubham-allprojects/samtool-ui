@@ -31,6 +31,7 @@ import ManageUsers from "./Admin/User/ManageUsers";
 import { useEffect } from "react";
 import axios from "axios";
 import ViewSearchResults from "./components/3.Properties with filters/ViewSearchResults";
+import ListOfProperties from "./components/3.Properties with filters/ListOfProperties";
 
 function App() {
   const MINUTE_MS = 1000;
@@ -78,6 +79,10 @@ function App() {
           <Route
             path="/property-search-results/:data"
             element={<ViewSearchResults />}
+          />
+          <Route
+            path="/list-of-properties/:data"
+            element={<ListOfProperties />}
           />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
