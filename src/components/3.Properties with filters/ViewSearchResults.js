@@ -59,7 +59,7 @@ const ViewSearchResults = () => {
   };
 
   const getPropertyData = async () => {
-    console.log(dataToPost);
+    // console.log(dataToPost);
     setLoading(true);
     paginationRef.current.classList.add("d-none");
     window.scrollTo(0, 0);
@@ -323,10 +323,7 @@ const ViewSearchResults = () => {
                         let optionToSelectByDefault = document.getElementById(
                           `stateFilter-${state.state_id}`
                         );
-                        if (
-                          dataToPost.state_id &&
-                          optionToSelectByDefault
-                        ) {
+                        if (dataToPost.state_id && optionToSelectByDefault) {
                           if (dataToPost.state_id === state.state_id) {
                             optionToSelectByDefault.selected = true;
                           }
@@ -364,10 +361,7 @@ const ViewSearchResults = () => {
                           let optionToSelectByDefault = document.getElementById(
                             `cityFilter-${city.city_id}`
                           );
-                          if (
-                            dataToPost.city_id &&
-                            optionToSelectByDefault
-                          ) {
+                          if (dataToPost.city_id && optionToSelectByDefault) {
                             if (dataToPost.city_id === city.city_id) {
                               optionToSelectByDefault.selected = true;
                             }
@@ -403,10 +397,7 @@ const ViewSearchResults = () => {
                           let optionToSelectByDefault = document.getElementById(
                             `categoryFilter-${category.type_id}`
                           );
-                          if (
-                            dataToPost.type_id &&
-                            optionToSelectByDefault
-                          ) {
+                          if (dataToPost.type_id && optionToSelectByDefault) {
                             if (dataToPost.type_id === category.type_id) {
                               optionToSelectByDefault.selected = true;
                             }
@@ -679,6 +670,7 @@ const ViewSearchResults = () => {
               <button
                 onClick={() => {
                   console.log(dataToPost);
+                  getPropertyData();
                 }}
                 className="btn btn-primary w-100 text-center"
               >
