@@ -678,6 +678,54 @@ const ViewSearchResults = () => {
           <div className="property-wrapper">
             <div className="container-fluid display-on-search py-3">
               <div className="row">
+                <div className="col-12 d-flex justify-content-md-end">
+                  <div className="container-fluid p-0">
+                    <div className="row justify-content-end">
+                      <div className="col-xl-2 col-md-3 col-12">
+                        <div className="inner-box">
+                          <div className="dropdown">
+                            <div
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              className="form-select"
+                            >
+                              <div
+                                value=""
+                                style={{
+                                  overflow: "hidden",
+                                  fontWeight: "normal",
+                                  display: "block",
+                                  whiteSpaceCollapse: "collapse",
+                                  textWrap: "nowrap",
+                                  minHeight: "1.2em",
+                                  padding: "0px 2px 1px",
+                                }}
+                              >
+                                <span className="me-2">
+                                  <i class="bi bi-filter-right"></i>
+                                </span>
+                                Sort
+                              </div>
+                            </div>
+                            <ul
+                              onClick={(e) => {
+                                e.stopPropagation();
+                              }}
+                              className="dropdown-menu shadow w-100"
+                            >
+                              <div className="container-fluid p-3">
+                                sort options
+                              </div>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12">
+                  <hr />
+                </div>
                 {loading ? (
                   <CommonSpinner
                     spinnerColor="primary"
