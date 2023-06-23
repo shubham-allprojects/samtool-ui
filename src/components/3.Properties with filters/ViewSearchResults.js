@@ -20,11 +20,11 @@ const ViewSearchResults = () => {
   const [searchFields, setSearchFields] = useState({
     states: "",
     cities: "",
-    localities: "",
+    // localities: "",
     assetCategory: "",
     banks: "",
   });
-  const { states, assetCategory, cities, localities, banks } = searchFields;
+  const { states, assetCategory, cities, banks } = searchFields;
 
   // It will fetch all states, banks, assets from api and will map those values to respective select fields.
   const getSearchDetails = async () => {
@@ -116,6 +116,66 @@ const ViewSearchResults = () => {
     };
     const res = await axios.post(apis.searchAPI, dataOfNextOrPrevPage);
     return res.data;
+  };
+
+  // This function will run on change of input fields.
+  const onFieldsChange = async (e) => {
+    let apis = {
+      cityAPI: `/sam/v1/property/by-city`,
+      addressAPI: `/sam/v1/property/by-address`,
+    };
+    const { name, value } = e.target;
+    if (name === "states") {
+      // Store state id ( if available ) into dataToPost useState (It is required for search functionality).
+      if (value) {
+        setDataToPost({ ...dataToPost, state_id: parseInt(value) });
+      } else {
+        delete dataToPost.state_id;
+        delete dataToPost.city_id;
+      }
+      // If input is state then post selected state id to api for getting cities based on selected state.
+      const cityByState = await axios.post(apis.cityAPI, {
+        state_id: parseInt(value),
+      });
+      // Store cities data into searchField useState.
+      setSearchFields({ ...searchFields, cities: cityByState.data });
+    } else if (name === "cities") {
+      // Store city id ( if available ) into dataToPost useState (It is required for search functionality).
+      if (value) {
+        setDataToPost({ ...dataToPost, city_id: parseInt(value) });
+      } else {
+        delete dataToPost.city_id;
+      }
+      // If input is cities then post selected city id to api for getting locality info. based on selected city.
+      // const localityByCity = await axios.post(apis.addressAPI, {
+      //   city_id: parseInt(value),
+      // });
+      // Store locality data into searchField useState.
+      // setSearchFields({ ...searchFields, localities: localityByCity.data });
+    }
+    // else if (name === "localities") {
+    //   // Store locality value ( if available ) into dataToPost useState (It is required for search functionality).
+    //   if (value) {
+    //     setDataToPost({ ...dataToPost, locality: value });
+    //   } else {
+    //     delete dataToPost.locality;
+    //   }
+    // }
+    else if (name === "asset") {
+      // Store asset type id ( if available ) into dataToPost useState (It is required for search functionality).
+      if (value) {
+        setDataToPost({ ...dataToPost, type_id: parseInt(value) });
+      } else {
+        delete dataToPost.type_id;
+      }
+    } else if (name === "bank") {
+      // Store bank id ( if available ) into dataToPost useState (It is required for search functionality).
+      if (value) {
+        setDataToPost({ ...dataToPost, bank_id: parseInt(value) });
+      } else {
+        delete dataToPost.bank_id;
+      }
+    }
   };
 
   let propertyMinPrices = [
@@ -249,14 +309,13 @@ const ViewSearchResults = () => {
           >
             <div className="col-xl-1 col-md-2 col-12 mt-3 mt-md-0">
               <div className="inner-box">
-                {/* <label htmlFor="bank">Bank</label> */}
                 <div className="select-div">
                   <select
-                    name="bank"
-                    id="bank"
+                    name="states"
+                    id="states"
                     className="form-select"
                     aria-label=".form-select-sm example"
-                    //   onChange={onFieldsChange}
+                    onChange={onFieldsChange}
                   >
                     <option value="">State</option>
                     {states ? (
@@ -265,10 +324,10 @@ const ViewSearchResults = () => {
                           `stateFilter-${state.state_id}`
                         );
                         if (
-                          dataFromParams.state_id &&
+                          dataToPost.state_id &&
                           optionToSelectByDefault
                         ) {
-                          if (dataFromParams.state_id === state.state_id) {
+                          if (dataToPost.state_id === state.state_id) {
                             optionToSelectByDefault.selected = true;
                           }
                         }
@@ -291,14 +350,13 @@ const ViewSearchResults = () => {
             </div>
             <div className="col-xl-1 col-md-2 col-12 mt-3 mt-md-0">
               <div className="inner-box">
-                {/* <label htmlFor="bank">Bank</label> */}
                 <div className="select-div">
                   <select
-                    name="bank"
-                    id="bank"
+                    name="cities"
+                    id="cities"
                     className="form-select"
                     aria-label=".form-select-sm example"
-                    //   onChange={onFieldsChange}
+                    onChange={onFieldsChange}
                   >
                     <option value="">City</option>
                     {cities
@@ -307,10 +365,10 @@ const ViewSearchResults = () => {
                             `cityFilter-${city.city_id}`
                           );
                           if (
-                            dataFromParams.city_id &&
+                            dataToPost.city_id &&
                             optionToSelectByDefault
                           ) {
-                            if (dataFromParams.city_id === city.city_id) {
+                            if (dataToPost.city_id === city.city_id) {
                               optionToSelectByDefault.selected = true;
                             }
                           }
@@ -333,11 +391,11 @@ const ViewSearchResults = () => {
               <div className="inner-box">
                 <div className="select-div">
                   <select
-                    name="category"
-                    id="category"
+                    name="asset"
+                    id="asset"
                     className="form-select"
                     aria-label=".form-select-sm example"
-                    //   onChange={onFieldsChange}
+                    onChange={onFieldsChange}
                   >
                     <option value="">Category</option>
                     {assetCategory
@@ -346,10 +404,10 @@ const ViewSearchResults = () => {
                             `categoryFilter-${category.type_id}`
                           );
                           if (
-                            dataFromParams.type_id &&
+                            dataToPost.type_id &&
                             optionToSelectByDefault
                           ) {
-                            if (dataFromParams.type_id === category.type_id) {
+                            if (dataToPost.type_id === category.type_id) {
                               optionToSelectByDefault.selected = true;
                             }
                           }
@@ -370,14 +428,13 @@ const ViewSearchResults = () => {
             </div>
             <div className="col-xl-1 col-md-2 col-12 mt-3 mt-md-0">
               <div className="inner-box">
-                {/* <label htmlFor="bank">Bank</label> */}
                 <div className="select-div">
                   <select
                     name="bank"
                     id="bank"
                     className="form-select"
                     aria-label=".form-select-sm example"
-                    //   onChange={onFieldsChange}
+                    onChange={onFieldsChange}
                   >
                     <option value="">Bank</option>
                     {banks
@@ -619,7 +676,12 @@ const ViewSearchResults = () => {
               </div>
             </div>
             <div className="col-lg-1 col-md-2 col-12 my-3 my-md-0 p-lg-0">
-              <button className="btn btn-primary w-100 text-center">
+              <button
+                onClick={() => {
+                  console.log(dataToPost);
+                }}
+                className="btn btn-primary w-100 text-center"
+              >
                 Search
               </button>
             </div>
