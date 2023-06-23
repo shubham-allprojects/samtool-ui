@@ -59,7 +59,6 @@ const ViewSearchResults = () => {
   };
 
   const getPropertyData = async () => {
-    // console.log(dataToPost);
     setLoading(true);
     paginationRef.current.classList.add("d-none");
     window.scrollTo(0, 0);
@@ -82,7 +81,6 @@ const ViewSearchResults = () => {
       await axios.post(apis.searchAPI, dataToPost).then((res) => {
         // Store Searched results into propertyData useState.
         setPropertyData(res.data);
-        console.log(dataToPost);
         setLoading(false);
         if (res.data) {
           paginationRef.current.classList.remove("d-none");
@@ -669,7 +667,6 @@ const ViewSearchResults = () => {
             <div className="col-lg-1 col-md-2 col-12 my-3 my-md-0 p-lg-0">
               <button
                 onClick={() => {
-                  console.log(dataToPost);
                   getPropertyData();
                 }}
                 className="btn btn-primary w-100 text-center"
