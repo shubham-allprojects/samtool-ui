@@ -712,7 +712,7 @@ const ViewSearchResults = () => {
                               // onClick={(e) => {
                               //   e.stopPropagation();
                               // }}
-                              className="dropdown-menu shadow"
+                              className="dropdown-menu shadow w-100"
                             >
                               <li
                                 onClick={(e) => {
