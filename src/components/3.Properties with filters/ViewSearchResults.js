@@ -25,6 +25,7 @@ const ViewSearchResults = () => {
     banks: "",
   });
   const { states, assetCategory, cities, banks } = searchFields;
+  const [sortText, setSortText] = useState("Relevance");
 
   // It will fetch all states, banks, assets from api and will map those values to respective select fields.
   const getSearchDetails = async () => {
@@ -704,18 +705,47 @@ const ViewSearchResults = () => {
                                 <span className="me-2">
                                   <i class="bi bi-filter-right"></i>
                                 </span>
-                                Sort
+                                Sort by : {sortText}
                               </div>
                             </div>
                             <ul
-                              onClick={(e) => {
-                                e.stopPropagation();
-                              }}
+                              // onClick={(e) => {
+                              //   e.stopPropagation();
+                              // }}
                               className="dropdown-menu shadow w-100"
                             >
-                              <div className="container-fluid p-3">
-                                sort options
-                              </div>
+                              <li
+                                onClick={(e) => {
+                                  setSortText(e.target.textContent);
+                                }}
+                              >
+                                <span class="dropdown-item">Relevance</span>
+                              </li>
+                              <li
+                                onClick={(e) => {
+                                  setSortText(e.target.textContent);
+                                }}
+                              >
+                                <span class="dropdown-item">
+                                  Price - Low to High
+                                </span>
+                              </li>
+                              <li
+                                onClick={(e) => {
+                                  setSortText(e.target.textContent);
+                                }}
+                              >
+                                <span class="dropdown-item">
+                                  Price - High to Low
+                                </span>
+                              </li>
+                              <li
+                                onClick={(e) => {
+                                  setSortText(e.target.textContent);
+                                }}
+                              >
+                                <span class="dropdown-item">Most Recent</span>
+                              </li>
                             </ul>
                           </div>
                         </div>
