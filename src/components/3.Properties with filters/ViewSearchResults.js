@@ -682,7 +682,7 @@ const ViewSearchResults = () => {
                 <div className="col-12 d-flex justify-content-md-end">
                   <div className="container-fluid p-0">
                     <div className="row justify-content-end">
-                      <div className="col-xl-2 col-md-3 col-12">
+                      <div className="" style={{ width: "fit-content" }}>
                         <div className="inner-box">
                           <div className="dropdown">
                             <div
@@ -712,7 +712,7 @@ const ViewSearchResults = () => {
                               // onClick={(e) => {
                               //   e.stopPropagation();
                               // }}
-                              className="dropdown-menu shadow w-100"
+                              className="dropdown-menu shadow"
                             >
                               <li
                                 onClick={(e) => {
