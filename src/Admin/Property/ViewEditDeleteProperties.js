@@ -1165,7 +1165,7 @@ const ViewEditDeleteProperties = () => {
                                     name="completion_date"
                                     defaultValue={
                                       completion_date
-                                        ? completion_date.split(" ")[0]
+                                        ? completion_date.split("T")[0]
                                         : ""
                                     }
                                     disabled
@@ -1191,7 +1191,7 @@ const ViewEditDeleteProperties = () => {
                                     name="purchase_date"
                                     defaultValue={
                                       purchase_date
-                                        ? purchase_date.split(" ")[0]
+                                        ? purchase_date.split("T")[0]
                                         : ""
                                     }
                                     disabled
@@ -1217,7 +1217,7 @@ const ViewEditDeleteProperties = () => {
                                   onChange={onInputChange}
                                   defaultValue={
                                     mortgage_date
-                                      ? mortgage_date.split(" ")[0]
+                                      ? mortgage_date.split("T")[0]
                                       : ""
                                   }
                                   required

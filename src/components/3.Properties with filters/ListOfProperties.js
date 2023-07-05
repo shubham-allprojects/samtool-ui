@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Layout from "../1.CommonLayout/Layout";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -7,6 +7,16 @@ import { useState, useEffect } from "react";
 const ListOfProperties = () => {
   const { data } = useParams();
   const dataFromParams = JSON.parse(decodeURIComponent(data));
+  const localData = JSON.parse(localStorage.getItem("data"));
+  const [enquiryFormData, setEnquiryFormData] = useState({
+    user_id: localData.userId ?? "",
+    property_id: "",
+    enquiry_source: "email",
+    enquiry_comments: "",
+  });
+  const enquiryForm = useRef();
+  const { user_id, property_id, enquiry_source, enquiry_comments } =
+    enquiryFormData;
   const goTo = useNavigate();
   const [selectedPropertyResults, setSelectedPropertyResults] = useState([]);
   const viewCurrentProperty = async (type, city, range) => {
@@ -27,6 +37,19 @@ const ListOfProperties = () => {
         });
     } catch (error) {}
   };
+
+  const onEnquiryFieldsChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "enquiry-comment") {
+      setEnquiryFormData({ ...enquiryFormData, enquiry_comments: value });
+    }
+  };
+
+  const onEnquiryFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(enquiryFormData);
+  };
+
   useEffect(() => {
     if (dataFromParams) {
       viewCurrentProperty(
@@ -40,16 +63,6 @@ const ListOfProperties = () => {
   return (
     <Layout>
       <section className="list-of-properties section-padding min-100vh">
-        {/* {dataFromParams ? (
-          <div>
-            <div>{dataFromParams.type}</div>
-            <div>{dataFromParams.city}</div>
-            <div>{dataFromParams.range}</div>
-          </div>
-        ) : (
-          <></>
-        )} */}
-
         <div className="container-fluid">
           <div className="row p-md-2">
             <div className="card p-3 border-0">
@@ -335,7 +348,7 @@ const ListOfProperties = () => {
                                         <div className="common-btn-font">
                                           {completion_date
                                             ? completion_date
-                                                .split(" ")[0]
+                                                .split("T")[0]
                                                 .split("-")
                                                 .reverse()
                                                 .join("-")
@@ -353,7 +366,7 @@ const ListOfProperties = () => {
                                         <div className="common-btn-font">
                                           {purchase_date
                                             ? purchase_date
-                                                .split(" ")[0]
+                                                .split("T")[0]
                                                 .split("-")
                                                 .reverse()
                                                 .join("-")
@@ -371,7 +384,7 @@ const ListOfProperties = () => {
                                         <div className="common-btn-font">
                                           {mortgage_date
                                             ? mortgage_date
-                                                .split(" ")[0]
+                                                .split("T")[0]
                                                 .split("-")
                                                 .reverse()
                                                 .join("-")
@@ -429,6 +442,31 @@ const ListOfProperties = () => {
                                           </button>
                                         </div>
                                       </div>
+                                      <div className="col-xl-3 col-lg-4 col-6 mt-xl-4 mt-3">
+                                        <small
+                                          className="text-muted"
+                                          style={{ visibility: "hidden" }}
+                                        >
+                                          contact title
+                                        </small>
+                                        <div className="common-btn-font mt-2">
+                                          <button
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#commentModal"
+                                            className="btn btn-sm btn-primary common-btn-font"
+                                            onClick={() => {
+                                              setEnquiryFormData({
+                                                ...enquiryFormData,
+                                                enquiry_comments: "",
+                                                property_id: property_id,
+                                              });
+                                              enquiryForm.current.reset();
+                                            }}
+                                          >
+                                            Contact
+                                          </button>
+                                        </div>
+                                      </div>
                                       <div className="col-12">
                                         <hr />
                                       </div>
@@ -470,6 +508,57 @@ const ListOfProperties = () => {
           </div>
         </div>
       </section>
+      {/* comment modal */}
+      <div
+        className="modal fade"
+        id="commentModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div
+            className="modal-content"
+            style={{ background: "rgba(135, 207, 235, 0.85)" }}
+          >
+            <div className="d-flex p-2 justify-content-end">
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <form
+              ref={enquiryForm}
+              className="modal-body pt-0"
+              onSubmit={onEnquiryFormSubmit}
+            >
+              <textarea
+                onChange={onEnquiryFieldsChange}
+                placeholder="Enter your message here"
+                name="enquiry-comment"
+                id="enquiry-comment"
+                rows="5"
+                className="form-control"
+                style={{ resize: "none" }}
+                required
+              ></textarea>
+              <div className="mt-3">
+                <button
+                  disabled={enquiry_comments ? false : true}
+                  type="submit"
+                  className="btn btn-primary w-100 common-btn-font"
+                >
+                  <span>
+                    <i className="bi bi-send-fill me-2"></i>Send
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 };

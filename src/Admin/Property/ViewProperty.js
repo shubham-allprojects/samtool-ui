@@ -454,7 +454,7 @@ const ViewProperty = ({
                       <small className="text-muted">Completion Date</small>
                       <h5 className="mt-1">
                         {completion_date
-                          .split(" ")[0]
+                          .split("T")[0]
                           .split("-")
                           .reverse()
                           .join("-")}
@@ -468,7 +468,7 @@ const ViewProperty = ({
                       <small className="text-muted">Purchase Date</small>
                       <h5 className="mt-1">
                         {purchase_date
-                          .split(" ")[0]
+                          .split("T")[0]
                           .split("-")
                           .reverse()
                           .join("-")}
@@ -482,7 +482,7 @@ const ViewProperty = ({
                       <small className="text-muted">Mortgage Date</small>
                       <h5 className="mt-1">
                         {mortgage_date
-                          .split(" ")[0]
+                          .split("T")[0]
                           .split("-")
                           .reverse()
                           .join("-")}
