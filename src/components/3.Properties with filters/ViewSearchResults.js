@@ -27,6 +27,16 @@ const ViewSearchResults = () => {
   const { states, assetCategory, cities, banks } = searchFields;
   const [sortText, setSortText] = useState("Relevance");
 
+  const [enquiryFormData, setEnquiryFormData] = useState({
+    user_id: "",
+    property_id: "",
+    enquiry_source: "email",
+    enquiry_comments: "",
+  });
+
+  const { user_id, property_id, enquiry_source, enquiry_comments } =
+    enquiryFormData;
+
   // It will fetch all states, banks, assets from api and will map those values to respective select fields.
   const getSearchDetails = async () => {
     let apis = {
