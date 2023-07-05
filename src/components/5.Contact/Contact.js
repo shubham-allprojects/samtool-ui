@@ -56,17 +56,26 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     console.log(JSON.stringify(formData));
-    // try {
-    //   await axios.post(`/sam/v1/customer-registration/contact-details`, JSON.stringify(formData)).then((res) => {
-    //     if (res.status === 0) {
-    //       e.target.reset();
-    //       toast.success("Message sent successfully");
-    //       setLoading(false);
-    //       setCaptchaVerified(false);
-    //     }
-    //   });
-    // } catch (error) {}
-    setLoading(false);
+    try {
+      await axios
+        .post(
+          `/sam/v1/customer-registration/contact-details`,
+          JSON.stringify(formData)
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.data.status === 0) {
+            e.target.reset();
+            toast.success("Message sent successfully");
+            setLoading(false);
+            setCaptchaVerified(false);
+          } else {
+            setLoading(false);
+          }
+        });
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   const loadCaptchaOnRefresh = () => {
