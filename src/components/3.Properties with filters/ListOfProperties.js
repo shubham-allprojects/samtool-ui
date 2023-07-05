@@ -3,11 +3,14 @@ import Layout from "../1.CommonLayout/Layout";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
+let authHeaders = "";
 const ListOfProperties = () => {
   const { data } = useParams();
   const dataFromParams = JSON.parse(decodeURIComponent(data));
   const localData = JSON.parse(localStorage.getItem("data"));
+  authHeaders = { Authorization: localData.logintoken };
   const [enquiryFormData, setEnquiryFormData] = useState({
     user_id: localData.userId ?? "",
     property_id: "",
@@ -45,9 +48,24 @@ const ListOfProperties = () => {
     }
   };
 
-  const onEnquiryFormSubmit = (e) => {
+  const onEnquiryFormSubmit = async (e) => {
     e.preventDefault();
     console.log(enquiryFormData);
+    try {
+      await axios
+        .post(`/sam/v1/property/auth/property_enquiry`, enquiryFormData, {
+          headers: authHeaders,
+        })
+        .then((res) => {
+          if (res.data.msg === 0) {
+            toast.success("Message sent successfully");
+          } else {
+            toast.error("Internal server error");
+          }
+        });
+    } catch (error) {
+      toast.error("Internal server error");
+    }
   };
 
   useEffect(() => {
