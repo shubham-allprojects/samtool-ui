@@ -713,7 +713,7 @@ const ViewSearchResults = () => {
                                 }}
                               >
                                 <span className="me-2">
-                                  <i class="bi bi-filter-right"></i>
+                                  <i className="bi bi-filter-right"></i>
                                 </span>
                                 Sort by : {sortText}
                               </div>
@@ -729,14 +729,14 @@ const ViewSearchResults = () => {
                                   setSortText(e.target.textContent);
                                 }}
                               >
-                                <span class="dropdown-item">Relevance</span>
+                                <span className="dropdown-item">Relevance</span>
                               </li>
                               <li
                                 onClick={(e) => {
                                   setSortText(e.target.textContent);
                                 }}
                               >
-                                <span class="dropdown-item">
+                                <span className="dropdown-item">
                                   Price - Low to High
                                 </span>
                               </li>
@@ -745,7 +745,7 @@ const ViewSearchResults = () => {
                                   setSortText(e.target.textContent);
                                 }}
                               >
-                                <span class="dropdown-item">
+                                <span className="dropdown-item">
                                   Price - High to Low
                                 </span>
                               </li>
@@ -754,7 +754,7 @@ const ViewSearchResults = () => {
                                   setSortText(e.target.textContent);
                                 }}
                               >
-                                <span class="dropdown-item">Most Recent</span>
+                                <span className="dropdown-item">Most Recent</span>
                               </li>
                             </ul>
                           </div>
