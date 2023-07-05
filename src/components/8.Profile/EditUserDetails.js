@@ -142,9 +142,10 @@ const EditUserDetails = () => {
             } = user_details;
             setUserType(user_type);
             setIdOfState(parseInt(state_id));
+            console.log("user_details", user_details);
             setCommonUserDetails({
               state_id: parseInt(state_id),
-              address: address,
+              address: locality,
               mobile_number: mobile_number,
               locality: locality,
               city: city,
@@ -327,6 +328,7 @@ const EditUserDetails = () => {
       state: state_name,
       email: email,
     };
+    console.log(dataToPost);
     setLoading(true);
     try {
       await axios
