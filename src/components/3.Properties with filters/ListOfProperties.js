@@ -549,6 +549,8 @@ const ListOfProperties = () => {
                   disabled={enquiry_comments ? false : true}
                   type="submit"
                   className="btn btn-primary w-100 common-btn-font"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
                 >
                   <span>
                     <i className="bi bi-send-fill me-2"></i>Send
