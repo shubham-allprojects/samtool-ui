@@ -70,10 +70,12 @@ const Contact = () => {
             setLoading(false);
             setCaptchaVerified(false);
           } else {
+            toast.error("Internal server error")
             setLoading(false);
           }
         });
     } catch (error) {
+      toast.error("Internal server error")
       setLoading(false);
     }
   };
