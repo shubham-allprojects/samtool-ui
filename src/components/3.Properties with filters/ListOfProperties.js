@@ -369,6 +369,9 @@ const ListOfProperties = () => {
                                             ? transformDateFormat(
                                                 completion_date
                                               )
+                                                .split("-")
+                                                .reverse()
+                                                .join("-")
                                             : "Not Available"}
                                         </div>
                                       </div>
@@ -383,6 +386,9 @@ const ListOfProperties = () => {
                                         <div className="common-btn-font">
                                           {purchase_date
                                             ? transformDateFormat(purchase_date)
+                                                .split("-")
+                                                .reverse()
+                                                .join("-")
                                             : "Not Available"}
                                         </div>
                                       </div>
@@ -397,6 +403,9 @@ const ListOfProperties = () => {
                                         <div className="common-btn-font">
                                           {mortgage_date
                                             ? transformDateFormat(mortgage_date)
+                                                .split("-")
+                                                .reverse()
+                                                .join("-")
                                             : "Not Available"}
                                         </div>
                                       </div>
