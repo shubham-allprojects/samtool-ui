@@ -391,7 +391,6 @@ const ViewEditDeleteProperties = () => {
         bank_branch_id,
       } = currentPropertyRes.data;
       setOtherValuesToShow(currentPropertyRes.data);
-      console.log(completion_date, purchase_date, mortgage_date);
 
       setAllDefaultValues(
         bank_id,
@@ -416,9 +415,9 @@ const ViewEditDeleteProperties = () => {
           ready_reckoner_price: parseInt(ready_reckoner_price),
           expected_price: parseInt(expected_price),
           market_price: parseInt(market_price),
-          completion_date: completion_date,
-          purchase_date: purchase_date,
-          mortgage_date: mortgage_date,
+          completion_date: transformDateFormat(completion_date),
+          purchase_date: transformDateFormat(purchase_date),
+          mortgage_date: transformDateFormat(mortgage_date),
           is_sold: parseInt(is_sold),
           status: status,
           territory: territory,
@@ -1166,11 +1165,7 @@ const ViewEditDeleteProperties = () => {
                                     type="date"
                                     id="completion_date"
                                     name="completion_date"
-                                    value={
-                                      completion_date
-                                        ? completion_date.split("T")[0]
-                                        : ""
-                                    }
+                                    value={completion_date}
                                     disabled
                                   />
                                 </div>
@@ -1192,11 +1187,7 @@ const ViewEditDeleteProperties = () => {
                                     type="date"
                                     id="purchase_date"
                                     name="purchase_date"
-                                    value={
-                                      purchase_date
-                                        ? purchase_date.split("T")[0]
-                                        : ""
-                                    }
+                                    value={purchase_date}
                                     disabled
                                   />
                                 </div>
@@ -1218,11 +1209,7 @@ const ViewEditDeleteProperties = () => {
                                   id="mortgage_date"
                                   name="mortgage_date"
                                   onChange={onInputChange}
-                                  value={
-                                    mortgage_date
-                                      ? mortgage_date.split("T")[0]
-                                      : ""
-                                  }
+                                  defaultValue={mortgage_date}
                                   required
                                 />
                               </div>
