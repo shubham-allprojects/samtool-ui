@@ -1,6 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-import { checkLoginSession, rootTitle, transformDateFormat } from "../../CommonFunctions";
+import {
+  checkLoginSession,
+  rootTitle,
+  transformDateFormat,
+} from "../../CommonFunctions";
 import Layout from "../../components/1.CommonLayout/Layout";
 import AdminSideBar from "../AdminSideBar";
 import BreadCrumb from "../BreadCrumb";
@@ -387,6 +391,7 @@ const ViewEditDeleteProperties = () => {
         bank_branch_id,
       } = currentPropertyRes.data;
       setOtherValuesToShow(currentPropertyRes.data);
+      console.log(completion_date, purchase_date, mortgage_date);
 
       setAllDefaultValues(
         bank_id,
@@ -807,7 +812,7 @@ const ViewEditDeleteProperties = () => {
                                     id="type_name"
                                     type="text"
                                     className="form-control"
-                                    defaultValue={type_name}
+                                    value={type_name}
                                     disabled
                                   />
                                 </div>
@@ -965,9 +970,7 @@ const ViewEditDeleteProperties = () => {
                                     id="is_stressed"
                                     type="text"
                                     className="form-control"
-                                    defaultValue={
-                                      is_stressed === 1 ? "Yes" : "No"
-                                    }
+                                    value={is_stressed === 1 ? "Yes" : "No"}
                                     disabled
                                   />
                                 </div>
@@ -989,7 +992,7 @@ const ViewEditDeleteProperties = () => {
                                     id="territory"
                                     name="territory"
                                     className="form-control"
-                                    defaultValue={territory}
+                                    value={territory}
                                     disabled
                                   />
                                 </div>
@@ -1017,7 +1020,7 @@ const ViewEditDeleteProperties = () => {
                                     className="form-control"
                                     id="saleable_area"
                                     name="saleable_area"
-                                    defaultValue={
+                                    value={
                                       saleable_area
                                         ? parseInt(
                                             saleable_area.split("sqrt")[0]
@@ -1045,7 +1048,7 @@ const ViewEditDeleteProperties = () => {
                                     className="form-control"
                                     id="carpet_area"
                                     name="carpet_area"
-                                    defaultValue={
+                                    value={
                                       saleable_area
                                         ? parseInt(carpet_area.split("sqrt")[0])
                                         : ""
@@ -1163,7 +1166,7 @@ const ViewEditDeleteProperties = () => {
                                     type="date"
                                     id="completion_date"
                                     name="completion_date"
-                                    defaultValue={
+                                    value={
                                       completion_date
                                         ? completion_date.split("T")[0]
                                         : ""
@@ -1189,7 +1192,7 @@ const ViewEditDeleteProperties = () => {
                                     type="date"
                                     id="purchase_date"
                                     name="purchase_date"
-                                    defaultValue={
+                                    value={
                                       purchase_date
                                         ? purchase_date.split("T")[0]
                                         : ""
@@ -1215,7 +1218,7 @@ const ViewEditDeleteProperties = () => {
                                   id="mortgage_date"
                                   name="mortgage_date"
                                   onChange={onInputChange}
-                                  defaultValue={
+                                  value={
                                     mortgage_date
                                       ? mortgage_date.split("T")[0]
                                       : ""
@@ -1319,7 +1322,7 @@ const ViewEditDeleteProperties = () => {
                                     name="flat_number"
                                     type="number"
                                     className="form-control"
-                                    defaultValue={flat_number}
+                                    value={flat_number}
                                     disabled
                                   />
                                 </div>
@@ -1341,7 +1344,7 @@ const ViewEditDeleteProperties = () => {
                                     name="building_name"
                                     type="text"
                                     className="form-control"
-                                    defaultValue={building_name}
+                                    value={building_name}
                                     disabled
                                   />
                                 </div>
@@ -1363,7 +1366,7 @@ const ViewEditDeleteProperties = () => {
                                     name="society_name"
                                     type="text"
                                     className="form-control"
-                                    defaultValue={society_name}
+                                    value={society_name}
                                     disabled
                                   />
                                 </div>
@@ -1385,7 +1388,7 @@ const ViewEditDeleteProperties = () => {
                                     name="plot_number"
                                     type="number"
                                     className="form-control"
-                                    defaultValue={plot_number}
+                                    value={plot_number}
                                     disabled
                                   />
                                 </div>
@@ -1407,7 +1410,7 @@ const ViewEditDeleteProperties = () => {
                                     name="locality"
                                     type="text"
                                     className="form-control"
-                                    defaultValue={locality}
+                                    value={locality}
                                     disabled
                                   />
                                 </div>
@@ -1430,7 +1433,7 @@ const ViewEditDeleteProperties = () => {
                                     name="landmark"
                                     type="text"
                                     className="form-control"
-                                    defaultValue={landmark}
+                                    value={landmark}
                                     disabled
                                   />
                                 </div>
@@ -1452,7 +1455,7 @@ const ViewEditDeleteProperties = () => {
                                     id="state"
                                     name="state"
                                     className="form-control"
-                                    defaultValue={state_name}
+                                    value={state_name}
                                     disabled
                                   />
                                 </div>
@@ -1473,7 +1476,7 @@ const ViewEditDeleteProperties = () => {
                                     id="city"
                                     name="city"
                                     className="form-control"
-                                    defaultValue={city_name}
+                                    value={city_name}
                                     disabled
                                   />
                                 </div>
@@ -1494,7 +1497,7 @@ const ViewEditDeleteProperties = () => {
                                     type="text"
                                     id="zip"
                                     name="zip"
-                                    defaultValue={zip}
+                                    value={zip}
                                     disabled
                                     className="form-control"
                                   ></input>
