@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { transformDateFormat } from "../../CommonFunctions";
 
 let authHeaders = "";
 const ListOfProperties = () => {
@@ -365,11 +366,9 @@ const ListOfProperties = () => {
                                         </small>
                                         <div className="common-btn-font">
                                           {completion_date
-                                            ? completion_date
-                                                .split("T")[0]
-                                                .split("-")
-                                                .reverse()
-                                                .join("-")
+                                            ? transformDateFormat(
+                                                completion_date
+                                              )
                                             : "Not Available"}
                                         </div>
                                       </div>
@@ -383,11 +382,7 @@ const ListOfProperties = () => {
                                         </small>
                                         <div className="common-btn-font">
                                           {purchase_date
-                                            ? purchase_date
-                                                .split("T")[0]
-                                                .split("-")
-                                                .reverse()
-                                                .join("-")
+                                            ? transformDateFormat(purchase_date)
                                             : "Not Available"}
                                         </div>
                                       </div>
@@ -401,11 +396,7 @@ const ListOfProperties = () => {
                                         </small>
                                         <div className="common-btn-font">
                                           {mortgage_date
-                                            ? mortgage_date
-                                                .split("T")[0]
-                                                .split("-")
-                                                .reverse()
-                                                .join("-")
+                                            ? transformDateFormat(mortgage_date)
                                             : "Not Available"}
                                         </div>
                                       </div>

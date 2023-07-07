@@ -43,3 +43,12 @@ export const checkLoginSession = async (token) => {
     }
   } catch (error) {}
 };
+
+export const transformDateFormat = (dateString) => {
+  const date = new Date(dateString);
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const year = date.getUTCFullYear();
+  let formattedDate = `${day}-${month}-${year}`;
+  return formattedDate;
+};

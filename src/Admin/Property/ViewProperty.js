@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import axios from "axios";
+import { transformDateFormat } from "../../CommonFunctions";
 let cnt = 0;
 let authHeader = "";
 
@@ -453,11 +454,7 @@ const ViewProperty = ({
                     <div className="col-md-4">
                       <small className="text-muted">Completion Date</small>
                       <h5 className="mt-1">
-                        {completion_date
-                          .split("T")[0]
-                          .split("-")
-                          .reverse()
-                          .join("-")}
+                        {transformDateFormat(completion_date)}
                       </h5>
                     </div>
                   ) : (
@@ -467,11 +464,7 @@ const ViewProperty = ({
                     <div className="col-md-4">
                       <small className="text-muted">Purchase Date</small>
                       <h5 className="mt-1">
-                        {purchase_date
-                          .split("T")[0]
-                          .split("-")
-                          .reverse()
-                          .join("-")}
+                        {transformDateFormat(purchase_date)}
                       </h5>
                     </div>
                   ) : (
@@ -481,11 +474,7 @@ const ViewProperty = ({
                     <div className="col-md-4">
                       <small className="text-muted">Mortgage Date</small>
                       <h5 className="mt-1">
-                        {mortgage_date
-                          .split("T")[0]
-                          .split("-")
-                          .reverse()
-                          .join("-")}
+                        {transformDateFormat(mortgage_date)}
                       </h5>
                     </div>
                   ) : (
