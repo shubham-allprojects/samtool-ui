@@ -49,6 +49,6 @@ export const transformDateFormat = (dateString) => {
   const day = String(date.getUTCDate()).padStart(2, "0");
   const month = String(date.getUTCMonth() + 1).padStart(2, "0");
   const year = date.getUTCFullYear();
-  let formattedDate = `${day}-${month}-${year}`;
+  let formattedDate = `${year}-${month}-${day}`;
   return formattedDate;
 };
