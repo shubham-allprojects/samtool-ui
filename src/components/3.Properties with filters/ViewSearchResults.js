@@ -990,7 +990,9 @@ const ViewSearchResults = () => {
                                           type: category,
                                           city: city_name,
                                           range: range,
-                                          bank_id: bank_id ? bank_id : "",
+                                          bank_id: dataToPost.bank_id
+                                            ? dataToPost.bank_id
+                                            : "",
                                         })
                                       )}`,
                                     }}
