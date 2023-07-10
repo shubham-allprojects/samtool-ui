@@ -1019,13 +1019,7 @@ const ViewEditDeleteProperties = () => {
                                     className="form-control"
                                     id="saleable_area"
                                     name="saleable_area"
-                                    value={
-                                      saleable_area
-                                        ? parseInt(
-                                            saleable_area.split("sqrt")[0]
-                                          )
-                                        : ""
-                                    }
+                                    value={saleable_area ? saleable_area : ""}
                                     disabled
                                   />
                                 </div>
@@ -1047,11 +1041,7 @@ const ViewEditDeleteProperties = () => {
                                     className="form-control"
                                     id="carpet_area"
                                     name="carpet_area"
-                                    value={
-                                      saleable_area
-                                        ? parseInt(carpet_area.split("sqrt")[0])
-                                        : ""
-                                    }
+                                    value={saleable_area ? carpet_area : ""}
                                     disabled
                                   />
                                 </div>
