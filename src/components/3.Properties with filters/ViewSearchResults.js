@@ -78,11 +78,11 @@ const ViewSearchResults = () => {
           setPageCount(Math.ceil(res.data.length / batch_size));
         }
       });
+      console.log(dataToPost);
       // Post data and get Searched result from response.
       await axios.post(apis.searchAPI, dataToPost).then((res) => {
         // Store Searched results into propertyData useState.
         setPropertyData(res.data);
-        console.log(res.data);
         setLoading(false);
         if (res.data) {
           paginationRef.current.classList.remove("d-none");
@@ -196,13 +196,21 @@ const ViewSearchResults = () => {
     50000,
   ];
 
-  const [formData, setFormData] = useState({
-    minPriceValue: "",
-    maxPriceValue: "",
-    minAreaValue: "",
-    maxAreaValue: "",
-    propertyAge: "",
-  });
+  let minValueOfPrice = propertyMinPrices[0];
+  let maxValueOfPrice = maxPricesOfProperty[maxPricesOfProperty.length - 1];
+  let minValueOfArea = propertyMinArea[0];
+  let maxValueOfArea = maxAreaOfProperty[maxAreaOfProperty.length - 1];
+
+  const [moreFiltersDataForFiltersCount, setMoreFiltersDataForFiltersCount] =
+    useState({
+      minPriceValue: "",
+      maxPriceValue: "",
+      minAreaValue: "",
+      maxAreaValue: "",
+      propertyAge: "",
+      titleClearValue: "",
+      territoryValue: "",
+    });
 
   const {
     minPriceValue,
@@ -210,18 +218,20 @@ const ViewSearchResults = () => {
     minAreaValue,
     maxAreaValue,
     propertyAge,
-  } = formData;
+    titleClearValue,
+    territoryValue,
+  } = moreFiltersDataForFiltersCount;
 
-  const [filtersCount, setFiltersCount] = useState(2);
+  const [filtersCount, setFiltersCount] = useState(0);
 
   const [propertyMaxPrices, setPropertyMaxPrices] =
     useState(maxPricesOfProperty);
 
   const [propertyMaxArea, setPropertyMaxArea] = useState(maxAreaOfProperty);
 
-  const onInputChange = (e) => {
+  const onMoreFiltersInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "minPrice") {
+    if (name === "min_price") {
       if (value) {
         if (!minPriceValue && !maxPriceValue) {
           setFiltersCount(filtersCount + 1);
@@ -229,27 +239,55 @@ const ViewSearchResults = () => {
         let intValue = parseInt(value);
         let indexOfValue = maxPricesOfProperty.indexOf(intValue);
         setPropertyMaxPrices(maxPricesOfProperty.slice(indexOfValue + 1));
-        setFormData({ ...formData, minPriceValue: value });
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          minPriceValue: value,
+        });
+
+        setDataToPost({ ...dataToPost, [name]: value });
       } else {
-        setFormData({ ...formData, minPriceValue: "" });
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          minPriceValue: "",
+        });
         setPropertyMaxPrices(maxPricesOfProperty);
         if (!maxPriceValue) {
           setFiltersCount(filtersCount - 1);
         }
+
+        if (dataToPost.max_price) {
+          setDataToPost({ ...dataToPost, [name]: String(minValueOfPrice) });
+        } else {
+          delete dataToPost.min_price;
+        }
       }
-    } else if (name === "maxPrice") {
+    } else if (name === "max_price") {
       if (value) {
         if (!minPriceValue && !maxPriceValue) {
           setFiltersCount(filtersCount + 1);
         }
-        setFormData({ ...formData, maxPriceValue: value });
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          maxPriceValue: value,
+        });
+
+        setDataToPost({ ...dataToPost, [name]: value });
       } else {
-        setFormData({ ...formData, maxPriceValue: "" });
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          maxPriceValue: "",
+        });
         if (!minPriceValue) {
           setFiltersCount(filtersCount - 1);
         }
+
+        if (dataToPost.min_price) {
+          setDataToPost({ ...dataToPost, [name]: String(maxPriceValue) });
+        } else {
+          delete dataToPost.max_price;
+        }
       }
-    } else if (name === "minArea") {
+    } else if (name === "min_area") {
       if (value) {
         if (!minAreaValue && !maxAreaValue) {
           setFiltersCount(filtersCount + 1);
@@ -257,35 +295,89 @@ const ViewSearchResults = () => {
         let intValue = parseInt(value);
         let indexOfValue = maxAreaOfProperty.indexOf(intValue);
         setPropertyMaxArea(maxAreaOfProperty.slice(indexOfValue + 1));
-        setFormData({ ...formData, minAreaValue: value });
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          minAreaValue: value,
+        });
       } else {
-        setFormData({ ...formData, minAreaValue: "" });
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          minAreaValue: "",
+        });
         setPropertyMaxArea(maxAreaOfProperty);
         if (!maxAreaValue) {
           setFiltersCount(filtersCount - 1);
         }
       }
-    } else if (name === "maxArea") {
+    } else if (name === "max_area") {
       if (value) {
         if (!minAreaValue && !maxAreaValue) {
           setFiltersCount(filtersCount + 1);
         }
-        setFormData({ ...formData, maxAreaValue: value });
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          maxAreaValue: value,
+        });
       } else {
-        setFormData({ ...formData, maxAreaValue: "" });
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          maxAreaValue: "",
+        });
         if (!minAreaValue) {
           setFiltersCount(filtersCount - 1);
         }
       }
     } else if (name === "propertyAge") {
       if (value) {
-        setFormData({ ...formData, propertyAge: value });
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          propertyAge: value,
+        });
         if (!propertyAge) {
           setFiltersCount(filtersCount + 1);
         }
       } else {
-        setFormData({ ...formData, propertyAge: "" });
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          propertyAge: "",
+        });
         if (propertyAge) {
+          setFiltersCount(filtersCount - 1);
+        }
+      }
+    } else if (name === "title_clear_property") {
+      if (value) {
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          titleClearValue: value,
+        });
+        if (!titleClearValue) {
+          setFiltersCount(filtersCount + 1);
+        }
+      } else {
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          titleClearValue: "",
+        });
+        if (titleClearValue) {
+          setFiltersCount(filtersCount - 1);
+        }
+      }
+    } else if (name === "territory") {
+      if (value) {
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          territoryValue: value,
+        });
+        if (!territoryValue) {
+          setFiltersCount(filtersCount + 1);
+        }
+      } else {
+        setMoreFiltersDataForFiltersCount({
+          ...moreFiltersDataForFiltersCount,
+          territoryValue: "",
+        });
+        if (territoryValue) {
           setFiltersCount(filtersCount - 1);
         }
       }
@@ -486,11 +578,11 @@ const ViewSearchResults = () => {
                           <div className="inner-box">
                             <div className="select-div">
                               <select
-                                id="minPrice"
-                                name="minPrice"
+                                id="min_price"
+                                name="min_price"
                                 className="form-select form-select-sm"
                                 aria-label=".form-select-sm example"
-                                onChange={onInputChange}
+                                onChange={onMoreFiltersInputChange}
                               >
                                 <option value="">Min</option>
                                 {propertyMinPrices.map((price, Index) => {
@@ -508,11 +600,11 @@ const ViewSearchResults = () => {
                           <div className="inner-box">
                             <div className="select-div">
                               <select
-                                id="maxPrice"
-                                name="maxPrice"
+                                id="max_price"
+                                name="max_price"
                                 className="form-select form-select-sm"
                                 aria-label=".form-select-sm example"
-                                onChange={onInputChange}
+                                onChange={onMoreFiltersInputChange}
                               >
                                 <option value="">Max</option>
                                 {propertyMaxPrices.map((price, Index) => {
@@ -543,8 +635,9 @@ const ViewSearchResults = () => {
                                 name="title_clear_property"
                                 className="form-select form-select-sm"
                                 aria-label=".form-select-sm example"
-                                onChange={onInputChange}
+                                onChange={onMoreFiltersInputChange}
                               >
+                                <option value=""></option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                               </select>
@@ -565,9 +658,10 @@ const ViewSearchResults = () => {
                                 name="territory"
                                 className="form-select form-select-sm"
                                 aria-label=".form-select-sm example"
-                                onChange={onInputChange}
+                                onChange={onMoreFiltersInputChange}
                               >
-                                <option value="Gram Panchayat Limit">
+                                <option value=""></option>
+                                <option value="gram panchayat limit">
                                   Gram Panchayat Limit
                                 </option>
                               </select>
@@ -589,11 +683,11 @@ const ViewSearchResults = () => {
                           <div className="inner-box">
                             <div className="select-div">
                               <select
-                                id="minArea"
-                                name="minArea"
+                                id="min_area"
+                                name="min_area"
                                 className="form-select form-select-sm"
                                 aria-label=".form-select-sm example"
-                                onChange={onInputChange}
+                                onChange={onMoreFiltersInputChange}
                               >
                                 <option value="">Min</option>
                                 {propertyMinArea.map((area, Index) => {
@@ -611,11 +705,11 @@ const ViewSearchResults = () => {
                           <div className="inner-box">
                             <div className="select-div">
                               <select
-                                id="maxArea"
-                                name="maxArea"
+                                id="max_area"
+                                name="max_area"
                                 className="form-select form-select-sm"
                                 aria-label=".form-select-sm example"
-                                onChange={onInputChange}
+                                onChange={onMoreFiltersInputChange}
                               >
                                 <option value="">Max</option>
                                 {propertyMaxArea.map((area, Index) => {
@@ -648,7 +742,7 @@ const ViewSearchResults = () => {
                                 name="propertyAge"
                                 className="form-select form-select-sm"
                                 aria-label=".form-select-sm example"
-                                onChange={onInputChange}
+                                onChange={onMoreFiltersInputChange}
                               >
                                 <option value=""></option>
                                 <option value="1">Less than 1 year</option>
@@ -856,7 +950,7 @@ const ViewSearchResults = () => {
                                 <div className="text-capitalize">
                                   <span>Carpet Area: </span>
                                   <span className="common-btn-font">
-                                    {carpet_area}
+                                    {carpet_area} (sq. ft.)
                                   </span>
                                 </div>
                               ) : (
