@@ -82,6 +82,7 @@ const ViewSearchResults = () => {
       await axios.post(apis.searchAPI, dataToPost).then((res) => {
         // Store Searched results into propertyData useState.
         setPropertyData(res.data);
+        console.log(res.data);
         setLoading(false);
         if (res.data) {
           paginationRef.current.classList.remove("d-none");
@@ -744,7 +745,9 @@ const ViewSearchResults = () => {
                                   setSortText(e.target.textContent);
                                 }}
                               >
-                                <span className="dropdown-item">Most Recent</span>
+                                <span className="dropdown-item">
+                                  Most Recent
+                                </span>
                               </li>
                             </ul>
                           </div>
@@ -772,8 +775,16 @@ const ViewSearchResults = () => {
                   </div>
                 ) : (
                   propertyData.map((property, Index) => {
-                    const { count, category, city_name, market_value, range } =
-                      property;
+                    const {
+                      count,
+                      category,
+                      city_name,
+                      market_value,
+                      range,
+                      bank_id,
+                      carpet_area,
+                      bank_name,
+                    } = property;
                     return (
                       <div className="col-xl-3 col-lg-4 col-md-6" key={Index}>
                         <div className="property-card-wrapper">
@@ -830,6 +841,28 @@ const ViewSearchResults = () => {
                                 <></>
                               )}
 
+                              {bank_name ? (
+                                <div className="text-capitalize">
+                                  <span>Bank: </span>
+                                  <span className="common-btn-font">
+                                    {bank_name}
+                                  </span>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+
+                              {carpet_area ? (
+                                <div className="text-capitalize">
+                                  <span>Carpet Area: </span>
+                                  <span className="common-btn-font">
+                                    {carpet_area}
+                                  </span>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+
                               {range ? (
                                 <div className="text-capitalize">
                                   <span>Range: </span>
@@ -863,6 +896,7 @@ const ViewSearchResults = () => {
                                           type: category,
                                           city: city_name,
                                           range: range,
+                                          bank_id: bank_id ? bank_id : "",
                                         })
                                       )}`,
                                     }}

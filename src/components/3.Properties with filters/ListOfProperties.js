@@ -23,7 +23,7 @@ const ListOfProperties = () => {
     enquiryFormData;
   const goTo = useNavigate();
   const [selectedPropertyResults, setSelectedPropertyResults] = useState([]);
-  const viewCurrentProperty = async (type, city, range) => {
+  const viewCurrentProperty = async (type, city, range, bank_id) => {
     let minValueOfproperty = parseInt(range.split("-")[0]);
     let maxValueOfproperty = parseInt(range.split("-")[1]);
     let dataToPost = {
@@ -32,6 +32,9 @@ const ListOfProperties = () => {
       minvalue: minValueOfproperty,
       maxvalue: maxValueOfproperty,
     };
+    if (bank_id) {
+      dataToPost.bank_id = bank_id;
+    }
     try {
       await axios
         .post(`/sam/v1/property/view-properties`, dataToPost)
@@ -74,7 +77,8 @@ const ListOfProperties = () => {
       viewCurrentProperty(
         dataFromParams.type,
         dataFromParams.city,
-        dataFromParams.range
+        dataFromParams.range,
+        dataFromParams.bank_id
       );
     }
   }, []);
