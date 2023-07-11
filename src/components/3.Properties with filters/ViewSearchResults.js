@@ -196,10 +196,10 @@ const ViewSearchResults = () => {
     50000,
   ];
 
-  const maxPrice = String(Math.max(...maxPricesOfProperty));
-  const minPrice = String(Math.min(...propertyMinPrices));
-  const maxArea = String(Math.max(...maxAreaOfProperty));
-  const minArea = String(Math.min(...propertyMinArea));
+  const maxPrice = "550000000";
+  const minPrice = "10000000";
+  const maxArea = "100";
+  const minArea = "50000";
 
   const [moreFiltersDataForFiltersCount, setMoreFiltersDataForFiltersCount] =
     useState({
@@ -362,6 +362,7 @@ const ViewSearchResults = () => {
       }
     } else if (name === "title_clear_property") {
       if (value) {
+        setDataToPost({ ...dataToPost, [name]: parseInt(value) });
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
           titleClearValue: value,
@@ -370,6 +371,7 @@ const ViewSearchResults = () => {
           setFiltersCount(filtersCount + 1);
         }
       } else {
+        delete dataToPost.title_clear_property;
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
           titleClearValue: "",
@@ -380,6 +382,7 @@ const ViewSearchResults = () => {
       }
     } else if (name === "territory") {
       if (value) {
+        setDataToPost({ ...dataToPost, [name]: value });
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
           territoryValue: value,
@@ -388,6 +391,7 @@ const ViewSearchResults = () => {
           setFiltersCount(filtersCount + 1);
         }
       } else {
+        delete dataToPost.territory;
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
           territoryValue: "",
@@ -682,6 +686,9 @@ const ViewSearchResults = () => {
                                 <option value=""></option>
                                 <option value="gram panchayat limit">
                                   Gram Panchayat Limit
+                                </option>
+                                <option value="corporate limit">
+                                  Corporate limit
                                 </option>
                               </select>
                             </div>
