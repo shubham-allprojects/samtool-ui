@@ -236,7 +236,7 @@ const ViewSearchResults = () => {
         if (!minPriceValue && !maxPriceValue) {
           setFiltersCount(filtersCount + 1);
         }
-        let intValue = parseInt(value);
+        // let intValue = parseInt(value);
         // let indexOfValue = maxPricesOfProperty.indexOf(intValue);
         // setPropertyMaxPrices(maxPricesOfProperty.slice(indexOfValue + 1));
         let allOptions = document.querySelectorAll(".max-price-options");
