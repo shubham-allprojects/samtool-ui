@@ -237,17 +237,31 @@ const ViewSearchResults = () => {
           setFiltersCount(filtersCount + 1);
         }
         let intValue = parseInt(value);
-        let indexOfValue = maxPricesOfProperty.indexOf(intValue);
-        setPropertyMaxPrices(maxPricesOfProperty.slice(indexOfValue + 1));
+        // let indexOfValue = maxPricesOfProperty.indexOf(intValue);
+        // setPropertyMaxPrices(maxPricesOfProperty.slice(indexOfValue + 1));
+        let allOptions = document.querySelectorAll(".max-price-options");
+        allOptions.forEach((option) => {
+          if (parseInt(value) >= parseInt(option.value)) {
+            option.setAttribute("disabled", true);
+            option.nextElementSibling.selected = true;
+            setDataToPost({
+              ...dataToPost,
+              [name]: value,
+              max_price: option.nextElementSibling.value,
+            });
+          } else {
+            option.removeAttribute("disabled");
+          }
+        });
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
           minPriceValue: value,
         });
-        if (dataToPost.max_price) {
-          setDataToPost({ ...dataToPost, [name]: value });
-        } else {
-          setDataToPost({ ...dataToPost, [name]: value, max_price: maxPrice });
-        }
+        // if (dataToPost.max_price) {
+        //   setDataToPost({ ...dataToPost, [name]: value });
+        // } else {
+        //   setDataToPost({ ...dataToPost, [name]: value, max_price: maxPrice });
+        // }
       } else {
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
@@ -258,15 +272,26 @@ const ViewSearchResults = () => {
           setFiltersCount(filtersCount - 1);
         }
 
-        if (dataToPost.max_price) {
-          setDataToPost({
-            ...dataToPost,
-            [name]: minPrice,
-          });
-        } else {
-          delete dataToPost.min_price;
-          delete dataToPost.max_price;
-        }
+        let allOptions = document.querySelectorAll(".max-price-options");
+        allOptions.forEach((option) => {
+          option.removeAttribute("disabled");
+          if (!option.value) {
+            console.log(option);
+            option.selected = true;
+          }
+        });
+
+        delete dataToPost.min_price;
+        delete dataToPost.max_price;
+        // if (dataToPost.max_price) {
+        //   setDataToPost({
+        //     ...dataToPost,
+        //     [name]: minPrice,
+        //   });
+        // } else {
+        //   delete dataToPost.min_price;
+        //   delete dataToPost.max_price;
+        // }
       }
     } else if (name === "max_price") {
       if (value) {
@@ -297,10 +322,11 @@ const ViewSearchResults = () => {
             ...dataToPost,
             [name]: maxPrice,
           });
-        } else {
-          delete dataToPost.max_price;
-          delete dataToPost.min_price;
         }
+        // else {
+        //   delete dataToPost.max_price;
+        //   delete dataToPost.min_price;
+        // }
       }
     } else if (name === "min_area") {
       if (value) {
@@ -625,11 +651,13 @@ const ViewSearchResults = () => {
                                 aria-label=".form-select-sm example"
                                 onChange={onMoreFiltersInputChange}
                               >
-                                <option value="">Max</option>
+                                <option className="max-price-options" value="">
+                                  Max
+                                </option>
                                 {propertyMaxPrices.map((price, Index) => {
                                   return (
                                     <option
-                                      id={price}
+                                      className="max-price-options"
                                       value={price}
                                       key={Index}
                                     >
