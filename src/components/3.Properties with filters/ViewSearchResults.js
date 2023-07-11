@@ -869,16 +869,8 @@ const ViewSearchResults = () => {
                   </div>
                 ) : (
                   propertyData.map((property, Index) => {
-                    const {
-                      count,
-                      category,
-                      city_name,
-                      market_value,
-                      range,
-                      bank_id,
-                      carpet_area,
-                      bank_name,
-                    } = property;
+                    const { count, category, city_name, market_value, range } =
+                      property;
                     return (
                       <div className="col-xl-3 col-lg-4 col-md-6" key={Index}>
                         <div className="property-card-wrapper">
@@ -929,28 +921,6 @@ const ViewSearchResults = () => {
                                     {`${(
                                       parseInt(market_value) / 10000000
                                     ).toFixed(2)} Cr.`}
-                                  </span>
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-
-                              {bank_name ? (
-                                <div className="text-capitalize">
-                                  <span>Bank: </span>
-                                  <span className="common-btn-font">
-                                    {bank_name}
-                                  </span>
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-
-                              {carpet_area ? (
-                                <div className="text-capitalize">
-                                  <span>Carpet Area: </span>
-                                  <span className="common-btn-font">
-                                    {carpet_area} (sq. ft.)
                                   </span>
                                 </div>
                               ) : (
