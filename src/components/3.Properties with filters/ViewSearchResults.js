@@ -198,8 +198,8 @@ const ViewSearchResults = () => {
 
   const maxPrice = "550000000";
   const minPrice = "10000000";
-  const maxArea = "100";
-  const minArea = "50000";
+  const maxArea = "50000";
+  const minArea = "100";
 
   const [moreFiltersDataForFiltersCount, setMoreFiltersDataForFiltersCount] =
     useState({
@@ -333,14 +333,38 @@ const ViewSearchResults = () => {
         if (!minAreaValue && !maxAreaValue) {
           setFiltersCount(filtersCount + 1);
         }
-        let intValue = parseInt(value);
-        let indexOfValue = maxAreaOfProperty.indexOf(intValue);
-        setPropertyMaxArea(maxAreaOfProperty.slice(indexOfValue + 1));
+        // let intValue = parseInt(value);
+        // let indexOfValue = maxAreaOfProperty.indexOf(intValue);
+        // setPropertyMaxArea(maxAreaOfProperty.slice(indexOfValue + 1));
+        let allOptions = document.querySelectorAll(".max-carpet-area-options");
+        allOptions.forEach((option) => {
+          if (parseInt(value) >= parseInt(option.value)) {
+            option.setAttribute("disabled", true);
+            option.nextElementSibling.selected = true;
+            setDataToPost({
+              ...dataToPost,
+              [name]: value,
+              max_area: option.nextElementSibling.value,
+            });
+          } else {
+            option.removeAttribute("disabled");
+          }
+        });
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
           minAreaValue: value,
         });
       } else {
+        let allOptions = document.querySelectorAll(".max-carpet-area-options");
+        allOptions.forEach((option) => {
+          option.removeAttribute("disabled");
+          if (!option.value) {
+            console.log(option);
+            option.selected = true;
+          }
+        });
+        delete dataToPost.min_area;
+        delete dataToPost.max_area;
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
           minAreaValue: "",
@@ -359,6 +383,11 @@ const ViewSearchResults = () => {
           ...moreFiltersDataForFiltersCount,
           maxAreaValue: value,
         });
+        if (dataToPost.min_area) {
+          setDataToPost({ ...dataToPost, [name]: value });
+        } else {
+          setDataToPost({ ...dataToPost, [name]: value, min_area: minArea });
+        }
       } else {
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
@@ -366,6 +395,12 @@ const ViewSearchResults = () => {
         });
         if (!minAreaValue) {
           setFiltersCount(filtersCount - 1);
+        }
+        if (dataToPost.min_area) {
+          setDataToPost({
+            ...dataToPost,
+            [name]: maxArea,
+          });
         }
       }
     } else if (name === "propertyAge") {
@@ -765,10 +800,19 @@ const ViewSearchResults = () => {
                                 aria-label=".form-select-sm example"
                                 onChange={onMoreFiltersInputChange}
                               >
-                                <option value="">Max</option>
+                                <option
+                                  className="max-carpet-area-options"
+                                  value=""
+                                >
+                                  Max
+                                </option>
                                 {propertyMaxArea.map((area, Index) => {
                                   return (
-                                    <option value={area} key={Index}>
+                                    <option
+                                      className="max-carpet-area-options"
+                                      value={area}
+                                      key={Index}
+                                    >
                                       {area}
                                     </option>
                                   );
