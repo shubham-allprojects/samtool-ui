@@ -454,7 +454,10 @@ const ViewProperty = ({
                     <div className="col-md-4">
                       <small className="text-muted">Completion Date</small>
                       <h5 className="mt-1">
-                        {transformDateFormat(completion_date).split("-").reverse().join("-")}
+                        {transformDateFormat(completion_date)
+                          .split("-")
+                          .reverse()
+                          .join("-")}
                       </h5>
                     </div>
                   ) : (
@@ -464,7 +467,10 @@ const ViewProperty = ({
                     <div className="col-md-4">
                       <small className="text-muted">Purchase Date</small>
                       <h5 className="mt-1">
-                        {transformDateFormat(purchase_date).split("-").reverse().join("-")}
+                        {transformDateFormat(purchase_date)
+                          .split("-")
+                          .reverse()
+                          .join("-")}
                       </h5>
                     </div>
                   ) : (
@@ -474,7 +480,10 @@ const ViewProperty = ({
                     <div className="col-md-4">
                       <small className="text-muted">Mortgage Date</small>
                       <h5 className="mt-1">
-                        {transformDateFormat(mortgage_date).split("-").reverse().join("-")}
+                        {transformDateFormat(mortgage_date)
+                          .split("-")
+                          .reverse()
+                          .join("-")}
                       </h5>
                     </div>
                   ) : (
@@ -650,25 +659,25 @@ const ViewProperty = ({
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-xl">
-          <div className="modal-content bg-dark text-white">
-            <div className="modal-header">
+        <div className="modal-dialog modal-fullscreen">
+          <div className="modal-content">
+            <div className="modal-header border-0 pb-0">
               <h5 className="modal-title" id="exampleModalLabel">
                 {fileName ? fileName : ""}
               </h5>
               <button
                 type="button"
-                className="btn btn-dark"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               >
-                <i className="bi bi-x-lg"></i>
+                {/* <i className="bi bi-x-lg"></i> */}
               </button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body pt-0">
               <div className="container-fluid">
                 <div className="row justify-content-center">
-                  <div className="col-12 p-0" style={{ height: "65vh" }}>
+                  <div className="col-12 p-0 min-100vh">
                     {srcOfFile ? (
                       fileExtension === "jpg" ||
                       fileExtension === "jpeg" ||
@@ -680,13 +689,6 @@ const ViewProperty = ({
                           style={{ objectFit: "contain" }}
                         />
                       ) : (
-                        // <object
-                        //   className="w-100 h-100"
-                        //   data={srcOfFile}
-                        //   aria-labelledby="property-documents"
-                        //   frameborder="0"
-                        // ></object>
-
                         <DocViewer
                           documents={[{ uri: srcOfFile }]}
                           pluginRenderers={DocViewerRenderers}
