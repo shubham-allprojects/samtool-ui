@@ -178,12 +178,12 @@ const ViewSearchResults = () => {
     }
   };
 
-  let propertyMinPrices = [
+  const propertyMinPrices = [
     10000000, 50000000, 100000000, 150000000, 200000000, 250000000, 300000000,
     350000000, 400000000, 450000000, 500000000,
   ];
 
-  let maxPricesOfProperty = [
+  const maxPricesOfProperty = [
     10000000, 50000000, 100000000, 150000000, 200000000, 250000000, 300000000,
     350000000, 400000000, 450000000, 500000000, 550000000,
   ];
@@ -196,10 +196,10 @@ const ViewSearchResults = () => {
     50000,
   ];
 
-  let minValueOfPrice = propertyMinPrices[0];
-  let maxValueOfPrice = maxPricesOfProperty[maxPricesOfProperty.length - 1];
-  let minValueOfArea = propertyMinArea[0];
-  let maxValueOfArea = maxAreaOfProperty[maxAreaOfProperty.length - 1];
+  const maxPrice = String(Math.max(...maxPricesOfProperty));
+  const minPrice = String(Math.min(...propertyMinPrices));
+  const maxArea = String(Math.max(...maxAreaOfProperty));
+  const minArea = String(Math.min(...propertyMinArea));
 
   const [moreFiltersDataForFiltersCount, setMoreFiltersDataForFiltersCount] =
     useState({
@@ -243,8 +243,11 @@ const ViewSearchResults = () => {
           ...moreFiltersDataForFiltersCount,
           minPriceValue: value,
         });
-
-        setDataToPost({ ...dataToPost, [name]: value });
+        if (dataToPost.max_price) {
+          setDataToPost({ ...dataToPost, [name]: value });
+        } else {
+          setDataToPost({ ...dataToPost, [name]: value, max_price: maxPrice });
+        }
       } else {
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
@@ -256,9 +259,13 @@ const ViewSearchResults = () => {
         }
 
         if (dataToPost.max_price) {
-          setDataToPost({ ...dataToPost, [name]: String(minValueOfPrice) });
+          setDataToPost({
+            ...dataToPost,
+            [name]: minPrice,
+          });
         } else {
           delete dataToPost.min_price;
+          delete dataToPost.max_price;
         }
       }
     } else if (name === "max_price") {
@@ -271,7 +278,11 @@ const ViewSearchResults = () => {
           maxPriceValue: value,
         });
 
-        setDataToPost({ ...dataToPost, [name]: value });
+        if (dataToPost.min_price) {
+          setDataToPost({ ...dataToPost, [name]: value });
+        } else {
+          setDataToPost({ ...dataToPost, [name]: value, min_price: minPrice });
+        }
       } else {
         setMoreFiltersDataForFiltersCount({
           ...moreFiltersDataForFiltersCount,
@@ -282,9 +293,13 @@ const ViewSearchResults = () => {
         }
 
         if (dataToPost.min_price) {
-          setDataToPost({ ...dataToPost, [name]: String(maxPriceValue) });
+          setDataToPost({
+            ...dataToPost,
+            [name]: maxPrice,
+          });
         } else {
           delete dataToPost.max_price;
+          delete dataToPost.min_price;
         }
       }
     } else if (name === "min_area") {
@@ -609,7 +624,11 @@ const ViewSearchResults = () => {
                                 <option value="">Max</option>
                                 {propertyMaxPrices.map((price, Index) => {
                                   return (
-                                    <option value={price} key={Index}>
+                                    <option
+                                      id={price}
+                                      value={price}
+                                      key={Index}
+                                    >
                                       {price}
                                     </option>
                                   );
