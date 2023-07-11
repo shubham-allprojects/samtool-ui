@@ -661,7 +661,7 @@ const ViewProperty = ({
       >
         <div className="modal-dialog modal-fullscreen">
           <div className="modal-content">
-            <div className="modal-header border-0 pb-0">
+            <div className="modal-header skyblue-bg">
               <h5 className="modal-title" id="exampleModalLabel">
                 {fileName ? fileName : ""}
               </h5>
@@ -674,17 +674,17 @@ const ViewProperty = ({
                 {/* <i className="bi bi-x-lg"></i> */}
               </button>
             </div>
-            <div className="modal-body pt-0">
+            <div className="modal-body">
               <div className="container-fluid">
                 <div className="row justify-content-center">
-                  <div className="col-12 p-0 min-100vh">
+                  <div className="col-12 p-0 min-100vh text-center">
                     {srcOfFile ? (
                       fileExtension === "jpg" ||
                       fileExtension === "jpeg" ||
                       fileExtension === "png" ? (
                         <img
                           src={srcOfFile}
-                          className="h-100 w-100"
+                          className="img-fluid"
                           alt="property"
                           style={{ objectFit: "contain" }}
                         />
