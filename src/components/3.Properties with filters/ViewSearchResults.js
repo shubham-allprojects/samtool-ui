@@ -203,6 +203,7 @@ const ViewSearchResults = () => {
 
   const [filtersCount, setFiltersCount] = useState(0);
   const [priceFilterSelected, setPriceFilterSelected] = useState(false);
+  const [areaFilterSelected, setAreaFilterSelected] = useState(false);
 
   useEffect(() => {
     if (priceFilterSelected) {
@@ -211,6 +212,14 @@ const ViewSearchResults = () => {
       setFiltersCount(filtersCount === 0 ? 0 : filtersCount - 1);
     }
   }, [priceFilterSelected]);
+
+  useEffect(() => {
+    if (areaFilterSelected) {
+      setFiltersCount(filtersCount + 1);
+    } else {
+      setFiltersCount(filtersCount === 0 ? 0 : filtersCount - 1);
+    }
+  }, [areaFilterSelected]);
 
   const onMoreFiltersInputChange = (e) => {
     const { name, value } = e.target;
@@ -234,12 +243,9 @@ const ViewSearchResults = () => {
       } else {
         delete dataToPost.min_price;
         delete dataToPost.max_price;
-
         if (!dataToPost.max_price) {
-          console.log("max price is not available");
           setPriceFilterSelected(false);
         } else {
-          console.log("max price is available", dataToPost.max_price);
           setPriceFilterSelected(true);
         }
         let allOptions = document.querySelectorAll(".max-price-options");
@@ -272,6 +278,7 @@ const ViewSearchResults = () => {
       }
     } else if (name === "min_area") {
       if (value) {
+        setAreaFilterSelected(true);
         let allOptions = document.querySelectorAll(".max-carpet-area-options");
         allOptions.forEach((option) => {
           if (parseInt(value) >= parseInt(option.value)) {
@@ -297,6 +304,14 @@ const ViewSearchResults = () => {
         });
         delete dataToPost.min_area;
         delete dataToPost.max_area;
+
+        if (!dataToPost.max_area) {
+          console.log("max area is not available");
+          setAreaFilterSelected(false);
+        } else {
+          console.log("max area is available", dataToPost.max_price);
+          setAreaFilterSelected(true);
+        }
       }
     } else if (name === "max_area") {
       if (value) {
@@ -307,10 +322,13 @@ const ViewSearchResults = () => {
         }
       } else {
         if (dataToPost.min_area) {
+          setAreaFilterSelected(true);
           setDataToPost({
             ...dataToPost,
             [name]: maxArea,
           });
+        } else {
+          setAreaFilterSelected(false);
         }
       }
     } else if (name === "propertyAge") {
