@@ -331,9 +331,11 @@ const ViewSearchResults = () => {
           setAreaFilterSelected(false);
         }
       }
-    } else if (name === "propertyAge") {
+    } else if (name === "age") {
       if (value) {
+        setDataToPost({ ...dataToPost, [name]: parseInt(value) });
       } else {
+        delete dataToPost.age;
       }
     } else if (name === "title_clear_property") {
       if (value) {
@@ -722,8 +724,8 @@ const ViewSearchResults = () => {
                           <div className="inner-box">
                             <div className="select-div">
                               <select
-                                id="propertyAge"
-                                name="propertyAge"
+                                id="age"
+                                name="age"
                                 className="form-select form-select-sm"
                                 aria-label=".form-select-sm example"
                                 onChange={onMoreFiltersInputChange}
