@@ -252,7 +252,6 @@ const ViewSearchResults = () => {
         allOptions.forEach((option) => {
           option.removeAttribute("disabled");
           if (!option.value) {
-            console.log(option);
             option.selected = true;
           }
         });
@@ -298,7 +297,6 @@ const ViewSearchResults = () => {
         allOptions.forEach((option) => {
           option.removeAttribute("disabled");
           if (!option.value) {
-            console.log(option);
             option.selected = true;
           }
         });
@@ -306,10 +304,8 @@ const ViewSearchResults = () => {
         delete dataToPost.max_area;
 
         if (!dataToPost.max_area) {
-          console.log("max area is not available");
           setAreaFilterSelected(false);
         } else {
-          console.log("max area is available", dataToPost.max_price);
           setAreaFilterSelected(true);
         }
       }
