@@ -202,11 +202,21 @@ const ViewSearchResults = () => {
   const minArea = "100";
 
   const [filtersCount, setFiltersCount] = useState(0);
+  const [priceFilterSelected, setPriceFilterSelected] = useState(false);
+
+  useEffect(() => {
+    if (priceFilterSelected) {
+      setFiltersCount(filtersCount + 1);
+    } else {
+      setFiltersCount(filtersCount === 0 ? 0 : filtersCount - 1);
+    }
+  }, [priceFilterSelected]);
 
   const onMoreFiltersInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "min_price") {
       if (value) {
+        setPriceFilterSelected(true);
         let allOptions = document.querySelectorAll(".max-price-options");
         allOptions.forEach((option) => {
           if (parseInt(value) >= parseInt(option.value)) {
@@ -222,6 +232,16 @@ const ViewSearchResults = () => {
           }
         });
       } else {
+        delete dataToPost.min_price;
+        delete dataToPost.max_price;
+
+        if (!dataToPost.max_price) {
+          console.log("max price is not available");
+          setPriceFilterSelected(false);
+        } else {
+          console.log("max price is available", dataToPost.max_price);
+          setPriceFilterSelected(true);
+        }
         let allOptions = document.querySelectorAll(".max-price-options");
         allOptions.forEach((option) => {
           option.removeAttribute("disabled");
@@ -230,12 +250,10 @@ const ViewSearchResults = () => {
             option.selected = true;
           }
         });
-
-        delete dataToPost.min_price;
-        delete dataToPost.max_price;
       }
     } else if (name === "max_price") {
       if (value) {
+        setPriceFilterSelected(true);
         if (dataToPost.min_price) {
           setDataToPost({ ...dataToPost, [name]: value });
         } else {
@@ -243,10 +261,13 @@ const ViewSearchResults = () => {
         }
       } else {
         if (dataToPost.min_price) {
+          setPriceFilterSelected(true);
           setDataToPost({
             ...dataToPost,
             [name]: maxPrice,
           });
+        } else {
+          setPriceFilterSelected(false);
         }
       }
     } else if (name === "min_area") {
