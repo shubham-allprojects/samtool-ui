@@ -183,7 +183,7 @@ const ViewSearchResults = () => {
     350000000, 400000000, 450000000, 500000000,
   ];
 
-  const maxPricesOfProperty = [
+  const propertyMaxPrices = [
     10000000, 50000000, 100000000, 150000000, 200000000, 250000000, 300000000,
     350000000, 400000000, 450000000, 500000000, 550000000,
   ];
@@ -191,7 +191,7 @@ const ViewSearchResults = () => {
   let propertyMinArea = [
     100, 200, 300, 400, 500, 1000, 1500, 2000, 3000, 4000, 5000, 10000, 25000,
   ];
-  let maxAreaOfProperty = [
+  let propertyMaxArea = [
     100, 200, 300, 400, 500, 1000, 1500, 2000, 3000, 4000, 5000, 10000, 25000,
     50000,
   ];
@@ -201,44 +201,12 @@ const ViewSearchResults = () => {
   const maxArea = "50000";
   const minArea = "100";
 
-  const [moreFiltersDataForFiltersCount, setMoreFiltersDataForFiltersCount] =
-    useState({
-      minPriceValue: "",
-      maxPriceValue: "",
-      minAreaValue: "",
-      maxAreaValue: "",
-      propertyAge: "",
-      titleClearValue: "",
-      territoryValue: "",
-    });
-
-  const {
-    minPriceValue,
-    maxPriceValue,
-    minAreaValue,
-    maxAreaValue,
-    propertyAge,
-    titleClearValue,
-    territoryValue,
-  } = moreFiltersDataForFiltersCount;
-
   const [filtersCount, setFiltersCount] = useState(0);
-
-  const [propertyMaxPrices, setPropertyMaxPrices] =
-    useState(maxPricesOfProperty);
-
-  const [propertyMaxArea, setPropertyMaxArea] = useState(maxAreaOfProperty);
 
   const onMoreFiltersInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "min_price") {
       if (value) {
-        if (!minPriceValue && !maxPriceValue) {
-          setFiltersCount(filtersCount + 1);
-        }
-        // let intValue = parseInt(value);
-        // let indexOfValue = maxPricesOfProperty.indexOf(intValue);
-        // setPropertyMaxPrices(maxPricesOfProperty.slice(indexOfValue + 1));
         let allOptions = document.querySelectorAll(".max-price-options");
         allOptions.forEach((option) => {
           if (parseInt(value) >= parseInt(option.value)) {
@@ -253,25 +221,7 @@ const ViewSearchResults = () => {
             option.removeAttribute("disabled");
           }
         });
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          minPriceValue: value,
-        });
-        // if (dataToPost.max_price) {
-        //   setDataToPost({ ...dataToPost, [name]: value });
-        // } else {
-        //   setDataToPost({ ...dataToPost, [name]: value, max_price: maxPrice });
-        // }
       } else {
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          minPriceValue: "",
-        });
-        setPropertyMaxPrices(maxPricesOfProperty);
-        if (!maxPriceValue) {
-          setFiltersCount(filtersCount - 1);
-        }
-
         let allOptions = document.querySelectorAll(".max-price-options");
         allOptions.forEach((option) => {
           option.removeAttribute("disabled");
@@ -283,59 +233,24 @@ const ViewSearchResults = () => {
 
         delete dataToPost.min_price;
         delete dataToPost.max_price;
-        // if (dataToPost.max_price) {
-        //   setDataToPost({
-        //     ...dataToPost,
-        //     [name]: minPrice,
-        //   });
-        // } else {
-        //   delete dataToPost.min_price;
-        //   delete dataToPost.max_price;
-        // }
       }
     } else if (name === "max_price") {
       if (value) {
-        if (!minPriceValue && !maxPriceValue) {
-          setFiltersCount(filtersCount + 1);
-        }
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          maxPriceValue: value,
-        });
-
         if (dataToPost.min_price) {
           setDataToPost({ ...dataToPost, [name]: value });
         } else {
           setDataToPost({ ...dataToPost, [name]: value, min_price: minPrice });
         }
       } else {
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          maxPriceValue: "",
-        });
-        if (!minPriceValue) {
-          setFiltersCount(filtersCount - 1);
-        }
-
         if (dataToPost.min_price) {
           setDataToPost({
             ...dataToPost,
             [name]: maxPrice,
           });
         }
-        // else {
-        //   delete dataToPost.max_price;
-        //   delete dataToPost.min_price;
-        // }
       }
     } else if (name === "min_area") {
       if (value) {
-        if (!minAreaValue && !maxAreaValue) {
-          setFiltersCount(filtersCount + 1);
-        }
-        // let intValue = parseInt(value);
-        // let indexOfValue = maxAreaOfProperty.indexOf(intValue);
-        // setPropertyMaxArea(maxAreaOfProperty.slice(indexOfValue + 1));
         let allOptions = document.querySelectorAll(".max-carpet-area-options");
         allOptions.forEach((option) => {
           if (parseInt(value) >= parseInt(option.value)) {
@@ -350,10 +265,6 @@ const ViewSearchResults = () => {
             option.removeAttribute("disabled");
           }
         });
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          minAreaValue: value,
-        });
       } else {
         let allOptions = document.querySelectorAll(".max-carpet-area-options");
         allOptions.forEach((option) => {
@@ -365,37 +276,15 @@ const ViewSearchResults = () => {
         });
         delete dataToPost.min_area;
         delete dataToPost.max_area;
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          minAreaValue: "",
-        });
-        setPropertyMaxArea(maxAreaOfProperty);
-        if (!maxAreaValue) {
-          setFiltersCount(filtersCount - 1);
-        }
       }
     } else if (name === "max_area") {
       if (value) {
-        if (!minAreaValue && !maxAreaValue) {
-          setFiltersCount(filtersCount + 1);
-        }
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          maxAreaValue: value,
-        });
         if (dataToPost.min_area) {
           setDataToPost({ ...dataToPost, [name]: value });
         } else {
           setDataToPost({ ...dataToPost, [name]: value, min_area: minArea });
         }
       } else {
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          maxAreaValue: "",
-        });
-        if (!minAreaValue) {
-          setFiltersCount(filtersCount - 1);
-        }
         if (dataToPost.min_area) {
           setDataToPost({
             ...dataToPost,
@@ -405,61 +294,19 @@ const ViewSearchResults = () => {
       }
     } else if (name === "propertyAge") {
       if (value) {
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          propertyAge: value,
-        });
-        if (!propertyAge) {
-          setFiltersCount(filtersCount + 1);
-        }
       } else {
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          propertyAge: "",
-        });
-        if (propertyAge) {
-          setFiltersCount(filtersCount - 1);
-        }
       }
     } else if (name === "title_clear_property") {
       if (value) {
         setDataToPost({ ...dataToPost, [name]: parseInt(value) });
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          titleClearValue: value,
-        });
-        if (!titleClearValue) {
-          setFiltersCount(filtersCount + 1);
-        }
       } else {
         delete dataToPost.title_clear_property;
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          titleClearValue: "",
-        });
-        if (titleClearValue) {
-          setFiltersCount(filtersCount - 1);
-        }
       }
     } else if (name === "territory") {
       if (value) {
         setDataToPost({ ...dataToPost, [name]: value });
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          territoryValue: value,
-        });
-        if (!territoryValue) {
-          setFiltersCount(filtersCount + 1);
-        }
       } else {
         delete dataToPost.territory;
-        setMoreFiltersDataForFiltersCount({
-          ...moreFiltersDataForFiltersCount,
-          territoryValue: "",
-        });
-        if (territoryValue) {
-          setFiltersCount(filtersCount - 1);
-        }
       }
     }
   };
@@ -750,7 +597,7 @@ const ViewSearchResults = () => {
                                 <option value="gram panchayat limit">
                                   Gram Panchayat Limit
                                 </option>
-                                <option value="corporate limit">
+                                <option value="corporate">
                                   Corporate limit
                                 </option>
                               </select>
